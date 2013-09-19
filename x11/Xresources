@@ -1,0 +1,60 @@
+xterm*background: black
+uxterm*background: black
+xterm*foreground: lightgoldenrod
+uxterm*foreground: lightgoldenrod
+xterm*termName: xterm-256color
+uxterm*termName: xterm-256color
+xterm*font: -misc-fixed-medium-r-normal--13-120-75-75-c-80-iso10646-1
+uxterm*font: -misc-fixed-medium-r-normal--13-120-75-75-c-80-iso10646-1
+xterm*loginShell: true
+uxterm*loginShell: true
+xterm*selectToClipboard: true
+uxterm*selectToClipboard: true
+xterm*vt100.metaSendsEscape: true
+uxterm*vt100.metaSendsEscape: true
+xterm*vt100.eightBitControl: false
+uxterm*vt100.eightBitControl: false
+xterm*vt100.eightBitInput: false
+uxterm*vt100.eightBitInput: false
+xterm*vt100.eightBitOutput: true
+uxterm*vt100.eightBitOutput: true
+xterm*allowBoldFonts: false
+uxterm*allowBoldFonts: false
+xterm*vt100.scrollBar: false
+uxterm*vt100.scrollBar: false
+xterm*vt100.colorBDMode: true
+uxterm*vt100.colorBDMode: true
+xterm*vt100.colorBD: white
+uxterm*vt100.colorBD: white
+
+!Emacs.toolBar: 0
+!Emacs.font: Liberation Mono-10
+!Emacs.background: black
+!Emacs.foreground: lightgoldenrod
+!Emacs.font: -misc-fixed-medium-r-normal--13-120-75-75-c-80-iso10646-1
+!Emacs*popup*font: -misc-fixed-medium-r-normal--13-120-75-75-c-80-iso10646-1
+!Emacs*menubar*font: -misc-fixed-medium-r-normal--13-120-75-75-c-80-iso10646-1
+!Emacs*Dialog*font: -misc-fixed-medium-r-normal--13-120-75-75-c-80-iso10646-1
+
+!xscreensaver.Dialog.headingFont: -misc-fixed-medium-r-normal--15-140-75-75-c-90-iso10646-1
+!xscreensaver.Dialog.bodyFont: -misc-fixed-medium-r-normal--13-120-75-75-c-80-iso10646-1
+!xscreensaver.Dialog.labelFont: -misc-fixed-medium-r-normal--13-120-75-75-c-80-iso10646-1
+!xscreensaver.Dialog.unameFont: -misc-fixed-medium-r-normal--13-120-75-75-c-80-iso10646-1
+!xscreensaver.Dialog.buttonFont: -misc-fixed-medium-r-normal--13-120-75-75-c-80-iso10646-1
+!xscreensaver.Dialog.dateFont: -misc-fixed-medium-r-normal--13-120-75-75-c-80-iso10646-1
+!xscreensaver.passwd.passwdFont: -misc-fixed-medium-r-normal--13-120-75-75-c-80-iso10646-1
+!xscreensaver.Dialog.foreground: #ffffff
+!xscreensaver.Dialog.background: #111111
+!xscreensaver.Dialog.topShadowColor: #111111
+!xscreensaver.Dialog.bottomShadowColor: #111111
+!xscreensaver.Dialog.Button.foreground: #666666
+!xscreensaver.Dialog.Button.background: #ffffff
+!xscreensaver.Dialog.text.foreground: #666666
+!xscreensaver.Dialog.text.background: #ffffff
+!xscreensaver.Dialog.internalBorderWidth:24
+!xscreensaver.Dialog.borderWidth: 2
+!xscreensaver.Dialog.shadowThickness: 2
+!xscreensaver.passwd.thermometer.foreground: #ff0000
+!xscreensaver.passwd.thermometer.background: #000000
+!xscreensaver.passwd.thermometer.width: 8
+!xscreensaver.dateFormat: %I:%M%P %a %b %d, %Y

@@ -1,0 +1,13 @@
+termcapinfo xterm* ti@:te@
+startup_message off
+vbell off
+autodetach on
+altscreen on
+# shelltitle "$ |bash"
+defscrollback 5000
+compacthist on
+defutf8 on
+nonblock on
+
+hardstatus alwayslastline "%{= kw}%{B}[%= %{w}%{=kw}%?%-Lw%?%{r}(%{B}%n*%f %t%?(%u)%?%{r})%{w}%?%+Lw%?%?%=%{B}][%{B} %l %Y.%m.%d %C %A %{B}]%{w}"
+bind 'q' quit
