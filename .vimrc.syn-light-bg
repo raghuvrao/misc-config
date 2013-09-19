@@ -1,0 +1,6 @@
+if filereadable("/home/raghu/.vimrc.common")
+    source /home/raghu/.vimrc.common
+endif
+
+syntax on
+set background=light
