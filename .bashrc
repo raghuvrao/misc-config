@@ -3,7 +3,7 @@
 
 # If shell is not interactive, simply return.
 # Do not do anything else.
-if [[ ! "${-}" =~ \*i\* ]]; then
+if [[ ! "${-}" =~ i ]]; then
     return 0
 fi
 
