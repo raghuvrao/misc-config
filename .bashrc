@@ -21,7 +21,6 @@ shopt -u -o posix
 
 # Some useful globbing options.
 shopt -s extglob
-shopt -s failglob
 shopt -s globstar
 
 # Misc. useful options.
