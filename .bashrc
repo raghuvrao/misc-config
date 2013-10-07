@@ -25,6 +25,7 @@ shopt -s failglob
 shopt -s globstar
 
 # Misc. useful options.
+shopt -s histverify
 shopt -s histappend
 shopt -s checkwinsize
 shopt -s no_empty_cmd_completion
