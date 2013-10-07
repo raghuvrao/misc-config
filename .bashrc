@@ -19,6 +19,12 @@ shopt -u -o vi
 # I like to be able to use process substitution.
 shopt -u -o posix
 
+# Some useful globbing options.
+shopt -s extglob
+shopt -s failglob
+shopt -s globstar
+
+# Misc. useful options.
 shopt -s histappend
 shopt -s checkwinsize
 shopt -s no_empty_cmd_completion
