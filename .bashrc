@@ -1,29 +1,19 @@
 # ~/.bashrc
 # Raghu Rao
 
-# If shell is not interactive, simply return.
-# Do not do anything else.
-if [[ ! "${-}" =~ i ]]; then
+# posix - unset to allow use of process substitution
+# extglob - set to allow use of extended globbing
+shopt -u -o posix
+shopt -s extglob
+
+if [[ "${-}" != *i* ]]; then
     return 0
 fi
 
-# If a pipeline fails, get the exit code of the right-most command that
-# failed instead of the final command's exit code.
-shopt -s -o pipefail
-
-# Emacs-like keybindings at the shell prompt are better than vi-like
-# bindings for me.
-shopt -s -o emacs
 shopt -u -o vi
-
-# I like to be able to use process substitution.
-shopt -u -o posix
-
-# Some useful globbing options.
-shopt -s extglob
+shopt -s -o emacs
+shopt -s -o pipefail
 shopt -s globstar
-
-# Misc. useful options.
 shopt -s histverify
 shopt -s histappend
 shopt -s checkwinsize
@@ -44,11 +34,10 @@ rxvt*|xterm*)
 ;;
 esac
 
-# Add custom colorization for ls if available.
 unset LS_COLORS
 if [[ -x /usr/bin/dircolors ]]; then 
-    if [[ -f ${HOME}/.dir_colors ]]; then
-        eval "$(/usr/bin/dircolors -b ${HOME}/.dir_colors)"
+    if [[ -f "${HOME}"/.dir_colors ]]; then
+        eval "$(/usr/bin/dircolors -b "${HOME}"/.dir_colors)"
     else
         eval "$(/usr/bin/dircolors -b)"
     fi
@@ -64,7 +53,6 @@ if [[ -f /etc/bash_completion ]]; then
     . /etc/bash_completion
 fi
 
-# Work-related stuff.
-if [[ -r ${HOME}/.bash_office ]]; then
-   . ${HOME}/.bash_office
+if [[ -r "${HOME}"/.bash_office ]]; then
+   . "${HOME}"/.bash_office
 fi
