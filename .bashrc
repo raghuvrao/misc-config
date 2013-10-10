@@ -57,7 +57,7 @@ _git_summary()
             _marker+="+"
         fi
     fi
-    printf "${_marker} ${_git_branch}\n"
+    printf "%s %s\n" "${_marker}" "${_git_branch}"
     unset _marker _git_branch _r _git_status
 }
 PROMPT_COMMAND=_git_summary
