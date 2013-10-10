@@ -24,15 +24,26 @@ export HISTSIZE=1000
 export HISTFILESIZE=2000
 export HISTTIMEFORMAT='%F %T '
 
-PS1='\h ${?} \w\$ '
-
-# Not going to bother with xterm title within screen/tmux.
 unset PROMPT_COMMAND
+
+plain_prompt='\h ${?} \w\$ '
+color="$(tput setaf 6)"
+reset="$(tput sgr0)"
 case "${TERM}" in
-rxvt*|xterm*)
-    PROMPT_COMMAND='echo -ne "\033]0;${HOSTNAME%%.*} ${PWD/#$HOME/~}\007"'
-;;
+    rxvt*|xterm*)
+        PS1="\[""${color}""\]""${plain_prompt}""\[""${reset}""\]"
+        # xterm title
+        PS1="\[\e]0;\h \w\a\]""${PS1}"
+    ;;
+    screen*)
+        # Not going to bother with xterm title within screen/tmux.
+        PS1="\[""${color}""\]""${plain_prompt}""\[""${reset}""\]"
+    ;;
+    *)
+        PS1="${plain_prompt}"
+    ;;
 esac
+unset color reset plain_prompt
 
 unset LS_COLORS
 if [[ -x /usr/bin/dircolors ]]; then 
