@@ -53,7 +53,7 @@ _git_summary()
             _marker+="U"
         fi
         _r="Your branch is ahead"
-        if [[ ${_git_status} =~ ${r} ]]; then
+        if [[ ${_git_status} =~ ${_r} ]]; then
             _marker+="+"
         fi
     fi
