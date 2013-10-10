@@ -24,7 +24,43 @@ export HISTSIZE=1000
 export HISTFILESIZE=2000
 export HISTTIMEFORMAT='%F %T '
 
-unset PROMPT_COMMAND
+# Quick git summary, if ${PWD} is a git repository.
+_git_summary()
+{
+    [[ -d ./.git ]] || return
+
+    _marker=""
+    _git_status="$(git status -unormal 2>&1)"
+    _r="Not a git repo"
+    if [[ "${_git_status}" =~ ${_r} ]]; then
+        return
+    else
+        _git_branch="$(git branch | awk '/^\*/ { print $2 }')"
+        _r="working directory clean"
+        if [[ ${_git_status} =~ ${_r} ]]; then
+            _marker="C"
+        fi
+        _r="new file:"
+        if [[ ${_git_status} =~ ${_r} ]]; then
+            _marker+="N"
+        fi
+        _r="modified:"
+        if [[ ${_git_status} =~ ${_r} ]]; then
+            _marker+="M"
+        fi
+        _r="Untracked files"
+        if [[ ${_git_status} =~ ${_r} ]]; then
+            _marker+="U"
+        fi
+        _r="Your branch is ahead"
+        if [[ ${_git_status} =~ ${r} ]]; then
+            _marker+="+"
+        fi
+    fi
+    printf "${_marker} ${_git_branch}\n"
+    unset _marker _git_branch _r _git_status
+}
+PROMPT_COMMAND=_git_summary
 
 plain_prompt='\h ${?} \w\$ '
 color="$(tput setaf 6)"
