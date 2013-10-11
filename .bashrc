@@ -43,7 +43,7 @@ _git_summary()
 
         # Find element of array that begins with '*'
         # (the current branch)
-        for ((__i = 0; __i < ${#__a}; __i++)); do
+        for ((__i = 0; __i < ${#__a[@]}; __i++)); do
             if [[ "${__a[${__i}]}" =~ ^\* ]]; then
                 git_branch="${__a[${__i}]##\* }"
                 break
