@@ -31,34 +31,48 @@ _git_summary()
 
     marker=""
     git_status="$(git status -unormal 2>&1)"
-    r="Not a git repo"
-    if [[ "${git_status}" =~ ${r} ]]; then
+    __r="Not a git repo"
+    if [[ "${git_status}" =~ ${__r} ]]; then
         return
     else
-        git_branch="$(git branch | awk '/^\*/ { print $2 }')"
-        r="working directory clean"
-        if [[ ${git_status} =~ ${r} ]]; then
+        # Get each line of 'git branch' into an array
+        __i=0
+        while read -r; do
+            __a[__i++]="${REPLY}"
+        done < <(git branch)
+
+        # Find element of array that begins with '*'
+        # (the current branch)
+        for ((__i = 0; __i < ${#__a}; __i++)); do
+            if [[ "${__a[${__i}]}" =~ ^\* ]]; then
+                git_branch="${__a[${__i}]##\* }"
+                break
+            fi
+        done
+
+        __r="working directory clean"
+        if [[ ${git_status} =~ ${__r} ]]; then
             marker="c"
         fi
-        r="new file:"
-        if [[ ${git_status} =~ ${r} ]]; then
+        __r="new file:"
+        if [[ ${git_status} =~ ${__r} ]]; then
             marker+="n"
         fi
-        r="modified:"
-        if [[ ${git_status} =~ ${r} ]]; then
+        __r="modified:"
+        if [[ ${git_status} =~ ${__r} ]]; then
             marker+="m"
         fi
-        r="Untracked files"
-        if [[ ${git_status} =~ ${r} ]]; then
+        __r="Untracked files"
+        if [[ ${git_status} =~ ${__r} ]]; then
             marker+="u"
         fi
-        r="Your branch is ahead"
-        if [[ ${git_status} =~ ${r} ]]; then
+        __r="Your branch is ahead"
+        if [[ ${git_status} =~ ${__r} ]]; then
             marker+="+"
         fi
     fi
     printf "[git: %s %s]\n" "${git_branch}" "${marker}"
-    unset marker git_branch r git_status
+    unset marker git_branch __r git_status __i __a
 }
 PROMPT_COMMAND=_git_summary
 
