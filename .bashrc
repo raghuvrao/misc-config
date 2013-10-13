@@ -36,9 +36,8 @@ _git_summary()
         return
     else
         # Get each line of 'git branch' into an array
-        __i=0
         while read -r; do
-            __a[__i++]="${REPLY}"
+            __a+=("${REPLY}")
         done < <(git branch)
 
         # Find element of array that begins with '*'
