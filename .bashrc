@@ -84,7 +84,7 @@ case "${TERM}" in
         # xterm title
         PS1="\[\e]0;\h \w\a\]""${PS1}"
     ;;
-    screen*)
+    linux*|screen*)
         # Not going to bother with xterm title within screen/tmux.
         PS1="\[""${color}""\]""${plain_prompt}""\[""${reset}""\]"
     ;;
