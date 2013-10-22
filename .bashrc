@@ -26,24 +26,24 @@ export HISTTIMEFORMAT='%F %T '
 
 unset PROMPT_COMMAND
 
-plain_prompt='\h ${?} \w\$ '
 color="$(tput setaf 6)"
 reset="$(tput sgr0)"
+color_prompt="\[""${color}""\]"'(\h)'"\[""${reset}""\]"' ${?} \w\$ '
+plain_prompt='(\h) ${?} \w\$ '
 case "${TERM}" in
     rxvt*|xterm*)
-        PS1="\[""${color}""\]""${plain_prompt}""\[""${reset}""\]"
         # xterm title
-        PS1="\[\e]0;\h \w\a\]""${PS1}"
+        PS1="\[\e]0;\h \w\a\]""${color_prompt}"
     ;;
     linux*|screen*)
         # Not going to bother with xterm title within screen/tmux.
-        PS1="\[""${color}""\]""${plain_prompt}""\[""${reset}""\]"
+        PS1="${color_prompt}"
     ;;
     *)
         PS1="${plain_prompt}"
     ;;
 esac
-unset color reset plain_prompt
+unset color reset color_prompt plain_prompt
 
 unset LS_COLORS
 if [[ -x /usr/bin/dircolors ]]; then 
