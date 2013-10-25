@@ -28,12 +28,12 @@ unset PROMPT_COMMAND
 
 color="$(tput setaf 6)"
 reset="$(tput sgr0)"
-color_prompt="\[""${color}""\]"'(\h)'"\[""${reset}""\]"' ${?} \w\$ '
+color_prompt="\[${color}\]"'(\h)'"\[${reset}\]"' ${?} \w\$ '
 plain_prompt='(\h) ${?} \w\$ '
 case "${TERM}" in
     rxvt*|xterm*)
         # xterm title
-        PS1="\[\e]0;\h \w\a\]""${color_prompt}"
+        PS1="\[\e]0;\h \w\a\]${color_prompt}"
     ;;
     linux*|screen*)
         # Not going to bother with xterm title within screen/tmux.
