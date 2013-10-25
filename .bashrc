@@ -28,7 +28,7 @@ unset PROMPT_COMMAND
 
 color="$(tput setaf 6)"
 reset="$(tput sgr0)"
-color_prompt="\[${color}\]"'(\h)'"\[${reset}\]"' ${?} \w\$ '
+color_prompt="\[${color}\](\h)\[${reset}\]"' ${?} \w\$ '
 plain_prompt='(\h) ${?} \w\$ '
 case "${TERM}" in
     rxvt*|xterm*)
