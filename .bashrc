@@ -24,26 +24,39 @@ export HISTSIZE=1000
 export HISTFILESIZE=2000
 export HISTTIMEFORMAT='%F %T '
 
+# On Debian, bash-completion is sourced from /etc/profile (via sourcing
+# /etc/profile.d/bash_completion.sh).  So, either start the shell as a
+# login shell or uncomment the following if you want bash-completion.
+# Source this file early on (e.g. before setting your PS1, if you want
+# to use __git_ps1 and such other functions in your prompt).
+if [[ -f /etc/bash_completion ]]; then
+    . /etc/bash_completion
+fi
+
 unset PROMPT_COMMAND
+if [[ "$(type -t __git_ps1)" == "function" ]]; then
+    PROMPT_COMMAND='__git_ps1 "[%s]\n"'
+fi
 
 color="$(tput setaf 6)"
 reset="$(tput sgr0)"
-color_prompt="\[${color}\](\h)\[${reset}\]"' ${?} \w\$ '
-plain_prompt='(\h) ${?} \w\$ '
+prompt_common=' ${?} \w\$ '
+if [[ -n "${color}" ]]; then
+    prompt="\[${color}\](\h)\[${reset}\]${prompt_common}"
+else
+    prompt="(\h)${prompt_common}"
+fi
 case "${TERM}" in
     rxvt*|xterm*)
         # xterm title
-        PS1="\[\e]0;\h \w\a\]${color_prompt}"
-    ;;
-    linux*|screen*)
-        # Not going to bother with xterm title within screen/tmux.
-        PS1="${color_prompt}"
+        PS1="\[\e]0;\h \w\a\]${prompt}"
     ;;
     *)
-        PS1="${plain_prompt}"
+        # Not going to bother with xterm title within screen/tmux.
+        PS1="${prompt}"
     ;;
 esac
-unset color reset color_prompt plain_prompt
+unset color reset prompt prompt_common
 
 unset LS_COLORS
 if [[ -x /usr/bin/dircolors ]]; then 
@@ -56,13 +69,6 @@ fi
 
 unalias -a
 alias l='ls --color=tty'
-
-# On Debian, bash-completion is sourced from /etc/profile (via sourcing
-# /etc/profile.d/bash_completion.sh).  So, either start the shell as a
-# login shell or uncomment the following if you want bash-completion.
-if [[ -f /etc/bash_completion ]]; then
-    . /etc/bash_completion
-fi
 
 if [[ -r "${HOME}"/.bash_office ]]; then
    . "${HOME}"/.bash_office
