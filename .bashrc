@@ -37,6 +37,8 @@ unset PROMPT_COMMAND
 if [[ "$(type -t __git_ps1)" == "function" ]]; then
     PROMPT_COMMAND='__git_ps1 "[%s]\n"'
 fi
+GIT_PS1_SHOWDIRTYSTATE=yes
+GIT_PS1_SHOWUNTRACKEDFILES=yes
 
 color="$(tput setaf 6)"
 reset="$(tput sgr0)"
