@@ -1,18 +1,13 @@
 # ~/.bashrc
 # Raghu Rao
 
-# posix - unset to allow use of process substitution
-# extglob - set to allow use of extended globbing
+[[ "${-}" != *i* ]] && return
+
 shopt -u -o posix
-shopt -s extglob
-
-if [[ "${-}" != *i* ]]; then
-    return 0
-fi
-
 shopt -u -o vi
 shopt -s -o emacs
 shopt -s -o pipefail
+shopt -s extglob
 shopt -s globstar
 shopt -s histverify
 shopt -s histappend
