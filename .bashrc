@@ -1,7 +1,7 @@
 # ~/.bashrc
 # Raghu Rao
 
-[[ "${-}" != *i* ]] && return
+[[ ${-} == *i* ]] || return
 
 shopt -u -o posix
 shopt -u -o vi
