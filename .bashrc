@@ -35,7 +35,7 @@ fi
 export GIT_PS1_SHOWDIRTYSTATE='yes'
 export GIT_PS1_SHOWUNTRACKEDFILES='yes'
 
-color="$(tput setaf 6)"
+color="$(tput setaf 2)"
 reset="$(tput sgr0)"
 prompt='\h ${?} \w\$ '
 if [[ -n "${color}" ]]; then
