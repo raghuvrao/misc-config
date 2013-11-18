@@ -35,10 +35,9 @@ fi
 export GIT_PS1_SHOWDIRTYSTATE='yes'
 export GIT_PS1_SHOWUNTRACKEDFILES='yes'
 
-color="$(tput setaf 2)"
-reset="$(tput sgr0)"
 prompt='\h ${?} \w\$ '
-if [[ -n "${color}" ]]; then
+if color="$(tput setaf 2 2>/dev/null)"; then
+    reset="$(tput sgr0)"
     PS1="\[${color}\]${prompt}\[${reset}\]"
 else
     PS1="${prompt}"
