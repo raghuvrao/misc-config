@@ -37,23 +37,19 @@ export GIT_PS1_SHOWUNTRACKEDFILES='yes'
 
 color="$(tput setaf 6)"
 reset="$(tput sgr0)"
-prompt_common=' ${?} \w\$ '
+prompt='\h ${?} \w\$ '
 if [[ -n "${color}" ]]; then
-    prompt="\[${color}\](\h)\[${reset}\]${prompt_common}"
+    PS1="\[${color}\]${prompt}\[${reset}\]"
 else
-    prompt="(\h)${prompt_common}"
+    PS1="${prompt}"
 fi
 case "${TERM}" in
     rxvt*|xterm*)
         # xterm title
-        PS1="\[\e]0;\h \w\a\]${prompt}"
-    ;;
-    *)
-        # Not going to bother with xterm title within screen/tmux.
-        PS1="${prompt}"
+        PS1="\[\e]0;\h \w\a\]${PS1}"
     ;;
 esac
-unset color reset prompt prompt_common
+unset color reset prompt
 
 unset LS_COLORS
 if [[ -x /usr/bin/dircolors ]]; then 
