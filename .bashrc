@@ -62,7 +62,7 @@ if [[ -x /usr/bin/dircolors ]]; then
 fi
 
 unalias -a
-alias l='ls --color=tty'
+l() { command ls --color=always "$@"; }
 
 if [[ -r "${HOME}"/.bash_office ]]; then
    . "${HOME}"/.bash_office
