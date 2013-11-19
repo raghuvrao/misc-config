@@ -29,15 +29,17 @@ if [[ -f /etc/bash_completion ]]; then
 fi
 
 unset PROMPT_COMMAND
-if [[ "$(type -t __git_ps1)" == "function" ]]; then
+__t="$(type -t __git_ps1)"
+if [[ ${__t} == function ]]; then
     PROMPT_COMMAND='__git_ps1 "[%s]\n"'
     export GIT_PS1_SHOWDIRTYSTATE='yes'
     export GIT_PS1_SHOWUNTRACKEDFILES='yes'
 fi
+unset __t
 
 prompt='\h ${?} \w\$ '
-if color="$(tput setaf 2 2>/dev/null)"; then
-    reset="$(tput sgr0)"
+if color="$(tput setaf 2 2> /dev/null)"; then
+    reset="$(tput sgr0 2> /dev/null)"
     PS1="\[${color}\]${prompt}\[${reset}\]"
 else
     PS1="${prompt}"
