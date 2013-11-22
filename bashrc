@@ -15,8 +15,8 @@ shopt -s checkwinsize
 shopt -s no_empty_cmd_completion
 
 export HISTCONTROL='ignoreboth'
-export HISTSIZE=1000
-export HISTFILESIZE=2000
+export HISTSIZE=10000
+export HISTFILESIZE=20000
 export HISTTIMEFORMAT='%F %T '
 
 # On Debian, bash-completion is sourced from /etc/profile (via sourcing
