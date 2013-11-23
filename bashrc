@@ -63,7 +63,7 @@ case "${TERM}" in
 esac
 
 unalias -a
-l() { command ls --color=always "$@"; }
+l() { command ls --color=always "${@}"; }
 
 if [[ -r "${HOME}"/.bash_office ]]; then
    . "${HOME}"/.bash_office
