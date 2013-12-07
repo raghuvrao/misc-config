@@ -1,3 +1,6 @@
+syntax on
+set background=dark
+
 "set cursorline
 "set cursorcolumn
 set shortmess=Ilmnrx
@@ -29,6 +32,3 @@ set smarttab
 set softtabstop=4
 set tabstop=4
 set shiftwidth=4
-
-nnoremap -U <c-v>eU
-nnoremap -L <c-v>eu
