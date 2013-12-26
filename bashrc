@@ -39,8 +39,11 @@ unset t
 
 unset LS_COLORS
 prompt='\h ${?} \w\$ '
-if c="$(tput setaf 2 2>/dev/null)" && r="$(tput sgr0 2>/dev/null)"; then
-    PS1="\[${c}\]${prompt}\[${r}\]"
+if c="$(tput setaf 2 2>/dev/null)" && \
+   b="$(tput bold 2>/dev/null)" && \
+   d="$(tput sgr0 2>/dev/null)"
+then
+    PS1="\[${b}\]\[${c}\]${prompt}\[${d}\]"
     if type -P dircolors >/dev/null 2>&1; then
         if [[ -f "${HOME}"/.dir_colors ]]; then
             eval "$(dircolors -b "${HOME}"/.dir_colors)"
@@ -53,7 +56,7 @@ if c="$(tput setaf 2 2>/dev/null)" && r="$(tput sgr0 2>/dev/null)"; then
 else
     PS1="${prompt}"
 fi
-unset c r prompt
+unset prompt c b d
 
 case "${TERM}" in
     rxvt*|xterm*)
