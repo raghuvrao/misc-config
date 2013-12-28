@@ -29,16 +29,18 @@ if [[ -f /etc/bash_completion ]]; then
 fi
 
 unset PROMPT_COMMAND
+unset LS_COLORS
+
+prompt='[\h ${?} \w'
 t="$(type -t __git_ps1)"
-if [[ ${t} == function ]]; then
-    PROMPT_COMMAND='__git_ps1 "[%s]\n"'
+if [[ ${t} == 'function' ]]; then
     export GIT_PS1_SHOWDIRTYSTATE='yes'
     export GIT_PS1_SHOWUNTRACKEDFILES='yes'
+    prompt="${prompt}"'$(__git_ps1 " (%s)")'
 fi
 unset t
+prompt="${prompt}"']\$ '
 
-unset LS_COLORS
-prompt='\h ${?} \w\$ '
 if c="$(tput setaf 2 2>/dev/null)" && \
    b="$(tput bold 2>/dev/null)" && \
    d="$(tput sgr0 2>/dev/null)"
