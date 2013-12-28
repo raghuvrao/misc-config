@@ -31,7 +31,7 @@ fi
 unset PROMPT_COMMAND
 unset LS_COLORS
 
-prompt='[\h ${?} \w'
+prompt='(\h ${?} \w'
 t="$(type -t __git_ps1)"
 if [[ ${t} == 'function' ]]; then
     export GIT_PS1_SHOWDIRTYSTATE='yes'
@@ -39,7 +39,7 @@ if [[ ${t} == 'function' ]]; then
     prompt="${prompt}"'$(__git_ps1 " (%s)")'
 fi
 unset t
-prompt="${prompt}"']\$ '
+prompt="${prompt}"')\$ '
 
 if c="$(tput setaf 2 2>/dev/null)" && \
    b="$(tput bold 2>/dev/null)" && \
