@@ -60,12 +60,10 @@ else
 fi
 unset prompt c b d
 
-case "${TERM}" in
-    rxvt*|xterm*)
-        # xterm title
-        PS1="\[\e]0;\h \w\a\]${PS1}"
-    ;;
-esac
+# xterm title
+if [[ "${TERM}" =~ (xterm|rxvt)* ]]; then
+    PS1="\[\e]0;\h:\w\a\]${PS1}"
+fi
 
 unalias -a
 l() { command ls --color=always "${@}"; }
