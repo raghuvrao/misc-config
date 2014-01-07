@@ -61,7 +61,7 @@ fi
 unset prompt c b d
 
 # xterm title
-if [[ "${TERM}" =~ (xterm|rxvt)* ]]; then
+if [[ "${TERM}" =~ (xterm|rxvt).* ]]; then
     PS1="\[\e]0;\h:\w\a\]${PS1}"
 fi
 
