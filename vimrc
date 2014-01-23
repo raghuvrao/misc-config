@@ -1,5 +1,6 @@
 syntax on
-set background=dark
+set background=light
+hi Comment cterm=NONE gui=NONE ctermbg=NONE guibg=NONE ctermfg=gray guifg=gray
 
 "set cursorline
 "set cursorcolumn
