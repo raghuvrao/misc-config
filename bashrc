@@ -42,10 +42,9 @@ unset t
 prompt="${prompt}"')\$ '
 
 if c="$(tput setaf 2 2>/dev/null)" && \
-   b="$(tput bold 2>/dev/null)" && \
    d="$(tput sgr0 2>/dev/null)"
 then
-    PS1="\[${b}\]\[${c}\]${prompt}\[${d}\]"
+    PS1="\[${c}\]${prompt}\[${d}\]"
     if type -P dircolors >/dev/null 2>&1; then
         if [[ -f "${HOME}"/.dir_colors ]]; then
             eval "$(dircolors -b "${HOME}"/.dir_colors)"
@@ -58,7 +57,7 @@ then
 else
     PS1="${prompt}"
 fi
-unset prompt c b d
+unset prompt c d
 
 # xterm title
 if [[ "${TERM}" =~ (xterm|rxvt).* ]]; then
