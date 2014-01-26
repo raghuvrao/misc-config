@@ -1,6 +1,6 @@
 syntax on
 set background=light
-hi Comment cterm=NONE gui=NONE ctermbg=NONE guibg=NONE ctermfg=gray guifg=gray
+hi Comment cterm=NONE gui=NONE ctermbg=NONE guibg=NONE ctermfg=darkgray guifg=darkgray
 
 "set cursorline
 "set cursorcolumn
