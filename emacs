@@ -10,7 +10,7 @@
 (global-font-lock-mode 1)
 (set-default-font "DejaVu Sans Mono-10")
 (set-background-color "black")
-(set-foreground-color "lightgoldenrod1")
+(set-foreground-color "darkkhaki")
 ;(set-cursor-color "grey")
 (global-hl-line-mode 1)
 (set-face-background 'hl-line "grey18")
