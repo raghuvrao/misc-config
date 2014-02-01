@@ -1,7 +1,7 @@
-xterm*background: black
-uxterm*background: black
-xterm*foreground: lightgoldenrod
-uxterm*foreground: lightgoldenrod
+!xterm*background: black
+!uxterm*background: black
+!xterm*foreground: lightgoldenrod
+!uxterm*foreground: lightgoldenrod
 xterm*termName: xterm-256color
 uxterm*termName: xterm-256color
 xterm*font: -misc-fixed-medium-r-normal--13-120-75-75-c-80-iso10646-1
@@ -18,14 +18,14 @@ xterm*vt100.eightBitInput: false
 uxterm*vt100.eightBitInput: false
 xterm*vt100.eightBitOutput: true
 uxterm*vt100.eightBitOutput: true
-xterm*allowBoldFonts: false
-uxterm*allowBoldFonts: false
 xterm*vt100.scrollBar: false
 uxterm*vt100.scrollBar: false
-xterm*vt100.colorBDMode: true
-uxterm*vt100.colorBDMode: true
-xterm*vt100.colorBD: white
-uxterm*vt100.colorBD: white
+!xterm*vt100.colorBDMode: true
+!uxterm*vt100.colorBDMode: true
+!xterm*allowBoldFonts: false
+!uxterm*allowBoldFonts: false
+!xterm*vt100.colorBD: white
+!uxterm*vt100.colorBD: white
 
 !Emacs.toolBar: 0
 !Emacs.font: Liberation Mono-10
