@@ -1,6 +1,10 @@
 syntax on
 set background=light
-hi Comment cterm=NONE gui=NONE ctermbg=NONE guibg=NONE ctermfg=darkgray guifg=darkgray
+hi Comment ctermbg=NONE guibg=NONE ctermfg=Gray guifg=Gray cterm=NONE gui=NONE 
+hi Visual ctermbg=DarkBlue guibg=DarkBlue ctermfg=Gray guifg=Gray cterm=NONE gui=NONE
+hi StatusLine ctermbg=NONE guibg=NONE ctermfg=NONE guifg=NONE cterm=reverse gui=reverse term=reverse
+hi WildMenu ctermbg=DarkBlue guibg=DarkBlue ctermfg=Gray guifg=Gray cterm=NONE gui=NONE term=reverse
+hi Search ctermbg=DarkGreen guibg=DarkGreen ctermfg=Black guifg=Black cterm=NONE gui=NONE term=reverse
 
 "set cursorline
 "set cursorcolumn
