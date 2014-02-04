@@ -25,7 +25,6 @@ HISTSIZE=10000
 HISTFILESIZE=20000
 HISTTIMEFORMAT='%F %T '
 PROMPT_DIRTRIM=3
-PS1='[\h ${?} \w]> '
+PS1='[\h ${?} \W]\$ '
 
 ls() { command ls -F "${@}"; }
-tmux() { command tmux -2 "${@}"; }
