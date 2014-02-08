@@ -1,3 +1,4 @@
+let g:loaded_matchparen = 1
 "set cursorline
 "set cursorcolumn
 set shortmess=Ilmnrx
