@@ -25,6 +25,6 @@ HISTSIZE=10000
 HISTFILESIZE=20000
 HISTTIMEFORMAT='%F %T '
 PROMPT_DIRTRIM=3
-PS1='[\h ${?} \W]\$ '
+PS1='[\h ${?} \w]\$ '
 
 ls() { command ls -F "${@}"; }
