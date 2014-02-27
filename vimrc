@@ -2,7 +2,7 @@ let g:loaded_matchparen = 1
 "set cursorline
 "set cursorcolumn
 set shortmess=Ilmnrx
-set statusline=[%{&ff}]\ %f%m%r%=[%l/%L,%c]
+set statusline=[%{&ff}]%f%M%R\ %=\ %l/%L\ %c
 set laststatus=2
 "set nowrap
 set cpoptions=$
@@ -33,5 +33,4 @@ set shiftwidth=4
 
 syntax on
 set background=light
-hi StatusLine ctermbg=NONE guibg=NONE ctermfg=NONE guifg=NONE cterm=reverse gui=reverse term=reverse
 hi Visual ctermbg=DarkBlue guibg=DarkBlue ctermfg=Gray guifg=Gray cterm=NONE gui=NONE term=reverse

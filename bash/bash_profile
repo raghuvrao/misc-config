@@ -16,4 +16,4 @@ if [[ -f "${HOME}/.bashrc" ]]; then
     . "${HOME}/.bashrc"
 fi
 
-export LESS='-R -I -m'
+export LESS='-R -i'
