@@ -1,9 +1,13 @@
 # .bash_profile
 
-if [[ -d "${HOME}/bin" ]]; then
-    export PATH="${PATH}:${HOME}/bin"
-fi
-
+_dirs_=( "${HOME}/bin" )
+for _dir_ in ${_dirs_[@]}; do
+    if [[ ( -d "${_dir_}" ) && ( ! "${PATH}" =~ ${_dir_} ) ]]; then
+        PATH="${PATH}:${_dir_}"
+    fi
+done
+unset _dir_ _dirs_
+            
 if [[ -d "${HOME}/lib/python" ]]; then
     export PYTHONPATH="${PYTHONPATH}:${HOME}/lib/python"
 fi
