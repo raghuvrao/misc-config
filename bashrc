@@ -28,3 +28,11 @@ PROMPT_DIRTRIM=3
 PS1='[\h ${?} \w]\$ '
 
 ls() { command ls -F "${@}"; }
+
+[[ -f /etc/bash_completion.d/git ]] && {
+    source /etc/bash_completion.d/git
+    GIT_PS1_SHOWDIRTYSTATE='yes'
+    GIT_PS1_SHOWUNTRACKEDFILES='yes'
+    GIT_PS1_SHOWSTASHSTATE='yes'
+    PS1='[\h ${?} \w$(__git_ps1 " (%s)")]\$ '
+}
