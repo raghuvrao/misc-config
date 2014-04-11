@@ -14,12 +14,14 @@ shopt -u -o vi
 shopt -s -o emacs
 shopt -s -o pipefail
 shopt -s extglob
+shopt -s dotglob
 shopt -s globstar
 shopt -s histverify
 shopt -s histappend
 shopt -s checkwinsize
 shopt -s no_empty_cmd_completion
 
+GLOBIGNORE=".:.."
 HISTCONTROL='ignoreboth'
 HISTSIZE=10000
 HISTFILESIZE=20000
@@ -27,7 +29,7 @@ HISTTIMEFORMAT='%F %T '
 PROMPT_DIRTRIM=3
 PS1='[\h ${?} \w]\$ '
 
-ls() { command ls -F "${@}"; }
+ls() { command ls -a -F "${@}"; }
 
 [[ -f /etc/bash_completion.d/git ]] && {
     source /etc/bash_completion.d/git
