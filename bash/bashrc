@@ -29,7 +29,7 @@ HISTTIMEFORMAT='%F %T '
 PROMPT_DIRTRIM=3
 PS1='[\h ${?} \w]\$ '
 
-ls() { command ls -a -F "${@}"; }
+ls() { command ls -a --color=auto "${@}"; }
 
 [[ -f /etc/bash_completion.d/git ]] && {
     source /etc/bash_completion.d/git
