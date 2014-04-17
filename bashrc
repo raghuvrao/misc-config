@@ -29,7 +29,10 @@ HISTTIMEFORMAT='%F %T '
 PROMPT_DIRTRIM=3
 PS1='[\h ${?} \w]\$ '
 
-ls() { command ls -a --color=auto "${@}"; }
+if type -P dircolors >/dev/null 2>&1; then
+    ls() { command ls -a --color=auto "${@}"; }
+    eval "$(dircolors -b)"
+fi
 
 [[ -f /etc/bash_completion.d/git ]] && {
     source /etc/bash_completion.d/git
