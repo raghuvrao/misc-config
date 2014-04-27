@@ -29,8 +29,10 @@ HISTTIMEFORMAT='%F %T '
 PROMPT_DIRTRIM=3
 PS1='[\h ${?} \w]\$ '
 
+ls() { command ls -A -F "${@}"; }
 if type -P dircolors >/dev/null 2>&1; then
-    ls() { command ls -a --color=auto "${@}"; }
+    unset ls
+    ls() { command ls -A --color=auto "${@}"; }
     eval "$(dircolors -b)"
 fi
 
