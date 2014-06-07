@@ -1,6 +1,6 @@
 # .bash_profile
 
-_dirs_=( "${HOME}/bin" )
+_dirs_=( "${HOME}/bin" "/sbin" "/usr/sbin" "/usr/local/sbin" )
 for _dir_ in ${_dirs_[@]}; do
     if [[ ( -d "${_dir_}" ) && ( ! "${PATH}" =~ ${_dir_} ) ]]; then
         PATH="${PATH}:${_dir_}"
