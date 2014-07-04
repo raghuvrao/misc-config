@@ -1,0 +1,13 @@
+set editing-mode emacs
+set input-meta on
+set output-meta on
+set convert-meta off
+set expand-tilde on
+set mark-directories on
+set mark-symlinked-directories on
+set page-completions on
+set skip-completed-text on
+set visible-stats on
+set show-all-if-ambiguous on
+set completion-prefix-display-length 1
+set bell-style visible
