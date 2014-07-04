@@ -34,3 +34,6 @@ set shiftwidth=4
 syntax on
 set background=light
 hi Visual ctermbg=DarkBlue guibg=DarkBlue ctermfg=Gray guifg=Gray cterm=NONE gui=NONE term=reverse
+
+set foldmethod=indent
+set foldlevel=99
