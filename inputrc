@@ -9,5 +9,5 @@ set page-completions on
 set skip-completed-text on
 set visible-stats on
 set show-all-if-ambiguous on
-set completion-prefix-display-length 1
+set completion-prefix-display-length 4
 set bell-style visible
