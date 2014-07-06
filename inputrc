@@ -1,3 +1,5 @@
+TAB: menu-complete
+
 set editing-mode emacs
 set input-meta on
 set output-meta on
@@ -9,5 +11,6 @@ set page-completions on
 set skip-completed-text on
 set visible-stats on
 set show-all-if-ambiguous on
-set completion-prefix-display-length 4
+set completion-prefix-display-length 0
+set menu-complete-display-prefix on
 set bell-style visible
