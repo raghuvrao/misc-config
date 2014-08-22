@@ -30,11 +30,7 @@ PROMPT_DIRTRIM=3
 PS1='[\h ${?} \w]\$ '
 
 ls() { command ls -A -F "${@}"; }
-if type -P dircolors >/dev/null 2>&1; then
-    unset ls
-    ls() { command ls -A --color=auto "${@}"; }
-    eval "$(dircolors -b)"
-fi
+grep() { command grep --color=auto "${@}"; }
 
 [[ -f /etc/bash_completion.d/git ]] && {
     source /etc/bash_completion.d/git
