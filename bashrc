@@ -19,8 +19,9 @@ shopt -s histappend
 shopt -s checkwinsize
 shopt -s no_empty_cmd_completion
 
-EDITOR=vim
-VISUAL="${EDITOR}"
+FCEDIT="vim"
+EDITOR="${FCEDIT}"
+VISUAL="${FCEDIT}"
 GLOBIGNORE=".:.."
 HISTCONTROL='ignoreboth'
 HISTSIZE=10000
