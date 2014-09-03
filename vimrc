@@ -1,10 +1,9 @@
 let g:loaded_matchparen = 1
-"set cursorline
-"set cursorcolumn
+
 set shortmess=Ilmnrx
 set statusline=[%{&ff}]%f%M%R\ %=\ %l/%L\ %c
 set laststatus=2
-"set nowrap
+set ruler
 set cpoptions=$
 set nomodeline
 set modelines=0
@@ -21,9 +20,9 @@ set incsearch
 set ignorecase
 set smartcase
 
-"filetype indent on
-"set autoindent
-"set paste
+filetype indent off
+set noautoindent
+set paste
 
 set expandtab
 set smarttab
@@ -31,9 +30,15 @@ set softtabstop=4
 set tabstop=4
 set shiftwidth=4
 
-syntax on
-set background=light
-"hi Visual ctermbg=DarkBlue guibg=DarkBlue ctermfg=Gray guifg=Gray cterm=NONE gui=NONE term=reverse
-
 set foldmethod=indent
 set foldlevel=99
+
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+
+colorscheme rrao
+syntax off
+set list
+set listchars=tab:▶\ ,trail:◆
