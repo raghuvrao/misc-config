@@ -1,13 +1,18 @@
+set paste
+filetype indent off
+set noautoindent
+
+set nocompatible
+set encoding=utf-8
+
 let g:loaded_matchparen = 1
 
 set shortmess=Ilmnrx
-set statusline=[%{&ff}]%f%M%R\ %=\ %l/%L\ %c
+set statusline=[%{&ff}]%f%M%R\ %=\ %l,%c
 set laststatus=2
-set ruler
 set cpoptions=$
 set nomodeline
 set modelines=0
-set encoding=utf-8
 set showcmd
 set scrolloff=2
 set wildmenu
@@ -19,10 +24,6 @@ set hlsearch
 set incsearch
 set ignorecase
 set smartcase
-
-filetype indent off
-set noautoindent
-set paste
 
 set expandtab
 set smarttab
