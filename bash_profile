@@ -7,7 +7,7 @@ for _dir_ in ${_dirs_[@]}; do
     fi
 done
 unset _dir_ _dirs_
-            
+
 if [[ -d "${HOME}/lib/python" ]]; then
     export PYTHONPATH="${PYTHONPATH}:${HOME}/lib/python"
 fi
