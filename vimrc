@@ -11,7 +11,7 @@ let g:loaded_matchparen = 1
 set shortmess=Ia
 set noruler
 set laststatus=1
-set cpoptions=$
+set cpoptions=v$
 set nomodeline
 set modelines=0
 set showcmd
