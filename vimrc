@@ -1,15 +1,15 @@
 set nocompatible
 set encoding=utf-8
 
-set paste
-filetype indent on
-set noautoindent
+set nopaste
+filetype plugin indent on
+set autoindent
+set smartindent
 
 let g:loaded_matchparen = 1
 
-set shortmess=Ilmnrx
+set shortmess=Ia
 set noruler
-"set statusline=[%{&ff}]%f%M%R\ %=\ %l,%c
 set laststatus=1
 set cpoptions=v$
 set nomodeline
@@ -22,7 +22,7 @@ set backspace=indent,eol,start
 set visualbell
 
 set hlsearch
-set incsearch
+set noincsearch
 set ignorecase
 set smartcase
 
@@ -33,8 +33,8 @@ set tabstop=4
 set shiftwidth=4
 
 set foldmethod=indent
-set foldlevel=99
+set foldlevel=10
 
 syntax off
 set list
-set listchars=tab:▶·,trail:◆,extends:>,precedes:<,nbsp:●
+set listchars=tab:»\ ,trail:◆,extends:▶,precedes:◀,nbsp:●
