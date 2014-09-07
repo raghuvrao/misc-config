@@ -1,16 +1,17 @@
-set paste
-filetype indent off
-set noautoindent
-
 set nocompatible
 set encoding=utf-8
+
+set paste
+filetype indent on
+set noautoindent
 
 let g:loaded_matchparen = 1
 
 set shortmess=Ilmnrx
-set statusline=[%{&ff}]%f%M%R\ %=\ %l,%c
-set laststatus=2
-set cpoptions=$
+set noruler
+"set statusline=[%{&ff}]%f%M%R\ %=\ %l,%c
+set laststatus=1
+set cpoptions=v$
 set nomodeline
 set modelines=0
 set showcmd
@@ -26,7 +27,7 @@ set ignorecase
 set smartcase
 
 set expandtab
-set smarttab
+set nosmarttab
 set softtabstop=4
 set tabstop=4
 set shiftwidth=4
@@ -34,11 +35,6 @@ set shiftwidth=4
 set foldmethod=indent
 set foldlevel=99
 
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
-
 syntax off
 set list
-set listchars=tab:▶\ ,trail:◆
+set listchars=tab:▶·,trail:◆,extends:>,precedes:<,nbsp:●
