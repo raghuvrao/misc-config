@@ -9,7 +9,7 @@ set smartindent
 let g:loaded_matchparen = 1
 
 set shortmess=Ia
-set noruler
+set ruler
 set laststatus=1
 set cpoptions=$
 set nomodeline
