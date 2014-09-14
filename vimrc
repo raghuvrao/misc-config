@@ -35,6 +35,8 @@ set shiftwidth=4
 set foldmethod=indent
 set foldlevel=10
 
-syntax off
 set list
 set listchars=tab:»\ ,trail:◆,extends:▶,precedes:◀,nbsp:●
+
+set background=light
+syntax off
