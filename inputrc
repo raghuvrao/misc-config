@@ -15,5 +15,9 @@ set skip-completed-text on
 set visible-stats on
 set show-all-if-ambiguous off
 
-Control-`: menu-complete
+"\C-`": menu-complete
 set menu-complete-display-prefix on
+
+# Trying to get out of the habit of clearing my screen frequently.
+"\C-l": redraw-current-line
+"\C-x\C-l": clear-screen
