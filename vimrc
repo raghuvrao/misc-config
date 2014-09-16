@@ -38,5 +38,7 @@ set foldlevel=10
 set list
 set listchars=tab:»\ ,trail:◆,extends:▶,precedes:◀,nbsp:●
 
+au FileType svn,gitcommit setlocal textwidth=50
+
 set background=light
 syntax off
