@@ -1,44 +1,52 @@
-set nocompatible
-set encoding=utf-8
+" Kludge to prevent vimrc from being read in if vim is started as vi
+" (here until I can figure out a cleaner way)
+if !has("compatible")
 
-set nopaste
-filetype plugin indent on
-set autoindent
-set smartindent
+    set nocompatible
+    set encoding=utf-8
 
-let g:loaded_matchparen = 1
+    set nopaste
+    filetype plugin indent on
+    set autoindent
+    set smartindent
 
-set shortmess=Ia
-set ruler
-set laststatus=1
-set cpoptions=$
-set nomodeline
-set modelines=0
-set showcmd
-set scrolloff=2
-set wildmenu
-set wildmode=full
-set backspace=indent,eol,start
-set visualbell
+    let g:loaded_matchparen = 1
 
-set hlsearch
-set noincsearch
-set ignorecase
-set smartcase
+    set shortmess=Ia
+    set ruler
+    set laststatus=1
+    set cpoptions=$
+    set nomodeline
+    set modelines=0
+    set showcmd
+    set scrolloff=2
+    set wildmenu
+    set wildmode=full
+    set backspace=indent,eol,start
+    set visualbell
 
-set expandtab
-set nosmarttab
-set softtabstop=4
-set tabstop=4
-set shiftwidth=4
+    set hlsearch
+    set noincsearch
+    set ignorecase
+    set smartcase
 
-set foldmethod=indent
-set foldlevel=10
+    set expandtab
+    set nosmarttab
+    set softtabstop=4
+    set tabstop=4
+    set shiftwidth=4
 
-set list
-set listchars=tab:»\ ,trail:◆,extends:▶,precedes:◀,nbsp:●
+    set foldmethod=indent
+    set foldlevel=10
 
-au FileType svn,gitcommit setlocal textwidth=50
+    set list
+    set listchars=tab:»\ ,trail:◆,extends:▶,precedes:◀,nbsp:●
 
-set background=light
-syntax off
+    if has("autocmd")
+        au FileType svn,gitcommit setlocal textwidth=50
+    endif
+
+    set background=light
+    syntax off
+
+endif
