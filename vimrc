@@ -47,6 +47,6 @@ if !has("compatible")
     endif
 
     set background=light
-    syntax off
+    syntax on
 
 endif
