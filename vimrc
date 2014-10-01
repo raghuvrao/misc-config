@@ -40,7 +40,7 @@ if !has("compatible")
     set foldlevel=10
 
     set list
-    set listchars=tab:»\ ,trail:◆,extends:▶,precedes:◀,nbsp:●
+    set listchars=tab:»\ ,trail:█,extends:>,precedes:<,nbsp:░
 
     if has("autocmd")
         au FileType svn,gitcommit setlocal textwidth=50
