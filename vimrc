@@ -37,7 +37,7 @@ if !has("compatible")
     set shiftwidth=4
 
     set foldmethod=indent
-    set foldlevel=10
+    set foldlevel=100
 
     set list
     set listchars=tab:»\ ,trail:█,extends:>,precedes:<,nbsp:░
