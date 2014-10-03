@@ -10,6 +10,8 @@ if !has("compatible")
     set autoindent
     set smartindent
 
+    let g:loaded_matchparen = 1
+
     set shortmess=Ia
     set ruler
     set laststatus=1
@@ -46,7 +48,6 @@ if !has("compatible")
 
     set background=light
     syntax reset
-    hi MatchParen ctermfg=Magenta guifg=Magenta ctermbg=NONE guibg=NONE term=reverse cterm=NONE gui=NONE
     syntax on
 
 endif
