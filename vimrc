@@ -43,7 +43,7 @@ if !has("compatible")
     set listchars=tab:»\ ,trail:█,extends:>,precedes:<,nbsp:░
 
     if has("autocmd")
-        au FileType svn,gitcommit setlocal textwidth=50
+        au FileType svn,gitcommit setlocal textwidth=80
     endif
 
     set background=light
