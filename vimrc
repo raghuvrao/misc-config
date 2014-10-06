@@ -1,52 +1,61 @@
-" Kludge to prevent vimrc from being read in if vim is started as vi
-" (here until I can figure out a cleaner way)
-if !has("compatible")
+set nocompatible
+set nopaste
 
-    set nocompatible
-    set encoding=utf-8
+set shortmess=Ia
+set laststatus=1
+set cpoptions=$
+set nomodeline
+set modelines=0
+set scrolloff=2
+set wildmode=longest,full
+set backspace=indent,eol,start
+set visualbell
 
-    set nopaste
-    filetype plugin indent on
-    set autoindent
-    set smartindent
+set hlsearch
+set noincsearch
+set ignorecase
+set smartcase
 
-    let g:loaded_matchparen = 1
+set expandtab
+set nosmarttab
+set softtabstop=4
+set tabstop=4
+set shiftwidth=4
 
-    set shortmess=Ia
-    set ruler
-    set laststatus=1
-    set cpoptions=$
-    set nomodeline
-    set modelines=0
-    set showcmd
-    set scrolloff=2
+set list
+set listchars=tab:>\ ,trail:#,extends:>,precedes:<,nbsp:_
+
+if has("wildmenu")
     set wildmenu
-    set wildmode=full
-    set backspace=indent,eol,start
-    set visualbell
+endif
 
-    set hlsearch
-    set noincsearch
-    set ignorecase
-    set smartcase
+if has("cmdline_info")
+    set ruler
+    set showcmd
+endif
 
-    set expandtab
-    set nosmarttab
-    set softtabstop=4
-    set tabstop=4
-    set shiftwidth=4
+if has("multi_byte")
+    set encoding=utf-8
+    set listchars=tab:»\ ,trail:█,extends:>,precedes:<,nbsp:░
+endif
 
+if has("eval")
+    let g:loaded_matchparen = 1
+endif
+
+if has("folding")
     set foldmethod=indent
     set foldlevel=100
+endif
 
-    set list
-    set listchars=tab:»\ ,trail:█,extends:>,precedes:<,nbsp:░
+if has("autocmd")
+    set autoindent
+    set smartindent
+    filetype plugin indent on
+    au FileType svn,gitcommit setlocal textwidth=80
+endif
 
-    if has("autocmd")
-        au FileType svn,gitcommit setlocal textwidth=80
-    endif
-
+if has("syntax")
     set background=light
     syntax on
-
 endif
