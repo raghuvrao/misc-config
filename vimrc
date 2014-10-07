@@ -11,8 +11,6 @@ set wildmode=longest,full
 set backspace=indent,eol,start
 set visualbell
 
-set hlsearch
-set noincsearch
 set ignorecase
 set smartcase
 
@@ -24,6 +22,11 @@ set shiftwidth=4
 
 set list
 set listchars=tab:>\ ,trail:#,extends:>,precedes:<,nbsp:_
+
+if has("extra_search")
+    set hlsearch
+    set noincsearch
+endif
 
 if has("wildmenu")
     set wildmenu
@@ -48,14 +51,14 @@ if has("folding")
     set foldlevel=100
 endif
 
-if has("autocmd")
+if has("autocmd") && has("smartindent")
     set autoindent
     set smartindent
     filetype plugin indent on
-    au FileType svn,gitcommit setlocal textwidth=80
+    au FileType svn,gitcommit setlocal textwidth=78
 endif
 
-if has("syntax")
+if &t_Co > 2 && has("syntax")
     set background=light
     syntax on
 endif
