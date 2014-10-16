@@ -12,6 +12,8 @@ xterm*selectToClipboard: true
 uxterm*selectToClipboard: true
 xterm*vt100.scrollBar: false
 uxterm*vt100.scrollBar: false
+xterm*vt100.eightBitInput: false
+uxterm*vt100.eightBitInput: false
 !xterm*vt100.metaSendsEscape: true
 !uxterm*vt100.metaSendsEscape: true
 !xterm*vt100.eightBitControl: false
