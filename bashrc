@@ -30,15 +30,7 @@ HISTSIZE=10000
 HISTFILESIZE=20000
 HISTTIMEFORMAT='%F %T '
 PROMPT_DIRTRIM=3
-PS1='(\h ${?} \w)\$ '
+PS1='(\h \w)\$ '
 
 ls() { command ls -AbF "${@}"; }
 grep() { command grep --color=auto "${@}"; }
-
-[[ -f /etc/bash_completion.d/git ]] && {
-    source /etc/bash_completion.d/git
-    GIT_PS1_SHOWDIRTYSTATE='yes'
-    GIT_PS1_SHOWUNTRACKEDFILES='yes'
-    GIT_PS1_SHOWSTASHSTATE='yes'
-    PS1='$(__git_ps1 "(%s)")'"${PS1}"
-}
