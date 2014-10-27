@@ -8,7 +8,7 @@
 (setq auto-fill-mode 1)
 (setq default-major-mode 'text-mode)
 (global-font-lock-mode 1)
-(set-variable 'frame-background-mode 'light)
+;(set-variable 'frame-background-mode 'light)
 ;(set-default-font "DejaVu Sans Mono-10")
 ;(set-background-color "black")
 ;(set-foreground-color "darkkhaki")
