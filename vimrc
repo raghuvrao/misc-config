@@ -56,6 +56,7 @@ if has("autocmd") && has("smartindent")
     set smartindent
     filetype plugin indent on
     au FileType svn,gitcommit setlocal textwidth=78
+    au BufNewFile,BufRead *.conf set filetype=conf
 endif
 
 if &t_Co > 2 && has("syntax")
