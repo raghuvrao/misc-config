@@ -60,7 +60,7 @@ if has("autocmd") && has("smartindent")
 endif
 
 if &t_Co > 2 && has("syntax")
-    set background=light
+    set background=dark
     syntax reset
     syntax on
 endif

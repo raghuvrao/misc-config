@@ -1,7 +1,7 @@
-xterm*vt100.background: white
-uxterm*vt100.background: white
-xterm*vt100.foreground: black
-uxterm*vt100.foreground: black
+xterm*vt100.background: black
+uxterm*vt100.background: black
+xterm*vt100.foreground: gray
+uxterm*vt100.foreground: gray
 xterm*termName: xterm-256color
 uxterm*termName: xterm-256color
 xterm*vt100.font: -misc-fixed-medium-r-normal--13-120-75-75-c-80-iso10646-1
@@ -26,8 +26,8 @@ xterm*vt100.colorBDMode: true
 uxterm*vt100.colorBDMode: true
 xterm*vt100.allowBoldFonts: false
 uxterm*vt100.allowBoldFonts: false
-xterm*vt100.colorBD: gray27
-uxterm*vt100.colorBD: gray27
+xterm*vt100.colorBD: white
+uxterm*vt100.colorBD: white
 
 !Emacs.toolBar: 0
 !Emacs.font: Liberation Mono-10
