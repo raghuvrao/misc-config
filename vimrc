@@ -16,8 +16,8 @@ set smartcase
 
 set expandtab
 set nosmarttab
+set tabstop=8
 set softtabstop=4
-set tabstop=4
 set shiftwidth=4
 
 set list
