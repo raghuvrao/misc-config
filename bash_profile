@@ -9,12 +9,16 @@ for _dir_ in ${_dirs_[@]}; do
 done
 unset _dir_ _dirs_
 
+# less should be able to handle colors, do case-insensitive searches.
 export LESS='-R -i'
 
+# Should I ever need to install python libs in my homedir.
 if [[ -d "${HOME}/lib/python" ]]; then
     export PYTHONPATH="${PYTHONPATH}:${HOME}/lib/python"
 fi
 
+# Here so I know that the python interpreter supports a startup / run-control /
+# initialization / whatchamacalit file.
 if [[ -f "${HOME}/.pythonrc.py" ]]; then
     export PYTHONSTARTUP="${HOME}/.pythonrc.py"
 fi
