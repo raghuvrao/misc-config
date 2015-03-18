@@ -30,7 +30,7 @@ HISTSIZE=10000
 HISTFILESIZE=20000
 HISTTIMEFORMAT='%F %T '
 PROMPT_DIRTRIM=3
-PS1='\w\$ '
+PS1='[\w]\$ '
 
 ls() { command ls -AbF "${@}"; }
 grep() { command grep --color=auto "${@}"; }
