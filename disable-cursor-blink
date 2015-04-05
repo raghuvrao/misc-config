@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# Sledgehammer to disable cursor blinking.
+
+# GNOME 2
+gconftool-2 --set "/desktop/gnome/interface/cursor_blink" --type boolean "False"
+gconftool-2 --set "/apps/gnome-terminal/profiles/Default/cursor_blink" --type boolean "False"
+gconftool-2 -s /apps/gnome-terminal/profiles/Default/cursor_blink_mode -t string off
+grep -q 'gtk-cursor-blink=0' ~/.gtkrc-2.0 || printf "%s\n" "gtk-cursor-blink=0" >> ~/.gtkrc-2.0
+
+# GNOME 3
+gsettings set org.gnome.desktop.interface cursor-blink false
+
+# XFCE 4.10 and newer
+xfconf-query -c xsettings -p /Net/CursorBlink -T
+
+# Older than XFCE 4.10
+xfconf-query -c xsettings -p /Net/CursorBlink -s false
+
+# KDE / Qt
+message="For KDE and Qt applications, install qtconfig or qt4-qtconfig.
+qtconfig -> Interface -> CursorFlashTime -> <some small number>.  Then, punch
+the down-scroll thing next to that text box until you see 'No blinking'.
+Alternately, set it to some small number and quit (save changes when asked).
+Then, edit ~/.config/Trolltech.conf, and under the [Qt] section, set
+cursorFlashTime to 0."
+printf "\n%s\n" "${message}"
+
+# Source
+printf "\n%s\n" "http://www.jurta.org/en/prog/noblink"
