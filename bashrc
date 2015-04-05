@@ -21,14 +21,6 @@ shopt -s histappend
 shopt -s checkwinsize
 shopt -s no_empty_cmd_completion
 
-FCEDIT='vim'
-EDITOR="${FCEDIT}"
-VISUAL="${FCEDIT}"
-GLOBIGNORE='.:..'
-HISTCONTROL='ignoreboth'
-HISTSIZE=10000
-HISTFILESIZE=20000
-HISTTIMEFORMAT='%F %T '
 PROMPT_DIRTRIM=3
 PS1='[\w \h]\$ '
 
