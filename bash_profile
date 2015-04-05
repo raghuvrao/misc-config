@@ -13,8 +13,8 @@ for _dir_ in ${_dirs_[@]}; do
 done
 unset _dir_ _dirs_
 
-# Se variables here that will not change with each invocation of the shell, and
-# will be available in all shells.
+# Set variables here that will not change with each invocation of the shell,
+# and will be available in all shells.
 export LESS='-R -i'
 export VISUAL='vim'
 export EDITOR="${VISUAL}"
