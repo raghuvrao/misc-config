@@ -22,7 +22,16 @@ shopt -s checkwinsize
 shopt -s no_empty_cmd_completion
 
 PROMPT_DIRTRIM=3
-PS1='[\w \h]\$ '
 
 ls() { command ls -AbF "${@}"; }
 grep() { command grep --color=auto "${@}"; }
+
+if co="$(tput setaf 1 2>/dev/null)"; then
+    rst="$(tput sgr0 2>/dev/null)"
+    ps1_deco="\[${rst}${co}\]»\[${rst}\]"
+    unset co rst
+else
+    ps1_deco='\n'
+fi
+PS1="${ps1_deco}"'[\w \h]\$ '
+unset ps1_deco
