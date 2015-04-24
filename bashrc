@@ -21,17 +21,17 @@ shopt -s histappend
 shopt -s checkwinsize
 shopt -s no_empty_cmd_completion
 
-PROMPT_DIRTRIM=3
-
 ls() { command ls -AbF "${@}"; }
 grep() { command grep --color=auto "${@}"; }
+cgrep() { command grep --color=always "${@}"; }
 
+PROMPT_DIRTRIM=3
+
+_ps1='[\w \h]\$ '
+PS1='\n'"${_ps1}"
 if co="$(tput setaf 1 2>/dev/null)"; then
     rst="$(tput sgr0 2>/dev/null)"
-    ps1_deco="\[${rst}${co}\]»\[${rst}\]"
+    PS1="\[${rst}${co}\]§\[${rst}\]${_ps1}"
     unset co rst
-else
-    ps1_deco='\n'
 fi
-PS1="${ps1_deco}"'[\w \h]\$ '
-unset ps1_deco
+unset _ps1
