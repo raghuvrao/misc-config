@@ -14,8 +14,3 @@ set page-completions on
 set skip-completed-text on
 set visible-stats on
 set show-all-if-ambiguous off
-
-# Try to get out of the habit of clearing the screen frequently (make the
-# keybinding slightly more inconvenient than the default; unbind the default).
-"\C-l":
-"\C-x\C-l": clear-screen
