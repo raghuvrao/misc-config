@@ -26,12 +26,4 @@ grep() { command grep --color=auto "${@}"; }
 cgrep() { command grep --color=always "${@}"; }
 
 PROMPT_DIRTRIM=3
-
-_ps1='[\w \h]\$ '
-PS1='\n'"${_ps1}"
-if co="$(tput setaf 1 2>/dev/null)"; then
-    rst="$(tput sgr0 2>/dev/null)"
-    PS1="\[${rst}${co}\]|\[${rst}\]${_ps1}"
-    unset co rst
-fi
-unset _ps1
+PS1='\h:\w\$ '
