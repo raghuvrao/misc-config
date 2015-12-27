@@ -25,5 +25,7 @@ ls() { command ls -AbF "${@}"; }
 grep() { command grep --color=auto "${@}"; }
 cgrep() { command grep --color=always "${@}"; }
 
+[[ -d "${HOME}/bin" ]] && PATH+=":${HOME}/bin"
+
 PROMPT_DIRTRIM=3
 PS1='\h:\w\$ '
