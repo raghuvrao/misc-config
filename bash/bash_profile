@@ -1,14 +1,6 @@
 # .bash_profile
 # Raghu Rao
 
-_dirs_=( "${HOME}/bin" )
-for _dir_ in ${_dirs_[@]}; do
-    if [[ ( -d "${_dir_}" ) && ( ! "${PATH}" =~ ${_dir_} ) ]]; then
-        PATH="${PATH}:${_dir_}"
-    fi
-done
-unset _dir_ _dirs_
-
 # Set variables here that will not change with each invocation of the shell,
 # and will be available in all shells.
 export LESS='-R -i'
