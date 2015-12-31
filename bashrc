@@ -3,11 +3,26 @@
 
 umask 077
 
-[[ ${-} == *i* ]] || return
+if [[ ${-} != *i* ]]; then
+    return
+fi
 
 unalias -a
 unset PROMPT_COMMAND
 unset LS_COLORS
+
+export LESS='-R -i'
+export VISUAL='vim'
+export EDITOR="${VISUAL}"
+export FCEDIT="${VISUAL}"
+
+HISTCONTROL='ignoreboth'
+HISTSIZE=10000
+HISTFILESIZE=20000
+HISTTIMEFORMAT='%F %T '
+GLOBIGNORE='.:..'
+PROMPT_DIRTRIM=3
+PS1='(\h)\w\$ '
 
 shopt -u -o posix
 shopt -u -o vi
@@ -21,11 +36,26 @@ shopt -s histappend
 shopt -s checkwinsize
 shopt -s no_empty_cmd_completion
 
-ls() { command ls -AbF "${@}"; }
-grep() { command grep --color=auto "${@}"; }
-cgrep() { command grep --color=always "${@}"; }
+ls() {
+    command ls -AbF "${@}"
+}
 
-[[ -d "${HOME}/bin" ]] && PATH+=":${HOME}/bin"
+grep() {
+    command grep --color=auto "${@}"
+}
 
-PROMPT_DIRTRIM=3
-PS1='\h:\w\$ '
+cgrep() {
+    command grep --color=always "${@}"
+}
+
+if [[ -d "${HOME}/lib/python" ]]; then
+    export PYTHONPATH="${PYTHONPATH}:${HOME}/lib/python"
+fi
+
+if [[ -f "${HOME}/.pythonrc.py" ]]; then
+    export PYTHONSTARTUP="${HOME}/.pythonrc.py"
+fi
+
+if [[ -d "${HOME}/bin" ]]; then
+    PATH+=":${HOME}/bin"
+fi
