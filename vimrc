@@ -39,7 +39,7 @@ endif
 
 if has("multi_byte")
     set encoding=utf-8
-    set listchars=tab:»\ ,trail:█,extends:>,precedes:<,nbsp:░
+    set listchars=tab:·\ ,trail:█,extends:>,precedes:<,nbsp:░
 endif
 
 if has("eval")
