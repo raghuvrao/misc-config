@@ -3,17 +3,17 @@
 
 # from /etc/profile (Red Hat)
 pathmunge() {
-  case ":${PATH}:" in
-    *:"${1}":*)
-      ;;
-    *)
-      if [ "${2}" = "after" ]; then
-        PATH="${PATH}:${1}"
-      else
-        PATH="${1}:${PATH}"
-      fi
-      ;;
-  esac
+    case ":${PATH}:" in
+        *:"${1}":*)
+            ;;
+        *)
+            if [ "${2}" = "after" ]; then
+                PATH="${PATH}:${1}"
+            else
+                PATH="${1}:${PATH}"
+            fi
+            ;;
+    esac
 }
 
 # If an environment variable does not change between shell invocations and is
@@ -28,15 +28,15 @@ export SVN_EDITOR="${VISUAL}"
 export LESS='-i -R'
 
 if [ -d "${HOME}/lib/python" ]; then
-  export PYTHONPATH="${PYTHONPATH}:${HOME}/lib/python"
+    export PYTHONPATH="${PYTHONPATH}:${HOME}/lib/python"
 fi
 
 if [ -r "${HOME}/.pythonrc.py" ]; then
-  export PYTHONSTARTUP="${HOME}/.pythonrc.py"
+    export PYTHONSTARTUP="${HOME}/.pythonrc.py"
 fi
 
 if [ -d "${HOME}/bin" ]; then
-  pathmunge "${HOME}/bin" "after"
+    pathmunge "${HOME}/bin" "after"
 fi
 
 export PATH
@@ -44,5 +44,5 @@ unset -f pathmunge
 
 # Source .bashrc in the end, and only if running bash.
 if [ -n "${BASH_VERSION}" -a -r "${HOME}/.bashrc" ]; then
-  . "${HOME}/.bashrc"
+    . "${HOME}/.bashrc"
 fi
