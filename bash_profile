@@ -16,10 +16,16 @@ pathmunge() {
     esac
 }
 
-# If an environment variable does not change between shell invocations and is
-# required in child shells or forked programs it belongs in .profile or
-# .bash_profile.  Such variables must be exported so they can be made available
-# in child shells and other programs the shell forks and execs.
+# Some general guidelines to tell if an environment variable belongs in this
+# file:
+#   - its value remains the same in all shell invocations
+#   - it is expected to be available to child processes (e.g. programs other
+#     than the shell use it)
+#   - it does not concern interactive shell sessions in particular (e.g. PS1 is
+#     interactive-only, so it does not belong in this file)
+#   - it is not bash-specific
+# In order that these variables be available to child processes, it is
+# necessary to export them.
 
 export VISUAL='vim'
 export EDITOR="${VISUAL}"
