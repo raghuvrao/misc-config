@@ -11,11 +11,13 @@ fi
 unset LS_COLORS PROMPT_COMMAND
 unalias -a
 
-# If a variable changes between shell invocations, or not required in child
-# shells or forked programs, or makes sense only in an interactive shell, it
-# belongs in the shell run-control file (e.g. ~/.bashrc).  These variables are
-# typically used by the shell itself or shell builtins, so exporting them is
-# unnecessary.
+# Some general guidelines to tell if an environment variable belongs in this
+# file:
+#   - it is used only by the shell or shell builtins (e.g. PS1, HISTSIZE,
+#     GLOBIGNORE etc.)
+#   - it could change between shell sessions (e.g. different values for PS1
+#     based on the value of TERM)
+# Exporting such environment variables is typically unnecessary.
 GLOBIGNORE='.:..'
 HISTCONTROL='ignoreboth'
 HISTSIZE=10000
