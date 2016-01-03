@@ -1,5 +1,7 @@
 # .bashrc
 # Raghu Rao
+# Unlike .profile, this file is expected for use only with bash, so bashisms
+# should be fine to use here.
 
 # If a non-interactive shell sources this file, do not do anything.
 if [[ "${-}" != *i* ]]; then
