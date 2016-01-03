@@ -1,3 +1,6 @@
+" Disable macro-recording by unbinding it from 'q'.  I am always misfiring.
+map q <Nop>
+
 set nocompatible
 set nopaste
 
@@ -7,27 +10,22 @@ set cpoptions=$
 set nomodeline
 set modelines=0
 set scrolloff=2
-set wildmode=longest,full
 set backspace=indent,eol,start
 set visualbell
 
-set ignorecase
-set smartcase
-
 set expandtab
 set nosmarttab
-set tabstop=8
 set softtabstop=4
+set tabstop=8
 set shiftwidth=4
 
-set list
-set listchars=tab:>\ ,trail:#,extends:>,precedes:<,nbsp:_
-
+set ignorecase
+set smartcase
 if has("extra_search")
-    set hlsearch
     set noincsearch
 endif
 
+set wildmode=longest,full
 if has("wildmenu")
     set wildmenu
 endif
@@ -37,6 +35,8 @@ if has("cmdline_info")
     set showcmd
 endif
 
+set list
+set listchars=tab:>\ ,trail:#,extends:>,precedes:<,nbsp:_
 if has("multi_byte")
     set encoding=utf-8
     set listchars=tab:·\ ,trail:█,extends:>,precedes:<,nbsp:░
@@ -55,11 +55,15 @@ if has("autocmd") && has("smartindent")
     set autoindent
     set smartindent
     filetype plugin indent on
-    au FileType svn,gitcommit setlocal textwidth=78
-    au BufNewFile,BufRead *.conf set filetype=conf
+    au FileType svn,gitcommit setlocal textwidth=80
+    au BufRead,BufNewFile *.conf set filetype=conf
+    au BufRead,BufNewFile *.py set textwidth=160
 endif
 
 if &t_Co > 2 && has("syntax")
     set background=dark
     syntax on
+    if has("extra_search")
+        set hlsearch
+    endif
 endif
