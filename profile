@@ -1,11 +1,6 @@
 # .profile
 # Raghu Rao
-#
-# Keep .profile strictly POSIX-compliant (e.g. it should work with dash): some
-# desktop environments / Linux distributions source .profile while logging in,
-# some others source .bash_profile, some try one file after another,... and I
-# do not want to keep track of which one does what.  So, just use .profile and
-# keep it sh-compatible.
+# This file must be fully sh-compatible!  No bashisms!
 
 # from /etc/profile (Red Hat)
 pathmunge() {
@@ -22,10 +17,15 @@ pathmunge() {
     esac
 }
 
-# If an environment variable does not change between shell invocations and is
-# required in child shells or forked programs it belongs in .profile or
-# .bash_profile.  Such variables must be exported so they can be made available
-# in child shells and other programs the shell forks and execs.
+# Some general guidelines to tell if an environment variable belongs in this
+# file:
+#   - its value remains the same in all shell invocations
+#   - it is expected to be available to child processes (e.g. programs other
+#     than the shell use it)
+#   - it does not concern interactive shell sessions in particular (e.g. PS1)
+#   - it is not bash-specific
+# In order that these variables be available to child processes, it is
+# necessary to export them.
 
 export VISUAL='vim'
 export EDITOR="${VISUAL}"
