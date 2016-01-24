@@ -3,10 +3,8 @@
 
 umask 077
 
-# If a non-interactive shell sources this file, do not do anything.
-if [[ "${-}" != *i* ]]; then
-    return
-fi
+# Do nothing if shell is non-interactive.
+if [[ "${-}" != *i* ]]; then return; fi
 
 unset LS_COLORS PROMPT_COMMAND
 unalias -a
@@ -31,27 +29,23 @@ shopt -s -o emacs pipefail
 shopt -s checkhash checkwinsize cmdhist dotglob extglob histappend \
          histreedit histverify no_empty_cmd_completion sourcepath
 
-ls() {
-    command ls -abF "${@}"
-}
+ls() { command ls -abF "${@}"; }
 
-grep() {
-    command grep --color=auto "${@}"
-}
+grep() { command grep --color=auto "${@}"; }
 
-cgrep() {
-    command grep --color=always "${@}"
-}
+cgrep() { command grep --color=always "${@}"; }
 
-t() {
-    local py_cmd=
+t()
+{
+    local py=
+    local tf='%s %F %a %T %Z(%z)'
     if [[ -z "${1}" ]]; then
-        py_cmd='import time; print time.strftime("%s %F %a %T %Z(%z)");'
+        py='from datetime import datetime as dt; import pytz; print dt.now(pytz.timezone("US/Pacific")).strftime("'"${tf}"'");'
     elif [[ "${1}" =~ ^(\+|\-)?[0-9]+(\.[0-9]+)?$ ]]; then
-        py_cmd='import time; print time.strftime("%s %F %a %T %Z(%z)", time.localtime('"${1}"'));'
+        py='from datetime import datetime as dt; import pytz; print dt.utcfromtimestamp('"${1}"').replace(tzinfo=pytz.utc).astimezone(pytz.timezone("US/Pacific")).strftime("'"${tf}"'");'
     fi
-    if [[ -n "${py_cmd}" ]]; then
-        python -c "${py_cmd}"
+    if [[ -n "${py}" ]]; then
+        python -c "${py}"
     else
         return 1
     fi
