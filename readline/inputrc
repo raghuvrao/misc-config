@@ -16,6 +16,8 @@ set show-all-if-ambiguous off
 set show-all-if-unmodified off
 set completion-prefix-display-length 0
 set bell-style none
+set match-hidden-files on
+set print-completions-horizontally on
 
 # Example of how to change keybindings (will affect all programs that link
 # against readline): change clear-screen from C-l to C-x C-l (unbind the
