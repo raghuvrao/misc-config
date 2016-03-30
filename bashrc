@@ -26,8 +26,9 @@ PS1='(\H)\w\$ '
 
 shopt -u -o posix vi
 shopt -s -o emacs pipefail
-shopt -s checkhash checkwinsize cmdhist dotglob extglob histappend \
-         histreedit histverify no_empty_cmd_completion sourcepath
+shopt -u dotglob
+shopt -s checkhash checkwinsize cmdhist extglob histappend histreedit \
+         histverify no_empty_cmd_completion sourcepath
 
 ls() { command ls -abF "${@}"; }
 
