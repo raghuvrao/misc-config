@@ -38,16 +38,44 @@ cgrep() { command grep --color=always "${@}"; }
 
 t()
 {
-    local py=
-    local tf='%s %F %a %T %Z(%z)'
-    if [[ -z "${1}" ]]; then
-        py='from datetime import datetime as dt; import pytz; print dt.now(pytz.timezone("US/Pacific")).strftime("'"${tf}"'");'
-    elif [[ "${1}" =~ ^(\+|\-)?[0-9]+(\.[0-9]+)?$ ]]; then
-        py='from datetime import datetime as dt; import pytz; print dt.utcfromtimestamp('"${1}"').replace(tzinfo=pytz.utc).astimezone(pytz.timezone("US/Pacific")).strftime("'"${tf}"'");'
-    fi
-    if [[ -n "${py}" ]]; then
-        python -c "${py}"
-    else
+    local unix_ts="${1}"
+    local include_now_info='yes'
+    if [[ -z "${unix_ts}" ]]; then
+        unix_ts="$(date +%s)"
+        include_now_info='no'
+    elif [[ ! "${unix_ts}" =~ ^(\+|\-)?[0-9]+(\.[0-9]+)?$ ]]; then
+        echo "Usage: ${FUNCNAME[0]} [UNIX timestamp]" >&2
         return 1
     fi
+    python <<END
+import sys
+from datetime import datetime as dt
+try:
+    from pytz import timezone, utc
+except ImportError, i:
+    print "Cannot import pytz: {0}".format(i)
+    sys.exit(1)
+tf = '%F %a %T %Z(%z)'
+tzs = [timezone('Etc/UTC'),
+       timezone('US/Pacific'),
+       timezone('US/Eastern'),
+       timezone('Asia/Kolkata'),
+       timezone('Asia/Shanghai')]
+unix_ts = int(float('${unix_ts}'))
+my_dt = dt.utcfromtimestamp(unix_ts).replace(tzinfo=utc)
+now = None
+if '${include_now_info}' == 'yes':
+    import time
+    now = int(time.time())
+    now_dt = dt.utcfromtimestamp(now).replace(tzinfo=utc)
+print "{0} {1}UNIX".format(
+    unix_ts,
+    "(now: {0}; diff: {1}) ".format(now, now - unix_ts) if now else "")
+for tz in tzs:
+    print "{0} {1}{2}".format(
+        my_dt.astimezone(tz).strftime(tf),
+        "(now: {0}) ".format(now_dt.astimezone(tz).strftime(tf)) if now else "",
+        tz)
+END
+
 }
