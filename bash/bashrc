@@ -30,11 +30,23 @@ shopt -u dotglob
 shopt -s checkhash checkwinsize cmdhist extglob histappend histreedit \
          histverify no_empty_cmd_completion sourcepath
 
-ls() { command ls -abF "${@}"; }
+ls_options='-a -b'
+grep_options=''
+cgrep_options=''
 
-grep() { command grep --color=auto "${@}"; }
+if [[ "${TERM}" =~ linux|xterm|screen && "${OSTYPE}" =~ linux ]]; then
+    # Boldly assume all variants of the three terminal types
+    # support color on linux.
+    ls_options+=' --color=auto'
+    grep_options+=' --color=auto'
+    cgrep_options+=' --color=always'
+fi
 
-cgrep() { command grep --color=always "${@}"; }
+ls() { command ls ${ls_options} "${@}"; }
+
+grep() { command grep ${grep_options} "${@}"; }
+
+cgrep() { command grep ${cgrep_options} "${@}"; }
 
 t()
 {
