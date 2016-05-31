@@ -40,6 +40,8 @@ if [[ "${TERM}" =~ linux|xterm|screen && "${OSTYPE}" =~ linux ]]; then
     ls_options+=' --color=auto'
     grep_options+=' --color=auto'
     cgrep_options+=' --color=always'
+else
+    ls_options+=' -F'
 fi
 
 ls() { command ls ${ls_options} "${@}"; }
