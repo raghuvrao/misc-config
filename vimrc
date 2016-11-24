@@ -1,17 +1,18 @@
-" Disable macro-recording by unbinding it from 'q'.  I am always misfiring.
-map q <Nop>
+" Short-cut to toggle line numbers.
+nnoremap <C-a> :set invnumber<CR>
+inoremap <C-a> <C-O>:set invnumber<CR>
 
 set nocompatible
 set nopaste
+set novisualbell
 
-set shortmess=Ia
-set laststatus=1
-set cpoptions=$
 set nomodeline
 set modelines=0
-set scrolloff=2
+
+set shortmess=I
+set laststatus=1
+set cpoptions=$
 set backspace=indent,eol,start
-set visualbell
 
 set expandtab
 set nosmarttab
@@ -21,19 +22,14 @@ set shiftwidth=4
 
 set ignorecase
 set smartcase
-if has("extra_search")
-    set noincsearch
-endif
 
 set wildmode=longest,full
-if has("wildmenu")
-    set wildmenu
-endif
+if has("wildmenu") | set wildmenu | endif
 
-if has("cmdline_info")
-    set ruler
-    set showcmd
-endif
+if has("cmdline_info") | set noruler showcmd | endif
+if has("eval") | let g:loaded_matchparen = 1 | endif
+if has("folding") | set foldmethod=indent foldlevel=100 | endif
+if has("extra_search") | set hlsearch noincsearch | endif
 
 set list
 set listchars=tab:>\ ,trail:#,extends:>,precedes:<,nbsp:_
@@ -42,28 +38,32 @@ if has("multi_byte")
     set listchars=tab:·\ ,trail:█,extends:>,precedes:<,nbsp:░
 endif
 
-if has("eval")
-    let g:loaded_matchparen = 1
-endif
-
-if has("folding")
-    set foldmethod=indent
-    set foldlevel=100
-endif
-
-if has("autocmd") && has("smartindent")
-    set autoindent
-    set smartindent
+set textwidth=78
+if has("autocmd")
     filetype plugin indent on
-    au FileType svn,gitcommit setlocal textwidth=80
-    au BufRead,BufNewFile *.conf set filetype=conf
-    au BufRead,BufNewFile *.py set textwidth=160
+    augroup rrao_augroup
+        au!
+        au BufWinEnter,BufRead,BufNewFile * setlocal formatoptions=qnm1
+
+        au FileType svn,gitcommit if has("cmdline_info") | setlocal ruler | endif
+        au FileType svn,gitcommit setlocal noexpandtab softtabstop=8 shiftwidth=8 tabstop=8
+        au BufWinEnter,BufRead,BufNewFile .gitconfig if has("cmdline_info") | setlocal ruler | endif
+        au BufWinEnter,BufRead,BufNewFile .gitconfig setlocal noexpandtab softtabstop=8 shiftwidth=8 tabstop=8
+
+        au FileType python if has("cmdline_info") | setlocal ruler | endif
+        au FileType python setlocal textwidth=98
+
+        au BufWinEnter,BufRead,BufNewFile *.go if has("cmdline_info") | setlocal ruler | endif
+        au BufWinEnter,BufRead,BufNewFile *.go if has("smartindent") | setlocal smartindent | endif
+        au BufWinEnter,BufRead,BufNewFile *.go setlocal filetype=go noexpandtab softtabstop=8 shiftwidth=8 tabstop=8 textwidth=0
+        au BufWinEnter,BufRead,BufNewFile *.go setlocal list listchars=tab:\ \ ,trail:#,extends:>,precedes:<,nbsp:_
+        au BufWinEnter,BufRead,BufNewFile *.go if has("multi_byte") | setlocal listchars=tab:\ \ ,trail:█,extends:>,precedes:<,nbsp:░ | endif
+
+        au FileType sh if has("cmdline_info") | setlocal ruler | endif
+        au FileType *.sh if has("cmdline_info") | setlocal ruler | endif
+        au FileType *.bash if has("cmdline_info") | setlocal ruler | endif
+    augroup END
 endif
 
-if &t_Co > 2 && has("syntax")
-    set background=dark
-    syntax on
-    if has("extra_search")
-        set hlsearch
-    endif
-endif
+" Disable automatic syntax highlighting for all files!
+syntax off
