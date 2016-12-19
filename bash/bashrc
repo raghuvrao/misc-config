@@ -11,5 +11,6 @@ HISTFILESIZE=20000
 HISTSIZE="${HISTFILESIZE}"
 HISTTIMEFORMAT='%F %a %T %Z(UTC%z) '
 
-if ! type -a cgrep >/dev/null 2>&1; then alias cgrep='grep --color=always'; fi
-if ! alias ls >/dev/null 2>&1; then alias ls='ls -F'; fi
+if ! alias cgrep &>/dev/null; then alias cgrep='grep --color=always'; fi
+if ! alias ls &>/dev/null; then alias ls='ls -F'; fi
+if ! alias ll &>/dev/null; then alias ll='ls -l'; fi
