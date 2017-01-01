@@ -2,6 +2,8 @@
 nnoremap <C-a> :set invnumber<CR>
 inoremap <C-a> <C-O>:set invnumber<CR>
 
+set nobackup
+set noundofile
 set nocompatible
 set nopaste
 set novisualbell
@@ -62,6 +64,8 @@ if has("autocmd")
         au FileType sh if has("cmdline_info") | setlocal ruler | endif
         au FileType *.sh if has("cmdline_info") | setlocal ruler | endif
         au FileType *.bash if has("cmdline_info") | setlocal ruler | endif
+
+        au FileType sshconfig,sshdconfig setlocal noexpandtab softtabstop=8 shiftwidth=8 tabstop=8 textwidth=0
     augroup END
 endif
 
