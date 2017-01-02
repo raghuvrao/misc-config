@@ -1,8 +1,10 @@
-# .profile
-# Raghu Rao
-# This file must be fully sh-compatible!  No bashisms!
+# ~/.profile
+# Author: Raghu Rao <raghu.v.rao@gmail.com>
 
-# from /etc/profile (Red Hat)
+# This file must be fully sh-compatible as it is sourced by multiple sh-like
+# shells!  No bashisms!
+
+# Stolen from Red Hat's /etc/profile
 pathmunge() {
     case ":${PATH}:" in
         *:"${1}":*)
