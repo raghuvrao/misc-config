@@ -1,7 +1,7 @@
 # .bash_profile
-# Raghu Rao
+# Author: Raghu Rao <raghu.v.rao@gmail.com>
 
-# from /etc/profile (Red Hat)
+# Stolen from Red Hat's /etc/profile
 pathmunge() {
     case ":${PATH}:" in
         *:"${1}":*)
