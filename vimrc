@@ -51,7 +51,7 @@ if has("autocmd")
 		au BufWinEnter,BufRead,BufNewFile .gitconfig if has("cmdline_info") | setlocal ruler | endif
 
 		au FileType python if has("cmdline_info") | setlocal ruler | endif
-		au FileType python setlocal expandtab softtabstop=4 shiftwidth=4 tabstop=8 textwidth=98
+		au FileType python setlocal expandtab softtabstop=4 shiftwidth=4 textwidth=98
 
 		au BufWinEnter,BufRead,BufNewFile *.go if has("cmdline_info") | setlocal ruler | endif
 		au BufWinEnter,BufRead,BufNewFile *.go if has("smartindent") | setlocal smartindent | endif
@@ -60,9 +60,9 @@ if has("autocmd")
 		au BufWinEnter,BufRead,BufNewFile *.go if has("multi_byte") | setlocal listchars=tab:\ \ ,trail:█,extends:>,precedes:<,nbsp:░ | endif
 
 		au FileType sh if has("cmdline_info") | setlocal ruler | endif
-		au FileType sh setlocal expandtab softtabstop=4 shiftwidth=4 tabstop=8
+		au FileType sh setlocal expandtab softtabstop=4 shiftwidth=4
 		au BufWinEnter,BufRead,BufNewFile *.sh,*.bash if has("cmdline_info") | setlocal ruler | endif
-		au BufWinEnter,BufRead,BufNewFile *.sh,*.bash setlocal expandtab softtabstop=4 shiftwidth=4 tabstop=8
+		au BufWinEnter,BufRead,BufNewFile *.sh,*.bash setlocal expandtab softtabstop=4 shiftwidth=4
 	augroup END
 endif
 
