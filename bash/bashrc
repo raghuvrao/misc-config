@@ -30,3 +30,13 @@ if [[ -r "${f}" ]]; then
     fi
 fi
 unset f
+
+if [[ -z "${PROMPT_COMMAND}" ]]; then
+    case "${TERM}" in
+        xterm|xterm-*color|screen|screen-*color)
+            # The same escape sequence seems to work as intended in xterm and
+            # tmux (sets pane_title in tmux).
+            PROMPT_COMMAND='printf "\033]2;${HOSTNAME%%\.*}:${PWD/#${HOME}/\~}\007"'
+            ;;
+    esac
+fi
