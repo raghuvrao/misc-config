@@ -16,19 +16,17 @@ alias ls='ls -F'
 alias ll='ls -l'
 alias l.='ls -d .*'
 
-# For reasons I do not yet understand, C-l does not clear the screen in
-# bash+tmux on Slackware (i.e. the readline function clear-screen (which is
-# bound to C-l by default) does not seem to work as expected when in tmux on
-# Slackware).  However, the command 'tput clear' magically works.  So, work
+# For reasons I do not yet understand, C-l (by default, bound to readline's
+# clear-screen function) does not clear the screen in bash on Slackware for
+# some terminal types (e.g. screen, screen-256color and xterm-256color).
+# However, on these terminal types, the command 'tput clear' works.  So, work
 # around the problem for now by binding C-l to 'tput clear'.
 f="/etc/slackware-version"
-if [[ -n "${TMUX}" && -r "${f}" ]]; then
-    while read line; do
-        if [[ "${line}" =~ ^[Ss]lackware ]]; then
-            builtin bind -r "\C-l"
-            builtin bind -x '"\C-l": tput clear'
-            break
-        fi
-    done < "${f}"
+if [[ -r "${f}" ]]; then
+    read -r first_line <"${f}" &>/dev/null
+    if [[ "${first_line}" =~ ^[Ss]lackware ]]; then
+        builtin bind -r "\C-l"
+        builtin bind -x '"\C-l": tput clear'
+    fi
 fi
 unset f
