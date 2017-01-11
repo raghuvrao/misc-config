@@ -16,6 +16,8 @@ alias ls='ls -F'
 alias ll='ls -l'
 alias l.='ls -d .*'
 
+shopt -s checkwinsize
+
 case "${TERM}" in
     xterm|xterm-*color|screen|screen-*color)
         # The same escape sequence seems to work as intended in xterm and
