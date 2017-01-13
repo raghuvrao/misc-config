@@ -18,27 +18,19 @@ alias l.='ls -d .*'
 
 shopt -s checkwinsize
 
-case "${TERM}" in
-    xterm|xterm-*color|screen|screen-*color)
-        # The same escape sequence seems to work as intended in xterm and
-        # tmux (sets pane_title in tmux).
-        if [[ -z "${PROMPT_COMMAND}" ]]; then
-            PROMPT_COMMAND='printf "\033]2;${HOSTNAME%%\.*}:${PWD/#${HOME}/\~}\007"'
-        fi
-        # For reasons I do not yet understand, C-l (by default, bound to
-        # readline's clear-screen function) does not clear the screen in bash
-        # on Slackware for some terminal types (e.g. screen, screen-256color
-        # and xterm-256color).  However, on these terminal types, the command
-        # 'tput clear' works.  So, work around the problem for now by binding
-        # C-l to 'tput clear'.
-        f="/etc/slackware-version"
-        if [[ -r "${f}" ]]; then
-            read -r first_line <"${f}" &>/dev/null
-            if [[ "${first_line}" =~ ^[Ss]lackware ]]; then
-                builtin bind -r "\C-l"
-                builtin bind -x '"\C-l": tput clear'
-            fi
-        fi
-        unset f
-        ;;
-esac
+# For reasons I do not yet understand, C-l (by default, bound to readline's
+# clear-screen function) does not clear the screen in bash on Slackware for
+# some terminal types (e.g. screen, screen-256color and xterm-256color).
+# However, on these terminal types, the command 'tput clear' works.  So, work
+# around the problem for now by binding C-l to 'tput clear'.
+f="/etc/slackware-version"
+if [[ -r "${f}" && "${TERM}" =~ xterm\-.*|screen.* ]]; then
+    read -r first_line <"${f}" &>/dev/null
+    if [[ "${first_line}" =~ ^[Ss]lackware ]]; then
+        builtin bind -r "\C-l"
+        builtin bind -x '"\C-l": tput clear'
+    fi
+fi
+unset f
+
+unset PROMPT_COMMAND
