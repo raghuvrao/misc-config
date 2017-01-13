@@ -13,8 +13,6 @@ HISTTIMEFORMAT='%F %a %T %Z(UTC%z) '
 
 if ! type -a cgrep &>/dev/null; then alias cgrep='grep --color=always'; fi
 alias ls='ls -F'
-alias ll='ls -l'
-alias l.='ls -d .*'
 
 shopt -s checkwinsize
 
