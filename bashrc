@@ -8,7 +8,6 @@
 if [[ "${-}" != *i* ]]; then return; fi
 
 if ! type -a cgrep &>/dev/null; then alias cgrep='grep --color=always'; fi
-alias ls='ls -F'
 
 shopt -s checkwinsize
 
