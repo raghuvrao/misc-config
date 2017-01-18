@@ -31,7 +31,7 @@ export VISUAL='vim'
 export EDITOR="${VISUAL}"
 export FCEDIT="${VISUAL}"
 export SVN_EDITOR="${VISUAL}"
-export LESS='-i -R'
+export LESS='-X -i -R'
 
 if [ -d "${HOME}/lib/python" ]; then
     export PYTHONPATH="${PYTHONPATH}:${HOME}/lib/python"
