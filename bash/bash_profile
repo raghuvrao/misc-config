@@ -32,7 +32,7 @@ export EDITOR="${VISUAL}"
 export FCEDIT="${VISUAL}"
 export SVN_EDITOR="${VISUAL}"
 export PAGER='less'
-export LESS='-X -i -R'
+export LESS='-i -R'
 
 if [ -d "${HOME}/lib/python" ]; then
     export PYTHONPATH="${PYTHONPATH}:${HOME}/lib/python"

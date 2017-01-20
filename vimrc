@@ -8,10 +8,6 @@ set nocompatible
 set nopaste
 set novisualbell
 
-" Disable alternate screen usage (that screen-clearing feature).
-set t_te=
-set t_ti=
-
 set nomodeline
 set modelines=0
 
