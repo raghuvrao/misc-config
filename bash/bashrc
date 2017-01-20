@@ -39,8 +39,7 @@ case "${TERM}" in
                 # so additional checks are not necessary.  Even more
                 # thankfully, when I start tmux on the Linux console (where
                 # window-title-setting is irrelevant because there are no
-                # windows), tmux will not let the sequences below do funny
-                # things.
+                # windows), funny things will not happen.
                 t1='\033]2;%s\033\134'
                 t2='\033k%s\033\134'
                 PROMPT_COMMAND='printf '"'${t1}${t2}'"' "${HOSTNAME}" "${HOSTNAME}"'
