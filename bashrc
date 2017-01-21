@@ -53,6 +53,9 @@ shopt -s checkwinsize
 # of title-setting when in GNU screen.  Having the same TXT portion in both s1
 # and s2 ensures I get the same string in both the emulator's title bar text
 # and the tmux/screen window name.
+#
+# Fortunately, neither s1 nor s2 seem to do any harm when running tmux/screen
+# at the Linux console (e.g. TERM=screen.linux).
 unset PROMPT_COMMAND
 s1='\e]0;%s(%s)\a'
 s2='\ek%s(%s)\e\\'
