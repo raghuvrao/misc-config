@@ -25,49 +25,59 @@ shopt -s checkwinsize
 
 # Do terminal-type-specific stuff (setting window-title sequences, rebinding
 # shortcuts etc.).
-case "${TERM}" in
-    xterm*|screen*)
-        if [[ -z "${PROMPT_COMMAND}" ]]; then
-            if [[ "${TERM}" == xterm* ]]; then
-                PROMPT_COMMAND='printf '"'\033]2;%s\007'"' "${HOSTNAME}"'
-            elif [[ "${TERM}" == screen* ]]; then  # For tmux, really.
-                # In tmux, the sequence in t1 below sets the pane_title
-                # variable.  The sequence in t2 sets the window_name variable.
-                # I use both these variables in my tmux configuration for the
-                # window title, so use both sequences here.  Thankfully, GNU
-                # screen does not seem to get upset when I use both sequences,
-                # so additional checks are not necessary.  Even more
-                # thankfully, when I start tmux on the Linux console (where
-                # window-title-setting is irrelevant because there are no
-                # windows), funny things will not happen.
-                t1='\033]2;%s\033\134'
-                t2='\033k%s\033\134'
-                PROMPT_COMMAND='printf '"'${t1}${t2}'"' "${HOSTNAME}" "${HOSTNAME}"'
-                unset t1 t2
-            else
-                PROMPT_COMMAND=
-            fi
+#
+# Read the 'C1 (8-Bit) Control Characters' and 'Operating System Commands'
+# sections at < http://invisible-island.net/xterm/ctlseqs/ctlseqs.html >.
+#
+#   Operating System Command (OSC) is the following sequence:
+#
+#       ESC ]
+#
+#   OSC 0 ; TXT BEL -> set terminal emulator window title and icon name (tab
+#                      title in some terminal emulators, e.g. iTerm2) to TXT
+#   OSC 1 ; TXT BEL -> set only icon name (tab title in some terminal
+#                      emulators) to TXT
+#   OSC 2 ; TXT BEL -> set only terminal emulator window title to TXT
+#
+# The first sequence above is probably the least headache.  It also sets
+# pane_title in tmux and the hardstatus in GNU screen.  Therefore, use that
+# sequence in s1 below.
+#
+# The second sequence (s2 below) seems specific to tmux and GNU screen, and it
+# sets the screen-/tmux-specific window name (not the terminal emulator window
+# title bar text).  In tmux, this sequence sets the window_name variable.
+# tmux can be configured to include window_name in the terminal emulator title
+# bar text (which is what I have done in my ~/.tmux.conf), so I will use s2
+# along with s1 when in tmux (TERM=screen*).  I have configured GNU screen to
+# set the terminal window title bar text to the hardstatus, so s1 takes care
+# of title-setting when in GNU screen.  Having the same TXT portion in both s1
+# and s2 ensures I get the same string in both the emulator's title bar text
+# and the tmux/screen window name.
+unset PROMPT_COMMAND
+s1='\e]0;%s(%s)\a'
+s2='\ek%s(%s)\e\\'
+if [[ "${TERM}" == xterm* ]]; then
+    PROMPT_COMMAND='printf '"'${s1}' "'"${HOSTNAME}" "${$}"'
+elif [[ "${TERM}" == screen* ]]; then
+    PROMPT_COMMAND='printf '"'${s1}${s2}'"' "${HOSTNAME}" "${$}" "${HOSTNAME}" "${$}"'
+fi
+unset s1 s2
+
+# In Slackware, when running bash, readline's clear-screen function (bound to
+# C-l by default) does not seem to work as expected for certain TERMs (e.g.
+# xterm-256color, screen-256color and screen).  For these TERMs, the command
+# 'tput clear' works as expected.  So, work around the problem by rebinding
+# C-l to 'tput clear' until I find a proper solution.
+if [[ "${TERM}" =~ xterm-.*|screen.* ]]; then
+    f="/etc/slackware-version"
+    if [[ -r "${f}" ]]; then
+        read -r first_line <"${f}" &>/dev/null
+        if [[ "${first_line}" =~ ^[Ss]lackware ]]; then
+            builtin bind -r "\C-l"
+            builtin bind -x '"\C-l": tput clear'
         fi
-        # For reasons I do not yet understand, C-l (by default, bound to
-        # readline's clear-screen function) does not clear the screen in bash
-        # on Slackware for some terminal types. E.g. C-l does not work as
-        # expected when TERM is screen, screen-256color or xterm-256color
-        # (possibly others), but works just fine when TERM is xterm or linux.
-        # On the terminal types where C-l does not work, the command 'tput
-        # clear' works.  So, work around the problem for now by binding C-l to
-        # 'tput clear'.
-        if [[ "${TERM}" =~ xterm-.*|screen.* ]]; then
-            f="/etc/slackware-version"
-            if [[ -r "${f}" && "${TERM}" =~ xterm\-.*|screen.* ]]; then
-                read -r first_line <"${f}" &>/dev/null
-                if [[ "${first_line}" =~ ^[Ss]lackware ]]; then
-                    builtin bind -r "\C-l"
-                    builtin bind -x '"\C-l": tput clear'
-                fi
-            fi
-            unset f
-        fi
-        ;;
-esac
+    fi
+    unset f
+fi
 
 unset -v p
