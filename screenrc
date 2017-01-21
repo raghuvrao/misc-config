@@ -9,5 +9,10 @@ compacthist on
 defutf8 on
 nonblock on
 
-hardstatus alwayslastline "%{= kw}%{B}[%= %{w}%{=kw}%?%-Lw%?%{r}(%{B}%n*%f %t%?(%u)%?%{r})%{w}%?%+Lw%?%?%=%{B}][%{B} %l %Y.%m.%d %C %A %{B}]%{w}"
+# hardstatus alwayslastline "%{= kw}%{B}[%= %{w}%{=kw}%?%-Lw%?%{r}(%{B}%n*%f %t%?(%u)%?%{r})%{w}%?%+Lw%?%?%=%{B}][%{B} %l %Y.%m.%d %C %A %{B}]%{w}"
+# hardstatus alwayslastline "[%= %-Lw(%n*%f %t(%u))%+Lw%=][%l %Y.%m.%d %C %A ]"
+
+# from 'man screen'
+hardstatus alwayslastline "%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<"
+
 bind 'q' quit
