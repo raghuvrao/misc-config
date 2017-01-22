@@ -26,12 +26,12 @@ shopt -s checkwinsize
 # Set xterm title.  See accompanying document SETTING-TITLES for a brief
 # discussion.
 unset PROMPT_COMMAND
-s1='\e]0;%s(%s)\a'
-s2='\ek%s(%s)\e\\'
+s1='"\e]0;${HOSTNAME%%.*}:${PWD/#${HOME}/\~}\a"'
+s2='"\ek${HOSTNAME%%.*}:${PWD/#${HOME}/\~}\e\\"'
 if [[ "${TERM}" == xterm* ]]; then
-    PROMPT_COMMAND='printf '"'${s1}' "'"${HOSTNAME}" "${$}"'
+    PROMPT_COMMAND="printf ${s1}"
 elif [[ "${TERM}" == screen* ]]; then
-    PROMPT_COMMAND='printf '"'${s1}${s2}'"' "${HOSTNAME}" "${$}" "${HOSTNAME}" "${$}"'
+    PROMPT_COMMAND="printf ${s1}${s2}"
 fi
 unset s1 s2
 
