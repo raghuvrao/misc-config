@@ -112,7 +112,7 @@ GNU screen
 
 In GNU screen, the relevant variable is the hardstatus of the window (yielded
 by %h).  It so happens that the first of the OSC titles described above (i.e.
-whe n = 0) sets the hardstatus of the window in GNU screen:
+when n = 0) sets the hardstatus of the window in GNU screen:
 
     OSC 0 ; TXT BEL
 
