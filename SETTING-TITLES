@@ -105,7 +105,6 @@ document.
 KSEQ sets the tmux-/screen-window name (not the terminal emulator window title
 text).  I will discuss this sequence a little more in the sections below.
 
-
 __________
 GNU screen
 ----------
