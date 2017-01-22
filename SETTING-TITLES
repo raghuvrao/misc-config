@@ -5,7 +5,7 @@ Author: Raghu Rao <raghu.v.rao@gmail.com>
 
 _____________________________________________________________________________
 xterm
-xterm-like terminual emulators (gnome-terminal, konsole, iTerm2 etc.)
+xterm-like terminal emulators (gnome-terminal, konsole, iTerm2 etc.)
 =============================================================================
 
 Operating System Command (OSC) sequences can be used to set the title strings.
@@ -93,7 +93,7 @@ window title.  How these programs set the title, I will not discuss here
 (frankly, because I do not know how they do it - I have not studied their
 sources).
 
-In addition to the OSC titles above, both screen and tmux support the
+In addition to the OSC sequences above, both screen and tmux support the
 following sequence:
 
     ESC k TXT ESC \
