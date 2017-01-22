@@ -1,0 +1,176 @@
+_____________________________________________________________________________
+SETTING TERMINAL EMULATOR WINDOW TITLES AND ICON NAMES
+Author: Raghu Rao <raghu.v.rao@gmail.com>
+=============================================================================
+
+_____________________________________________________________________________
+xterm
+xterm-like terminual emulators (gnome-terminal, konsole, iTerm2 etc.)
+=============================================================================
+
+
+Operating System Command (OSC) sequences can be used to set the title strings.
+
+OSC is the following sequence:
+
+    ESC ]
+
+OSC can be used to set xterm titles using either sequence below:
+
+    OSC n ; TXT BEL
+    OSC n ; TXT ST
+
+BEL (Bell) is the bell character (Control-G or octal 007)
+ST (String Terminator) is the sequence ESC \
+
+I will use the first form (the one with BEL).
+
+Title strings are modified when n is 0, 1 or 2.  3 is also a valid value for
+n, but that value is not relevant to title-setting, so we will not discuss
+n = 3.
+
+OSC 0 ; TXT BEL
+---------------
+
+Set terminal emulator window title and icon name to TXT.  In some terminal
+emulators that support tabs, the icon name is used for setting the tab title.
+E.g. iTerm2.
+
+OSC 1 ; TXT BEL
+---------------
+
+Set only icon name (tab title in some terminal emulators) to TXT.
+
+OSC 2 ; TXT BEL
+---------------
+
+Set only terminal emulator window title to TXT.
+
+When n = 0 (that is, the first of the three sequences above), it seems to do
+The Right/Expected Thing on all terminal emulators I use frequently
+(gnome-terminal, Konsole, iTerm2, xterm).  The second sequence above (n = 1)
+does nothing on gnome-terminal, at least on some versions of it.  When n = 2,
+only the tab title is set in iTerm2; the window title is not altered.  Using
+the first sequence (n = 0) lets me not worry about these differences.
+
+Let us say I want to set the title to:
+
+    hostname(shell PID)
+
+Example:
+
+    inspiron1545.example.com(12345)
+
+If I am using bash, I can use the environment variables $HOSTNAME and $$ to
+get me the information I need.  The control sequence would look like:
+
+    OSC   0 ; ${HOSTNAME}(${$}) BEL
+  = ESC ] 0 ; ${HOSTNAME}(${$}) BEL
+  = \e  ] 0 ; ${HOSTNAME}(${$}) \a
+
+I could then use the bash builtin 'printf' to send this sequence just before
+my prompt is printed.  The PROMPT_COMMAND variable can be used for this
+purpose.  If I set the value of PROMPT_COMMAND to the following, I will have
+bash set the terminal emulator window title / icon name text for me right
+before each time the prompt is ready to be displayed.
+
+    $ echo "${PROMPT_COMMAND}"
+    printf '\e]0;%s(%s)\a' "${HOSTNAME}" "${$}"
+
+To be safe, I will set PROMPT_COMMAND to the above only when TERM=xterm* (e.g.
+xterm, xterm-color, xterm-256color, etc.).
+
+_____________________________________________________________________________
+GNU screen and tmux
+=============================================================================
+
+When in GNU screen and tmux, we do not set the terminal emulator window title
+or icon name directly.  Instead, we set one or more variables internal to
+screen or tmux, and instruct screen or tmux to use those variables to set the
+window title.  How these programs set the title, I will not discuss here
+(frankly, because I do not know how they do it - I have not studied their
+sources).
+
+In addition to the OSC titles above, both screen and tmux support the
+following sequence:
+
+    ESC k TXT ESC \
+  = \e  k TXT \e  \\  (in bash)
+
+Let me call this sequence KSEQ so I can refer to it easily in the rest of this
+document.
+
+KSEQ sets the tmux-/screen-window name (not the terminal emulator window title
+text).  I will discuss this sequence a little more in the sections below.
+
+
+GNU screen
+----------
+
+In GNU screen, the relevant variable is the hardstatus of the window (yielded
+by %h).  It so happens that the first of the OSC titles described above (i.e.
+whe n = 0) sets the hardstatus of the window in GNU screen:
+
+    OSC 0 ; TXT BEL
+
+You may have to define hs, ts, fs and ds in the screen configuration file
+(e.g. ~/.screenrc) to get the OSC window-title/icon-name sequence to work
+correctly.  For example:
+
+    termcapinfo <term-type-glob> "hs:ts=\E]0;:fs=\007:ds=\E]0;\007"
+
+where <term-type-glob> matches the value of the TERM environment variable
+BEFORE starting screen.  For example, if you are running xterm, TERM typically
+matches 'xterm*' (e.g. xterm, xterm-color, xterm-256color etc.).  So, if you
+start screen in xterm, you want to put something like the following in your
+screenrc.
+
+    termcapinfo xterm* hs:ts=\E]0;:fs=\007:ds=\E]0;\007
+
+tmux
+----
+
+In tmux, the relevant variables are pane_title and window_name.
+
+The first and third OSC title sequences (n = 0 and n = 2) described above will
+set variable 'pane_title'.
+
+KSEQ described above sets the variable 'window_name'.
+
+I have configured tmux to use both pane_title and window_name to set the
+terminal emulator window title bar text.  I have done so by including the
+following in my ~/.tmux.conf:
+
+    set -g set-titles-string "#{session_alerts} #{pane_title} | #{window_name}"
+
+In GNU screen and tmux, TERM is 'screen*'.  E.g. screen, screen-256color,
+screen.linux etc.  When TERM=screen*, I use both the OSC title sequence (n
+= 0) and KSEQ in PROMPT_COMMAND.  I have set the value of PROMPT_COMMAND to:
+
+    $ echo "${PROMPT_COMMAND}"
+    printf '\e]0;%s(%s)\a\ek%s(%s)\e\\' "${HOSTNAME}" "${$}" "${HOSTNAME}" "${$}"
+            |-----------||-----------|  |------------------| |------------------|
+                 OSC         KSEQ              For OSC            For KSEQ
+
+_____________________________________________________________________________
+NOTES
+=============================================================================
+
+Configuring tmux to use both pane_title and window_name to set my terminal
+emulator window title bar text means the same text is duplicated twice in the
+title bar text.  That is fine because I log in to various servers, and some
+use the s1 sequence (e.g.  RHEL7) while others use the s2 sequence (e.g.
+RHEL6) when TERM=screen*.  When I log out of these servers, I want my local
+title string to be reset correctly.
+
+Fortunately, neither OSC sequence (n = 0) nor KSEQ seems to do any harm when
+running tmux/screen at the Linux console (e.g. TERM=screen.linux).
+
+_____________________________________________________________________________
+REFERENCES
+=============================================================================
+
+Sections 'C1 (8-Bit) Control Characters' and 'Operating System Commands' at
+the following link:
+
+    http://invisible-island.net/xterm/ctlseqs/ctlseqs.html
