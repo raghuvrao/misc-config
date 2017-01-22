@@ -1,0 +1,513 @@
+_____________________________________________________________________________
+SETTING TERMINAL EMULATOR WINDOW TITLES AND ICON NAMES
+Author: Raghu Rao <raghu.v.rao@gmail.com>
+*****************************************************************************
+
+Please view or print this file using a fixed-width typeface (also known as
+a monospace font).  Otherwise, the spacing in a lot of places will be off, and
+it will be hard to follow.  Here are a few examples of fixed-width typefaces:
+
+DejaVu Sans Mono  Noto Mono  Terminus  misc-fixed   GNU Unifont
+Roboto Mono       Fira Mono  Courier   Courier New  Menlo
+Andale Mono       Consolas
+
+
+_____________________________________________________________________________
+xterm
+xterm-like terminal emulators (gnome-terminal, konsole, iTerm2 etc.)
+=============================================================================
+
+Operating System Command (OSC) sequences can be used to set the title strings.
+
+OSC is the following sequence:
+
+    ESC ]
+
+OSC can be used to set xterm titles using either sequence below:
+
+    OSC n ; TXT BEL
+    OSC n ; TXT ST
+
+BEL is the bell character (Control-G or octal 007).  ST is String Terminator
+(the sequence ESC \).
+
+I will use the first form (the one with BEL) because it seems to work on all
+terminal emulators (gnome-terminal, xterm, Konsole, iTerm2) and multiplexers
+(GNU screen, tmux) I have tried.  The ST-form did not work on Konsole when
+TERM matched 'xterm*', at least on Slackware64 14.2.
+
+Title strings are modified when n is 0, 1 or 2.
+
+    OSC 0 ; TXT BEL -> set terminal emulator window title and icon name to TXT.
+    OSC 1 ; TXT BEL -> set only icon name to TXT.
+    OSC 2 ; TXT BEL -> set only terminal emulator window title to TXT.
+
+In gnome-terminal, the second sequence above (n = 1) sets the icon title (the
+string that shows up in, for example, gnome-panel), but does not alter the
+window or tab titles.  On iTerm2, the same sequence sets both window title and
+tab title.
+
+The third OSC sequence above (n = 2) sets window and tab titles in
+gnome-terminal, and does not alter the icon name.  In iTerm2, the same
+sequence sets only the window title, and the tab title is not altered.
+
+For me, the desirable result is that the window title, the tab title and the
+icon name are all set.  Using the first sequence (n = 0) gives me these
+results, at least on the terminal emulators that I use frequently
+(gnome-terminal, Konsole, iTerm2, xterm), so that is the sequence I am going
+to choose.
+
+Let us say I want to set the window/tab title and icon name to:
+
+    hostname:current-directory
+
+Example:
+
+    inspiron1545.example.com:/home/raghu
+
+If I am using bash, I can use the environment variables $HOSTNAME and $PWD to
+get the information I need.  The control sequence would look like:
+
+       OSC 0 ; ${HOSTNAME}:${PWD} BEL
+  =  ESC ] 0 ; ${HOSTNAME}:${PWD} BEL
+  =   \e ] 0 ; ${HOSTNAME}:${PWD} \a   (in bash)
+  = \033 ] 0 ; ${HOSTNAME}:${PWD} \007 (using octal equivalents)
+
+I could then send this sequence to my terminal (e.g. by printing it to the
+terminal) just before my prompt is printed.
+
+Bash will execute the value of the environment variable PROMPT_COMMAND just
+before printing the prompt each time.  So, I can set PROMPT_COMMAND such that
+executing its value will output the control sequence above.  Upon doing so,
+bash will set the terminal emulator window title / icon name text for me right
+before each time the prompt is printed.  I could use, for example, the bash
+builtin 'printf' in PROMPT_COMMAND:
+
+    $ echo "${PROMPT_COMMAND}"
+    printf '\033]0;%s:%s\007' "${HOSTNAME}" "${PWD}"
+
+To be safe, I will set PROMPT_COMMAND to the above only when TERM=xterm* (e.g.
+xterm, xterm-color, xterm-256color, etc.).  Here is an example of what you
+could include in your ~/.bashrc to set PROMPT_COMMAND:
+
+    s='\033]0;%s:%s\007'
+    if [[ "${TERM}" == xterm* ]]; then
+      PROMPT_COMMAND="printf '${s}'"' "${HOSTNAME}" "${PWD}"'
+    fi
+    unset -v s
+
+See the DIGRESSION section below for a discussion on the quoting.
+
+_____________________________________________________________________________
+GNU screen and tmux
+=============================================================================
+
+When in GNU screen and tmux, we do not set the terminal emulator window title
+or icon name directly.  Instead, we set one or more variables internal to
+screen or tmux, and configure screen or tmux to use those variables to set the
+window title.  I will discuss what these variables are and how they can be set
+in the following sections.  Before I do that, I should discuss this next
+control sequence briefly.
+
+In addition to the OSC sequences above, both screen and tmux support the
+following sequence:
+
+    ESC  k TXT ESC  \
+  =  \e  k TXT  \e  \\   (in bash, '\' must be escaped)
+  = \033 k TXT \033 \134 (using octal equivalents)
+
+This sequence probably has an official name, but I do not know what that is,
+so let me call this sequence KSEQ.  This way, I can refer to this sequence
+easily in the rest of this document.
+
+KSEQ sets the tmux-/screen-window name (not the terminal emulator window/tab
+title text).  I will discuss this sequence a little more in the sections
+below.
+
+__________
+GNU screen
+----------
+
+--- BEGIN minor digression ---
+Physical terminals used to have a hardware status line that was distinct from
+the display area.  It used to be typically the last line of the display, and
+it was used for displaying the status of various things.  E.g., if your
+Caps-Lock is on or not.
+
+GNU screen has support for modifying this hardware status ("hardstatus") line
+for different terminal types by using specific terminal capabilities defined
+in that term type's terminfo database.
+
+xterm and other terminal emulator programs do not have a dedicated hardstatus
+line.  However, xterm-like emulators can be configured to emulate the
+hardstatus line in some way.  For example, they can be configured to use their
+window title bar as the hardstatus line.
+
+When you press <PREFIX> C in GNU screen (<PREFIX> is CONTROL-A by default),
+screen creates a new "window".  This window, to which I will refer as
+screen-window, is managed by screen, and it is contained within the terminal
+emulator's window.  The two are distinct, although they are referred to by the
+same word "window".
+
+GNU screen maintains, among several other things, two things about each
+screen-window it manages: the screen-window's name and the screen-window's
+hardstatus.  In the following paragraphs, we will see how one can set the
+terminal emulator window title text while in GNU screen.
+--- END minor digression ---
+
+The very short version of getting GNU screen to set the terminal emulator's
+window title text is:
+
+    Step 1
+        Define terminal capabilities for your terminal emulator's term-type
+        that can be used to access the "hardstatus" of the terminal emulator
+
+    Step 2
+        Set the the hardstatus of the screen-window to the desired text
+
+Step 1: Defining terminal capabilities
+--------------------------------------
+
+The hardware-status-line-related terminal capabilities for xterm and the like
+are:
+
+    hs
+        Having 'hs' in the capabilities means we have a hardware statusline.
+        Having 'hs@' says there is no hardware status line support.
+
+        GNU screen, however, will believe that there is a hardware status line
+        only if hs, ts, fs, ds are all set.
+    ts
+        to statusline (the sequence that will move the "cursor" to the status
+        line)
+    fs
+        from statusline (the sequence that will move the cursor back from the
+        status line to the display area)
+    ds
+        delete statusline (the sequence that will remove/reset the status line
+        text)
+
+We must define these capabilities such that, when they are used, the window
+title text / icon names are modified accordingly.  We know that the OSC
+sequence when n = 0 (OSC 0 ; TXT BEL) allows us to modify window titles and
+icon names.  So, we will use that sequence, and define the capabilities above
+like so:
+
+    hs: no value to assign; its presence indicates that the corresponding
+        term-type supports a hardware status line
+    ts: OSC 0 ;          ('ESC  ] 0 ;' or '\033 ] 0 ;')
+    fs: BEL              ('\007' or '\a')
+    ds: OSC 0 ; TXT BEL  (TXT can be whatever you want; empty even)
+
+In GNU screen parlance, the way to do the above is as follows:
+
+    termcapinfo <term-type-glob> "hs:ts=\033]0;:fs=\007:ds=\033]0;\007"
+
+where <term-type-glob> matches the value of the term-type of your terminal
+emulator (typically, it is value of the TERM environment variable BEFORE
+starting screen).  For example, if you are running xterm or the like, TERM
+typically matches 'xterm*' (xterm, xterm-color, xterm-256color etc.).  So, if
+you start screen in xterm, you want to put something like the following in
+your screenrc.
+
+    termcapinfo xterm* hs:ts=\033]0;:fs=\007:ds=\033]0;\007
+
+Having the above line in your screen config file will instruct screen that
+xterm* supports a hardware status line.  When screen uses that capability, the
+corresponding sequences are used.
+
+Step 2: Setting the hardstatus of the screen-window
+---------------------------------------------------
+
+The GNU screen manual says there are two ways to set the hardstatus of the
+window: using the Application Program Command (APC) sequence, or using the OSC
+sequence (with n = 0, 1, 2).  Here is the relevant excerpt from `man screen':
+
+    "The third form specifies the contents of the hardstatus line.  '%h' is
+    used as default string, i.e. the stored hardstatus of the current window
+    (settable via "ESC]0;<string>^G" or "ESC_<string>ESC\") is displayed.  You
+    can customize this  to  any string you like including the escapes from the
+    "STRING ESCAPES" chapter. If you leave out the argument string, the
+    current string is displayed."
+
+In the above, "ESC_<string>ESC\" is the APC sequence, and "ESC]0;<string>^G"
+is the familiar OSC sequence (^G is BEL).  It _seems_ that using the APC
+sequence does not trigger screen to use the hardware status capability of the
+terminal emulator; it just sets the hardstatus value of the screen-window.
+Using the OSC sequence, however, does both.  So, we will use the OSC sequence
+to set the hardstatus.
+
+       OSC 0 ; TXT BEL
+  =   \e ] 0 ; TXT \a   (in bash)
+  = \033 ] 0 ; TXT \007 (using octal equivalents)
+
+This sequence can be used in PROMPT_COMMAND as described in a previous
+section.  See the PUTTING IT ALL TOGETHER section.
+
+NOTE: GNU screen allows you to decide how you would like to display the
+hardstatus.  In some versions of screen, if you set hardstatus to
+'alwayslastline', setting the hardstatus even with the OSC sequence does not
+trigger screen to use the terminal's hardstatus line.  This behaviour is in
+conformance with the documentation.  However, in newer versions, it seems and
+exception is added: at least on xterm-like terminal emulators, using the OSC
+sequence seems to trigger screen to use the hardstatus capabilities even upon
+setting hardstatus to 'alwayslastline'.  If you have set everything up as
+described above (termcapinfo and PROMPT_COMMAND), and your terminal emulator's
+window title text is not changing, see if not setting hardstatus to
+'alwayslastline' helps.
+
+Remember I said screen maintains a hardstatus, AND a name for each
+screen-window?  Manipulating the hardstatus is described above, but what about
+the screen-window name?  The screen-window name is the thing you can change
+when you press <PREFIX> A (CONTROL-A A) in screen.  It is typically used in
+the 'caption' line of screen.  To keep things consistent, I recommend keeping
+the screen-window name to the same text as the hardstatus text.  But how do
+you do that?  You certainly do not want to be using <PREFIX> A each time you
+open a new screen-window!  Remember KSEQ I mentioned above?  That is what you
+use to set the screen-window name.
+
+In your PROMPT_COMMAND, in addition to using the OSC sequence, use KSEQ.
+Doing so will take care of changing screen-window name (so your caption line
+is updated), and screen-window hardstatus (so your terminal emulator window
+title / icon names are updated).  See the PUTTING IT ALL TOGETHER section.
+
+____
+tmux
+----
+
+In tmux, the relevant variables are pane_title and window_name.
+
+The first and third OSC title sequences (n = 0 and n = 2) described above will
+set the variable 'pane_title'.
+
+KSEQ described above sets the variable 'window_name'.
+
+I have configured tmux to use both pane_title and window_name to set the
+terminal emulator window/tab title text (see the NOTES section below to see
+why I use both and not just one of them).  I have done so by including the
+following in my ~/.tmux.conf:
+
+    set -g set-titles-string "#{session_alerts} #{pane_title} #{window_name}"
+
+However, just setting 'set-titles-string' is insufficient.  You must also
+allow tmux to change / rename title strings and window names.  Here are the
+relevant settings:
+
+    set -g set-titles on
+    setw -g allow-rename on
+    setw -g automatic-rename on
+
+_____________________________________________________________________________
+PUTTING IT ALL TOGETHER
+=============================================================================
+
+In GNU screen and tmux, TERM is 'screen*'.  E.g. screen, screen-256color,
+screen.linux etc.  When TERM=screen*, I use both the OSC title sequence (n
+= 0) and KSEQ in PROMPT_COMMAND.  I have set the value of PROMPT_COMMAND to:
+
+    $ echo "${PROMPT_COMMAND}"
+    printf '\033]0;%s:%s\007\033k%s:%s\033\134' "${HOSTNAME}" "${PWD}" "${HOSTNAME}" "${PWD}"
+            |--------------||----------------|  |--------------------| |--------------------|
+                OSC seq.           KSEQ           args for OSC seq.        args for KSEQ
+
+To put all the discussion above (and below) together, here are the relevant
+sections from the relevant files:
+
+_________
+~/.bashrc
+---------
+
+    s='\033]0;%s:%s\007'  # OSC sequence.
+    case "${TERM}" in
+      xterm*)
+        PROMPT_COMMAND="printf '${s}'"' "${HOSTNAME}" "${PWD}"'
+        ;;
+      screen*)
+        # Append KSEQ to OSC sequence.
+        s+='\033k%s:%s\033\134'
+        # s will have four format specifiers now (two in the OSC sequence and two
+        # in KSEQ), so provide arguments accordingly.
+        PROMPT_COMMAND="printf '${s}'"' "${HOSTNAME}" "${PWD}" "${HOSTNAME}" "${PWD}"'
+        ;;
+      *)
+        PROMPT_COMMAND=
+        ;;
+    esac
+    unset -v s
+
+See the NOTES and DIGRESSION sections below for variations of the above.
+
+____________
+~/.tmux.conf
+------------
+
+    set -g set-titles on
+    set -g set-titles-string "#{session_alerts} #{pane_title} #{window_name}"
+    setw -g allow-rename on
+    setw -g automatic-rename on
+
+___________
+~/.screenrc
+-----------
+
+    termcapinfo xterm* 'hs:ts=\E]0;:fs=\007:ds=\E]0;screen\007'
+    termcapinfo rxvt* 'hs:ts=\E]0;:fs=\007:ds=\E]0;screen\007'  # if using rxvt
+    # 'hardstatus alwayslastline' will make some versions of screen not use
+    # the hardware status line capabilities in some terminal emulators.
+    # Consequently, the emulators' window/tab title strings and icon names
+    # will not be modified.
+
+_____________________________________________________________________________
+NOTES
+=============================================================================
+
+Configuring tmux to use both pane_title and window_name to set my terminal
+emulator window/tab title text means the same text is duplicated twice in the
+title text on my local computer.  That is fine for me because I log in to
+various servers, and some use KSEQ (e.g. RHEL7) while others use the OSC
+sequence (e.g. RHEL6) when TERM=screen*.  When I log out of these servers,
+I want my local title string to be reset correctly.
+
+Fortunately, neither the OSC sequence (n = 0) nor KSEQ seems to do any harm
+when running tmux/screen at the Linux console (e.g. TERM=screen.linux).
+
+In bash, ${PWD/#${HOME}/~} will substitute the value of ${HOME} with '~' when
+the value of ${HOME} appears as a prefix in ${PWD}.  E.g.  if ${HOME} is
+'/home/raghu' and ${PWD} is '/home/raghu/src', then ${PWD/#${HOME}/~} will be
+'~/src'.  On some recent versions of bash, you may have to escape '~' (that
+is, use \~ instead of just ~) in the pattern substitution.  Otherwise, bash
+will substitute ~ back with your home-dir path, rendering the whole
+substitution useless.
+
+In bash, ${HOSTNAME%%.*} will give the value of HOSTNAME up to the first dot.
+E.g. if ${HOSTNAME} is inspiron1545.example.com, ${HOSTNAME%%.*} will give
+just 'inspiron1545'.
+
+_____________________________________________________________________________
+DIGRESSION
+=============================================================================
+
+Here is a tip for a tiny optimization.  Your hostname does not change
+frequently.  At least, not each time your shell is ready to print the prompt.
+So, instead of computing "${HOSTNAME%%.*}" each time, you can compute it once,
+and use the result in printf in PROMPT_COMMAND.  Here is an example, which
+works when TERM=xterm* (note that the sequence in line 1 is the OSC sequence
+with n = 0):
+
+    1  s='\033]0;%s:%s\007'  # single-quoted; will not be altered by the shell
+    2  h="${HOSTNAME%%.*}"   # double-quoted; will be processed by the shell
+    3  PROMPT_COMMAND="printf '${s}' '${h}'"' "${PWD/#${HOME}/~}"'
+    4  unset -v s h
+
+The above will give us the following result:
+
+    $ echo "${PROMPT_COMMAND}"
+    printf '\033]0;%s:%s\007' 'inspiron1545' "${PWD/#${HOME}/~}"
+
+s is the format string for printf.  h is the value for the first %s in s, and
+"${PWD/#${HOME}/~}" is the value for the second %s in s.  If HOSTNAME is
+inspiron1545.example.com, after line 2, the value of h will be inspiron1545.
+
+We want s and h to be expanded in the final result that is assigned to
+PROMPT_COMMAND; we do not want to those temporary/auxiliary variables to
+linger.  On the other hand, we do not want ${PWD/#${HOME}/~} to be expanded by
+the shell while assigning to PROMPT_COMMAND.  PWD will change frequently as
+you use your system, and we want our title string to change as PWD changes.
+So, we must do our quoting carefully, in such a way that only s and h are
+expanded by the shell while assigning to PROMPT_COMMAND.  Let us see how I am
+doing that.
+
+In line 3, I am assigning the concatenation of multiple strings to
+PROMPT_COMMAND.  The final result assigned is the concatenation of the
+following two strings, one double-quoted and one single-quoted:
+
+    1  "printf '${s}' '${h}'"  (double-quoted; call it String 1)
+    2  ' "${PWD/#${HOME}/~}"'  (single-quoted; call it String 2)
+
+String 1 is double-quoted, so s and h are expanded (even though s and h are
+themselves in single quotes within string 1) while assigning to
+PROMPT_COMMAND.  The single quotes will be preserved in PROMPT_COMMAND.
+
+    "printf '${s}' '${h}'"
+  = "printf '\033]0;%s:%s\007' 'inspiron1545'"
+
+Why have I wrapped s and h in single quotes?  For safety.  If, by some bizarre
+sequence of events, either of these variables get values containing characters
+that could trigger expansion/substitution by the shell, there could be
+undesirable (and maybe dangerous) side-effects.  For example, if h ends up
+being 'foo*', I want it to remain 'foo*' when it is passed as an argument to
+printf; I do not want the shell expanding 'foo*' as if it were a wildcard.
+You could argue that s is completely under my control and h is derived from
+HOSTNAME, neither of which could be misbehaved.  But who knows!  Better safe
+than sorry.
+
+String 2, by virtue of being in single quotes, will not be altered by the
+shell in any way while assigning to PROMPT_COMMAND, even though
+${PWD/#${HOME}/~} is in double quotes.  The double quotes will be preserved in
+the assignment to PROMPT_COMMAND.
+
+    ' "${PWD/#${HOME}/~}"'
+  = ' "${PWD/#${HOME}/~}"'  (no change)
+
+As an argument (to printf), ${PWD/#${HOME}/~} will be in double-quotes.  So,
+each time the printf in PROMPT_COMMAND is run, it is at THAT point that the
+shell will process any substitution/expansion first, and then pass along the
+result to printf.  This is the behaviour we want for the second '%s' in
+printf, as PWD changes frequently during use of the system.
+
+In bash, concatenation is done by placing the strings beside each other.  For
+example, the strings "foo" and 'bar' are concatenated as follows.
+
+    "foo"'bar'
+  = foobar
+
+PROMPT_COMMAND is simply a concatenation of strings 1 and 2:
+
+    PROMPT_COMMAND="printf '${s}' '${h}'"' "${PWD/#${HOME}/~}"'
+                   |--------------------||--------------------|
+                          String 1              String 2
+
+When we plug in the values of s and h, we get:
+
+    PROMPT_COMMAND
+        = "printf '\033]0;%s:%s\007' 'inspiron1545'"' "${PWD/#${HOME}/~}"'
+          |----------------------------------------||--------------------|
+                          String 1                         String 2
+
+        = printf '\033]0;%s:%s\007' 'inspiron1545' "${PWD/#${HOME}/~}"'
+
+The final result above is what is finally assigned to PROMPT_COMMAND; that is
+what we see when we print the value of PROMPT_COMMAND.
+
+The above example is suitable when TERM=xterm* (and also for hardstatus in GNU
+screen) because we have used the OSC sequence.  For completeness when TERM is
+like screen*, we should also use KSEQ.  So, there will be four format
+specifiers in the printf format string (two from OSQ sequence, two from KSEQ).
+Consequently, there will be two more arguments to printf:
+
+    s='\033]0;%s:%s\007'     # OSC sequence.
+    s+='\033k%s:%s\033\134'  # Append KSEQ to s.
+    h="${HOSTNAME%%.*}"
+    PROMPT_COMMAND="printf '${s}' '${h}'"' "${PWD/#${HOME}/~}"'" '${h}'"' "${PWD/#${HOME}/~}"'
+    unset -v s h
+
+The above yields the following result:
+
+    $ echo "${PROMPT_COMMAND}"
+    printf '\033]0;%s:%s\007\033k%s:%s\033\134' 'inspiron1545' "${PWD/#${HOME}/~}" 'inspiron1545' "${PWD/#${HOME}/~}"
+
+Congratulations!  You are now not computing ${HOSTNAME%%.*} on each run of the
+value of PROMPT_COMMAND!
+
+
+_____________________________________________________________________________
+REFERENCES
+=============================================================================
+
+1. Sections 'C1 (8-Bit) Control Characters' and 'Operating System Commands'
+   at http://invisible-island.net/xterm/ctlseqs/ctlseqs.html
+2. man bash
+3. man screen
+4. man tmux
+5. /etc/screenrc on Red Hat Enterprise Linux versions {6,7}
+6. /etc/bashrc on Red Hat Enterprise Linux versions {6,7}
