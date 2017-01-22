@@ -28,32 +28,18 @@ Title strings are modified when n is 0, 1 or 2.  3 is also a valid value for
 n, but that value is not relevant to title-setting, so we will not discuss
 n = 3.
 
-_______________
-OSC 0 ; TXT BEL
----------------
-
-Set terminal emulator window title and icon name to TXT.  In some terminal
-emulators that support tabs, the icon name is used for setting the tab title.
-E.g. iTerm2.
-
-_______________
-OSC 1 ; TXT BEL
----------------
-
-Set only icon name (tab title in some terminal emulators) to TXT.
-
-_______________
-OSC 2 ; TXT BEL
----------------
-
-Set only terminal emulator window title to TXT.
+    OSC 0 ; TXT BEL -> set terminal emulator window title and icon name to TXT.
+    OSC 1 ; TXT BEL -> set only icon name TXT.
+    OSC 2 ; TXT BEL -> set only terminal emulator window title to TXT.
 
 The second sequence above (n = 1) seems to do nothing on gnome-terminal, at
-least on some versions of it.  When n = 2, only the window title is set in
-iTerm2; the tab title is not altered.  For me, the desirable result is that
-window title, tab title and icon name are all set.  Using the first sequence
-(n = 0) lets me not worry about these differences, at least on the terminal
-emulators I use, so that is the sequence I am going to use.
+least on some versions of it, whereas on iTerm2, it sets both window title and
+tab title.  When n = 2, only the window title is set in iTerm2, and the tab
+title is not altered whereas on gnome-terminal, this sequence sets both window
+title and tab title.  For me, the desirable result is that window title, tab
+title and icon name are all set.  Using the first sequence (n = 0) lets me not
+worry about these differences, and gives me the results I want, at least on
+the terminal emulators I use, so that is the sequence I am going to choose.
 
 Let us say I want to set the title to:
 
@@ -236,3 +222,4 @@ REFERENCES
 2.  man bash
 3.  man screen
 4.  man tmux
+5.  /etc/{screen,bash}rc on Red Hat Enterprise Linux versions {6,7}
