@@ -8,7 +8,6 @@ xterm
 xterm-like terminual emulators (gnome-terminal, konsole, iTerm2 etc.)
 =============================================================================
 
-
 Operating System Command (OSC) sequences can be used to set the title strings.
 
 OSC is the following sequence:
@@ -20,8 +19,8 @@ OSC can be used to set xterm titles using either sequence below:
     OSC n ; TXT BEL
     OSC n ; TXT ST
 
-BEL (Bell) is the bell character (Control-G or octal 007)
-ST (String Terminator) is the sequence ESC \
+BEL is the bell character (Control-G or octal 007).  ST is String Terminator
+(the sequence ESC \).
 
 I will use the first form (the one with BEL).
 
@@ -29,6 +28,7 @@ Title strings are modified when n is 0, 1 or 2.  3 is also a valid value for
 n, but that value is not relevant to title-setting, so we will not discuss
 n = 3.
 
+_______________
 OSC 0 ; TXT BEL
 ---------------
 
@@ -36,11 +36,13 @@ Set terminal emulator window title and icon name to TXT.  In some terminal
 emulators that support tabs, the icon name is used for setting the tab title.
 E.g. iTerm2.
 
+_______________
 OSC 1 ; TXT BEL
 ---------------
 
 Set only icon name (tab title in some terminal emulators) to TXT.
 
+_______________
 OSC 2 ; TXT BEL
 ---------------
 
@@ -104,6 +106,7 @@ KSEQ sets the tmux-/screen-window name (not the terminal emulator window title
 text).  I will discuss this sequence a little more in the sections below.
 
 
+__________
 GNU screen
 ----------
 
@@ -127,6 +130,7 @@ screenrc.
 
     termcapinfo xterm* hs:ts=\E]0;:fs=\007:ds=\E]0;\007
 
+____
 tmux
 ----
 
@@ -150,7 +154,7 @@ screen.linux etc.  When TERM=screen*, I use both the OSC title sequence (n
     $ echo "${PROMPT_COMMAND}"
     printf '\e]0;%s(%s)\a\ek%s(%s)\e\\' "${HOSTNAME}" "${$}" "${HOSTNAME}" "${$}"
             |-----------||-----------|  |------------------| |------------------|
-                 OSC         KSEQ              For OSC            For KSEQ
+               OSC seq.      KSEQ           For OSC seq.           For KSEQ
 
 _____________________________________________________________________________
 NOTES
@@ -159,12 +163,12 @@ NOTES
 Configuring tmux to use both pane_title and window_name to set my terminal
 emulator window title bar text means the same text is duplicated twice in the
 title bar text.  That is fine because I log in to various servers, and some
-use the s1 sequence (e.g.  RHEL7) while others use the s2 sequence (e.g.
-RHEL6) when TERM=screen*.  When I log out of these servers, I want my local
-title string to be reset correctly.
+use KSEQ (e.g.  RHEL7) while others use the OSC sequence (e.g.  RHEL6) when
+TERM=screen*.  When I log out of these servers, I want my local title string
+to be reset correctly.
 
-Fortunately, neither OSC sequence (n = 0) nor KSEQ seems to do any harm when
-running tmux/screen at the Linux console (e.g. TERM=screen.linux).
+Fortunately, neither the OSC sequence (n = 0) nor KSEQ seems to do any harm
+when running tmux/screen at the Linux console (e.g. TERM=screen.linux).
 
 _____________________________________________________________________________
 REFERENCES
