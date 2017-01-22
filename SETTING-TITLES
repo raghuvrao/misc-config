@@ -218,9 +218,9 @@ to be reset correctly.
 Fortunately, neither the OSC sequence (n = 0) nor KSEQ seems to do any harm
 when running tmux/screen at the Linux console (e.g. TERM=screen.linux).
 
-In bash, ${HOSTNAME%%.*} will give the value of HOSTNAME up to the value of
-the first dot.  E.g. if ${HOSTNAME} is inspiron1545.example.com,
-${HOSTNAME%%.*} will give just 'inspiron1545'.
+In bash, ${HOSTNAME%%.*} will give the value of HOSTNAME up to the first dot.
+E.g. if ${HOSTNAME} is inspiron1545.example.com, ${HOSTNAME%%.*} will give
+just 'inspiron1545'.
 
 In bash, ${PWD/#${HOME}/\~} will substitute the value of ${HOME} with '~' when
 the value of ${HOME} appears as a prefix in ${PWD}.  E.g.  if ${HOME} is
