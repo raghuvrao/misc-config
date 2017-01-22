@@ -48,12 +48,12 @@ OSC 2 ; TXT BEL
 
 Set only terminal emulator window title to TXT.
 
-When n = 0 (that is, the first of the three sequences above), it seems to do
-The Right/Expected Thing on all terminal emulators I use frequently
-(gnome-terminal, Konsole, iTerm2, xterm).  The second sequence above (n = 1)
-does nothing on gnome-terminal, at least on some versions of it.  When n = 2,
-only the tab title is set in iTerm2; the window title is not altered.  Using
-the first sequence (n = 0) lets me not worry about these differences.
+The second sequence above (n = 1) seems to do nothing on gnome-terminal, at
+least on some versions of it.  When n = 2, only the window title is set in
+iTerm2; the tab title is not altered.  For me, the desirable result is that
+window title, tab title and icon name are all set.  Using the first sequence
+(n = 0) lets me not worry about these differences, at least on the terminal
+emulators I use, so that is the sequence I am going to use.
 
 Let us say I want to set the title to:
 
@@ -68,7 +68,7 @@ get me the information I need.  The control sequence would look like:
 
     OSC   0 ; ${HOSTNAME}(${$}) BEL
   = ESC ] 0 ; ${HOSTNAME}(${$}) BEL
-  = \e  ] 0 ; ${HOSTNAME}(${$}) \a
+  = \e  ] 0 ; ${HOSTNAME}(${$}) \a  (in bash)
 
 I could then use the bash builtin 'printf' to send this sequence just before
 my prompt is printed.  The PROMPT_COMMAND variable can be used for this
@@ -102,8 +102,9 @@ following sequence:
 Let me call this sequence KSEQ so I can refer to it easily in the rest of this
 document.
 
-KSEQ sets the tmux-/screen-window name (not the terminal emulator window title
-text).  I will discuss this sequence a little more in the sections below.
+KSEQ sets the tmux-/screen-window name (not the terminal emulator window/tab
+title text).  I will discuss this sequence a little more in the sections
+below.
 
 __________
 GNU screen
@@ -113,7 +114,8 @@ In GNU screen, the relevant variable is the hardstatus of the window (yielded
 by %h).  It so happens that the first of the OSC titles described above (i.e.
 when n = 0) sets the hardstatus of the window in GNU screen:
 
-    OSC 0 ; TXT BEL
+    OSC  0 ; TXT BEL
+  = \e ] 0 ; TXT \a  (in bash)
 
 You may have to define hs, ts, fs and ds in the screen configuration file
 (e.g. ~/.screenrc) to get the OSC window-title/icon-name sequence to work
@@ -136,12 +138,12 @@ tmux
 In tmux, the relevant variables are pane_title and window_name.
 
 The first and third OSC title sequences (n = 0 and n = 2) described above will
-set variable 'pane_title'.
+set the variable 'pane_title'.
 
 KSEQ described above sets the variable 'window_name'.
 
 I have configured tmux to use both pane_title and window_name to set the
-terminal emulator window title bar text.  I have done so by including the
+terminal emulator window/tab title text.  I have done so by including the
 following in my ~/.tmux.conf:
 
     set -g set-titles-string "#{session_alerts} #{pane_title} | #{window_name}"
@@ -160,9 +162,9 @@ NOTES
 =============================================================================
 
 Configuring tmux to use both pane_title and window_name to set my terminal
-emulator window title bar text means the same text is duplicated twice in the
-title bar text.  That is fine because I log in to various servers, and some
-use KSEQ (e.g.  RHEL7) while others use the OSC sequence (e.g.  RHEL6) when
+emulator window/tab title text means the same text is duplicated twice in the
+title text.  That is fine because I log in to various servers, and some use
+KSEQ (e.g. RHEL7) while others use the OSC sequence (e.g. RHEL6) when
 TERM=screen*.  When I log out of these servers, I want my local title string
 to be reset correctly.
 
