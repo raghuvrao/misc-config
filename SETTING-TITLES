@@ -172,7 +172,7 @@ PUTTING IT ALL TOGETHER
 
 _________
 ~/.bashrc
-=========
+---------
 
     s1='"\e]0;${HOSTNAME}:${PWD}\a"'  # OSC sequence
     s2='"\ek${HOSTNAME}:${PWD}\e\\"'  # KSEQ
@@ -187,7 +187,7 @@ _________
 
 ____________
 ~/.tmux.conf
-============
+------------
 
     set -g set-titles on
     set -g set-titles-string "#{session_alerts} #{pane_title} | #{window_name}"
@@ -196,7 +196,7 @@ ____________
 
 ___________
 ~/.screenrc
-===========
+-----------
 
     termcapinfo xterm* 'hs:ts=\E]0;:fs=\007:ds=\E]0;screen\007'
     termcapinfo rxvt* 'hs:ts=\E]0;:fs=\007:ds=\E]0;screen\007'  # if using rxvt
