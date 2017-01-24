@@ -32,16 +32,22 @@ n = 3.
     OSC 1 ; TXT BEL -> set only icon name TXT.
     OSC 2 ; TXT BEL -> set only terminal emulator window title to TXT.
 
-The second sequence above (n = 1) seems to do nothing on gnome-terminal, at
-least on some versions of it, whereas on iTerm2, it sets both window title and
-tab title.  When n = 2, only the window title is set in iTerm2, and the tab
-title is not altered whereas on gnome-terminal, this sequence sets both window
-title and tab title.  For me, the desirable result is that window title, tab
-title and icon name are all set.  Using the first sequence (n = 0) lets me not
-worry about these differences, and gives me the results I want, at least on
-the terminal emulators I use, so that is the sequence I am going to choose.
+In gnome-terminal, the second sequence above (n = 1) sets the icon title (the
+string that shows up in, for example, gnome-panel), but does not alter the
+window or tab titles.  On iTerm2, the same sequence sets both window title and tab
+title.
 
-Let us say I want to set the title to:
+The third OSC sequence above (n = 2) sets window and tab titles in
+gnome-terminal, and does not alter the icon name.  In iTerm2, the same
+sequence sets only the window title, and the tab title is not altered.
+
+For me, the desirable result is that the window title, the tab title and the
+icon name are all set.  Using the first sequence (n = 0) gives me these
+results, at least on the terminal emulators that I use frequently
+(gnome-terminal, konsole, iTerm2, xterm), so that is the sequence I am going
+to choose.
+
+Let us say I want to set the window/tab title and icon name to:
 
     hostname:current-directory
 
@@ -56,22 +62,22 @@ get the information I need.  The control sequence would look like:
   = ESC ] 0 ; ${HOSTNAME}:${PWD} BEL
   = \e  ] 0 ; ${HOSTNAME}:${PWD} \a  (in bash)
 
-I could then use the bash builtin 'printf' to send this sequence just before
-my prompt is printed.
+I could then send this sequence to my terminal (e.g. by printing it to the
+terminal) just before my prompt is printed.
 
 Bash will execute the value of the environment variable PROMPT_COMMAND just
-before printing the prompt each time.  So, I can set the value of
-PROMPT_COMMAND such that executing its value will output the control sequence
-above.  Upon doing so, bash will set the terminal emulator window title / icon
-name text for me right before each time the prompt is printed.  I could use,
-for example, the bash builtin 'printf' in setting PROMPT_COMMAND:
+before printing the prompt each time.  So, I can set PROMPT_COMMAND such that
+executing its value will output the control sequence above.  Upon doing so,
+bash will set the terminal emulator window title / icon name text for me right
+before each time the prompt is printed.  I could use, for example, the bash
+builtin 'printf' in PROMPT_COMMAND:
 
     $ echo "${PROMPT_COMMAND}"
     printf "\e]0;${HOSTNAME}:${PWD}\a"
 
 To be safe, I will set PROMPT_COMMAND to the above only when TERM=xterm* (e.g.
 xterm, xterm-color, xterm-256color, etc.).  Here is an example of what you
-could include in your ~/.bashrc:
+could include in your ~/.bashrc to set PROMPT_COMMAND:
 
     s1='"\e]0;${HOSTNAME}:${PWD}\a"'
     if [[ "${TERM}" == xterm* ]]; then PROMPT_COMMAND="printf ${s1}"; fi
@@ -83,10 +89,10 @@ GNU screen and tmux
 
 When in GNU screen and tmux, we do not set the terminal emulator window title
 or icon name directly.  Instead, we set one or more variables internal to
-screen or tmux, and instruct screen or tmux to use those variables to set the
-window title.  How these programs set the title, I will not discuss here
-(frankly, because I do not know how they do it - I have not studied their
-sources).
+screen or tmux, and configure screen or tmux to use those variables to set the
+window title.  I will discuss what these variables are and how they can be set
+in the following sections.  Before I do that, I should discuss this next
+control sequence briefly.
 
 In addition to the OSC sequences above, both screen and tmux support the
 following sequence:
@@ -112,15 +118,16 @@ when n = 0) sets the hardstatus of the window in GNU screen:
     OSC  0 ; TXT BEL
   = \e ] 0 ; TXT \a  (in bash)
 
-You may have to define hs, ts, fs and ds in the screen configuration file
-(e.g. ~/.screenrc) to get the OSC window-title/icon-name sequence to work
-correctly.  For example:
+You may have to define hs, ts, fs and ds for your TERM in the screen
+configuration file (e.g. ~/.screenrc) to get the OSC window-title/icon-name
+sequence to work correctly.  Here is one example (note that the sequences
+below match the OSC sequence when n = 0):
 
     termcapinfo <term-type-glob> "hs:ts=\E]0;:fs=\007:ds=\E]0;\007"
 
 where <term-type-glob> matches the value of the TERM environment variable
 BEFORE starting screen.  For example, if you are running xterm, TERM typically
-matches 'xterm*' (e.g. xterm, xterm-color, xterm-256color etc.).  So, if you
+matches 'xterm*' (xterm, xterm-color, xterm-256color etc.).  So, if you
 start screen in xterm, you want to put something like the following in your
 screenrc.
 
@@ -208,10 +215,13 @@ In bash, ${HOSTNAME%%.*} will give the value of HOSTNAME up to the first dot.
 E.g. if ${HOSTNAME} is inspiron1545.example.com, ${HOSTNAME%%.*} will give
 just 'inspiron1545'.
 
-In bash, ${PWD/#${HOME}/\~} will substitute the value of ${HOME} with '~' when
+In bash, ${PWD/#${HOME}/~} will substitute the value of ${HOME} with '~' when
 the value of ${HOME} appears as a prefix in ${PWD}.  E.g.  if ${HOME} is
-'/home/raghu' and ${PWD} is '/home/raghu/src', then ${PWD/#${HOME}/\~} will be
-'~/src'.
+'/home/raghu' and ${PWD} is '/home/raghu/src', then ${PWD/#${HOME}/~} will be
+'~/src'.  On some recent versions of bash, you may have to escape '~' (that
+is, use \~ instead of just ~) in the pattern substitution.  Otherwise, bash
+will substitute ~ back with your home-dir path, rendering the whole
+substitution useless.
 
 _____________________________________________________________________________
 REFERENCES
