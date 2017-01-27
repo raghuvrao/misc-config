@@ -16,9 +16,9 @@ HISTFILESIZE=20000
 HISTSIZE="${HISTFILESIZE}"
 HISTTIMEFORMAT='%F %a %T %Z(UTC%z) '
 
-# Set up a handy alias to force grep to color my output (useful when piping
-# grep output through less -R).
-if ! type -a cgrep &>/dev/null; then alias cgrep='grep --color=always'; fi
+# Set up a few aliases I like.
+alias colorgrep='grep --color=always'
+alias ll='ls -l'
 
 # Make sure bash updates its idea of window size after each command.
 shopt -s checkwinsize
