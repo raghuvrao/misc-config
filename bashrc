@@ -10,9 +10,9 @@ if [[ "${-}" != *i* ]]; then return; fi
 # Source system-wide settings file.
 if [[ -r /etc/bashrc ]]; then . /etc/bashrc; fi
 
-# Set up a handy alias to force grep to color my output (useful when piping
-# grep output through less -R).
-if ! type -a cgrep &>/dev/null; then alias cgrep='grep --color=always'; fi
+# Set up a few aliases I like.
+alias colorgrep='grep --color=always'
+alias ll='ls -l'
 
 # Make sure bash updates its idea of window size after each command.
 shopt -s checkwinsize
