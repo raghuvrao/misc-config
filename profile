@@ -49,6 +49,26 @@ if [ -d "${HOME}/bin" ]; then
     pathmunge "${HOME}/bin" "after"
 fi
 
+GOROOT="${HOME}/golang/root"
+if [ -d "${GOROOT}" ]; then
+    export GOROOT
+    if [ -d "${GOROOT}/bin" ]; then
+        pathmunge "${GOROOT}/bin" "after"
+    fi
+else
+    unset GOROOT
+fi
+
+GOPATH="${HOME}/go"
+if [ -d "${GOPATH}" ]; then
+    export GOPATH
+    if [ -d "${GOPATH}/bin" ]; then
+        pathmunge "${GOPATH}/bin" "after"
+    fi
+else
+    unset GOPATH
+fi
+
 export PATH
 unset -f pathmunge
 
