@@ -1,16 +1,20 @@
 # .bash_profile
 # Author: Raghu Rao <raghu.v.rao@gmail.com>
 
-# Stolen from Red Hat's /etc/profile
+# Slightly modified version of pathmunge from Red Hat's /etc/profile.
 pathmunge() {
   case ":${PATH}:" in
     *:"${1}":*)
       ;;
     *)
-      if [ "${2}" = "after" ]; then
-        PATH="${PATH}:${1}"
+      if [ -z "${PATH}" ]; then  # Avoid leading/trailing colon
+        PATH="${1}"
       else
-        PATH="${1}:${PATH}"
+        if [ "${2}" = "after" ]; then
+          PATH="${PATH}:${1}"
+        else
+          PATH="${1}:${PATH}"
+        fi
       fi
       ;;
   esac
@@ -47,7 +51,7 @@ if [ -d "${HOME}/bin" ]; then
 fi
 
 # Do not modify PATH after this part (in other words: do this part towards the
-# end of ~/.profile).  Remove any duplicates from PATH.  Order will be
+# end of ~/.bash_profile).  Remove any duplicates from PATH.  Order will be
 # preserved.
 orig_IFS="${IFS+_${IFS}}"
 IFS=':'
