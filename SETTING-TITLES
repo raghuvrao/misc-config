@@ -3,6 +3,15 @@ SETTING TERMINAL EMULATOR WINDOW TITLES AND ICON NAMES
 Author: Raghu Rao <raghu.v.rao@gmail.com>
 *****************************************************************************
 
+Please view or print this file using a fixed-width typeface (also known as
+a monospace font).  Otherwise, the spacing in a lot of places will be off, and
+it will be hard to follow.  Here are a few examples of fixed-width typefaces:
+
+DejaVu Sans Mono  Noto Mono  Terminus  misc-fixed   GNU Unifont
+Roboto Mono       Fira Mono  Courier   Courier New  Menlo
+Andale Mono       Consolas
+
+
 _____________________________________________________________________________
 xterm
 xterm-like terminal emulators (gnome-terminal, konsole, iTerm2 etc.)
@@ -29,7 +38,7 @@ n, but that value is not relevant to title-setting, so we will not discuss
 n = 3.
 
     OSC 0 ; TXT BEL -> set terminal emulator window title and icon name to TXT.
-    OSC 1 ; TXT BEL -> set only icon name TXT.
+    OSC 1 ; TXT BEL -> set only icon name to TXT.
     OSC 2 ; TXT BEL -> set only terminal emulator window title to TXT.
 
 In gnome-terminal, the second sequence above (n = 1) sets the icon title (the
@@ -58,9 +67,10 @@ Example:
 If I am using bash, I can use the environment variables $HOSTNAME and $PWD to
 get the information I need.  The control sequence would look like:
 
-    OSC   0 ; ${HOSTNAME}:${PWD} BEL
-  = ESC ] 0 ; ${HOSTNAME}:${PWD} BEL
-  = \e  ] 0 ; ${HOSTNAME}:${PWD} \a  (in bash)
+       OSC 0 ; ${HOSTNAME}:${PWD} BEL
+  =  ESC ] 0 ; ${HOSTNAME}:${PWD} BEL
+  =   \e ] 0 ; ${HOSTNAME}:${PWD} \a   (in bash)
+  = \033 ] 0 ; ${HOSTNAME}:${PWD} \007 (using octal equivalents)
 
 I could then send this sequence to my terminal (e.g. by printing it to the
 terminal) just before my prompt is printed.
@@ -73,15 +83,19 @@ before each time the prompt is printed.  I could use, for example, the bash
 builtin 'printf' in PROMPT_COMMAND:
 
     $ echo "${PROMPT_COMMAND}"
-    printf "\e]0;${HOSTNAME}:${PWD}\a"
+    printf '\033]0;%s:%s\007' "${HOSTNAME}" "${PWD}"
 
 To be safe, I will set PROMPT_COMMAND to the above only when TERM=xterm* (e.g.
 xterm, xterm-color, xterm-256color, etc.).  Here is an example of what you
 could include in your ~/.bashrc to set PROMPT_COMMAND:
 
-    s1='"\e]0;${HOSTNAME}:${PWD}\a"'
-    if [[ "${TERM}" == xterm* ]]; then PROMPT_COMMAND="printf ${s1}"; fi
-    unset s1
+    s='\033]0;%s:%s\007'
+    if [[ "${TERM}" == xterm* ]]; then
+      PROMPT_COMMAND="printf '${s}'"' "${HOSTNAME}" "${PWD}"'
+    fi
+    unset -v s
+
+See the ADDITIONAL INFORMATION section below for a discussion on the quoting.
 
 _____________________________________________________________________________
 GNU screen and tmux
@@ -97,8 +111,9 @@ control sequence briefly.
 In addition to the OSC sequences above, both screen and tmux support the
 following sequence:
 
-    ESC k TXT ESC \
-  = \e  k TXT \e  \\  (in bash)
+    ESC  k TXT ESC  \
+  =  \e  k TXT  \e  \\   (in bash, '\' must be escaped)
+  = \033 k TXT \033 \134 (using octal equivalents)
 
 Let me call this sequence KSEQ so I can refer to it easily in the rest of this
 document.
@@ -115,8 +130,9 @@ In GNU screen, the relevant variable is the hardstatus of the window (yielded
 by %h).  It so happens that the first of the OSC titles described above (i.e.
 when n = 0) sets the hardstatus of the window in GNU screen:
 
-    OSC  0 ; TXT BEL
-  = \e ] 0 ; TXT \a  (in bash)
+       OSC 0 ; TXT BEL
+  =   \e ] 0 ; TXT \a   (in bash)
+  = \033 ] 0 ; TXT \007 (using octal equivalents)
 
 You may have to define hs, ts, fs and ds for your TERM in the screen
 configuration file (e.g. ~/.screenrc) to get the OSC window-title/icon-name
@@ -155,9 +171,9 @@ screen.linux etc.  When TERM=screen*, I use both the OSC title sequence (n
 = 0) and KSEQ in PROMPT_COMMAND.  I have set the value of PROMPT_COMMAND to:
 
     $ echo "${PROMPT_COMMAND}"
-    printf "\e]0;${HOSTNAME}:${PWD}\a""\ek${HOSTNAME}:${PWD}\e\\"
-            |-----------------------|  |-----------------------|
-                   OSC sequence                  KSEQ
+    printf '\033]0;%s:%s\007\033k%s:%s\033\134' "${HOSTNAME}" "${PWD}" "${HOSTNAME}" "${PWD}"
+            |--------------||----------------|  |--------------------| |--------------------|
+                OSC seq.           KSEQ           args for OSC seq.        args for KSEQ
 
 _____________________________________________________________________________
 PUTTING IT ALL TOGETHER
@@ -167,16 +183,25 @@ _________
 ~/.bashrc
 ---------
 
-    s1='"\e]0;${HOSTNAME}:${PWD}\a"'  # OSC sequence
-    s2='"\ek${HOSTNAME}:${PWD}\e\\"'  # KSEQ
-    if [[ "${TERM}" == xterm* ]]; then
-        PROMPT_COMMAND="printf ${s1}"
-    elif [[ "${TERM}" == screen* ]]; then
-        PROMPT_COMMAND="printf ${s1}${s2}"
-    else
+    s='\033]0;%s:%s\007'  # OSC sequence.
+    case "${TERM}" in
+      xterm*)
+        PROMPT_COMMAND="printf '${s}'"' "${HOSTNAME}" "${PWD}"'
+        ;;
+      screen*)
+        # Append KSEQ to OSC sequence.
+        s+='\033k%s:%s\033\134'
+        # s will have four format specifiers now (two in the OSC sequence and two
+        # in KSEQ), so provide arguments accordingly.
+        PROMPT_COMMAND="printf '${s}'"' "${HOSTNAME}" "${PWD}" "${HOSTNAME}" "${PWD}"'
+        ;;
+      *)
         PROMPT_COMMAND=
-    fi
-    unset s1 s2
+        ;;
+    esac
+    unset -v s
+
+See the ADDITIONAL INFORMATION section below for variations of the above.
 
 ____________
 ~/.tmux.conf
@@ -198,7 +223,7 @@ ___________
     # window's hardstatus.
 
 _____________________________________________________________________________
-NOTES
+ADDITIONAL INFORMATION
 =============================================================================
 
 Configuring tmux to use both pane_title and window_name to set my terminal
@@ -211,9 +236,7 @@ to be reset correctly.
 Fortunately, neither the OSC sequence (n = 0) nor KSEQ seems to do any harm
 when running tmux/screen at the Linux console (e.g. TERM=screen.linux).
 
-In bash, ${HOSTNAME%%.*} will give the value of HOSTNAME up to the first dot.
-E.g. if ${HOSTNAME} is inspiron1545.example.com, ${HOSTNAME%%.*} will give
-just 'inspiron1545'.
+-----------------------------------------------------------------------------
 
 In bash, ${PWD/#${HOME}/~} will substitute the value of ${HOME} with '~' when
 the value of ${HOME} appears as a prefix in ${PWD}.  E.g.  if ${HOME} is
@@ -222,6 +245,128 @@ the value of ${HOME} appears as a prefix in ${PWD}.  E.g.  if ${HOME} is
 is, use \~ instead of just ~) in the pattern substitution.  Otherwise, bash
 will substitute ~ back with your home-dir path, rendering the whole
 substitution useless.
+
+In bash, ${HOSTNAME%%.*} will give the value of HOSTNAME up to the first dot.
+E.g. if ${HOSTNAME} is inspiron1545.example.com, ${HOSTNAME%%.*} will give
+just 'inspiron1545'.
+
+-----------------------------------------------------------------------------
+
+Here is a tip to get a small performance boost.  Your hostname does not change
+frequently.  At least, not each time your shell is ready to print the prompt.
+So, instead of computing "${HOSTNAME%%.*}" each time, you can compute it once,
+and use the result in printf in PROMPT_COMMAND.  Here is an example, which
+works when TERM=xterm* (note that the sequence in line 1 is the OSC sequence
+with n = 0):
+
+    1  s='\033]0;%s:%s\007'  # single-quoted; will not be altered by the shell
+    2  h="${HOSTNAME%%.*}"   # double-quoted; will be processed by the shell
+    3  PROMPT_COMMAND="printf '${s}' '${h}'"' "${PWD/#${HOME}/~}"'
+    4  unset -v s h
+
+The above will give us the following result:
+
+    $ echo "${PROMPT_COMMAND}"
+    printf '\033]0;%s:%s\007' 'inspiron1545' "${PWD/#${HOME}/~}"
+
+s is the format string for printf.  h is the value for the first %s in s, and
+"${PWD/#${HOME}/~}" is the value for the second %s in s.  If HOSTNAME is
+inspiron1545.example.com, after line 2, the value of h will be inspiron1545.
+
+We want s and h to be expanded in the final result that is assigned to
+PROMPT_COMMAND; we do not want to those temporary/auxiliary variables to
+linger.  On the other hand, we do not want ${PWD/#${HOME}/~} to be expanded by
+the shell while assigning to PROMPT_COMMAND.  PWD will change frequently as
+you use your system, and we want our title string to change as PWD changes.
+So, we must do our quoting carefully, in such a way that only s and h are
+expanded by the shell while assigning to PROMPT_COMMAND.  Let us see how I am
+doing that.
+
+In line 3, I am assigning the concatenation of multiple strings to
+PROMPT_COMMAND.  The final result assigned is the concatenation of the
+following two strings, one double-quoted and one single-quoted:
+
+    1  "printf '${s}' '${h}'"  (double-quoted; call it String 1)
+    2  ' "${PWD/#${HOME}/~}"'  (single-quoted; call it String 2)
+
+String 1 is double-quoted, so s and h are expanded (even though s and h are
+themselves in single quotes within string 1) while assigning to
+PROMPT_COMMAND.  The single quotes will be preserved in PROMPT_COMMAND.
+
+    "printf '${s}' '${h}'"
+  = "printf '\033]0;%s:%s\007' 'inspiron1545'"
+
+Why have I wrapped s and h in single quotes?  For safety.  If, by some bizarre
+sequence of events, either of these variables get values containing characters
+that could trigger expansion/substitution by the shell, there could be
+undesirable (and maybe dangerous) side-effects.  For example, if h ends up
+being 'foo*', I want it to remain 'foo*' when it is passed as an argument to
+printf; I do not want the shell expanding 'foo*' as if it were a wildcard.
+You could argue that s is completely under my control and h is derived from
+HOSTNAME, neither of which could be misbehaved.  But who knows!  Better safe
+than sorry.
+
+String 2, by virtue of being in single quotes, will not be altered by the
+shell in any way while assigning to PROMPT_COMMAND, even though
+${PWD/#${HOME}/~} is in double quotes.  The double quotes will be preserved in
+the assignment to PROMPT_COMMAND.
+
+    ' "${PWD/#${HOME}/~}"'
+  = ' "${PWD/#${HOME}/~}"'  (no change)
+
+As an argument (to printf), ${PWD/#${HOME}/~} will be in double-quotes.  So,
+each time the printf in PROMPT_COMMAND is run, it is at THAT point that the
+shell will process any substitution/expansion first, and then pass along the
+result to printf.  This is the behaviour we want for the second '%s' in
+printf, as PWD changes frequently during use of the system.
+
+PROMPT_COMMAND is simply a concatenation of strings 1 and 2 (in bash,
+concatenation is done by placing the strings beside each other):
+
+    "foo" + 'bar'
+  = "foo"'bar'
+  = foobar
+
+So,
+
+    PROMPT_COMMAND="printf '${s}' '${h}'"' "${PWD/#${HOME}/~}"'
+                   |--------------------||--------------------|
+                          String 1              String 2
+
+    PROMPT_COMMAND
+        = "printf '\033]0;%s:%s\007' 'inspiron1545'" + ' "${PWD/#${HOME}/~}"'
+          |----------------------------------------|   |--------------------|
+                          String 1                            String 2
+
+        = "printf '\033]0;%s:%s\007' 'inspiron1545'"' "${PWD/#${HOME}/~}"'
+          |----------------------------------------||--------------------|
+                          String 1                         String 2
+
+        = printf '\033]0;%s:%s\007' 'inspiron1545' "${PWD/#${HOME}/~}"'
+
+The final result above is what is finally assigned to PROMPT_COMMAND; that is
+what we see when we print the value of PROMPT_COMMAND.
+
+The above example is suitable when TERM=xterm* (and in GNU screen) because we
+have used the OSC sequence.  For completeness when TERM=screen*, there is an
+additional sequence (KSEQ).  So, there will be four format specifiers in the
+printf format string (two from OSQ sequence, two from KSEQ).  Consequently,
+there will be two more arguments to printf:
+
+    s='\033]0;%s:%s\007'     # OSC sequence.
+    s+='\033k%s:%s\033\134'  # Append KSEQ to s.
+    h="${HOSTNAME%%.*}"
+    PROMPT_COMMAND="printf '${s}' '${h}'"' "${PWD/#${HOME}/~}"'" '${h}'"' "${PWD/#${HOME}/~}"'
+    unset -v s h
+
+The above yields the following result:
+
+    $ echo "${PROMPT_COMMAND}"
+    printf '\033]0;%s:%s\007\033k%s:%s\033\134' 'inspiron1545' "${PWD/#${HOME}/~}" 'inspiron1545' "${PWD/#${HOME}/~}"
+
+Congratulations!  You are now not computing ${HOSTNAME%%.*} on each run of the
+value of PROMPT_COMMAND!
+
 
 _____________________________________________________________________________
 REFERENCES
