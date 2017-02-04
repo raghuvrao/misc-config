@@ -15,13 +15,13 @@ set shortmess=I
 set laststatus=1
 set cpoptions=$
 set backspace=indent,eol,start
+set lazyredraw
 
 set noexpandtab
 set nosmarttab
 set softtabstop=8
 set tabstop=8
 set shiftwidth=8
-set textwidth=78
 
 set ignorecase
 set smartcase
@@ -29,7 +29,10 @@ set smartcase
 set wildmode=longest,full
 if has("wildmenu") | set wildmenu | endif
 
-if has("cmdline_info") | set noruler showcmd | endif
+set autoindent
+if has("smartindent") | set nosmartindent | endif
+
+if has("cmdline_info") | set ruler showcmd | endif
 if has("eval") | let g:loaded_matchparen = 1 | endif
 if has("folding") | set foldmethod=indent foldlevel=100 | endif
 if has("extra_search") | set hlsearch noincsearch | endif
@@ -41,28 +44,22 @@ if has("multi_byte")
 	set listchars=tab:·\ ,trail:█,extends:>,precedes:<,nbsp:░
 endif
 
+set textwidth=78
 if has("autocmd")
 	filetype plugin indent on
 	augroup raghu_augroup
 		au!
 		au BufWinEnter,BufRead,BufNewFile * setlocal formatoptions=qnm1
 
-		au FileType svn,gitcommit if has("cmdline_info") | setlocal ruler | endif
-		au BufWinEnter,BufRead,BufNewFile .gitconfig if has("cmdline_info") | setlocal ruler | endif
+		au FileType python setlocal textwidth=98 expandtab softtabstop=2 shiftwidth=2
 
-		au FileType python if has("cmdline_info") | setlocal ruler | endif
-		au FileType python setlocal expandtab softtabstop=4 shiftwidth=4 textwidth=98
-
-		au BufWinEnter,BufRead,BufNewFile *.go if has("cmdline_info") | setlocal ruler | endif
 		au BufWinEnter,BufRead,BufNewFile *.go if has("smartindent") | setlocal smartindent | endif
 		au BufWinEnter,BufRead,BufNewFile *.go setlocal filetype=go textwidth=0
 		au BufWinEnter,BufRead,BufNewFile *.go setlocal list listchars=tab:\ \ ,trail:#,extends:>,precedes:<,nbsp:_
-		au BufWinEnter,BufRead,BufNewFile *.go if has("multi_byte") | setlocal listchars=tab:\ \ ,trail:█,extends:>,precedes:<,nbsp:░ | endif
+		au BufWinEnter,BufRead,BufNewFile *.go if has("multi_byte") | set listchars=tab:\ \ ,trail:█,extends:>,precedes:<,nbsp:░ | endif
 
-		au FileType sh if has("cmdline_info") | setlocal ruler | endif
-		au FileType sh setlocal expandtab softtabstop=4 shiftwidth=4
-		au BufWinEnter,BufRead,BufNewFile *.sh,*.bash if has("cmdline_info") | setlocal ruler | endif
-		au BufWinEnter,BufRead,BufNewFile *.sh,*.bash setlocal expandtab softtabstop=4 shiftwidth=4
+		au FileType sh setlocal expandtab softtabstop=2 shiftwidth=2
+		au FileType *.sh,*.bash setlocal expandtab softtabstop=2 shiftwidth=2
 	augroup END
 endif
 
