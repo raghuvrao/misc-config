@@ -8,7 +8,7 @@ if [[ "${-}" != *i* ]]; then return; fi
 
 p='/etc/bashrc'
 if [[ -f "${p}" && -r "${p}" ]]; then
-    source "${p}"
+  source "${p}"
 fi
 unset -v p
 
@@ -46,13 +46,13 @@ ll() {
 # 'tput clear' works as expected.  So, work around the problem by rebinding
 # C-l to 'tput clear' until I find a proper solution.
 if [[ "${TERM}" =~ xterm-.*|screen.* ]]; then
-    f="/etc/slackware-version"
-    if [[ -r "${f}" ]]; then
-        read -r first_line <"${f}" &>/dev/null
-        if [[ "${first_line}" =~ ^[Ss]lackware ]]; then
-            builtin bind -r "\C-l"
-            builtin bind -x '"\C-l": tput clear'
-        fi
+  f="/etc/slackware-version"
+  if [[ -r "${f}" ]]; then
+    read -r first_line <"${f}" &>/dev/null
+    if [[ "${first_line}" =~ ^[Ss]lackware ]]; then
+      builtin bind -r "\C-l"
+      builtin bind -x '"\C-l": tput clear'
     fi
-    unset f
+  fi
+  unset -v f
 fi
