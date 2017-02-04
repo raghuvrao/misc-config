@@ -7,27 +7,49 @@
 # Do nothing if shell is non-interactive.
 if [[ "${-}" != *i* ]]; then return; fi
 
-# Source system-wide settings file.
-if [[ -r /etc/bashrc ]]; then . /etc/bashrc; fi
-
-# Set up a few aliases I like.
-alias colorgrep='grep --color=always'
-alias ll='ls -l'
-
 # Make sure bash updates its idea of window size after each command.
 shopt -s checkwinsize
 
-# Set xterm title.  See accompanying document SETTING-TITLES for a brief
-# discussion.
-unset PROMPT_COMMAND
-s1='"\e]0;${HOSTNAME%%.*}:${PWD/#${HOME}/\~}\a"'
-s2='"\ek${HOSTNAME%%.*}:${PWD/#${HOME}/\~}\e\\"'
-if [[ "${TERM}" == xterm* ]]; then
-    PROMPT_COMMAND="printf ${s1}"
-elif [[ "${TERM}" == screen* ]]; then
-    PROMPT_COMMAND="printf ${s1}${s2}"
+# Discard all aliases.
+unalias -a
+
+# Handy function to force color sequences in grep's output.  Useful when piping
+# to 'less -R'.
+if ! type -a acgrep &>/dev/null; then
+  acgrep() {
+    command grep --color=always "${@}"
+  }
 fi
-unset s1 s2
+
+# Make ll a bit more useful.
+ll() {
+  if [[ -n ${INSIDE_EMACS+x} ]]; then
+    command ls -lA "${@}"
+  else
+    command ls -lA "${@}" | less -F -X
+  fi
+}
+
+# Set up a simple shell prompt.
+PS1='\u@\h:\w\$ '
+PROMPT_DIRTRIM=3
+
+# Use PROMPT_COMMAND to set terminal emulator window/tab titles and icon
+# names.  See the accompanying file SETTING-TITLES for a brief discussion.  In
+# recent versions of bash, you may have to escape '~' below.
+unset -v PROMPT_COMMAND
+s='\033]0;%s:%s\007'
+h="${HOSTNAME%%.*}"
+case "${TERM}" in
+  xterm*)
+    PROMPT_COMMAND="printf '${s}' '${h}'"' "${PWD/#${HOME}/\~}"'
+    ;;
+  screen*)
+    s+='\033k%s:%s\033\134'
+    PROMPT_COMMAND="printf '${s}' '${h}'"' "${PWD/#${HOME}/\~}"'" '${h}'"' "${PWD/#${HOME}/\~}"'
+    ;;
+esac
+unset -v h s
 
 # In Slackware, when running bash, readline's clear-screen function (bound to
 # C-l by default) does not seem to work as expected for certain TERMs (e.g.
