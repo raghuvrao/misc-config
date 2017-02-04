@@ -3,17 +3,17 @@
 
 # Stolen from Red Hat's /etc/profile
 pathmunge() {
-    case ":${PATH}:" in
-        *:"${1}":*)
-            ;;
-        *)
-            if [ "${2}" = "after" ]; then
-                PATH="${PATH}:${1}"
-            else
-                PATH="${1}:${PATH}"
-            fi
-            ;;
-    esac
+  case ":${PATH}:" in
+    *:"${1}":*)
+      ;;
+    *)
+      if [ "${2}" = "after" ]; then
+        PATH="${PATH}:${1}"
+      else
+        PATH="${1}:${PATH}"
+      fi
+      ;;
+  esac
 }
 
 # Some general guidelines to tell if an environment variable belongs in this
@@ -35,21 +35,34 @@ export PAGER='less'
 export LESS='-i -R'
 
 if [ -d "${HOME}/lib/python" ]; then
-    export PYTHONPATH="${PYTHONPATH}:${HOME}/lib/python"
+  export PYTHONPATH="${PYTHONPATH}:${HOME}/lib/python"
 fi
 
 if [ -r "${HOME}/.pythonrc.py" ]; then
-    export PYTHONSTARTUP="${HOME}/.pythonrc.py"
+  export PYTHONSTARTUP="${HOME}/.pythonrc.py"
 fi
 
 if [ -d "${HOME}/bin" ]; then
-    pathmunge "${HOME}/bin" "after"
+  pathmunge "${HOME}/bin" "after"
 fi
 
+# Do not modify PATH after this part (in other words: do this part towards the
+# end of ~/.profile).  Remove any duplicates from PATH.  Order will be
+# preserved.
+orig_IFS="${IFS+_${IFS}}"
+IFS=':'
+path_copy="${PATH}"
+PATH=""
+for p in ${path_copy}; do
+  pathmunge "${p}" "after"
+done
+if [ -z "${orig_IFS}" ]; then unset -v IFS; else IFS="${orig_IFS#_}"; fi
 export PATH
+unset -v orig_IFS p path_copy
+
 unset -f pathmunge
 
 # Source .bashrc in the end, and only if running bash.
 if [ -n "${BASH_VERSION}" -a -r "${HOME}/.bashrc" ]; then
-    . "${HOME}/.bashrc"
+  . "${HOME}/.bashrc"
 fi
