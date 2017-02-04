@@ -10,30 +10,35 @@ p='/etc/bashrc'
 if [[ -f "${p}" && -r "${p}" ]]; then
     source "${p}"
 fi
+unset -v p
 
 HISTCONTROL='ignoreboth'
 HISTFILESIZE=20000
 HISTSIZE="${HISTFILESIZE}"
 HISTTIMEFORMAT='%F %a %T %Z(UTC%z) '
 
-# Set up a few aliases I like.
-alias colorgrep='grep --color=always'
-alias ll='ls -l'
-
 # Make sure bash updates its idea of window size after each command.
 shopt -s checkwinsize
 
-# Set xterm title.  See accompanying document SETTING-TITLES for a brief
-# discussion.
-unset PROMPT_COMMAND
-s1='"\e]0;${HOSTNAME%%.*}:${PWD/#${HOME}/\~}\a"'
-s2='"\ek${HOSTNAME%%.*}:${PWD/#${HOME}/\~}\e\\"'
-if [[ "${TERM}" == xterm* ]]; then
-    PROMPT_COMMAND="printf ${s1}"
-elif [[ "${TERM}" == screen* ]]; then
-    PROMPT_COMMAND="printf ${s1}${s2}"
+# Discard all aliases.
+unalias -a
+
+# Handy function to force color sequences in grep's output.  Useful when piping
+# to 'less -R'.
+if ! type -a acgrep &>/dev/null; then
+  acgrep() {
+    command grep --color=always "${@}"
+  }
 fi
-unset s1 s2
+
+# Make ll a bit more useful.
+ll() {
+  if [[ -n ${INSIDE_EMACS+x} ]]; then
+    command ls -lA "${@}"
+  else
+    command ls -lA "${@}" | less -F -X
+  fi
+}
 
 # In Slackware, when running bash, readline's clear-screen function (bound to
 # C-l by default) does not seem to work as expected for certain TERMs (e.g.
@@ -51,5 +56,3 @@ if [[ "${TERM}" =~ xterm-.*|screen.* ]]; then
     fi
     unset f
 fi
-
-unset -v p
