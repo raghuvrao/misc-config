@@ -94,7 +94,7 @@ could include in your ~/.bashrc to set PROMPT_COMMAND:
     fi
     unset -v s
 
-See the ADDITIONAL INFORMATION section below for a discussion on the quoting.
+See the DIGRESSION section below for a discussion on the quoting.
 
 _____________________________________________________________________________
 GNU screen and tmux
@@ -160,10 +160,11 @@ set the variable 'pane_title'.
 KSEQ described above sets the variable 'window_name'.
 
 I have configured tmux to use both pane_title and window_name to set the
-terminal emulator window/tab title text.  I have done so by including the
+terminal emulator window/tab title text (see the NOTES section below to see
+why I use both and not just one of them).  I have done so by including the
 following in my ~/.tmux.conf:
 
-    set -g set-titles-string "#{session_alerts} #{pane_title} | #{window_name}"
+    set -g set-titles-string "#{session_alerts} #{pane_title} #{window_name}"
 
 In GNU screen and tmux, TERM is 'screen*'.  E.g. screen, screen-256color,
 screen.linux etc.  When TERM=screen*, I use both the OSC title sequence (n
@@ -200,14 +201,14 @@ _________
     esac
     unset -v s
 
-See the ADDITIONAL INFORMATION section below for variations of the above.
+See the DIGRESSION section below for variations of the above.
 
 ____________
 ~/.tmux.conf
 ------------
 
     set -g set-titles on
-    set -g set-titles-string "#{session_alerts} #{pane_title} | #{window_name}"
+    set -g set-titles-string "#{session_alerts} #{pane_title} #{window_name}"
     setw -g allow-rename on
     setw -g automatic-rename on
 
@@ -222,20 +223,18 @@ ___________
     # window's hardstatus.
 
 _____________________________________________________________________________
-ADDITIONAL INFORMATION
+NOTES
 =============================================================================
 
 Configuring tmux to use both pane_title and window_name to set my terminal
 emulator window/tab title text means the same text is duplicated twice in the
-title text.  That is fine because I log in to various servers, and some use
-KSEQ (e.g. RHEL7) while others use the OSC sequence (e.g. RHEL6) when
-TERM=screen*.  When I log out of these servers, I want my local title string
-to be reset correctly.
+title text on my local computer.  That is fine for me because I log in to
+various servers, and some use KSEQ (e.g. RHEL7) while others use the OSC
+sequence (e.g. RHEL6) when TERM=screen*.  When I log out of these servers,
+I want my local title string to be reset correctly.
 
 Fortunately, neither the OSC sequence (n = 0) nor KSEQ seems to do any harm
 when running tmux/screen at the Linux console (e.g. TERM=screen.linux).
-
------------------------------------------------------------------------------
 
 In bash, ${PWD/#${HOME}/~} will substitute the value of ${HOME} with '~' when
 the value of ${HOME} appears as a prefix in ${PWD}.  E.g.  if ${HOME} is
@@ -249,7 +248,9 @@ In bash, ${HOSTNAME%%.*} will give the value of HOSTNAME up to the first dot.
 E.g. if ${HOSTNAME} is inspiron1545.example.com, ${HOSTNAME%%.*} will give
 just 'inspiron1545'.
 
------------------------------------------------------------------------------
+_____________________________________________________________________________
+DIGRESSION
+=============================================================================
 
 Here is a tip to get a small performance boost.  Your hostname does not change
 frequently.  At least, not each time your shell is ready to print the prompt.
@@ -319,24 +320,21 @@ shell will process any substitution/expansion first, and then pass along the
 result to printf.  This is the behaviour we want for the second '%s' in
 printf, as PWD changes frequently during use of the system.
 
-PROMPT_COMMAND is simply a concatenation of strings 1 and 2 (in bash,
-concatenation is done by placing the strings beside each other):
+In bash, concatenation is done by placing the strings beside each other.  For
+example, the strings "foo" and 'bar' are concatenated as follows.
 
-    "foo" + 'bar'
-  = "foo"'bar'
+    "foo"'bar'
   = foobar
 
-So,
+PROMPT_COMMAND is simply a concatenation of strings 1 and 2:
 
     PROMPT_COMMAND="printf '${s}' '${h}'"' "${PWD/#${HOME}/~}"'
                    |--------------------||--------------------|
                           String 1              String 2
 
-    PROMPT_COMMAND
-        = "printf '\033]0;%s:%s\007' 'inspiron1545'" + ' "${PWD/#${HOME}/~}"'
-          |----------------------------------------|   |--------------------|
-                          String 1                            String 2
+When we plug in the values of s and h, we get:
 
+    PROMPT_COMMAND
         = "printf '\033]0;%s:%s\007' 'inspiron1545'"' "${PWD/#${HOME}/~}"'
           |----------------------------------------||--------------------|
                           String 1                         String 2
@@ -346,11 +344,11 @@ So,
 The final result above is what is finally assigned to PROMPT_COMMAND; that is
 what we see when we print the value of PROMPT_COMMAND.
 
-The above example is suitable when TERM=xterm* (and in GNU screen) because we
-have used the OSC sequence.  For completeness when TERM=screen*, there is an
-additional sequence (KSEQ).  So, there will be four format specifiers in the
-printf format string (two from OSQ sequence, two from KSEQ).  Consequently,
-there will be two more arguments to printf:
+The above example is suitable when TERM=xterm* (and also for hardstatus in GNU
+screen) because we have used the OSC sequence.  For completeness when TERM is
+like screen*, we should also use KSEQ.  So, there will be four format
+specifiers in the printf format string (two from OSQ sequence, two from KSEQ).
+Consequently, there will be two more arguments to printf:
 
     s='\033]0;%s:%s\007'     # OSC sequence.
     s+='\033k%s:%s\033\134'  # Append KSEQ to s.
