@@ -20,8 +20,10 @@ HISTTIMEFORMAT='%F %a %T %Z(UTC%z) '
 # Make sure bash updates its idea of window size after each command.
 shopt -s checkwinsize
 
-# Discard all aliases.
-unalias -a
+# Remove some aliases that I dislike.
+for a in ls ll l. vi; do
+  if alias "${a}" &>/dev/null; then unalias "${a}"; fi
+done
 
 # Handy function to force color sequences in grep's output.  Useful when piping
 # to 'less -R'.
