@@ -201,7 +201,7 @@ _________
     esac
     unset -v s
 
-See the DIGRESSION section below for variations of the above.
+See the NOTES and DIGRESSION sections below for variations of the above.
 
 ____________
 ~/.tmux.conf
