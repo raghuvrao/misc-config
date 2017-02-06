@@ -20,27 +20,17 @@ HISTTIMEFORMAT='%F %a %T %Z(UTC%z) '
 # Make sure bash updates its idea of window size after each command.
 shopt -s checkwinsize
 
-# Remove some aliases that I dislike.
+# Make pipeline's return status the value of the last (rightmost) command to
+# exit with a non-zero status, or zero if all commands exit successfully.
+shopt -o -s pipefail
+
+# Delete/modify/add aliases.
 for a in ls ll l. vi; do
   if alias "${a}" &>/dev/null; then unalias "${a}"; fi
 done
-
-# Handy function to force color sequences in grep's output.  Useful when piping
-# to 'less -R'.
-if ! type -a acgrep &>/dev/null; then
-  acgrep() {
-    command grep --color=always "${@}"
-  }
-fi
-
-# Make ll a bit more useful.
-ll() {
-  if [[ -n ${INSIDE_EMACS+x} ]]; then
-    command ls -lA "${@}"
-  else
-    command ls -lA "${@}" | less -F -X
-  fi
-}
+unset -v a
+if ! type -a ll &>/dev/null; then alias ll='ls -l'; fi
+if ! type -a acgrep &>/dev/null; then alias acgrep='grep --color=always'; fi
 
 # In Slackware, when running bash, readline's clear-screen function (bound to
 # C-l by default) does not seem to work as expected for certain TERMs (e.g.
