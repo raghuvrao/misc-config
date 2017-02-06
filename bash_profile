@@ -53,7 +53,7 @@ fi
 # Do not modify PATH after this part (in other words: do this part towards the
 # end of ~/.bash_profile).  Remove any duplicates from PATH.  Order will be
 # preserved.
-orig_IFS="${IFS+_${IFS}}"
+orig_IFS="${IFS+_${IFS}}"  # Note: ${foo+bar}, not ${foo:+bar}
 IFS=':'
 path_copy="${PATH}"
 PATH=""
