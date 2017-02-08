@@ -1,18 +1,30 @@
-termcapinfo xterm* ti@:te@
 startup_message off
-vbell off
+
+altscreen off
+termcapinfo xterm* ti@:te@
+
 autodetach on
-altscreen on
-# shelltitle "$ |bash"
-defscrollback 5000
-compacthist on
+defc1 off
+defmonitor on
 defutf8 on
 nonblock on
+vbell off
 
-# hardstatus alwayslastline "%{= kw}%{B}[%= %{w}%{=kw}%?%-Lw%?%{r}(%{B}%n*%f %t%?(%u)%?%{r})%{w}%?%+Lw%?%?%=%{B}][%{B} %l %Y.%m.%d %C %A %{B}]%{w}"
-# hardstatus alwayslastline "[%= %-Lw(%n*%f %t(%u))%+Lw%=][%l %Y.%m.%d %C %A ]"
+# Set terminfo capabilities for hardstatus for the xterm term-type.  Set the
+# capabilities in such a way that when this capability is used, it updates the
+# window title and icon name (by using the corresponding control sequence, in
+# this case, the OSC sequence OSC 0 ; TEXT BEL).
+termcapinfo xterm* 'hs:ts=\E]0;:fs=\007:ds=\E]0;GNU Screen\007'
 
-# from 'man screen'
-hardstatus alwayslastline "%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<"
+# 'alwayslastline' will tell screen not to use the terminal's hardstatus line,
+# and instead use a display line for hardstatus (typically, the last line in
+# the display area).  Some versions of GNU Screen will use the terminal's
+# hardstatus capability even when the alwayslastline option is set.  So, if
+# you have set hardstatus to alwayslastline, and you are wondering why your
+# terminal's titlebar is not getting updated, then do not set hardstatus to
+# alwayslastline.
+#hardstatus alwayslastline
+hardstatus string 's:%h'
 
-bind 'q' quit
+# The string is from 'man screen'.
+caption always '%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<'
