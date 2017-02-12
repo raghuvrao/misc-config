@@ -1,5 +1,5 @@
 set nobackup
-set noundofile
+if has("persistent_undo") | set noundofile | endif
 set nocompatible
 set nopaste
 set novisualbell
