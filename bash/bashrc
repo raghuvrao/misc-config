@@ -45,6 +45,7 @@ if [[ "${TERM}" =~ xterm-.*|screen.* ]]; then
       builtin bind -r "\C-l"
       builtin bind -x '"\C-l": tput clear'
     fi
+    unset -v first_line
   fi
   unset -v f
 fi
