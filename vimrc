@@ -65,3 +65,7 @@ endif
 
 " Disable automatic syntax highlighting for all files!
 syntax off
+
+" Make vim more secure.  See |torjan-horse|.
+set noexrc
+set secure
