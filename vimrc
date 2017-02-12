@@ -1,7 +1,3 @@
-" Short-cut to toggle line numbers.
-nnoremap <C-a> :set invnumber<CR>
-inoremap <C-a> <C-O>:set invnumber<CR>
-
 set nobackup
 set noundofile
 set nocompatible
