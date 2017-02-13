@@ -37,7 +37,7 @@
   (when (display-graphic-p)
     (setq frame-title-format (concat "%b - " (system-name)))
     (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-10"))
-    (setq cursor-type 'bar)
+    (add-to-list 'default-frame-alist '(cursor-type . bar))
     (global-hl-line-mode 1)
     (let ((f (if (car frame)
 		 (car frame)
