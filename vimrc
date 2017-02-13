@@ -47,8 +47,6 @@ if has("autocmd")
 		au!
 		au BufWinEnter,BufRead,BufNewFile * setlocal formatoptions=qnm1
 
-		au FileType python setlocal textwidth=98 expandtab softtabstop=2 shiftwidth=2
-
 		au BufWinEnter,BufRead,BufNewFile *.go if has("smartindent") | setlocal smartindent | endif
 		au BufWinEnter,BufRead,BufNewFile *.go setlocal filetype=go textwidth=0
 		au BufWinEnter,BufRead,BufNewFile *.go setlocal list listchars=tab:\ \ ,trail:#,extends:>,precedes:<,nbsp:_
@@ -62,6 +60,6 @@ endif
 " Disable automatic syntax highlighting for all files!
 syntax off
 
-" Make vim more secure.  See |torjan-horse|.
+" Make vim more secure.  See |trojan-horse|.
 set noexrc
 set secure
