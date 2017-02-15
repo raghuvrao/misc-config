@@ -33,12 +33,17 @@
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
 
+(require 'auto-complete)
+(define-key ac-mode-map (kbd "C-c TAB") 'auto-complete)
+(setq ac-auto-start nil
+      ac-auto-show-menu nil
+      ac-disable-inline t)
+
 (with-eval-after-load 'go-mode
   (require 'go-guru)
   (require 'go-rename)
   (require 'go-errcheck)
   (require 'go-eldoc)
-  (require 'auto-complete)
   (require 'go-autocomplete)
   (setq gofmt-command (or (executable-find "goimports")
 			  (executable-find "gofmt")))
@@ -48,8 +53,6 @@
   (add-hook 'go-mode-hook '(lambda ()
 			     (setq show-trailing-whitespace t)
 			     (auto-complete-mode 1)
-			     (set (make-local-variable 'ac-disable-inline) t)
-			     (set (make-local-variable 'ac-auto-show-menu) nil)
 			     (if (not (string-match "^go" compile-command))
 				 (set (make-local-variable 'compile-command)
 				      "go build && go vet")))))
