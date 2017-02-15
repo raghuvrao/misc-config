@@ -50,12 +50,12 @@
 (add-hook 'after-make-frame-functions 'my-frame-misc-stuff-hook t)
 (add-hook 'after-init-hook 'my-frame-misc-stuff-hook t)
 
+(require 'windmove)
+(windmove-default-keybindings)
 (global-set-key (kbd "S-C-<right>") 'enlarge-window-horizontally)
 (global-set-key (kbd "S-C-<left>") 'shrink-window-horizontally)
 (global-set-key (kbd "S-C-<down>") 'shrink-window)
 (global-set-key (kbd "S-C-<up>") 'enlarge-window)
-(require 'windmove)
-(windmove-default-keybindings)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
