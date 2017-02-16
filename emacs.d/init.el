@@ -12,9 +12,6 @@
   (package-initialize))
 
 (global-font-lock-mode -1)
-(electric-pair-mode -1)
-(menu-bar-mode 1)  ; Helps me to discover emacs.
-(line-number-mode 1)
 (column-number-mode 1)
 (show-paren-mode 1)
 (setenv "PAGER" "cat")
@@ -27,8 +24,6 @@
 
 (when (fboundp 'tool-bar-mode)
   (tool-bar-mode -1))
-(when (fboundp 'scroll-bar-mode)
-  (scroll-bar-mode 1))  ; I think I like them.
 
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
