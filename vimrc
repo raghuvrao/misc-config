@@ -29,7 +29,6 @@ set autoindent
 if has("smartindent") | set nosmartindent | endif
 
 if has("cmdline_info") | set ruler showcmd | endif
-if has("eval") | let g:loaded_matchparen = 1 | endif
 if has("folding") | set foldmethod=indent foldlevel=100 | endif
 if has("extra_search") | set hlsearch noincsearch | endif
 
