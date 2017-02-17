@@ -37,8 +37,10 @@
       (set-face-foreground 'default "#000000" f)
       (set-face-background 'isearch "#EECCEE" f)
       (set-face-foreground 'isearch nil f)
-      (set-face-background 'show-paren-match "#99EE99" f)
-      (set-face-background 'region "#FFEEBB" f))))
+      (set-face-background 'region "#FFEEBB" f)
+      (set-face-foreground 'region nil f)
+      (set-face-background 'show-paren-match "#AAEEEE" f)
+      (set-face-foreground 'show-paren-match nil f))))
 (add-hook 'after-make-frame-functions 'my-frame-misc-stuff-hook t)
 (add-hook 'after-init-hook 'my-frame-misc-stuff-hook t)
 
