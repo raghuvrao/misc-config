@@ -1,32 +1,30 @@
-(when (>= emacs-major-version 24)
-  (require 'package)
-  (setq package-archives
-	'(("gnu" . "https://elpa.gnu.org/packages/")
-	  ("melpa-stable" . "https://stable.melpa.org/packages/")
-	  ("melpa" . "https://melpa.org/packages/")))
-  (setq package-archive-priorities
-	'(("gnu" . 90)
-	  ("melpa-stable" . 70)
-	  ("melpa" . 50)))
-  (setq package-enable-at-startup nil)
-  (package-initialize))
+(require 'package)
+(setq package-archives
+      '(("gnu" . "https://elpa.gnu.org/packages/")
+	("melpa-stable" . "https://stable.melpa.org/packages/")
+	("melpa" . "https://melpa.org/packages/"))
+      package-archive-priorities
+      '(("gnu" . 90)
+	("melpa-stable" . 70)
+	("melpa" . 50))
+      package-enable-at-startup nil)
+(package-initialize)
 
 (global-font-lock-mode -1)
 (column-number-mode 1)
-(show-paren-mode 1)
 (setenv "PAGER" "cat")
 (setq inhibit-startup-screen t
       make-backup-files nil
       frame-background-mode 'light
       transient-mark-mode t
-      auto-save-default t
-      scroll-step 1)
+      uniquify-buffer-name-style 'forward
+      scroll-step 1
+      blink-matching-paren 1
+      show-paren-delay 0)
+(show-paren-mode 1)
 
 (when (fboundp 'tool-bar-mode)
   (tool-bar-mode -1))
-
-(require 'uniquify)
-(setq uniquify-buffer-name-style 'forward)
 
 (defun my-frame-misc-stuff-hook (&rest frame)
   (when (display-graphic-p)
@@ -35,8 +33,11 @@
     (let ((f (if (car frame)
 		 (car frame)
 	       (selected-frame))))
+      (set-face-background 'default "#FFFFFF" f)
+      (set-face-foreground 'default "#333333" f)
       (set-face-background 'isearch "#EECCEE" f)
       (set-face-foreground 'isearch nil f)
+      (set-face-background 'show-paren-match "#99EE99" f)
       (set-face-background 'region "#FFEEBB" f))))
 (add-hook 'after-make-frame-functions 'my-frame-misc-stuff-hook t)
 (add-hook 'after-init-hook 'my-frame-misc-stuff-hook t)
