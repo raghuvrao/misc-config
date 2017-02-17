@@ -34,7 +34,7 @@
 		 (car frame)
 	       (selected-frame))))
       (set-face-background 'default "#FFFFFF" f)
-      (set-face-foreground 'default "#333333" f)
+      (set-face-foreground 'default "#000000" f)
       (set-face-background 'isearch "#EECCEE" f)
       (set-face-foreground 'isearch nil f)
       (set-face-background 'show-paren-match "#99EE99" f)
