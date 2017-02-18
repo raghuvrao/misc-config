@@ -1,26 +1,9 @@
 (require 'package)
-(setq package-archives
-      '(("gnu" . "https://elpa.gnu.org/packages/")
-	("melpa-stable" . "https://stable.melpa.org/packages/")
-	("melpa" . "https://melpa.org/packages/"))
-      package-archive-priorities
-      '(("gnu" . 90)
-	("melpa-stable" . 70)
-	("melpa" . 50))
-      package-enable-at-startup nil)
 (package-initialize)
 
 (global-font-lock-mode -1)
 (column-number-mode 1)
 (setenv "PAGER" "cat")
-(setq inhibit-startup-screen t
-      make-backup-files nil
-      frame-background-mode 'light
-      transient-mark-mode t
-      uniquify-buffer-name-style 'forward
-      scroll-step 1
-      blink-matching-paren 1
-      show-paren-delay 0)
 (show-paren-mode 1)
 
 (when (fboundp 'tool-bar-mode)
@@ -28,19 +11,8 @@
 
 (defun my-frame-misc-stuff-hook (&rest frame)
   (when (display-graphic-p)
-    (setq frame-title-format (concat "%b - " (system-name)))
-    (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-10"))
-    (let ((f (if (car frame)
-		 (car frame)
-	       (selected-frame))))
-      (set-face-background 'default "#FFFFFF" f)
-      (set-face-foreground 'default "#000000" f)
-      (set-face-background 'isearch "#EECCEE" f)
-      (set-face-foreground 'isearch nil f)
-      (set-face-background 'region "#FFEEBB" f)
-      (set-face-foreground 'region nil f)
-      (set-face-background 'show-paren-match "#AAEEEE" f)
-      (set-face-foreground 'show-paren-match nil f))))
+    (global-hl-line-mode 1)
+    (setq frame-title-format (concat "%b - " (system-name)))))
 (add-hook 'after-make-frame-functions 'my-frame-misc-stuff-hook t)
 (add-hook 'after-init-hook 'my-frame-misc-stuff-hook t)
 
@@ -56,10 +28,28 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(frame-background-mode (quote light))
+ '(inhibit-startup-screen t)
+ '(make-backup-files nil)
+ '(package-archive-priorities (quote (("gnu" . 90) ("melpa-stable" . 70) ("melpa" . 50))))
+ '(package-archives
+   (quote
+    (("gnu" . "https://elpa.gnu.org/packages/")
+     ("melpa-stable" . "https://stable.melpa.org/packages/")
+     ("melpa" . "https://melpa.org/packages/"))))
+ '(package-enable-at-startup nil)
+ '(scroll-conservatively 101)
+ '(show-paren-delay 0)
+ '(show-trailing-whitespace nil)
+ '(transient-mark-mode t)
+ '(uniquify-buffer-name-style (quote forward) nil (uniquify)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((((type x)) (:background "white" :foreground "black" :height 98 :family "DejaVu Sans Mono"))))
+ '(hl-line ((((type x)) (:background "lemon chiffon"))))
+ '(isearch ((((type x)) (:background "pink"))))
+ '(region ((((type x)) (:background "moccasin"))))
+ '(show-paren-match ((((type x)) (:background "pale turquoise" :underline t)))))
