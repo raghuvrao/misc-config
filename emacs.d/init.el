@@ -30,6 +30,7 @@
  ;; If there is more than one, they won't work right.
  '(frame-background-mode (quote light))
  '(inhibit-startup-screen t)
+ '(initial-scratch-message nil)
  '(make-backup-files nil)
  '(package-archive-priorities (quote (("gnu" . 90) ("melpa-stable" . 70) ("melpa" . 50))))
  '(package-archives
