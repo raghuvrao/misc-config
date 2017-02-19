@@ -48,7 +48,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((((type x)) (:background "white" :foreground "black" :height 98 :family "DejaVu Sans Mono"))))
+ '(default ((((type x)) (:background "white" :foreground "grey20" :height 98 :family "DejaVu Sans Mono"))))
+ '(fringe ((((type x)) (:background "grey95" :foreground "grey"))))
  '(hl-line ((((type x)) (:background "lemon chiffon"))))
  '(isearch ((((type x)) (:background "pink"))))
  '(region ((((type x)) (:background "moccasin"))))
