@@ -65,7 +65,7 @@
  '(package-enable-at-startup nil)
  '(package-selected-packages
    (quote
-    (go-autocomplete go-mode go-rename go-guru go-errcheck go-eldoc auto-complete)))
+    (auto-complete go-mode go-autocomplete go-eldoc go-errcheck go-guru go-rename)))
  '(scroll-conservatively 101)
  '(show-paren-delay 0)
  '(show-trailing-whitespace nil)
