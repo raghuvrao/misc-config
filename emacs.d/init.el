@@ -56,10 +56,7 @@ If the buffer does not already exist, create it and then switch to it."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((((type x)) (:background "white" :foreground "black" :height 98 :family "DejaVu Sans Mono"))))
- '(fringe ((((type x)) (:background "grey95" :foreground "grey"))))
+ '(default ((((type x)) (:height 100))))
  '(isearch ((((type x)) (:background "pink"))))
- '(mode-line ((((type x)) (:background "grey75" :foreground "black" :box (:line-width 1 :style released-button))) (t (:inverse-video t))))
- '(mode-line-inactive ((t (:inherit mode-line :background "grey90" :foreground "grey45" :box (:line-width 1 :color "grey75") :weight light))))
  '(region ((((type x)) (:background "moccasin"))))
  '(show-paren-match ((((type x)) (:background "pale turquoise" :underline t)))))
