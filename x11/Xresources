@@ -1,3 +1,5 @@
+xterm*termName: xterm-256color
+uxterm*termName: xterm-256color
 xterm*vt100.font: -misc-fixed-medium-r-normal--13-120-75-75-c-80-iso10646-1
 uxterm*vt100.font: -misc-fixed-medium-r-normal--13-120-75-75-c-80-iso10646-1
 xterm*loginShell: true
@@ -18,8 +20,6 @@ uxterm*vt100.eightBitInput: false
 !uxterm*vt100.colorBDMode: true
 !xterm*vt100.allowBoldFonts: false
 !uxterm*vt100.allowBoldFonts: false
-!xterm*termName: xterm-256color
-!uxterm*termName: xterm-256color
 !xterm*vt100.metaSendsEscape: true
 !uxterm*vt100.metaSendsEscape: true
 !xterm*vt100.eightBitControl: false
