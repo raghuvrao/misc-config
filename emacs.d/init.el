@@ -30,11 +30,12 @@
 				 (set (make-local-variable 'compile-command)
 				      "go build && go vet")))))
 
-(defun my-frame-misc-stuff-hook (&rest frame)
+(defun raghu-frame-hook (&rest frame)
+  "A few things to run each time a new frame is created."
   (when (display-graphic-p)
     (setq frame-title-format (concat "%b - " (system-name)))))
-(add-hook 'after-make-frame-functions 'my-frame-misc-stuff-hook t)
-(add-hook 'after-init-hook 'my-frame-misc-stuff-hook t)
+(add-hook 'after-make-frame-functions 'raghu-frame-hook t)
+(add-hook 'after-init-hook 'raghu-frame-hook t)
 
 (require 'windmove)
 (windmove-default-keybindings)
