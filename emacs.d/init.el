@@ -59,5 +59,5 @@ If the buffer does not already exist, create it and then switch to it."
  ;; If there is more than one, they won't work right.
  '(default ((((type x)) (:height 100))))
  '(isearch ((((type x)) (:background "pink"))))
- '(region ((((type x)) (:background "moccasin"))))
+ '(region ((((type x)) (:background "khaki"))))
  '(show-paren-match ((((type x)) (:background "pale turquoise" :underline t)))))
