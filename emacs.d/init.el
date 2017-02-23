@@ -2,19 +2,13 @@
 (package-initialize)
 
 (global-font-lock-mode -1)
+(global-hl-line-mode 1)
 (column-number-mode 1)
 (setenv "PAGER" "cat")
 (show-paren-mode 1)
 
 (when (fboundp 'tool-bar-mode)
   (tool-bar-mode -1))
-
-(defun raghu-frame-hook (&rest frame)
-  "A few things to run each time a new frame is created."
-  (when (display-graphic-p)
-    (setq frame-title-format (concat "%b - " (system-name)))))
-(add-hook 'after-make-frame-functions 'raghu-frame-hook t)
-(add-hook 'after-init-hook 'raghu-frame-hook t)
 
 (require 'windmove)
 (windmove-default-keybindings)
@@ -26,16 +20,23 @@
 (defun raghu-get-temporary-buffer ()
   "Switch to the buffer named \"*raghu-temporary*\".
 
-If the buffer does not already exist, create it and then switch to it."
+If the buffer does not already exist, create it and then switch
+to it.  I use this buffer as a hold area for text I do not plan
+on saving."
   (interactive)
   (switch-to-buffer (get-buffer-create "*raghu-temporary*")))
 (global-set-key (kbd "C-c r t") 'raghu-get-temporary-buffer)
+
+;; Unbind C-x C-c so I do not accidentally kill emacs.  I will instead
+;; use `M-x kill-emacs` or similar.
+(define-key global-map (kbd "C-x C-c") nil)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(debug-on-error t)
  '(frame-background-mode (quote light))
  '(inhibit-startup-screen t)
  '(initial-scratch-message nil)
@@ -57,7 +58,7 @@ If the buffer does not already exist, create it and then switch to it."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((((type x)) (:height 100))))
- '(isearch ((((type x)) (:background "pink"))))
- '(region ((((type x)) (:background "khaki"))))
- '(show-paren-match ((((type x)) (:background "pale turquoise" :underline t)))))
+ '(default ((((type x)) (:height 100 :background "white" :foreground "black"))))
+ '(isearch ((((type x)) (:background "yellow2"))))
+ '(region ((((type x)) (:background "sky blue"))))
+ '(show-paren-match ((((type x)) (:background "yellow2" :underline t)))))
