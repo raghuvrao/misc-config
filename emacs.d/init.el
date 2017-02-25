@@ -27,8 +27,9 @@ on saving."
   (switch-to-buffer (get-buffer-create "*raghu-temporary*")))
 (global-set-key (kbd "C-c r t") 'raghu-get-temporary-buffer)
 
-;; Unbind C-x C-c so I do not accidentally kill emacs.  I will instead
-;; use `M-x kill-emacs` or similar.
+;; Unbind `C-x C-c' so I do not accidentally kill emacs.  I will
+;; instead use `M-x s a - t RET' instead.  It runs
+;; save-buffers-kill-terminal, which is bound by default to `C-x C-c'.
 (define-key global-map (kbd "C-x C-c") nil)
 
 (custom-set-variables
@@ -37,7 +38,6 @@ on saving."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(debug-on-error t)
- '(frame-background-mode (quote light))
  '(inhibit-startup-screen t)
  '(initial-scratch-message nil)
  '(make-backup-files nil)
@@ -58,7 +58,6 @@ on saving."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((((type x)) (:height 100 :background "white" :foreground "black"))))
+ '(default ((((type x)) (:height 100))))
  '(isearch ((((type x)) (:background "yellow2"))))
- '(region ((((type x)) (:background "sky blue"))))
- '(show-paren-match ((((type x)) (:background "yellow2" :underline t)))))
+ '(region ((((type x)) (:background "LightGoldenRod2")))))
