@@ -62,6 +62,7 @@ on saving."
  '(ac-auto-start nil)
  '(ac-disable-inline t)
  '(debug-on-error t)
+ '(frame-background-mode (quote light))
  '(inhibit-startup-screen t)
  '(initial-scratch-message nil)
  '(make-backup-files nil)
