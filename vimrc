@@ -56,9 +56,6 @@ if has("autocmd")
 	augroup END
 endif
 
-" Disable automatic syntax highlighting for all files!
-syntax off
-
 " Make vim more secure.  See |trojan-horse|.
 set noexrc
 set secure
