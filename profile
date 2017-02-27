@@ -63,7 +63,7 @@ else
   unset GOPATH
 fi
 
-GOROOT="${HOME}/golang/root"
+GOROOT="/opt/golang/root"
 if [ -d "${GOROOT}" ]; then
   export GOROOT
   if [ -d "${GOROOT}/bin" ]; then
