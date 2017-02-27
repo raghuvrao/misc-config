@@ -1,7 +1,6 @@
 (require 'package)
 (package-initialize)
 
-(global-font-lock-mode -1)
 (global-hl-line-mode 1)
 (column-number-mode 1)
 (setenv "PAGER" "cat")
