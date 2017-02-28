@@ -15,16 +15,6 @@
 (global-set-key (kbd "S-C-<down>") 'shrink-window)
 (global-set-key (kbd "S-C-<up>") 'enlarge-window)
 
-(defun raghu-get-temporary-buffer ()
-  "Switch to the buffer named \"*raghu-temporary*\".
-
-If the buffer does not already exist, create it and then switch
-to it.  I use this buffer as a hold area for text I do not plan
-on saving."
-  (interactive)
-  (switch-to-buffer (get-buffer-create "*raghu-temporary*")))
-(global-set-key (kbd "C-c r t") 'raghu-get-temporary-buffer)
-
 ;; Unbind `C-x C-c' so I do not accidentally kill emacs.  I will
 ;; instead use `M-x s a - t RET' instead.  It runs
 ;; save-buffers-kill-terminal, which is bound by default to `C-x C-c'.
@@ -47,15 +37,12 @@ on saving."
      ("melpa-stable" . "https://stable.melpa.org/packages/")
      ("melpa" . "https://melpa.org/packages/"))))
  '(package-enable-at-startup nil)
- '(scroll-conservatively 101)
+ '(scroll-conservatively most-positive-fixnum)
  '(show-paren-delay 0)
- '(show-trailing-whitespace nil)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((((type x)) (:height 100))))
- '(isearch ((((type x)) (:background "yellow2"))))
- '(region ((((type x)) (:background "LightGoldenRod2")))))
+ '(default ((((type x)) (:height 100)))))
