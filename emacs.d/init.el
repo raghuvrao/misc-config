@@ -5,15 +5,16 @@
 (setenv "PAGER" "cat")
 (show-paren-mode 1)
 
-(when (fboundp 'tool-bar-mode)
+(when (fboundp #'tool-bar-mode)
   (tool-bar-mode -1))
 
 (require 'windmove)
 (windmove-default-keybindings)
-(global-set-key (kbd "S-C-<right>") 'enlarge-window-horizontally)
-(global-set-key (kbd "S-C-<left>") 'shrink-window-horizontally)
-(global-set-key (kbd "S-C-<down>") 'shrink-window)
-(global-set-key (kbd "S-C-<up>") 'enlarge-window)
+
+(global-set-key (kbd "S-C-<right>") #'enlarge-window-horizontally)
+(global-set-key (kbd "S-C-<left>") #'shrink-window-horizontally)
+(global-set-key (kbd "S-C-<down>") #'shrink-window)
+(global-set-key (kbd "S-C-<up>") #'enlarge-window)
 
 ;; Unbind `C-x C-c' so I do not accidentally kill emacs.  I will
 ;; instead use `M-x s a - t RET' instead.  It runs
