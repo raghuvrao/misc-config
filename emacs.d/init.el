@@ -5,11 +5,11 @@
 (setenv "PAGER" "cat")
 (show-paren-mode 1)
 
-(when (fboundp 'tool-bar-mode)
+(when (fboundp #'tool-bar-mode)
   (tool-bar-mode -1))
 
 (require 'auto-complete)
-(define-key ac-mode-map (kbd "C-c TAB") 'auto-complete)
+(define-key ac-mode-map (kbd "C-c TAB") #'auto-complete)
 
 (with-eval-after-load 'go-mode
   (require 'go-guru)
@@ -19,22 +19,23 @@
   (require 'go-autocomplete)
   (setq gofmt-command (or (executable-find "goimports")
 			  (executable-find "gofmt")))
-  (add-hook 'before-save-hook 'gofmt-before-save)
-  (add-hook 'go-mode-hook 'go-eldoc-setup)
-  ;; (add-hook 'go-mode-hook 'go-guru-hl-identifier-mode)
-  (add-hook 'go-mode-hook '(lambda ()
-			     (setq show-trailing-whitespace t)
-			     (auto-complete-mode 1)
-			     (if (not (string-match "^go" compile-command))
-				 (set (make-local-variable 'compile-command)
-				      "go build && go vet")))))
+  (add-hook 'before-save-hook #'gofmt-before-save)
+  (add-hook 'go-mode-hook #'go-eldoc-setup)
+  ;; (add-hook 'go-mode-hook #'go-guru-hl-identifier-mode)
+  (add-hook 'go-mode-hook (lambda ()
+			    (setq show-trailing-whitespace t)
+			    (auto-complete-mode 1)
+			    (if (not (string-match "^go" compile-command))
+				(set (make-local-variable 'compile-command)
+				     "go build && go vet")))))
 
 (require 'windmove)
 (windmove-default-keybindings)
-(global-set-key (kbd "S-C-<right>") 'enlarge-window-horizontally)
-(global-set-key (kbd "S-C-<left>") 'shrink-window-horizontally)
-(global-set-key (kbd "S-C-<down>") 'shrink-window)
-(global-set-key (kbd "S-C-<up>") 'enlarge-window)
+
+(global-set-key (kbd "S-C-<right>") #'enlarge-window-horizontally)
+(global-set-key (kbd "S-C-<left>") #'shrink-window-horizontally)
+(global-set-key (kbd "S-C-<down>") #'shrink-window)
+(global-set-key (kbd "S-C-<up>") #'enlarge-window)
 
 ;; Unbind `C-x C-c' so I do not accidentally kill emacs.  I will
 ;; instead use `M-x s a - t RET' instead.  It runs
