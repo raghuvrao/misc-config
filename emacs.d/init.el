@@ -12,7 +12,7 @@
 (add-hook 'special-mode-hook #'font-lock-mode)
 
 ;; Create a keybinding to enable syntax highlighting when needed.
-(global-set-key (kbd "C-c r f") #'font-lock-mode)
+(define-key global-map (kbd "C-c r f") #'font-lock-mode)
 
 (when (fboundp #'tool-bar-mode)
   (tool-bar-mode -1))
@@ -20,15 +20,18 @@
 (require 'windmove)
 (windmove-default-keybindings)
 
-(global-set-key (kbd "S-C-<right>") #'enlarge-window-horizontally)
-(global-set-key (kbd "S-C-<left>") #'shrink-window-horizontally)
-(global-set-key (kbd "S-C-<down>") #'shrink-window)
-(global-set-key (kbd "S-C-<up>") #'enlarge-window)
+(define-key global-map (kbd "S-C-<right>") #'enlarge-window-horizontally)
+(define-key global-map (kbd "S-C-<left>") #'shrink-window-horizontally)
+(define-key global-map (kbd "S-C-<down>") #'shrink-window)
+(define-key global-map (kbd "S-C-<up>") #'enlarge-window)
 
 ;; Unbind `C-x C-c' so I do not accidentally kill emacs.  I will
 ;; instead use `M-x sa-t RET' instead.  It runs
 ;; save-buffers-kill-terminal, which is bound by default to `C-x C-c'.
 (define-key global-map (kbd "C-x C-c") nil)
+
+;; Use Ibuffer instead of list-buffer.
+(define-key global-map (kbd "C-x C-b") #'ibuffer)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -55,5 +58,5 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((((type x pm w32 ns)) (:height 90 :family "DejaVu Sans Mono"))))
+ '(default ((((type x pm w32 ns) (background light)) (:height 90 :background "white" :foreground "gray20" :family "DejaVu Sans Mono"))))
  '(region ((((type x pm w32 ns) (background light)) (:background "LightGoldenRod2")))))
