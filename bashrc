@@ -33,13 +33,13 @@ unset -v PROMPT_COMMAND
 s='\033]0;%s:%s\007'
 h="${HOSTNAME%%.*}"
 case "${TERM}" in
-  xterm*)
-    PROMPT_COMMAND="printf '${s}' '${h}'"' "${PWD/#${HOME}/\~}"'
-    ;;
-  screen*)
-    s+='\033k%s:%s\033\134'
-    PROMPT_COMMAND="printf '${s}' '${h}'"' "${PWD/#${HOME}/\~}"'" '${h}'"' "${PWD/#${HOME}/\~}"'
-    ;;
+xterm*)
+  PROMPT_COMMAND="printf '${s}' '${h}'"' "${PWD/#${HOME}/\~}"'
+  ;;
+screen*)
+  s+='\033k%s:%s\033\134'
+  PROMPT_COMMAND="printf '${s}' '${h}'"' "${PWD/#${HOME}/\~}"'" '${h}'"' "${PWD/#${HOME}/\~}"'
+  ;;
 esac
 unset -v h s
 
