@@ -8,8 +8,16 @@
 
 ;; Enable syntax highlighting only in some places.
 (global-font-lock-mode -1)
-(add-hook 'diff-mode-hook #'font-lock-mode)
-(add-hook 'special-mode-hook #'font-lock-mode)
+(defun raghu--enable-font-lock-mode-in-buffer ()
+  "Enable font-lock mode in the current buffer.
+
+I add this function to various mode hooks."
+  (interactive)
+  (font-lock-mode 1))
+(add-hook 'diff-mode-hook #'raghu--enable-font-lock-mode-in-buffer)
+(add-hook 'special-mode-hook #'raghu--enable-font-lock-mode-in-buffer)
+(add-hook 'shell-mode-hook #'raghu--enable-font-lock-mode-in-buffer)
+(add-hook 'eshell-mode-hook #'raghu--enable-font-lock-mode-in-buffer)
 
 ;; Create a keybinding to enable syntax highlighting when needed.
 (define-key global-map (kbd "C-c r f") #'font-lock-mode)
