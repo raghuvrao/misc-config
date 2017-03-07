@@ -4,19 +4,18 @@
 # Slightly modified version of pathmunge from Red Hat's /etc/profile.
 pathmunge() {
   case ":${PATH}:" in
-    *:"${1}":*)
-      ;;
-    *)
-      if [ -z "${PATH}" ]; then  # Avoid leading/trailing colon
-        PATH="${1}"
+  *:"${1}":*) ;;
+  *)
+    if [ -z "${PATH}" ]; then  # Avoid leading/trailing colon
+      PATH="${1}"
+    else
+      if [ "${2}" = "after" ]; then
+        PATH="${PATH}:${1}"
       else
-        if [ "${2}" = "after" ]; then
-          PATH="${PATH}:${1}"
-        else
-          PATH="${1}:${PATH}"
-        fi
+        PATH="${1}:${PATH}"
       fi
-      ;;
+    fi
+    ;;
   esac
 }
 
