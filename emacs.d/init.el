@@ -51,6 +51,10 @@
      ("melpa" . "https://melpa.org/packages/"))))
  '(package-enable-at-startup nil)
  '(scroll-conservatively most-positive-fixnum)
+ '(sh-basic-offset 2)
+ '(sh-indent-for-case-alt (quote +))
+ '(sh-indent-for-case-label 0)
+ '(sh-indentation 2)
  '(show-paren-delay 0)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify)))
 (custom-set-faces
