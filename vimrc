@@ -35,25 +35,19 @@ if has("extra_search") | set hlsearch noincsearch | endif
 set list
 set listchars=tab:>\ ,trail:#,extends:>,precedes:<,nbsp:_
 if has("multi_byte")
-	set encoding=utf-8
-	set listchars=tab:·\ ,trail:█,extends:>,precedes:<,nbsp:░
+  set encoding=utf-8
+  set listchars=tab:·\ ,trail:█,extends:>,precedes:<,nbsp:░
 endif
 
 set textwidth=78
 if has("autocmd")
-	filetype plugin indent on
-	augroup raghu_augroup
-		au!
-		au BufWinEnter,BufRead,BufNewFile * setlocal formatoptions=qnm1
-
-		au BufWinEnter,BufRead,BufNewFile *.go if has("smartindent") | setlocal smartindent | endif
-		au BufWinEnter,BufRead,BufNewFile *.go setlocal filetype=go textwidth=0
-		au BufWinEnter,BufRead,BufNewFile *.go setlocal list listchars=tab:\ \ ,trail:#,extends:>,precedes:<,nbsp:_
-		au BufWinEnter,BufRead,BufNewFile *.go if has("multi_byte") | set listchars=tab:\ \ ,trail:█,extends:>,precedes:<,nbsp:░ | endif
-
-		au FileType sh setlocal expandtab softtabstop=2 shiftwidth=2
-		au FileType *.sh,*.bash setlocal expandtab softtabstop=2 shiftwidth=2
-	augroup END
+  filetype plugin indent on
+  augroup raghu_augroup
+    au!
+    au BufWinEnter,BufRead,BufNewFile * setlocal formatoptions=qnm1
+    au FileType sh,vim setlocal expandtab softtabstop=2 shiftwidth=2
+    au FileType *.sh,*.bash,*.vim setlocal expandtab softtabstop=2 shiftwidth=2
+  augroup END
 endif
 
 " Disable automatic syntax highlighting in all files!
