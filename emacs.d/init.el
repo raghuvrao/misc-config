@@ -71,4 +71,5 @@ I add this function to various mode hooks."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((((type x pm w32 ns) (background light)) (:height 90 :background "white" :foreground "gray20" :family "DejaVu Sans Mono"))))
+ '(isearch ((((type x pm w32 ns) (background light)) (:background "LightSalmon" :foreground "black"))))
  '(region ((((type x pm w32 ns) (background light)) (:background "LightGoldenRod2")))))
