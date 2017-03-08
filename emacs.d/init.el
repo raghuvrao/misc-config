@@ -26,7 +26,7 @@ I add this function to various mode hooks."
   (tool-bar-mode -1))
 
 (require 'auto-complete)
-(define-key ac-mode-map (kbd "C-c TAB") #'auto-complete)
+(define-key ac-mode-map (kbd "<backtab>") #'auto-complete)
 
 (with-eval-after-load 'go-mode
   (require 'go-guru)
