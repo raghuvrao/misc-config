@@ -21,6 +21,7 @@ done
 unset -v a
 if ! type -a ll &>/dev/null; then alias ll='ls -l -a'; fi
 if ! type -a acgrep &>/dev/null; then alias acgrep='grep --color=always'; fi
+if ! type -a ec &>/dev/null; then alias ec='emacsclient -c -t'; fi
 
 # Set up a simple shell prompt.
 PS1='\u@\h:\w\$ '
