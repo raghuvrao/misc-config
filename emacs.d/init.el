@@ -14,10 +14,11 @@
 I add this function to various mode hooks."
   (interactive)
   (font-lock-mode 1))
-(add-hook 'diff-mode-hook #'raghu--enable-font-lock-mode-in-buffer)
-(add-hook 'special-mode-hook #'raghu--enable-font-lock-mode-in-buffer)
-(add-hook 'shell-mode-hook #'raghu--enable-font-lock-mode-in-buffer)
 (add-hook 'eshell-mode-hook #'raghu--enable-font-lock-mode-in-buffer)
+(add-hook 'diff-mode-hook #'raghu--enable-font-lock-mode-in-buffer)
+(add-hook 'dired-mode-hook #'raghu--enable-font-lock-mode-in-buffer)
+(add-hook 'shell-mode-hook #'raghu--enable-font-lock-mode-in-buffer)
+(add-hook 'special-mode-hook #'raghu--enable-font-lock-mode-in-buffer)
 (add-hook 'inferior-python-mode-hook #'raghu--enable-font-lock-mode-in-buffer)
 
 ;; Create a keybinding to enable syntax highlighting when needed.
