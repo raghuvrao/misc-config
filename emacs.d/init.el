@@ -1,50 +1,127 @@
 (require 'package)
 (package-initialize)
 
+;; Override yes-or-no-p's definition by making yes-or-no-p an alias
+;; for y-or-n-p.  This way, when yes-or-no-p is called, y-or-n-p will
+;; actually be called, and I can reply with y/SPC or n/DEL instead of
+;; `yes RET' or `no RET'.
+(defalias 'yes-or-no-p #'y-or-n-p)
+
+(global-hl-line-mode 1)
 (column-number-mode 1)
 (setenv "PAGER" "cat")
 (show-paren-mode 1)
-(global-hl-line-mode 1)
+(when (fboundp #'tool-bar-mode) (tool-bar-mode -1))
 
-;; Enable syntax highlighting only in some places.
+;; Enable syntax higlighting only in some places.  Define a
+;; key-binding to toggle it.
 (global-font-lock-mode -1)
-(defun raghu--enable-font-lock-mode-in-buffer ()
-  "Enable font-lock mode in the current buffer.
+(defun raghu/font-lock-mode-in-buffer ()
+  "Enable font-lock-mode (syntax highlighting etc.) in current buffer.
 
-I add this function to various mode hooks."
+Does nothing more than calling (font-lock-mode 1).  Meant for
+adding to the few mode hooks in whose modes I want syntax
+highlighting enabled, so as to avoid repeating the corresponding
+lambda form over and over."
   (interactive)
   (font-lock-mode 1))
-(add-hook 'eshell-mode-hook #'raghu--enable-font-lock-mode-in-buffer)
-(add-hook 'diff-mode-hook #'raghu--enable-font-lock-mode-in-buffer)
-(add-hook 'dired-mode-hook #'raghu--enable-font-lock-mode-in-buffer)
-(add-hook 'shell-mode-hook #'raghu--enable-font-lock-mode-in-buffer)
-(add-hook 'special-mode-hook #'raghu--enable-font-lock-mode-in-buffer)
-(add-hook 'inferior-python-mode-hook #'raghu--enable-font-lock-mode-in-buffer)
+(add-hook 'diff-mode-hook #'raghu/font-lock-mode-in-buffer)
+(add-hook 'dired-mode-hook #'raghu/font-lock-mode-in-buffer)
+(add-hook 'eshell-mode-hook #'raghu/font-lock-mode-in-buffer)
+(add-hook 'inferior-python-mode-hook #'raghu/font-lock-mode-in-buffer)
+(add-hook 'shell-mode-hook #'raghu/font-lock-mode-in-buffer)
+(add-hook 'special-mode-hook #'raghu/font-lock-mode-in-buffer)
+(define-key global-map (kbd "C-c p") #'font-lock-mode) ; Toggles font-lock-mode.
 
-;; Create a keybinding to enable syntax highlighting when needed.
-(define-key global-map (kbd "C-c p") #'font-lock-mode)
-
-(when (fboundp #'tool-bar-mode)
-  (tool-bar-mode -1))
-
+;; Make emacs-windows navigation easier.
 (require 'windmove)
-(define-key global-map (kbd "C-<right>") #'windmove-right)
-(define-key global-map (kbd "C-<left>") #'windmove-left)
-(define-key global-map (kbd "C-<down>") #'windmove-down)
 (define-key global-map (kbd "C-<up>") #'windmove-up)
+(define-key global-map (kbd "C-<down>") #'windmove-down)
+(define-key global-map (kbd "C-<left>") #'windmove-left)
+(define-key global-map (kbd "C-<right>") #'windmove-right)
 
-(define-key global-map (kbd "M-C-<right>") #'enlarge-window-horizontally)
-(define-key global-map (kbd "M-C-<left>") #'shrink-window-horizontally)
-(define-key global-map (kbd "M-C-<down>") #'shrink-window)
-(define-key global-map (kbd "M-C-<up>") #'enlarge-window)
+;; A few line-killing key-bindings.  Slightly easier than `C-a C-k
+;; C-k' and/or `M-0 C-k'.
+(define-key global-map (kbd "C-c k")
+  (lambda ()
+    "Kill backward from point to beginning of the line."
+    (interactive)
+    (kill-line 0)))
+(define-key global-map (kbd "C-c K")
+  (lambda ()
+    "Kill the whole line."
+    (interactive)
+    (kill-whole-line)))
 
-;; Unbind `C-x C-c' so I do not accidentally kill emacs.  I will
-;; instead use `M-x sa-t RET' instead.  It runs
-;; save-buffers-kill-terminal, which is bound by default to `C-x C-c'.
+;; Make resizing windows a little easier.  The ESC <arrow> forms help
+;; when running emacs in tmux.
+(define-key global-map (kbd "M-<up>") #'enlarge-window)
+(define-key global-map (kbd "ESC <up>") #'enlarge-window)
+(define-key global-map (kbd "M-<down>") #'shrink-window)
+(define-key global-map (kbd "ESC <down>") #'shrink-window)
+(define-key global-map (kbd "M-<left>") #'shrink-window-horizontally)
+(define-key global-map (kbd "ESC <left>") #'shrink-window-horizontally)
+(define-key global-map (kbd "M-<right>") #'enlarge-window-horizontally)
+(define-key global-map (kbd "ESC <right>") #'enlarge-window-horizontally)
+
+(defun raghu/insert-new-line-above (&optional lines)
+  "Insert LINES (default=1) new lines above current line.
+
+As new lines are inserted, point's position will remain constant
+relative to the line on which point was located originally."
+  (interactive "p")
+  (when (> lines 0)
+    (save-excursion
+      (beginning-of-line 1)
+      (open-line lines))
+    ;; save-excursion does not work (works differently?) when column
+    ;; is 0?
+    (when (= (current-column) 0)
+      (forward-line lines))))
+(define-key global-map (kbd "C-c RET") #'raghu/insert-new-line-above)
+
+(defun raghu/insert-and-go-to-new-line-above (&optional lines)
+  "Insert LINES (default=1) new lines above current line.
+
+The point is moved to the top-most line inserted."
+  (interactive "p")
+  (when (> lines 0)
+    (beginning-of-line 1)
+    (open-line lines)))
+(define-key global-map (kbd "C-c O") #'raghu/insert-and-go-to-new-line-above)
+
+(defun raghu/insert-and-go-to-new-line-below (&optional lines)
+  "Insert LINES (default=1) new lines below current line.
+
+Point moves to the newly-inserted line immediately below the line
+on which point originally was."
+  (interactive "p")
+  (when (> lines 0)
+    ;; Insert LINES-1 lines first without any post-insert formatting
+    ;; (third arg to newline = nil => do not do any post-insert
+    ;; formatting), while saving original point state
+    ;; (save-excursion).
+    (save-excursion
+      (end-of-line 1)
+      (newline (- lines 1) nil)))
+  ;; That we did a save-excursion, point will still be at the original
+  ;; position.  So, move to the end of that line and do the equivalent
+  ;; of a RET (3rd arg to newline = non-nil => do post-insert
+  ;; formatting).  This way, any indenting / formatting happens only
+  ;; on the line immediately below the original line.
+  (end-of-line 1)
+  (newline 1 t))
+(define-key global-map (kbd "C-c o") #'raghu/insert-and-go-to-new-line-below)
+
+;; I accidentally do `C-x C-c' a lot (when I meant to do `C-x' or
+;; `C-c'), so I will remove its binding.  To terminate emacs, I will
+;; use `M-x sa-t' (which runs save-buffers-kill-terminal, bound to
+;; `C-x C-c' by default) or `C-x #' or `C-x 5 0' or `M-x kill-emacs'
+;; as appropriate.
 (define-key global-map (kbd "C-x C-c") nil)
 
-;; Use Ibuffer instead of list-buffer.
-(define-key global-map (kbd "C-x C-b") #'ibuffer)
+;; Use Ibuffer instead of list-buffers.
+(define-key global-map (kbd "C-x C-b") 'ibuffer)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
