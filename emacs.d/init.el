@@ -156,5 +156,5 @@ on which point originally was."
  ;; If there is more than one, they won't work right.
  '(default ((((type x) (class color) (background light)) (:background "white" :foreground "gray20" :height 90 :family "DejaVu Sans Mono"))))
  '(hl-line ((((type x) (class color) (background light)) (:background "DarkSeaGreen1"))))
- '(isearch ((((type x) (class color) (background light)) (:background "yellow"))))
+ '(isearch ((((type x) (class color) (background light)) (:background "orchid1" :foreground "black"))))
  '(region ((((type x) (class color) (background light)) (:background "LightGoldenrod2")))))
