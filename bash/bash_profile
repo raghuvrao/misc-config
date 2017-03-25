@@ -30,8 +30,7 @@ pathmunge() {
 # In order that these variables be available to child processes, it is
 # necessary to export them.
 
-export VISUAL='emacsclient -c -t'
-export ALTERNATE_EDITOR='emacs'
+export VISUAL='vim'
 export EDITOR="${VISUAL}"
 export FCEDIT="${VISUAL}"
 export SVN_EDITOR="${VISUAL}"
