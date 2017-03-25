@@ -154,6 +154,7 @@ on which point originally was."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((((type x) (class color) (background light)) (:background "white" :foreground "gray20" :height 90 :family "DejaVu Sans Mono"))))
- '(hl-line ((((type x) (class color) (background light)) (:background "darkseagreen1"))))
+ '(hl-line ((((type x) (class color) (background light)) (:background "lemonchiffon"))))
  '(isearch ((((type x) (class color) (background light)) (:background "yellow"))))
- '(region ((((type x) (class color) (background light)) (:background "lightgoldenrod2")))))
+ '(region ((((type x) (class color) (background light)) (:background "lightgoldenrod2"))))
+ '(show-paren-match ((((type x) (class color) (background light)) (:background "pale turquoise")))))
