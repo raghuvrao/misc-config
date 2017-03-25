@@ -140,6 +140,7 @@ on which point originally was."
      ("melpa-stable" . "https://stable.melpa.org/packages/")
      ("melpa" . "https://melpa.org/packages/"))))
  '(package-enable-at-startup nil)
+ '(ring-bell-function (quote ignore))
  '(scroll-conservatively most-positive-fixnum)
  '(sh-basic-offset 2)
  '(sh-indent-for-case-alt (quote +))
@@ -152,4 +153,7 @@ on which point originally was."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((((type x) (class color) (background light)) (:background "white" :foreground "gray20" :height 90 :family "DejaVu Sans Mono"))))
+ '(hl-line ((((type x) (class color) (background light)) (:background "darkseagreen1"))))
+ '(isearch ((((type x) (class color) (background light)) (:background "yellow"))))
+ '(region ((((type x) (class color) (background light)) (:background "lightgoldenrod2")))))
