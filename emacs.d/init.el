@@ -31,6 +31,7 @@ lambda form over and over."
 (add-hook 'inferior-python-mode-hook #'raghu/font-lock-mode-in-buffer)
 (add-hook 'shell-mode-hook #'raghu/font-lock-mode-in-buffer)
 (add-hook 'special-mode-hook #'raghu/font-lock-mode-in-buffer)
+(add-hook 'compilation-mode-hook #'raghu/font-lock-mode-in-buffer)
 (define-key global-map (kbd "C-c p") #'font-lock-mode) ; Toggles font-lock-mode.
 
 ;; Make emacs-windows navigation easier.
