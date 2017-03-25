@@ -25,13 +25,13 @@ highlighting enabled, so as to avoid repeating the corresponding
 lambda form over and over."
   (interactive)
   (font-lock-mode 1))
+(add-hook 'compilation-mode-hook #'raghu/font-lock-mode-in-buffer)
 (add-hook 'diff-mode-hook #'raghu/font-lock-mode-in-buffer)
 (add-hook 'dired-mode-hook #'raghu/font-lock-mode-in-buffer)
 (add-hook 'eshell-mode-hook #'raghu/font-lock-mode-in-buffer)
 (add-hook 'inferior-python-mode-hook #'raghu/font-lock-mode-in-buffer)
 (add-hook 'shell-mode-hook #'raghu/font-lock-mode-in-buffer)
 (add-hook 'special-mode-hook #'raghu/font-lock-mode-in-buffer)
-(add-hook 'compilation-mode-hook #'raghu/font-lock-mode-in-buffer)
 (define-key global-map (kbd "C-c p") #'font-lock-mode) ; Toggles font-lock-mode.
 
 ;; Make emacs-windows navigation easier.
@@ -155,7 +155,6 @@ on which point originally was."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((((type x) (class color) (background light)) (:background "white" :foreground "gray20" :height 90 :family "DejaVu Sans Mono"))))
- '(hl-line ((((type x) (class color) (background light)) (:background "lemonchiffon"))))
+ '(hl-line ((((type x) (class color) (background light)) (:background "DarkSeaGreen1"))))
  '(isearch ((((type x) (class color) (background light)) (:background "yellow"))))
- '(region ((((type x) (class color) (background light)) (:background "lightgoldenrod2"))))
- '(show-paren-match ((((type x) (class color) (background light)) (:background "pale turquoise")))))
+ '(region ((((type x) (class color) (background light)) (:background "LightGoldenrod2")))))
