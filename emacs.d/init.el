@@ -48,11 +48,7 @@ lambda form over and over."
     "Kill backward from point to beginning of the line."
     (interactive)
     (kill-line 0)))
-(define-key global-map (kbd "C-c K")
-  (lambda ()
-    "Kill the whole line."
-    (interactive)
-    (kill-whole-line)))
+(define-key global-map (kbd "C-c K") #'kill-whole-line)
 
 ;; Make resizing windows a little easier.  The ESC <arrow> forms help
 ;; when running emacs in tmux.
