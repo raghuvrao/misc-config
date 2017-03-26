@@ -71,8 +71,7 @@ relative to the line on which point was located originally."
     (save-excursion
       (beginning-of-line 1)
       (open-line lines))
-    ;; save-excursion does not work (works differently?) when column
-    ;; is 0?
+    ;; save-excursion does works differently when column is 0?
     (when (= (current-column) 0)
       (forward-line lines))))
 (define-key global-map (kbd "C-c RET") #'raghu/insert-new-line-above)
