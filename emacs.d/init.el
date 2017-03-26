@@ -43,11 +43,11 @@ lambda form over and over."
 
 ;; A few line-killing key-bindings.  Slightly easier than `C-a C-k
 ;; C-k' and/or `M-0 C-k'.
-(define-key global-map (kbd "C-c k")
-  (lambda ()
-    "Kill backward from point to beginning of the line."
-    (interactive)
-    (kill-line 0)))
+(defun raghu/kill-to-beginning-of-line ()
+  "Kill backward, from point to the beginning of the line."
+  (interactive)
+  (kill-line 0))
+(define-key global-map (kbd "C-c k") #'raghu/kill-to-beginning-of-line)
 (define-key global-map (kbd "C-c K") #'kill-whole-line)
 
 ;; Make resizing windows a little easier.  The ESC <arrow> forms help
