@@ -152,4 +152,4 @@ on which point originally was."
  '(default ((((type x) (class color) (background light)) (:background "white" :foreground "gray20" :height 90 :family "DejaVu Sans Mono"))))
  '(hl-line ((((type x) (class color) (background light)) (:background "DarkSeaGreen1"))))
  '(isearch ((((type x) (class color) (background light)) (:background "orchid1" :foreground "black"))))
- '(region ((((type x) (class color) (background light)) (:background "khaki1")))))
+ '(region ((((type x) (class color) (background light)) (:background "NavajoWhite1")))))
