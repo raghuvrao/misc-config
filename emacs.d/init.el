@@ -7,7 +7,13 @@
 ;; `yes RET' or `no RET'.
 (defalias 'yes-or-no-p #'y-or-n-p)
 
-(global-hl-line-mode 1)
+;; Highlighting the current line is mostly useful in programs.  So,
+;; keep it disabled by default, enable it only for programs, and make
+;; a key-binding to toggle it.
+(global-hl-line-mode -1)
+(add-hook 'prog-mode-hook (lambda () (hl-line-mode 1)))
+(define-key global-map (kbd "C-c H") #'hl-line-mode)
+
 (column-number-mode 1)
 (setenv "PAGER" "cat")
 (show-paren-mode 1)
