@@ -93,31 +93,42 @@ lambda form over and over."
 (define-key global-map (kbd "C-c M-k") #'raghu/kill-to-beginning-of-line)
 
 (defun raghu/kill-backward-to-indentation (&optional arg)
-  "Kill backward from point to first nonblank character ARG lines away.
+  "Kill backward from point to first nonblank character ARG lines up.
 
-If no argument is supplied, work only on current line.  In other
-words, not supplying ARG is equivalent to supplying 0 for ARG.
-When ARG is negative, no action is performed."
-  ;; In the following, I use back-to-indentation when arg is nil and
-  ;; backward-to-indentation when arg is a positive integer, instead
-  ;; of using backward-to-indentation in both cases.  The reason is
-  ;; because when arg is nil (which, in this function, I would like to
-  ;; treat the same as arg being 0), backward-to-indentation calls
-  ;; (forward-line 0), which has the side-effect of relocating point
-  ;; to column 0.  In some places (e.g. in the minibuffer), point
-  ;; moving to column 0 will cause problems in kill-region, which I
-  ;; call here subsequently.
+If ARG is a positive integer, then kill backward from point to
+first nonblank character ARG lines above.
+
+If ARG is 0, then kill backward from point to first nonblank
+character on the same line.
+
+If ARG is nil or not supplied, perform the same action as when
+ARG is 0.
+
+If ARG is none of the above, perform no action."
   (interactive "P")
   (setq prior-point (point))		; No need to mess with mark, I think.
-  (if (integerp arg)
-      (progn
-	(setq lines (prefix-numeric-value arg))
-	(when (>= lines 0)		; Operate either on a positive int...
-	  (backward-to-indentation lines)
-	  (kill-region prior-point (point))))
-    (progn				; ... or on nil.  Nothing else.
-      (back-to-indentation)
-      (kill-region prior-point (point)))))
+  (cond ((integerp arg)
+	 (setq lines (prefix-numeric-value arg))
+	 ;; When arg is >0 (i.e. more than one line), use
+	 ;; backward-to-indentation.  When arg is nil or 0, use
+	 ;; back-to-indentation.  backward-to-indentation, when arg is
+	 ;; 0 or nil, will call (forward-line 0), which has the
+	 ;; side-effect of relocating point to column 0.  We would
+	 ;; like to avoid this side-effect: in places where a subset
+	 ;; of the text is read-only (e.g. minibuffer), this
+	 ;; side-effect will cause problems with kill-region, which I
+	 ;; am calling in this function.  back-to-indentation calls
+	 ;; beginning-of-line, which does not have this side-effect.
+	 ;; Also, back-to-indentation does not take arguments.
+	 (cond ((= lines 0)
+		(back-to-indentation)
+		(kill-region prior-point (point)))
+	       ((> lines 0)
+		(backward-to-indentation lines)
+		(kill-region prior-point (point)))))
+	 ((not arg)
+	  (back-to-indentation)
+	  (kill-region prior-point (point)))))
 (define-key global-map (kbd "C-c k") #'raghu/kill-backward-to-indentation)
 
 (define-key global-map (kbd "C-c K") #'kill-whole-line)
