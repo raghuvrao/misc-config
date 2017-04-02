@@ -113,13 +113,12 @@ If ARG is none of the above, perform no action."
 	 ;; backward-to-indentation.  When arg is nil or 0, use
 	 ;; back-to-indentation.  backward-to-indentation, when arg is
 	 ;; 0 or nil, will call (forward-line 0), which has the
-	 ;; side-effect of relocating point to column 0.  We would
-	 ;; like to avoid this side-effect: in places where a subset
-	 ;; of the text is read-only (e.g. minibuffer), this
-	 ;; side-effect will cause problems with kill-region, which I
-	 ;; am calling in this function.  back-to-indentation calls
-	 ;; beginning-of-line, which does not have this side-effect.
-	 ;; Also, back-to-indentation does not take arguments.
+	 ;; side-effect of relocating point to column 0.  In places
+	 ;; where a subset of the text is read-only (e.g. minibuffer),
+	 ;; this side-effect will cause problems with kill-region.
+	 ;; back-to-indentation calls beginning-of-line, which does
+	 ;; not have this side-effect.  Also, back-to-indentation does
+	 ;; not take arguments.
 	 (cond ((= lines 0)
 		(back-to-indentation)
 		(kill-region prior-point (point)))
