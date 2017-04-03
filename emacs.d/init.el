@@ -39,7 +39,7 @@ form over and over."
 (add-hook 'ibuffer-mode-hook #'raghu/hl-line-mode-in-buffer)
 (add-hook 'prog-mode-hook #'raghu/hl-line-mode-in-buffer)
 (add-hook 'text-mode-hook #'raghu/hl-line-mode-in-buffer)
-(define-key global-map (kbd "C-c H") #'hl-line-mode) ; Toggles hl-line-mode.
+(define-key global-map (kbd "C-c H") #'hl-line-mode)
 
 ;; Enable syntax higlighting only in some places.  Define a
 ;; key-binding to toggle it.
@@ -60,7 +60,7 @@ lambda form over and over."
 (add-hook 'inferior-python-mode-hook #'raghu/font-lock-mode-in-buffer)
 (add-hook 'shell-mode-hook #'raghu/font-lock-mode-in-buffer)
 (add-hook 'special-mode-hook #'raghu/font-lock-mode-in-buffer)
-(define-key global-map (kbd "C-c P") #'font-lock-mode) ; Toggles font-lock-mode.
+(define-key global-map (kbd "C-c P") #'font-lock-mode)
 
 ;; Make emacs-windows navigation easier.
 (require 'windmove)
