@@ -15,10 +15,7 @@
 (defalias 'yes-or-no-p #'y-or-n-p)
 
 (defun raghu/visit-emacs-configuration-file ()
-  "Open ~/.emacs.d/init.el.
-
-Because I can't leave that file alone.  I must constantly
-\"improve my emacs experience.\""
+  "Visit ~/.emacs.d/init.el."
   (interactive)
   (find-file (substitute-in-file-name "$HOME/.emacs.d/init.el")))
 (define-key global-map (kbd "C-c C") #'raghu/visit-emacs-configuration-file)
@@ -83,6 +80,32 @@ lambda form over and over."
 ;; Joining lines is a function I use fairly frequently.  Define a
 ;; key-binding for it.
 (define-key global-map (kbd "C-c j") #'join-line)
+
+(defun raghu/scroll-text-up (&optional lines)
+  "Scroll text up LINES keeping point on the original line.
+
+LINES is 1 if not supplied or non-positive.
+
+See `scroll-preserve-screen-position' if you prefer to keep
+point's screen position unchanged."
+  (interactive "p")
+  (when (<= lines 0)
+    (setq lines 1))
+  (scroll-up lines))
+(define-key global-map (kbd "M-n") #'raghu/scroll-text-up)
+
+(defun raghu/scroll-text-down (&optional lines)
+  "Scroll text down LINES lines keeping point on the original line.
+
+LINES is 1 if not supplied or non-positive.
+
+See `scroll-preserve-screen-position' if you prefer to keep
+point's screen position unchanged."
+  (interactive "p")
+  (when (<= lines 0)
+    (setq lines 1))
+  (scroll-down lines))
+(define-key global-map (kbd "M-p") #'raghu/scroll-text-down)
 
 ;; Functions and key-bindings to make line-killing easier.
 
@@ -192,6 +215,7 @@ on which point originally was."
  ;; If there is more than one, they won't work right.
  '(debug-on-error t)
  '(frame-background-mode (quote light))
+ '(indicate-empty-lines t)
  '(inhibit-startup-screen t)
  '(initial-scratch-message nil)
  '(make-backup-files nil)
