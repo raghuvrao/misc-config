@@ -82,12 +82,13 @@ lambda form over and over."
 (define-key global-map (kbd "C-c j") #'join-line)
 
 (defun raghu/scroll-text-up (&optional lines)
-  "Scroll text up LINES keeping point on the original line.
+  "Scroll text up LINES lines keeping point on the original line.
 
 LINES is 1 if not supplied or non-positive.
 
-See `scroll-preserve-screen-position' if you prefer to keep
-point's screen position unchanged."
+Point moves with the original line so long as the original line
+is in the window.  See `scroll-preserve-screen-position' if you
+prefer to keep point's screen position unchanged."
   (interactive "p")
   (when (<= lines 0)
     (setq lines 1))
@@ -99,8 +100,9 @@ point's screen position unchanged."
 
 LINES is 1 if not supplied or non-positive.
 
-See `scroll-preserve-screen-position' if you prefer to keep
-point's screen position unchanged."
+Point moves with the original line so long as the original line
+is in the window.  See `scroll-preserve-screen-position' if you
+prefer to keep point's screen position unchanged."
   (interactive "p")
   (when (<= lines 0)
     (setq lines 1))
