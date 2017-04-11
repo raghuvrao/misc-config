@@ -9,6 +9,13 @@
 (when (fboundp #'tool-bar-mode) (tool-bar-mode -1))
 (when (fboundp #'scroll-bar-mode) (scroll-bar-mode -1))
 
+;; Remove a few undesirable key-bindings.  I will repurpose some of
+;; them.
+(define-key global-map (kbd "C-x C-c") nil)
+(define-key global-map (kbd "C-z") nil)
+(define-key global-map (kbd "C-x C-z") nil)
+(define-key global-map (kbd "C-x C-b") nil)
+
 ;; Override yes-or-no-p's definition by making yes-or-no-p an alias
 ;; for y-or-n-p.  This way, when yes-or-no-p is called, y-or-n-p will
 ;; actually be called, and I can reply with y/SPC or n/DEL instead of
@@ -65,13 +72,6 @@ lambda form over and over."
 ;; automatically.  I will hit `S-TAB' to trigger auto-complete.
 (require 'auto-complete)
 (define-key ac-mode-map (kbd "<backtab>") #'auto-complete)
-
-;; I accidentally do `C-x C-c' a lot (when I meant to do `C-x' or
-;; `C-c'), so I will remove its binding.  To terminate emacs, I will
-;; use `M-x sa-t' (which runs save-buffers-kill-terminal, bound to
-;; `C-x C-c' by default) or `C-x #' or `C-x 5 0' or `M-x kill-emacs'
-;; as appropriate.
-(define-key global-map (kbd "C-x C-c") nil)
 
 ;; Use Ibuffer instead of list-buffers.
 (define-key global-map (kbd "C-x C-b") 'ibuffer)
