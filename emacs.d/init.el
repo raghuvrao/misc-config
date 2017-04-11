@@ -244,9 +244,9 @@ on which point originally was."
   (add-hook 'go-mode-hook (lambda ()
 			    (setq show-trailing-whitespace t)
 			    (auto-complete-mode 1)
-			    (if (not (string-match "^go" compile-command))
-				(set (make-local-variable 'compile-command)
-				     "go build && go vet")))))
+			    (unless (string-match "^go" compile-command)
+			      (set (make-local-variable 'compile-command)
+				   "go build && go vet")))))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
