@@ -67,12 +67,28 @@ lambda form over and over."
 (add-hook 'special-mode-hook #'raghu/font-lock-mode-in-buffer)
 (define-key global-map (kbd "C-c P") #'font-lock-mode)
 
-;; Make emacs-windows navigation easier.
+;; Line-wrapping is sometimes annoying, beneficial at other times.
+;; Disable it in a few major modes so corresponding buffers are not
+;; line-wrapped, and make a key-binding to toggle it.
+(defun raghu/enable-truncate-long-lines-in-buffer ()
+  "Enable line truncation (or, disable line-wrapping) in current buffer."
+  (interactive)
+  (set (make-local-variable 'truncate-lines) t))
+(add-hook 'prog-mode-hook #'raghu/enable-truncate-long-lines-in-buffer)
+(add-hook 'diff-mode-hook #'raghu/enable-truncate-long-lines-in-buffer)
+(define-key global-map (kbd "C-c t") #'toggle-truncate-lines)
+
+;; I do not believe I need a key-binding to suspend/iconify/minimize
+;; emacs.  Instead, I will use those key-bindings for the `repeat'
+;; function.
+(define-key global-map (kbd "C-z") #'repeat)
+(define-key global-map (kbd "C-x C-z") #'repeat)
+
+;; Make emacs-windows navigation easier.  The arg to
+;; windmove-default-keybindings is a symbol indicating the modifier to
+;; use with the arrow keys to navigate windows.
 (require 'windmove)
-(define-key global-map (kbd "C-<up>") #'windmove-up)
-(define-key global-map (kbd "C-<down>") #'windmove-down)
-(define-key global-map (kbd "C-<left>") #'windmove-left)
-(define-key global-map (kbd "C-<right>") #'windmove-right)
+(windmove-default-keybindings 'control)
 
 ;; Make resizing windows a little easier.  The `ESC <arrow>' forms
 ;; help when running emacs in tmux.
