@@ -67,6 +67,17 @@ lambda form over and over."
 (add-hook 'special-mode-hook #'raghu/font-lock-mode-in-buffer)
 (define-key global-map (kbd "C-c P") #'font-lock-mode)
 
+;; Line-wrapping is sometimes annoying, beneficial at other times.
+;; Disable it in a few major modes so corresponding buffers are not
+;; line-wrapped, and make a key-binding to toggle it.
+(defun raghu/enable-truncate-long-lines-in-buffer ()
+  "Enable line truncation (or, disable line-wrapping) in current buffer."
+  (interactive)
+  (set (make-local-variable 'truncate-lines) t))
+(add-hook 'prog-mode-hook #'raghu/enable-truncate-long-lines-in-buffer)
+(add-hook 'diff-mode-hook #'raghu/enable-truncate-long-lines-in-buffer)
+(define-key global-map (kbd "C-c t") #'toggle-truncate-lines)
+
 ;; auto-complete is great when it stays out of the way.  In
 ;; custom-set-variables, I have disabled auto-complete from starting
 ;; automatically.  I will hit `S-TAB' to trigger auto-complete.
