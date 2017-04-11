@@ -90,37 +90,34 @@ lambda form over and over."
 (require 'windmove)
 (windmove-default-keybindings 'control)
 
+;; Sometimes I like to scroll text while not having to move point too
+;; much, so define corresponding functions and key-bindings.  The
+;; key-bindings I am using below are a little awkward, but with the
+;; `repeat' function, they are not so bad.
+(defun raghu/show-text-next (&optional lines)
+  "Reveal next LINES lines of text by scrolling text up."
+  (interactive "p")
+  (scroll-up lines))
+(define-key global-map (kbd "C-c s n") #'raghu/show-text-next)
+(defun raghu/show-text-previous (&optional lines)
+  "Reveal previous LINES lines of text by scrolling text down."
+  (interactive "p")
+  (scroll-down lines))
+(define-key global-map (kbd "C-c s p") #'raghu/show-text-previous)
+(defun raghu/show-text-right (&optional cols)
+  "Reveal COLS columns of text on the right by scrolling text left."
+  (interactive "p")
+  (scroll-left cols))
+(define-key global-map (kbd "C-c s r") #'raghu/show-text-right)
+(defun raghu/show-text-left (&optional cols)
+  "Reveal COLS columns of text on the left by scrolling text right."
+  (interactive "p")
+  (scroll-right cols))
+(define-key global-map (kbd "C-c s l") #'raghu/show-text-left)
+
 ;; Joining lines is a function I use fairly frequently.  Define a
 ;; key-binding for it.
 (define-key global-map (kbd "C-c j") #'join-line)
-
-(defun raghu/scroll-text-up (&optional lines)
-  "Scroll text up LINES lines keeping point on the original line.
-
-LINES is 1 if not supplied or non-positive.
-
-Point moves with the original line so long as the original line
-is in the window.  See `scroll-preserve-screen-position' if you
-prefer to keep point's screen position unchanged."
-  (interactive "p")
-  (when (<= lines 0)
-    (setq lines 1))
-  (scroll-up lines))
-(define-key global-map (kbd "M-n") #'raghu/scroll-text-up)
-
-(defun raghu/scroll-text-down (&optional lines)
-  "Scroll text down LINES lines keeping point on the original line.
-
-LINES is 1 if not supplied or non-positive.
-
-Point moves with the original line so long as the original line
-is in the window.  See `scroll-preserve-screen-position' if you
-prefer to keep point's screen position unchanged."
-  (interactive "p")
-  (when (<= lines 0)
-    (setq lines 1))
-  (scroll-down lines))
-(define-key global-map (kbd "M-p") #'raghu/scroll-text-down)
 
 ;; Functions and key-bindings to make line-killing easier.
 
