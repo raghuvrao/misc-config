@@ -93,12 +93,11 @@ lambda form over and over."
 (define-key global-map (kbd "C-z") #'repeat)
 (define-key global-map (kbd "C-x C-z") #'repeat)
 
-;; Make emacs-windows navigation easier.
+;; Make emacs-windows navigation easier.  The arg to
+;; windmove-default-keybindings is a symbol indicating the modifier to
+;; use with the arrow keys to navigate windows.
 (require 'windmove)
-(define-key global-map (kbd "C-<up>") #'windmove-up)
-(define-key global-map (kbd "C-<down>") #'windmove-down)
-(define-key global-map (kbd "C-<left>") #'windmove-left)
-(define-key global-map (kbd "C-<right>") #'windmove-right)
+(windmove-default-keybindings 'control)
 
 ;; Make resizing windows a little easier.  The `ESC <arrow>' forms
 ;; help when running emacs in tmux.
