@@ -7,6 +7,7 @@
 (show-paren-mode 1)
 
 (when (fboundp #'tool-bar-mode) (tool-bar-mode -1))
+(when (fboundp #'scroll-bar-mode) (scroll-bar-mode -1))
 
 ;; Override yes-or-no-p's definition by making yes-or-no-p an alias
 ;; for y-or-n-p.  This way, when yes-or-no-p is called, y-or-n-p will
