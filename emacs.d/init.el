@@ -117,7 +117,7 @@ lambda form over and over."
 
 ;; Joining lines is a function I use fairly frequently.  Define a
 ;; key-binding for it.
-(define-key global-map (kbd "C-c j") #'join-line)
+(define-key global-map (kbd "C-c J") #'join-line)
 
 ;; Functions and key-bindings to make line-killing easier.
 
