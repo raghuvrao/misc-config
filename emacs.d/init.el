@@ -90,17 +90,6 @@ lambda form over and over."
 (require 'windmove)
 (windmove-default-keybindings 'control)
 
-;; Make resizing windows a little easier.  The `ESC <arrow>' forms
-;; help when running emacs in tmux.
-(define-key global-map (kbd "M-<up>") #'enlarge-window)
-(define-key global-map (kbd "ESC <up>") #'enlarge-window)
-(define-key global-map (kbd "M-<down>") #'shrink-window)
-(define-key global-map (kbd "ESC <down>") #'shrink-window)
-(define-key global-map (kbd "M-<left>") #'shrink-window-horizontally)
-(define-key global-map (kbd "ESC <left>") #'shrink-window-horizontally)
-(define-key global-map (kbd "M-<right>") #'enlarge-window-horizontally)
-(define-key global-map (kbd "ESC <right>") #'enlarge-window-horizontally)
-
 ;; Joining lines is a function I use fairly frequently.  Define a
 ;; key-binding for it.
 (define-key global-map (kbd "C-c j") #'join-line)
