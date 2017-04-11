@@ -85,7 +85,7 @@ lambda form over and over."
 (define-key ac-mode-map (kbd "<backtab>") #'auto-complete)
 
 ;; Use Ibuffer instead of list-buffers.
-(define-key global-map (kbd "C-x C-b") 'ibuffer)
+(define-key global-map (kbd "C-x C-b") #'ibuffer)
 
 ;; I do not believe I need a key-binding to suspend/iconify/minimize
 ;; emacs.  Instead, I will use those key-bindings for the `repeat'
