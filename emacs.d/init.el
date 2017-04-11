@@ -159,7 +159,7 @@ If ARG is none of the above, perform no action."
 	       ((> lines 0)
 		(backward-to-indentation lines)
 		(kill-region prior-point (point)))))
-	((not arg)
+	((null arg)
 	 (back-to-indentation)
 	 (kill-region prior-point (point)))))
 (define-key global-map (kbd "C-c k") #'raghu/kill-backward-to-indentation)
