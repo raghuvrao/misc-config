@@ -259,6 +259,7 @@ on which point originally was."
  '(ac-disable-inline t)
  '(debug-on-error t)
  '(frame-background-mode (quote light))
+ '(hscroll-step 1)
  '(indicate-empty-lines t)
  '(inhibit-startup-screen t)
  '(initial-scratch-message nil)
@@ -274,6 +275,7 @@ on which point originally was."
    (quote
     (multiple-cursors auto-complete go-mode go-autocomplete go-eldoc go-errcheck go-guru go-rename)))
  '(ring-bell-function (quote ignore))
+ '(scroll-conservatively 5)
  '(sh-basic-offset 2)
  '(sh-indent-for-case-alt (quote +))
  '(sh-indent-for-case-label 0)
