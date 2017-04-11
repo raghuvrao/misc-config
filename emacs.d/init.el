@@ -87,6 +87,12 @@ lambda form over and over."
 ;; Use Ibuffer instead of list-buffers.
 (define-key global-map (kbd "C-x C-b") 'ibuffer)
 
+;; I do not believe I need a key-binding to suspend/iconify/minimize
+;; emacs.  Instead, I will use those key-bindings for the `repeat'
+;; function.
+(define-key global-map (kbd "C-z") #'repeat)
+(define-key global-map (kbd "C-x C-z") #'repeat)
+
 ;; Make emacs-windows navigation easier.
 (require 'windmove)
 (define-key global-map (kbd "C-<up>") #'windmove-up)
