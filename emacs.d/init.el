@@ -225,7 +225,8 @@ on which point originally was."
 			    (subword-mode 1)
 			    (unless (string-match "^go" compile-command)
 			      (set (make-local-variable 'compile-command)
-				   "go build && go vet")))))
+				   "go build && go vet"))
+			    (local-set-key (kbd "C-c b") #'compile))))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
