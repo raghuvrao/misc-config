@@ -10,14 +10,41 @@
 (when (fboundp #'tool-bar-mode) (tool-bar-mode -1))
 (when (fboundp #'scroll-bar-mode) (scroll-bar-mode -1))
 
-;; Remove a few undesirable key-bindings.
-(define-key global-map (kbd "C-x C-c") nil)
-
 ;; Override yes-or-no-p's definition by making yes-or-no-p an alias
 ;; for y-or-n-p.  This way, when yes-or-no-p is called, y-or-n-p will
 ;; actually be called, and I can reply with y/SPC or n/DEL instead of
 ;; `yes RET' or `no RET'.
 (defalias 'yes-or-no-p #'y-or-n-p)
+
+;; Remove a few undesirable key-bindings.
+(define-key global-map (kbd "C-x C-c") nil)
+
+;; A few convenient key-bindings are assigned to not-so-interesting
+;; functions by default.  Reassign them to more interesting functions.
+(define-key global-map (kbd "C-x C-b") #'ibuffer)
+(define-key global-map (kbd "C-z") #'repeat)
+(define-key global-map (kbd "C-x C-z") #'repeat)
+
+;; Assign convenient key-bindings for useful functions that either
+;; have no default key-bindings or have inconvenient default
+;; key-bindings.
+(define-key global-map (kbd "C-c H") #'hl-line-mode)
+(define-key global-map (kbd "C-c J") #'join-line)
+(define-key global-map (kbd "C-c K") #'kill-whole-line)
+(define-key global-map (kbd "C-c P") #'font-lock-mode)
+(define-key global-map (kbd "C-c t") #'toggle-truncate-lines)
+
+;; auto-complete is great when it stays out of the way.  In
+;; custom-set-variables, I have disabled auto-complete from starting
+;; automatically.  I will hit `S-TAB' to trigger auto-complete.
+(require 'auto-complete)
+(define-key ac-mode-map (kbd "<backtab>") #'auto-complete)
+
+;; Make emacs-windows navigation easier.  The arg to
+;; windmove-default-keybindings is a symbol indicating the modifier to
+;; use with the arrow keys to navigate windows.
+(require 'windmove)
+(windmove-default-keybindings 'control)
 
 (defun raghu/visit-emacs-configuration-file ()
   "Visit ~/.emacs.d/init.el."
@@ -41,7 +68,6 @@ form over and over."
 (add-hook 'ibuffer-mode-hook #'raghu/hl-line-mode-in-buffer)
 (add-hook 'prog-mode-hook #'raghu/hl-line-mode-in-buffer)
 (add-hook 'text-mode-hook #'raghu/hl-line-mode-in-buffer)
-(define-key global-map (kbd "C-c H") #'hl-line-mode)
 
 ;; Enable syntax higlighting only in some places.  Define a
 ;; key-binding to toggle it.
@@ -62,7 +88,6 @@ lambda form over and over."
 (add-hook 'inferior-python-mode-hook #'raghu/font-lock-mode-in-buffer)
 (add-hook 'shell-mode-hook #'raghu/font-lock-mode-in-buffer)
 (add-hook 'special-mode-hook #'raghu/font-lock-mode-in-buffer)
-(define-key global-map (kbd "C-c P") #'font-lock-mode)
 
 ;; Line-wrapping is sometimes annoying, beneficial at other times.
 ;; Disable it in a few major modes so corresponding buffers are not
@@ -73,19 +98,6 @@ lambda form over and over."
   (set (make-local-variable 'truncate-lines) t))
 (add-hook 'prog-mode-hook #'raghu/enable-truncate-long-lines-in-buffer)
 (add-hook 'diff-mode-hook #'raghu/enable-truncate-long-lines-in-buffer)
-(define-key global-map (kbd "C-c t") #'toggle-truncate-lines)
-
-;; I do not believe I need a key-binding to suspend/iconify/minimize
-;; emacs.  Instead, I will use those key-bindings for the `repeat'
-;; function.
-(define-key global-map (kbd "C-z") #'repeat)
-(define-key global-map (kbd "C-x C-z") #'repeat)
-
-;; Make emacs-windows navigation easier.  The arg to
-;; windmove-default-keybindings is a symbol indicating the modifier to
-;; use with the arrow keys to navigate windows.
-(require 'windmove)
-(windmove-default-keybindings 'control)
 
 ;; Sometimes I like to scroll text while not having to move point too
 ;; much, so define corresponding functions and key-bindings.  The
@@ -111,10 +123,6 @@ lambda form over and over."
   (interactive "p")
   (scroll-right cols))
 (define-key global-map (kbd "C-c s l") #'raghu/show-text-left)
-
-;; Joining lines is a function I use fairly frequently.  Define a
-;; key-binding for it.
-(define-key global-map (kbd "C-c J") #'join-line)
 
 ;; Functions and key-bindings to make line-killing easier.
 
@@ -160,8 +168,6 @@ If ARG is none of the above, perform no action."
 	 (back-to-indentation)
 	 (kill-region prior-point (point)))))
 (define-key global-map (kbd "C-c k") #'raghu/kill-backward-to-indentation)
-
-(define-key global-map (kbd "C-c K") #'kill-whole-line)
 
 ;; Functions and key-bindings to make line-insertion easier.
 
