@@ -1,6 +1,9 @@
 (require 'package)
 (package-initialize)
 
+;; Various shell programs like to send their stdout through a pager.
+;; When those programs are run within emacs, pagination functionality
+;; through an external program is unnecessary.
 (setenv "PAGER" "cat")
 
 (column-number-mode 1)
@@ -16,7 +19,7 @@
 ;; `yes RET' or `no RET'.
 (defalias 'yes-or-no-p #'y-or-n-p)
 
-;; Remove a few undesirable key-bindings.
+;; Remove undesirable key-bindings.
 (define-key global-map (kbd "C-x C-c") nil)
 
 ;; A few convenient key-bindings are assigned to not-so-interesting
@@ -92,9 +95,7 @@ buffer named \"*Async: CMD*\"."
   (find-file (substitute-in-file-name "$HOME/.emacs.d/init.el")))
 (define-key global-map (kbd "C-c C") #'raghu/visit-emacs-configuration-file)
 
-;; Highlighting the current line is useful mostly in programs, so keep
-;; it disabled by default, enable it in programs, and make a
-;; key-binding to toggle it.
+;; Highlighting the current line is useful, but not everywhere.
 (global-hl-line-mode -1)
 (defun raghu/enable-hl-line-mode-in-buffer ()
   "Highlight line containing point in current buffer."
@@ -104,8 +105,7 @@ buffer named \"*Async: CMD*\"."
 (add-hook 'prog-mode-hook #'raghu/enable-hl-line-mode-in-buffer)
 (add-hook 'text-mode-hook #'raghu/enable-hl-line-mode-in-buffer)
 
-;; Enable syntax higlighting only in some places.  Define a
-;; key-binding to toggle it.
+;; Enable syntax higlighting / fontification only in some places.
 (global-font-lock-mode -1)
 (defun raghu/enable-font-lock-mode-in-buffer ()
   "Enable font lock mode in buffer."
@@ -119,11 +119,11 @@ buffer named \"*Async: CMD*\"."
 (add-hook 'shell-mode-hook #'raghu/enable-font-lock-mode-in-buffer)
 (add-hook 'special-mode-hook #'raghu/enable-font-lock-mode-in-buffer)
 
-;; Line-wrapping is sometimes annoying, beneficial at other times.
-;; Disable it in a few major modes so corresponding buffers are not
-;; line-wrapped, and make a key-binding to toggle it.
+;; Line-wrapping is sometimes annoying.
 (defun raghu/enable-truncate-long-lines-in-buffer ()
-  "Enable line truncation (or, disable line-wrapping) in current buffer."
+  "Enable line truncation in current buffer.
+
+Line truncation is Emacs parlance for not-line-wrapping."
   (interactive)
   (set (make-local-variable 'truncate-lines) t))
 (add-hook 'prog-mode-hook #'raghu/enable-truncate-long-lines-in-buffer)
