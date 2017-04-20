@@ -10,12 +10,8 @@
 (when (fboundp #'tool-bar-mode) (tool-bar-mode -1))
 (when (fboundp #'scroll-bar-mode) (scroll-bar-mode -1))
 
-;; Remove a few undesirable key-bindings.  I will repurpose some of
-;; them.
+;; Remove a few undesirable key-bindings.
 (define-key global-map (kbd "C-x C-c") nil)
-(define-key global-map (kbd "C-z") nil)
-(define-key global-map (kbd "C-x C-z") nil)
-(define-key global-map (kbd "C-x C-b") nil)
 
 ;; Override yes-or-no-p's definition by making yes-or-no-p an alias
 ;; for y-or-n-p.  This way, when yes-or-no-p is called, y-or-n-p will
