@@ -126,12 +126,6 @@ lambda form over and over."
 
 ;; Functions and key-bindings to make line-killing easier.
 
-(defun raghu/kill-to-beginning-of-line ()
-  "Kill backward from point to beginning of the line."
-  (interactive)
-  (kill-line 0))
-(define-key global-map (kbd "C-c M-k") #'raghu/kill-to-beginning-of-line)
-
 (defun raghu/kill-backward-to-indentation (&optional arg)
   "Kill backward from point to first nonblank character ARG lines up.
 
