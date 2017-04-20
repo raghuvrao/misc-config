@@ -22,6 +22,9 @@ set shiftwidth=8
 set ignorecase
 set smartcase
 
+set nowrap
+set sidescroll=1
+
 set wildmode=longest,full
 if has("wildmenu") | set wildmenu | endif
 
