@@ -56,38 +56,28 @@
 ;; it disabled by default, enable it in programs, and make a
 ;; key-binding to toggle it.
 (global-hl-line-mode -1)
-(defun raghu/hl-line-mode-in-buffer ()
-  "Highlight line containing point in current buffer.
-
-Does nothing more than calling (hl-line-mode 1).  Meant for
-adding to the mode hooks in whose modes I want current-line
-highlighting, so as to avoid repeating the corresponding lambda
-form over and over."
+(defun raghu/enable-hl-line-mode-in-buffer ()
+  "Highlight line containing point in current buffer."
   (interactive)
   (hl-line-mode 1))
-(add-hook 'ibuffer-mode-hook #'raghu/hl-line-mode-in-buffer)
-(add-hook 'prog-mode-hook #'raghu/hl-line-mode-in-buffer)
-(add-hook 'text-mode-hook #'raghu/hl-line-mode-in-buffer)
+(add-hook 'ibuffer-mode-hook #'raghu/enable-hl-line-mode-in-buffer)
+(add-hook 'prog-mode-hook #'raghu/enable-hl-line-mode-in-buffer)
+(add-hook 'text-mode-hook #'raghu/enable-hl-line-mode-in-buffer)
 
 ;; Enable syntax higlighting only in some places.  Define a
 ;; key-binding to toggle it.
 (global-font-lock-mode -1)
-(defun raghu/font-lock-mode-in-buffer ()
-  "Enable font-lock-mode (syntax highlighting etc.) in current buffer.
-
-Does nothing more than calling (font-lock-mode 1).  Meant for
-adding to the few mode hooks in whose modes I want syntax
-highlighting enabled, so as to avoid repeating the corresponding
-lambda form over and over."
+(defun raghu/enable-font-lock-mode-in-buffer ()
+  "Enable font lock mode in buffer."
   (interactive)
   (font-lock-mode 1))
-(add-hook 'compilation-mode-hook #'raghu/font-lock-mode-in-buffer)
-(add-hook 'diff-mode-hook #'raghu/font-lock-mode-in-buffer)
-(add-hook 'dired-mode-hook #'raghu/font-lock-mode-in-buffer)
-(add-hook 'eshell-mode-hook #'raghu/font-lock-mode-in-buffer)
-(add-hook 'inferior-python-mode-hook #'raghu/font-lock-mode-in-buffer)
-(add-hook 'shell-mode-hook #'raghu/font-lock-mode-in-buffer)
-(add-hook 'special-mode-hook #'raghu/font-lock-mode-in-buffer)
+(add-hook 'compilation-mode-hook #'raghu/enable-font-lock-mode-in-buffer)
+(add-hook 'diff-mode-hook #'raghu/enable-font-lock-mode-in-buffer)
+(add-hook 'dired-mode-hook #'raghu/enable-font-lock-mode-in-buffer)
+(add-hook 'eshell-mode-hook #'raghu/enable-font-lock-mode-in-buffer)
+(add-hook 'inferior-python-mode-hook #'raghu/enable-font-lock-mode-in-buffer)
+(add-hook 'shell-mode-hook #'raghu/enable-font-lock-mode-in-buffer)
+(add-hook 'special-mode-hook #'raghu/enable-font-lock-mode-in-buffer)
 
 ;; Line-wrapping is sometimes annoying, beneficial at other times.
 ;; Disable it in a few major modes so corresponding buffers are not
