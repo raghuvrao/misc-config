@@ -80,9 +80,9 @@ buffer named \"*Async: CMD*\"."
 	      ;; constructed from the command to be run.  Otherwise,
 	      ;; use the now-trimmed buf-name to name the new buffer.
 	      (buf-name (or (when (stringp buf-name)
-			      (unless (eq buf-name "")
+			      (unless (string= buf-name "")
 				(let ((buf-name (raghu--trim-space buf-name)))
-				  (unless (eq buf-name "") buf-name))))
+				  (unless (string= buf-name "") buf-name))))
 			    (concat "*Async: " cmd "*"))))
 	  (switch-to-buffer buf-name)
 	  (setq default-directory dir)
