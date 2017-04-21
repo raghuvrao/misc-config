@@ -101,8 +101,10 @@ buffer named \"*Async: CMD*\"."
   "Highlight line containing point in current buffer."
   (interactive)
   (hl-line-mode 1))
+(add-hook 'eshell-mode-hook #'raghu/enable-hl-line-mode-in-buffer)
 (add-hook 'ibuffer-mode-hook #'raghu/enable-hl-line-mode-in-buffer)
 (add-hook 'prog-mode-hook #'raghu/enable-hl-line-mode-in-buffer)
+(add-hook 'shell-mode-hook #'raghu/enable-hl-line-mode-in-buffer)
 (add-hook 'text-mode-hook #'raghu/enable-hl-line-mode-in-buffer)
 
 ;; Enable syntax higlighting / fontification only in some places.
