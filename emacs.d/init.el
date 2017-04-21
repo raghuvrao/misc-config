@@ -129,8 +129,8 @@ buffer named \"*Async: CMD*\"."
 Line truncation is Emacs parlance for not-line-wrapping."
   (interactive)
   (set (make-local-variable 'truncate-lines) t))
-(add-hook 'prog-mode-hook #'raghu/enable-truncate-long-lines-in-buffer)
 (add-hook 'diff-mode-hook #'raghu/enable-truncate-long-lines-in-buffer)
+(add-hook 'prog-mode-hook #'raghu/enable-truncate-long-lines-in-buffer)
 
 ;; Sometimes I like to scroll text while not having to move point too
 ;; much, so define corresponding functions and key-bindings.  The
