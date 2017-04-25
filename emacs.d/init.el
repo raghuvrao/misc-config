@@ -264,7 +264,7 @@ on which point originally was."
 			    (unless (string-match "^go" compile-command)
 			      (set (make-local-variable 'compile-command)
 				   "go build && go vet"))
-			    (local-set-key (kbd "C-c b") #'compile))))
+			    (local-set-key (kbd "C-c C-c") #'compile))))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
