@@ -130,30 +130,37 @@ Line truncation is Emacs parlance for not-line-wrapping."
 (add-hook 'diff-mode-hook #'raghu/enable-truncate-long-lines-in-buffer)
 (add-hook 'prog-mode-hook #'raghu/enable-truncate-long-lines-in-buffer)
 
-;; Sometimes I like to scroll text while not having to move point too
-;; much, so define corresponding functions and key-bindings.  The
-;; key-bindings I am using below are a little awkward, but with the
-;; `repeat' function, they are not so bad.
-(defun raghu/show-text-next (&optional lines)
-  "Reveal next LINES lines of text by scrolling text up."
-  (interactive "p")
-  (scroll-up lines))
-(define-key global-map (kbd "C-c s n") #'raghu/show-text-next)
-(defun raghu/show-text-previous (&optional lines)
-  "Reveal previous LINES lines of text by scrolling text down."
-  (interactive "p")
-  (scroll-down lines))
-(define-key global-map (kbd "C-c s p") #'raghu/show-text-previous)
-(defun raghu/show-text-right (&optional cols)
-  "Reveal COLS columns of text on the right by scrolling text left."
-  (interactive "p")
-  (scroll-left cols))
-(define-key global-map (kbd "C-c s r") #'raghu/show-text-right)
-(defun raghu/show-text-left (&optional cols)
-  "Reveal COLS columns of text on the left by scrolling text right."
-  (interactive "p")
-  (scroll-right cols))
-(define-key global-map (kbd "C-c s l") #'raghu/show-text-left)
+;; Scroll text around while not moving point away from original line
+;; (so long as the original line is in the window, of course).
+(defun raghu--reveal-down-one-line ()
+  "Reveal one line below." (interactive) (scroll-up 1))
+(defun raghu--reveal-up-one-line ()
+  "Reveal one line above." (interactive) (scroll-down 1))
+(defun raghu--reveal-right-one-column ()
+  "Reveal one column on the right." (interactive) (scroll-left 1))
+(defun raghu--reveal-left-one-column ()
+  "Reveal one column on the left." (interactive) (scroll-right 1))
+(setq raghu/scroll-text-map (make-sparse-keymap))
+(define-key raghu/scroll-text-map (kbd "i") #'raghu--reveal-up-one-line)
+(define-key raghu/scroll-text-map (kbd "k") #'raghu--reveal-down-one-line)
+(define-key raghu/scroll-text-map (kbd "j") #'raghu--reveal-left-one-column)
+(define-key raghu/scroll-text-map (kbd "l") #'raghu--reveal-right-one-column)
+(defun raghu/do-text-scrolling ()
+  "Activate a map that lets one use i/j/k/l to scroll text.
+
+Point remains with the original text-line (as opposed to screen
+line) so long as the original text-line is within the window.  A
+mark at point's original starting position is pushed so there is
+an easy way (e.g. C-u C-SPC) to return to that position, in case
+one scrolls too much."
+  (interactive)
+  (push-mark)
+  (message "Use i/j/k/l to scroll text.")
+  (set-transient-map raghu/scroll-text-map
+		     (lambda () (when (<= ?i last-input-event ?l)
+				  (message "Use i/j/k/l to scroll text.")))
+		     nil))
+(define-key global-map (kbd "C-c s") #'raghu/do-text-scrolling)
 
 (defun raghu/kill-backward-to-indentation (&optional arg)
   "Kill backward from point to first nonblank character on line.
