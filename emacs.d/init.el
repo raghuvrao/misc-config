@@ -155,8 +155,6 @@ Line truncation is Emacs parlance for not-line-wrapping."
   (scroll-right cols))
 (define-key global-map (kbd "C-c s l") #'raghu/show-text-left)
 
-;; Functions and key-bindings to make line-killing easier.
-
 (defun raghu/kill-backward-to-indentation (&optional arg)
   "Kill backward from point to first nonblank character on line.
 
@@ -171,7 +169,7 @@ above, perform no action."
     (cond ((integerp arg)
 	   (let ((lines (prefix-numeric-value arg)))
 	     (cond ((= lines 0)
-		    ;; If arg is 0, backward-to-indentation calls
+		    ;; (backward-to-indentation 0) will call
 		    ;; (forward-line 0), which has a side-effect of
 		    ;; moving point to column 0.  In places where a
 		    ;; subset of the text is read-only (for example,
@@ -194,8 +192,6 @@ above, perform no action."
 	   (back-to-indentation)
 	   (kill-region prior-point (point))))))
 (define-key global-map (kbd "C-c k") #'raghu/kill-backward-to-indentation)
-
-;; Functions and key-bindings to make line-insertion easier.
 
 (defun raghu/insert-new-line-above (&optional lines)
   "Insert LINES (default=1) new lines above current line.
