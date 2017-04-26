@@ -161,8 +161,12 @@ one scrolls too much."
   (push-mark)
   (message "Use i/j/k/l to scroll text.")
   (set-transient-map raghu/scroll-text-map
-		     (lambda () (when (<= ?i last-input-event ?l)
-				  (message "Use i/j/k/l to scroll text.")))
+		     (lambda ()
+		       (when (or (eq last-input-event ?i)
+				 (eq last-input-event ?k)
+				 (eq last-input-event ?j)
+				 (eq last-input-event ?l))
+			 (message "Use i/j/k/l to scroll text.")))
 		     nil))
 (define-key global-map (kbd "C-c s") #'raghu/do-text-scrolling)
 
