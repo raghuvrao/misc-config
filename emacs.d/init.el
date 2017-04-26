@@ -136,27 +136,29 @@ Line truncation is Emacs parlance for not-line-wrapping."
 (define-key
   raghu/scroll-text-map
   (kbd "i")
-  (lambda () (interactive) (scroll-down 1)))
-(define-key
-  raghu/scroll-text-map
-  (kbd "k")
   (lambda () (interactive) (scroll-up 1)))
 (define-key
   raghu/scroll-text-map
+  (kbd "k")
+  (lambda () (interactive) (scroll-down 1)))
+(define-key
+  raghu/scroll-text-map
   (kbd "j")
-  (lambda () (interactive) (scroll-right 1)))
+  (lambda () (interactive) (scroll-left 1)))
 (define-key
   raghu/scroll-text-map
   (kbd "l")
-  (lambda () (interactive) (scroll-left 1)))
+  (lambda () (interactive) (scroll-right 1)))
 (defun raghu/do-text-scrolling ()
-  "Activate a map that lets one use i/j/k/l to scroll text.
+  "Activate a map that has convenient key-bindings to scroll text.
 
+The key-bindings are `i' to scroll text up, `k' to scroll text
+down, `j' to scroll text left, and `l' to scroll text right.
 Point remains with the original text-line (as opposed to screen
 line) so long as the original text-line is within the window.  A
 mark at point's original starting position is pushed so there is
-an easy way (e.g. C-u C-SPC) to return to that position, in case
-one scrolls too much."
+an easy way (e.g. `C-u C-SPC') to return to that position, in
+case one scrolls too much."
   (interactive)
   (push-mark)
   (message "Use i/j/k/l to scroll text.")
