@@ -132,19 +132,23 @@ Line truncation is Emacs parlance for not-line-wrapping."
 
 ;; Scroll text around while not moving point away from original line
 ;; (so long as the original line is in the window, of course).
-(defun raghu--reveal-down-one-line ()
-  "Reveal one line below." (interactive) (scroll-up 1))
-(defun raghu--reveal-up-one-line ()
-  "Reveal one line above." (interactive) (scroll-down 1))
-(defun raghu--reveal-right-one-column ()
-  "Reveal one column on the right." (interactive) (scroll-left 1))
-(defun raghu--reveal-left-one-column ()
-  "Reveal one column on the left." (interactive) (scroll-right 1))
 (setq raghu/scroll-text-map (make-sparse-keymap))
-(define-key raghu/scroll-text-map (kbd "i") #'raghu--reveal-up-one-line)
-(define-key raghu/scroll-text-map (kbd "k") #'raghu--reveal-down-one-line)
-(define-key raghu/scroll-text-map (kbd "j") #'raghu--reveal-left-one-column)
-(define-key raghu/scroll-text-map (kbd "l") #'raghu--reveal-right-one-column)
+(define-key
+  raghu/scroll-text-map
+  (kbd "i")
+  (lambda () (interactive) (scroll-down 1)))
+(define-key
+  raghu/scroll-text-map
+  (kbd "k")
+  (lambda () (interactive) (scroll-up 1)))
+(define-key
+  raghu/scroll-text-map
+  (kbd "j")
+  (lambda () (interactive) (scroll-right 1)))
+(define-key
+  raghu/scroll-text-map
+  (kbd "l")
+  (lambda () (interactive) (scroll-left 1)))
 (defun raghu/do-text-scrolling ()
   "Activate a map that lets one use i/j/k/l to scroll text.
 
