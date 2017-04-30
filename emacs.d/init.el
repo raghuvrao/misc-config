@@ -309,13 +309,13 @@ on which point originally was."
   (add-hook 'go-mode-hook #'go-eldoc-setup)
   ;; (add-hook 'go-mode-hook #'go-guru-hl-identifier-mode)
   (add-hook 'go-mode-hook (lambda ()
-			    (setq show-trailing-whitespace t)
-			    (auto-complete-mode 1)
-			    (subword-mode 1)
 			    (unless (string-match "^go" compile-command)
 			      (set (make-local-variable 'compile-command)
 				   "go build && go vet"))
-			    (local-set-key (kbd "C-c C-c") #'compile))))
+			    (local-set-key (kbd "C-c C-c") #'compile)
+			    (setq show-trailing-whitespace t)
+			    (auto-complete-mode 1)
+			    (subword-mode 1))))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
