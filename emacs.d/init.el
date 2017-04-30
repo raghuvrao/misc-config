@@ -118,39 +118,26 @@ Line truncation is Emacs parlance for not-line-wrapping."
 	    (set (make-local-variable 'truncate-lines) nil)
 	    (set (make-local-variable 'word-wrap) 1)))
 
-;; Scroll text around while not moving point away from original line
-;; (so long as the original line is in the window, of course).
-(setq raghu/scroll-text-map (make-sparse-keymap))
-(define-key
-  raghu/scroll-text-map
-  (kbd "i")
-  (lambda () (interactive) (scroll-up 1)))
-(define-key
-  raghu/scroll-text-map
-  (kbd "k")
-  (lambda () (interactive) (scroll-down 1)))
-(define-key
-  raghu/scroll-text-map
-  (kbd "j")
-  (lambda () (interactive) (scroll-left 1)))
-(define-key
-  raghu/scroll-text-map
-  (kbd "l")
-  (lambda () (interactive) (scroll-right 1)))
-(defun raghu/do-text-scrolling ()
-  "Activate a map that has convenient key-bindings to scroll text.
+;; Scroll while keeping point on original text-line (so long as the
+;; original text-line is in the window, of course).
+(setq raghu/scroll-map (make-sparse-keymap))
+(define-key raghu/scroll-map (kbd "i") (lambda () (interactive) (scroll-up 1)))
+(define-key raghu/scroll-map (kbd "k") (lambda () (interactive) (scroll-down 1)))
+(define-key raghu/scroll-map (kbd "j") (lambda () (interactive) (scroll-left 1)))
+(define-key raghu/scroll-map (kbd "l") (lambda () (interactive) (scroll-right 1)))
+(defun raghu/scroll ()
+  "Scroll in the current buffer.
 
-The key-bindings are `i' to scroll text up, `k' to scroll text
-down, `j' to scroll text left, and `l' to scroll text right.
-Point remains with the original text-line (as opposed to screen
-line) so long as the original text-line is within the window.  A
-mark at point's original starting position is pushed so there is
-an easy way (e.g. `C-u C-SPC') to return to that position, in
-case one scrolls too much."
+Activates a keymap temporarily where `i' will scroll text up, `k'
+will scroll text down, `j' will scroll text left, and `l' will
+scroll text right.  Any other key will deactivate the keymap.
+While scrolling, point remains with the original text-line (not
+screen-line) so long as the original text-line is within the
+window.  A mark is set at point's original starting position."
   (interactive)
   (push-mark)
   (message "Use i/j/k/l to scroll text.")
-  (set-transient-map raghu/scroll-text-map
+  (set-transient-map raghu/scroll-map
 		     (lambda ()
 		       (when (or (eq last-input-event ?i)
 				 (eq last-input-event ?k)
@@ -158,7 +145,7 @@ case one scrolls too much."
 				 (eq last-input-event ?l))
 			 (message "Use i/j/k/l to scroll text.")))
 		     nil))
-(define-key global-map (kbd "C-c s") #'raghu/do-text-scrolling)
+(define-key global-map (kbd "C-c s") #'raghu/scroll)
 
 (defun raghu/kill-backward-to-indentation (&optional arg)
   "Kill backward from point to first nonblank character on line.
