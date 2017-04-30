@@ -254,9 +254,9 @@ relative to the line on which point was located originally."
     (save-excursion
       (beginning-of-line 1)
       (open-line lines))
-    ;; account for save-excursion working differently when column is 0
-    (when (bolp)
-      (forward-line lines))))
+    ;; Account for save-excursion behaving differently at the
+    ;; beginning of the line.
+    (when (bolp) (forward-line lines))))
 (define-key global-map (kbd "C-c RET") #'raghu/insert-new-line-above)
 
 (defun raghu/insert-new-line-below (&optional lines)
