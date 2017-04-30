@@ -82,6 +82,7 @@ The name of the buffer is \"*Async: CMD*\"."
   (interactive)
   (hl-line-mode 1))
 (add-hook 'dired-mode-hook #'raghu/enable-hl-line-mode-in-buffer)
+(add-hook 'eshell-mode-hook #'raghu/enable-hl-line-mode-in-buffer)
 (add-hook 'ibuffer-mode-hook #'raghu/enable-hl-line-mode-in-buffer)
 (add-hook 'prog-mode-hook #'raghu/enable-hl-line-mode-in-buffer)
 (add-hook 'shell-mode-hook #'raghu/enable-hl-line-mode-in-buffer)
@@ -96,6 +97,7 @@ The name of the buffer is \"*Async: CMD*\"."
 (add-hook 'compilation-mode-hook #'raghu/enable-font-lock-mode-in-buffer)
 (add-hook 'diff-mode-hook #'raghu/enable-font-lock-mode-in-buffer)
 (add-hook 'dired-mode-hook #'raghu/enable-font-lock-mode-in-buffer)
+(add-hook 'eshell-mode-hook #'raghu/enable-font-lock-mode-in-buffer)
 (add-hook 'inferior-python-mode-hook #'raghu/enable-font-lock-mode-in-buffer)
 (add-hook 'shell-mode-hook #'raghu/enable-font-lock-mode-in-buffer)
 (add-hook 'special-mode-hook #'raghu/enable-font-lock-mode-in-buffer)
@@ -276,5 +278,6 @@ on which point originally was."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((((type x)) (:height 90 :family "DejaVu Sans Mono"))))
+ '(eshell-prompt ((t nil)))
  '(isearch ((((type x ns) (class color) (background light)) (:background "plum2" :foreground "black"))))
  '(region ((((type x ns) (class color) (background light)) (:background "LightGoldenrod2")))))
