@@ -185,6 +185,65 @@ above, perform no action."
 	   (kill-region prior-point (point))))))
 (define-key global-map (kbd "C-c k") #'raghu/kill-backward-to-indentation)
 
+(defun raghu/copy-line (&optional lines)
+  "Copy LINES lines.
+
+Save LINES lines in the `kill-ring' without actually killing the
+lines.  If LINES is a non-zero positive integer, save that many
+lines below starting from the current line.  If LINES is a
+non-zero negative integer, save that many lines above starting
+from the current line.  If LINES is neither of the above, do
+nothing."
+  (interactive "p")
+  (when (integerp lines)
+    (unless (= 0 lines)
+      (save-excursion
+	(if (< 0 lines) (forward-line 0) (forward-line 1))
+	(let ((end (point)))
+	  (forward-line lines)
+	  (kill-ring-save (point) end)
+	  (message "Lines copied <= %d" (abs lines)))))))
+(define-key global-map (kbd "C-c w") #'raghu/copy-line)
+
+(defun raghu/yank-above-current-line (&optional arg)
+  "Insert most recent kill above current line.
+
+If ARG is supplied and is a non-negative integer, insert the
+ARGth most recent kill above current line."
+  (interactive "p")
+  (when (integerp arg)
+    (when (>= arg 0)
+      (save-excursion
+	(beginning-of-line)
+	(open-line 1)
+	(yank arg)
+	;; If the yanked text already has a newline at the end, we
+	;; will end up with an extra newline, so let's get rid of the
+	;; extra newline if one exists.
+	(when (and (eolp) (bolp))
+	  (forward-line 0)
+	  (let ((beginning (point)))
+	    (forward-line 1)
+	    (delete-region beginning (point)))))
+      ;; Account for save-excursion behaving differently at the
+      ;; beginning of the line.
+      (when (bolp) (forward-line 1)))))
+(define-key global-map (kbd "C-c Y") #'raghu/yank-above-current-line)
+
+(defun raghu/yank-below-current-line (&optional arg)
+  "Insert most recent kill below current line.
+
+If ARG is supplied and is a non-negative integer, insert the
+ARGth most recent kill below current line."
+  (interactive "p")
+  (when (integerp arg)
+    (when (>= arg 0)
+      (save-excursion
+	(end-of-line)
+	(if (eobp) (newline 1 nil) (forward-line 1))
+	(yank arg)))))
+(define-key global-map (kbd "C-c y") #'raghu/yank-below-current-line)
+
 (defun raghu/insert-new-line-above (&optional lines)
   "Insert LINES (default=1) new lines above current line.
 
