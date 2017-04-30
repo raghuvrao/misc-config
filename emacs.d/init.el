@@ -112,6 +112,12 @@ Line truncation is Emacs parlance for not-line-wrapping."
 (add-hook 'diff-mode-hook #'raghu/enable-truncate-long-lines-in-buffer)
 (add-hook 'prog-mode-hook #'raghu/enable-truncate-long-lines-in-buffer)
 
+;; In text-mode, word-/line-wrapping is useful.
+(add-hook 'text-mode-hook
+	  (lambda ()
+	    (set (make-local-variable 'truncate-lines) nil)
+	    (set (make-local-variable 'word-wrap) 1)))
+
 ;; Scroll text around while not moving point away from original line
 ;; (so long as the original line is in the window, of course).
 (setq raghu/scroll-text-map (make-sparse-keymap))
