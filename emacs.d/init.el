@@ -1,3 +1,11 @@
+;;; init.el --- Emacs configuration file  -*- lexical-binding: t -*-
+
+;;; Commentary:
+
+;; My Emacs configuration file.
+
+;;; Code:
+
 (require 'package)
 (package-initialize)
 
@@ -58,7 +66,7 @@
 
 The name of the buffer is \"*Async: CMD*\"."
   (interactive (list (read-shell-command "Async shell command? ")))
-  ;; Get rid of leading/trailing space from input.
+  ;; Get rid of leading/trailing space from the command.
   (let ((cmd (replace-regexp-in-string "^[ \t]+\\|[ \t]+$" "" cmd)))
     ;; Do work only if cmd is non-empty after trimming.
     (when (> (length cmd) 0)
@@ -333,3 +341,5 @@ on which point originally was."
  '(eshell-prompt ((t nil)))
  '(isearch ((((type x ns) (class color) (background light)) (:background "plum2" :foreground "black"))))
  '(region ((((type x ns) (class color) (background light)) (:background "LightGoldenrod2")))))
+
+;;; init.el ends here
