@@ -90,6 +90,6 @@ unset -f pathmunge
 
 # Source .bashrc in the end, and only if running bash.
 if [ -n "${BASH_VERSION}" -a -r "${HOME}/.bashrc" ]; then
-  HISTCONTROL='ignoredups'
+  export HISTCONTROL='ignoredups'
   . "${HOME}/.bashrc"
 fi
