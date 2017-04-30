@@ -49,44 +49,24 @@
 (require 'windmove)
 (windmove-default-keybindings 'control)
 
-(defun raghu--trim-space (text)
-  "Strip leading/trailing space from TEXT."
-  (when (stringp text)
-    (replace-regexp-in-string "^[ \t]+\\|[ \t]+$" "" text)))
-
 ;; async-shell-command runs the commands in buffers that are not
 ;; entirely uniquely named.  It has support for using different buffer
 ;; names, but for me, that's not good enough.  I want the buffers to
 ;; be named after the command that is run in them.
-(defun raghu/async-shell-command (cmd &optional buf-name)
-  "Run shell command CMD asynchronously in buffer named after command.
+(defun raghu/async-shell-command (cmd)
+  "Run shell command CMD asynchronously in buffer named after CMD.
 
-If optional string argument BUF-NAME is supplied, the command's
-output (stdout and stderr) will be placed in the buffer named
-BUF-NAME.  If BUF-NAME is nil or not supplied or not a string or
-an effectively empty string, the command's output is placed in a
-buffer named \"*Async: CMD*\"."
+The name of the buffer is \"*Async: CMD*\"."
   (interactive (list (read-shell-command "Async shell command? ")))
-  (when (> (length cmd) 0)
-    ;; Get rid of leading/trailing space from input.
-    (let ((cmd (raghu--trim-space cmd)))
-      ;; Do work only if cmd is non-empty after trimming.
-      (when (> (length cmd) 0)
-	(let ((dir default-directory)
-	      ;; If buf-name is a string, first strip leading/trailing
-	      ;; space from it, if it is not already just "".  If
-	      ;; buf-name is "" after that, or if buf-name was not a
-	      ;; string to begin with, give the new buffer a name
-	      ;; constructed from the command to be run.  Otherwise,
-	      ;; use the now-trimmed buf-name to name the new buffer.
-	      (buf-name (or (when (stringp buf-name)
-			      (unless (string= buf-name "")
-				(let ((buf-name (raghu--trim-space buf-name)))
-				  (unless (string= buf-name "") buf-name))))
-			    (concat "*Async: " cmd "*"))))
-	  (switch-to-buffer buf-name)
-	  (setq default-directory dir)
-	  (async-shell-command cmd buf-name nil))))))
+  ;; Get rid of leading/trailing space from input.
+  (let ((cmd (replace-regexp-in-string "^[ \t]+\\|[ \t]+$" "" cmd)))
+    ;; Do work only if cmd is non-empty after trimming.
+    (when (> (length cmd) 0)
+      (let ((dir default-directory)
+	    (buf-name (concat "*Async: " cmd "*")))
+	(switch-to-buffer buf-name)
+	(setq default-directory dir)
+	(async-shell-command cmd buf-name nil)))))
 (define-key global-map (kbd "C-c !") #'raghu/async-shell-command)
 
 (defun raghu/visit-emacs-configuration-file ()
