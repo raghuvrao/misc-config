@@ -116,104 +116,96 @@ window.  A mark is set at point's original starting position."
 		     nil))
 (define-key global-map (kbd "C-c s") #'raghu/scroll)
 
-(defun raghu/kill-backward-to-indentation (&optional arg)
+(defun raghu/kill-backward-to-indentation (arg)
   "Kill backward from point to first nonblank character on line.
 
-If optional argument ARG is a positive integer, then kill
-backward from point to first nonblank character ARG lines above.
-If ARG is 0, then kill backward from point to first nonblank
-character on the same line.  If ARG is nil or not supplied,
-perform the same action as when ARG is 0.  If ARG is none of the
-above, perform no action."
-  (interactive "P")
-  (let ((prior-point (point)))		; No need to mess with mark, I think.
-    (cond ((integerp arg)
-	   (let ((lines (prefix-numeric-value arg)))
-	     (cond ((= lines 0)
-		    ;; (backward-to-indentation 0) will call
-		    ;; (forward-line 0), which has a side-effect of
-		    ;; moving point to column 0.  In places where a
-		    ;; subset of the text is read-only (for example,
-		    ;; the minibuffer), this side-effect will cause
-		    ;; kill-region to fail.  back-to-indentation calls
-		    ;; beginning-of-line, which does not have this
-		    ;; side-effect.
-		    (back-to-indentation)
-		    (kill-region prior-point (point)))
-		   ((> lines 0)
-		    ;; back-to-indentation does not take arguments, so
-		    ;; use backward-to-indentation when we are dealing
-		    ;; with multiple lines.
-		    (backward-to-indentation lines)
-		    (kill-region prior-point (point))))))
-	  ((null arg)
-	   ;; We want to treat arg being nil the same as arg being 0.
-	   ;; See reasoning above for using back-to-indentation here
-	   ;; instead of backward-to-indentation.
-	   (back-to-indentation)
-	   (kill-region prior-point (point))))))
+If ARG is >=1, count backwards ARG lines from the current
+line (including the current line), and kill from point to
+indentation of the resulting line.  By default, ARG is 1, which
+means kill backward from point to indentation on the current
+line.  If ARG < 1, nothing is killed."
+  (interactive "p")
+  (when (>= arg 1)
+    (let ((prior-point (point)))
+      (cond ((= arg 1)
+	     ;; If arg is 1, (backward-to-indentation (1- 1)) will
+	     ;; call (forward-line 0) which relocates point to column
+	     ;; 0.  In buffers where part of the text is read-only
+	     ;; (e.g. minibuffer prompts), this side-effect causes
+	     ;; problems with the kill-region call below.  So, instead
+	     ;; of backward-to-indentation, use back-to-indentation in
+	     ;; this case, which does not have the above side-effect.
+	     (back-to-indentation))
+	    (t
+	     ;; arg is always >1 here owing to the `when' check above.
+	     ;; When dealing with multiple lines, use
+	     ;; backward-to-indentation because back-to-indentation
+	     ;; takes no arguments.  Also, backward-to-indentation
+	     ;; works on one more line than desirable for the
+	     ;; semantics here, so use arg - 1.
+	     (backward-to-indentation (1- arg))))
+      (kill-region prior-point (point)))))
 (define-key global-map (kbd "C-c k") #'raghu/kill-backward-to-indentation)
 
-(defun raghu/copy-line (&optional lines)
-  "Copy LINES lines.
+(defun raghu/copy-line (lines)
+  "Copy LINES lines starting from current line.
 
 Save LINES lines in the `kill-ring' without actually killing the
 lines.  If LINES is a non-zero positive integer, save that many
 lines below starting from the current line.  If LINES is a
 non-zero negative integer, save that many lines above starting
-from the current line.  If LINES is neither of the above, do
-nothing."
+from the current line.  If LINES is 0, copy no lines.  Return the
+number of lines actually copied."
   (interactive "p")
-  (when (integerp lines)
-    (unless (= 0 lines)
-      (save-excursion
-	(if (< 0 lines) (forward-line 0) (forward-line 1))
-	(let ((end (point)))
-	  (forward-line lines)
-	  (kill-ring-save (point) end)
-	  (message "Lines copied <= %d" (abs lines)))))))
+  (let ((num-lines-copied (if (= 0 lines)
+			      lines
+			    (save-excursion
+			      (if (< 0 lines) (forward-line 0) (forward-line 1))
+			      (let ((end (point)))
+				(let ((excess (forward-line lines)))
+				  (kill-ring-save (point) end)
+				  (abs (- lines excess))))))))
+    (message "Lines copied: %d" num-lines-copied) num-lines-copied))
 (define-key global-map (kbd "C-c w") #'raghu/copy-line)
 
-(defun raghu/yank-above-current-line (&optional arg)
+(defun raghu/yank-above-current-line (arg)
   "Insert most recent kill above current line.
 
 If ARG is supplied and is a non-negative integer, insert the
 ARGth most recent kill above current line."
   (interactive "p")
-  (when (integerp arg)
-    (when (>= arg 0)
-      (save-excursion
-	(beginning-of-line)
-	(open-line 1)
-	(yank arg)
-	;; If the yanked text already has a newline at the end, we
-	;; will end up with an extra newline, so let's get rid of the
-	;; extra newline if one exists.
-	(when (and (eolp) (bolp))
-	  (forward-line 0)
-	  (let ((beginning (point)))
-	    (forward-line 1)
-	    (delete-region beginning (point)))))
-      ;; Account for save-excursion behaving differently at the
-      ;; beginning of the line.
-      (when (bolp) (forward-line 1)))))
+  (when (>= arg 0)
+    (save-excursion
+      (beginning-of-line)
+      (open-line 1)
+      (yank arg)
+      ;; If the yanked text already has a newline at the end, we
+      ;; will end up with an extra newline, so let's get rid of the
+      ;; extra newline if one exists.
+      (when (and (eolp) (bolp))
+	(forward-line 0)
+	(let ((beginning (point)))
+	  (forward-line 1)
+	  (delete-region beginning (point)))))
+    ;; Account for save-excursion behaving differently at the
+    ;; beginning of the line.
+    (when (bolp) (forward-line 1))))
 (define-key global-map (kbd "C-c Y") #'raghu/yank-above-current-line)
 
-(defun raghu/yank-below-current-line (&optional arg)
+(defun raghu/yank-below-current-line (arg)
   "Insert most recent kill below current line.
 
 If ARG is supplied and is a non-negative integer, insert the
 ARGth most recent kill below current line."
   (interactive "p")
-  (when (integerp arg)
-    (when (>= arg 0)
-      (save-excursion
-	(end-of-line)
-	(if (eobp) (newline 1 nil) (forward-line 1))
-	(yank arg)))))
+  (when (>= arg 0)
+    (save-excursion
+      (end-of-line)
+      (if (eobp) (newline 1 nil) (forward-line 1))
+      (yank arg))))
 (define-key global-map (kbd "C-c y") #'raghu/yank-below-current-line)
 
-(defun raghu/insert-new-line-above (&optional lines)
+(defun raghu/insert-new-line-above (lines)
   "Insert LINES (default=1) new lines above current line.
 
 As new lines are inserted, point's position will remain constant
@@ -228,7 +220,7 @@ relative to the line on which point was located originally."
     (when (bolp) (forward-line lines))))
 (define-key global-map (kbd "C-c RET") #'raghu/insert-new-line-above)
 
-(defun raghu/insert-new-line-below (&optional lines)
+(defun raghu/insert-new-line-below (lines)
   "Insert LINES (default=1) new lines below current line.
 
 As new lines are inserted, point's position will remain constant
@@ -240,7 +232,7 @@ relative to the line on which point was located originally."
       (newline lines nil))))
 (define-key global-map (kbd "C-c M-RET") #'raghu/insert-new-line-below)
 
-(defun raghu/insert-and-go-to-new-line-above (&optional lines)
+(defun raghu/insert-and-go-to-new-line-above (lines)
   "Insert LINES (default=1) new lines above current line.
 
 The point is moved to the top-most line inserted."
@@ -251,7 +243,7 @@ The point is moved to the top-most line inserted."
     (indent-according-to-mode)))
 (define-key global-map (kbd "C-c O") #'raghu/insert-and-go-to-new-line-above)
 
-(defun raghu/insert-and-go-to-new-line-below (&optional lines)
+(defun raghu/insert-and-go-to-new-line-below (lines)
   "Insert LINES (default=1) new lines below current line.
 
 Point moves to the newly-inserted line immediately below the line
