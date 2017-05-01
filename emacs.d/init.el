@@ -287,6 +287,13 @@ parlance for not-line-wrapping."
   (interactive)
   (set (make-local-variable 'truncate-lines) t))
 
+(defun raghu/enable-auto-complete-mode-in-buffer ()
+  "Enable completion in current buffer.
+
+Meant for adding to mode hooks."
+  (interactive)
+  (auto-complete-mode 1))
+
 (with-eval-after-load 'simple
   ;; special-mode is a "parent" mode for various modes.
   (add-hook 'special-mode-hook #'raghu/enable-font-lock-mode-in-buffer))
@@ -306,6 +313,10 @@ parlance for not-line-wrapping."
 (with-eval-after-load 'diff-mode
   (add-hook 'diff-mode-hook #'raghu/enable-font-lock-mode-in-buffer)
   (add-hook 'diff-mode-hook #'raghu/enable-truncate-long-lines-in-buffer))
+
+(with-eval-after-load 'elisp-mode
+  (add-hook 'emacs-lisp-mode-hook #'raghu/enable-auto-complete-mode-in-buffer)
+  (add-hook 'lisp-interaction-mode-hook #'raghu/enable-auto-complete-mode-in-buffer))
 
 (with-eval-after-load 'esh-mode
   (add-hook 'eshell-mode-hook #'raghu/enable-hl-line-mode-in-buffer)
@@ -333,6 +344,7 @@ parlance for not-line-wrapping."
 			  (executable-find "gofmt")))
   (add-hook 'before-save-hook #'gofmt-before-save)
   (add-hook 'go-mode-hook #'go-eldoc-setup)
+  (add-hook 'go-mode-hook #'raghu/enable-auto-complete-mode-in-buffer)
   ;; (add-hook 'go-mode-hook #'go-guru-hl-identifier-mode)
   (add-hook 'go-mode-hook (lambda ()
 			    (unless (string-match "^go" compile-command)
@@ -340,7 +352,6 @@ parlance for not-line-wrapping."
 				   "go build && go vet"))
 			    (local-set-key (kbd "C-c C-c") #'compile)
 			    (setq show-trailing-whitespace t)
-			    (auto-complete-mode 1)
 			    (subword-mode 1))))
 
 (custom-set-variables
