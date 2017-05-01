@@ -17,6 +17,8 @@
 (column-number-mode 1)
 (show-paren-mode 1)
 
+(global-hl-line-mode -1)
+(global-font-lock-mode -1)
 (transient-mark-mode -1)
 (when (fboundp #'tool-bar-mode) (tool-bar-mode -1))
 (when (fboundp #'scroll-bar-mode) (scroll-bar-mode -1))
@@ -47,7 +49,9 @@
 
 ;; auto-complete is great when it stays out of the way.  In
 ;; custom-set-variables, I have disabled auto-complete from starting
-;; automatically.  I will hit `S-TAB' to trigger auto-complete.
+;; automatically.  I will hit `S-TAB' to trigger auto-complete.  Also,
+;; I am not enabling it globally.  I will enable it in specific
+;; major-modes.
 (require 'auto-complete)
 (define-key ac-mode-map (kbd "<backtab>") #'auto-complete)
 
@@ -82,48 +86,6 @@ The name of the buffer is \"*Async: CMD*\"."
   (interactive)
   (find-file (substitute-in-file-name "$HOME/.emacs.d/init.el")))
 (define-key global-map (kbd "C-c C") #'raghu/visit-emacs-configuration-file)
-
-;; Highlighting the current line is useful, but not everywhere.
-(global-hl-line-mode -1)
-(defun raghu/enable-hl-line-mode-in-buffer ()
-  "Highlight line containing point in current buffer."
-  (interactive)
-  (hl-line-mode 1))
-(add-hook 'dired-mode-hook #'raghu/enable-hl-line-mode-in-buffer)
-(add-hook 'eshell-mode-hook #'raghu/enable-hl-line-mode-in-buffer)
-(add-hook 'ibuffer-mode-hook #'raghu/enable-hl-line-mode-in-buffer)
-(add-hook 'prog-mode-hook #'raghu/enable-hl-line-mode-in-buffer)
-(add-hook 'shell-mode-hook #'raghu/enable-hl-line-mode-in-buffer)
-(add-hook 'text-mode-hook #'raghu/enable-hl-line-mode-in-buffer)
-
-;; Enable syntax higlighting / fontification only in some places.
-(global-font-lock-mode -1)
-(defun raghu/enable-font-lock-mode-in-buffer ()
-  "Enable font lock mode in buffer."
-  (interactive)
-  (font-lock-mode 1))
-(add-hook 'compilation-mode-hook #'raghu/enable-font-lock-mode-in-buffer)
-(add-hook 'diff-mode-hook #'raghu/enable-font-lock-mode-in-buffer)
-(add-hook 'dired-mode-hook #'raghu/enable-font-lock-mode-in-buffer)
-(add-hook 'eshell-mode-hook #'raghu/enable-font-lock-mode-in-buffer)
-(add-hook 'inferior-python-mode-hook #'raghu/enable-font-lock-mode-in-buffer)
-(add-hook 'shell-mode-hook #'raghu/enable-font-lock-mode-in-buffer)
-(add-hook 'special-mode-hook #'raghu/enable-font-lock-mode-in-buffer)
-
-;; Line-wrapping is sometimes annoying.
-(defun raghu/enable-truncate-long-lines-in-buffer ()
-  "Enable line truncation in current buffer.
-
-Line truncation is Emacs parlance for not-line-wrapping."
-  (interactive)
-  (set (make-local-variable 'truncate-lines) t))
-(add-hook 'diff-mode-hook #'raghu/enable-truncate-long-lines-in-buffer)
-(add-hook 'prog-mode-hook #'raghu/enable-truncate-long-lines-in-buffer)
-
-;; In text-mode, word-/line-wrapping is useful.
-(add-hook 'text-mode-hook (lambda ()
-			    (set (make-local-variable 'truncate-lines) nil)
-			    (set (make-local-variable 'word-wrap) 1)))
 
 ;; Scroll while keeping point on original text-line (so long as the
 ;; original text-line is in the window, of course).
@@ -302,6 +264,64 @@ on which point originally was."
     (forward-line)
     (indent-according-to-mode)))
 (define-key global-map (kbd "C-c o") #'raghu/insert-and-go-to-new-line-below)
+
+(defun raghu/enable-hl-line-mode-in-buffer ()
+  "Highlight line containing point in current buffer.
+
+Meant for adding to mode hooks."
+  (interactive)
+  (hl-line-mode 1))
+
+(defun raghu/enable-font-lock-mode-in-buffer ()
+  "Enable font lock mode in buffer.
+
+Meant for adding to mode hooks."
+  (interactive)
+  (font-lock-mode 1))
+
+(defun raghu/enable-truncate-long-lines-in-buffer ()
+  "Enable line truncation in current buffer.
+
+Meant for adding to mode hooks.  Line truncation is Emacs
+parlance for not-line-wrapping."
+  (interactive)
+  (set (make-local-variable 'truncate-lines) t))
+
+(with-eval-after-load 'simple
+  ;; special-mode is a "parent" mode for various modes.
+  (add-hook 'special-mode-hook #'raghu/enable-font-lock-mode-in-buffer))
+
+(with-eval-after-load 'prog-mode
+  ;; prog-mode is a "parent" mode for various programming modes.
+  (add-hook 'prog-mode-hook #'raghu/enable-truncate-long-lines-in-buffer)
+  (add-hook 'prog-mode-hook #'raghu/enable-hl-line-mode-in-buffer))
+
+(with-eval-after-load 'dired
+  (add-hook 'dired-mode-hook #'raghu/enable-hl-line-mode-in-buffer)
+  (add-hook 'dired-mode-hook #'raghu/enable-font-lock-mode-in-buffer))
+
+(with-eval-after-load 'compile
+  (add-hook 'compilation-mode-hook #'raghu/enable-font-lock-mode-in-buffer))
+
+(with-eval-after-load 'diff-mode
+  (add-hook 'diff-mode-hook #'raghu/enable-font-lock-mode-in-buffer)
+  (add-hook 'diff-mode-hook #'raghu/enable-truncate-long-lines-in-buffer))
+
+(with-eval-after-load 'esh-mode
+  (add-hook 'eshell-mode-hook #'raghu/enable-hl-line-mode-in-buffer)
+  (add-hook 'eshell-mode-hook #'raghu/enable-font-lock-mode-in-buffer))
+
+(with-eval-after-load 'ibuffer
+  (add-hook 'ibuffer-mode-hook #'raghu/enable-hl-line-mode-in-buffer))
+
+(with-eval-after-load 'python
+  (add-hook 'inferior-python-mode-hook #'raghu/enable-font-lock-mode-in-buffer))
+
+;; text-mode does not provide a feature, so use "text-mode" below.
+(with-eval-after-load "text-mode"
+  (add-hook 'text-mode-hook (lambda ()
+			      (set (make-local-variable 'truncate-lines) nil)
+			      (set (make-local-variable 'word-wrap) 1))))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
