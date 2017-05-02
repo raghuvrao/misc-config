@@ -179,9 +179,12 @@ ARGth most recent kill above current line."
       (beginning-of-line)
       (open-line 1)
       (yank arg)
-      ;; If the yanked text already has a newline at the end, we
-      ;; will end up with an extra newline, so let's get rid of the
-      ;; extra newline if one exists.
+      ;; If the yanked text already has a newline at the end, we will
+      ;; end up with an extra newline, so let's get rid of the extra
+      ;; newline if one exists.  We do so in a way that the removed
+      ;; newline does not end up in the `kill-ring'.  Otherwise, a
+      ;; subsequent yank will yank the newline, which is not what we
+      ;; want.
       (when (and (eolp) (bolp))
 	(forward-line 0)
 	(let ((beginning (point)))
