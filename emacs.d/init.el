@@ -276,6 +276,13 @@ Meant for adding to mode hooks.  Line truncation is Emacs
 parlance for not-line-wrapping."
   (set (make-local-variable 'truncate-lines) t))
 
+(defun raghu--enable-word-wrap-in-buffer ()
+  "Enable word-wrapping in current buffer.
+
+Meant for adding to mode hooks."
+  (set (make-local-variable 'truncate-lines) nil)
+  (set (make-local-variable 'word-wrap) 1))
+
 (defun raghu--enable-auto-complete-mode-in-buffer ()
   "Enable completion in current buffer.
 
@@ -318,9 +325,7 @@ Meant for adding to mode hooks."
 
 ;; text-mode does not provide a feature, so use "text-mode" below.
 (with-eval-after-load "text-mode"
-  (add-hook 'text-mode-hook (lambda ()
-			      (set (make-local-variable 'truncate-lines) nil)
-			      (set (make-local-variable 'word-wrap) 1))))
+  (add-hook 'text-mode-hook #'raghu--enable-word-wrap-in-buffer))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
