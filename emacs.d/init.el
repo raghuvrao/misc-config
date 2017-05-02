@@ -257,68 +257,64 @@ on which point originally was."
     (indent-according-to-mode)))
 (define-key global-map (kbd "C-c o") #'raghu/insert-and-go-to-new-line-below)
 
-(defun raghu/enable-hl-line-mode-in-buffer ()
+(defun raghu--enable-hl-line-mode-in-buffer ()
   "Highlight line containing point in current buffer.
 
 Meant for adding to mode hooks."
-  (interactive)
   (hl-line-mode 1))
 
-(defun raghu/enable-font-lock-mode-in-buffer ()
+(defun raghu--enable-font-lock-mode-in-buffer ()
   "Enable font lock mode in buffer.
 
 Meant for adding to mode hooks."
-  (interactive)
   (font-lock-mode 1))
 
-(defun raghu/enable-truncate-long-lines-in-buffer ()
+(defun raghu--enable-truncate-long-lines-in-buffer ()
   "Enable line truncation in current buffer.
 
 Meant for adding to mode hooks.  Line truncation is Emacs
 parlance for not-line-wrapping."
-  (interactive)
   (set (make-local-variable 'truncate-lines) t))
 
-(defun raghu/enable-auto-complete-mode-in-buffer ()
+(defun raghu--enable-auto-complete-mode-in-buffer ()
   "Enable completion in current buffer.
 
 Meant for adding to mode hooks."
-  (interactive)
   (auto-complete-mode 1))
 
 (with-eval-after-load 'simple
   ;; special-mode is a "parent" mode for various modes.
-  (add-hook 'special-mode-hook #'raghu/enable-font-lock-mode-in-buffer))
+  (add-hook 'special-mode-hook #'raghu--enable-font-lock-mode-in-buffer))
 
 (with-eval-after-load 'prog-mode
   ;; prog-mode is a "parent" mode for various programming modes.
-  (add-hook 'prog-mode-hook #'raghu/enable-truncate-long-lines-in-buffer)
-  (add-hook 'prog-mode-hook #'raghu/enable-hl-line-mode-in-buffer))
+  (add-hook 'prog-mode-hook #'raghu--enable-truncate-long-lines-in-buffer)
+  (add-hook 'prog-mode-hook #'raghu--enable-hl-line-mode-in-buffer))
 
 (with-eval-after-load 'dired
-  (add-hook 'dired-mode-hook #'raghu/enable-hl-line-mode-in-buffer)
-  (add-hook 'dired-mode-hook #'raghu/enable-font-lock-mode-in-buffer))
+  (add-hook 'dired-mode-hook #'raghu--enable-hl-line-mode-in-buffer)
+  (add-hook 'dired-mode-hook #'raghu--enable-font-lock-mode-in-buffer))
 
 (with-eval-after-load 'compile
-  (add-hook 'compilation-mode-hook #'raghu/enable-font-lock-mode-in-buffer))
+  (add-hook 'compilation-mode-hook #'raghu--enable-font-lock-mode-in-buffer))
 
 (with-eval-after-load 'diff-mode
-  (add-hook 'diff-mode-hook #'raghu/enable-font-lock-mode-in-buffer)
-  (add-hook 'diff-mode-hook #'raghu/enable-truncate-long-lines-in-buffer))
+  (add-hook 'diff-mode-hook #'raghu--enable-font-lock-mode-in-buffer)
+  (add-hook 'diff-mode-hook #'raghu--enable-truncate-long-lines-in-buffer))
 
 (with-eval-after-load 'elisp-mode
-  (add-hook 'emacs-lisp-mode-hook #'raghu/enable-auto-complete-mode-in-buffer)
-  (add-hook 'lisp-interaction-mode-hook #'raghu/enable-auto-complete-mode-in-buffer))
+  (add-hook 'emacs-lisp-mode-hook #'raghu--enable-auto-complete-mode-in-buffer)
+  (add-hook 'lisp-interaction-mode-hook #'raghu--enable-auto-complete-mode-in-buffer))
 
 (with-eval-after-load 'esh-mode
-  (add-hook 'eshell-mode-hook #'raghu/enable-hl-line-mode-in-buffer)
-  (add-hook 'eshell-mode-hook #'raghu/enable-font-lock-mode-in-buffer))
+  (add-hook 'eshell-mode-hook #'raghu--enable-hl-line-mode-in-buffer)
+  (add-hook 'eshell-mode-hook #'raghu--enable-font-lock-mode-in-buffer))
 
 (with-eval-after-load 'ibuffer
-  (add-hook 'ibuffer-mode-hook #'raghu/enable-hl-line-mode-in-buffer))
+  (add-hook 'ibuffer-mode-hook #'raghu--enable-hl-line-mode-in-buffer))
 
 (with-eval-after-load 'python
-  (add-hook 'inferior-python-mode-hook #'raghu/enable-font-lock-mode-in-buffer))
+  (add-hook 'inferior-python-mode-hook #'raghu--enable-font-lock-mode-in-buffer))
 
 ;; text-mode does not provide a feature, so use "text-mode" below.
 (with-eval-after-load "text-mode"
