@@ -272,11 +272,12 @@ Meant for adding to mode hooks."
 Meant for adding to mode hooks."
   (font-lock-mode 1))
 
-(defun raghu--enable-truncate-long-lines-in-buffer ()
+(defun raghu--disable-line-wrap-in-buffer ()
   "Enable line truncation in current buffer.
 
-Meant for adding to mode hooks.  Line truncation is Emacs
-parlance for not-line-wrapping."
+Line truncation is Emacs parlance for not-line-wrapping.  So,
+this function disables line-wrapping.  Meant for adding to mode
+hooks."
   (set (make-local-variable 'truncate-lines) t))
 
 (defun raghu--enable-word-wrap-in-buffer ()
@@ -298,7 +299,7 @@ Meant for adding to mode hooks."
 
 (with-eval-after-load 'prog-mode
   ;; prog-mode is a "parent" mode for various programming modes.
-  (add-hook 'prog-mode-hook #'raghu--enable-truncate-long-lines-in-buffer)
+  (add-hook 'prog-mode-hook #'raghu--disable-line-wrap-in-buffer)
   (add-hook 'prog-mode-hook #'raghu--enable-hl-line-mode-in-buffer))
 
 (with-eval-after-load 'dired
@@ -310,7 +311,7 @@ Meant for adding to mode hooks."
 
 (with-eval-after-load 'diff-mode
   (add-hook 'diff-mode-hook #'raghu--enable-font-lock-mode-in-buffer)
-  (add-hook 'diff-mode-hook #'raghu--enable-truncate-long-lines-in-buffer))
+  (add-hook 'diff-mode-hook #'raghu--disable-line-wrap-in-buffer))
 
 (with-eval-after-load 'elisp-mode
   (add-hook 'emacs-lisp-mode-hook #'raghu--enable-auto-complete-mode-in-buffer)
