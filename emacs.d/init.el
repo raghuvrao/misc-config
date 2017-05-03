@@ -97,10 +97,10 @@ The name of the buffer is \"*Async: CMD*\"."
 (defun raghu/scroll ()
   "Scroll in the current buffer.
 
-Activates a keymap temporarily where `i' will scroll text up, `k'
-will scroll text down, `j' will scroll text left, and `l' will
-scroll text right.  Any other key will deactivate the keymap.
-While scrolling, point remains with the original text-line (not
+Activate a keymap where `i' will scroll text up, `k' will scroll
+text down, `j' will scroll text left, and `l' will scroll text
+right.  Any other key will deactivate the keymap.  While
+scrolling, point remains with the original text-line (not
 screen-line) so long as the original text-line is within the
 window.  A mark is set at point's original starting position."
   (interactive)
@@ -119,11 +119,11 @@ window.  A mark is set at point's original starting position."
 (defun raghu/kill-backward-to-indentation (arg)
   "Kill backward from point to first nonblank character on line.
 
-If ARG is >=1, count backwards ARG lines from the current
-line (including the current line), and kill from point to
-indentation of the resulting line.  By default, ARG is 1, which
-means kill backward from point to indentation on the current
-line.  If ARG < 1, nothing is killed."
+If ARG = 1, kill backward from point to indentation on the
+current line.  If ARG > 1, count backwards ARG lines from the
+current line (including the current line), and kill from point to
+indentation of the resulting line.  If ARG < 1, nothing is
+killed."
   (interactive "p")
   (when (>= arg 1)
     (let ((prior-point (point)))
@@ -155,7 +155,8 @@ lines.  If LINES is a non-zero positive integer, save that many
 lines below starting from the current line.  If LINES is a
 non-zero negative integer, save that many lines above starting
 from the current line.  If LINES is 0, copy no lines.  Return the
-number of lines actually copied."
+number of lines actually copied.  Point remains with the original
+text line, and at the original position on that line."
   (interactive "p")
   (let ((num-lines-copied (if (= 0 lines)
 			      lines
@@ -169,10 +170,10 @@ number of lines actually copied."
 (define-key global-map (kbd "C-c w") #'raghu/copy-line)
 
 (defun raghu/yank-above-current-line (arg)
-  "Insert most recent kill above current line.
+  "Yank ARGth most recent `kill-ring' entry above current line.
 
-If ARG is supplied and is a non-negative integer, insert the
-ARGth most recent kill above current line."
+Point remains with the original text-line at the original
+position on that line."
   (interactive "p")
   (when (>= arg 0)
     (save-excursion
@@ -196,10 +197,10 @@ ARGth most recent kill above current line."
 (define-key global-map (kbd "C-c Y") #'raghu/yank-above-current-line)
 
 (defun raghu/yank-below-current-line (arg)
-  "Insert most recent kill below current line.
+  "Yank ARGth most recent `kill-ring' entry below current line.
 
-If ARG is supplied and is a non-negative integer, insert the
-ARGth most recent kill below current line."
+Point remains with the original text-line at the original
+position on that line."
   (interactive "p")
   (when (>= arg 0)
     (save-excursion
@@ -209,10 +210,10 @@ ARGth most recent kill below current line."
 (define-key global-map (kbd "C-c y") #'raghu/yank-below-current-line)
 
 (defun raghu/insert-new-line-above (lines)
-  "Insert LINES (default=1) new lines above current line.
+  "Insert LINES new lines above current line.
 
-As new lines are inserted, point's position will remain constant
-relative to the line on which point was located originally."
+As new lines are inserted, point remains with the original
+text-line, and at the original position on that line."
   (interactive "p")
   (when (> lines 0)
     (save-excursion
@@ -224,10 +225,10 @@ relative to the line on which point was located originally."
 (define-key global-map (kbd "C-c RET") #'raghu/insert-new-line-above)
 
 (defun raghu/insert-new-line-below (lines)
-  "Insert LINES (default=1) new lines below current line.
+  "Insert LINES new lines below current line.
 
-As new lines are inserted, point's position will remain constant
-relative to the line on which point was located originally."
+As new lines are inserted, point remains with the original
+text-line, and at the original position on that line."
   (interactive "p")
   (when (> lines 0)
     (save-excursion
@@ -236,9 +237,10 @@ relative to the line on which point was located originally."
 (define-key global-map (kbd "C-c M-RET") #'raghu/insert-new-line-below)
 
 (defun raghu/insert-and-go-to-new-line-above (lines)
-  "Insert LINES (default=1) new lines above current line.
+  "Insert LINES new lines above current line.
 
-The point is moved to the top-most line inserted."
+Point is moved to the top-most line inserted, and indentation
+according to mode is inserted."
   (interactive "p")
   (when (> lines 0)
     (beginning-of-line 1)
@@ -247,10 +249,11 @@ The point is moved to the top-most line inserted."
 (define-key global-map (kbd "C-c O") #'raghu/insert-and-go-to-new-line-above)
 
 (defun raghu/insert-and-go-to-new-line-below (lines)
-  "Insert LINES (default=1) new lines below current line.
+  "Insert LINES new lines below current line.
 
 Point moves to the newly-inserted line immediately below the line
-on which point originally was."
+on which point originally was, and indentation according to mode
+is inserted."
   (interactive "p")
   (when (> lines 0)
     (save-excursion
