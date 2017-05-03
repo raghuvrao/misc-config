@@ -166,7 +166,8 @@ text line, and at the original position on that line."
 				(let ((excess (forward-line lines)))
 				  (kill-ring-save (point) end)
 				  (abs (- lines excess))))))))
-    (message "Lines copied: %d" num-lines-copied) num-lines-copied))
+    (message "Lines copied: %d" num-lines-copied)
+    num-lines-copied))
 (define-key global-map (kbd "C-c w") #'raghu/copy-line)
 
 (defun raghu/yank-above-current-line (arg)
