@@ -175,37 +175,22 @@ is inserted."
     (indent-according-to-mode)))
 (define-key global-map (kbd "C-c o") #'raghu/insert-and-go-to-new-line-below)
 
+;; Functions meant solely for adding to mode hooks.
 (defun raghu--enable-hl-line-mode-in-buffer ()
-  "Highlight line containing point in current buffer.
-
-Meant for adding to mode hooks."
+  "Highlight line containing point in current buffer."
   (hl-line-mode 1))
-
 (defun raghu--enable-font-lock-mode-in-buffer ()
-  "Enable font lock mode in buffer.
-
-Meant for adding to mode hooks."
+  "Enable font lock mode in buffer."
   (font-lock-mode 1))
-
 (defun raghu--disable-line-wrap-in-buffer ()
-  "Enable line truncation in current buffer.
-
-Line truncation is Emacs parlance for not-line-wrapping.  So,
-this function disables line-wrapping.  Meant for adding to mode
-hooks."
+  "Enable line truncation in current buffer."
   (set (make-local-variable 'truncate-lines) t))
-
 (defun raghu--enable-word-wrap-in-buffer ()
-  "Enable word-wrapping in current buffer.
-
-Meant for adding to mode hooks."
+  "Enable word-wrapping in current buffer."
   (set (make-local-variable 'truncate-lines) nil)
   (set (make-local-variable 'word-wrap) 1))
-
 (defun raghu--enable-auto-complete-mode-in-buffer ()
-  "Enable completion in current buffer.
-
-Meant for adding to mode hooks."
+  "Enable completion in current buffer."
   (auto-complete-mode 1))
 
 (with-eval-after-load 'simple
