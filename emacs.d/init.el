@@ -200,9 +200,6 @@ is inserted."
   (add-hook 'prog-mode-hook #'raghu--disable-line-wrap-in-buffer)
   (add-hook 'prog-mode-hook #'raghu--enable-hl-line-mode-in-buffer))
 
-(with-eval-after-load 'help-mode
-  (add-hook 'help-mode-hook #'raghu--enable-hl-line-mode-in-buffer))
-
 (with-eval-after-load 'dired
   (add-hook 'dired-mode-hook #'raghu--enable-hl-line-mode-in-buffer)
   (add-hook 'dired-mode-hook #'raghu--enable-font-lock-mode-in-buffer))
