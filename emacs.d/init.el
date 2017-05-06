@@ -9,6 +9,13 @@
 (require 'package)
 (package-initialize)
 
+(when (fboundp #'tool-bar-mode) (tool-bar-mode -1))
+(when (fboundp #'scroll-bar-mode) (scroll-bar-mode -1))
+(when (fboundp #'horizontal-scroll-bar-mode) (horizontal-scroll-bar-mode -1))
+(global-hl-line-mode -1)
+(global-font-lock-mode -1)
+(transient-mark-mode -1)
+
 ;; Various shell programs like to send their stdout through a pager.
 ;; When those programs are run within emacs, pagination functionality
 ;; through an external program is unnecessary.
@@ -16,12 +23,6 @@
 
 (column-number-mode 1)
 (show-paren-mode 1)
-
-(global-hl-line-mode -1)
-(global-font-lock-mode -1)
-(transient-mark-mode -1)
-(when (fboundp #'tool-bar-mode) (tool-bar-mode -1))
-(when (fboundp #'scroll-bar-mode) (scroll-bar-mode -1))
 
 ;; Override yes-or-no-p's definition by making yes-or-no-p an alias
 ;; for y-or-n-p.  This way, when yes-or-no-p is called, y-or-n-p will
