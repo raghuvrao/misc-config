@@ -349,6 +349,7 @@ Meant for adding to mode hooks."
  '(initial-scratch-message nil)
  '(kill-whole-line t)
  '(make-backup-files nil)
+ '(mouse-yank-at-point t)
  '(package-archive-priorities (quote (("gnu" . 90) ("melpa-stable" . 70) ("melpa" . 50))))
  '(package-archives
    (quote
