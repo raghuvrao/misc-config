@@ -44,7 +44,6 @@
 ;; key-bindings.
 (define-key global-map (kbd "C-c H") #'hl-line-mode)
 (define-key global-map (kbd "C-c J") #'join-line)
-(define-key global-map (kbd "C-c K") #'kill-whole-line)
 (define-key global-map (kbd "C-c P") #'font-lock-mode)
 (define-key global-map (kbd "C-c t") #'toggle-truncate-lines)
 
@@ -347,6 +346,7 @@ Meant for adding to mode hooks."
  '(indicate-empty-lines t)
  '(inhibit-startup-screen t)
  '(initial-scratch-message nil)
+ '(kill-whole-line t)
  '(make-backup-files nil)
  '(package-archive-priorities (quote (("gnu" . 90) ("melpa-stable" . 70) ("melpa" . 50))))
  '(package-archives
