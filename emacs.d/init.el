@@ -67,9 +67,7 @@
 ;; names, but for me, that's not good enough.  I want the buffers to
 ;; be named after the command that is run in them.
 (defun raghu/async-shell-command (cmd)
-  "Run shell command CMD asynchronously in buffer named after CMD.
-
-The name of the buffer is \"*Async: CMD*\"."
+  "Run shell command CMD asynchronously in buffer \"*Async: CMD*\"."
   (interactive (list (read-shell-command "Async shell command? ")))
   ;; Get rid of leading/trailing space from the command.
   (let ((cmd (replace-regexp-in-string "^[ \t]+\\|[ \t]+$" "" cmd)))
