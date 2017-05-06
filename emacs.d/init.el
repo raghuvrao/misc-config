@@ -46,6 +46,7 @@
 (define-key global-map (kbd "C-c J") #'join-line)
 (define-key global-map (kbd "C-c P") #'font-lock-mode)
 (define-key global-map (kbd "C-c t") #'toggle-truncate-lines)
+(define-key global-map (kbd "C-c ;") #'comment-line)
 
 ;; auto-complete is great when it stays out of the way.  In
 ;; custom-set-variables, I have disabled auto-complete from starting
