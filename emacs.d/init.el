@@ -189,6 +189,13 @@ is inserted."
   (add-hook 'prog-mode-hook #'raghu--disable-line-wrap-in-buffer)
   (add-hook 'prog-mode-hook #'raghu--enable-hl-line-mode-in-buffer))
 
+(with-eval-after-load 'ibuffer
+  ;; font-lock-mode is helpful in ibuffer-mode, but there is no need
+  ;; to enable it here separately. ibuffer-mode inherits from
+  ;; special-mode, and I have enabled font-lock-mode in special-mode
+  ;; (see above), so ibuffer-mode gets font-lock-mode.
+  (add-hook 'ibuffer-mode-hook #'raghu--enable-hl-line-mode-in-buffer))
+
 (with-eval-after-load 'dired
   (add-hook 'dired-mode-hook #'raghu--enable-hl-line-mode-in-buffer)
   (add-hook 'dired-mode-hook #'raghu--enable-font-lock-mode-in-buffer))
@@ -203,9 +210,6 @@ is inserted."
 (with-eval-after-load 'esh-mode
   (add-hook 'eshell-mode-hook #'raghu--enable-hl-line-mode-in-buffer)
   (add-hook 'eshell-mode-hook #'raghu--enable-font-lock-mode-in-buffer))
-
-(with-eval-after-load 'ibuffer
-  (add-hook 'ibuffer-mode-hook #'raghu--enable-hl-line-mode-in-buffer))
 
 (with-eval-after-load 'python
   (add-hook 'inferior-python-mode-hook #'raghu--enable-font-lock-mode-in-buffer))
