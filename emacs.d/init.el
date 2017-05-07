@@ -48,14 +48,6 @@
 (define-key global-map (kbd "C-c t") #'toggle-truncate-lines)
 (define-key global-map (kbd "C-c ;") #'comment-line)
 
-;; auto-complete is great when it stays out of the way.  In
-;; custom-set-variables, I have disabled auto-complete from starting
-;; automatically.  I will hit `S-TAB' to trigger auto-complete.  Also,
-;; I am not enabling it globally.  I will enable it in specific
-;; major-modes.
-(require 'auto-complete)
-(define-key ac-mode-map (kbd "<backtab>") #'auto-complete)
-
 ;; Make emacs-windows navigation easier.  The arg to
 ;; windmove-default-keybindings is a symbol indicating the modifier to
 ;; use with the arrow keys to navigate windows.
@@ -187,9 +179,6 @@ is inserted."
   "Enable word-wrapping in current buffer."
   (set (make-local-variable 'truncate-lines) nil)
   (set (make-local-variable 'word-wrap) 1))
-(defun raghu--enable-auto-complete-mode-in-buffer ()
-  "Enable completion in current buffer."
-  (auto-complete-mode 1))
 
 (with-eval-after-load 'simple
   ;; special-mode is a "parent" mode for various modes.
@@ -210,10 +199,6 @@ is inserted."
 (with-eval-after-load 'diff-mode
   (add-hook 'diff-mode-hook #'raghu--enable-font-lock-mode-in-buffer)
   (add-hook 'diff-mode-hook #'raghu--disable-line-wrap-in-buffer))
-
-(with-eval-after-load 'elisp-mode
-  (add-hook 'emacs-lisp-mode-hook #'raghu--enable-auto-complete-mode-in-buffer)
-  (add-hook 'lisp-interaction-mode-hook #'raghu--enable-auto-complete-mode-in-buffer))
 
 (with-eval-after-load 'esh-mode
   (add-hook 'eshell-mode-hook #'raghu--enable-hl-line-mode-in-buffer)
