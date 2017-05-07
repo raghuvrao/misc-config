@@ -228,12 +228,11 @@ is inserted."
  '(kill-whole-line t)
  '(make-backup-files nil)
  '(mouse-yank-at-point t)
- '(package-archive-priorities (quote (("gnu" . 90) ("melpa-stable" . 70) ("melpa" . 50))))
+ '(package-archive-priorities (quote (("gnu" . 90) ("melpa-stable" . 70))))
  '(package-archives
    (quote
     (("gnu" . "https://elpa.gnu.org/packages/")
-     ("melpa-stable" . "https://stable.melpa.org/packages/")
-     ("melpa" . "https://melpa.org/packages/"))))
+     ("melpa-stable" . "https://stable.melpa.org/packages/"))))
  '(package-enable-at-startup nil)
  '(ring-bell-function (quote ignore))
  '(scroll-conservatively 5)
