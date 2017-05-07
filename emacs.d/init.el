@@ -219,7 +219,6 @@ is inserted."
   (require 'go-rename)
   (require 'go-errcheck)
   (require 'go-eldoc)
-  (require 'go-autocomplete)
   (setq gofmt-command (or (executable-find "goimports")
 			  (executable-find "gofmt")))
   (add-hook 'before-save-hook #'gofmt-before-save)
