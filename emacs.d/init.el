@@ -191,7 +191,7 @@ is inserted."
 
 (with-eval-after-load 'ibuffer
   ;; font-lock-mode is helpful in ibuffer-mode, but there is no need
-  ;; to enable it here separately. ibuffer-mode inherits from
+  ;; to enable it here separately.  ibuffer-mode inherits from
   ;; special-mode, and I have enabled font-lock-mode in special-mode
   ;; (see above), so ibuffer-mode gets font-lock-mode.
   (add-hook 'ibuffer-mode-hook #'raghu--enable-hl-line-mode-in-buffer))
