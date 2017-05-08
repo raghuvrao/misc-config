@@ -122,7 +122,7 @@ nothing."
     (let ((prior-point (point)))
       (back-to-indentation)
       (when (> arg 1)
-	(setq prior-point (point))
+	(when (> (point) prior-point) (setq prior-point (point)))
 	(backward-to-indentation (1- arg)))
       (let ((point-at-indentation (point)))
 	(when (> prior-point point-at-indentation)
