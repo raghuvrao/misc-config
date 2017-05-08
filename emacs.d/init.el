@@ -118,24 +118,13 @@ killed."
   (interactive "p")
   (when (>= arg 1)
     (let ((prior-point (point)))
-      (cond ((= arg 1)
-	     ;; If arg is 1, (backward-to-indentation (1- 1)) will
-	     ;; call (forward-line 0) which relocates point to column
-	     ;; 0.  In buffers where part of the text is read-only
-	     ;; (e.g. minibuffer prompts), this side-effect causes
-	     ;; problems with the kill-region call below.  So, instead
-	     ;; of backward-to-indentation, use back-to-indentation in
-	     ;; this case, which does not have the above side-effect.
-	     (back-to-indentation))
-	    (t
-	     ;; arg is always >1 here owing to the `when' check above.
-	     ;; When dealing with multiple lines, use
-	     ;; backward-to-indentation because back-to-indentation
-	     ;; takes no arguments.  Also, backward-to-indentation
-	     ;; works on one more line than desirable for the
-	     ;; semantics here, so use arg - 1.
-	     (backward-to-indentation (1- arg))))
-      (kill-region prior-point (point)))))
+      (back-to-indentation)
+      (when (> arg 1)
+	(setq prior-point (point))
+	(backward-to-indentation (1- arg)))
+      (let ((point-at-indentation (point)))
+	(when (> prior-point point-at-indentation)
+	  (kill-region prior-point point-at-indentation))))))
 (define-key global-map (kbd "C-c k") #'raghu/kill-backward-to-indentation)
 
 (defun raghu/insert-and-go-to-new-line-above (lines)
