@@ -107,24 +107,20 @@ window.  A mark is set at point's original starting position."
 		     nil))
 (define-key global-map (kbd "C-c s") #'raghu/scroll)
 
-(defun raghu/kill-backward-to-indentation (arg)
+(defun raghu/kill-backward-to-indentation (lines)
   "Kill backward from point to first nonblank character on line.
 
-If ARG is 1, kill backward from point (if not already in the
-line's indentation) to indentation on the current line;
-otherwise, just move point to indentation.  If ARG is greater
-than 1, first move point to end of current line's indentation if
-point had been somewhere inside current line's indentation, then
-count backwards ARG lines from the current line (including the
-current line), and kill from point to indentation of the
-resulting line.  If ARG is lesser than 1, kill nothing."
+Do work only if LINES >= 1.  Starting from point, kill backward
+to indentation of the LINESth line above.  The count LINES
+includes the current line.  So, to kill from point backward to
+indentation on the same line, LINES must be 1."
   (interactive "p")
-  (when (>= arg 1)
+  (when (>= lines 1)
     (let ((prior-point (point)))
       (back-to-indentation)
-      (when (> arg 1)
+      (when (> lines 1)
 	(when (> (point) prior-point) (setq prior-point (point)))
-	(backward-to-indentation (1- arg)))
+	(backward-to-indentation (1- lines)))
       (let ((point-at-indentation (point)))
 	(when (> prior-point point-at-indentation)
 	  (kill-region prior-point point-at-indentation))))))
