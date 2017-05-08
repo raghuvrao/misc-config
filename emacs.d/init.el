@@ -110,11 +110,13 @@ window.  A mark is set at point's original starting position."
 (defun raghu/kill-backward-to-indentation (arg)
   "Kill backward from point to first nonblank character on line.
 
-If ARG = 1, kill backward from point to indentation on the
-current line.  If ARG > 1, count backwards ARG lines from the
-current line (including the current line), and kill from point to
-indentation of the resulting line.  If ARG < 1, nothing is
-killed."
+If ARG is 1, kill backward from point (if not already in the
+line's indentation) to indentation on the current line.  If ARG
+is greater than 1, move to the end of the current line's
+indentation, count backwards ARG lines from the current
+line (including the current line), and kill from point to
+indentation of the resulting line.  If ARG is lesser than 1, kill
+nothing."
   (interactive "p")
   (when (>= arg 1)
     (let ((prior-point (point)))
