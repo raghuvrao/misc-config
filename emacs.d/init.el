@@ -199,6 +199,10 @@ is inserted."
   (add-hook 'diff-mode-hook #'raghu--enable-font-lock-mode-in-buffer)
   (add-hook 'diff-mode-hook #'raghu--disable-line-wrap-in-buffer))
 
+(with-eval-after-load 'shell
+  (add-hook 'shell-mode-hook #'raghu--enable-hl-line-mode-in-buffer))
+  (add-hook 'shell-mode-hook #'raghu--enable-font-lock-mode-in-buffer)
+
 (with-eval-after-load 'esh-mode
   (add-hook 'eshell-mode-hook #'raghu--enable-hl-line-mode-in-buffer)
   (add-hook 'eshell-mode-hook #'raghu--enable-font-lock-mode-in-buffer))
