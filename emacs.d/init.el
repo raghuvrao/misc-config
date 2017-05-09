@@ -203,12 +203,12 @@ is inserted."
   (add-hook 'eshell-mode-hook #'raghu--enable-hl-line-mode-in-buffer)
   (add-hook 'eshell-mode-hook #'raghu--enable-font-lock-mode-in-buffer))
 
-(with-eval-after-load 'python
-  (add-hook 'inferior-python-mode-hook #'raghu--enable-font-lock-mode-in-buffer))
-
 ;; text-mode does not provide a feature, so use "text-mode" below.
 (with-eval-after-load "text-mode"
   (add-hook 'text-mode-hook #'raghu--enable-word-wrap-in-buffer))
+
+(with-eval-after-load 'python
+  (add-hook 'inferior-python-mode-hook #'raghu--enable-font-lock-mode-in-buffer))
 
 (with-eval-after-load 'go-mode
   (require 'go-guru)
