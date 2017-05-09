@@ -80,20 +80,27 @@
 
 ;; Scroll while keeping point on original text-line (so long as the
 ;; original text-line is in the window, of course).
-(setq raghu/scroll-map (make-sparse-keymap))
-(define-key raghu/scroll-map (kbd "i") (lambda () (interactive) (scroll-up 1)))
-(define-key raghu/scroll-map (kbd "k") (lambda () (interactive) (scroll-down 1)))
-(define-key raghu/scroll-map (kbd "j") (lambda () (interactive) (scroll-left 1)))
-(define-key raghu/scroll-map (kbd "l") (lambda () (interactive) (scroll-right 1)))
+(defvar raghu/scroll-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "i") (lambda () (interactive) (scroll-up 1)))
+    (define-key map (kbd "k") (lambda () (interactive) (scroll-down 1)))
+    (define-key map (kbd "j") (lambda () (interactive) (scroll-left 1)))
+    (define-key map (kbd "l") (lambda () (interactive) (scroll-right 1)))
+    map)
+  "Keymap for scrolling.
+
+When this keymap is active, pressing `i' will scroll text up,
+pressing `k' will scroll text down, pressing `j' will scroll text
+left, and pressing `l' will scroll text right.  While scrolling,
+point remains with the original text-line (not screen-line) so
+long as the original text-line is within the window.")
 (defun raghu/scroll ()
   "Scroll in the current buffer.
 
-Activate a keymap where `i' will scroll text up, `k' will scroll
-text down, `j' will scroll text left, and `l' will scroll text
-right.  Any other key will deactivate the keymap.  While
-scrolling, point remains with the original text-line (not
-screen-line) so long as the original text-line is within the
-window.  A mark is set at point's original starting position."
+Activate the keymap `raghu/scroll-map', which makes scrolling a
+little easier.  When a key that is not in the map is pressed, it
+will deactivate the keymap so usual editing operations can be
+resumed.  A mark is set at point's original starting position."
   (interactive)
   (push-mark)
   (message "Use i/j/k/l to scroll text.")
