@@ -167,6 +167,9 @@ is inserted."
   "Enable word-wrapping in current buffer."
   (set (make-local-variable 'truncate-lines) nil)
   (set (make-local-variable 'word-wrap) 1))
+(defun raghu--show-trailing-whitespace-in-buffer ()
+  "Show trailing whitespace in current buffer."
+  (set (make-local-variable 'show-trailing-whitespace) t))
 
 (with-eval-after-load 'simple
   ;; special-mode is a "parent" mode for various modes.
@@ -176,6 +179,7 @@ is inserted."
   ;; prog-mode is a "parent" mode for various programming modes.
   (add-hook 'prog-mode-hook #'raghu--disable-line-wrap-in-buffer)
   (add-hook 'prog-mode-hook #'raghu--enable-hl-line-mode-in-buffer))
+  (add-hook 'prog-mode-hook #'raghu--show-trailing-whitespace-in-buffer))
 
 (with-eval-after-load 'ibuffer
   ;; font-lock-mode is helpful in ibuffer-mode, but there is no need
