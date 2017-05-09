@@ -185,7 +185,7 @@ is inserted."
 (with-eval-after-load 'prog-mode
   ;; prog-mode is a "parent" mode for various programming modes.
   (add-hook 'prog-mode-hook #'raghu--disable-line-wrap-in-buffer)
-  (add-hook 'prog-mode-hook #'raghu--enable-hl-line-mode-in-buffer))
+  (add-hook 'prog-mode-hook #'raghu--enable-hl-line-mode-in-buffer)
   (add-hook 'prog-mode-hook #'raghu--show-trailing-whitespace-in-buffer))
 
 (with-eval-after-load 'ibuffer
@@ -207,8 +207,8 @@ is inserted."
   (add-hook 'diff-mode-hook #'raghu--disable-line-wrap-in-buffer))
 
 (with-eval-after-load 'shell
-  (add-hook 'shell-mode-hook #'raghu--enable-hl-line-mode-in-buffer))
-  (add-hook 'shell-mode-hook #'raghu--enable-font-lock-mode-in-buffer)
+  (add-hook 'shell-mode-hook #'raghu--enable-hl-line-mode-in-buffer)
+  (add-hook 'shell-mode-hook #'raghu--enable-font-lock-mode-in-buffer))
 
 (with-eval-after-load 'esh-mode
   (add-hook 'eshell-mode-hook #'raghu--enable-hl-line-mode-in-buffer)
