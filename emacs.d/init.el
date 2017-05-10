@@ -80,20 +80,57 @@
 
 ;; Scroll while keeping point on original text-line (so long as the
 ;; original text-line is in the window, of course).
+
+;; First, define a few scrolling-related functions.  These functions
+;; will be eventually bound to keys.
+(defun raghu--scroll-up-one ()
+  "Scroll buffer to show next one line."
+  (interactive)
+  (scroll-up 1))
+(defun raghu--scroll-down-one ()
+  "Scroll buffer to show previous one line."
+  (interactive)
+  (scroll-down 1))
+(defun raghu--scroll-right-one ()
+  "Scroll buffer to show left one column."
+  (interactive)
+  (scroll-right 1))
+(defun raghu--scroll-left-one ()
+  "Scroll buffer to show right one column."
+  (interactive)
+  (scroll-left 1))
+
+;; Next, define a map variable, and bind the above functions to one or
+;; more keys in this map.  Make sure to keep the key-bindings and the
+;; documentation below in agreement with each other.
 (defvar raghu/scroll-map
   (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "i") (lambda () (interactive) (scroll-up 1)))
-    (define-key map (kbd "k") (lambda () (interactive) (scroll-down 1)))
-    (define-key map (kbd "j") (lambda () (interactive) (scroll-left 1)))
-    (define-key map (kbd "l") (lambda () (interactive) (scroll-right 1)))
+    (define-key map (kbd "SPC") #'scroll-up)
+    (define-key map (kbd "DEL") #'scroll-down)
+    (define-key map (kbd "i") #'raghu--scroll-down-one)
+    (define-key map (kbd "<up>") #'raghu--scroll-down-one)
+    (define-key map (kbd "k") #'raghu--scroll-up-one)
+    (define-key map (kbd "<down>") #'raghu--scroll-up-one)
+    (define-key map (kbd "j") #'raghu--scroll-right-one)
+    (define-key map (kbd "<left>") #'raghu--scroll-right-one)
+    (define-key map (kbd "l") #'raghu--scroll-left-one)
+    (define-key map (kbd "<right>") #'raghu--scroll-left-one)
     map)
-  "Keymap for scrolling.
+  "Keymap for scrolling one line/column at a time.
 
-When this keymap is active, pressing `i' will scroll text up,
-pressing `k' will scroll text down, pressing `j' will scroll text
-left, and pressing `l' will scroll text right.  While scrolling,
-point remains with the original text-line (not screen-line) so
-long as the original text-line is within the window.")
+The following key-bindings are defined in this map:
+
+i, <up>, DEL:	show previous (scroll down)
+k, <down>, SPC:	show next (scroll up)
+j, <left>:	show left (scroll right)
+l, <right>:	show right (scroll left)
+
+While scrolling, point remains with the original text-line (not
+screen-line) so long as the original text-line is within the
+window.")
+
+;; Finally, define a function and a key-binding to activate the above
+;; keymap in a transient fashion.
 (defun raghu/scroll ()
   "Scroll in the current buffer.
 
@@ -103,15 +140,10 @@ will deactivate the keymap so usual editing operations can be
 resumed.  A mark is set at point's original starting position."
   (interactive)
   (push-mark)
-  (message "Use i/j/k/l to scroll text.")
+  (message "raghu/scroll-map activated.")
   (set-transient-map raghu/scroll-map
-		     (lambda ()
-		       (when (or (eq last-input-event ?i)
-				 (eq last-input-event ?k)
-				 (eq last-input-event ?j)
-				 (eq last-input-event ?l))
-			 (message "Use i/j/k/l to scroll text.")))
-		     nil))
+		     t
+		     (lambda () (message "raghu/scroll-map deactivated."))))
 (define-key global-map (kbd "C-c s") #'raghu/scroll)
 
 (defun raghu/kill-backward-to-indentation (lines)
@@ -175,7 +207,7 @@ is inserted."
   (set (make-local-variable 'truncate-lines) nil)
   (set (make-local-variable 'word-wrap) 1))
 (defun raghu--show-trailing-whitespace-in-buffer ()
-  "Show trailing whitespace in current buffer."
+  "Highlight trailing whitespace in the current buffer."
   (set (make-local-variable 'show-trailing-whitespace) t))
 
 (with-eval-after-load 'simple
