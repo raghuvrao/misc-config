@@ -105,8 +105,6 @@
 ;; documentation below in agreement with each other.
 (defvar raghu/scroll-map
   (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "SPC") #'scroll-up)
-    (define-key map (kbd "DEL") #'scroll-down)
     (define-key map (kbd "i") #'raghu--scroll-down-one)
     (define-key map (kbd "<up>") #'raghu--scroll-down-one)
     (define-key map (kbd "k") #'raghu--scroll-up-one)
@@ -120,10 +118,10 @@
 
 The following key-bindings are defined in this map:
 
-i, <up>, DEL:	show previous (scroll down)
-k, <down>, SPC:	show next (scroll up)
-j, <left>:	show left (scroll right)
-l, <right>:	show right (scroll left)
+i, <up>: show previous (scroll down)
+k, <down>: show next (scroll up)
+j, <left>: show left (scroll right)
+l, <right>: show right (scroll left)
 
 While scrolling, point remains with the original text-line (not
 screen-line) so long as the original text-line is within the
