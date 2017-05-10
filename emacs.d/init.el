@@ -83,19 +83,19 @@
 
 ;; First, define a few scrolling-related functions.  These functions
 ;; will be eventually bound to keys.
-(defun raghu--scroll-up-one ()
+(defun raghu--show-down-one ()
   "Scroll buffer to show next one line."
   (interactive)
   (scroll-up 1))
-(defun raghu--scroll-down-one ()
+(defun raghu--show-up-one ()
   "Scroll buffer to show previous one line."
   (interactive)
   (scroll-down 1))
-(defun raghu--scroll-right-one ()
+(defun raghu--show-left-one ()
   "Scroll buffer to show left one column."
   (interactive)
   (scroll-right 1))
-(defun raghu--scroll-left-one ()
+(defun raghu--show-right-one ()
   "Scroll buffer to show right one column."
   (interactive)
   (scroll-left 1))
@@ -105,14 +105,14 @@
 ;; documentation below in agreement with each other.
 (defvar raghu/scroll-map
   (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "i") #'raghu--scroll-down-one)
-    (define-key map (kbd "<up>") #'raghu--scroll-down-one)
-    (define-key map (kbd "k") #'raghu--scroll-up-one)
-    (define-key map (kbd "<down>") #'raghu--scroll-up-one)
-    (define-key map (kbd "j") #'raghu--scroll-right-one)
-    (define-key map (kbd "<left>") #'raghu--scroll-right-one)
-    (define-key map (kbd "l") #'raghu--scroll-left-one)
-    (define-key map (kbd "<right>") #'raghu--scroll-left-one)
+    (define-key map (kbd "i") #'raghu--show-up-one)
+    (define-key map (kbd "<up>") #'raghu--show-up-one)
+    (define-key map (kbd "k") #'raghu--show-down-one)
+    (define-key map (kbd "<down>") #'raghu--show-down-one)
+    (define-key map (kbd "j") #'raghu--show-left-one)
+    (define-key map (kbd "<left>") #'raghu--show-left-one)
+    (define-key map (kbd "l") #'raghu--show-right-one)
+    (define-key map (kbd "<right>") #'raghu--show-right-one)
     map)
   "Keymap for scrolling one line/column at a time.
 
