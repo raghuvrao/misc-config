@@ -54,6 +54,14 @@
 (require 'windmove)
 (windmove-default-keybindings 'control)
 
+;; Useful for changing CRLF line terminators to LF line terminators.
+(defun raghu/dos2unix (buffer)
+  "Convert BUFFER's file encoding system from DOS to UNIX."
+  (interactive "*bApply to buffer")
+  (with-current-buffer buffer
+    (set-buffer-file-coding-system 'unix t)
+    (set-buffer-file-coding-system 'utf-8 t)))
+
 ;; async-shell-command runs the commands in buffers that are not
 ;; entirely uniquely named.  It has support for using different buffer
 ;; names, but for me, that's not good enough.  I want the buffers to
