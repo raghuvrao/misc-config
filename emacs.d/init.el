@@ -159,7 +159,7 @@ Do work only if LINES >= 1.  Starting from point, kill backward
 to indentation of the LINESth line above.  The count LINES
 includes the current line.  So, to kill from point backward to
 indentation on the same line, LINES must be 1."
-  (interactive "p")
+  (interactive "*p")
   (when (>= lines 1)
     (let ((prior-point (point)))
       (back-to-indentation)
@@ -176,7 +176,7 @@ indentation on the same line, LINES must be 1."
 
 Point is moved to the top-most line inserted, and indentation
 according to mode is inserted."
-  (interactive "p")
+  (interactive "*p")
   (when (> lines 0)
     (beginning-of-line 1)
     (open-line lines)
@@ -189,7 +189,7 @@ according to mode is inserted."
 Point moves to the newly-inserted line immediately below the line
 on which point originally was, and indentation according to mode
 is inserted."
-  (interactive "p")
+  (interactive "*p")
   (when (> lines 0)
     (save-excursion
       (end-of-line 1)
