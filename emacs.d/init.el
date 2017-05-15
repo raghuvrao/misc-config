@@ -223,7 +223,8 @@ lines, and convert the original lines into comments.  If ARG is a
 positive integer, work on ARG lines below.  If ARG is a negative
 integer, work on ARG lines above.  In either case, ARG includes
 the current line.  So, to work on the current line only, ARG must
-be 1 (or -1).  If ARG is 0, do nothing."
+be 1 (or -1).  If ARG is neither a positive integer nor a
+negative integer, do nothing."
   (interactive "*p")
   (when (and (derived-mode-p 'prog-mode)
 	     (integerp arg)
