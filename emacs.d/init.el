@@ -171,6 +171,122 @@ indentation on the same line, LINES must be 1."
 	  (kill-region prior-point point-at-indentation))))))
 (define-key global-map (kbd "C-c k") #'raghu/kill-backward-to-indentation)
 
+(defun raghu/duplicate-region-comment-original (beginning end)
+  "Duplicate lines containing region, make the originals comments.
+
+Take the lines that encapsulate the region defined by BEGINNING
+and END, place a copy of these lines above the first line of the
+region, and make those lines into comments.  If BEGINNING or END
+is at the beginning (or end) of a line, that line will be
+included.  This behaviour is to make it easy to \"mark\" a line
+for consideration without having to worry about where point is in
+in that line.  Just be somewhere on the starting line, activate
+the mark if not already activated, and go somewhere on the ending
+line to include both lines and the lines in between."
+  (interactive "*r")
+  (when (and (derived-mode-p 'prog-mode)
+	     (integerp beginning)
+	     (integerp end)
+	     (>= beginning 1)
+	     (>= end 1))
+    ;; Ensure beginning <= end for ease of implementation.
+    ;; (interactive "*r") guarantees this requirement is satisfied
+    ;; when this function is used interactively.  When used in lisp,
+    ;; there are no such guarantees, so let us do it ourselves.
+    (let* ((start (if (< beginning end) beginning end))
+	   (finish (if (= start beginning) end beginning)))
+      (save-excursion
+	(let* ((start-bol (progn (goto-char start)
+				 (beginning-of-line)
+				 (point)))
+	       (finish-eol (progn (goto-char finish)
+				  (end-of-line)
+				  (point))))
+	  ;; Use buffer-substring instead of kill-ring-save because we
+	  ;; do not want the copied text to end up on the kill-ring.
+	  ;; The idea is to duplicate the lines, not to save them
+	  ;; anywhere for yanking later.
+	  (let ((copied-lines (buffer-substring start-bol finish-eol)))
+	    (goto-char start-bol)
+	    (open-line 1)
+	    (insert copied-lines)
+	    (ignore-errors (comment-region start-bol finish-eol)))))
+      ;; Account for save-excursion behavior at beginning of line.
+      (when (and (bolp) (= start (point)))
+      	(forward-line (* 2 (count-lines start finish)))))))
+
+(defun raghu/duplicate-line-comment-original (arg)
+  "Duplicate current line and make the original a comment.
+
+Starting from and including the current line, duplicate ARG
+lines, and convert the original lines into comments.  If ARG is a
+positive integer, work on ARG lines below.  If ARG is a negative
+integer, work on ARG lines above.  In either case, ARG includes
+the current line.  So, to work on the current line only, ARG must
+be 1 (or -1).  If ARG is 0, do nothing."
+  (interactive "*p")
+  (when (and (derived-mode-p 'prog-mode)
+	     (integerp arg)
+	     (not (= 0 arg)))
+    (save-excursion
+      (let ((original (point)))
+	(if (> arg 0)
+	    (progn (forward-line (1- arg))
+		   (end-of-line)
+		   (let ((end (point)))
+		     (goto-char original)
+		     (beginning-of-line)
+		     (let ((start (point)))
+		       (let ((copied-lines (buffer-substring start end)))
+			 (open-line 1)
+			 (insert copied-lines)
+			 (ignore-errors (comment-region start end))))))
+	  (forward-line (1+ arg))	; arg is never zero here.
+	  (let ((start (point)))
+	    (goto-char original)
+	    (end-of-line)
+	    (let ((end (point)))
+	      (let ((copied-lines (buffer-substring start end)))
+		(goto-char start)
+		(open-line 1)
+		(insert copied-lines)
+		(ignore-errors (comment-region start end))))))))
+    ;; Account for save-excursion behavior at beginning of line.
+    (when (bolp) (cond
+		  ((= arg -1) (forward-line 1))
+		  ((> arg 0) (forward-line arg))))))
+
+(defun raghu/duplicate-and-comment-original (arg)
+  "Duplicate lines, make the originals into comments.
+
+Do work only if buffer is derived from a programming mode, as the
+concept of comments are not clearly defined for other modes.  If
+a region is active, call
+`raghu/duplicate-region-comment-original' on the region.  If a
+region is not active, and ARG is an integer, act on ARG lines by
+calling `raghu/duplicate-line-comment-original' with argument
+ARG.  If a region is not active, and ARG is a list, fetch its
+`car', and if the result is an integer, say N, act on N lines by
+calling `raghu/duplicate-line-comment-original' with argument N.
+If a region is not active, and ARG is neither an interger nor a
+list, call `raghu/duplicate-line-comment-original' with argument
+1."
+  (interactive "*P")
+  (when (derived-mode-p 'prog-mode)
+    (cond ((use-region-p)
+	   (raghu/duplicate-region-comment-original (region-beginning)
+						    (region-end)))
+	  ((integerp arg)
+	   (raghu/duplicate-line-comment-original arg))
+	  ((null arg)
+	   (raghu/duplicate-line-comment-original 1))
+	  ((listp arg)
+	   (let ((n (car arg)))
+	     (when (integerp n) (raghu/duplicate-line-comment-original n))))
+	  (t
+	   (raghu/duplicate-line-comment-original 1)))))
+(define-key global-map (kbd "C-c I") #'raghu/duplicate-and-comment-original)
+
 (defun raghu/insert-and-go-to-new-line-above (lines)
   "Insert LINES new lines above current line.
 
