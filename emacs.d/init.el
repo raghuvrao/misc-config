@@ -216,15 +216,16 @@ line to include both lines and the lines in between."
       	(forward-line (* 2 (count-lines start finish)))))))
 
 (defun raghu/duplicate-line-comment-original (arg)
-  "Duplicate current line and make the original a comment.
+  "Duplicate current line and make the duplicate a comment.
 
-Starting from and including the current line, duplicate ARG
-lines, and convert the original lines into comments.  If ARG is a
-positive integer, work on ARG lines below.  If ARG is a negative
-integer, work on ARG lines above.  In either case, ARG includes
-the current line.  So, to work on the current line only, ARG must
-be 1 (or -1).  If ARG is neither a positive integer nor a
-negative integer, do nothing."
+Starting from and including the current line, take ARG lines,
+place a copy of them above the current line, and convert those
+lines into comments.  If ARG is a non-zero positive integer,
+perform this work on ARG lines below.  If ARG is a non-zero
+negative integer, perform this work on ARG lines above.  In
+either case, ARG includes the current line.  So, to perform the
+work on the current line only, ARG must be either 1 or -1.  If
+ARG is anything else, do nothing."
   (interactive "*p")
   (when (and (derived-mode-p 'prog-mode)
 	     (integerp arg)
@@ -253,9 +254,8 @@ negative integer, do nothing."
 		(insert copied-lines)
 		(ignore-errors (comment-region start end))))))))
     ;; Account for save-excursion behavior at beginning of line.
-    (when (bolp) (cond
-		  ((= arg -1) (forward-line 1))
-		  ((> arg 0) (forward-line arg))))))
+    (when (bolp) (cond ((= arg -1) (forward-line 1))
+		       ((> arg 0) (forward-line arg))))))
 
 (defun raghu/duplicate-and-comment-original (arg)
   "Duplicate lines, make the originals into comments.
