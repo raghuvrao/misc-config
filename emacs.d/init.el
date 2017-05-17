@@ -274,18 +274,15 @@ list, call `raghu/duplicate-line-comment-original' with argument
 1."
   (interactive "*P")
   (when (derived-mode-p 'prog-mode)
-    (cond ((use-region-p)
-	   (raghu/duplicate-region-comment-original (region-beginning)
-						    (region-end)))
-	  ((integerp arg)
-	   (raghu/duplicate-line-comment-original arg))
-	  ((null arg)
-	   (raghu/duplicate-line-comment-original 1))
-	  ((listp arg)
-	   (let ((n (car arg)))
-	     (when (integerp n) (raghu/duplicate-line-comment-original n))))
-	  (t
-	   (raghu/duplicate-line-comment-original 1)))))
+    (cond ((use-region-p) (raghu/duplicate-region-comment-original
+			   (region-beginning)
+			   (region-end)))
+	  ((integerp arg) (raghu/duplicate-line-comment-original arg))
+	  ((null arg) (raghu/duplicate-line-comment-original 1))
+	  ((listp arg) (let ((n (car arg)))
+			 (when (integerp n)
+			   (raghu/duplicate-line-comment-original n))))
+	  (t (raghu/duplicate-line-comment-original 1)))))
 (define-key global-map (kbd "C-c I") #'raghu/duplicate-and-comment-original)
 
 (defun raghu/insert-and-go-to-new-line-above (lines)
