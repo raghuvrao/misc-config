@@ -200,12 +200,12 @@ line to include both lines and the lines in between."
 	   (finish-eol nil)
 	   (copied-lines nil))
       (save-excursion
-	(setq start-bol (progn (goto-char start)
-			       (beginning-of-line)
-			       (point)))
-	(setq finish-eol (progn (goto-char finish)
-				(end-of-line)
-				(point)))
+	(goto-char start)
+	(beginning-of-line)
+	(setq start-bol (point))
+	(goto-char finish)
+	(end-of-line)
+	(setq finish-eol (point))
 	;; Use buffer-substring instead of kill-ring-save because we
 	;; do not want the copied text to end up on the kill-ring.
 	;; The idea is to duplicate the lines, not to save them
