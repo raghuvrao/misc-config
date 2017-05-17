@@ -171,8 +171,8 @@ indentation on the same line, LINES must be 1."
 	  (kill-region prior-point point-at-indentation))))))
 (define-key global-map (kbd "C-c k") #'raghu/kill-backward-to-indentation)
 
-(defun raghu/duplicate-region-comment-original (beginning end)
-  "Duplicate lines containing region, make the originals comments.
+(defun raghu/duplicate-region-and-comment (beginning end)
+  "Duplicate lines containing region and make them comments.
 
 Take the lines that encapsulate the region defined by BEGINNING
 and END, place a copy of these lines above the first line of the
@@ -182,7 +182,11 @@ included.  This behaviour is to make it easy to \"mark\" a line
 for consideration without having to worry about where point is in
 in that line.  Just be somewhere on the starting line, activate
 the mark if not already activated, and go somewhere on the ending
-line to include both lines and the lines in between."
+line to include both lines and the lines in between.
+
+Do work only when the major mode of the buffer is derived from
+`prog-mode'.  The concept of comments may not be well-defined for
+non-programming modes, so err on the side of caution."
   (interactive "*r")
   (when (and (derived-mode-p 'prog-mode)
 	     (integerp beginning)
@@ -219,8 +223,8 @@ line to include both lines and the lines in between."
       (when (and (bolp) (= start (point)))
 	(forward-line (count-lines start-bol finish-eol))))))
 
-(defun raghu/duplicate-line-comment-original (arg)
-  "Duplicate current line and make the duplicate a comment.
+(defun raghu/duplicate-line-and-comment (arg)
+  "Duplicate current line and make it a comment.
 
 Starting from and including the current line, take ARG lines,
 place a copy of them above the current line, and convert those
@@ -229,7 +233,11 @@ perform this work on ARG lines below.  If ARG is a non-zero
 negative integer, perform this work on ARG lines above.  In
 either case, ARG includes the current line.  So, to perform the
 work on the current line only, ARG must be either 1 or -1.  If
-ARG is anything else, do nothing."
+ARG is anything else, do nothing.
+
+Do work only when the major mode of the buffer is derived from
+`prog-mode'.  The concept of comments may not be well-defined for
+non-programming modes, so err on the side of caution."
   (interactive "*p")
   (when (and (derived-mode-p 'prog-mode)
 	     (integerp arg)
@@ -260,32 +268,32 @@ ARG is anything else, do nothing."
       (when (and (bolp) (= start (point)))
 	(forward-line (count-lines start end))))))
 
-(defun raghu/duplicate-and-comment-original (arg)
-  "Duplicate lines, make the originals into comments.
+(defun raghu/duplicate-and-comment (&optional arg)
+  "Duplicate lines and make them comments.
 
-Do work only if buffer is derived from a programming mode, as the
-concept of comments are not clearly defined for other modes.  If
-a region is active, call
-`raghu/duplicate-region-comment-original' on the region.  If a
-region is not active, and ARG is an integer, act on ARG lines by
-calling `raghu/duplicate-line-comment-original' with argument
-ARG.  If a region is not active, and ARG is a list, fetch its
-`car', and if the result is an integer, say N, act on N lines by
-calling `raghu/duplicate-line-comment-original' with argument N.
-If a region is not active, and ARG is neither an interger nor a
-list, call `raghu/duplicate-line-comment-original' with argument
-1."
+If region is active, call `raghu/duplicate-region-and-comment' on
+region.  If region is not active and ARG is an integer, call
+`raghu/duplicate-line-and-comment' with argument ARG.  If region
+is not active, and ARG is nil or not supplied, call
+`raghu/duplicate-line-and-comment' with argument 1.  If region is
+not active, ARG is a list, and if `car' of the list is an integer
+N, call `raghu/duplicate-line-and-comment' with argument N.  If
+region is not active and ARG is none of the above, do no work.
+
+Do work only when the major mode of the buffer is derived from
+`prog-mode'.  The concept of comments may not be well-defined for
+non-programming modes, so err on the side of caution."
   (interactive "*P")
   (when (derived-mode-p 'prog-mode)
-    (cond ((use-region-p) (raghu/duplicate-region-comment-original
+    (cond ((use-region-p) (raghu/duplicate-region-and-comment
 			   (region-beginning)
 			   (region-end)))
-	  ((integerp arg) (raghu/duplicate-line-comment-original arg))
-	  ((null arg) (raghu/duplicate-line-comment-original 1))
+	  ((integerp arg) (raghu/duplicate-line-and-comment arg))
+	  ((null arg) (raghu/duplicate-line-and-comment 1))
 	  ((listp arg) (let ((n (car arg)))
 			 (when (integerp n)
-			   (raghu/duplicate-line-comment-original n)))))))
-(define-key global-map (kbd "C-c I") #'raghu/duplicate-and-comment-original)
+			   (raghu/duplicate-line-and-comment n)))))))
+(define-key global-map (kbd "C-c I") #'raghu/duplicate-and-comment)
 
 (defun raghu/insert-and-go-to-new-line-above (lines)
   "Insert LINES new lines above current line.
