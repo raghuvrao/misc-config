@@ -190,30 +190,34 @@ line to include both lines and the lines in between."
 	     (>= beginning 1)
 	     (>= end 1))
     ;; Ensure beginning <= end for ease of implementation.
-    ;; (interactive "*r") guarantees this requirement is satisfied
-    ;; when this function is used interactively.  When used in lisp,
-    ;; there are no such guarantees, so let us do it ourselves.
+    ;; (interactive "*r") guarantees that this requirement is
+    ;; satisfied when this function is called interactively.  When
+    ;; called in lisp, there are no such guarantees, so let us do it
+    ;; ourselves.
     (let* ((start (if (< beginning end) beginning end))
-	   (finish (if (= start beginning) end beginning)))
+	   (finish (if (= start beginning) end beginning))
+	   (start-bol nil)
+	   (finish-eol nil)
+	   (copied-lines nil))
       (save-excursion
-	(let* ((start-bol (progn (goto-char start)
-				 (beginning-of-line)
-				 (point)))
-	       (finish-eol (progn (goto-char finish)
-				  (end-of-line)
-				  (point))))
-	  ;; Use buffer-substring instead of kill-ring-save because we
-	  ;; do not want the copied text to end up on the kill-ring.
-	  ;; The idea is to duplicate the lines, not to save them
-	  ;; anywhere for yanking later.
-	  (let ((copied-lines (buffer-substring start-bol finish-eol)))
-	    (goto-char start-bol)
-	    (open-line 1)
-	    (insert copied-lines)
-	    (ignore-errors (comment-region start-bol finish-eol)))))
+	(setq start-bol (progn (goto-char start)
+			       (beginning-of-line)
+			       (point)))
+	(setq finish-eol (progn (goto-char finish)
+				(end-of-line)
+				(point)))
+	;; Use buffer-substring instead of kill-ring-save because we
+	;; do not want the copied text to end up on the kill-ring.
+	;; The idea is to duplicate the lines, not to save them
+	;; anywhere for yanking later.
+	(setq copied-lines (buffer-substring start-bol finish-eol))
+	(goto-char start-bol)
+	(open-line 1)
+	(insert copied-lines)
+	(ignore-errors (comment-region start-bol finish-eol)))
       ;; Account for save-excursion behavior at beginning of line.
       (when (and (bolp) (= start (point)))
-      	(forward-line (* 2 (count-lines start finish)))))))
+	(forward-line (count-lines start-bol finish-eol))))))
 
 (defun raghu/duplicate-line-comment-original (arg)
   "Duplicate current line and make the duplicate a comment.
@@ -230,32 +234,31 @@ ARG is anything else, do nothing."
   (when (and (derived-mode-p 'prog-mode)
 	     (integerp arg)
 	     (not (= 0 arg)))
-    (save-excursion
-      (let ((original (point)))
+    (let ((original (point))
+	  (start nil)
+	  (end nil)
+	  (copied-lines nil))
+      (save-excursion
 	(if (> arg 0)
 	    (progn (forward-line (1- arg))
 		   (end-of-line)
-		   (let ((end (point)))
-		     (goto-char original)
-		     (beginning-of-line)
-		     (let ((start (point)))
-		       (let ((copied-lines (buffer-substring start end)))
-			 (open-line 1)
-			 (insert copied-lines)
-			 (ignore-errors (comment-region start end))))))
+		   (setq end (point))
+		   (goto-char original)
+		   (beginning-of-line)
+		   (setq start (point)))
 	  (forward-line (1+ arg))	; arg is never zero here.
-	  (let ((start (point)))
-	    (goto-char original)
-	    (end-of-line)
-	    (let ((end (point)))
-	      (let ((copied-lines (buffer-substring start end)))
-		(goto-char start)
-		(open-line 1)
-		(insert copied-lines)
-		(ignore-errors (comment-region start end))))))))
-    ;; Account for save-excursion behavior at beginning of line.
-    (when (bolp) (cond ((= arg -1) (forward-line 1))
-		       ((> arg 0) (forward-line arg))))))
+	  (setq start (point))
+	  (goto-char original)
+	  (end-of-line)
+	  (setq end (point)))
+	(setq copied-lines (buffer-substring start end))
+	(goto-char start)
+	(open-line 1)
+	(insert copied-lines)
+	(ignore-errors (comment-region start end)))
+      ;; Account for save-excursion behavior at beginning of line.
+      (when (and (bolp) (= start (point)))
+	(forward-line (count-lines start end))))))
 
 (defun raghu/duplicate-and-comment-original (arg)
   "Duplicate lines, make the originals into comments.
