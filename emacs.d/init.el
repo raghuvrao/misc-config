@@ -284,8 +284,7 @@ list, call `raghu/duplicate-line-comment-original' with argument
 	  ((null arg) (raghu/duplicate-line-comment-original 1))
 	  ((listp arg) (let ((n (car arg)))
 			 (when (integerp n)
-			   (raghu/duplicate-line-comment-original n))))
-	  (t (raghu/duplicate-line-comment-original 1)))))
+			   (raghu/duplicate-line-comment-original n)))))))
 (define-key global-map (kbd "C-c I") #'raghu/duplicate-and-comment-original)
 
 (defun raghu/insert-and-go-to-new-line-above (lines)
