@@ -18,7 +18,7 @@
 
 ;; Various shell programs like to send their stdout through a pager.
 ;; When those programs are run within emacs, pagination functionality
-;; through an external program is unnecessary.
+;; is unnecessary.
 (setenv "PAGER" "cat")
 
 (column-number-mode 1)
@@ -70,14 +70,16 @@
   "Run shell command CMD asynchronously in buffer \"*Async: CMD*\"."
   (interactive (list (read-shell-command "Async shell command? ")))
   ;; Get rid of leading/trailing space from the command.
-  (let ((cmd (replace-regexp-in-string "^[ \t]+\\|[ \t]+$" "" cmd)))
-    ;; Do work only if cmd is non-empty after trimming.
-    (when (> (length cmd) 0)
-      (let ((dir default-directory)
-	    (buf-name (concat "*Async: " cmd "*")))
-	(switch-to-buffer buf-name)
-	(setq default-directory dir)
-	(async-shell-command cmd buf-name nil)))))
+  (let ((trimmed-cmd (replace-regexp-in-string "^[ \t]+\\|[ \t]+$" "" cmd))
+	(dir default-directory)
+	(buf-name nil))
+    ;; Do work only if cmd is non-empty after trimming
+    ;; leading/trailing space.
+    (when (> (length trimmed-cmd) 0)
+      (setq buf-name (concat "*Async: " trimmed-cmd "*"))
+      (switch-to-buffer buf-name)
+      (setq default-directory dir)
+      (async-shell-command trimmed-cmd buf-name nil))))
 (define-key global-map (kbd "C-c !") #'raghu/async-shell-command)
 
 (defun raghu/visit-emacs-configuration-file ()
@@ -161,14 +163,15 @@ includes the current line.  So, to kill from point backward to
 indentation on the same line, LINES must be 1."
   (interactive "*p")
   (when (>= lines 1)
-    (let ((prior-point (point)))
+    (let ((prior-point (point))
+	  (point-at-indentation nil))
       (back-to-indentation)
       (when (> lines 1)
 	(when (> (point) prior-point) (setq prior-point (point)))
 	(backward-to-indentation (1- lines)))
-      (let ((point-at-indentation (point)))
-	(when (> prior-point point-at-indentation)
-	  (kill-region prior-point point-at-indentation))))))
+      (setq point-at-indentation (point))
+      (when (> prior-point point-at-indentation)
+	(kill-region prior-point point-at-indentation)))))
 (define-key global-map (kbd "C-c k") #'raghu/kill-backward-to-indentation)
 
 (defun raghu/duplicate-region-and-comment (beginning end)
