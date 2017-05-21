@@ -355,7 +355,7 @@ on which point originally was, and indentation according to mode
 is inserted."
   (interactive "*p")
   (unless (> lines 0)
-    (user-error "Expected non-zero positive integer; got %S" arg))
+    (user-error "Expected non-zero positive integer; got %S" lines))
   (save-excursion
     (end-of-line 1)
     (newline lines nil))
