@@ -73,13 +73,12 @@
   (let ((trimmed-cmd (replace-regexp-in-string "^[ \t]+\\|[ \t]+$" "" cmd))
 	(dir default-directory)
 	(buf-name nil))
-    ;; Do work only if cmd is non-empty after trimming
-    ;; leading/trailing space.
-    (when (> (length trimmed-cmd) 0)
-      (setq buf-name (concat "*Async: " trimmed-cmd "*"))
-      (switch-to-buffer buf-name)
-      (setq default-directory dir)
-      (async-shell-command trimmed-cmd buf-name nil))))
+    (unless (> (length trimmed-cmd) 0)
+      (user-error "%s" "Empty command"))
+    (setq buf-name (concat "*Async: " trimmed-cmd "*"))
+    (switch-to-buffer buf-name)
+    (setq default-directory dir)
+    (async-shell-command trimmed-cmd buf-name nil)))
 (define-key global-map (kbd "C-c !") #'raghu/async-shell-command)
 
 (defun raghu/visit-emacs-configuration-file ()
@@ -157,22 +156,30 @@ resumed.  A mark is set at point's original starting position."
 (defun raghu/kill-backward-to-indentation (lines)
   "Kill backward from point to first nonblank character on line.
 
-Do work only if LINES >= 1.  Starting from point, kill backward
-to indentation of the LINESth line above.  The count LINES
-includes the current line.  So, to kill from point backward to
-indentation on the same line, LINES must be 1."
+Starting from point, kill backward to indentation of the LINESth
+line above.  The count LINES includes the current line.  So, to
+kill from point backward to indentation on the same line, LINES
+must be 1.  Signal an error if LINES < 1."
   (interactive "*p")
-  (when (>= lines 1)
-    (let ((prior-point (point))
-	  (point-at-indentation nil))
-      (back-to-indentation)
-      (when (> lines 1)
-	(when (> (point) prior-point) (setq prior-point (point)))
-	(backward-to-indentation (1- lines)))
-      (setq point-at-indentation (point))
-      (when (> prior-point point-at-indentation)
-	(kill-region prior-point point-at-indentation)))))
+  (unless (> lines 0)
+    (user-error "Expected non-zero positive integer; got %S" lines))
+  (let ((prior-point (point))
+	(point-at-indentation nil))
+    (back-to-indentation)
+    (when (> lines 1)
+      (when (> (point) prior-point) (setq prior-point (point)))
+      (backward-to-indentation (1- lines)))
+    (setq point-at-indentation (point))
+    (when (> prior-point point-at-indentation)
+      (kill-region prior-point point-at-indentation))))
 (define-key global-map (kbd "C-c k") #'raghu/kill-backward-to-indentation)
+
+(define-error 'raghu/unsupported-in-major-mode
+  "Function unsupported in buffer's major mode"
+  'error)
+(define-error 'raghu/invalid-region
+  "Invalid region specified"
+  'error)
 
 (defun raghu/duplicate-region-and-comment (beginning end)
   "Duplicate lines containing region and make them comments.
@@ -187,44 +194,47 @@ in that line.  Just be somewhere on the starting line, activate
 the mark if not already activated, and go somewhere on the ending
 line to include both lines and the lines in between.
 
-Do work only when the major mode of the buffer is derived from
-`prog-mode'.  The concept of comments may not be well-defined for
-non-programming modes, so err on the side of caution."
+If the major mode of the buffer is not derived from `prog-mode',
+signal an error: err on the side of caution because the concept
+of comments may not be well-defined for non-programming-language
+modes."
   (interactive "*r")
-  (when (and (derived-mode-p 'prog-mode)
-	     (integerp beginning)
-	     (integerp end)
-	     (>= beginning 1)
-	     (>= end 1))
-    ;; Ensure beginning <= end for ease of implementation.
-    ;; (interactive "*r") guarantees that this requirement is
-    ;; satisfied when this function is called interactively.  When
-    ;; called in lisp, there are no such guarantees, so let us do it
-    ;; ourselves.
-    (let* ((start (if (< beginning end) beginning end))
-	   (finish (if (= start beginning) end beginning))
-	   (start-bol nil)
-	   (finish-eol nil)
-	   (copied-lines nil))
-      (save-excursion
-	(goto-char start)
-	(beginning-of-line)
-	(setq start-bol (point))
-	(goto-char finish)
-	(end-of-line)
-	(setq finish-eol (point))
-	;; Use buffer-substring instead of kill-ring-save because we
-	;; do not want the copied text to end up on the kill-ring.
-	;; The idea is to duplicate the lines, not to save them
-	;; anywhere for yanking later.
-	(setq copied-lines (buffer-substring start-bol finish-eol))
-	(goto-char start-bol)
-	(open-line 1)
-	(insert copied-lines)
-	(ignore-errors (comment-region start-bol finish-eol)))
-      ;; Account for save-excursion behavior at beginning of line.
-      (when (and (bolp) (= start (point)))
-	(forward-line (count-lines start-bol finish-eol))))))
+  (unless (derived-mode-p 'prog-mode)
+    (signal 'raghu/unsupported-in-major-mode
+	    (list (format-message "`%s' not derived from prog-mode"
+				  major-mode))))
+  (unless (and (integerp beginning) (integerp end))
+    (signal 'wrong-type-argument
+	    (list (format-message "Expected integers, got %S, %S"
+				  beginning
+				  end))))
+  (unless (and (>= beginning 1) (>= end 1))
+    (signal 'raghu/invalid-region
+	    (list (format-message "(%d, %d) defines invalid region"
+				  beginning
+				  end))))
+  ;; Ensure beginning <= end for ease of implementation.
+  ;; (interactive "*r") guarantees that this requirement is
+  ;; satisfied when this function is called interactively.  When
+  ;; called in lisp, there are no such guarantees, so let us do it
+  ;; ourselves.
+  (when (> beginning end) (let (x) (setq x beginning beginning end end x)))
+  (let (beginning-bol end-eol copied-lines)
+    (save-excursion
+      (goto-char beginning) (beginning-of-line) (setq beginning-bol (point))
+      (goto-char end) (end-of-line) (setq end-eol (point))
+      ;; Use buffer-substring instead of kill-ring-save because we
+      ;; do not want the copied text to end up on the kill-ring.
+      ;; The idea is to duplicate the lines, not to save them
+      ;; anywhere for yanking later.
+      (setq copied-lines (buffer-substring beginning-bol end-eol))
+      (goto-char beginning-bol)
+      (open-line 1)
+      (insert copied-lines)
+      (comment-region beginning-bol end-eol))
+    ;; Account for save-excursion behavior at beginning of line.
+    (when (and (bolp) (= beginning (point)))
+      (forward-line (count-lines beginning-bol end-eol)))))
 
 (defun raghu/duplicate-line-and-comment (arg)
   "Duplicate current line and make it a comment.
@@ -236,66 +246,92 @@ perform this work on ARG lines below.  If ARG is a non-zero
 negative integer, perform this work on ARG lines above.  In
 either case, ARG includes the current line.  So, to perform the
 work on the current line only, ARG must be either 1 or -1.  If
-ARG is anything else, do nothing.
+ARG is anything else, signal an error.
 
-Do work only when the major mode of the buffer is derived from
-`prog-mode'.  The concept of comments may not be well-defined for
-non-programming modes, so err on the side of caution."
+If the major mode of the buffer is not derived from `prog-mode',
+signal an error: err on the side of caution because the concept
+of comments may not be well-defined for non-programming-language
+modes."
   (interactive "*p")
-  (when (and (derived-mode-p 'prog-mode)
-	     (integerp arg)
-	     (not (= 0 arg)))
-    (let ((original (point))
-	  (start nil)
-	  (end nil)
-	  (copied-lines nil))
-      (save-excursion
-	(if (> arg 0)
-	    (progn (forward-line (1- arg))
-		   (end-of-line)
-		   (setq end (point))
-		   (goto-char original)
-		   (beginning-of-line)
-		   (setq start (point)))
-	  (forward-line (1+ arg))	; arg is never zero here.
-	  (setq start (point))
-	  (goto-char original)
-	  (end-of-line)
-	  (setq end (point)))
-	(setq copied-lines (buffer-substring start end))
-	(goto-char start)
-	(open-line 1)
-	(insert copied-lines)
-	(ignore-errors (comment-region start end)))
-      ;; Account for save-excursion behavior at beginning of line.
-      (when (and (bolp) (= start (point)))
-	(forward-line (count-lines start end))))))
+  (unless (derived-mode-p 'prog-mode)
+    (signal 'raghu/unsupported-in-major-mode
+	    (list (format-message
+		   "`%s' not derived from prog-mode"
+		   major-mode))))
+  (unless (and (integerp arg) (not (= 0 arg)))
+    (signal 'wrong-type-argument
+	    (list (format-message "Expected non-zero integer, got %S" arg))))
+  (let (original start end copied-lines)
+    (setq original (point))
+    (save-excursion
+      (if (> arg 0)
+	  (progn (forward-line (1- arg))
+		 (end-of-line)
+		 (setq end (point))
+		 (goto-char original)
+		 (beginning-of-line)
+		 (setq start (point)))
+	(forward-line (1+ arg))		; arg is never zero here.
+	(setq start (point))
+	(goto-char original)
+	(end-of-line)
+	(setq end (point)))
+      (setq copied-lines (buffer-substring start end))
+      (goto-char start)
+      (open-line 1)
+      (insert copied-lines)
+      (comment-region start end))
+    ;; Account for save-excursion behavior at beginning of line.
+    (when (and (bolp) (= start (point)))
+      (forward-line (count-lines start end)))))
 
 (defun raghu/duplicate-and-comment (&optional arg)
   "Duplicate lines and make them comments.
 
-If region is active, call `raghu/duplicate-region-and-comment' on
-region.  If region is not active and ARG is an integer, call
-`raghu/duplicate-line-and-comment' with argument ARG.  If region
-is not active, and ARG is nil or not supplied, call
-`raghu/duplicate-line-and-comment' with argument 1.  If region is
-not active, ARG is a list, and if `car' of the list is an integer
-N, call `raghu/duplicate-line-and-comment' with argument N.  If
-region is not active and ARG is none of the above, do no work.
+If region is active:
 
-Do work only when the major mode of the buffer is derived from
-`prog-mode'.  The concept of comments may not be well-defined for
-non-programming modes, so err on the side of caution."
+  Call `raghu/duplicate-region-and-comment' on region.  ARG is
+  ignored.
+
+If region is not active:
+
+  If ARG is nil or not supplied, call
+  `raghu/duplicate-line-and-comment' with argument 1.
+
+  If ARG is an integer, call `raghu/duplicate-line-and-comment'
+  with argument ARG.
+
+  If ARG is a list, call `raghu/duplicate-line-and-comment' with
+  argument (`car' ARG).
+
+  If ARG is none of the above, print an error message to the
+  minibuffer, and perform no further work.
+
+If the buffer's major mode is not derived from `prog-mode', print
+an error message to the minibuffer, and take no further action:
+err on the side of caution because the concept of comments may
+not be well-defined for non-programming-language modes."
   (interactive "*P")
-  (when (derived-mode-p 'prog-mode)
-    (cond ((use-region-p) (raghu/duplicate-region-and-comment
-			   (region-beginning)
-			   (region-end)))
-	  ((integerp arg) (raghu/duplicate-line-and-comment arg))
-	  ((null arg) (raghu/duplicate-line-and-comment 1))
-	  ((listp arg) (let ((n (car arg)))
-			 (when (integerp n)
-			   (raghu/duplicate-line-and-comment n)))))))
+  (condition-case err
+      (progn
+	(unless (derived-mode-p 'prog-mode)
+	  (signal 'raghu/unsupported-in-major-mode
+		  (list (format-message
+			 "`%s' not derived from prog-mode"
+			 major-mode))))
+	(cond ((use-region-p) (raghu/duplicate-region-and-comment
+			       (region-beginning)
+			       (region-end)))
+	      ((integerp arg) (raghu/duplicate-line-and-comment arg))
+	      ((null arg) (raghu/duplicate-line-and-comment 1))
+	      ((listp arg) (raghu/duplicate-line-and-comment (car arg)))
+	      (t (signal 'user-error (list (format-message
+					    "Argument %S is unsupported"
+					    arg))))))
+    ((wrong-type-argument
+      raghu/unsupported-in-major-mode
+      raghu/raghu/invalid-region)
+     (message "%s" (error-message-string err)))))
 (define-key global-map (kbd "C-c I") #'raghu/duplicate-and-comment)
 
 (defun raghu/insert-and-go-to-new-line-above (lines)
@@ -304,10 +340,11 @@ non-programming modes, so err on the side of caution."
 Point is moved to the top-most line inserted, and indentation
 according to mode is inserted."
   (interactive "*p")
-  (when (> lines 0)
-    (beginning-of-line 1)
-    (open-line lines)
-    (indent-according-to-mode)))
+  (unless (> lines 0)
+    (user-error "Expected non-zero positive integer; got %S" lines))
+  (beginning-of-line 1)
+  (open-line lines)
+  (indent-according-to-mode))
 (define-key global-map (kbd "C-c O") #'raghu/insert-and-go-to-new-line-above)
 
 (defun raghu/insert-and-go-to-new-line-below (lines)
@@ -317,12 +354,13 @@ Point moves to the newly-inserted line immediately below the line
 on which point originally was, and indentation according to mode
 is inserted."
   (interactive "*p")
-  (when (> lines 0)
-    (save-excursion
-      (end-of-line 1)
-      (newline lines nil))
-    (forward-line)
-    (indent-according-to-mode)))
+  (unless (> lines 0)
+    (user-error "Expected non-zero positive integer; got %S" arg))
+  (save-excursion
+    (end-of-line 1)
+    (newline lines nil))
+  (forward-line)
+  (indent-according-to-mode))
 (define-key global-map (kbd "C-c o") #'raghu/insert-and-go-to-new-line-below)
 
 ;; Functions meant solely for adding to mode hooks.
