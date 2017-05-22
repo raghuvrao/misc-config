@@ -330,7 +330,7 @@ not be well-defined for non-programming-language modes."
 					    arg))))))
     ((wrong-type-argument
       raghu/unsupported-in-major-mode
-      raghu/raghu/invalid-region)
+      raghu/invalid-region)
      (message "%s" (error-message-string err)))))
 (define-key global-map (kbd "C-c I") #'raghu/duplicate-and-comment)
 
