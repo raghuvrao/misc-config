@@ -198,7 +198,6 @@ If the major mode of the buffer is not derived from `prog-mode',
 signal an error: err on the side of caution because the concept
 of comments may not be well-defined for non-programming-language
 modes."
-  (interactive "*r")
   (unless (derived-mode-p 'prog-mode)
     (signal 'raghu/unsupported-in-major-mode
 	    (list (format-message "`%s' not derived from prog-mode"
@@ -214,10 +213,6 @@ modes."
 				  beginning
 				  end))))
   ;; Ensure beginning <= end for ease of implementation.
-  ;; (interactive "*r") guarantees that this requirement is
-  ;; satisfied when this function is called interactively.  When
-  ;; called in lisp, there are no such guarantees, so let us do it
-  ;; ourselves.
   (when (> beginning end) (let (x) (setq x beginning beginning end end x)))
   (let (beginning-bol end-eol copied-lines)
     (save-excursion
@@ -252,7 +247,6 @@ If the major mode of the buffer is not derived from `prog-mode',
 signal an error: err on the side of caution because the concept
 of comments may not be well-defined for non-programming-language
 modes."
-  (interactive "*p")
   (unless (derived-mode-p 'prog-mode)
     (signal 'raghu/unsupported-in-major-mode
 	    (list (format-message
@@ -288,24 +282,19 @@ modes."
 (defun raghu/duplicate-and-comment (&optional arg)
   "Duplicate lines and make them comments.
 
-If region is active:
+This function is meant only for interactive use.  In Lisp, use
+`raghu/duplicate-line-and-comment' and
+`raghu/duplicate-region-and-comment'.
 
-  Call `raghu/duplicate-region-and-comment' on region.  ARG is
-  ignored.
-
-If region is not active:
-
-  If ARG is nil or not supplied, call
-  `raghu/duplicate-line-and-comment' with argument 1.
-
-  If ARG is an integer, call `raghu/duplicate-line-and-comment'
-  with argument ARG.
-
-  If ARG is a list, call `raghu/duplicate-line-and-comment' with
-  argument (`car' ARG).
-
-  If ARG is none of the above, print an error message to the
-  minibuffer, and perform no further work.
+If region is active, call `raghu/duplicate-region-and-comment' on
+region, and ignore ARG.  If region is not active and if ARG is
+nil or not supplied, call `raghu/duplicate-line-and-comment' with
+argument 1.  If region is not active and if ARG is an integer,
+call `raghu/duplicate-line-and-comment' with argument ARG.  If
+region is not active and ARG is a list, call
+`raghu/duplicate-line-and-comment' with argument (`car' ARG).  If
+region is not active and ARG is none of the above, print an error
+message to the minibuffer, and perform no further work.
 
 If the buffer's major mode is not derived from `prog-mode', print
 an error message to the minibuffer, and take no further action:
