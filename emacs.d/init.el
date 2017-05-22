@@ -184,15 +184,9 @@ must be 1.  Signal an error if LINES < 1."
 (defun raghu/duplicate-region-and-comment (beginning end)
   "Duplicate lines containing region and make them comments.
 
-Take the lines that encapsulate the region defined by BEGINNING
-and END, place a copy of these lines above the first line of the
-region, and make those lines into comments.  If BEGINNING or END
-is at the beginning (or end) of a line, that line will be
-included.  This behaviour is to make it easy to \"mark\" a line
-for consideration without having to worry about where point is in
-in that line.  Just be somewhere on the starting line, activate
-the mark if not already activated, and go somewhere on the ending
-line to include both lines and the lines in between.
+Take the lines necessary and sufficient to encapsulate the region
+defined by BEGINNING and END, place a copy of these lines above
+the first line of the region, and make those lines into comments.
 
 If the major mode of the buffer is not derived from `prog-mode',
 signal an error: err on the side of caution because the concept
