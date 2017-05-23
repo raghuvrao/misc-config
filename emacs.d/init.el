@@ -217,8 +217,11 @@ non-zero positive integer."
       (kill-region prior-point point-at-indentation))))
 (define-key global-map (kbd "C-c k") #'raghu/kill-backward-to-indentation)
 
-(define-error 'raghu/unsupported-in-major-mode
-  "Function unsupported in buffer's major mode"
+(define-error 'raghu/prog-mode-not-parent
+  "prog-mode is not a parent of buffer's major mode"
+  'error)
+(define-error 'raghu/comment-syntax-undefined
+  "Comment syntax is not defined for buffer's major mode"
   'error)
 
 (defun raghu/duplicate-region-and-comment (beginning end)
@@ -233,8 +236,10 @@ signal an error: err on the side of caution because the concept
 of comments may not be well-defined for non-programming-language
 modes."
   (unless (derived-mode-p 'prog-mode)
-    (signal 'raghu/unsupported-in-major-mode
-	    (list (list 'derived-mode-p 'prog-mode) major-mode)))
+    (signal 'raghu/prog-mode-not-parent nil))
+  ;; See newcomment.el for `comment-start'.
+  (unless (and (boundp 'comment-start) comment-start)
+    (signal 'raghu/comment-syntax-undefined nil))
   (unless (raghu/non-zero-positive-integer-p beginning end)
     (signal 'wrong-type-argument
 	    (list 'raghu/non-zero-positive-integer-p (list beginning end))))
@@ -275,8 +280,10 @@ from `prog-mode': err on the side of caution because the concept
 of comments may not be well-defined for non-programming-language
 modes."
   (unless (derived-mode-p 'prog-mode)
-    (signal 'raghu/unsupported-in-major-mode
-	    (list (list 'derived-mode-p 'prog-mode) major-mode)))
+    (signal 'raghu/prog-mode-not-parent nil))
+  ;; See newcomment.el for `comment-start'.
+  (unless (and (boundp 'comment-start) comment-start)
+    (signal 'raghu/comment-syntax-undefined nil))
   (unless (raghu/non-zero-integer-p arg)
     (signal 'wrong-type-argument (list 'raghu/non-zero-integer-p arg)))
   (let (original start end copied-lines)
@@ -330,7 +337,9 @@ message to the minibuffer, and perform no further work."
 	      ((listp arg) (raghu/duplicate-line-and-comment (car arg)))
 	      (t (signal 'wrong-type-argument
 			 (list (list 'null 'integerp 'listp) arg)))))
-    ((wrong-type-argument raghu/unsupported-in-major-mode)
+    ((wrong-type-argument
+      raghu/prog-mode-not-parent
+      raghu/comment-syntax-undefined)
      (message "%s" (error-message-string err)))))
 (define-key global-map (kbd "C-c I") #'raghu/duplicate-and-comment)
 
