@@ -54,6 +54,48 @@
 (require 'windmove)
 (windmove-default-keybindings 'control)
 
+(defun raghu/non-zero-integer-p (&rest args)
+  "Return t if all ARGS are non-zero integers, nil otherwise."
+  (let ((all-good-values-p t)
+	(len-args (length args))
+	(i 0)
+	(arg-i nil))
+    (when (= 0 len-args) (setq all-good-values-p nil))
+    (while (and all-good-values-p (< i len-args))
+      (setq arg-i (elt args i))
+      (if (integerp arg-i)
+	  (if (= 0 arg-i) (setq all-good-values-p nil) (setq i (1+ i)))
+	(setq all-good-values-p nil)))
+    all-good-values-p))
+
+(defun raghu/non-zero-positive-integer-p (&rest args)
+  "Return t if all ARGS are non-zero positive integers, nil otherwise."
+  (let ((all-good-values-p t)
+	(len-args (length args))
+	(i 0)
+	(arg-i nil))
+    (when (= 0 len-args) (setq all-good-values-p nil))
+    (while (and all-good-values-p (< i len-args))
+      (setq arg-i (elt args i))
+      (if (integerp arg-i)
+	  (if (>= arg-i 1) (setq i (1+ i)) (setq all-good-values-p nil))
+	(setq all-good-values-p nil)))
+    all-good-values-p))
+
+(defun raghu/non-zero-negative-integer-p (&rest args)
+  "Return t if all ARGS are non-zero negative integers, nil otherwise."
+  (let ((all-good-values-p t)
+	(len-args (length args))
+	(i 0)
+	(arg-i nil))
+    (when (= 0 len-args) (setq all-good-values-p nil))
+    (while (and all-good-values-p (< i len-args))
+      (setq arg-i (elt args i))
+      (if (integerp arg-i)
+	  (if (<= arg-i -1) (setq i (1+ i)) (setq all-good-values-p nil))
+	(setq all-good-values-p nil)))
+    all-good-values-p))
+
 ;; Useful for changing CRLF line terminators to LF line terminators.
 (defun raghu/dos2unix (buffer)
   "Convert BUFFER's file encoding system from DOS to UNIX."
@@ -159,9 +201,10 @@ resumed.  A mark is set at point's original starting position."
 Starting from point, kill backward to indentation of the LINESth
 line above.  The count LINES includes the current line.  So, to
 kill from point backward to indentation on the same line, LINES
-must be 1.  Signal an error if LINES < 1."
+must be 1.  Signal an error if LINES is anything other than a
+non-zero positive integer."
   (interactive "*p")
-  (unless (> lines 0)
+  (unless (raghu/non-zero-positive-integer-p lines)
     (user-error "Expected non-zero positive integer; got %S" lines))
   (let ((prior-point (point))
 	(point-at-indentation nil))
@@ -177,9 +220,6 @@ must be 1.  Signal an error if LINES < 1."
 (define-error 'raghu/unsupported-in-major-mode
   "Function unsupported in buffer's major mode"
   'error)
-(define-error 'raghu/invalid-region
-  "Invalid region specified"
-  'error)
 
 (defun raghu/duplicate-region-and-comment (beginning end)
   "Duplicate lines containing region and make them comments.
@@ -194,18 +234,10 @@ of comments may not be well-defined for non-programming-language
 modes."
   (unless (derived-mode-p 'prog-mode)
     (signal 'raghu/unsupported-in-major-mode
-	    (list (format-message "`%s' not derived from prog-mode"
-				  major-mode))))
-  (unless (and (integerp beginning) (integerp end))
+	    (list (list 'derived-mode-p 'prog-mode) major-mode)))
+  (unless (raghu/non-zero-positive-integer-p beginning end)
     (signal 'wrong-type-argument
-	    (list (format-message "Expected integers, got %S, %S"
-				  beginning
-				  end))))
-  (unless (and (>= beginning 1) (>= end 1))
-    (signal 'raghu/invalid-region
-	    (list (format-message "(%d, %d) defines invalid region"
-				  beginning
-				  end))))
+	    (list 'raghu/non-zero-positive-integer-p (list beginning end))))
   ;; Ensure beginning <= end for ease of implementation.
   (when (> beginning end) (let (x) (setq x beginning beginning end end x)))
   (let (beginning-bol end-eol copied-lines)
@@ -229,26 +261,24 @@ modes."
   "Duplicate current line and make it a comment.
 
 Starting from and including the current line, take ARG lines,
-place a copy of them above the current line, and convert those
-lines into comments.  If ARG is a non-zero positive integer,
-perform this work on ARG lines below.  If ARG is a non-zero
-negative integer, perform this work on ARG lines above.  In
-either case, ARG includes the current line.  So, to perform the
-work on the current line only, ARG must be either 1 or -1.  If
-ARG is anything else, signal an error.
+place a copy of them above the first of the ARG lines, and
+convert the copied lines into comments.  If ARG is a non-zero
+positive integer, perform this work on ARG lines below.  If ARG
+is a non-zero negative integer, perform this work on ARG lines
+above.  In either case, ARG includes the current line.  So, to
+perform the work on the current line only, ARG must be either 1
+or -1.
 
-If the major mode of the buffer is not derived from `prog-mode',
-signal an error: err on the side of caution because the concept
+Signal an error if ARG is anything other than a non-zero integer.
+Signal an error if the major mode of the buffer is not derived
+from `prog-mode': err on the side of caution because the concept
 of comments may not be well-defined for non-programming-language
 modes."
   (unless (derived-mode-p 'prog-mode)
     (signal 'raghu/unsupported-in-major-mode
-	    (list (format-message
-		   "`%s' not derived from prog-mode"
-		   major-mode))))
-  (unless (and (integerp arg) (not (= 0 arg)))
-    (signal 'wrong-type-argument
-	    (list (format-message "Expected non-zero integer, got %S" arg))))
+	    (list (list 'derived-mode-p 'prog-mode) major-mode)))
+  (unless (raghu/non-zero-integer-p arg)
+    (signal 'wrong-type-argument (list 'raghu/non-zero-integer-p arg)))
   (let (original start end copied-lines)
     (setq original (point))
     (save-excursion
@@ -288,32 +318,19 @@ call `raghu/duplicate-line-and-comment' with argument ARG.  If
 region is not active and ARG is a list, call
 `raghu/duplicate-line-and-comment' with argument (`car' ARG).  If
 region is not active and ARG is none of the above, print an error
-message to the minibuffer, and perform no further work.
-
-If the buffer's major mode is not derived from `prog-mode', print
-an error message to the minibuffer, and take no further action:
-err on the side of caution because the concept of comments may
-not be well-defined for non-programming-language modes."
+message to the minibuffer, and perform no further work."
   (interactive "*P")
   (condition-case err
       (progn
-	(unless (derived-mode-p 'prog-mode)
-	  (signal 'raghu/unsupported-in-major-mode
-		  (list (format-message
-			 "`%s' not derived from prog-mode"
-			 major-mode))))
-	(cond ((use-region-p) (raghu/duplicate-region-and-comment
+      	(cond ((use-region-p) (raghu/duplicate-region-and-comment
 			       (region-beginning)
 			       (region-end)))
 	      ((integerp arg) (raghu/duplicate-line-and-comment arg))
 	      ((null arg) (raghu/duplicate-line-and-comment 1))
 	      ((listp arg) (raghu/duplicate-line-and-comment (car arg)))
-	      (t (signal 'user-error (list (format-message
-					    "Argument %S is unsupported"
-					    arg))))))
-    ((wrong-type-argument
-      raghu/unsupported-in-major-mode
-      raghu/invalid-region)
+	      (t (signal 'wrong-type-argument
+			 (list (list 'null 'integerp 'listp) arg)))))
+    ((wrong-type-argument raghu/unsupported-in-major-mode)
      (message "%s" (error-message-string err)))))
 (define-key global-map (kbd "C-c I") #'raghu/duplicate-and-comment)
 
