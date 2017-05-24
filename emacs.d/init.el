@@ -347,9 +347,10 @@ message to the minibuffer, and perform no further work."
   "Insert LINES new lines above current line.
 
 Point is moved to the top-most line inserted, and indentation
-according to mode is inserted."
+according to mode is inserted.  If LINES is anything other than a
+non-zero positive integer, signal an error."
   (interactive "*p")
-  (unless (> lines 0)
+  (unless (raghu/non-zero-positive-integer-p lines)
     (user-error "Expected non-zero positive integer; got %S" lines))
   (beginning-of-line 1)
   (open-line lines)
@@ -361,9 +362,10 @@ according to mode is inserted."
 
 Point moves to the newly-inserted line immediately below the line
 on which point originally was, and indentation according to mode
-is inserted."
+is inserted.  If LINES is anything other than a non-zero positive
+integer, signal an error."
   (interactive "*p")
-  (unless (> lines 0)
+  (unless (raghu/non-zero-positive-integer-p lines)
     (user-error "Expected non-zero positive integer; got %S" lines))
   (save-excursion
     (end-of-line 1)
