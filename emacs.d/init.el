@@ -218,10 +218,10 @@ non-zero positive integer."
 (define-key global-map (kbd "C-c k") #'raghu/kill-backward-to-indentation)
 
 (define-error 'raghu/prog-mode-not-parent
-  "prog-mode is not a parent of buffer's major mode"
+  "Buffer's major mode not derived from prog-mode"
   'error)
 (define-error 'raghu/comment-syntax-undefined
-  "Comment syntax is not defined for buffer's major mode"
+  "Comment syntax not defined for buffer's major mode"
   'error)
 
 (defun raghu/duplicate-region-and-comment (beginning end)
