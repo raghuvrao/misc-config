@@ -313,30 +313,21 @@ modes."
 (defun raghu/duplicate-and-comment (&optional arg)
   "Duplicate lines and make them comments.
 
-This function is meant only for interactive use.  In Lisp, use
-`raghu/duplicate-line-and-comment' and
-`raghu/duplicate-region-and-comment'.
+This function is meant only for interactive use.  In Lisp, use:
+
+  `raghu/duplicate-line-and-comment'
+  `raghu/duplicate-region-and-comment'
 
 If region is active, call `raghu/duplicate-region-and-comment' on
-region, and ignore ARG.  If region is not active and if ARG is
-nil or not supplied, call `raghu/duplicate-line-and-comment' with
-argument 1.  If region is not active and if ARG is an integer,
-call `raghu/duplicate-line-and-comment' with argument ARG.  If
-region is not active and ARG is a list, call
-`raghu/duplicate-line-and-comment' with argument (`car' ARG).  If
-region is not active and ARG is none of the above, print an error
-message to the minibuffer, and perform no further work."
-  (interactive "*P")
+region, and ignore ARG.  If region is not active, call
+`raghu/duplicate-line-and-comment' with numeric argument ARG."
+  (interactive "*p")
   (condition-case err
-      (progn
-      	(cond ((use-region-p) (raghu/duplicate-region-and-comment
-			       (region-beginning)
-			       (region-end)))
-	      ((integerp arg) (raghu/duplicate-line-and-comment arg))
-	      ((null arg) (raghu/duplicate-line-and-comment 1))
-	      ((listp arg) (raghu/duplicate-line-and-comment (car arg)))
-	      (t (signal 'wrong-type-argument
-			 (list (list 'null 'integerp 'listp) arg)))))
+      (if (use-region-p)
+	  (raghu/duplicate-region-and-comment (region-beginning) (region-end))
+	(if arg
+	    (raghu/duplicate-line-and-comment arg)
+	  (signal 'wrong-type-argument (list 'integerp arg))))
     ((wrong-type-argument
       raghu/prog-mode-not-parent
       raghu/comment-syntax-undefined)
