@@ -310,7 +310,7 @@ modes."
     (when (and (bolp) (= start (point)))
       (forward-line (count-lines start end)))))
 
-(defun raghu/duplicate-and-comment (&optional arg)
+(defun raghu/duplicate-and-comment (arg)
   "Duplicate lines and make them comments.
 
 This function is meant only for interactive use.  In Lisp, use:
