@@ -217,9 +217,6 @@ non-zero positive integer."
       (kill-region prior-point point-at-indentation))))
 (define-key global-map (kbd "C-c k") #'raghu/kill-backward-to-indentation)
 
-(define-error 'raghu/prog-mode-not-parent
-  "Buffer's major mode not derived from prog-mode"
-  'error)
 (define-error 'raghu/comment-syntax-undefined
   "Comment syntax not defined for buffer's major mode"
   'error)
@@ -231,21 +228,20 @@ Take the lines necessary and sufficient to encapsulate the region
 defined by BEGINNING and END, place a copy of these lines above
 the first line of the region, and make those lines into comments.
 
-If the major mode of the buffer is not derived from `prog-mode',
-signal an error: err on the side of caution because the concept
-of comments may not be well-defined for non-programming-language
-modes."
-  (unless (derived-mode-p 'prog-mode)
-    (signal 'raghu/prog-mode-not-parent nil))
-  ;; See newcomment.el for `comment-start'.
-  (unless (and (boundp 'comment-start) comment-start)
+Signal an error if ARG is anything other than a non-zero integer.
+Signal an error if comment syntax is not defined for buffer's
+major mode (comment syntax is considered defined if
+`comment-start' and `comment-end' are non-nil)."
+  ;; See newcomment.el for `comment-start' and `comment-end'.
+  (unless (and (boundp 'comment-start) comment-start
+	       (boundp 'comment-end) comment-end)
     (signal 'raghu/comment-syntax-undefined nil))
   (unless (raghu/non-zero-positive-integer-p beginning end)
     (signal 'wrong-type-argument
 	    (list 'raghu/non-zero-positive-integer-p (list beginning end))))
   ;; Ensure beginning <= end for ease of implementation.
   (when (> beginning end) (let (x) (setq x beginning beginning end end x)))
-  (let (beginning-bol end-eol copied-lines)
+  (let (beginning-bol end-eol copied-lines num-copied-lines)
     (save-excursion
       (goto-char beginning) (beginning-of-line) (setq beginning-bol (point))
       (goto-char end) (end-of-line) (setq end-eol (point))
@@ -254,13 +250,14 @@ modes."
       ;; The idea is to duplicate the lines, not to save them
       ;; anywhere for yanking later.
       (setq copied-lines (buffer-substring beginning-bol end-eol))
+      (setq num-copied-lines (count-lines beginning-bol end-eol))
       (goto-char beginning-bol)
       (open-line 1)
       (insert copied-lines)
       (comment-region beginning-bol end-eol))
     ;; Account for save-excursion behavior at beginning of line.
     (when (and (bolp) (= beginning (point)))
-      (forward-line (count-lines beginning-bol end-eol)))))
+      (forward-line num-copied-lines))))
 
 (defun raghu/duplicate-line-and-comment (arg)
   "Duplicate current line and make it a comment.
@@ -275,18 +272,16 @@ perform the work on the current line only, ARG must be either 1
 or -1.
 
 Signal an error if ARG is anything other than a non-zero integer.
-Signal an error if the major mode of the buffer is not derived
-from `prog-mode': err on the side of caution because the concept
-of comments may not be well-defined for non-programming-language
-modes."
-  (unless (derived-mode-p 'prog-mode)
-    (signal 'raghu/prog-mode-not-parent nil))
-  ;; See newcomment.el for `comment-start'.
-  (unless (and (boundp 'comment-start) comment-start)
+Signal an error if comment syntax is not defined for buffer's
+major mode (comment syntax is considered defined if
+`comment-start' and `comment-end' are non-nil)."
+  ;; See newcomment.el for `comment-start' and `comment-end'.
+  (unless (and (boundp 'comment-start) comment-start
+	       (boundp 'comment-end) comment-end)
     (signal 'raghu/comment-syntax-undefined nil))
   (unless (raghu/non-zero-integer-p arg)
     (signal 'wrong-type-argument (list 'raghu/non-zero-integer-p arg)))
-  (let (original start end copied-lines)
+  (let (original start end copied-lines num-copied-lines)
     (setq original (point))
     (save-excursion
       (if (> arg 0)
@@ -302,13 +297,14 @@ modes."
 	(end-of-line)
 	(setq end (point)))
       (setq copied-lines (buffer-substring start end))
+      (setq num-copied-lines (count-lines start end))
       (goto-char start)
       (open-line 1)
       (insert copied-lines)
       (comment-region start end))
     ;; Account for save-excursion behavior at beginning of line.
     (when (and (bolp) (= start (point)))
-      (forward-line (count-lines start end)))))
+      (forward-line num-copied-lines))))
 
 (defun raghu/duplicate-and-comment (arg)
   "Duplicate lines and make them comments.
@@ -325,12 +321,8 @@ region, and ignore ARG.  If region is not active, call
   (condition-case err
       (if (use-region-p)
 	  (raghu/duplicate-region-and-comment (region-beginning) (region-end))
-	(if arg
-	    (raghu/duplicate-line-and-comment arg)
-	  (signal 'wrong-type-argument (list 'integerp arg))))
-    ((wrong-type-argument
-      raghu/prog-mode-not-parent
-      raghu/comment-syntax-undefined)
+	(raghu/duplicate-line-and-comment arg))
+    ((wrong-type-argument raghu/comment-syntax-undefined)
      (message "%s" (error-message-string err)))))
 (define-key global-map (kbd "C-c I") #'raghu/duplicate-and-comment)
 
