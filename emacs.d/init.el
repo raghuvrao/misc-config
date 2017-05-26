@@ -230,11 +230,10 @@ the first line of the region, and make those lines into comments.
 
 Signal an error if ARG is anything other than a non-zero integer.
 Signal an error if comment syntax is not defined for buffer's
-major mode (comment syntax is considered defined if
-`comment-start' and `comment-end' are non-nil)."
+major mode (see `comment-start' and `comment-end')."
   ;; See newcomment.el for `comment-start' and `comment-end'.
-  (unless (and (boundp 'comment-start) comment-start
-	       (boundp 'comment-end) comment-end)
+  (unless (and (boundp 'comment-start) (stringp comment-start)
+	       (boundp 'comment-end) (stringp comment-end))
     (signal 'raghu/comment-syntax-undefined nil))
   (unless (raghu/non-zero-positive-integer-p beginning end)
     (signal 'wrong-type-argument
@@ -273,11 +272,10 @@ or -1.
 
 Signal an error if ARG is anything other than a non-zero integer.
 Signal an error if comment syntax is not defined for buffer's
-major mode (comment syntax is considered defined if
-`comment-start' and `comment-end' are non-nil)."
+major mode (see `comment-start' and `comment-end')."
   ;; See newcomment.el for `comment-start' and `comment-end'.
-  (unless (and (boundp 'comment-start) comment-start
-	       (boundp 'comment-end) comment-end)
+  (unless (and (boundp 'comment-start) (stringp comment-start)
+	       (boundp 'comment-end) (stringp comment-end))
     (signal 'raghu/comment-syntax-undefined nil))
   (unless (raghu/non-zero-integer-p arg)
     (signal 'wrong-type-argument (list 'raghu/non-zero-integer-p arg)))
