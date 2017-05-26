@@ -58,12 +58,12 @@
   "Return t if ARG is a non-zero integer, nil otherwise."
   (and (integerp arg) (not (= arg 0))))
 
-(defun raghu/non-zero-positive-integer-p (arg)
-  "Return t if ARG is a non-zero positive integer, nil otherwise."
+(defun raghu/positive-non-zero-integer-p (arg)
+  "Return t if ARG is a positive non-zero integer, nil otherwise."
   (and (integerp arg) (>= arg 1)))
 
-(defun raghu/non-zero-negative-integer-p (arg)
-  "Return t if ARG is a non-zero negative integer, nil otherwise."
+(defun raghu/negative-non-zero-integer-p (arg)
+  "Return t if ARG is a negative non-zero integer, nil otherwise."
   (and (integerp arg) (<= arg -1)))
 
 ;; Useful for changing CRLF line terminators to LF line terminators.
@@ -171,11 +171,11 @@ resumed.  A mark is set at point's original starting position."
 Starting from point, kill backward to indentation of the LINESth
 line above.  The count LINES includes the current line.  So, to
 kill from point backward to indentation on the same line, LINES
-must be 1.  Signal an error if LINES is not a non-zero positive
+must be 1.  Signal an error if LINES is not a positive non-zero
 integer."
   (interactive "*p")
-  (unless (raghu/non-zero-positive-integer-p lines)
-    (user-error "Expected non-zero positive integer; got %S" lines))
+  (unless (raghu/positive-non-zero-integer-p lines)
+    (user-error "Expected positive non-zero integer; got %S" lines))
   (let ((prior-point (point))
 	(point-at-indentation nil))
     (back-to-indentation)
@@ -198,17 +198,18 @@ Take the lines necessary and sufficient to encapsulate the region
 defined by BEGINNING and END, place a copy of these lines above
 the first line of the region, and make those lines into comments.
 
-Signal an error if BEGINNING and END are not non-zero integers.
-Signal an error if comment syntax is not defined for buffer's
-major mode (see variables `comment-start' and `comment-end')."
+Signal an error if BEGINNING and END are not positive non-zero
+integers.  Signal an error if comment syntax is not defined for
+buffer's major mode (see variables `comment-start' and
+`comment-end')."
   ;; See newcomment.el for `comment-start' and `comment-end'.
   (unless (and (boundp 'comment-start) (stringp comment-start)
 	       (boundp 'comment-end) (stringp comment-end))
     (signal 'raghu/comment-syntax-undefined nil))
-  (unless (and (raghu/non-zero-positive-integer-p beginning)
-	       (raghu/non-zero-positive-integer-p end))
+  (unless (and (raghu/positive-non-zero-integer-p beginning)
+	       (raghu/positive-non-zero-integer-p end))
     (signal 'wrong-type-argument
-	    (list 'raghu/non-zero-positive-integer-p (list beginning end))))
+	    (list 'raghu/positive-non-zero-integer-p (list beginning end))))
   ;; Ensure beginning <= end for ease of implementation.
   (when (> beginning end) (let (x) (setq x beginning beginning end end x)))
   (let (beginning-bol end-eol copied-lines num-copied-lines)
@@ -234,9 +235,9 @@ major mode (see variables `comment-start' and `comment-end')."
 
 Starting from and including the current line, take ARG lines,
 place a copy of them above the first of the ARG lines, and
-convert the copied lines into comments.  If ARG is a non-zero
-positive integer, perform this work on ARG lines below.  If ARG
-is a non-zero negative integer, perform this work on ARG lines
+convert the copied lines into comments.  If ARG is a positive
+non-zero integer, perform this work on ARG lines below.  If ARG
+is a negative non-zero integer, perform this work on ARG lines
 above.  In either case, ARG includes the current line.  So, to
 perform the work on the current line only, ARG must be either 1
 or -1.
@@ -299,11 +300,11 @@ region, and ignore ARG.  If region is not active, call
   "Insert LINES new lines above current line.
 
 Point is moved to the top-most line inserted, and indentation
-according to mode is inserted.  If LINES is anything other than a
-non-zero positive integer, signal an error."
+according to mode is inserted.  If LINES is not a positive
+non-zero integer, signal an error."
   (interactive "*p")
-  (unless (raghu/non-zero-positive-integer-p lines)
-    (user-error "Expected non-zero positive integer; got %S" lines))
+  (unless (raghu/positive-non-zero-integer-p lines)
+    (user-error "Expected positive non-zero integer; got %S" lines))
   (beginning-of-line 1)
   (open-line lines)
   (indent-according-to-mode))
@@ -314,11 +315,11 @@ non-zero positive integer, signal an error."
 
 Point moves to the newly-inserted line immediately below the line
 on which point originally was, and indentation according to mode
-is inserted.  If LINES is anything other than a non-zero positive
+is inserted.  If LINES is anything other than a positive non-zero
 integer, signal an error."
   (interactive "*p")
-  (unless (raghu/non-zero-positive-integer-p lines)
-    (user-error "Expected non-zero positive integer; got %S" lines))
+  (unless (raghu/positive-non-zero-integer-p lines)
+    (user-error "Expected positive non-zero integer; got %S" lines))
   (save-excursion
     (end-of-line 1)
     (newline lines nil))
