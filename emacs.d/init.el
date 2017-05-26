@@ -54,47 +54,17 @@
 (require 'windmove)
 (windmove-default-keybindings 'control)
 
-(defun raghu/non-zero-integer-p (&rest args)
-  "Return t if all ARGS are non-zero integers, nil otherwise."
-  (let ((all-good-values-p t)
-	(len-args (length args))
-	(i 0)
-	(arg-i nil))
-    (when (= 0 len-args) (setq all-good-values-p nil))
-    (while (and all-good-values-p (< i len-args))
-      (setq arg-i (elt args i))
-      (if (integerp arg-i)
-	  (if (= 0 arg-i) (setq all-good-values-p nil) (setq i (1+ i)))
-	(setq all-good-values-p nil)))
-    all-good-values-p))
+(defun raghu/non-zero-integer-p (arg)
+  "Return t if ARG is a non-zero integer, nil otherwise."
+  (and (integerp arg) (not (= arg 0))))
 
-(defun raghu/non-zero-positive-integer-p (&rest args)
-  "Return t if all ARGS are non-zero positive integers, nil otherwise."
-  (let ((all-good-values-p t)
-	(len-args (length args))
-	(i 0)
-	(arg-i nil))
-    (when (= 0 len-args) (setq all-good-values-p nil))
-    (while (and all-good-values-p (< i len-args))
-      (setq arg-i (elt args i))
-      (if (integerp arg-i)
-	  (if (>= arg-i 1) (setq i (1+ i)) (setq all-good-values-p nil))
-	(setq all-good-values-p nil)))
-    all-good-values-p))
+(defun raghu/non-zero-positive-integer-p (arg)
+  "Return t if ARG is a non-zero positive integer, nil otherwise."
+  (and (integerp arg) (>= arg 1)))
 
-(defun raghu/non-zero-negative-integer-p (&rest args)
-  "Return t if all ARGS are non-zero negative integers, nil otherwise."
-  (let ((all-good-values-p t)
-	(len-args (length args))
-	(i 0)
-	(arg-i nil))
-    (when (= 0 len-args) (setq all-good-values-p nil))
-    (while (and all-good-values-p (< i len-args))
-      (setq arg-i (elt args i))
-      (if (integerp arg-i)
-	  (if (<= arg-i -1) (setq i (1+ i)) (setq all-good-values-p nil))
-	(setq all-good-values-p nil)))
-    all-good-values-p))
+(defun raghu/non-zero-negative-integer-p (arg)
+  "Return t if ARG is a non-zero negative integer, nil otherwise."
+  (and (integerp arg) (<= arg -1)))
 
 ;; Useful for changing CRLF line terminators to LF line terminators.
 (defun raghu/dos2unix (buffer)
@@ -201,8 +171,8 @@ resumed.  A mark is set at point's original starting position."
 Starting from point, kill backward to indentation of the LINESth
 line above.  The count LINES includes the current line.  So, to
 kill from point backward to indentation on the same line, LINES
-must be 1.  Signal an error if LINES is anything other than a
-non-zero positive integer."
+must be 1.  Signal an error if LINES is not a non-zero positive
+integer."
   (interactive "*p")
   (unless (raghu/non-zero-positive-integer-p lines)
     (user-error "Expected non-zero positive integer; got %S" lines))
@@ -228,14 +198,15 @@ Take the lines necessary and sufficient to encapsulate the region
 defined by BEGINNING and END, place a copy of these lines above
 the first line of the region, and make those lines into comments.
 
-Signal an error if ARG is anything other than a non-zero integer.
+Signal an error if BEGINNING and END are not non-zero integers.
 Signal an error if comment syntax is not defined for buffer's
-major mode (see `comment-start' and `comment-end')."
+major mode (see variables `comment-start' and `comment-end')."
   ;; See newcomment.el for `comment-start' and `comment-end'.
   (unless (and (boundp 'comment-start) (stringp comment-start)
 	       (boundp 'comment-end) (stringp comment-end))
     (signal 'raghu/comment-syntax-undefined nil))
-  (unless (raghu/non-zero-positive-integer-p beginning end)
+  (unless (and (raghu/non-zero-positive-integer-p beginning)
+	       (raghu/non-zero-positive-integer-p end))
     (signal 'wrong-type-argument
 	    (list 'raghu/non-zero-positive-integer-p (list beginning end))))
   ;; Ensure beginning <= end for ease of implementation.
@@ -270,9 +241,9 @@ above.  In either case, ARG includes the current line.  So, to
 perform the work on the current line only, ARG must be either 1
 or -1.
 
-Signal an error if ARG is anything other than a non-zero integer.
-Signal an error if comment syntax is not defined for buffer's
-major mode (see `comment-start' and `comment-end')."
+Signal an error if ARG is not a non-zero integer.  Signal an
+error if comment syntax is not defined for buffer's major
+mode (see variables `comment-start' and `comment-end')."
   ;; See newcomment.el for `comment-start' and `comment-end'.
   (unless (and (boundp 'comment-start) (stringp comment-start)
 	       (boundp 'comment-end) (stringp comment-end))
