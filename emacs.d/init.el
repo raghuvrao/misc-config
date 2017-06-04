@@ -62,6 +62,23 @@
     (set-buffer-file-coding-system 'unix t)
     (set-buffer-file-coding-system 'utf-8 t)))
 
+(defun raghu/indent-buffer (&optional buffer-or-name)
+  "Indent all or narrowed part of buffer.
+
+If BUFFER-OR-NAME is supplied, work on that buffer if it exists;
+otherwise, work on the current buffer.  Return the buffer object
+on which work was actually done."
+  (interactive "bBuffer")
+  (let ((buf (or (when (or (stringp buffer-or-name)
+			   (bufferp buffer-or-name))
+		   (get-buffer buffer-or-name))
+		 (current-buffer))))
+    (with-current-buffer buf
+      (barf-if-buffer-read-only)
+      (indent-region (point-min) (point-max))
+      (message "Indented: %S" buf))
+    buf))				; Return actual work buf.
+
 ;; async-shell-command runs the commands in buffers that are not
 ;; entirely uniquely named.  It has support for using different buffer
 ;; names, but for me, that's not good enough.  I want the buffers to
