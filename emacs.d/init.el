@@ -217,7 +217,9 @@ the first line of the region, and make those lines into comments.
 Signal an error if comment syntax is not defined for buffer's
 major mode.  This function considers comment syntax as defined if
 the symbols `comment-start' and `comment-end' satisfy the
-predicate functions `boundp' and `stringp'."
+predicate functions `boundp' and `stringp'.
+
+Return the number of lines copied."
   ;; See newcomment.el for `comment-start' and `comment-end'.
   (unless (boundp 'comment-start)
     (signal 'raghu/incomplete-comment-syntax '(boundp comment-start)))
@@ -237,7 +239,8 @@ predicate functions `boundp' and `stringp'."
     (if (< end pmin)
 	(setq end pmin)
       (when (> end pmax) (setq end pmax))))
-  (unless (= beginning end)
+  (if (= beginning end)
+      0					; Return #lines copied.
     (let (beginning-bol end-eol copied-lines num-copied-lines)
       (save-excursion
 	(goto-char beginning) (beginning-of-line) (setq beginning-bol (point))
@@ -254,7 +257,8 @@ predicate functions `boundp' and `stringp'."
 	(comment-region beginning-bol end-eol))
       ;; Account for save-excursion behavior at beginning of line.
       (when (and (bolp) (= beginning (point)))
-	(forward-line num-copied-lines)))))
+	(forward-line num-copied-lines))
+      num-copied-lines)))		; Return #lines copied.
 
 (defun raghu/duplicate-line-and-comment (arg)
   "Duplicate and comment current line.
@@ -268,7 +272,9 @@ Signal an error if ARG is not an integer.  Signal an error if
 comment syntax is not defined for buffer's major mode.  This
 function considers comment syntax as defined if the symbols
 `comment-start' and `comment-end' satisfy the predicate functions
-`boundp' and `stringp'."
+`boundp' and `stringp'.
+
+Return the number of lines copied."
   ;; See newcomment.el for `comment-start' and `comment-end'.
   (unless (boundp 'comment-start)
     (signal 'raghu/incomplete-comment-syntax '(boundp comment-start)))
@@ -302,36 +308,37 @@ function considers comment syntax as defined if the symbols
       (comment-region start end))
     ;; Account for save-excursion behavior at beginning of line.
     (when (and (bolp) (= start (point)))
-      (forward-line num-copied-lines))))
+      (forward-line num-copied-lines))
+    num-copied-lines))			; Return #lines copied.
 
 (defun raghu/duplicate-and-comment (&optional arg)
   "Duplicate lines and make them comments.
 
-This function is meant only for interactive use.  In Lisp, use:
-
-  `raghu/duplicate-line-and-comment'
-  `raghu/duplicate-region-and-comment'
+This function is region-aware, and suitable for interactive use.
+For use in Lisp, `raghu/duplicate-line-and-comment' and
+`raghu/duplicate-region-and-comment' are better-suited.
 
 If region is active, call `raghu/duplicate-region-and-comment' on
-the region, and ignore ARG.  Optional argument ARG is used only
-when region is inactive.  Call `raghu/duplicate-line-and-comment'
-with argument ARG if ARG is an integer.  If ARG is a list, call
-`raghu/duplicate-line-and-comment' with argument (`car' ARG) if
-it is an integer, 0 otherwise.  If ARG is not supplied or not any
-of the above, call `raghu/duplicate-line-and-comment' with
-argument 0."
+the region; ignore ARG.  Optional argument ARG is used only when
+region is either inactive or empty.  If ARG is an integer, call
+`raghu/duplicate-line-and-comment' with argument ARG.  If ARG is
+a list, let x be (`car' ARG).  If x is an integer, call
+`raghu/duplicate-line-and-comment' with argument x; otherwise,
+with argument 0.  If ARG is not supplied or not any of the above,
+call `raghu/duplicate-line-and-comment' with argument 0.
+
+Return the number of lines copied."
   (interactive "*P")
   (condition-case err
       (if (use-region-p)
-	  (raghu/duplicate-region-and-comment (region-beginning)
-					      (region-end))
-	(cond ((integerp arg) nil)
-	      ((listp arg) (setq arg (let ((x (car arg)))
-				       (if (integerp x) x 0))))
-	      (t (setq arg 0)))
+	  (raghu/duplicate-region-and-comment (region-beginning) (region-end))
+	(cond
+	 ((integerp arg) nil)
+	 ((listp arg) (setq arg (let ((x (car arg))) (if (integerp x) x 0))))
+	 (t (setq arg 0)))
 	(raghu/duplicate-line-and-comment arg))
     ((raghu/incomplete-comment-syntax wrong-type-argument)
-     (message "%s" (error-message-string err)))))
+     (progn (message "%s" (error-message-string err) 0)))))
 (define-key global-map (kbd "C-c I") #'raghu/duplicate-and-comment)
 
 (defun raghu/insert-and-go-to-new-line-above (lines)
