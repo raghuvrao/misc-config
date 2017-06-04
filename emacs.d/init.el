@@ -55,12 +55,23 @@
 (windmove-default-keybindings 'control)
 
 ;; Useful for changing CRLF line terminators to LF line terminators.
-(defun raghu/dos2unix (buffer)
-  "Convert BUFFER's file encoding system from DOS to UNIX."
-  (interactive "*bApply to buffer")
-  (with-current-buffer buffer
-    (set-buffer-file-coding-system 'unix t)
-    (set-buffer-file-coding-system 'utf-8 t)))
+(defun raghu/dos2unix (&optional buffer-or-name)
+  "Convert buffer's file encoding system from DOS to UNIX.
+
+If BUFFER-OR-NAME is supplied, work on that buffer if it exists;
+otherwise, work on the current buffer.  Return the buffer object
+on which work was actually done."
+  (interactive "bBuffer")
+  (let ((buf (or (when (or (stringp buffer-or-name)
+			   (bufferp buffer-or-name))
+		   (get-buffer buffer-or-name))
+		 (current-buffer))))
+    (with-current-buffer buf
+      (barf-if-buffer-read-only)
+      (set-buffer-file-coding-system 'unix t)
+      (set-buffer-file-coding-system 'utf-8 t)
+      (message "DOS-to-UNIX: %S" buf))
+    buf))				; Return actual work buf.
 
 (defun raghu/indent-buffer (&optional buffer-or-name)
   "Indent all or narrowed part of buffer.
