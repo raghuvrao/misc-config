@@ -176,10 +176,8 @@ resumed.  A mark is set at point's original starting position."
   (interactive)
   (push-mark)
   (message "%s" "raghu/scroll-map activated.")
-  (set-transient-map raghu/scroll-map
-		     t
-		     (lambda ()
-		       (message "%s" "raghu/scroll-map deactivated."))))
+  (set-transient-map
+   raghu/scroll-map t (lambda () (message "%s" "raghu/scroll-map OFF"))))
 (define-key global-map (kbd "C-c s") #'raghu/scroll)
 
 (defun raghu/kill-backward-to-indentation (&optional arg)
