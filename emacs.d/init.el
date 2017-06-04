@@ -456,6 +456,7 @@ is inserted.  If LINES is not a natural number, signal an error."
  '(sh-indentation 2)
  '(show-paren-delay 0)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
+ '(use-dialog-box nil)
  '(vc-follow-symlinks t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
