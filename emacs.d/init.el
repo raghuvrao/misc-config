@@ -175,7 +175,7 @@ will deactivate the keymap so usual editing operations can be
 resumed.  A mark is set at point's original starting position."
   (interactive)
   (push-mark)
-  (message "%s" "raghu/scroll-map activated.")
+  (message "%s" "raghu/scroll-map ON.")
   (set-transient-map
    raghu/scroll-map t (lambda () (message "%s" "raghu/scroll-map OFF"))))
 (define-key global-map (kbd "C-c s") #'raghu/scroll)
