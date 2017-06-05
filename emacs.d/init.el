@@ -224,9 +224,11 @@ Return the number of lines copied."
   (unless (boundp 'comment-end)
     (signal 'raghu/incomplete-comment-syntax '(boundp comment-end)))
   (unless (stringp comment-start)
-    (signal 'raghu/incomplete-comment-syntax '(stringp comment-start)))
+    (signal 'raghu/incomplete-comment-syntax
+	    (list #'stringp comment-start 'comment-start)))
   (unless (stringp comment-end)
-    (signal 'raghu/incomplete-comment-syntax '(stringp comment-end)))
+    (signal 'raghu/incomplete-comment-syntax
+	    (list #'stringp comment-end 'comment-end)))
   ;; Ensure beginning <= end for ease of implementation.
   (when (> beginning end) (let (x) (setq x beginning beginning end end x)))
   ;; Ensure beginning and end are within bounds.
@@ -279,9 +281,11 @@ Return the number of lines copied."
   (unless (boundp 'comment-end)
     (signal 'raghu/incomplete-comment-syntax '(boundp comment-end)))
   (unless (stringp comment-start)
-    (signal 'raghu/incomplete-comment-syntax '(stringp comment-start)))
+    (signal 'raghu/incomplete-comment-syntax
+	    (list #'stringp comment-start 'comment-start)))
   (unless (stringp comment-end)
-    (signal 'raghu/incomplete-comment-syntax '(stringp comment-end)))
+    (signal 'raghu/incomplete-comment-syntax
+	    (list #'stringp comment-end 'comment-end)))
   (unless (integerp arg)
     (signal 'wrong-type-argument '(integerp arg)))
   (let (original start end copied-lines num-copied-lines)
