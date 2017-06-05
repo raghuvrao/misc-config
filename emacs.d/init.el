@@ -55,40 +55,38 @@
 (windmove-default-keybindings 'control)
 
 ;; Useful for changing CRLF line terminators to LF line terminators.
-(defun raghu/dos2unix (&optional buffer-or-name)
+(defun raghu/dos2unix (buffer-or-name)
   "Convert buffer's file encoding system from DOS to UNIX.
 
-If BUFFER-OR-NAME is supplied, work on that buffer if it exists;
-otherwise, work on the current buffer.  Return the buffer object
-on which work was actually done."
+Return the buffer object on which work was actually done, nil if
+BUFFER-OR-NAME does not correspond to a buffer.  If called
+interactively, read buffer name from minibuffer."
   (interactive "bBuffer")
-  (let ((buf (or (when (or (stringp buffer-or-name)
-			   (bufferp buffer-or-name))
-		   (get-buffer buffer-or-name))
-		 (current-buffer))))
-    (with-current-buffer buf
-      (barf-if-buffer-read-only)
-      (set-buffer-file-coding-system 'unix t)
-      (set-buffer-file-coding-system 'utf-8 t)
-      (message "DOS-to-UNIX: %S" buf))
-    buf))				; Return actual work buf.
+  (let ((buf (when (or (stringp buffer-or-name) (bufferp buffer-or-name))
+	       (get-buffer buffer-or-name))))
+    (unless (null buf)
+      (with-current-buffer buf
+	(barf-if-buffer-read-only)
+	(set-buffer-file-coding-system 'unix t)
+	(set-buffer-file-coding-system 'utf-8 t)
+	(message "DOS-to-UNIX: %S" buf)
+	buf))))				; Return actual work buf.
 
-(defun raghu/indent-buffer (&optional buffer-or-name)
-  "Indent all or narrowed part of buffer.
+(defun raghu/indent-buffer (buffer-or-name)
+  "Indent all or narrowed part of buffer BUFFER-OR-NAME.
 
-If BUFFER-OR-NAME is supplied, work on that buffer if it exists;
-otherwise, work on the current buffer.  Return the buffer object
-on which work was actually done."
+Return the buffer object on which work was actually done, nil if
+BUFFER-OR-NAME does not correspond to a buffer.  If called
+interactively, read buffer name from minibuffer."
   (interactive "bBuffer")
-  (let ((buf (or (when (or (stringp buffer-or-name)
-			   (bufferp buffer-or-name))
-		   (get-buffer buffer-or-name))
-		 (current-buffer))))
-    (with-current-buffer buf
-      (barf-if-buffer-read-only)
-      (indent-region (point-min) (point-max))
-      (message "Indented: %S" buf))
-    buf))				; Return actual work buf.
+  (let ((buf (when (or (stringp buffer-or-name) (bufferp buffer-or-name))
+	       (get-buffer buffer-or-name))))
+    (unless (null buf)
+      (with-current-buffer buf
+	(barf-if-buffer-read-only)
+	(indent-region (point-min) (point-max))
+	(message "Indented: %S" buf)
+	buf))))				; Return actual work buf.
 
 ;; async-shell-command runs the commands in buffers that are not
 ;; entirely uniquely named.  It has support for using different buffer
