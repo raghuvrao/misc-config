@@ -140,12 +140,16 @@ interactively, read buffer name from minibuffer."
 ;; documentation below in agreement with each other.
 (defvar raghu/scroll-map
   (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "e") #'raghu--show-up-one)
     (define-key map (kbd "i") #'raghu--show-up-one)
     (define-key map (kbd "<up>") #'raghu--show-up-one)
+    (define-key map (kbd "d") #'raghu--show-down-one)
     (define-key map (kbd "k") #'raghu--show-down-one)
     (define-key map (kbd "<down>") #'raghu--show-down-one)
+    (define-key map (kbd "s") #'raghu--show-left-one)
     (define-key map (kbd "j") #'raghu--show-left-one)
     (define-key map (kbd "<left>") #'raghu--show-left-one)
+    (define-key map (kbd "f") #'raghu--show-right-one)
     (define-key map (kbd "l") #'raghu--show-right-one)
     (define-key map (kbd "<right>") #'raghu--show-right-one)
     map)
@@ -153,10 +157,10 @@ interactively, read buffer name from minibuffer."
 
 The following key-bindings are defined in this map:
 
-i, <up>: show previous (scroll down)
-k, <down>: show next (scroll up)
-j, <left>: show left (scroll right)
-l, <right>: show right (scroll left)
+e, i, <up>: show previous (scroll down)
+d, k, <down>: show next (scroll up)
+s, j, <left>: show left (scroll right)
+f, l, <right>: show right (scroll left)
 
 While scrolling, point remains with the original text-line (not
 screen-line) so long as the original text-line is within the
