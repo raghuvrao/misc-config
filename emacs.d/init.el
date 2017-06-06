@@ -55,38 +55,28 @@
 (windmove-default-keybindings 'control)
 
 ;; Useful for changing CRLF line terminators to LF line terminators.
-(defun raghu/dos2unix (buffer-or-name)
-  "Convert buffer's file encoding system from DOS to UNIX.
+(defun raghu/to-unix-utf-8-buffer (buf)
+  "Convert file encoding system of buffer BUF to UNIX UTF-8.
 
-Return the buffer object on which work was actually done, nil if
-BUFFER-OR-NAME does not correspond to a buffer.  If called
-interactively, read buffer name from minibuffer."
+If called interactively, read buffer name from minibuffer."
   (interactive "bBuffer")
-  (let ((buf (when (or (stringp buffer-or-name) (bufferp buffer-or-name))
-	       (get-buffer buffer-or-name))))
-    (unless (null buf)
-      (with-current-buffer buf
-	(barf-if-buffer-read-only)
-	(set-buffer-file-coding-system 'unix t)
-	(set-buffer-file-coding-system 'utf-8 t)
-	(message "DOS-to-UNIX: %S" buf)
-	buf))))				; Return actual work buf.
+  (with-current-buffer buf
+    (barf-if-buffer-read-only)
+    (set-buffer-file-coding-system 'unix t)
+    (set-buffer-file-coding-system 'utf-8 t)
+    (message "To UNIX UTF-8: %S" (get-buffer buf))
+    t))
 
-(defun raghu/indent-buffer (buffer-or-name)
-  "Indent all or narrowed part of buffer BUFFER-OR-NAME.
+(defun raghu/indent-buffer (buf)
+  "Indent all or narrowed part of buffer BUF.
 
-Return the buffer object on which work was actually done, nil if
-BUFFER-OR-NAME does not correspond to a buffer.  If called
-interactively, read buffer name from minibuffer."
+If called interactively, read buffer name from minibuffer."
   (interactive "bBuffer")
-  (let ((buf (when (or (stringp buffer-or-name) (bufferp buffer-or-name))
-	       (get-buffer buffer-or-name))))
-    (unless (null buf)
-      (with-current-buffer buf
-	(barf-if-buffer-read-only)
-	(indent-region (point-min) (point-max))
-	(message "Indented: %S" buf)
-	buf))))				; Return actual work buf.
+  (with-current-buffer buf
+    (barf-if-buffer-read-only)
+    (indent-region (point-min) (point-max))
+    (message "Indented: %S" (get-buffer buf))
+    t))
 
 ;; async-shell-command runs the commands in buffers that are not
 ;; entirely uniquely named.  It has support for using different buffer
