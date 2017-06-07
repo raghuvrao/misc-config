@@ -24,6 +24,9 @@
 (column-number-mode 1)
 (show-paren-mode 1)
 
+(set-language-environment "UTF-8")
+(prefer-coding-system 'utf-8)
+
 ;; Override yes-or-no-p's definition by making yes-or-no-p an alias
 ;; for y-or-n-p.  This way, when yes-or-no-p is called, y-or-n-p will
 ;; actually be called, and I can reply with y/SPC or n/DEL instead of
