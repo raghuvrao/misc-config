@@ -471,6 +471,7 @@ is inserted.  If LINES is not a natural number, signal an error."
  ;; If there is more than one, they won't work right.
  '(default ((((type x)) (:height 90 :family "DejaVu Sans Mono"))))
  '(eshell-prompt ((t nil)))
+ '(fringe ((t (:inherit default))))
  '(isearch ((((type x ns) (class color) (background light)) (:background "plum2" :foreground "black"))))
  '(region ((((type x ns) (class color) (background light)) (:background "LightGoldenrod2")))))
 
