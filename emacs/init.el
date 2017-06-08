@@ -179,23 +179,23 @@ resumed.  A mark is set at point's original starting position."
   "Kill backward from point to first nonblank character on line.
 
 With argument ARG, kill backward to indentation of the ARGth line
-above the current line.  The absolute value of ARG is used,
-because the kill is always backward.  If ARG is 0, kill backward
-from point to indentation of the current line (the one on which
-point is).  If ARG is not an integer, assume ARG is 0."
+above the current line.  Return number of lines killed (count
+includes partially killed line, if any)."
   (interactive "*P")
   (cond ((integerp arg) nil)
 	((listp arg) (setq arg (let ((z (car arg))) (if (integerp z) z 0))))
-	(t (setq arg 0)))
+	(t (signal 'wrong-type-argument (list #'integerp arg))))
   (setq arg (abs arg))
-  (let ((prior-point (point)) (point-at-indentation nil))
+  (let ((prior-point (point)) (point-at-indent nil) (num-killed-lines 0))
     (back-to-indentation)
     (when (> arg 0)
       (when (> (point) prior-point) (setq prior-point (point)))
       (backward-to-indentation arg))
-    (setq point-at-indentation (point))
-    (when (> prior-point point-at-indentation)
-      (kill-region prior-point point-at-indentation))))
+    (setq point-at-indent (point))
+    (when (> prior-point point-at-indent)
+      (setq num-killed-lines (count-lines prior-point point-at-indent))
+      (kill-region prior-point point-at-indent))
+    num-killed-lines))
 (define-key global-map (kbd "C-c k") #'raghu/kill-backward-to-indentation)
 
 (define-error 'raghu/incomplete-comment-syntax
@@ -226,6 +226,10 @@ Return the number of lines copied."
   (unless (stringp comment-end)
     (signal 'raghu/incomplete-comment-syntax
 	    (list #'stringp comment-end 'comment-end)))
+  (unless (integerp beginning)
+    (signal 'wrong-type-argument (list #'integerp beginning 'beginning)))
+  (unless (integerp end)
+    (signal 'wrong-type-argument (list #'integerp end 'end)))
   ;; Ensure beginning <= end for ease of implementation.
   (when (> beginning end) (let (x) (setq x beginning beginning end end x)))
   ;; Ensure beginning and end are within bounds.
@@ -284,7 +288,7 @@ Return the number of lines copied."
     (signal 'raghu/incomplete-comment-syntax
 	    (list #'stringp comment-end 'comment-end)))
   (unless (integerp arg)
-    (signal 'wrong-type-argument '(integerp arg)))
+    (signal 'wrong-type-argument (list #'integerp arg)))
   (let (original start end copied-lines num-copied-lines)
     (setq original (point))
     (save-excursion
@@ -313,28 +317,21 @@ Return the number of lines copied."
 (defun raghu/duplicate-and-comment (&optional arg)
   "Duplicate lines and make them comments.
 
-This function is region-aware, and suitable for interactive use.
-For use in Lisp, `raghu/duplicate-line-and-comment' and
-`raghu/duplicate-region-and-comment' are better-suited.
-
 If region is active, call `raghu/duplicate-region-and-comment' on
-the region; ignore ARG.  Optional argument ARG is used only when
-region is either inactive or empty.  If ARG is an integer, call
-`raghu/duplicate-line-and-comment' with argument ARG.  If ARG is
-a list, let x be (`car' ARG).  If x is an integer, call
-`raghu/duplicate-line-and-comment' with argument x; otherwise,
-with argument 0.  If ARG is not supplied or not any of the above,
-call `raghu/duplicate-line-and-comment' with argument 0.
+the region, and ignore argument ARG.  If region is not active,
+call `raghu/duplicate-line-and-comment' with argument ARG.  When
+no prefix argument is provided, ARG defaults to 0.  Return the
+number of lines copied.
 
-Return the number of lines copied."
+Interactive only!  `raghu/duplicate-line-and-comment' and/or
+`raghu/duplicate-region-and-comment' are for use in Lisp."
   (interactive "*P")
   (condition-case err
       (if (use-region-p)
 	  (raghu/duplicate-region-and-comment (region-beginning) (region-end))
 	(cond
-	 ((integerp arg) nil)
-	 ((listp arg) (setq arg (let ((x (car arg))) (if (integerp x) x 0))))
-	 (t (setq arg 0)))
+	 ((null arg) (setq arg 0))
+	 ((listp arg) (let ((x (car arg))) (when (integerp x) (setq arg x)))))
 	(raghu/duplicate-line-and-comment arg))
     ((raghu/incomplete-comment-syntax wrong-type-argument)
      (progn (message "%s" (error-message-string err) 0)))))
