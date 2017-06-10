@@ -464,7 +464,7 @@ indentation according to mode."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((((type x)) (:height 90 :family "DejaVu Sans Mono"))))
+ '(default ((((type x)) (:height 90))))
  '(eshell-prompt ((t nil)))
  '(fringe ((t (:inherit default))))
  '(isearch ((((type x ns) (class color) (background light)) (:background "plum2" :foreground "black"))))
