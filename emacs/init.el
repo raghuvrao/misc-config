@@ -440,6 +440,7 @@ indentation according to mode."
  '(indicate-empty-lines t)
  '(inhibit-startup-screen t)
  '(initial-scratch-message nil)
+ '(isearch-allow-scroll t)
  '(kill-whole-line t)
  '(make-backup-files nil)
  '(mouse-yank-at-point t)
