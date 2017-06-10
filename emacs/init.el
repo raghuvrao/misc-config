@@ -178,14 +178,16 @@ resumed.  A mark is set at point's original starting position."
 (defun raghu/kill-backward-to-indentation (&optional arg)
   "Kill backward from point to first nonblank character on line.
 
-With argument ARG, kill backward to indentation of the ARGth line
-above the current line.  Return number of lines killed (count
-includes partially killed line, if any)."
+With prefix argument ARG, kill backward to indentation of the
+ARGth line above the current line.  Without a prefix argument,
+work on current line only (ARG defaults to 0 in this case).
+Return number of lines killed (count includes partially killed
+lines, if any)."
   (interactive "*P")
-  (cond ((integerp arg) nil)
-	((listp arg) (setq arg (let ((z (car arg))) (if (integerp z) z 0))))
-	(t (signal 'wrong-type-argument (list #'integerp arg))))
-  (setq arg (abs arg))
+  (cond ((null arg) (setq arg 0))
+	((listp arg) (let ((z (car arg))) (when (natnump z) (setq arg z)))))
+  (unless (natnump arg)
+    (signal 'wrong-type-argument (list #'natnump arg)))
   (let ((prior-point (point)) (point-at-indent nil) (num-killed-lines 0))
     (back-to-indentation)
     (when (> arg 0)
@@ -269,11 +271,10 @@ line and ARG lines below it.  If ARG is a negative integer,
 duplicate and comment the current line and (`abs' ARG) lines
 above it.  If ARG is 0, duplicate and comment current line only.
 
-Signal an error if ARG is not an integer.  Signal an error if
-comment syntax is not defined for buffer's major mode.  This
-function considers comment syntax as defined if the symbols
-`comment-start' and `comment-end' satisfy the predicate functions
-`boundp' and `stringp'.
+Consider comment syntax as defined if the symbols `comment-start'
+and `comment-end' satisfy the predicate functions `boundp' and
+`stringp'.  Signal an error if comment syntax is not defined for
+buffer's major mode.
 
 Return the number of lines copied."
   ;; See newcomment.el for `comment-start' and `comment-end'.
@@ -337,38 +338,35 @@ Interactive only!  `raghu/duplicate-line-and-comment' and/or
      (progn (message "%s" (error-message-string err) 0)))))
 (define-key global-map (kbd "C-c I") #'raghu/duplicate-and-comment)
 
-(defun raghu/insert-and-go-to-new-line-above (lines)
-  "Insert LINES new lines above current line.
+(defun raghu/new-line-above (arg)
+  "Above current line, insert new line and indentaion.
 
-Point is moved to the top-most line inserted, and indentation
-according to mode is inserted.  The absolute value of LINES is
-used.  If LINES is not an integer, signal an error."
+With prefix argument ARG, insert that many lines above current
+line.  Move point to top-most line inserted, and insert
+indentation according to mode."
   (interactive "*p")
-  (unless (integerp lines)
-    (signal 'wrong-type-argument (list #'integerp lines)))
-  (setq lines (abs lines))
-  (when (> lines 0)
+  (unless (natnump arg) (signal 'wrong-type-argument (list #'natnump arg)))
+  (when (> arg 0)			; (natnump 0) => t
     (beginning-of-line 1)
-    (open-line lines)
+    (open-line arg)
     (indent-according-to-mode)))
-(define-key global-map (kbd "C-c O") #'raghu/insert-and-go-to-new-line-above)
+(define-key global-map (kbd "C-c o") #'raghu/new-line-above)
 
-(defun raghu/insert-and-go-to-new-line-below (lines)
-  "Insert LINES new lines below current line.
+(defun raghu/new-line-below (arg)
+  "Below current line, insert new line and indentation.
 
-Point moves to the newly-inserted line immediately below the line
-on which point originally was, and indentation according to mode
-is inserted.  If LINES is not a natural number, signal an error."
+With prefix argument ARG, insert that many lines below current
+line.  Move point to top-most line inserted, and insert
+indentation according to mode."
   (interactive "*p")
-  (unless (natnump lines)
-    (signal 'wrong-type-argument (list #'natnump lines)))
-  (when (> lines 0)
+  (unless (natnump arg) (signal 'wrong-type-argument (list #'natnump arg)))
+  (when (> arg 0)			; (natnump 0) => t
     (save-excursion
       (end-of-line 1)
-      (newline lines nil))
+      (newline arg nil))
     (forward-line)
     (indent-according-to-mode)))
-(define-key global-map (kbd "C-c o") #'raghu/insert-and-go-to-new-line-below)
+(define-key global-map (kbd "C-c RET") #'raghu/new-line-below)
 
 ;; Functions meant solely for adding to mode hooks.
 (defun raghu--enable-hl-line-mode-in-buffer ()
