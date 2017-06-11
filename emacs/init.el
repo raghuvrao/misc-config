@@ -133,18 +133,14 @@ If called interactively, read buffer name from minibuffer."
 ;; documentation below in agreement with each other.
 (defvar raghu/scroll-map
   (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "e") #'raghu--show-up-one)
-    (define-key map (kbd "i") #'raghu--show-up-one)
-    (define-key map (kbd "<up>") #'raghu--show-up-one)
-    (define-key map (kbd "d") #'raghu--show-down-one)
-    (define-key map (kbd "k") #'raghu--show-down-one)
-    (define-key map (kbd "<down>") #'raghu--show-down-one)
-    (define-key map (kbd "s") #'raghu--show-left-one)
-    (define-key map (kbd "j") #'raghu--show-left-one)
-    (define-key map (kbd "<left>") #'raghu--show-left-one)
-    (define-key map (kbd "f") #'raghu--show-right-one)
-    (define-key map (kbd "l") #'raghu--show-right-one)
-    (define-key map (kbd "<right>") #'raghu--show-right-one)
+    (dolist (key '("e" "i" "<up>"))
+      (define-key map (kbd key) #'raghu--show-up-one))
+    (dolist (key '("d" "k" "<down>"))
+      (define-key map (kbd key) #'raghu--show-down-one))
+    (dolist (key '("s" "j" "<left>"))
+      (define-key map (kbd key) #'raghu--show-left-one))
+    (dolist (key '("f" "l" "<right>"))
+      (define-key map (kbd key) #'raghu--show-right-one))
     map)
   "Keymap for scrolling one line/column at a time.
 
