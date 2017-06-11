@@ -204,10 +204,6 @@ lines, if any)."
     num-killed-lines))
 (define-key global-map (kbd "C-c k") #'raghu/kill-backward-to-indentation)
 
-(define-error 'raghu/incomplete-comment-syntax
-  "Incomplete comment syntax"
-  'error)
-
 (defun raghu/duplicate-region-and-comment (beginning end)
   "Duplicate lines containing region and make them comments.
 
@@ -215,27 +211,25 @@ Take the lines necessary and sufficient to encapsulate the region
 defined by BEGINNING and END, place a copy of these lines above
 the first line of the region, and make those lines into comments.
 
-Signal an error if comment syntax is not defined for buffer's
-major mode.  This function considers comment syntax as defined if
-the symbols `comment-start' and `comment-end' satisfy the
-predicate functions `boundp' and `stringp'.
+Signal an error if comment syntax is not defined for buffer's major
+mode.  This function considers comment syntax in the buffer's major
+mode as defined if the symbols `comment-start' and `comment-end'
+satisfy the predicate functions `boundp' and `stringp'.
 
 Return the number of lines copied."
   ;; See newcomment.el for `comment-start' and `comment-end'.
   (unless (boundp 'comment-start)
-    (signal 'raghu/incomplete-comment-syntax '(boundp comment-start)))
+    (signal 'void-variable '(comment-start)))
   (unless (boundp 'comment-end)
-    (signal 'raghu/incomplete-comment-syntax '(boundp comment-end)))
+    (signal 'void-variable '(comment-end)))
   (unless (stringp comment-start)
-    (signal 'raghu/incomplete-comment-syntax
-	    (list #'stringp comment-start 'comment-start)))
+    (signal 'wrong-type-argument (list #'stringp comment-start)))
   (unless (stringp comment-end)
-    (signal 'raghu/incomplete-comment-syntax
-	    (list #'stringp comment-end 'comment-end)))
+    (signal 'wrong-type-argument (list #'stringp comment-end)))
   (unless (integerp beginning)
-    (signal 'wrong-type-argument (list #'integerp beginning 'beginning)))
+    (signal 'wrong-type-argument (list #'integerp beginning)))
   (unless (integerp end)
-    (signal 'wrong-type-argument (list #'integerp end 'end)))
+    (signal 'wrong-type-argument (list #'integerp end)))
   ;; Ensure beginning <= end for ease of implementation.
   (when (> beginning end) (let (x) (setq x beginning beginning end end x)))
   ;; Ensure beginning and end are within bounds.
@@ -246,7 +240,8 @@ Return the number of lines copied."
     (if (< end pmin)
 	(setq end pmin)
       (when (> end pmax) (setq end pmax))))
-  (when (= beginning end) (error "%s" "Nothing to comment"))
+  (when (= beginning end)
+    (signal 'error (list (format-message "%s" "Nothing to comment"))))
   (let (beginning-bol end-eol copied-lines num-copied-lines)
     (save-excursion
       (goto-char beginning) (beginning-of-line) (setq beginning-bol (point))
@@ -274,23 +269,21 @@ line and ARG lines below it.  If ARG is a negative integer,
 duplicate and comment the current line and (`abs' ARG) lines
 above it.  If ARG is 0, duplicate and comment current line only.
 
-Consider comment syntax as defined if the symbols `comment-start'
-and `comment-end' satisfy the predicate functions `boundp' and
-`stringp'.  Signal an error if comment syntax is not defined for
-buffer's major mode.
+Signal an error if comment syntax is not defined for buffer's major
+mode.  This function considers comment syntax in the buffer's major
+mode as defined if the symbols `comment-start' and `comment-end'
+satisfy the predicate functions `boundp' and `stringp'.
 
 Return the number of lines copied."
   ;; See newcomment.el for `comment-start' and `comment-end'.
   (unless (boundp 'comment-start)
-    (signal 'raghu/incomplete-comment-syntax '(boundp comment-start)))
+    (signal 'void-variable '(boundp comment-start)))
   (unless (boundp 'comment-end)
-    (signal 'raghu/incomplete-comment-syntax '(boundp comment-end)))
+    (signal 'void-variable '(boundp comment-end)))
   (unless (stringp comment-start)
-    (signal 'raghu/incomplete-comment-syntax
-	    (list #'stringp comment-start 'comment-start)))
+    (signal 'wrong-type-argument (list #'stringp comment-start)))
   (unless (stringp comment-end)
-    (signal 'raghu/incomplete-comment-syntax
-	    (list #'stringp comment-end 'comment-end)))
+    (signal 'wrong-type-argument (list #'stringp comment-end)))
   (unless (integerp arg)
     (signal 'wrong-type-argument (list #'integerp arg)))
   (let (original start end copied-lines num-copied-lines)
@@ -330,15 +323,12 @@ number of lines copied.
 Interactive only!  `raghu/duplicate-line-and-comment' and/or
 `raghu/duplicate-region-and-comment' are for use in Lisp."
   (interactive "*P")
-  (condition-case err
-      (if (use-region-p)
-	  (raghu/duplicate-region-and-comment (region-beginning) (region-end))
-	(cond
-	 ((null arg) (setq arg 0))
-	 ((listp arg) (let ((x (car arg))) (when (integerp x) (setq arg x)))))
-	(raghu/duplicate-line-and-comment arg))
-    ((raghu/incomplete-comment-syntax wrong-type-argument)
-     (progn (message "%s" (error-message-string err) 0)))))
+  (if (use-region-p)
+      (raghu/duplicate-region-and-comment (region-beginning) (region-end))
+    (cond
+     ((null arg) (setq arg 0))
+     ((listp arg) (let ((x (car arg))) (when (integerp x) (setq arg x)))))
+    (raghu/duplicate-line-and-comment arg)))
 (define-key global-map (kbd "C-c I") #'raghu/duplicate-and-comment)
 
 (defun raghu/new-line-above (arg)
