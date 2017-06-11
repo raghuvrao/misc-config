@@ -246,26 +246,25 @@ Return the number of lines copied."
     (if (< end pmin)
 	(setq end pmin)
       (when (> end pmax) (setq end pmax))))
-  (if (= beginning end)
-      0					; Return #lines copied.
-    (let (beginning-bol end-eol copied-lines num-copied-lines)
-      (save-excursion
-	(goto-char beginning) (beginning-of-line) (setq beginning-bol (point))
-	(goto-char end) (end-of-line) (setq end-eol (point))
-	;; Use buffer-substring instead of kill-ring-save because we
-	;; do not want the copied text to end up on the kill-ring.
-	;; The idea is to duplicate the lines, not to save them
-	;; anywhere for yanking later.
-	(setq copied-lines (buffer-substring beginning-bol end-eol))
-	(setq num-copied-lines (count-lines beginning-bol end-eol))
-	(goto-char beginning-bol)
-	(open-line 1)
-	(insert copied-lines)
-	(comment-region beginning-bol end-eol))
-      ;; Account for save-excursion behavior at beginning of line.
-      (when (and (bolp) (= beginning (point)))
-	(forward-line num-copied-lines))
-      num-copied-lines)))		; Return #lines copied.
+  (when (= beginning end) (error "%s" "Nothing to comment"))
+  (let (beginning-bol end-eol copied-lines num-copied-lines)
+    (save-excursion
+      (goto-char beginning) (beginning-of-line) (setq beginning-bol (point))
+      (goto-char end) (end-of-line) (setq end-eol (point))
+      ;; Use buffer-substring instead of kill-ring-save because we
+      ;; do not want the copied text to end up on the kill-ring.
+      ;; The idea is to duplicate the lines, not to save them
+      ;; anywhere for yanking later.
+      (setq copied-lines (buffer-substring beginning-bol end-eol))
+      (setq num-copied-lines (count-lines beginning-bol end-eol))
+      (goto-char beginning-bol)
+      (open-line 1)
+      (insert copied-lines)
+      (comment-region beginning-bol end-eol))
+    ;; Account for save-excursion behavior at beginning of line.
+    (when (and (bolp) (= beginning (point)))
+      (forward-line num-copied-lines))
+    num-copied-lines))		; Return #lines copied.
 
 (defun raghu/duplicate-line-and-comment (arg)
   "Duplicate and comment current line.
