@@ -215,10 +215,11 @@ Take the lines necessary and sufficient to encapsulate the region
 defined by BEGINNING and END, place a copy of these lines above
 the first line of the region, and make those lines into comments.
 
-Signal an error if comment syntax is not defined for buffer's
-major mode.  This function considers comment syntax as defined if
-the symbols `comment-start' and `comment-end' satisfy the
-predicate functions `boundp' and `stringp'.
+Signal an error if comment syntax is not defined for the buffer's
+major mode.  This function considers comment syntax for the
+buffer's major mode as defined if the symbols `comment-start' and
+`comment-end' satisfy the predicate functions `boundp' and
+`stringp'.
 
 Return the number of lines copied."
   ;; See newcomment.el for `comment-start' and `comment-end'.
@@ -274,10 +275,11 @@ line and ARG lines below it.  If ARG is a negative integer,
 duplicate and comment the current line and (`abs' ARG) lines
 above it.  If ARG is 0, duplicate and comment current line only.
 
-Consider comment syntax as defined if the symbols `comment-start'
-and `comment-end' satisfy the predicate functions `boundp' and
-`stringp'.  Signal an error if comment syntax is not defined for
-buffer's major mode.
+Signal an error if comment syntax is not defined for the buffer's
+major mode.  This function considers comment syntax for the
+buffer's major mode as defined if the symbols `comment-start' and
+`comment-end' satisfy the predicate functions `boundp' and
+`stringp'.
 
 Return the number of lines copied."
   ;; See newcomment.el for `comment-start' and `comment-end'.
