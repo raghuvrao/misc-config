@@ -214,14 +214,13 @@ lines, if any)."
 Take the lines necessary and sufficient to encapsulate the region
 defined by BEGINNING and END, place a copy of these lines above
 the first line of the region, and make those lines into comments.
+Return the number of lines copied.
 
 Signal an error if comment syntax is not defined for the buffer's
 major mode.  This function considers comment syntax for the
 buffer's major mode as defined if the symbols `comment-start' and
 `comment-end' satisfy the predicate functions `boundp' and
-`stringp'.
-
-Return the number of lines copied."
+`stringp'."
   ;; See newcomment.el for `comment-start' and `comment-end'.
   (unless (boundp 'comment-start)
     (signal 'raghu/incomplete-comment-syntax '(boundp comment-start)))
@@ -274,14 +273,13 @@ If ARG is a positive integer, duplicate and comment the current
 line and ARG lines below it.  If ARG is a negative integer,
 duplicate and comment the current line and (`abs' ARG) lines
 above it.  If ARG is 0, duplicate and comment current line only.
+Return the number of lines copied.
 
 Signal an error if comment syntax is not defined for the buffer's
 major mode.  This function considers comment syntax for the
 buffer's major mode as defined if the symbols `comment-start' and
 `comment-end' satisfy the predicate functions `boundp' and
-`stringp'.
-
-Return the number of lines copied."
+`stringp'."
   ;; See newcomment.el for `comment-start' and `comment-end'.
   (unless (boundp 'comment-start)
     (signal 'raghu/incomplete-comment-syntax '(boundp comment-start)))
@@ -329,8 +327,9 @@ call `raghu/duplicate-line-and-comment' with argument ARG.  When
 no prefix argument is provided, ARG defaults to 0.  Return the
 number of lines copied.
 
-Interactive only!  `raghu/duplicate-line-and-comment' and/or
-`raghu/duplicate-region-and-comment' are for use in Lisp."
+This function is intended for interactive use only.  In Lisp, use
+the functions `raghu/duplicate-line-and-comment' and
+`raghu/duplicate-region-and-comment'."
   (interactive "*P")
   (condition-case err
       (if (use-region-p)
