@@ -219,9 +219,11 @@ buffer's major mode as defined if the symbols `comment-start' and
 `stringp'."
   ;; See newcomment.el for `comment-start' and `comment-end'.
   (unless (boundp 'comment-start)
-    (signal 'raghu/incomplete-comment-syntax '(boundp comment-start)))
+    (signal 'raghu/incomplete-comment-syntax
+	    (list #'boundp 'comment-start)))
   (unless (boundp 'comment-end)
-    (signal 'raghu/incomplete-comment-syntax '(boundp comment-end)))
+    (signal 'raghu/incomplete-comment-syntax
+	    (list #'boundp 'comment-end)))
   (unless (stringp comment-start)
     (signal 'raghu/incomplete-comment-syntax
 	    (list #'stringp comment-start 'comment-start)))
@@ -229,9 +231,11 @@ buffer's major mode as defined if the symbols `comment-start' and
     (signal 'raghu/incomplete-comment-syntax
 	    (list #'stringp comment-end 'comment-end)))
   (unless (integerp beginning)
-    (signal 'wrong-type-argument (list #'integerp beginning 'beginning)))
+    (signal 'wrong-type-argument
+	    (list #'integerp beginning 'beginning)))
   (unless (integerp end)
-    (signal 'wrong-type-argument (list #'integerp end 'end)))
+    (signal 'wrong-type-argument
+	    (list #'integerp end 'end)))
   ;; Ensure beginning <= end for ease of implementation.
   (when (> beginning end) (let (x) (setq x beginning beginning end end x)))
   ;; Ensure beginning and end are within bounds.
@@ -242,7 +246,8 @@ buffer's major mode as defined if the symbols `comment-start' and
     (if (< end pmin)
 	(setq end pmin)
       (when (> end pmax) (setq end pmax))))
-  (when (= beginning end) (error "%s" "Nothing to comment"))
+  (when (= beginning end)
+    (signal 'error (list (format-message "%s" "Nothing to comment"))))
   (let (beginning-bol end-eol copied-lines num-copied-lines)
     (save-excursion
       (goto-char beginning) (beginning-of-line) (setq beginning-bol (point))
@@ -260,7 +265,8 @@ buffer's major mode as defined if the symbols `comment-start' and
     ;; Account for save-excursion behavior at beginning of line.
     (when (and (bolp) (= beginning (point)))
       (forward-line num-copied-lines))
-    num-copied-lines))		; Return #lines copied.
+    ;; Return the number of lines copied+commented.
+    num-copied-lines))
 
 (defun raghu/duplicate-line-and-comment (arg)
   "Duplicate and comment current line.
@@ -278,9 +284,11 @@ buffer's major mode as defined if the symbols `comment-start' and
 `stringp'."
   ;; See newcomment.el for `comment-start' and `comment-end'.
   (unless (boundp 'comment-start)
-    (signal 'raghu/incomplete-comment-syntax '(boundp comment-start)))
+    (signal 'raghu/incomplete-comment-syntax
+	    (list #'boundp 'comment-start)))
   (unless (boundp 'comment-end)
-    (signal 'raghu/incomplete-comment-syntax '(boundp comment-end)))
+    (signal 'raghu/incomplete-comment-syntax
+	    (list #'boundp 'comment-end)))
   (unless (stringp comment-start)
     (signal 'raghu/incomplete-comment-syntax
 	    (list #'stringp comment-start 'comment-start)))
@@ -288,7 +296,8 @@ buffer's major mode as defined if the symbols `comment-start' and
     (signal 'raghu/incomplete-comment-syntax
 	    (list #'stringp comment-end 'comment-end)))
   (unless (integerp arg)
-    (signal 'wrong-type-argument (list #'integerp arg)))
+    (signal 'wrong-type-argument
+	    (list #'integerp arg)))
   (let (original start end copied-lines num-copied-lines)
     (setq original (point))
     (save-excursion
@@ -312,7 +321,8 @@ buffer's major mode as defined if the symbols `comment-start' and
     ;; Account for save-excursion behavior at beginning of line.
     (when (and (bolp) (= start (point)))
       (forward-line num-copied-lines))
-    num-copied-lines))			; Return #lines copied.
+    ;; Return the number of lines copied+commented.
+    num-copied-lines))
 
 (defun raghu/duplicate-and-comment (&optional arg)
   "Duplicate lines and make them comments.
