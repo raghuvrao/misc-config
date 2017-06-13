@@ -453,7 +453,6 @@ indentation according to mode."
  ;; If there is more than one, they won't work right.
  '(debug-on-error t)
  '(frame-background-mode (quote light))
- '(hscroll-step 1)
  '(indicate-empty-lines t)
  '(inhibit-startup-screen t)
  '(initial-scratch-message nil)
@@ -471,7 +470,6 @@ indentation according to mode."
    (quote
     (go-eldoc go-errcheck go-guru go-mode go-rename multiple-cursors)))
  '(ring-bell-function (quote ignore))
- '(scroll-conservatively 5)
  '(sh-basic-offset 2)
  '(sh-indent-for-case-alt (quote +))
  '(sh-indent-for-case-label 0)
