@@ -12,8 +12,6 @@
 (when (fboundp #'tool-bar-mode) (tool-bar-mode -1))
 (when (fboundp #'scroll-bar-mode) (scroll-bar-mode -1))
 (when (fboundp #'horizontal-scroll-bar-mode) (horizontal-scroll-bar-mode -1))
-(global-hl-line-mode -1)
-(global-font-lock-mode -1)
 (transient-mark-mode -1)
 
 ;; Various shell programs like to send their stdout through a pager.
@@ -378,7 +376,14 @@ indentation according to mode."
     (indent-according-to-mode)))
 (define-key global-map (kbd "C-c RET") #'raghu/new-line-below)
 
-;; Functions meant solely for adding to mode hooks.
+;; Disable a few things globally, and enable them on a per-mode basis.
+;;
+;; First, disable them globally.
+(global-hl-line-mode -1)
+(global-font-lock-mode -1)
+
+;; Next, define functions to enable them per-buffer.  These functions
+;; are meant solely for adding to mode hooks.
 (defun raghu--enable-hl-line-mode-in-buffer ()
   "Highlight line containing point in current buffer."
   (hl-line-mode 1))
@@ -396,6 +401,8 @@ indentation according to mode."
   "Highlight trailing whitespace in the current buffer."
   (set (make-local-variable 'show-trailing-whitespace) t))
 
+;; Finally, add one or more of the above functions (and maybe other
+;; functions) to the desired modes' hooks.
 (with-eval-after-load 'simple
   ;; special-mode is a "parent" mode for various modes.
   (add-hook 'special-mode-hook #'raghu--enable-font-lock-mode-in-buffer))
