@@ -10,6 +10,7 @@
 (package-initialize)
 
 (when (fboundp #'tool-bar-mode) (tool-bar-mode -1))
+(when (fboundp #'tooltip-mode) (tooltip-mode -1))
 (when (fboundp #'scroll-bar-mode) (scroll-bar-mode -1))
 (when (fboundp #'horizontal-scroll-bar-mode) (horizontal-scroll-bar-mode -1))
 (transient-mark-mode -1)
