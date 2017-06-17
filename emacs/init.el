@@ -34,12 +34,12 @@
 
 ;; Remove undesirable key-bindings.
 (define-key global-map (kbd "C-x C-c") nil)
+(define-key global-map (kbd "C-z") nil)
+(define-key global-map (kbd "C-x C-z") nil)
 
 ;; A few convenient key-bindings are assigned to not-so-interesting
 ;; functions by default.  Reassign them to more interesting functions.
-(define-key global-map (kbd "C-x C-b") #'ibuffer)
-(define-key global-map (kbd "C-z") #'repeat)
-(define-key global-map (kbd "C-x C-z") #'repeat)
+(define-key global-map [remap list-buffers] #'ibuffer)
 
 ;; Assign convenient key-bindings for useful functions that either
 ;; have no default key-bindings or have inconvenient default
