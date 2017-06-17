@@ -414,6 +414,9 @@ indentation according to mode."
   (add-hook 'prog-mode-hook #'raghu--enable-hl-line-mode-in-buffer)
   (add-hook 'prog-mode-hook #'raghu--show-trailing-whitespace-in-buffer))
 
+(with-eval-after-load 'cus-edit
+  (add-hook 'Custom-mode-hook #'raghu--enable-hl-line-mode-in-buffer))
+
 (with-eval-after-load 'ibuffer
   ;; font-lock-mode is helpful in ibuffer-mode, but there is no need
   ;; to enable it here separately.  ibuffer-mode inherits from
