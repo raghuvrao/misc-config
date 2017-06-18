@@ -377,6 +377,24 @@ indentation according to mode."
     (indent-according-to-mode)))
 (define-key global-map (kbd "C-c RET") #'raghu/new-line-below)
 
+;; From https://github.com/cjohansen/.emacs.d/blob/e669e7964be5484d78af11c67a3811e277114816/defuns/editing-defuns.el
+(defun current-quotes-char ()
+  (nth 3 (syntax-ppss)))
+
+(defalias 'point-is-in-string-p #'current-quotes-char)
+
+(defun raghu/mark-string ()
+  "Mark the string containing point."
+  (interactive)
+  (if (point-is-in-string-p)
+      (progn
+	(while (point-is-in-string-p) (backward-char 1))
+	(push-mark)
+	(forward-char 1)
+	(while (point-is-in-string-p) (forward-char 1)))
+    (error "Point is not in a string")))
+(define-key global-map (kbd "C-c \"") #'raghu/mark-string)
+
 ;; Disable a few things globally, and enable them on a per-mode basis.
 ;;
 ;; First, disable them globally.
