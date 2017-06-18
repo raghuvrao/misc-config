@@ -485,6 +485,10 @@ indentation according to mode."
 			    (local-set-key (kbd "C-c C-c") #'compile)
 			    (subword-mode 1))))
 
+(with-eval-after-load 'log-edit
+  (add-hook 'log-edit-mode-hook #'raghu--enable-hl-line-mode-in-buffer)
+  (add-hook 'log-edit-mode-hook #'raghu--enable-font-lock-mode-in-buffer))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
