@@ -468,6 +468,10 @@ indentation according to mode."
 (with-eval-after-load "text-mode"
   (add-hook 'text-mode-hook #'raghu--enable-word-wrap-in-buffer))
 
+(with-eval-after-load 'log-edit
+  (add-hook 'log-edit-mode-hook #'raghu--enable-hl-line-mode-in-buffer)
+  (add-hook 'log-edit-mode-hook #'raghu--enable-font-lock-mode-in-buffer))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
