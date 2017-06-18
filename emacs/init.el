@@ -103,7 +103,7 @@ If called interactively, read buffer name from minibuffer."
   "Visit ~/.emacs.d/init.el."
   (interactive)
   (find-file (substitute-in-file-name "$HOME/.emacs.d/init.el")))
-(define-key global-map (kbd "C-c C") #'raghu/visit-emacs-configuration-file)
+(define-key global-map (kbd "C-c I") #'raghu/visit-emacs-configuration-file)
 
 ;; Scroll while keeping point on original text-line (so long as the
 ;; original text-line is in the window, of course).
@@ -345,7 +345,7 @@ the functions `raghu/duplicate-line-and-comment' and
 	(raghu/duplicate-line-and-comment arg))
     ((raghu/incomplete-comment-syntax wrong-type-argument)
      (progn (message "%s" (error-message-string err) 0)))))
-(define-key global-map (kbd "C-c I") #'raghu/duplicate-and-comment)
+(define-key global-map (kbd "C-c C") #'raghu/duplicate-and-comment)
 
 (defun raghu/new-line-above (arg)
   "Above current line, insert new line and indentaion.
