@@ -379,6 +379,11 @@ indentation according to mode."
 
 ;; From https://github.com/cjohansen/.emacs.d/blob/e669e7964be5484d78af11c67a3811e277114816/defuns/editing-defuns.el
 (defun current-quotes-char ()
+  "Return non-nil if point is inside a string, nil otherwise.
+
+The return value is the character that will terminate the string,
+or t if the string should be terminated by a generic string
+delimiter."
   (nth 3 (syntax-ppss)))
 
 (defalias 'point-is-in-string-p #'current-quotes-char)
