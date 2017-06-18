@@ -388,15 +388,18 @@ delimiter."
 
 (defalias 'point-is-in-string-p #'current-quotes-char)
 
-(defun raghu/mark-string ()
-  "Mark the string containing point."
-  (interactive)
+(defun raghu/mark-string (&optional activate-mark-p)
+  "Mark the string containing point.
+
+If ACTIVATE-MARK-P is non-nil, activate mark too."
+  (interactive "P")
   (if (point-is-in-string-p)
       (progn
 	(while (point-is-in-string-p) (backward-char 1))
 	(push-mark)
 	(forward-char 1)
-	(while (point-is-in-string-p) (forward-char 1)))
+	(while (point-is-in-string-p) (forward-char 1))
+	(when activate-mark-p (activate-mark)))
     (error "Point is not in a string")))
 (define-key global-map (kbd "C-c \"") #'raghu/mark-string)
 
