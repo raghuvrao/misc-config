@@ -199,9 +199,7 @@ lines, if any)."
     num-killed-lines))
 (define-key global-map (kbd "C-c k") #'raghu/kill-backward-to-indentation)
 
-(define-error 'raghu/incomplete-comment-syntax
-  "Incomplete comment syntax"
-  'error)
+(define-error 'raghu/wrong-type "Wrong type" 'error)
 
 (defun raghu/duplicate-region-and-comment (beginning end)
   "Duplicate lines containing region and make them comments.
@@ -218,23 +216,17 @@ buffer's major mode as defined if the symbols `comment-start' and
 `stringp'."
   ;; See newcomment.el for `comment-start' and `comment-end'.
   (unless (boundp 'comment-start)
-    (signal 'raghu/incomplete-comment-syntax
-	    (list #'boundp 'comment-start)))
+    (signal 'void-variable '(comment-start)))
   (unless (boundp 'comment-end)
-    (signal 'raghu/incomplete-comment-syntax
-	    (list #'boundp 'comment-end)))
+    (signal 'void-variable '(comment-end)))
   (unless (stringp comment-start)
-    (signal 'raghu/incomplete-comment-syntax
-	    (list #'stringp comment-start 'comment-start)))
+    (signal 'raghu/wrong-type (list #'stringp comment-start 'comment-start)))
   (unless (stringp comment-end)
-    (signal 'raghu/incomplete-comment-syntax
-	    (list #'stringp comment-end 'comment-end)))
+    (signal 'raghu/wrong-type (list #'stringp comment-end 'comment-end)))
   (unless (integerp beginning)
-    (signal 'wrong-type-argument
-	    (list #'integerp beginning 'beginning)))
+    (signal 'wrong-type-argument (list #'integerp beginning 'beginning)))
   (unless (integerp end)
-    (signal 'wrong-type-argument
-	    (list #'integerp end 'end)))
+    (signal 'wrong-type-argument (list #'integerp end 'end)))
   ;; Ensure beginning <= end for ease of implementation.
   (when (> beginning end) (let (x) (setq x beginning beginning end end x)))
   ;; Ensure beginning and end are within bounds.
@@ -283,20 +275,15 @@ buffer's major mode as defined if the symbols `comment-start' and
 `stringp'."
   ;; See newcomment.el for `comment-start' and `comment-end'.
   (unless (boundp 'comment-start)
-    (signal 'raghu/incomplete-comment-syntax
-	    (list #'boundp 'comment-start)))
+    (signal 'void-variable '(comment-start)))
   (unless (boundp 'comment-end)
-    (signal 'raghu/incomplete-comment-syntax
-	    (list #'boundp 'comment-end)))
+    (signal 'void-variable '(comment-end)))
   (unless (stringp comment-start)
-    (signal 'raghu/incomplete-comment-syntax
-	    (list #'stringp comment-start 'comment-start)))
+    (signal 'raghu/wrong-type (list #'stringp comment-start 'comment-start)))
   (unless (stringp comment-end)
-    (signal 'raghu/incomplete-comment-syntax
-	    (list #'stringp comment-end 'comment-end)))
+    (signal 'raghu/wrong-type (list #'stringp comment-end 'comment-end)))
   (unless (integerp arg)
-    (signal 'wrong-type-argument
-	    (list #'integerp arg)))
+    (signal 'wrong-type-argument (list #'integerp arg)))
   (let (original start end copied-lines num-copied-lines)
     (setq original (point))
     (save-excursion
@@ -343,8 +330,9 @@ the functions `raghu/duplicate-line-and-comment' and
 	 ((null arg) (setq arg 0))
 	 ((listp arg) (let ((x (car arg))) (when (integerp x) (setq arg x)))))
 	(raghu/duplicate-line-and-comment arg))
-    ((raghu/incomplete-comment-syntax wrong-type-argument)
-     (progn (message "%s" (error-message-string err) 0)))))
+    ((wrong-type-argument
+      raghu/wrong-type
+      void-variable) (progn (message "%s" (error-message-string err)) 0))))
 (define-key global-map (kbd "C-c C") #'raghu/duplicate-and-comment)
 
 (defun raghu/new-line-above (arg)
