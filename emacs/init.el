@@ -207,19 +207,16 @@ sufficient to encapsulate the region; ignore all arguments.  If
 region is not active, use arguments to determine on which lines
 to work.
 
-LINES can be supplied via \\[universal-argument] prefix.  When no
-prefix, LINES is nil.
+LINES can be specified via prefix argument.  When no prefix
+argument is specified, LINES is nil.
 
 If region is not active, and if all three arguments are nil, work
 on the current line only.
 
-If region is not active, LINES is nil, and at least one of
-BEGINNING and END is non-nil, work on lines necessary and
+If region is not active, if LINES is nil, and if at least one of
+BEGINNING and END is non-nil, work on the lines necessary and
 sufficient to encapsulate the region defined by BEGINNING and
-END, limited by the accessible portion of the buffer (if either
-BEGINNING or END is nil or outside the accessible area of the
-buffer, set it to the closest endpoint ((`point-min')
-or (`point-max')) of the buffer).
+END, limited by the accessible area of the buffer.
 
 If region is not active, with prefix argument LINES, work on the
 current line, and LINES additional lines.  LINES > 0 means LINES
