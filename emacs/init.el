@@ -199,140 +199,101 @@ lines, if any)."
     num-killed-lines))
 (define-key global-map (kbd "C-c k") #'raghu/kill-backward-to-indentation)
 
-(define-error 'raghu/wrong-type "Wrong type" 'error)
+(defun raghu/duplicate-and-comment (&optional lines beginning end)
+  "Duplicate and comment lines.
 
-(defun raghu/duplicate-region-and-comment (beginning end)
-  "Duplicate lines containing region and make them comments.
+If the region is active, work on the lines necessary and
+sufficient to encapsulate the region; ignore all arguments.  If
+region is not active, use arguments to determine on which lines
+to work.
 
-Take the lines necessary and sufficient to encapsulate the region
-defined by BEGINNING and END, place a copy of these lines above
-the first line of the region, and make those lines into comments.
+LINES can be supplied via \\[universal-argument] prefix.  When no
+prefix, LINES is nil.
+
+If region is not active, and if all three arguments are nil, work
+on the current line only.
+
+If region is not active, LINES is nil, and at least one of
+BEGINNING and END is non-nil, work on lines necessary and
+sufficient to encapsulate the region defined by BEGINNING and
+END, limited by the accessible portion of the buffer (if either
+BEGINNING or END is nil or outside the accessible area of the
+buffer, set it to the closest endpoint ((`point-min')
+or (`point-max')) of the buffer).
+
+If region is not active, with prefix argument LINES, work on the
+current line, and LINES additional lines.  LINES > 0 means LINES
+lines below the current line, LINES < 0 means -LINES lines above
+the current line, LINES = 0 means current line only.  Ignore
+BEGINNING and END.
+
 Return the number of lines copied.
 
-Signal an error if comment syntax is not defined for the buffer's
-major mode.  This function considers comment syntax for the
-buffer's major mode as defined if the symbols `comment-start' and
-`comment-end' satisfy the predicate functions `boundp' and
-`stringp'."
-  ;; See newcomment.el for `comment-start' and `comment-end'.
-  (unless (boundp 'comment-start)
-    (signal 'void-variable '(comment-start)))
-  (unless (boundp 'comment-end)
-    (signal 'void-variable '(comment-end)))
-  (unless (stringp comment-start)
-    (signal 'raghu/wrong-type (list #'stringp comment-start 'comment-start)))
-  (unless (stringp comment-end)
-    (signal 'raghu/wrong-type (list #'stringp comment-end 'comment-end)))
-  (unless (integerp beginning)
-    (signal 'wrong-type-argument (list #'integerp beginning 'beginning)))
-  (unless (integerp end)
-    (signal 'wrong-type-argument (list #'integerp end 'end)))
-  ;; Ensure beginning <= end for ease of implementation.
-  (when (> beginning end) (let (x) (setq x beginning beginning end end x)))
-  ;; Ensure beginning and end are within bounds.
-  (let ((pmin (point-min)) (pmax (point-max)))
-    (if (< beginning pmin)
-	(setq beginning pmin)
-      (when (> beginning pmax) (setq beginning pmax)))
-    (if (< end pmin)
-	(setq end pmin)
-      (when (> end pmax) (setq end pmax))))
-  (when (= beginning end)
-    (signal 'error (list (format-message "%s" "Nothing to comment"))))
-  (let (beginning-bol end-eol copied-lines num-copied-lines)
+This function is best used interactively.  It calls the function
+`comment-normalize-vars', which prompts the user for comment
+syntax interactively if comment syntax for the buffer's major
+mode is undefined.  It can be used in Lisp, provided comment
+syntax is fully defined."
+  (interactive "*P")
+  (comment-normalize-vars)
+  (let ((try-using-region nil) (copied-lines nil) (num-copied-lines 0)
+	(beginning-bol nil) (end-eol nil))
+    (if (use-region-p)
+	(setq try-using-region t
+	      beginning (region-beginning)
+	      end (region-end))
+      (if (null lines)
+	  (if (and (null beginning) (null end))
+	      (setq lines 0 try-using-region nil)
+	    (or beginning (setq beginning (point-min)))
+	    (or end (setq end (point-max)))
+	    (setq try-using-region t))
+	(setq try-using-region nil)
+	(when (listp lines)
+	  (let ((z (car lines))) (when (integerp z) (setq lines z))))))
+    (unless (or (and (integerp beginning) (integerp end) try-using-region)
+		(and (integerp lines) (not try-using-region)))
+      (signal 'wrong-type-argument (list #'integerp lines beginning end)))
     (save-excursion
-      (goto-char beginning) (beginning-of-line) (setq beginning-bol (point))
-      (goto-char end) (end-of-line) (setq end-eol (point))
-      ;; Use buffer-substring instead of kill-ring-save because we
-      ;; do not want the copied text to end up on the kill-ring.
-      ;; The idea is to duplicate the lines, not to save them
-      ;; anywhere for yanking later.
-      (setq copied-lines (buffer-substring beginning-bol end-eol))
-      (setq num-copied-lines (count-lines beginning-bol end-eol))
+      (if try-using-region
+	  (progn (when (> beginning end)
+		   ;; Ensure beginning <= end for implementation ease.
+		   (let (x) (setq x beginning beginning end end x)))
+		 ;; Ensure beginning and end are within bounds.
+		 (let ((pmin (point-min)) (pmax (point-max)))
+		   (or (and (< beginning pmin) (setq beginning pmin))
+		       (and (> beginning pmax) (setq beginning pmax)))
+		   (or (and (< end pmin) (setq end pmin))
+		       (and (> end pmax) (setq end pmax))))
+		 (when (= beginning end) (error "%s" "Nothing to comment"))
+		 (goto-char beginning) (beginning-of-line)
+		 (setq beginning-bol (point))
+		 (goto-char end) (end-of-line)
+		 (setq end-eol (point)))
+	;; try-using-region is nil here; so, use the lines argument to
+	;; find beginning and end.
+	(let ((starting-point (point)))
+	  (forward-line lines)
+	  (if (> lines 0)
+	      (progn (end-of-line)
+		     (setq end (point))
+		     (goto-char starting-point) (beginning-of-line)
+		     (setq beginning (point)))
+	    (setq beginning (point))
+	    (goto-char starting-point) (end-of-line)
+	    (setq end (point)))
+	  (when (= beginning end) (error "%s" "Nothing to comment"))
+	  (setq beginning-bol beginning end-eol end)))
+      (setq copied-lines (buffer-substring beginning-bol end-eol)
+	    num-copied-lines (count-lines beginning-bol end-eol))
       (goto-char beginning-bol)
       (open-line 1)
       (insert copied-lines)
       (comment-region beginning-bol end-eol))
     ;; Account for save-excursion behavior at beginning of line.
-    (when (and (bolp) (= beginning (point)))
-      (forward-line num-copied-lines))
+    (when (and (bolp) (= beginning (point))) (forward-line num-copied-lines))
     ;; Return the number of lines copied+commented.
     num-copied-lines))
-
-(defun raghu/duplicate-line-and-comment (arg)
-  "Duplicate and comment current line.
-
-If ARG is a positive integer, duplicate and comment the current
-line and ARG lines below it.  If ARG is a negative integer,
-duplicate and comment the current line and (`abs' ARG) lines
-above it.  If ARG is 0, duplicate and comment current line only.
-Return the number of lines copied.
-
-Signal an error if comment syntax is not defined for the buffer's
-major mode.  This function considers comment syntax for the
-buffer's major mode as defined if the symbols `comment-start' and
-`comment-end' satisfy the predicate functions `boundp' and
-`stringp'."
-  ;; See newcomment.el for `comment-start' and `comment-end'.
-  (unless (boundp 'comment-start)
-    (signal 'void-variable '(comment-start)))
-  (unless (boundp 'comment-end)
-    (signal 'void-variable '(comment-end)))
-  (unless (stringp comment-start)
-    (signal 'raghu/wrong-type (list #'stringp comment-start 'comment-start)))
-  (unless (stringp comment-end)
-    (signal 'raghu/wrong-type (list #'stringp comment-end 'comment-end)))
-  (unless (integerp arg)
-    (signal 'wrong-type-argument (list #'integerp arg)))
-  (let (original start end copied-lines num-copied-lines)
-    (setq original (point))
-    (save-excursion
-      (forward-line arg)
-      (if (> arg 0)
-	  (progn (end-of-line)
-		 (setq end (point))
-		 (goto-char original)
-		 (beginning-of-line)
-		 (setq start (point)))
-	(setq start (point))		; Already in col. 0 here.
-	(goto-char original)
-	(end-of-line)
-	(setq end (point)))
-      (setq copied-lines (buffer-substring start end))
-      (setq num-copied-lines (count-lines start end))
-      (goto-char start)
-      (open-line 1)
-      (insert copied-lines)
-      (comment-region start end))
-    ;; Account for save-excursion behavior at beginning of line.
-    (when (and (bolp) (= start (point)))
-      (forward-line num-copied-lines))
-    ;; Return the number of lines copied+commented.
-    num-copied-lines))
-
-(defun raghu/duplicate-and-comment (&optional arg)
-  "Duplicate lines and make them comments.
-
-If region is active, call `raghu/duplicate-region-and-comment' on
-the region, and ignore argument ARG.  If region is not active,
-call `raghu/duplicate-line-and-comment' with argument ARG.  When
-no prefix argument is provided, ARG defaults to 0.  Return the
-number of lines copied.
-
-This function is intended for interactive use only.  In Lisp, use
-the functions `raghu/duplicate-line-and-comment' and
-`raghu/duplicate-region-and-comment'."
-  (interactive "*P")
-  (condition-case err
-      (if (use-region-p)
-	  (raghu/duplicate-region-and-comment (region-beginning) (region-end))
-	(cond
-	 ((null arg) (setq arg 0))
-	 ((listp arg) (let ((x (car arg))) (when (integerp x) (setq arg x)))))
-	(raghu/duplicate-line-and-comment arg))
-    ((wrong-type-argument
-      raghu/wrong-type
-      void-variable) (progn (message "%s" (error-message-string err)) 0))))
 (define-key global-map (kbd "C-c C") #'raghu/duplicate-and-comment)
 
 (defun raghu/new-line-above (arg)
