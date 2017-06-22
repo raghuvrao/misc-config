@@ -207,30 +207,33 @@ sufficient to encapsulate the region; ignore all arguments.  If
 region is not active, use arguments to determine on which lines
 to work.
 
-LINES can be specified via prefix argument.  When no prefix
-argument is specified, LINES is nil.
-
 If region is not active, and if all three arguments are nil, work
 on the current line only.
 
-If region is not active, if LINES is nil, and if at least one of
-BEGINNING and END is non-nil, work on the lines necessary and
-sufficient to encapsulate the region defined by BEGINNING and
-END, limited by the accessible area of the buffer.
+If region is not active, and if LINES is nil, work on the lines
+necessary and sufficient to encapsulate the region defined by
+BEGINNING and END, limited by `point-min' and `point-max'.  If
+BEGINNING is nil, use `point-min' in its place, or if END is nil,
+use `point-max' in its place.
 
-If region is not active, with prefix argument LINES, work on the
-current line, and LINES additional lines.  LINES > 0 means LINES
-lines below the current line, LINES < 0 means -LINES lines above
-the current line, LINES = 0 means current line only.  Ignore
-BEGINNING and END.
+If region is not active, and if LINES is non-nil, ignore
+BEGINNING and END, and work on the current line and LINES
+additional lines.  LINES>0 means LINES lines below the current
+line, LINES<0 means -LINES lines above the current line, and
+LINES=0 means current line only.
+
+LINES can be specified via prefix argument when calling
+interactively.  When no prefix argument is specified, LINES is
+nil.
 
 Return the number of lines copied.
 
-This function is best used interactively.  It calls the function
-`comment-normalize-vars', which prompts the user for comment
-syntax interactively if comment syntax for the buffer's major
-mode is undefined.  It can be used in Lisp, provided comment
-syntax is fully defined."
+Note: This function calls `comment-normalize-vars', which prompts
+the user for comment syntax if comment syntax is undefined for
+the buffer's major mode.  So, when using this function in Lisp,
+ensure that comment syntax is fully defined.  That is, ensure
+that `comment-normalize-vars' completes successfully without
+prompting the user for anything."
   (interactive "*P")
   (comment-normalize-vars)
   (let ((try-using-region nil) (copied-lines nil) (num-copied-lines 0)
@@ -248,15 +251,14 @@ syntax is fully defined."
 	(setq try-using-region nil)
 	(when (listp lines)
 	  (let ((z (car lines))) (when (integerp z) (setq lines z))))))
-    (unless (or (and (integerp beginning) (integerp end) try-using-region)
-		(and (integerp lines) (not try-using-region)))
-      (signal 'wrong-type-argument (list #'integerp lines beginning end)))
     (save-excursion
       (if try-using-region
-	  (progn (when (> beginning end)
-		   ;; Ensure beginning <= end for implementation ease.
+	  (progn (unless (integerp beginning)
+		   (signal 'wrong-type-argument (list #'integerp beginning)))
+		 (unless (integerp end)
+		   (signal 'wrong-type-argument (list #'integerp end)))
+		 (when (> beginning end)
 		   (let (x) (setq x beginning beginning end end x)))
-		 ;; Ensure beginning and end are within bounds.
 		 (let ((pmin (point-min)) (pmax (point-max)))
 		   (or (and (< beginning pmin) (setq beginning pmin))
 		       (and (> beginning pmax) (setq beginning pmax)))
@@ -269,6 +271,8 @@ syntax is fully defined."
 		 (setq end-eol (point)))
 	;; try-using-region is nil here; so, use the lines argument to
 	;; find beginning and end.
+	(unless (integerp lines)
+	  (signal 'wrong-type-argument (list #'integerp lines)))
 	(let ((starting-point (point)))
 	  (forward-line lines)
 	  (if (> lines 0)
