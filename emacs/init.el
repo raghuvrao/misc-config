@@ -34,18 +34,10 @@
 ;; `yes RET' or `no RET'.
 (defalias 'yes-or-no-p #'y-or-n-p)
 
-;; Remove undesirable key-bindings.
-(define-key global-map (kbd "C-x C-c") nil)
-(define-key global-map (kbd "C-z") nil)
-(define-key global-map (kbd "C-x C-z") nil)
-
-;; A few convenient key-bindings are assigned to not-so-interesting
-;; functions by default.  Reassign them to more interesting functions.
-(define-key global-map [remap list-buffers] #'ibuffer)
-
 ;; Assign convenient key-bindings for useful functions that either
 ;; have no default key-bindings or have inconvenient default
 ;; key-bindings.
+(define-key global-map (kbd "C-c B") #'ibuffer)
 (define-key global-map (kbd "C-c H") #'hl-line-mode)
 (define-key global-map (kbd "C-c J") #'join-line)
 (define-key global-map (kbd "C-c P") #'font-lock-mode)
