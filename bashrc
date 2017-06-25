@@ -24,6 +24,9 @@ shopt -s checkwinsize
 # exit with a non-zero status, or zero if all commands exit successfully.
 shopt -o -s pipefail
 
+# Do not save lines matching previous history entry.
+HISTCONTROL='ignoredups'
+
 # Delete/modify/add aliases.
 for a in ls ll l. vi; do
   if alias "${a}" &>/dev/null; then unalias "${a}"; fi
