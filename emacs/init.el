@@ -2,7 +2,7 @@
 
 ;;; Commentary:
 
-;; My Emacs configuration file.
+;; Raghu V. Rao's Emacs configuration file.
 
 ;;; Code:
 
@@ -122,9 +122,8 @@ If called interactively, read buffer name from minibuffer."
   (interactive)
   (scroll-left 1))
 
-;; Next, define a map variable, and bind the above functions to one or
-;; more keys in this map.  Make sure to keep the key-bindings and the
-;; documentation below in agreement with each other.
+;; Next, define a map variable, and in it, give key-bindings to the
+;; above functions.
 (defvar raghu/scroll-map
   (let ((map (make-sparse-keymap)))
     (define-key map "e" #'raghu--show-up-one)
