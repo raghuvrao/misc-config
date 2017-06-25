@@ -288,7 +288,7 @@ prompting the user for anything."
 (define-key global-map (kbd "C-c C") #'raghu/duplicate-and-comment)
 
 (defun raghu/new-line-above (arg)
-  "Above current line, insert new line and indentaion.
+  "Above current line, insert new line and indentation.
 
 With prefix argument ARG, insert that many lines above current
 line.  Move point to top-most line inserted, and insert
