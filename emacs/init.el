@@ -126,23 +126,12 @@ If called interactively, read buffer name from minibuffer."
 ;; documentation below in agreement with each other.
 (defvar raghu/scroll-map
   (let ((map (make-sparse-keymap)))
-    (dolist (key '("e" "i" "<up>"))
-      (define-key map (kbd key) #'raghu--show-up-one))
-    (dolist (key '("d" "k" "<down>"))
-      (define-key map (kbd key) #'raghu--show-down-one))
-    (dolist (key '("s" "j" "<left>"))
-      (define-key map (kbd key) #'raghu--show-left-one))
-    (dolist (key '("f" "l" "<right>"))
-      (define-key map (kbd key) #'raghu--show-right-one))
+    (define-key map "e" #'raghu--show-up-one)
+    (define-key map "d" #'raghu--show-down-one)
+    (define-key map "s" #'raghu--show-left-one)
+    (define-key map "f" #'raghu--show-right-one)
     map)
   "Keymap for scrolling one line/column at a time.
-
-The following key-bindings are defined in this map:
-
-e, i, <up>: show previous (scroll down)
-d, k, <down>: show next (scroll up)
-s, j, <left>: show left (scroll right)
-f, l, <right>: show right (scroll left)
 
 While scrolling, point remains with the original text-line (not
 screen-line) so long as the original text-line is within the
@@ -156,7 +145,9 @@ window.")
 Activate the keymap `raghu/scroll-map', which makes scrolling a
 little easier.  When a key that is not in the map is pressed, it
 will deactivate the keymap so usual editing operations can be
-resumed.  A mark is set at point's original starting position."
+resumed.  A mark is set at point's original starting position.
+
+\\{raghu/scroll-map}"
   (interactive)
   (push-mark)
   (message "%s" "raghu/scroll-map ON")
