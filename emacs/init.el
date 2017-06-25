@@ -24,6 +24,7 @@
 ;; When those programs are run within emacs, pagination functionality
 ;; is unnecessary.
 (setenv "PAGER" "cat")
+(setenv "GIT_PAGER")
 
 (set-language-environment "UTF-8")
 (prefer-coding-system 'utf-8)
