@@ -9,19 +9,21 @@
 (require 'package)
 (package-initialize)
 
-(when (fboundp #'tool-bar-mode) (tool-bar-mode -1))
-(when (fboundp #'tooltip-mode) (tooltip-mode -1))
-(when (fboundp #'scroll-bar-mode) (scroll-bar-mode -1))
-(when (fboundp #'horizontal-scroll-bar-mode) (horizontal-scroll-bar-mode -1))
-(transient-mark-mode -1)
+(dolist (l '((global-font-lock-mode . -1)
+	     (global-hl-line-mode . -1)
+	     (horizontal-scroll-bar-mode . -1)
+	     (scroll-bar-mode . -1)
+	     (tool-bar-mode . -1)
+	     (tooltip-mode . -1)
+	     (transient-mark-mode . -1)
+	     (column-number-mode . 1)
+	     (show-paren-mode . 1)))
+  (let ((m (car l)) (arg (cdr l))) (when (fboundp m) (funcall m arg))))
 
 ;; Various shell programs like to send their stdout through a pager.
 ;; When those programs are run within emacs, pagination functionality
 ;; is unnecessary.
 (setenv "PAGER" "cat")
-
-(column-number-mode 1)
-(show-paren-mode 1)
 
 (set-language-environment "UTF-8")
 (prefer-coding-system 'utf-8)
@@ -352,9 +354,6 @@ If ACTIVATE-MARK-P is non-nil, activate mark too."
 	(when activate-mark-p (activate-mark)))
     (error "Point is not in a string")))
 (define-key global-map (kbd "C-c \"") #'raghu/mark-string)
-
-(global-hl-line-mode -1)
-(global-font-lock-mode -1)
 
 (defun raghu--enable-hl-line-mode-in-buffer ()
   "Highlight line containing point in current buffer."
