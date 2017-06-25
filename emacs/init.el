@@ -353,14 +353,9 @@ If ACTIVATE-MARK-P is non-nil, activate mark too."
     (error "Point is not in a string")))
 (define-key global-map (kbd "C-c \"") #'raghu/mark-string)
 
-;; Disable a few things globally, and enable them on a per-mode basis.
-;;
-;; First, disable them globally.
 (global-hl-line-mode -1)
 (global-font-lock-mode -1)
 
-;; Next, define functions to enable them per-buffer.  These functions
-;; are meant solely for adding to mode hooks.
 (defun raghu--enable-hl-line-mode-in-buffer ()
   "Highlight line containing point in current buffer."
   (hl-line-mode 1))
@@ -378,14 +373,10 @@ If ACTIVATE-MARK-P is non-nil, activate mark too."
   "Highlight trailing whitespace in the current buffer."
   (set (make-local-variable 'show-trailing-whitespace) t))
 
-;; Finally, add one or more of the above functions (and maybe other
-;; functions) to the desired modes' hooks.
 (with-eval-after-load 'simple
-  ;; special-mode is a "parent" mode for various modes.
   (add-hook 'special-mode-hook #'raghu--enable-font-lock-mode-in-buffer))
 
 (with-eval-after-load 'prog-mode
-  ;; prog-mode is a "parent" mode for various programming modes.
   (add-hook 'prog-mode-hook #'raghu--disable-line-wrap-in-buffer)
   (add-hook 'prog-mode-hook #'raghu--enable-hl-line-mode-in-buffer)
   (add-hook 'prog-mode-hook #'raghu--show-trailing-whitespace-in-buffer))
@@ -394,10 +385,6 @@ If ACTIVATE-MARK-P is non-nil, activate mark too."
   (add-hook 'Custom-mode-hook #'raghu--enable-hl-line-mode-in-buffer))
 
 (with-eval-after-load 'ibuffer
-  ;; font-lock-mode is helpful in ibuffer-mode, but there is no need
-  ;; to enable it here separately.  ibuffer-mode inherits from
-  ;; special-mode, and I have enabled font-lock-mode in special-mode
-  ;; (see above), so ibuffer-mode gets font-lock-mode.
   (add-hook 'ibuffer-mode-hook #'raghu--enable-hl-line-mode-in-buffer))
 
 (with-eval-after-load 'dired
@@ -422,8 +409,7 @@ If ACTIVATE-MARK-P is non-nil, activate mark too."
 (with-eval-after-load 'python
   (add-hook 'inferior-python-mode-hook #'raghu--enable-font-lock-mode-in-buffer))
 
-;; text-mode does not provide a feature, so use "text-mode" below.
-(with-eval-after-load "text-mode"
+(with-eval-after-load "text-mode"	; No `provide' in text-mode.el
   (add-hook 'text-mode-hook #'raghu--enable-word-wrap-in-buffer))
 
 (with-eval-after-load 'log-edit
