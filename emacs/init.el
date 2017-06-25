@@ -464,7 +464,7 @@ If ACTIVATE-MARK-P is non-nil, activate mark too."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((((type x)) (:height 90)) (((type ns)) (:height 110))))
+ '(default ((((type x)) (:height 100)) (((type ns)) (:height 110))))
  '(eshell-prompt ((t nil)))
  '(fringe ((t (:inherit default))))
  '(isearch ((((type x ns) (class color) (background light)) (:background "plum2" :foreground "black"))))
