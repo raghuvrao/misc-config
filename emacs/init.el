@@ -9,16 +9,17 @@
 (require 'package)
 (package-initialize)
 
-(dolist (a '((global-font-lock-mode . -1)
-	     (global-hl-line-mode . -1)
-	     (horizontal-scroll-bar-mode . -1)
-	     (scroll-bar-mode . -1)
-	     (tool-bar-mode . -1)
-	     (tooltip-mode . -1)
-	     (transient-mark-mode . -1)
-	     (column-number-mode . 1)
-	     (show-paren-mode . 1)))
-  (let ((f (car a))) (when (fboundp f) (funcall f (cdr a)))))
+(global-font-lock-mode -1)
+(global-hl-line-mode -1)
+(transient-mark-mode -1)
+
+(when (fboundp 'horizontal-scroll-bar-mode) (horizontal-scroll-bar-mode -1))
+(when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+(when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(when (fboundp 'tooltip-mode) (tooltip-mode -1))
+
+(column-number-mode 1)
+(show-paren-mode 1)
 
 ;; Various shell programs like to send their stdout through a pager.
 ;; When those programs are run within emacs, pagination functionality
