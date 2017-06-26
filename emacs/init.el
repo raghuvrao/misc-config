@@ -18,7 +18,7 @@
 	     (transient-mark-mode . -1)
 	     (column-number-mode . 1)
 	     (show-paren-mode . 1)))
-  (let ((f (car a)) (arg (cdr a))) (when (fboundp f) (funcall f arg))))
+  (let ((f (car a))) (when (fboundp f) (funcall f (cdr a)))))
 
 ;; Various shell programs like to send their stdout through a pager.
 ;; When those programs are run within emacs, pagination functionality
