@@ -346,9 +346,6 @@ If ACTIVATE-MARK-P is non-nil, activate mark too."
 (defun raghu--enable-hl-line-mode-in-buffer ()
   "Highlight line containing point in current buffer."
   (hl-line-mode 1))
-(defun raghu--enable-font-lock-mode-in-buffer ()
-  "Enable font lock mode in buffer."
-  (font-lock-mode 1))
 (defun raghu--disable-line-wrap-in-buffer ()
   "Enable line truncation in current buffer."
   (set (make-local-variable 'truncate-lines) t))
@@ -361,7 +358,7 @@ If ACTIVATE-MARK-P is non-nil, activate mark too."
   (set (make-local-variable 'show-trailing-whitespace) t))
 
 (with-eval-after-load 'simple
-  (add-hook 'special-mode-hook #'raghu--enable-font-lock-mode-in-buffer))
+  (add-hook 'special-mode-hook #'turn-on-font-lock))
 
 (with-eval-after-load 'prog-mode
   (add-hook 'prog-mode-hook #'raghu--disable-line-wrap-in-buffer)
@@ -370,7 +367,7 @@ If ACTIVATE-MARK-P is non-nil, activate mark too."
 
 (with-eval-after-load 'outline
   (add-hook 'outline-mode-hook #'raghu--enable-hl-line-mode-in-buffer)
-  (add-hook 'outline-mode-hook #'raghu--enable-font-lock-mode-in-buffer))
+  (add-hook 'outline-mode-hook #'turn-on-font-lock))
 
 (with-eval-after-load 'cus-edit
   (add-hook 'Custom-mode-hook #'raghu--enable-hl-line-mode-in-buffer))
@@ -380,32 +377,32 @@ If ACTIVATE-MARK-P is non-nil, activate mark too."
 
 (with-eval-after-load 'dired
   (add-hook 'dired-mode-hook #'raghu--enable-hl-line-mode-in-buffer)
-  (add-hook 'dired-mode-hook #'raghu--enable-font-lock-mode-in-buffer))
+  (add-hook 'dired-mode-hook #'turn-on-font-lock))
 
 (with-eval-after-load 'compile
-  (add-hook 'compilation-mode-hook #'raghu--enable-font-lock-mode-in-buffer))
+  (add-hook 'compilation-mode-hook #'turn-on-font-lock))
 
 (with-eval-after-load 'diff-mode
-  (add-hook 'diff-mode-hook #'raghu--enable-font-lock-mode-in-buffer)
+  (add-hook 'diff-mode-hook #'turn-on-font-lock)
   (add-hook 'diff-mode-hook #'raghu--disable-line-wrap-in-buffer))
 
 (with-eval-after-load 'shell
   (add-hook 'shell-mode-hook #'raghu--enable-hl-line-mode-in-buffer)
-  (add-hook 'shell-mode-hook #'raghu--enable-font-lock-mode-in-buffer))
+  (add-hook 'shell-mode-hook #'turn-on-font-lock))
 
 (with-eval-after-load 'esh-mode
   (add-hook 'eshell-mode-hook #'raghu--enable-hl-line-mode-in-buffer)
-  (add-hook 'eshell-mode-hook #'raghu--enable-font-lock-mode-in-buffer))
+  (add-hook 'eshell-mode-hook #'turn-on-font-lock))
 
 (with-eval-after-load 'python
-  (add-hook 'inferior-python-mode-hook #'raghu--enable-font-lock-mode-in-buffer))
+  (add-hook 'inferior-python-mode-hook #'turn-on-font-lock))
 
 (with-eval-after-load "text-mode"	; No `provide' in text-mode.el
   (add-hook 'text-mode-hook #'raghu--enable-word-wrap-in-buffer))
 
 (with-eval-after-load 'log-edit
   (add-hook 'log-edit-mode-hook #'raghu--enable-hl-line-mode-in-buffer)
-  (add-hook 'log-edit-mode-hook #'raghu--enable-font-lock-mode-in-buffer))
+  (add-hook 'log-edit-mode-hook #'turn-on-font-lock))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
