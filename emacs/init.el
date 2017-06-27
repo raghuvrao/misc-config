@@ -76,23 +76,23 @@ If called interactively, read buffer name from minibuffer."
 ;; names, but for me, that's not good enough.  I want the buffers to
 ;; be named after the command that is run in them.
 (defun raghu/async-shell-command (cmd)
-  "Run string CMD asynchronously in buffer \"*Async: CMD*\".
+  "Run string CMD asynchronously in buffer \"*Async: `CMD'*\".
 
-Trim leading and trailing spaces first.
-
-Note: leading and trailing spaces are trimmed rather naively.  To
-preserve any spaces, quote them instead of escaping them."
+Trim leading and trailing spaces first."
   (interactive (list (read-shell-command "Async shell command? ")))
-  ;; Get rid of leading/trailing space from the command.
-  (let ((trimmed-cmd (replace-regexp-in-string "^[ \t]+\\|[ \t]+$" "" cmd))
-	(dir default-directory)
-	(buf-name nil))
-    (unless (> (length trimmed-cmd) 0)
-      (user-error "%s" "Empty command"))
-    (setq buf-name (concat "*Async: " trimmed-cmd "*"))
+  ;; Get rid of leading/trailing space from the command.  The regular
+  ;; expression `\\(\\\\[[:space:]] \\)?' helps in preserving any
+  ;; trailing escaped space character.
+  (setq cmd (replace-regexp-in-string
+	     "^[[:space:]]*\\(.*?\\)\\(\\\\[[:space:]]\\)?[[:space:]]*$"
+	     "\\1\\2"
+	     cmd))
+  (unless (> (length cmd) 0) (user-error "%s" "Empty command"))
+  (let ((dir default-directory) (buf-name nil))
+    (setq buf-name (format-message "*Async: `%s'*" cmd))
     (switch-to-buffer buf-name)
     (setq default-directory dir)
-    (async-shell-command trimmed-cmd buf-name nil)))
+    (async-shell-command cmd buf-name nil)))
 (define-key global-map (kbd "C-c !") #'raghu/async-shell-command)
 
 (defun raghu/visit-emacs-configuration-file ()
