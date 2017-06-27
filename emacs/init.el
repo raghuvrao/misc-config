@@ -21,24 +21,18 @@
 (column-number-mode 1)
 (show-paren-mode 1)
 
-;; Various shell programs like to send their stdout through a pager.
-;; When those programs are run within emacs, pagination functionality
-;; is unnecessary.
+;; Various shell programs like to send their stdout through a
+;; pagination program (e.g. more, less).  When those programs are run
+;; within Emacs, pagination is unnecessary.
 (setenv "PAGER" "cat")
 (setenv "GIT_PAGER")
 
 (set-language-environment "UTF-8")
 (prefer-coding-system 'utf-8)
 
-;; Override yes-or-no-p's definition by making yes-or-no-p an alias
-;; for y-or-n-p.  This way, when yes-or-no-p is called, y-or-n-p will
-;; actually be called, and I can reply with y/SPC or n/DEL instead of
-;; `yes RET' or `no RET'.
+;; Reply with y/SPC or n/DEL instead of `yes RET' or `no RET'.
 (defalias 'yes-or-no-p #'y-or-n-p)
 
-;; Assign convenient key-bindings for useful functions that either
-;; have no default key-bindings or have inconvenient default
-;; key-bindings.
 (define-key global-map (kbd "C-c B") #'ibuffer)
 (define-key global-map (kbd "C-c H") #'hl-line-mode)
 (define-key global-map (kbd "C-c J") #'join-line)
@@ -46,9 +40,6 @@
 (define-key global-map (kbd "C-c t") #'toggle-truncate-lines)
 (define-key global-map (kbd "C-c ;") #'comment-line)
 
-;; Make emacs-windows navigation easier.  The arg to
-;; windmove-default-keybindings is a symbol indicating the modifier to
-;; use with the arrow keys to navigate windows.
 (require 'windmove)
 (windmove-default-keybindings 'control)
 
@@ -108,7 +99,7 @@ preserve any spaces, quote them instead of escaping them."
 
 ;; Scroll while keeping point on original text-line (so long as the
 ;; original text-line is in the window, of course).
-
+;;
 ;; First, define a few scrolling-related functions.  These functions
 ;; will be eventually bound to keys.
 (defun raghu--show-down-one ()
