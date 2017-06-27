@@ -433,9 +433,7 @@ If ACTIVATE-MARK-P is non-nil, activate mark too."
     (("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa-stable" . "https://stable.melpa.org/packages/"))))
  '(package-enable-at-startup nil)
- '(package-selected-packages
-   (quote
-    (go-eldoc go-errcheck go-guru go-mode go-rename multiple-cursors)))
+ '(package-selected-packages (quote (go-eldoc go-errcheck go-guru go-mode go-rename)))
  '(ring-bell-function (quote ignore))
  '(sh-basic-offset 2)
  '(sh-indent-for-case-alt (quote +))
