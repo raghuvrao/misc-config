@@ -72,20 +72,20 @@ If called interactively, read buffer name from minibuffer."
     t))
 
 ;; async-shell-command runs the commands in buffers that are not
-;; entirely uniquely named.  It has support for using different buffer
-;; names, but for me, that's not good enough.  I want the buffers to
-;; be named after the command that is run in them.
+;; entirely uniquely named.  I want the buffers to be named after the
+;; command that is run in them.
 (defun raghu/async-shell-command (cmd)
-  "Run string CMD asynchronously in buffer \"*Async: `CMD'*\".
+  "Run string CMD in buffer \"*Async: `CMD'*\".
 
-Trim leading and trailing spaces first."
+Remove leading and trailing spaces from CMD first.  To preserve
+any leading or trailing spaces, they must be surrounded by single
+or double quotes."
   (interactive (list (read-shell-command "Async shell command? ")))
-  ;; Get rid of leading/trailing space from the command.  The regular
-  ;; expression `\\(\\\\[[:space:]] \\)?' helps in preserving any
-  ;; trailing escaped space character.
+  ;; Remove leading/trailing spaces from CMD.  `\\\\[[:space:]]' is my
+  ;; regular expression for escaped space.  I hope it is correct.
   (setq cmd (replace-regexp-in-string
-	     "^[[:space:]]*\\(.*?\\)\\(\\\\[[:space:]]\\)?[[:space:]]*$"
-	     "\\1\\2"
+	     "^\\(\\\\?[[:space:]]\\)+\\|\\(\\\\?[[:space:]]\\)+$"
+	     ""
 	     cmd))
   (unless (> (length cmd) 0) (user-error "%s" "Empty command"))
   (let ((dir default-directory) (buf-name nil))
