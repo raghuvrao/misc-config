@@ -25,7 +25,7 @@
 ;; pagination program (e.g. more, less).  When those programs are run
 ;; within Emacs, pagination is unnecessary.
 (setenv "PAGER" "cat")
-(setenv "GIT_PAGER")
+(setenv "GIT_PAGER" nil)
 
 (set-language-environment "UTF-8")
 (prefer-coding-system 'utf-8)
