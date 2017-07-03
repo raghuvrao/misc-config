@@ -33,10 +33,6 @@
 ;; Reply with y/SPC or n/DEL instead of `yes RET' or `no RET'.
 (defalias 'yes-or-no-p #'y-or-n-p)
 
-(define-key global-map (kbd "C-x C-c") nil)
-(define-key global-map (kbd "C-x C-z") nil)
-(define-key global-map (kbd "C-z") nil)
-
 (define-key global-map (kbd "C-c B") #'ibuffer)
 (define-key global-map (kbd "C-c H") #'hl-line-mode)
 (define-key global-map (kbd "C-c J") #'join-line)
@@ -46,6 +42,12 @@
 
 (require 'windmove)
 (windmove-default-keybindings 'control)
+
+(defun raghu/with-confirmation (fn &rest args)
+  "Conditionally, call function FN with arguments ARGS."
+  (when (y-or-n-p "Are you sure?") (apply fn args)))
+
+(advice-add #'save-buffers-kill-terminal :around #'raghu/with-confirmation)
 
 ;; Useful for changing CRLF line terminators to LF line terminators.
 (defun raghu/to-unix-utf-8-buffer (buf)
