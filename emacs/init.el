@@ -374,6 +374,10 @@ If ACTIVATE-MARK-P is non-nil, activate mark too."
 (with-eval-after-load 'cus-edit
   (add-hook 'Custom-mode-hook #'raghu--enable-hl-line-mode-in-buffer))
 
+(with-eval-after-load 'tabulated-list
+  (add-hook 'tabulated-list-mode-hook #'raghu--disable-line-wrap-in-buffer)
+  (add-hook 'tabulated-list-mode-hook #'raghu--enable-hl-line-mode-in-buffer))
+
 (with-eval-after-load 'ibuffer
   (add-hook 'ibuffer-mode-hook #'raghu--enable-hl-line-mode-in-buffer))
 
@@ -399,6 +403,10 @@ If ACTIVATE-MARK-P is non-nil, activate mark too."
 (with-eval-after-load "text-mode"	; No `provide' in text-mode.el
   (add-hook 'text-mode-hook #'raghu--enable-word-wrap-in-buffer))
 
+(with-eval-after-load 'log-edit
+  (add-hook 'log-edit-mode-hook #'raghu--enable-hl-line-mode-in-buffer)
+  (add-hook 'log-edit-mode-hook #'turn-on-font-lock))
+
 (with-eval-after-load 'python
   (add-hook 'inferior-python-mode-hook #'turn-on-font-lock))
 
@@ -418,10 +426,6 @@ If ACTIVATE-MARK-P is non-nil, activate mark too."
 				   "go build && go vet"))
 			    (local-set-key (kbd "C-c C-c") #'compile)
 			    (subword-mode 1))))
-
-(with-eval-after-load 'log-edit
-  (add-hook 'log-edit-mode-hook #'raghu--enable-hl-line-mode-in-buffer)
-  (add-hook 'log-edit-mode-hook #'turn-on-font-lock))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
