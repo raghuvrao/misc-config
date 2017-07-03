@@ -374,6 +374,10 @@ If ACTIVATE-MARK-P is non-nil, activate mark too."
 (with-eval-after-load 'cus-edit
   (add-hook 'Custom-mode-hook #'raghu--enable-hl-line-mode-in-buffer))
 
+(with-eval-after-load 'tabulated-list
+  (add-hook 'tabulated-list-mode-hook #'raghu--disable-line-wrap-in-buffer)
+  (add-hook 'tabulated-list-mode-hook #'raghu--enable-hl-line-mode-in-buffer))
+
 (with-eval-after-load 'ibuffer
   (add-hook 'ibuffer-mode-hook #'raghu--enable-hl-line-mode-in-buffer))
 
