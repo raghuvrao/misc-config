@@ -250,7 +250,9 @@ prompting the user for anything."
 		 (unless (integerp end)
 		   (signal 'wrong-type-argument (list #'integerp end)))
 		 (when (> beginning end)
-		   (let (x) (setq x beginning beginning end end x)))
+		   (let (x) (setq x beginning
+				  beginning end
+				  end x)))
 		 (let ((pmin (point-min)) (pmax (point-max)))
 		   (or (and (< beginning pmin) (setq beginning pmin))
 		       (and (> beginning pmax) (setq beginning pmax)))
@@ -260,7 +262,8 @@ prompting the user for anything."
 		 (goto-char beginning)
 		 (beginning-of-line)
 		 (setq beginning-bol (point))
-		 (goto-char end) (end-of-line)
+		 (goto-char end)
+		 (end-of-line)
 		 (setq end-eol (point)))
 	;; try-using-region is nil here; so, use the lines argument to
 	;; find beginning and end.
@@ -279,7 +282,8 @@ prompting the user for anything."
 	    (end-of-line)
 	    (setq end (point)))
 	  (when (= beginning end) (error "%s" "Nothing to comment"))
-	  (setq beginning-bol beginning end-eol end)))
+	  (setq beginning-bol beginning
+		end-eol end)))
       (setq copied-lines (buffer-substring beginning-bol end-eol)
 	    num-copied-lines (count-lines beginning-bol end-eol))
       (goto-char beginning-bol)
