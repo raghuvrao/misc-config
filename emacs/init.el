@@ -353,7 +353,7 @@ If ACTIVATE-MARK-P is non-nil, activate mark too."
 (define-key global-map (kbd "C-c \"") #'raghu/mark-string)
 
 (defun raghu/insert-current-date-time-at-point (&optional arg)
-  "Insert the current date and time at point.
+  "Insert current date and time in system timezone at point.
 
 With one \\[universal-argument], insert current date and time in
 Etc/UTC at point.  With another \\[universal-argument], insert
