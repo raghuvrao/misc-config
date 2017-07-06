@@ -364,7 +364,7 @@ current UNIX timestamp at point."
     (pcase (prefix-numeric-value arg)
       (4  (setq timezone "Etc/UTC"))
       (16 (setq fmt "%s")))
-  (insert (format-time-string fmt nil timezone))))
+    (insert (format-time-string fmt nil timezone))))
 (define-key global-map (kbd "C-c t") #'raghu/insert-current-date-time-at-point)
 
 (defun raghu--enable-hl-line-mode-in-buffer ()
