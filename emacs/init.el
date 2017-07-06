@@ -37,7 +37,7 @@
 (define-key global-map (kbd "C-c H") #'hl-line-mode)
 (define-key global-map (kbd "C-c J") #'join-line)
 (define-key global-map (kbd "C-c P") #'font-lock-mode)
-(define-key global-map (kbd "C-c t") #'toggle-truncate-lines)
+(define-key global-map (kbd "C-c w") #'toggle-truncate-lines)
 (define-key global-map (kbd "C-c ;") #'comment-line)
 
 (require 'windmove)
@@ -351,6 +351,16 @@ If ACTIVATE-MARK-P is non-nil, activate mark too."
 	(when activate-mark-p (activate-mark)))
     (error "Point is not in a string")))
 (define-key global-map (kbd "C-c \"") #'raghu/mark-string)
+
+(defun raghu/insert-current-date-time-at-point (&optional unix-time-p)
+  "Insert the current date and time at point.
+
+If prefix argument UNIX-TIME-P is non-nil, insert the UNIX time
+at point."
+  (interactive "*P")
+  (insert (format-time-string (if unix-time-p "%s" "%Y-%m-%d %a %H:%M:%S %Z")
+			      nil nil)))
+(define-key global-map (kbd "C-c t") #'raghu/insert-current-date-time-at-point)
 
 (defun raghu--enable-hl-line-mode-in-buffer ()
   "Highlight line containing point in current buffer."
