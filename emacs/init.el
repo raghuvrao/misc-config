@@ -63,9 +63,10 @@ If called interactively, read buffer name from minibuffer."
     t))
 
 (defun raghu/indent-buffer (buf)
-  "Indent all or narrowed part of buffer BUF.
+  "Indent buffer BUF.
 
-If called interactively, read buffer name from minibuffer."
+If BUF is narrowed, indent only its accessible portion.  If
+called interactively, read buffer name from minibuffer."
   (interactive "bBuffer")
   (with-current-buffer buf
     (barf-if-buffer-read-only)
