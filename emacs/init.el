@@ -80,16 +80,16 @@ called interactively, read buffer name from minibuffer."
 (defun raghu/async-shell-command (cmd)
   "Run string CMD in buffer \"*Async: `CMD'*\".
 
-Remove leading and trailing spaces from CMD first.  To preserve
-any leading or trailing spaces, they must be surrounded by single
-or double quotes."
+Remove leading and trailing spaces, line-feeds, carriage-returns,
+vertical tabs and form-feeds from CMD first.  To preserve any of
+these characters, they must be surrounded by single or double
+quotes."
   (interactive (list (read-shell-command "Async shell command? ")))
-  ;; Remove leading/trailing spaces from CMD.  `\\\\[[:space:]]' is my
-  ;; regular expression for escaped space.  I hope it is correct.
-  (setq cmd (replace-regexp-in-string
-	     "^\\(\\\\?[[:space:]]\\)+\\|\\(\\\\?[[:space:]]\\)+$"
-	     ""
-	     cmd))
+  (let* ((space "\\\\?\\([[:space:]]\\|\n\\|\r\\|\v\\|\f\\)")
+	 (lead-space (concat "^\\(" space "\\)+"))
+	 (trail-space (concat "\\(" space "\\)+$"))
+	 (lead-or-trail-space (concat lead-space "\\|" trail-space)))
+    (setq cmd (replace-regexp-in-string lead-or-trail-space "" cmd)))
   (unless (> (length cmd) 0) (user-error "%s" "Empty command"))
   (let ((dir default-directory) (buf-name nil))
     (setq buf-name (format-message "*Async: `%s'*" cmd))
