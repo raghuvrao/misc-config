@@ -80,10 +80,10 @@ called interactively, read buffer name from minibuffer."
 (defun raghu/async-shell-command (cmd)
   "Run string CMD in buffer \"*Async: `CMD'*\".
 
-Remove leading and trailing spaces, line-feeds, carriage-returns,
-vertical tabs and form-feeds from CMD first.  To preserve any of
-these characters, they must be surrounded by single or double
-quotes."
+First, remove spaces, line-feeds, carriage-returns, vertical tabs
+and form-feeds from CMD, if they are leading or trailing (to
+preserve any of these characters when they are leading or
+trailing, they must be surrounded by single or double quotes)."
   (interactive (list (read-shell-command "Async shell command? ")))
   (let* ((space "\\\\?\\([[:space:]]\\|\n\\|\r\\|\v\\|\f\\)")
 	 (lead-space (format "^\\(%s\\)+" space))
