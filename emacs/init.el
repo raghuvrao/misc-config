@@ -86,8 +86,8 @@ these characters, they must be surrounded by single or double
 quotes."
   (interactive (list (read-shell-command "Async shell command? ")))
   (let* ((space "\\\\?\\([[:space:]]\\|\n\\|\r\\|\v\\|\f\\)")
-	 (lead-space (concat "^\\(" space "\\)+"))
-	 (trail-space (concat "\\(" space "\\)+$"))
+	 (lead-space (format "^\\(%s\\)+" space))
+	 (trail-space (format "\\(%s\\)+$" space))
 	 (lead-or-trail-space (concat lead-space "\\|" trail-space)))
     (setq cmd (replace-regexp-in-string lead-or-trail-space "" cmd)))
   (unless (> (length cmd) 0) (user-error "%s" "Empty command"))
