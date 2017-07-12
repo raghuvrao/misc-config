@@ -342,7 +342,7 @@ If ACTIVATE-MARK-P is non-nil, activate mark too."
     (error "Point is not in a string")))
 (define-key global-map (kbd "C-c \"") #'raghu/mark-string)
 
-(defun raghu/insert-current-date-time-at-point (&optional arg)
+(defun raghu/insert-current-date-time (&optional arg)
   "Insert current date and time in system timezone at point.
 
 With one \\[universal-argument], insert current date and time in
@@ -355,7 +355,7 @@ current UNIX timestamp at point."
       (4  (setq timezone "Etc/UTC"))
       (16 (setq fmt "%s")))
     (insert (format-time-string fmt nil timezone))))
-(define-key global-map (kbd "C-c t") #'raghu/insert-current-date-time-at-point)
+(define-key global-map (kbd "C-c t") #'raghu/insert-current-date-time)
 
 (defun raghu--enable-hl-line-mode-in-buffer ()
   "Highlight line containing point in current buffer."
