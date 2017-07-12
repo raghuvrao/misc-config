@@ -343,11 +343,11 @@ If ACTIVATE-MARK-P is non-nil, activate mark too."
 (define-key global-map (kbd "C-c \"") #'raghu/mark-string)
 
 (defun raghu/insert-current-date-time (&optional arg)
-  "Insert current date and time in system timezone at point.
+  "At point, insert current date and time in system timezone.
 
 With one \\[universal-argument], insert current date and time in
-Etc/UTC at point.  With another \\[universal-argument], insert
-current UNIX timestamp at point."
+Etc/UTC.  With another \\[universal-argument], insert current
+UNIX timestamp."
   (interactive "*P")
   (let ((fmt "%Y-%m-%d %a %H:%M:%S %Z")
 	(timezone nil))
