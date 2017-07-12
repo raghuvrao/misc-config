@@ -327,28 +327,17 @@ indentation according to mode."
     (indent-according-to-mode)))
 (define-key global-map (kbd "C-c RET") #'raghu/new-line-below)
 
-;; From https://github.com/cjohansen/.emacs.d/blob/e669e7964be5484d78af11c67a3811e277114816/defuns/editing-defuns.el
-(defun raghu/current-quotes-char ()
-  "Return non-nil if point is inside a string, nil otherwise.
-
-The return value is the character that will terminate the string,
-or t if the string should be terminated by a generic string
-delimiter."
-  (nth 3 (syntax-ppss)))
-
-(defalias 'raghu/point-is-in-string-p #'raghu/current-quotes-char)
-
 (defun raghu/mark-string (&optional activate-mark-p)
   "Mark the string containing point.
 
 If ACTIVATE-MARK-P is non-nil, activate mark too."
   (interactive "P")
-  (if (raghu/point-is-in-string-p)
+  (if (nth 3 (syntax-ppss))
       (progn
-	(while (raghu/point-is-in-string-p) (backward-char 1))
+	(while (nth 3 (syntax-ppss)) (backward-char 1))
 	(push-mark)
 	(forward-char 1)
-	(while (raghu/point-is-in-string-p) (forward-char 1))
+	(while (nth 3 (syntax-ppss)) (forward-char 1))
 	(when activate-mark-p (activate-mark)))
     (error "Point is not in a string")))
 (define-key global-map (kbd "C-c \"") #'raghu/mark-string)
