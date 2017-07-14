@@ -81,17 +81,18 @@ called interactively, read buffer name from minibuffer."
   "Run string CMD in buffer \"*Async: `CMD'*\".
 
 First, remove spaces, line-feeds, carriage-returns, vertical tabs
-and form-feeds from CMD, if they are leading or trailing (to
+and form-feeds from CMD, if they are leading or trailing.  To
 preserve any of these characters when they are leading or
-trailing, they must be surrounded by single or double quotes)."
+trailing, they must be surrounded by single or double quotes."
   (interactive (list (read-shell-command "Async shell command? ")))
   (let* ((space "\\\\?\\([[:space:]]\\|\n\\|\r\\|\v\\|\f\\)")
 	 (lead-space (format "^\\(%s\\)+" space))
 	 (trail-space (format "\\(%s\\)+$" space))
-	 (lead-or-trail-space (concat lead-space "\\|" trail-space)))
+	 (lead-or-trail-space (format "%s\\|%s" lead-space trail-space)))
     (setq cmd (replace-regexp-in-string lead-or-trail-space "" cmd)))
   (unless (> (length cmd) 0) (user-error "%s" "Empty command"))
-  (let ((dir default-directory) (buf-name nil))
+  (let ((dir default-directory)
+	(buf-name nil))
     (setq buf-name (format-message "*Async: `%s'*" cmd))
     (switch-to-buffer buf-name)
     (setq default-directory dir)
@@ -254,7 +255,8 @@ prompting the user for anything."
 		   (let (x) (setq x beginning
 				  beginning end
 				  end x)))
-		 (let ((pmin (point-min)) (pmax (point-max)))
+		 (let ((pmin (point-min))
+		       (pmax (point-max)))
 		   (or (and (< beginning pmin) (setq beginning pmin))
 		       (and (> beginning pmax) (setq beginning pmax)))
 		   (or (and (< end pmin) (setq end pmin))
@@ -352,8 +354,8 @@ UNIX timestamp."
   (let ((fmt "%Y-%m-%d %a %H:%M:%S %Z")
 	(timezone nil))
     (pcase (prefix-numeric-value arg)
-      (4  (setq timezone "Etc/UTC"))
-      (16 (setq fmt "%s")))
+      (4  (setq timezone "Etc/UTC"))	; One `universal-argument'
+      (16 (setq fmt "%s")))		; Two `universal-argument's
     (insert (format-time-string fmt nil timezone))))
 (define-key global-map (kbd "C-c t") #'raghu/insert-current-date-time)
 
