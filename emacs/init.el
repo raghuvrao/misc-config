@@ -386,6 +386,7 @@ UNIX timestamp."
  ;; If there is more than one, they won't work right.
  '(debug-on-error t)
  '(frame-background-mode (quote light))
+ '(help-window-select t)
  '(indicate-empty-lines t)
  '(inhibit-startup-screen t)
  '(initial-scratch-message nil)
