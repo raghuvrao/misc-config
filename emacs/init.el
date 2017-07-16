@@ -81,9 +81,10 @@ called interactively, read buffer name from minibuffer."
   "Run string CMD in buffer \"*Async: `CMD'*\".
 
 First, remove spaces, line-feeds, carriage-returns, vertical tabs
-and form-feeds from CMD, if they are leading or trailing.  To
-preserve any of these characters when they are leading or
-trailing, they must be surrounded by single or double quotes."
+and form-feeds from CMD even if escaped with `\\', if they are
+leading or trailing.  To preserve any of these characters when
+they are leading or trailing, they must be surrounded by single
+or double quotes."
   (interactive (list (read-shell-command "Async shell command? ")))
   (let* ((space "\\\\?\\([[:space:]]\\|\n\\|\r\\|\v\\|\f\\)")
 	 (lead-space (format "^\\(%s\\)+" space))
