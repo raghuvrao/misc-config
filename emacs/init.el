@@ -394,6 +394,8 @@ UNIX timestamp."
  '(isearch-allow-scroll t)
  '(kill-whole-line t)
  '(make-backup-files nil)
+ '(mouse-wheel-progressive-speed nil)
+ '(mouse-wheel-scroll-amount (quote (1 ((shift) . 5) ((control)))))
  '(mouse-yank-at-point t)
  '(package-archive-priorities (quote (("gnu" . 90) ("melpa-stable" . 70))))
  '(package-archives
