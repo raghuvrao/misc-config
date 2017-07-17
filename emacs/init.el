@@ -168,25 +168,27 @@ resumed.  A mark is set at point's original starting position.
 (defun raghu/kill-backward-to-indentation (&optional arg)
   "Kill backward from point to first nonblank character on line.
 
-With prefix argument ARG, kill backward to indentation of the
-ARGth line above the current line.  Without a prefix argument,
-work on current line only (ARG defaults to 0 in this case).
-Return number of lines killed (count includes partially killed
-lines, if any)."
+When ARG is a non-zero integer, kill backward from point to the
+indentation of the ARGth line above the current line.  When ARG
+is 0, nil or t, kill backward from point to the indentation of
+the current line.  Return number of lines killed (the count
+includes partially killed lines, if any).
+
+ARG can be supplied through \\[universal-argument]."
   (interactive "*P")
-  (cond ((null arg) (setq arg 0))
-	((listp arg) (let ((z (car arg))) (when (natnump z) (setq arg z)))))
+  (when (listp arg) (setq arg (car arg)))
+  (when (or (null arg) (eq arg t)) (setq arg 0))
   (unless (natnump arg)
-    (signal 'wrong-type-argument (list #'natnump arg)))
-  (let ((prior-point (point)) (point-at-indent nil) (num-killed-lines 0))
+    (signal 'wrong-type-argument (list #'natnump #'booleanp arg)))
+  (let ((starting-point (point)) (point-at-indent nil) (num-killed-lines 0))
     (back-to-indentation)
     (when (> arg 0)
-      (when (> (point) prior-point) (setq prior-point (point)))
+      (when (> (point) starting-point) (setq starting-point (point)))
       (backward-to-indentation arg))
     (setq point-at-indent (point))
-    (when (> prior-point point-at-indent)
-      (setq num-killed-lines (count-lines prior-point point-at-indent))
-      (kill-region prior-point point-at-indent))
+    (when (> starting-point point-at-indent)
+      (setq num-killed-lines (count-lines starting-point point-at-indent))
+      (kill-region point-at-indent starting-point))
     num-killed-lines))
 (define-key global-map (kbd "C-c k") #'raghu/kill-backward-to-indentation)
 
