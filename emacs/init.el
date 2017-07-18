@@ -203,11 +203,10 @@ If region is not active, work on the current line and LINES
 additional lines.  If LINES is greater than 0, work on the
 current line and LINES lines below it.  If LINES is lesser than
 0, work on the current line and -LINES lines above it.  If LINES
-is nil or equal to 0, work on the current line only.
+is nil, t or equal to 0, work on the current line only.
 
 LINES can be specified via prefix argument.  When no prefix
-argument is specified, LINES is nil, which means work on the
-current line only.
+argument is specified, work on the current line only.
 
 Return the number of lines copied.
 
@@ -227,10 +226,13 @@ mode."
 	    (goto-char re)
 	    (end-of-line)
 	    (setq end (point))))
-      (cond ((null lines) (setq lines 0))
-	    ((listp lines) (setq lines (car lines))))
-      (unless (integerp lines)
-	(signal 'wrong-type-argument (list #'integerp lines)))
+      (if (booleanp lines)
+	  (setq lines 0)
+	(when (listp lines)
+	  (let ((z (car lines)) (when (integerp z) (setq lines z)))))
+	(unless (integerp lines)
+	  (signal 'wrong-type-argument
+		  (list (list #'integerp #'booleanp) lines))))
       (let ((starting-point (point)))
 	(save-excursion
 	  (forward-line lines)
