@@ -176,10 +176,11 @@ includes partially killed lines, if any).
 
 ARG can be supplied through \\[universal-argument]."
   (interactive "*P")
-  (when (listp arg) (setq arg (car arg)))
-  (when (or (null arg) (eq arg t)) (setq arg 0))
-  (unless (natnump arg)
-    (signal 'wrong-type-argument (list #'natnump #'booleanp arg)))
+  (if (booleanp arg)
+      (setq arg 0)
+    (when (listp arg) (let ((z (car arg))) (when (natnump z) (setq arg z))))
+    (unless (natnump arg)
+      (signal 'wrong-type-argument (list (list #'natnump #'booleanp) arg))))
   (let ((starting-point (point)) (point-at-indent nil) (num-killed-lines 0))
     (back-to-indentation)
     (when (> arg 0)
