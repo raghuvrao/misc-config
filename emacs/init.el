@@ -428,4 +428,7 @@ UNIX timestamp."
  '(isearch ((((type x ns) (class color) (background light)) (:background "plum2" :foreground "black"))))
  '(region ((((type x ns) (class color) (background light)) (:background "LightGoldenrod2")))))
 
+(require 'server)
+(unless (server-running-p) (server-start))
+
 ;;; init.el ends here
