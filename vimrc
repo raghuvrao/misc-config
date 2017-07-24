@@ -35,15 +35,10 @@ endif
 
 " Easy way to remove highlight on search terms temporarily.
 nnoremap <Leader>\ :nohlsearch<CR>
+nnoremap <Leader>e :silent edit<CR>
 
 " Disable automatic syntax highlighting in all files!
-if has("syntax")
-  syntax off
-  set cursorline
-  if &t_Co == 256
-    highlight CursorLine term=NONE cterm=NONE ctermbg=222
-  endif
-endif
+if has("syntax") | syntax off | endif
 
 " Make vim more secure.  See |trojan-horse|.
 set noexrc secure
