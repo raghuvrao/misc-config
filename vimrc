@@ -1,37 +1,27 @@
 set nocompatible
-
+set laststatus=2
 set nobackup
 if has("persistent_undo") | set noundofile | endif
-
 set nomodeline modelines=0
-
-set backspace=indent,eol,start lazyredraw
-
+set backspace=indent,eol,start
+set lazyredraw
 set softtabstop=8  " Matches default values of tabstop and shiftwidth.
-
 set ignorecase smartcase
-
 set nowrap sidescroll=1
-
 if has("wildmenu") | set wildmenu | endif
-
 set autoindent
 if has("smartindent") | set nosmartindent | endif
-
 if has("cmdline_info") | set ruler showcmd | endif
-
 if has("folding") | set foldmethod=indent foldlevel=100 | endif
-
 if has("extra_search") | set hlsearch incsearch | endif
-
 set list
 if has("multi_byte")
-  set encoding=utf-8 listchars=tab:·\ ,trail:█,extends:>,precedes:<,nbsp:░
+  set encoding=utf-8 listchars=tab:·\ ,trail:█,extends:▶,precedes:◀,nbsp:░
 else
   set listchars=tab:>\ ,trail:#,extends:>,precedes:<,nbsp:_
 endif
+set textwidth=0
 
-set textwidth=78
 if has("autocmd")
   filetype plugin indent on
   augroup raghu_augroup
@@ -47,7 +37,13 @@ endif
 nnoremap <Leader>\ :nohlsearch<CR>
 
 " Disable automatic syntax highlighting in all files!
-syntax off
+if has("syntax")
+  syntax off
+  set cursorline
+  if &t_Co == 256
+    highlight CursorLine term=NONE cterm=NONE ctermbg=222
+  endif
+endif
 
 " Make vim more secure.  See |trojan-horse|.
 set noexrc secure
