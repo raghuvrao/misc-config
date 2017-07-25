@@ -7,7 +7,7 @@ set backspace=indent,eol,start
 set lazyredraw
 set softtabstop=8  " Matches default values of tabstop and shiftwidth.
 set ignorecase smartcase
-set nowrap sidescroll=1
+set nowrap sidescroll=1 sidescrolloff=3
 if has("wildmenu") | set wildmenu | endif
 set autoindent
 if has("smartindent") | set nosmartindent | endif
@@ -33,7 +33,6 @@ if has("autocmd")
   augroup END
 endif
 
-" Easy way to remove highlight on search terms temporarily.
 nnoremap <Leader>\ :nohlsearch<CR>
 nnoremap <Leader>e :silent edit<CR>
 
