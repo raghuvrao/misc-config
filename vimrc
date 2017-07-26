@@ -8,7 +8,7 @@ set lazyredraw
 set softtabstop=8  " Matches default values of tabstop and shiftwidth.
 set ignorecase smartcase
 set nowrap sidescroll=1 sidescrolloff=3
-if has("wildmenu") | set wildmenu | endif
+if has("wildmenu") | set nowildmenu wildmode=longest,list,full | endif
 set autoindent
 if has("smartindent") | set nosmartindent | endif
 if has("cmdline_info") | set ruler showcmd | endif
