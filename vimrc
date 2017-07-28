@@ -39,5 +39,8 @@ nnoremap <Leader>e :silent edit<CR>
 " Disable automatic syntax highlighting in all files!
 if has("syntax") | syntax off | endif
 
+" Disable the mouse.
+set mouse=
+
 " Make vim more secure.  See |trojan-horse|.
 set noexrc secure
