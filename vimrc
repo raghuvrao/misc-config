@@ -13,7 +13,7 @@ set autoindent
 if has("smartindent") | set nosmartindent | endif
 if has("cmdline_info") | set ruler showcmd | endif
 if has("folding") | set foldmethod=indent foldlevel=100 | endif
-if has("extra_search") | set hlsearch incsearch | endif
+if has("extra_search") | set incsearch | endif
 set list
 if has("multi_byte")
   set encoding=utf-8 listchars=tab:→\ ,trail:■,extends:▶,precedes:◀,nbsp:░
