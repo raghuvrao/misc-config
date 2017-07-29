@@ -7,7 +7,7 @@ set backspace=indent,eol,start
 set lazyredraw
 set softtabstop=8  " Matches default values of tabstop and shiftwidth.
 set ignorecase smartcase
-set nowrap sidescroll=1 sidescrolloff=3
+set nowrap sidescroll=1
 if has("wildmenu") | set nowildmenu wildmode=longest,list,full | endif
 set autoindent
 if has("smartindent") | set nosmartindent | endif
