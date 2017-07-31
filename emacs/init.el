@@ -410,8 +410,6 @@ UNIX timestamp."
  '(package-enable-at-startup nil)
  '(ring-bell-function (quote ignore))
  '(sh-basic-offset 2)
- '(sh-indent-for-case-alt (quote +))
- '(sh-indent-for-case-label 0)
  '(sh-indentation 2)
  '(show-paren-delay 0)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
