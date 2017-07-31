@@ -428,8 +428,6 @@ UNIX timestamp."
  '(package-selected-packages (quote (go-eldoc go-errcheck go-guru go-mode go-rename)))
  '(ring-bell-function (quote ignore))
  '(sh-basic-offset 2)
- '(sh-indent-for-case-alt (quote +))
- '(sh-indent-for-case-label 0)
  '(sh-indentation 2)
  '(show-paren-delay 0)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
