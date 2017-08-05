@@ -22,6 +22,7 @@ set list
 if has("multi_byte")
   set encoding=utf-8
   set listchars=tab:·\ ,trail:█,extends:>,precedes:<,nbsp:░
+  if has("windows") && has("folding") | set fillchars=vert:│ | endif
 else
   set listchars=tab:\|\ ,trail:#,extends:>,precedes:<,nbsp:_
 endif
@@ -59,7 +60,10 @@ endif
 
 nnoremap <Leader>e :silent edit<CR>
 
-if has("syntax") | syntax off | endif
+if has("syntax")
+  syntax off
+  highlight! link VertSplit Special
+endif
 
 " Make vim more secure.  See |trojan-horse|.
 set noexrc secure
