@@ -21,8 +21,8 @@ endif
 set list
 if has("multi_byte")
   set encoding=utf-8
-  set listchars=tab:·\ ,trail:█,extends:>,precedes:<,nbsp:░
-  if has("windows") && has("folding") | set fillchars=vert:│ | endif
+  set listchars=tab:¬\ ,trail:¶,extends:>,precedes:<,nbsp:·
+  if has("windows") && has("folding") | set fillchars=vert:│,stl:· | endif
 else
   set listchars=tab:\|\ ,trail:#,extends:>,precedes:<,nbsp:_
 endif
