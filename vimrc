@@ -48,11 +48,13 @@ endif
 " When running vim in tmux, allow C-<arrow> to work, useful in the cmdline and
 " in insert mode.
 if &term =~ '^screen'
-    " tmux sends xterm-style key sequences when its xterm-keys option is on.
-    execute "set <xUp>=\e[1;*A"
-    execute "set <xDown>=\e[1;*B"
-    execute "set <xRight>=\e[1;*C"
-    execute "set <xLeft>=\e[1;*D"
+  " tmux sends xterm-style key sequences when its xterm-keys option is on.
+  " Need `execute' because we want \e to be parsed into literal Esc before
+  " being assigned.
+  execute "set <xUp>=\e[1;*A"
+  execute "set <xDown>=\e[1;*B"
+  execute "set <xRight>=\e[1;*C"
+  execute "set <xLeft>=\e[1;*D"
 endif
 
 nnoremap <Leader>e :silent edit<CR>
