@@ -62,7 +62,8 @@ nnoremap <Leader>e :silent edit<CR>
 
 if has("syntax")
   syntax off
-  highlight! link VertSplit Special
+  highlight VertSplit NONE
+  highlight link VertSplit Special
 endif
 
 " Make vim more secure.  See |trojan-horse|.
