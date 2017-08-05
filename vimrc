@@ -64,6 +64,9 @@ if has("syntax")
   syntax off
   highlight VertSplit NONE
   highlight link VertSplit Special
+  highlight StatusLine
+        \ term=bold,reverse cterm=bold gui=bold
+        \ ctermfg=White ctermbg=DarkBlue guifg=White guibg=DarkBlue
 endif
 
 " Make vim more secure.  See |trojan-horse|.
