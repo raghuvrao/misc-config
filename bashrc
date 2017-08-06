@@ -29,9 +29,12 @@ if ! type -a acgrep &>/dev/null; then alias acgrep='grep --color=always'; fi
 PS1='\u@\h:\w\$ '
 PROMPT_DIRTRIM=3
 
-# Use PROMPT_COMMAND to set terminal emulator window/tab titles and icon
-# names.  See the accompanying file SETTING-TITLES for a brief discussion.  In
-# recent versions of bash, you may have to escape '~' below.
+# Use PROMPT_COMMAND to set terminal emulator window/tab titles and icon names.
+# See the accompanying file SETTING-TITLES for a brief discussion.  Below,
+# I have escaped `~' as recent versions of bash require it (without the escape,
+# `~' is expanded to the home directory before use, making the substitution
+# pointless).  In older versions of bash, `~' should not be escaped as it can
+# cause the `\' to appear in the output.
 unset -v PROMPT_COMMAND
 s='\033]0;%s:%s\007'
 h="${HOSTNAME%%.*}"
