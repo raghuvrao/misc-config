@@ -62,8 +62,9 @@ nnoremap <Leader>e :silent edit<CR>
 
 if has("syntax")
   syntax off
-  highlight VertSplit NONE
-  highlight link VertSplit Special
+  highlight VertSplit
+        \ term=bold,reverse cterm=NONE gui=NONE
+        \ ctermfg=DarkMagenta ctermbg=NONE guifg=DarkMagenta guibg=NONE
   highlight StatusLine
         \ term=bold,reverse cterm=bold gui=bold
         \ ctermfg=White ctermbg=DarkBlue guifg=White guibg=DarkBlue
