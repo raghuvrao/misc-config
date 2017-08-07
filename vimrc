@@ -1,5 +1,5 @@
 set nocompatible
-set laststatus=2
+set laststatus=1
 set mouse=
 set nobackup
 if has("persistent_undo") | set noundofile | endif
@@ -22,7 +22,11 @@ set list
 if has("multi_byte")
   set encoding=utf-8
   set listchars=tab:¬\ ,trail:¶,extends:>,precedes:<,nbsp:·
-  if has("windows") && has("folding") | set fillchars=vert:│,stl:· | endif
+  if has("windows") && has("folding")
+    " Has the side-effect of setting vert and sstlnc to blank when highlighting
+    " is available, which I find acceptable.
+    set fillchars=stl:^,fold:-,diff:-
+  endif
 else
   set listchars=tab:\|\ ,trail:#,extends:>,precedes:<,nbsp:_
 endif
@@ -39,23 +43,6 @@ if has("autocmd")
     au BufWinEnter,BufNewFile *.json,*.bash,*.sh,*.vim
           \ setlocal expandtab softtabstop=2 shiftwidth=2
   augroup END
-  if has("syntax")
-    augroup raghu_colors
-      au!
-      " Make vertical split separator line subtler.
-      au ColorScheme * highlight VertSplit
-            \ term=bold,reverse cterm=NONE gui=NONE
-            \ ctermfg=DarkMagenta ctermbg=NONE guifg=DarkMagenta guibg=NONE
-      " Make status line of current window easier to notice.
-      au ColorScheme * highlight StatusLine
-            \ term=bold,reverse cterm=bold gui=bold
-            \ ctermfg=White ctermbg=DarkBlue guifg=White guibg=DarkBlue
-    augroup END
-    " Even though I disable syntax highlighting (see below), I need the
-    " following seemingly-redundant line in order that the above
-    " highlighting-related autocommands are executed.
-    colorscheme default
-  endif
 endif
 
 " When running vim in tmux, allow C-<arrow> to work, useful in the cmdline and
