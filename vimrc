@@ -13,7 +13,14 @@ if has("wildmenu") | set nowildmenu wildmode=longest,list,full | endif
 set autoindent
 if has("smartindent") | set nosmartindent | endif
 if has("cmdline_info") | set ruler showcmd | endif
-if has("folding") | set foldmethod=indent foldlevel=100 | endif
+if has("folding")
+  set foldmethod=indent foldlevel=100
+  if has("windows")
+    " Has the side-effect of setting vert and stlnc to blank when highlighting
+    " is available, which I find acceptable.
+    set fillchars=stl:^,fold:-,diff:-
+  endif
+endif
 if has("extra_search")
   set incsearch
   nnoremap <Leader>\ :nohlsearch<CR>
@@ -24,11 +31,6 @@ if has("multi_byte")
   set listchars=tab:¬\ ,trail:¶,extends:>,precedes:<,nbsp:·
 else
   set listchars=tab:\|\ ,trail:#,extends:>,precedes:<,nbsp:_
-endif
-if has("windows") && has("folding")
-  " Has the side-effect of setting vert and stlnc to blank when highlighting
-  " is available, which I find acceptable.
-  set fillchars=stl:^,fold:-,diff:-
 endif
 set textwidth=0
 
