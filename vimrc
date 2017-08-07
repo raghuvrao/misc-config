@@ -32,18 +32,25 @@ if has("autocmd")
   filetype plugin indent on
   augroup raghu_augroup
     au!
-
     au BufWinEnter,BufNewFile * setlocal formatoptions=qnm1
-
     au FileType python setlocal expandtab softtabstop=4 shiftwidth=4
-
     au FileType help wincmd L
-
     au FileType json,sh,vim setlocal expandtab softtabstop=2 shiftwidth=2
     au BufWinEnter,BufNewFile *.json,*.bash,*.sh,*.vim
           \ setlocal expandtab softtabstop=2 shiftwidth=2
-
   augroup END
+  if has("syntax")
+    augroup raghu_colors
+      au!
+      au ColorScheme * highlight VertSplit
+            \ term=bold,reverse cterm=NONE gui=NONE
+            \ ctermfg=DarkMagenta ctermbg=NONE guifg=DarkMagenta guibg=NONE
+      au ColorScheme * highlight StatusLine
+            \ term=bold,reverse cterm=bold gui=bold
+            \ ctermfg=White ctermbg=DarkBlue guifg=White guibg=DarkBlue
+    augroup END
+    colorscheme default
+  endif
 endif
 
 " When running vim in tmux, allow C-<arrow> to work, useful in the cmdline and
@@ -60,15 +67,7 @@ endif
 
 nnoremap <Leader>e :silent edit<CR>
 
-if has("syntax")
-  syntax off
-  highlight VertSplit
-        \ term=bold,reverse cterm=NONE gui=NONE
-        \ ctermfg=DarkMagenta ctermbg=NONE guifg=DarkMagenta guibg=NONE
-  highlight StatusLine
-        \ term=bold,reverse cterm=bold gui=bold
-        \ ctermfg=White ctermbg=DarkBlue guifg=White guibg=DarkBlue
-endif
+if has("syntax") | syntax off | endif
 
 " Make vim more secure.  See |trojan-horse|.
 set noexrc secure
