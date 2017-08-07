@@ -23,7 +23,7 @@ if has("multi_byte")
   set encoding=utf-8
   set listchars=tab:¬\ ,trail:¶,extends:>,precedes:<,nbsp:·
   if has("windows") && has("folding")
-    " Has the side-effect of setting vert and sstlnc to blank when highlighting
+    " Has the side-effect of setting vert and stlnc to blank when highlighting
     " is available, which I find acceptable.
     set fillchars=stl:^,fold:-,diff:-
   endif
