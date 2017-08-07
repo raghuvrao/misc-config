@@ -42,14 +42,19 @@ if has("autocmd")
   if has("syntax")
     augroup raghu_colors
       au!
+      " Make vertical split separator line subtler.
       au ColorScheme * highlight VertSplit
             \ term=bold,reverse cterm=NONE gui=NONE
             \ ctermfg=DarkMagenta ctermbg=NONE guifg=DarkMagenta guibg=NONE
+      " Make status line of current window easier to notice.
       au ColorScheme * highlight StatusLine
             \ term=bold,reverse cterm=bold gui=bold
             \ ctermfg=White ctermbg=DarkBlue guifg=White guibg=DarkBlue
     augroup END
-    colorscheme default  " Just so above autocommands are executed.
+    " Even though I disable syntax highlighting (see below), I need the
+    " following seemingly-redundant line in order that the above
+    " highlighting-related autocommands are executed.
+    colorscheme default
   endif
 endif
 
