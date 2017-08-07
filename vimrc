@@ -49,7 +49,7 @@ if has("autocmd")
             \ term=bold,reverse cterm=bold gui=bold
             \ ctermfg=White ctermbg=DarkBlue guifg=White guibg=DarkBlue
     augroup END
-    colorscheme default
+    colorscheme default  " Just so above autocommands are executed.
   endif
 endif
 
