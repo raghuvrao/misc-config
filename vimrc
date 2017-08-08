@@ -1,4 +1,5 @@
 set nocompatible
+set display+=lastline
 set laststatus=2
 set mouse=
 set nobackup
