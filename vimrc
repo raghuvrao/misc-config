@@ -16,11 +16,9 @@ if has("smartindent") | set nosmartindent | endif
 if has("cmdline_info") | set ruler showcmd | endif
 if has("folding")
   set foldmethod=indent foldlevel=100
-  if has("windows")
-    " Has the side-effect of setting vert and stlnc to blank when highlighting
-    " is available, which I find acceptable.
-    set fillchars=stl:^,fold:-,diff:-
-  endif
+  " Has the side-effect of setting stlnc to blank when highlighting is
+  " available, which I think looks fine.
+  if has("windows") | set fillchars=vert:\|,stl:^,fold:-,diff:- | endif
 endif
 if has("extra_search")
   set incsearch
