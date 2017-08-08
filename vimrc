@@ -1,5 +1,5 @@
 set nocompatible
-set laststatus=1
+set laststatus=2
 set mouse=
 set nobackup
 if has("persistent_undo") | set noundofile | endif
