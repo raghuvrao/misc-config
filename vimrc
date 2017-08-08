@@ -27,7 +27,7 @@ endif
 set list
 if has("multi_byte")
   set encoding=utf-8
-  set listchars=tab:¬\ ,trail:¶,extends:>,precedes:<,nbsp:·
+  set listchars=tab:¬\ ,trail:¤,extends:>,precedes:<,nbsp:·
 else
   set listchars=tab:\|\ ,trail:#,extends:>,precedes:<,nbsp:_
 endif
