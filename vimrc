@@ -17,7 +17,7 @@ if has("folding")
   set foldmethod=indent foldlevel=100
   " Has the side-effect of setting stlnc to blank when highlighting is
   " available, which I think looks fine.
-  if has("windows") | set fillchars=vert:\|,stl:^,fold:-,diff:- | endif
+  if has("windows") | set fillchars=vert:\|,stl:*,fold:-,diff:- | endif
 endif
 if has("extra_search")
   set incsearch
