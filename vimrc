@@ -31,6 +31,7 @@ else
   set listchars=tab:\|\ ,trail:#,extends:>,precedes:<,nbsp:_
 endif
 set textwidth=0
+set statusline=%(\ %f%M%)%(\ %h%r%w%)%(\ %l,%c%V\ %)
 
 if has("autocmd")
   filetype plugin indent on
