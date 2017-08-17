@@ -39,7 +39,6 @@ if has("autocmd")
     au!
     au BufWinEnter,BufNewFile * setlocal formatoptions=qnm1
     au FileType python setlocal expandtab softtabstop=4 shiftwidth=4
-    au FileType help wincmd L
     au FileType json,sh,vim setlocal expandtab softtabstop=2 shiftwidth=2
     au BufWinEnter,BufNewFile *.json,*.bash,*.sh,*.vim
           \ setlocal expandtab softtabstop=2 shiftwidth=2
