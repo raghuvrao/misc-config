@@ -26,9 +26,9 @@ endif
 set list
 if has("multi_byte")
   set encoding=utf-8
-  set listchars=tab:·\ ,trail:¤,extends:>,precedes:<,nbsp:¬
+  set listchars=tab:·\ ,trail:¤,extends:%,precedes:%,nbsp:¬
 else
-  set listchars=tab:\|\ ,trail:#,extends:>,precedes:<,nbsp:_
+  set listchars=tab:\|\ ,trail:#,extends:%,precedes:%,nbsp:_
 endif
 set textwidth=0
 set statusline=%(\ %f%M%)%(\ %h%r%w%)%(\ %l,%c%V\ %)
