@@ -1,4 +1,3 @@
-set nocompatible
 set laststatus=2
 set mouse=
 set nobackup
@@ -9,15 +8,17 @@ set lazyredraw
 set softtabstop=8  " Matches default values of tabstop and shiftwidth.
 set ignorecase smartcase
 set nowrap sidescroll=1
-if has("wildmenu") | set nowildmenu wildmode=longest,list,full | endif
+nnoremap <Leader>w :set invwrap<CR>
+if exists("+linebreak") | set linebreak | endif
+if has("wildmenu") | set nowildmenu wildmode=longest:list,full | endif
 set autoindent
 if has("smartindent") | set nosmartindent | endif
 if has("cmdline_info") | set ruler showcmd | endif
 if has("folding")
   set foldmethod=indent foldlevel=100
-  " Has the side-effect of setting stlnc to blank when highlighting is
-  " available, which I think looks fine.
-  if has("windows") | set fillchars=vert:\|,stl:*,fold:-,diff:- | endif
+  if has("windows")
+    set fillchars=vert:\|,stl:*,stlnc:\ ,fold:-,diff:-
+  endif
 endif
 if has("extra_search")
   set incsearch
@@ -30,8 +31,11 @@ if has("multi_byte")
 else
   set listchars=tab:\|\ ,trail:#,extends:%,precedes:%,nbsp:_
 endif
+if exists("+statusline")
+  set statusline=%(\ %f%M%)%(\ %h%r%w%)%(\ %l:%c(%v)\ %)
+endif
 set textwidth=0
-set statusline=%(\ %f%M%)%(\ %h%r%w%)%(\ %l,%c%V\ %)
+if exists("+autochdir") | set autochdir | endif
 
 if has("autocmd")
   filetype plugin indent on
@@ -58,8 +62,10 @@ if &term =~ '^screen'
 endif
 
 nnoremap <Leader>e :silent edit<CR>
+nnoremap <Leader>tu i<CR><Esc>k:put =strftime('%s')<CR>kJJ
+nnoremap <Leader>ts i<CR><Esc>k:put =strftime('%Y-%m-%d %H:%M:%S %Z(UTC%z)')<CR>kJJ
 
 if has("syntax") | syntax off | endif
 
-" Make vim more secure.  See |trojan-horse|.
+" Make vim more secure.  See `:h trojan-horse'.
 set noexrc secure
