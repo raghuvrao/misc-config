@@ -13,11 +13,11 @@ set page-completions on
 set skip-completed-text on
 set visible-stats on
 set show-all-if-ambiguous off
-set show-all-if-unmodified off
+set show-all-if-unmodified on
 set completion-prefix-display-length 0
 set bell-style none
 set match-hidden-files on
-set print-completions-horizontally on
+set print-completions-horizontally off
 
 # Example of how to change keybindings (will affect all programs that link
 # against readline): change clear-screen from C-l to C-x C-l (unbind the
