@@ -1,4 +1,3 @@
-set laststatus=2
 set mouse=
 set nobackup
 if has("persistent_undo") | set noundofile | endif
@@ -31,6 +30,7 @@ if has("multi_byte")
 else
   set listchars=tab:\|\ ,trail:#,extends:%,precedes:%,nbsp:_
 endif
+set laststatus=2
 if exists("+statusline")
   set statusline=%(\ %f%M%)%(\ %h%r%w%)%(\ %l:%c(%v)\ %)
 endif
