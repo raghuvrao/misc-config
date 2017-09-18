@@ -24,6 +24,9 @@ shopt -s checkwinsize
 # exit with a non-zero status, or zero if all commands exit successfully.
 shopt -o -s pipefail
 
+# Do not perform completion when completion is attempted on an empty line.
+shopt -s no_empty_cmd_completion
+
 # Do not save lines matching previous history entry.
 HISTCONTROL='ignoredups'
 
