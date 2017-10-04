@@ -60,7 +60,7 @@ nnoremap <Leader>e :silent edit<CR>
 nnoremap <Leader>tu i<CR><Esc>k:put =strftime('%s')<CR>kJJ
 nnoremap <Leader>ts i<CR><Esc>k:put =strftime('%Y-%m-%d %H:%M:%S %Z(UTC%z)')<CR>kJJ
 
-set background=light
+set background=dark
 if has("syntax") | syntax off | endif
 
 " Make vim more secure.  See `:h trojan-horse'.
