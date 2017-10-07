@@ -1,33 +1,69 @@
 xterm*termName: xterm-256color
 uxterm*termName: xterm-256color
-xterm*vt100.font: -misc-fixed-medium-r-normal--13-120-75-75-c-80-iso10646-1
-uxterm*vt100.font: -misc-fixed-medium-r-normal--13-120-75-75-c-80-iso10646-1
 xterm*loginShell: true
 uxterm*loginShell: true
 xterm*selectToClipboard: true
 uxterm*selectToClipboard: true
-xterm*vt100.scrollBar: true
-uxterm*vt100.scrollBar: true
-xterm*vt100.eightBitInput: false
-uxterm*vt100.eightBitInput: false
-!xterm*vt100.background: black
-!uxterm*vt100.background: black
-!xterm*vt100.foreground: gray
-!uxterm*vt100.foreground: gray
-!xterm*vt100.colorBD: white
-!uxterm*vt100.colorBD: white
-!xterm*vt100.colorBDMode: true
-!uxterm*vt100.colorBDMode: true
-!xterm*vt100.allowBoldFonts: false
-!uxterm*vt100.allowBoldFonts: false
-!xterm*vt100.metaSendsEscape: true
-!uxterm*vt100.metaSendsEscape: true
-!xterm*vt100.eightBitControl: false
-!uxterm*vt100.eightBitControl: false
-!xterm*vt100.eightBitInput: false
-!uxterm*vt100.eightBitInput: false
-!xterm*vt100.eightBitOutput: true
-!uxterm*vt100.eightBitOutput: true
+xterm*vt100*font: -gnu-unifont-medium-r-normal-sans-16-160-75-75-c-80-iso10646-1
+uxterm*vt100*font: -gnu-unifont-medium-r-normal-sans-16-160-75-75-c-80-iso10646-1
+xterm*vt100.titeInhibit: false
+uxterm*vt100.titeInhibit: false
+xterm*vt100.scrollBar: false
+uxterm*vt100.scrollBar: false
+xterm*vt100.allowBoldFonts: false
+uxterm*vt100.allowBoldFonts: false
+xterm*vt100.boldMode: false
+uxterm*vt100.boldMode: false
+xterm*vt100.alwaysBoldMode: false
+uxterm*vt100.alwaysBoldMode: false
+xterm*vt100.colorBDMode: True
+uxterm*vt100.colorBDMode: True
+xterm*vt100.background: #000000
+uxterm*vt100.background: #000000
+xterm*vt100.foreground: #CCBC8B
+uxterm*vt100.foreground: #CCBC8B
+xterm*vt100.colorBD: #FFFFBB
+uxterm*vt100.colorBD: #FFFFBB
+xterm*vt100.color0: #303030
+uxterm*vt100.color0: #303030
+xterm*vt100.color1: #AA0000
+uxterm*vt100.color1: #AA0000
+xterm*vt100.color2: #00AA00
+uxterm*vt100.color2: #00AA00
+xterm*vt100.color3: #AAAA00
+uxterm*vt100.color3: #AAAA00
+xterm*vt100.color4: #0000AA
+uxterm*vt100.color4: #0000AA
+xterm*vt100.color5: #AA00AA
+uxterm*vt100.color5: #AA00AA
+xterm*vt100.color6: #00AAAA
+uxterm*vt100.color6: #00AAAA
+xterm*vt100.color7: #AAAAAA
+uxterm*vt100.color7: #AAAAAA
+xterm*vt100.color8: #555555
+uxterm*vt100.color8: #555555
+xterm*vt100.color9: #FF5555
+uxterm*vt100.color9: #FF5555
+xterm*vt100.color10: #55FF55
+uxterm*vt100.color10: #55FF55
+xterm*vt100.color11: #FFFF55
+uxterm*vt100.color11: #FFFF55
+xterm*vt100.color12: #5555FF
+uxterm*vt100.color12: #5555FF
+xterm*vt100.color13: #FF55FF
+uxterm*vt100.color13: #FF55FF
+xterm*vt100.color14: #55FFFF
+uxterm*vt100.color14: #55FFFF
+xterm*vt100.color15: #DDDDDD
+uxterm*vt100.color15: #DDDDDD
+xterm*vt100.metaSendsEscape: true
+uxterm*vt100.metaSendsEscape: true
+! xterm*vt100.eightBitInput: false
+! uxterm*vt100.eightBitInput: false
+! xterm*vt100.eightBitOutput: true
+! uxterm*vt100.eightBitOutput: true
+! xterm*vt100.eightBitControl: false
+! uxterm*vt100.eightBitControl: false
 
 !Emacs.toolBar: 0
 !Emacs.font: Liberation Mono-10
