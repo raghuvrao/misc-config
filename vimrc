@@ -38,9 +38,10 @@ if has("autocmd")
     au!
     au BufWinEnter,BufNewFile * setlocal formatoptions=qnm1
     au FileType python setlocal expandtab softtabstop=4 shiftwidth=4
-    au FileType json,sh,vim setlocal expandtab softtabstop=2 shiftwidth=2
-    au BufWinEnter,BufNewFile *.json,*.bash,*.sh,*.vim
-          \ setlocal expandtab softtabstop=2 shiftwidth=2
+    au FileType json setlocal expandtab softtabstop=2 shiftwidth=2
+    au FileType sh setlocal expandtab softtabstop=2 shiftwidth=2
+    au FileType vim
+          \ setlocal expandtab softtabstop=2 shiftwidth=2 keywordprg=:help
   augroup END
 endif
 
