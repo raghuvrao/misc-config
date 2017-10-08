@@ -36,9 +36,12 @@ if has("autocmd")
   filetype plugin indent on
   augroup raghu_augroup
     au!
-    au BufWinEnter,BufNewFile * setlocal formatoptions=qnm1j
-    au FileType json setlocal expandtab softtabstop=2 shiftwidth=2
-    au FileType sh setlocal expandtab softtabstop=2 shiftwidth=2
+    au BufWinEnter,BufNewFile *
+          \ setlocal formatoptions=qnm1j
+    au FileType json
+          \ setlocal expandtab softtabstop=2 shiftwidth=2
+    au FileType sh
+          \ setlocal expandtab softtabstop=2 shiftwidth=2
     au FileType vim
           \ setlocal expandtab softtabstop=2 shiftwidth=2 keywordprg=:help
   augroup END
