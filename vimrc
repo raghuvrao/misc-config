@@ -37,7 +37,7 @@ if has("autocmd")
   augroup raghu_augroup
     au!
     au BufWinEnter,BufNewFile *
-          \ setlocal formatoptions=qnm1j
+          \ setlocal formatoptions=qnm1lj
     au FileType json
           \ setlocal expandtab softtabstop=2 shiftwidth=2
     au FileType sh
