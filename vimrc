@@ -27,7 +27,7 @@ set list listchars=tab:>\ ,trail:#,extends:>,precedes:<,nbsp:%
 if has("multi_byte") | set encoding=utf-8 | endif
 set laststatus=2
 if exists("+statusline")
-  set statusline=%(\ %f%M%)%(\ %h%r%w%)%(\ %l:%c(%v)\ %)
+  set statusline=%(\ %f%M%)%(\ %h%r%w%)%(\ %l,%c%V\ %)
 endif
 set textwidth=0
 if exists("+autochdir") | set autochdir | endif
@@ -62,9 +62,13 @@ endif
 nnoremap <Leader>e :silent edit<CR>
 nnoremap <Leader>tu i<CR><Esc>k:put =strftime('%s')<CR>kJJ
 nnoremap <Leader>ts i<CR><Esc>k:put =strftime('%Y-%m-%d %H:%M:%S %Z(UTC%z)')<CR>kJJ
+nnoremap <Leader>m :set invmodifiable<CR>
 
 set background=dark
 if has("syntax") | syntax off | endif
+
+let g:loaded_matchparen=1
+packadd! matchit
 
 " Make vim more secure.  See `:h trojan-horse'.
 set noexrc secure
