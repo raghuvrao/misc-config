@@ -29,7 +29,7 @@ if ! type -a ll &>/dev/null; then alias ll='ls -l -a'; fi
 if ! type -a acgrep &>/dev/null; then alias acgrep='grep --color=always'; fi
 
 # Set up a simple shell prompt.
-PS1='\u@\h:\w\$ '
+PS1='\h:\w\$ '
 PROMPT_DIRTRIM=3
 
 # Use PROMPT_COMMAND to set terminal emulator window/tab titles and icon names.
