@@ -321,15 +321,21 @@ UNIX timestamp."
 (define-key global-map (kbd "C-c t") #'raghu/insert-current-date-time)
 
 (defun raghu--enable-hl-line-mode-in-buffer ()
-  "Highlight line containing point in current buffer."
-  (hl-line-mode 1))
+  "Highlight line containing point in current buffer.
+
+Do so only when Emacs is running on a graphic display."
+  (when (fboundp #'display-graphic-p)
+    (when (display-graphic-p) (hl-line-mode 1))))
+
 (defun raghu--disable-line-wrap-in-buffer ()
   "Enable line truncation in current buffer."
   (set (make-local-variable 'truncate-lines) t))
+
 (defun raghu--enable-word-wrap-in-buffer ()
   "Enable word-wrapping in current buffer."
   (set (make-local-variable 'truncate-lines) nil)
   (set (make-local-variable 'word-wrap) 1))
+
 (defun raghu--show-trailing-whitespace-in-buffer ()
   "Highlight trailing whitespace in the current buffer."
   (set (make-local-variable 'show-trailing-whitespace) t))
@@ -391,7 +397,7 @@ UNIX timestamp."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(debug-on-error t)
- '(frame-background-mode (quote light))
+ '(frame-background-mode (quote dark))
  '(help-window-select t)
  '(indicate-empty-lines t)
  '(inhibit-startup-screen t)
@@ -420,11 +426,13 @@ UNIX timestamp."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((((type x)) (:height 100)) (((type ns)) (:height 110))))
- '(eshell-prompt ((t nil)))
+ '(default ((((type x) (class color) (background dark)) (:background "gray10" :foreground "#CCBC8B" :height 90)) (((type ns) (class color) (background dark)) (:background "gray10" :foreground "#CCBC8B" :height 110))))
  '(fringe ((t (:inherit default))))
+ '(hl-line ((((type x ns) (class color) (background light)) (:background "azure2")) (((type x ns) (class color) (background dark)) (:background "gray23"))))
  '(isearch ((((type x ns) (class color) (background light)) (:background "plum2" :foreground "black"))))
- '(region ((((type x ns) (class color) (background light)) (:background "LightGoldenrod2")))))
+ '(lazy-highlight ((((type x ns) (class color) (background dark)) (:background "RoyalBlue4" :foreground "LightSkyBlue"))))
+ '(region ((((type x ns) (class color) (background light)) (:background "LightGoldenrod2"))))
+ '(show-paren-match ((((type x ns) (class color) (background dark)) (:background "green4" :foreground "white")))))
 
 (require 'server)
 (unless (server-running-p) (server-start))
