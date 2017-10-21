@@ -387,6 +387,9 @@ Do so only when Emacs is running on a graphic display."
 (with-eval-after-load "text-mode"	; No `provide' in text-mode.el
   (add-hook 'text-mode-hook #'raghu--enable-word-wrap-in-buffer))
 
+(with-eval-after-load "replace"		; No `provide' in replace.el
+  (add-hook 'occur-mode-hook #'raghu--disable-line-wrap-in-buffer))
+
 (with-eval-after-load 'log-edit
   (add-hook 'log-edit-mode-hook #'raghu--enable-hl-line-mode-in-buffer)
   (add-hook 'log-edit-mode-hook #'turn-on-font-lock))
