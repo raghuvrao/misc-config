@@ -411,6 +411,9 @@ Do so only when Emacs is running on a graphic display."
 			    (local-set-key (kbd "C-c C-c") #'compile)
 			    (subword-mode 1))))
 
+(with-eval-after-load 'conf-mode
+  (add-hook 'conf-mode-hook #'raghu--disable-line-wrap-in-buffer))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
