@@ -394,6 +394,9 @@ Do so only when Emacs is running on a graphic display."
   (add-hook 'log-edit-mode-hook #'raghu--enable-hl-line-mode-in-buffer)
   (add-hook 'log-edit-mode-hook #'turn-on-font-lock))
 
+(with-eval-after-load 'conf-mode
+  (add-hook 'conf-mode-hook #'raghu--disable-line-wrap-in-buffer))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
