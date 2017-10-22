@@ -327,10 +327,6 @@ Do so only when Emacs is running on a graphic display."
   (when (fboundp #'display-graphic-p)
     (when (display-graphic-p) (hl-line-mode 1))))
 
-(defun raghu--disable-line-wrap-in-buffer ()
-  "Enable line truncation in current buffer."
-  (set (make-local-variable 'truncate-lines) t))
-
 (defun raghu--enable-word-wrap-in-buffer ()
   "Enable word-wrapping in current buffer."
   (set (make-local-variable 'truncate-lines) nil)
@@ -344,7 +340,6 @@ Do so only when Emacs is running on a graphic display."
   (add-hook 'special-mode-hook #'turn-on-font-lock))
 
 (with-eval-after-load 'prog-mode
-  (add-hook 'prog-mode-hook #'raghu--disable-line-wrap-in-buffer)
   (add-hook 'prog-mode-hook #'raghu--enable-hl-line-mode-in-buffer)
   (add-hook 'prog-mode-hook #'raghu--show-trailing-whitespace-in-buffer))
 
@@ -356,7 +351,6 @@ Do so only when Emacs is running on a graphic display."
   (add-hook 'Custom-mode-hook #'raghu--enable-hl-line-mode-in-buffer))
 
 (with-eval-after-load 'tabulated-list
-  (add-hook 'tabulated-list-mode-hook #'raghu--disable-line-wrap-in-buffer)
   (add-hook 'tabulated-list-mode-hook #'raghu--enable-hl-line-mode-in-buffer))
 
 (with-eval-after-load 'ibuffer
@@ -370,8 +364,7 @@ Do so only when Emacs is running on a graphic display."
   (add-hook 'compilation-mode-hook #'turn-on-font-lock))
 
 (with-eval-after-load 'diff-mode
-  (add-hook 'diff-mode-hook #'turn-on-font-lock)
-  (add-hook 'diff-mode-hook #'raghu--disable-line-wrap-in-buffer))
+  (add-hook 'diff-mode-hook #'turn-on-font-lock))
 
 (with-eval-after-load 'shell
   (add-hook 'shell-mode-hook #'raghu--enable-hl-line-mode-in-buffer)
@@ -386,9 +379,6 @@ Do so only when Emacs is running on a graphic display."
 
 (with-eval-after-load "text-mode"	; No `provide' in text-mode.el
   (add-hook 'text-mode-hook #'raghu--enable-word-wrap-in-buffer))
-
-(with-eval-after-load "replace"		; No `provide' in replace.el
-  (add-hook 'occur-mode-hook #'raghu--disable-line-wrap-in-buffer))
 
 (with-eval-after-load 'log-edit
   (add-hook 'log-edit-mode-hook #'raghu--enable-hl-line-mode-in-buffer)
@@ -424,6 +414,7 @@ Do so only when Emacs is running on a graphic display."
  '(sh-basic-offset 2)
  '(sh-indentation 2)
  '(show-paren-delay 0)
+ '(truncate-lines t)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
  '(use-dialog-box nil)
  '(vc-follow-symlinks t))
