@@ -327,7 +327,7 @@ Do so only when Emacs is running on a graphic display."
   (when (fboundp #'display-graphic-p)
     (when (display-graphic-p) (hl-line-mode 1))))
 
-(defun raghu--enable-word-wrap-in-buffer ()
+(defun raghu--do-word-wrap-in-buffer ()
   "Enable word-wrapping in current buffer."
   (set (make-local-variable 'truncate-lines) nil)
   (set (make-local-variable 'word-wrap) 1))
@@ -384,7 +384,7 @@ Do so only when Emacs is running on a graphic display."
   (add-hook 'inferior-python-mode-hook #'turn-on-font-lock))
 
 (with-eval-after-load "text-mode"	; No `provide' in text-mode.el
-  (add-hook 'text-mode-hook #'raghu--enable-word-wrap-in-buffer))
+  (add-hook 'text-mode-hook #'raghu--do-word-wrap-in-buffer))
 
 (with-eval-after-load 'log-edit
   (add-hook 'log-edit-mode-hook #'raghu--enable-hl-line-mode-in-buffer)
