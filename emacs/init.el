@@ -328,7 +328,7 @@ Do so only when Emacs is running on a graphic display."
     (when (display-graphic-p) (hl-line-mode 1))))
 
 (defun raghu--do-word-wrap-in-buffer ()
-  "Enable word-wrapping in current buffer."
+  "Do word-wrapping in current buffer."
   (set (make-local-variable 'truncate-lines) nil)
   (set (make-local-variable 'word-wrap) 1))
 
