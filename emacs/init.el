@@ -332,6 +332,10 @@ Do so only when Emacs is running on a graphic display."
   (set (make-local-variable 'truncate-lines) nil)
   (set (make-local-variable 'word-wrap) 1))
 
+(defun raghu--do-line-wrap-in-buffer ()
+  "Do line-wrapping in current buffer."
+  (set (make-local-variable 'truncate-lines) nil))
+
 (defun raghu--show-trailing-whitespace-in-buffer ()
   "Highlight trailing whitespace in the current buffer."
   (set (make-local-variable 'show-trailing-whitespace) t))
@@ -380,6 +384,10 @@ Do so only when Emacs is running on a graphic display."
 (with-eval-after-load 'log-edit
   (add-hook 'log-edit-mode-hook #'raghu--enable-hl-line-mode-in-buffer)
   (add-hook 'log-edit-mode-hook #'turn-on-font-lock))
+
+(with-eval-after-load 'compile
+  (add-hook 'compilation-mode-hook #'raghu--enable-hl-line-mode-in-buffer)
+  (add-hook 'compilation-mode-hook #'raghu--do-line-wrap-in-buffer))
 
 (with-eval-after-load 'python
   (add-hook 'inferior-python-mode-hook #'turn-on-font-lock))
