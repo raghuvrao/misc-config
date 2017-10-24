@@ -40,8 +40,8 @@ xterm*vt100.color1: #AA0000
 uxterm*vt100.color1: #AA0000
 xterm*vt100.color2: #00AA00
 uxterm*vt100.color2: #00AA00
-xterm*vt100.color3: #AAAA00
-uxterm*vt100.color3: #AAAA00
+xterm*vt100.color3: #AA7700
+uxterm*vt100.color3: #AA7700
 xterm*vt100.color4: #3333AA
 uxterm*vt100.color4: #3333AA
 xterm*vt100.color5: #AA00AA
