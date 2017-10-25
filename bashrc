@@ -42,7 +42,7 @@ unset -v PROMPT_COMMAND
 s='\033]0;%s:%s\007'
 h="${HOSTNAME%%.*}"
 case "${TERM}" in
-  xterm*)
+  xterm*|rxvt*)
     PROMPT_COMMAND="printf '${s}' '${h}'"' "${PWD/#${HOME}/\~}"'
     ;;
   screen*)
