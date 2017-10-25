@@ -4,6 +4,34 @@ Xft.hintstyle: hintfull
 Xft.rgba: rgb
 Xft.lcdfilter: lcddefault
 
+URxvt.termName: rxvt-unicode-256color
+URxvt.loginShell: true
+URxvt.font: -gnu-unifont-medium-r-normal-sans-16-160-75-75-c-80-iso10646-1
+URxvt.boldFont: -gnu-unifont-medium-r-normal-sans-16-160-75-75-c-80-iso10646-1
+URxvt.italicFont: -gnu-unifont-medium-r-normal-sans-16-160-75-75-c-80-iso10646-1
+URxvt.boldItalicFont: -gnu-unifont-medium-r-normal-sans-16-160-75-75-c-80-iso10646-1
+URxvt.scrollBar: false
+URxvt.cursorBlink: true
+URxvt.background: #181818
+URxvt.foreground: #CCBC8B
+URxvt.colorBD: #FFFFBB
+URxvt.color0: #000000
+URxvt.color1: #AA0000
+URxvt.color2: #00AA00
+URxvt.color3: #AA7700
+URxvt.color4: #3333AA
+URxvt.color5: #AA00AA
+URxvt.color6: #00AAAA
+URxvt.color7: #AAAAAA
+URxvt.color8: #555555
+URxvt.color9: #FF5555
+URxvt.color10: #55FF55
+URxvt.color11: #FFFF55
+URxvt.color12: #5555FF
+URxvt.color13: #FF55FF
+URxvt.color14: #55FFFF
+URxvt.color15: #DDDDDD
+
 xterm*termName: xterm-256color
 uxterm*termName: xterm-256color
 xterm*loginShell: true

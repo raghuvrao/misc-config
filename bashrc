@@ -57,7 +57,7 @@ unset -v h s
 # xterm-256color, screen-256color and screen).  For these TERMs, the command
 # 'tput clear' works as expected.  So, work around the problem by rebinding
 # C-l to 'tput clear' until I find a proper solution.
-if [[ "${TERM}" =~ xterm-.*|screen.* ]]; then
+if [[ "${TERM}" =~ xterm-.*|screen.*|rxvt.* ]]; then
   f="/etc/slackware-version"
   if [[ -r "${f}" ]]; then
     read -r first_line <"${f}" &>/dev/null
