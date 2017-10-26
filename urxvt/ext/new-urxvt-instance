@@ -1,0 +1,13 @@
+#!/usr/bin/perl
+# Start new urxvt instance
+#
+# URxvt.perl-ext-common: new-urxvt-instance
+# URxvt.keysym.F12: new-urxvt-instance:new
+
+sub on_action {
+    my ($self, $action) = @_;
+    if ($action eq "new") {
+        my $dummy = `urxvt` ;
+    }
+    ()
+}
