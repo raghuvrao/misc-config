@@ -21,6 +21,7 @@ URxvt.foreground: rgb:CC/BC/8B
 URxvt.cursorColor: rgb:BB/33/BB
 URxvt.cursorColor2: rgb:BB/DD/BB
 URxvt.colorBD: rgb:FF/FF/BB
+URxvt.colorIT: rgb:93/70/DB
 URxvt.color0: rgb:00/00/00
 URxvt.color1: rgb:AA/00/00
 URxvt.color2: rgb:00/AA/00
