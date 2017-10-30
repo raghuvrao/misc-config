@@ -19,7 +19,7 @@ URxvt.cursorBlink: true
 URxvt.background: rgb:18/18/18
 URxvt.foreground: rgb:CC/BC/8B
 URxvt.cursorColor: rgb:BB/33/BB
-URxvt.cursorColor2: rgb:BB/DD/BB
+URxvt.cursorColor2: rgb:EE/EE/EE
 URxvt.colorBD: rgb:FF/FF/BB
 URxvt.colorIT: rgb:93/70/DB
 URxvt.color0: rgb:00/00/00
