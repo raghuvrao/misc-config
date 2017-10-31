@@ -53,6 +53,11 @@ if [ -d "${HOME}/bin" ]; then
   pathmunge "${HOME}/bin" "after"
 fi
 
+for d in /usr/local/sbin /usr/sbin /sbin; do
+  pathmunge "${d}"
+done
+unset -v d
+
 GOPATH="${HOME}/go"
 if [ -d "${GOPATH}" ]; then
   export GOPATH
