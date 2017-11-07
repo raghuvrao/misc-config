@@ -76,6 +76,8 @@ uxterm*vt100.metaSendsEscape: true
 ! xterm*vt100.eightBitControl: false
 ! uxterm*vt100.eightBitControl: false
 
+xfontsel*font: 9x15bold
+
 !Emacs.toolBar: 0
 !Emacs.font: Liberation Mono-10
 !Emacs.background: black
