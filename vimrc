@@ -64,7 +64,7 @@ nnoremap <Leader>tu i<CR><Esc>k:put =strftime('%s')<CR>kJJ
 nnoremap <Leader>ts i<CR><Esc>k:put =strftime('%Y-%m-%d %H:%M:%S %Z(UTC%z)')<CR>kJJ
 nnoremap <Leader>m :set invmodifiable<CR>
 
-set background=dark
+set background=light
 if has("syntax") | syntax off | endif
 
 let g:loaded_matchparen=1
