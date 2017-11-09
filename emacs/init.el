@@ -395,7 +395,7 @@ Do so only when Emacs is running on a graphic display."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(debug-on-error t)
- '(frame-background-mode (quote dark))
+ '(frame-background-mode (quote light))
  '(help-window-select t)
  '(indicate-empty-lines t)
  '(inhibit-startup-screen t)
@@ -425,16 +425,10 @@ Do so only when Emacs is running on a graphic display."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((((type x) (class color) (background dark)) (:background "gray10" :foreground "wheat3" :height 90)) (((type ns) (class color) (background dark)) (:background "gray10" :foreground "wheat3" :height 110))))
- '(diff-file-header ((((type x ns) (class color) (background dark)) (:background "gray40" :foreground "gray80" :weight bold))))
- '(diff-header ((((type x ns) (class color) (background dark)) (:background "gray25" :foreground "gray80"))))
- '(fringe ((((type x ns) (class color) (background dark)) (:background "gray16"))))
- '(hl-line ((((type x ns) (class color) (background dark)) (:background "gray23"))))
+ '(default ((((type x) (class color) (background light)) (:background "gray95" :foreground "gray20" :height 100))))
+ '(fringe ((t (:inherit default))))
  '(isearch ((((type x ns) (class color) (background light)) (:background "plum2" :foreground "black"))))
- '(lazy-highlight ((((type x ns) (class color) (background dark)) (:background "RoyalBlue4" :foreground "LightSkyBlue"))))
- '(match ((((type x ns) (class color) (background dark)) (:background "orange2" :foreground "black"))))
- '(region ((((type x ns) (class color) (background light)) (:background "LightGoldenrod2" :foreground "black")) (((type x ns) (class color) (background dark)) (:background "wheat3" :foreground "gray10"))))
- '(show-paren-match ((((type x ns) (class color) (background dark)) (:background "green4" :foreground "white")))))
+ '(region ((((type x ns) (class color) (background light)) (:background "LightGoldenrod2")) (((type tty) (class color) (min-colors 8) (background light)) (:background "cyan" :foreground "black")))))
 
 (require 'server)
 (unless (server-running-p) (server-start))
