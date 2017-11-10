@@ -428,10 +428,10 @@ Do so only when Emacs is running on a graphic display."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((((type x) (class color) (background light)) (:background "gray95" :foreground "gray20" :height 100))))
- '(fringe ((t (:inherit default))))
+ '(default ((((type x ns)) (:height 100))))
+ '(hl-line ((((type x ns) (class color) (background light)) (:background "LightGoldenrod2"))))
  '(isearch ((((type x ns) (class color) (background light)) (:background "plum2" :foreground "black"))))
- '(region ((((type x ns) (class color) (background light)) (:background "LightGoldenrod2")) (((type tty) (class color) (min-colors 8) (background light)) (:background "cyan" :foreground "black")))))
+ '(region ((((type x ns) (class color) (background light)) (:background "DarkSeaGreen3" :foreground "black")) (((type tty) (class color) (min-colors 8) (background light)) (:background "cyan" :foreground "black")))))
 
 (require 'server)
 (unless (server-running-p) (server-start))
