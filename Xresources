@@ -34,8 +34,10 @@ URxvt.color12: rgb:55/55/DD
 URxvt.color13: rgb:DD/55/DD
 URxvt.color14: rgb:55/DD/DD
 URxvt.color15: rgb:FF/FF/FF
-URxvt.perl-ext-common: default
-URxvt.keysym.F11: fullscreen:toggle
+! URxvt.perl-ext-common: default
+! URxvt.keysym.F11: fullscreen:toggle
+URxvt.perl-ext:
+URxvt.perl-ext-common:
 
 xterm*termName: xterm-256color
 uxterm*termName: xterm-256color
