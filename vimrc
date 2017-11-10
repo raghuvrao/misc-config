@@ -63,6 +63,7 @@ nnoremap <Leader>e :silent edit<CR>
 nnoremap <Leader>tu i<CR><Esc>k:put =strftime('%s')<CR>kJJ
 nnoremap <Leader>ts i<CR><Esc>k:put =strftime('%Y-%m-%d %H:%M:%S %Z(UTC%z)')<CR>kJJ
 nnoremap <Leader>m :set invmodifiable<CR>
+nnoremap <Leader>P :if exists("g:syntax_on") <Bar> syntax off <Bar> else <Bar> syntax on <Bar> endif<CR>
 
 set background=light
 if has("syntax") | syntax off | endif
