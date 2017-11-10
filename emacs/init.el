@@ -347,6 +347,9 @@ Do so only when Emacs is running on a graphic display."
   (add-hook 'outline-mode-hook #'raghu--enable-hl-line-mode-in-buffer)
   (add-hook 'outline-mode-hook #'turn-on-font-lock))
 
+(with-eval-after-load 'conf-mode
+  (add-hook 'conf-mode-hook #'raghu--enable-hl-line-mode-in-buffer))
+
 (with-eval-after-load 'cus-edit
   (add-hook 'Custom-mode-hook #'raghu--enable-hl-line-mode-in-buffer))
 
