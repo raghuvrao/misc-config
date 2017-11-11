@@ -14,6 +14,18 @@ XTerm*vt100.faceNameDoublesize: xft:WenQuanYi Zen Hei Mono
 UXTerm*vt100.faceNameDoublesize: xft:WenQuanYi Zen Hei Mono
 XTerm*vt100.faceSize: 10
 UXTerm*vt100.faceSize: 10
+XTerm*vt100.faceSize1: 6
+UXTerm*vt100.faceSize1: 6
+XTerm*vt100.faceSize2: 7
+UXTerm*vt100.faceSize2: 7
+XTerm*vt100.faceSize3: 8
+UXTerm*vt100.faceSize3: 8
+XTerm*vt100.faceSize4: 10
+UXTerm*vt100.faceSize4: 10
+XTerm*vt100.faceSize5: 12
+UXTerm*vt100.faceSize5: 12
+XTerm*vt100.faceSize6: 14
+UXTerm*vt100.faceSize6: 14
 XTerm*vt100.titeInhibit: false
 UXTerm*vt100.titeInhibit: false
 XTerm*vt100.scrollBar: false
