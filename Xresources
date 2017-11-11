@@ -1,9 +1,9 @@
-XTerm*termName: xterm-256color
-UXTerm*termName: xterm-256color
-XTerm.loginShell: true
-UXTerm.loginShell: true
-XTerm.selectToClipboard: true
-UXTerm.selectToClipboard: true
+XTerm.termName: xterm-256color
+UXTerm.termName: xterm-256color
+XTerm*vt100.loginShell: true
+UXTerm*vt100.loginShell: true
+XTerm*vt100.selectToClipboard: true
+UXTerm*vt100.selectToClipboard: true
 XTerm*vt100.font: -gnu-unifont-medium-r-normal-sans-16-160-75-75-c-80-iso10646-1
 UXTerm*vt100.font: -gnu-unifont-medium-r-normal-sans-16-160-75-75-c-80-iso10646-1
 XTerm*vt100.boldFont: -gnu-unifont-medium-r-normal-sans-16-160-75-75-c-80-iso10646-1
