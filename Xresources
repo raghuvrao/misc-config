@@ -41,6 +41,8 @@ URxvt.perl-ext-common:
 
 xterm.termName: xterm-256color
 uxterm.termName: xterm-256color
+xterm*vt100.backarrowKey: false
+uxterm*vt100.backarrowKey: false
 xterm*vt100.loginShell: true
 uxterm*vt100.loginShell: true
 xterm*vt100.selectToClipboard: true
