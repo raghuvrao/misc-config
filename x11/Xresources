@@ -26,8 +26,8 @@ xterm*vt100.faceSize4: 10
 uxterm*vt100.faceSize4: 10
 xterm*vt100.faceSize5: 12
 uxterm*vt100.faceSize5: 12
-xterm*vt100.faceSize6: 14
-uxterm*vt100.faceSize6: 14
+xterm*vt100.faceSize6: 15
+uxterm*vt100.faceSize6: 15
 xterm*vt100.titeInhibit: false
 uxterm*vt100.titeInhibit: false
 xterm*vt100.scrollBar: false
@@ -46,10 +46,10 @@ xterm*vt100.veryBoldColors: 4
 uxterm*vt100.veryBoldColors: 4
 xterm*vt100.background: rgb:FF/FF/FF
 uxterm*vt100.background: rgb:FF/FF/FF
-xterm*vt100.foreground: rgb:22/55/55
-uxterm*vt100.foreground: rgb:22/55/55
-xterm*vt100.colorBD: rgb:22/77/77
-uxterm*vt100.colorBD: rgb:22/77/77
+xterm*vt100.foreground: rgb:11/44/44
+uxterm*vt100.foreground: rgb:11/44/44
+xterm*vt100.colorBD: rgb:55/22/55
+uxterm*vt100.colorBD: rgb:55/22/55
 xterm*vt100.color0: rgb:00/00/00
 uxterm*vt100.color0: rgb:00/00/00
 xterm*vt100.color1: rgb:AA/00/00
