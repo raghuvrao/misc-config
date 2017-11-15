@@ -33,7 +33,6 @@
 ;; Reply with y/SPC or n/DEL instead of `yes RET' or `no RET'.
 (defalias 'yes-or-no-p #'y-or-n-p)
 
-(define-key global-map (kbd "C-c C-b") #'ibuffer)
 (define-key global-map (kbd "C-c H") #'hl-line-mode)
 (define-key global-map (kbd "C-c J") #'join-line)
 (define-key global-map (kbd "C-c P") #'font-lock-mode)
