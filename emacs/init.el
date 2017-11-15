@@ -429,9 +429,8 @@ Do so only when Emacs is running on a graphic display."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((((type x ns)) (:height 100))))
- '(hl-line ((((type x ns) (class color) (background light)) (:background "LightGoldenrod2"))))
  '(isearch ((((type x ns) (class color) (background light)) (:background "plum2" :foreground "black"))))
- '(region ((((type x ns) (class color) (background light)) (:background "DarkSeaGreen3" :foreground "black")) (((type tty) (class color) (min-colors 8) (background light)) (:background "cyan" :foreground "black")))))
+ '(region ((((type x ns) (class color) (background light)) (:background "LightGoldenrod2" :foreground "black")) (((type tty) (class color) (min-colors 8) (background light)) (:background "cyan" :foreground "black")))))
 
 (require 'server)
 (unless (server-running-p) (server-start))
