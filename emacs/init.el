@@ -33,10 +33,11 @@
 ;; Reply with y/SPC or n/DEL instead of `yes RET' or `no RET'.
 (defalias 'yes-or-no-p #'y-or-n-p)
 
-(define-key global-map (kbd "C-c B") #'ibuffer)
+(define-key global-map (kbd "C-c C-b") #'ibuffer)
 (define-key global-map (kbd "C-c H") #'hl-line-mode)
 (define-key global-map (kbd "C-c J") #'join-line)
 (define-key global-map (kbd "C-c P") #'font-lock-mode)
+(define-key global-map (kbd "C-c f") #'forward-whitespace)
 (define-key global-map (kbd "C-c w") #'toggle-truncate-lines)
 (define-key global-map (kbd "C-c ;") #'comment-line)
 
@@ -48,6 +49,16 @@
   (when (y-or-n-p "Are you sure?") (apply fn args)))
 
 (advice-add #'save-buffers-kill-terminal :around #'raghu/with-confirmation)
+
+(defun raghu/backward-whitespace (arg)
+  "Move point to start of previous sequence of whitespace characters.
+
+Each such sequence may be a single newline, or a sequence of
+consecutive space and/or tab characters.  With prefix argument
+ARG, move backwards ARG times."
+  (interactive "p")
+  (forward-whitespace (if (< arg 0) arg (- arg))))
+(define-key global-map (kbd "C-c b") #'raghu/backward-whitespace)
 
 ;; Useful for changing CRLF line terminators to LF line terminators.
 (defun raghu/to-unix-utf-8-buffer (buf)
