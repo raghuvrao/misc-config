@@ -16,7 +16,7 @@ if has("cmdline_info") | set ruler showcmd | endif
 if has("folding")
   set foldmethod=indent foldlevel=100
   if has("windows")
-    set fillchars=vert:\|,stl:*,stlnc:\ ,fold:-,diff:-
+    set fillchars=vert:\|,stl:-,stlnc:\ ,fold:-,diff:-
   endif
 endif
 if has("extra_search")
