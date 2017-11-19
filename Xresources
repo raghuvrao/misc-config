@@ -7,6 +7,7 @@ URxvt.scrollWithBuffer: true
 URxvt.scrollTtyKeypress: true
 URxvt.jumpScroll: true
 URxvt.skipScroll: false
+URxvt.skipBuiltinGlyphs: true
 URxvt.font: xft:DejaVu\ Sans\ Mono:size=10:style=Book,\
             xft:WenQuanYi\ Zen\ Hei\ Mono:size=10:style=Medium,\
             xft:Sazanami\ Mincho:size=10:style=Medium,\
