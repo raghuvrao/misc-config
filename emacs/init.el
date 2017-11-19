@@ -438,9 +438,9 @@ Do so only when Emacs is running on a graphic display."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((((type x ns)) (:height 100))))
  '(isearch ((((type x ns) (class color) (background light)) (:background "plum2" :foreground "black"))))
- '(region ((((type x ns) (class color) (background light)) (:background "LightGoldenrod2" :foreground "black")) (((type tty) (class color) (min-colors 8) (background light)) (:background "cyan" :foreground "black")))))
+ '(region ((((type x ns) (class color) (background light)) (:background "LightGoldenrod2" :foreground "black")) (((type tty) (class color) (min-colors 8) (background light)) (:background "cyan" :foreground "black"))))
+ '(trailing-whitespace ((((type x ns) (class color) (background light)) (:background "sky blue")))))
 
 (require 'server)
 (unless (server-running-p) (server-start))
