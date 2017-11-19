@@ -10,24 +10,24 @@ xterm*vt100.font: -gnu-unifont-medium-r-normal-sans-16-160-75-75-c-80-iso10646-1
 uxterm*vt100.font: -gnu-unifont-medium-r-normal-sans-16-160-75-75-c-80-iso10646-1
 xterm*vt100.boldFont: -gnu-unifont-medium-r-normal-sans-16-160-75-75-c-80-iso10646-1
 uxterm*vt100.boldFont: -gnu-unifont-medium-r-normal-sans-16-160-75-75-c-80-iso10646-1
-xterm*vt100.faceName: xft:Monospace
-uxterm*vt100.faceName: xft:Monospace
-xterm*vt100.faceNameDoublesize: xft:WenQuanYi Zen Hei Mono
-uxterm*vt100.faceNameDoublesize: xft:WenQuanYi Zen Hei Mono
+xterm*vt100.faceName: xft:DejaVu Sans Mono:style=Book
+uxterm*vt100.faceName: xft:DejaVu Sans Mono:style=Book
+xterm*vt100.faceNameDoublesize: xft:WenQuanYi Zen Hei Mono:style=Medium
+uxterm*vt100.faceNameDoublesize: xft:WenQuanYi Zen Hei Mono:style=Medium
 xterm*vt100.faceSize: 10
 uxterm*vt100.faceSize: 10
-xterm*vt100.faceSize1: 6
-uxterm*vt100.faceSize1: 6
-xterm*vt100.faceSize2: 7
-uxterm*vt100.faceSize2: 7
+xterm*vt100.faceSize1: 5
+uxterm*vt100.faceSize1: 5
+xterm*vt100.faceSize2: 6
+uxterm*vt100.faceSize2: 6
 xterm*vt100.faceSize3: 8
 uxterm*vt100.faceSize3: 8
 xterm*vt100.faceSize4: 10
 uxterm*vt100.faceSize4: 10
 xterm*vt100.faceSize5: 12
 uxterm*vt100.faceSize5: 12
-xterm*vt100.faceSize6: 15
-uxterm*vt100.faceSize6: 15
+xterm*vt100.faceSize6: 16
+uxterm*vt100.faceSize6: 16
 xterm*vt100.titeInhibit: false
 uxterm*vt100.titeInhibit: false
 xterm*vt100.scrollBar: false
