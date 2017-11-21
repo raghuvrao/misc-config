@@ -349,6 +349,9 @@ Do so only when Emacs is running on a graphic display."
 (with-eval-after-load 'simple
   (add-hook 'special-mode-hook #'turn-on-font-lock))
 
+(with-eval-after-load 'help-mode
+  (add-hook 'help-mode-hook #'raghu--do-word-wrap-in-buffer))
+
 (with-eval-after-load 'prog-mode
   (add-hook 'prog-mode-hook #'raghu--enable-hl-line-mode-in-buffer)
   (add-hook 'prog-mode-hook #'raghu--show-trailing-whitespace-in-buffer))
