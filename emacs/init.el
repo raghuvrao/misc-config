@@ -414,7 +414,6 @@ Do so only when Emacs is running on a graphic display."
  '(inhibit-startup-screen t)
  '(initial-scratch-message nil)
  '(isearch-allow-scroll t)
- '(kill-whole-line t)
  '(make-backup-files nil)
  '(mouse-wheel-progressive-speed nil)
  '(mouse-wheel-scroll-amount (quote (1 ((shift) . 5) ((control)))))
