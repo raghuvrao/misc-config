@@ -30,14 +30,6 @@ shopt -s no_empty_cmd_completion
 # Do not save lines matching previous history entry.
 HISTCONTROL='ignoredups'
 
-# Delete/modify/add aliases.
-for a in ls ll l. vi; do
-  if alias "${a}" &>/dev/null; then unalias "${a}"; fi
-done
-unset -v a
-if ! type -a ll &>/dev/null; then alias ll='ls -l -a'; fi
-if ! type -a acgrep &>/dev/null; then alias acgrep='grep --color=always'; fi
-
 # In Slackware, when running bash, readline's clear-screen function (bound to
 # C-l by default) does not seem to work as expected for certain TERMs (e.g.
 # xterm-256color, screen-256color and screen).  For these TERMs, the command
