@@ -20,14 +20,6 @@ shopt -s no_empty_cmd_completion
 # Do not save lines matching previous history entry.
 HISTCONTROL='ignoredups'
 
-# Delete/modify/add aliases.
-for a in ls ll l. vi; do
-  if alias "${a}" &>/dev/null; then unalias "${a}"; fi
-done
-unset -v a
-if ! type -a ll &>/dev/null; then alias ll='ls -l -a'; fi
-if ! type -a acgrep &>/dev/null; then alias acgrep='grep --color=always'; fi
-
 # Set up a simple shell prompt.
 PS1='\h:\w\$ '
 PROMPT_DIRTRIM=3
