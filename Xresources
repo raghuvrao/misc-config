@@ -8,86 +8,86 @@ URxvt.scrollTtyKeypress: true
 URxvt.jumpScroll: true
 URxvt.skipScroll: false
 URxvt.skipBuiltinGlyphs: true
-URxvt.font: xft:DejaVu\ Sans\ Mono:size=10:style=Book,\
-            xft:WenQuanYi\ Zen\ Hei\ Mono:size=10:style=Medium,\
-            xft:Sazanami\ Mincho:size=10:style=Medium,\
-            xft:Sazanami\ Gothic:size=10:style=Medium,\
-            xft:Lohit\ Assamese:size=10:style=Regular,\
-            xft:Lohit\ Kashmiri:size=10:style=Regular,\
-            xft:Lohit\ Nepali:size=10:style=Regular,\
-            xft:Lohit\ Konkani:size=10:style=Regular,\
-            xft:Lohit\ Tamil:size=10:style=Regular,\
-            xft:Lohit\ Telugu:size=10:style=Regular,\
-            xft:Lohit\ Kannada:size=10:style=Regular,\
-            xft:Lohit\ Devanagari:size=10:style=Regular,\
-            xft:Lohit\ Punjabi:size=10:style=Regular,\
-            xft:Lohit\ Sindhi:size=10:style=Regular,\
-            xft:Lohit\ Gujarati:size=10:style=Regular,\
-            xft:Lohit\ Malayalam:size=10:style=Regular,\
-            xft:Lohit\ Bengali:size=10:style=Regular,\
-            xft:Lohit\ Maithili:size=10:style=Regular,\
-            xft:Lohit\ Oriya:size=10:style=Regular,\
-            xft:Lohit\ Marathi:size=10:style=Regular
-URxvt.boldFont: xft:DejaVu\ Sans\ Mono:size=10:style=Bold,\
-                xft:WenQuanYi\ Zen\ Hei\ Mono:size=10:style=Medium,\
-                xft:Sazanami\ Mincho:size=10:style=Medium,\
-                xft:Sazanami\ Gothic:size=10:style=Medium,\
-                xft:Lohit\ Assamese:size=10:style=Regular,\
-                xft:Lohit\ Kashmiri:size=10:style=Regular,\
-                xft:Lohit\ Nepali:size=10:style=Regular,\
-                xft:Lohit\ Konkani:size=10:style=Regular,\
-                xft:Lohit\ Tamil:size=10:style=Regular,\
-                xft:Lohit\ Telugu:size=10:style=Regular,\
-                xft:Lohit\ Kannada:size=10:style=Regular,\
-                xft:Lohit\ Devanagari:size=10:style=Regular,\
-                xft:Lohit\ Punjabi:size=10:style=Regular,\
-                xft:Lohit\ Sindhi:size=10:style=Regular,\
-                xft:Lohit\ Gujarati:size=10:style=Regular,\
-                xft:Lohit\ Malayalam:size=10:style=Regular,\
-                xft:Lohit\ Bengali:size=10:style=Regular,\
-                xft:Lohit\ Maithili:size=10:style=Regular,\
-                xft:Lohit\ Oriya:size=10:style=Regular,\
-                xft:Lohit\ Marathi:size=10:style=Regular
-URxvt.italicFont: xft:DejaVu\ Sans\ Mono:size=10:style=Oblique,\
-                  xft:WenQuanYi\ Zen\ Hei\ Mono:size=10:style=Medium,\
-                  xft:Sazanami\ Mincho:size=10:style=Medium,\
-                  xft:Sazanami\ Gothic:size=10:style=Medium,\
-                  xft:Lohit\ Assamese:size=10:style=Regular,\
-                  xft:Lohit\ Kashmiri:size=10:style=Regular,\
-                  xft:Lohit\ Nepali:size=10:style=Regular,\
-                  xft:Lohit\ Konkani:size=10:style=Regular,\
-                  xft:Lohit\ Tamil:size=10:style=Regular,\
-                  xft:Lohit\ Telugu:size=10:style=Regular,\
-                  xft:Lohit\ Kannada:size=10:style=Regular,\
-                  xft:Lohit\ Devanagari:size=10:style=Regular,\
-                  xft:Lohit\ Punjabi:size=10:style=Regular,\
-                  xft:Lohit\ Sindhi:size=10:style=Regular,\
-                  xft:Lohit\ Gujarati:size=10:style=Regular,\
-                  xft:Lohit\ Malayalam:size=10:style=Regular,\
-                  xft:Lohit\ Bengali:size=10:style=Regular,\
-                  xft:Lohit\ Maithili:size=10:style=Regular,\
-                  xft:Lohit\ Oriya:size=10:style=Regular,\
-                  xft:Lohit\ Marathi:size=10:style=Regular
-URxvt.boldItalicFont: xft:DejaVu\ Sans\ Mono:size=10:style=Bold\ Oblique,\
-                      xft:WenQuanYi\ Zen\ Hei\ Mono:size=10:style=Medium,\
-                      xft:Sazanami\ Mincho:size=10:style=Medium,\
-                      xft:Sazanami\ Gothic:size=10:style=Medium,\
-                      xft:Lohit\ Assamese:size=10:style=Regular,\
-                      xft:Lohit\ Kashmiri:size=10:style=Regular,\
-                      xft:Lohit\ Nepali:size=10:style=Regular,\
-                      xft:Lohit\ Konkani:size=10:style=Regular,\
-                      xft:Lohit\ Tamil:size=10:style=Regular,\
-                      xft:Lohit\ Telugu:size=10:style=Regular,\
-                      xft:Lohit\ Kannada:size=10:style=Regular,\
-                      xft:Lohit\ Devanagari:size=10:style=Regular,\
-                      xft:Lohit\ Punjabi:size=10:style=Regular,\
-                      xft:Lohit\ Sindhi:size=10:style=Regular,\
-                      xft:Lohit\ Gujarati:size=10:style=Regular,\
-                      xft:Lohit\ Malayalam:size=10:style=Regular,\
-                      xft:Lohit\ Bengali:size=10:style=Regular,\
-                      xft:Lohit\ Maithili:size=10:style=Regular,\
-                      xft:Lohit\ Oriya:size=10:style=Regular,\
-                      xft:Lohit\ Marathi:size=10:style=Regular
+URxvt.font: xft:DejaVu Sans Mono:size=10:style=Book,\
+            xft:WenQuanYi Zen Hei Mono:size=10:style=Medium,\
+            xft:Sazanami Mincho:size=10:style=Medium,\
+            xft:Sazanami Gothic:size=10:style=Medium,\
+            xft:Lohit Assamese:size=10:style=Regular,\
+            xft:Lohit Kashmiri:size=10:style=Regular,\
+            xft:Lohit Nepali:size=10:style=Regular,\
+            xft:Lohit Konkani:size=10:style=Regular,\
+            xft:Lohit Tamil:size=10:style=Regular,\
+            xft:Lohit Telugu:size=10:style=Regular,\
+            xft:Lohit Kannada:size=10:style=Regular,\
+            xft:Lohit Devanagari:size=10:style=Regular,\
+            xft:Lohit Punjabi:size=10:style=Regular,\
+            xft:Lohit Sindhi:size=10:style=Regular,\
+            xft:Lohit Gujarati:size=10:style=Regular,\
+            xft:Lohit Malayalam:size=10:style=Regular,\
+            xft:Lohit Bengali:size=10:style=Regular,\
+            xft:Lohit Maithili:size=10:style=Regular,\
+            xft:Lohit Oriya:size=10:style=Regular,\
+            xft:Lohit Marathi:size=10:style=Regular
+URxvt.boldFont: xft:DejaVu Sans Mono:size=10:style=Bold,\
+                xft:WenQuanYi Zen Hei Mono:size=10:style=Medium,\
+                xft:Sazanami Mincho:size=10:style=Medium,\
+                xft:Sazanami Gothic:size=10:style=Medium,\
+                xft:Lohit Assamese:size=10:style=Regular,\
+                xft:Lohit Kashmiri:size=10:style=Regular,\
+                xft:Lohit Nepali:size=10:style=Regular,\
+                xft:Lohit Konkani:size=10:style=Regular,\
+                xft:Lohit Tamil:size=10:style=Regular,\
+                xft:Lohit Telugu:size=10:style=Regular,\
+                xft:Lohit Kannada:size=10:style=Regular,\
+                xft:Lohit Devanagari:size=10:style=Regular,\
+                xft:Lohit Punjabi:size=10:style=Regular,\
+                xft:Lohit Sindhi:size=10:style=Regular,\
+                xft:Lohit Gujarati:size=10:style=Regular,\
+                xft:Lohit Malayalam:size=10:style=Regular,\
+                xft:Lohit Bengali:size=10:style=Regular,\
+                xft:Lohit Maithili:size=10:style=Regular,\
+                xft:Lohit Oriya:size=10:style=Regular,\
+                xft:Lohit Marathi:size=10:style=Regular
+URxvt.italicFont: xft:DejaVu Sans Mono:size=10:style=Oblique,\
+                  xft:WenQuanYi Zen Hei Mono:size=10:style=Medium,\
+                  xft:Sazanami Mincho:size=10:style=Medium,\
+                  xft:Sazanami Gothic:size=10:style=Medium,\
+                  xft:Lohit Assamese:size=10:style=Regular,\
+                  xft:Lohit Kashmiri:size=10:style=Regular,\
+                  xft:Lohit Nepali:size=10:style=Regular,\
+                  xft:Lohit Konkani:size=10:style=Regular,\
+                  xft:Lohit Tamil:size=10:style=Regular,\
+                  xft:Lohit Telugu:size=10:style=Regular,\
+                  xft:Lohit Kannada:size=10:style=Regular,\
+                  xft:Lohit Devanagari:size=10:style=Regular,\
+                  xft:Lohit Punjabi:size=10:style=Regular,\
+                  xft:Lohit Sindhi:size=10:style=Regular,\
+                  xft:Lohit Gujarati:size=10:style=Regular,\
+                  xft:Lohit Malayalam:size=10:style=Regular,\
+                  xft:Lohit Bengali:size=10:style=Regular,\
+                  xft:Lohit Maithili:size=10:style=Regular,\
+                  xft:Lohit Oriya:size=10:style=Regular,\
+                  xft:Lohit Marathi:size=10:style=Regular
+URxvt.boldItalicFont: xft:DejaVu Sans Mono:size=10:style=Bold Oblique,\
+                      xft:WenQuanYi Zen Hei Mono:size=10:style=Medium,\
+                      xft:Sazanami Mincho:size=10:style=Medium,\
+                      xft:Sazanami Gothic:size=10:style=Medium,\
+                      xft:Lohit Assamese:size=10:style=Regular,\
+                      xft:Lohit Kashmiri:size=10:style=Regular,\
+                      xft:Lohit Nepali:size=10:style=Regular,\
+                      xft:Lohit Konkani:size=10:style=Regular,\
+                      xft:Lohit Tamil:size=10:style=Regular,\
+                      xft:Lohit Telugu:size=10:style=Regular,\
+                      xft:Lohit Kannada:size=10:style=Regular,\
+                      xft:Lohit Devanagari:size=10:style=Regular,\
+                      xft:Lohit Punjabi:size=10:style=Regular,\
+                      xft:Lohit Sindhi:size=10:style=Regular,\
+                      xft:Lohit Gujarati:size=10:style=Regular,\
+                      xft:Lohit Malayalam:size=10:style=Regular,\
+                      xft:Lohit Bengali:size=10:style=Regular,\
+                      xft:Lohit Maithili:size=10:style=Regular,\
+                      xft:Lohit Oriya:size=10:style=Regular,\
+                      xft:Lohit Marathi:size=10:style=Regular
 URxvt.scrollBar: false
 URxvt.cursorBlink: true
 URxvt.borderColor: rgb:FF/FF/FF
