@@ -10,10 +10,10 @@ xterm*vt100.font: -gnu-unifont-medium-r-normal-sans-16-160-75-75-c-80-iso10646-1
 uxterm*vt100.font: -gnu-unifont-medium-r-normal-sans-16-160-75-75-c-80-iso10646-1
 xterm*vt100.boldFont: -gnu-unifont-medium-r-normal-sans-16-160-75-75-c-80-iso10646-1
 uxterm*vt100.boldFont: -gnu-unifont-medium-r-normal-sans-16-160-75-75-c-80-iso10646-1
-xterm*vt100.faceName: xft:DejaVu Sans Mono:style=Book
-uxterm*vt100.faceName: xft:DejaVu Sans Mono:style=Book
-xterm*vt100.faceNameDoublesize: xft:WenQuanYi Zen Hei Mono:style=Medium
-uxterm*vt100.faceNameDoublesize: xft:WenQuanYi Zen Hei Mono:style=Medium
+xterm*vt100.faceName: xft:DejaVu Sans Mono
+uxterm*vt100.faceName: xft:DejaVu Sans Mono
+xterm*vt100.faceNameDoublesize: xft:WenQuanYi Zen Hei Mono
+uxterm*vt100.faceNameDoublesize: xft:WenQuanYi Zen Hei Mono
 xterm*vt100.faceSize: 10
 uxterm*vt100.faceSize: 10
 xterm*vt100.faceSize1: 5
