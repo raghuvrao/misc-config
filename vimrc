@@ -24,7 +24,10 @@ if has("extra_search")
   nnoremap <Leader>\ :nohlsearch<CR>
 endif
 set list listchars=tab:>\ ,trail:#,extends:>,precedes:<,nbsp:%
-if has("multi_byte") | set encoding=utf-8 | endif
+if has("multi_byte")
+  set encoding=utf-8
+  set listchars=tab:·\ ,trail:¬,extends:>,precedes:<,nbsp:%
+endif
 set laststatus=2
 if exists("+statusline")
   set statusline=%(\ %f%M%)%(\ %h%r%w%)%(\ %l,%c%V\ %)
