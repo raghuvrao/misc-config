@@ -66,17 +66,17 @@ if [ -d "${GOPATH}" ]; then
 		pathmunge "${GOPATH}/bin"
 	fi
 else
-  unset GOPATH
+	unset GOPATH
 fi
 
 GOROOT="/opt/golang/root"
 if [ -d "${GOROOT}" ]; then
-  export GOROOT
-  if [ -d "${GOROOT}/bin" ]; then
-    pathmunge "${GOROOT}/bin"
-  fi
+	export GOROOT
+	if [ -d "${GOROOT}/bin" ]; then
+		pathmunge "${GOROOT}/bin"
+	fi
 else
-  unset GOROOT
+	unset GOROOT
 fi
 
 # Do not modify PATH after this part (in other words: do this part towards the
@@ -87,7 +87,7 @@ IFS=':'
 path_copy="${PATH}"
 PATH=""
 for p in ${path_copy}; do
-  pathmunge "${p}" "after"
+	pathmunge "${p}" "after"
 done
 if [ -z "${orig_IFS}" ]; then unset -v IFS; else IFS="${orig_IFS#_}"; fi
 export PATH
@@ -97,5 +97,5 @@ unset -f pathmunge
 
 # Source .bashrc in the end, and only if running bash.
 if [ -n "${BASH_VERSION}" -a -r "${HOME}/.bashrc" ]; then
-  . "${HOME}/.bashrc"
+	. "${HOME}/.bashrc"
 fi
