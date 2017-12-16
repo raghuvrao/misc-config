@@ -6,21 +6,22 @@
 
 # Slightly modified version of pathmunge from Red Hat's /etc/profile.
 pathmunge() {
-  case ":${PATH}:" in
-    *:"${1}":*)
-      ;;
-    *)
-      # Avoid leading/trailing colon.
-      if [ -z "${PATH}" ]; then
-        PATH="${1}"
-      fi
-      if [ "${2}" = "after" ]; then
-        PATH="${PATH}:${1}"
-      else
-        PATH="${1}:${PATH}"
-      fi
-      ;;
-  esac
+	case ":${PATH}:" in
+		*:"${1}":*)
+			;;
+		*)
+			# Avoid leading/trailing colon.
+			if [ -z "${PATH}" ]; then
+				PATH="${1}"
+				return
+			fi
+			if [ "${2}" = "after" ]; then
+				PATH="${PATH}:${1}"
+			else
+				PATH="${1}:${PATH}"
+			fi
+			;;
+	esac
 }
 
 # Some general guidelines to tell if an environment variable belongs in this
@@ -42,28 +43,28 @@ export PAGER='less'
 export LESS='-i -R'
 
 if [ -d "${HOME}/lib/python" ]; then
-  export PYTHONPATH="${PYTHONPATH}:${HOME}/lib/python"
+	export PYTHONPATH="${PYTHONPATH}:${HOME}/lib/python"
 fi
 
 if [ -r "${HOME}/.pythonrc.py" ]; then
-  export PYTHONSTARTUP="${HOME}/.pythonrc.py"
+	export PYTHONSTARTUP="${HOME}/.pythonrc.py"
 fi
 
 if [ -d "${HOME}/bin" ]; then
-  pathmunge "${HOME}/bin" "after"
+	pathmunge "${HOME}/bin" "after"
 fi
 
 for d in /usr/local/sbin /usr/sbin /sbin; do
-  pathmunge "${d}"
+	pathmunge "${d}"
 done
 unset -v d
 
 GOPATH="${HOME}/go"
 if [ -d "${GOPATH}" ]; then
-  export GOPATH
-  if [ -d "${GOPATH}/bin" ]; then
-    pathmunge "${GOPATH}/bin"
-  fi
+	export GOPATH
+	if [ -d "${GOPATH}/bin" ]; then
+		pathmunge "${GOPATH}/bin"
+	fi
 else
   unset GOPATH
 fi

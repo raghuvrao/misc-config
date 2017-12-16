@@ -34,30 +34,30 @@ unset -v PROMPT_COMMAND
 s='\033]0;%s:%s\007'
 h="${HOSTNAME%%.*}"
 case "${TERM}" in
-  xterm*|rxvt*)
-    PROMPT_COMMAND="printf '${s}' '${h}'"' "${PWD/#${HOME}/\~}"'
-    ;;
-  screen*)
-    s+='\033k%s:%s\033\134'
-    PROMPT_COMMAND="printf '${s}' '${h}'"' "${PWD/#${HOME}/\~}"'" '${h}'"' "${PWD/#${HOME}/\~}"'
-    ;;
+	xterm*|rxvt*)
+		PROMPT_COMMAND="printf '${s}' '${h}'"' "${PWD/#${HOME}/\~}"'
+		;;
+	screen*)
+		s+='\033k%s:%s\033\134'
+		PROMPT_COMMAND="printf '${s}' '${h}'"' "${PWD/#${HOME}/\~}"'" '${h}'"' "${PWD/#${HOME}/\~}"'
+		;;
 esac
 unset -v h s
 
 # In Slackware, when running bash, readline's clear-screen function (bound to
 # C-l by default) does not seem to work as expected for certain TERMs (e.g.
 # xterm-256color, screen-256color and screen).  For these TERMs, the command
-# 'tput clear' works as expected.  So, work around the problem by rebinding
-# C-l to 'tput clear' until I find a proper solution.
+# 'tput clear' works as expected.  So, work around the problem by rebinding C-l
+# to 'tput clear' until I find a proper solution.
 if [[ "${TERM}" =~ xterm-.*|screen.*|rxvt.* ]]; then
-  f="/etc/slackware-version"
-  if [[ -r "${f}" ]]; then
-    read -r first_line <"${f}" &>/dev/null
-    if [[ "${first_line}" =~ ^[Ss]lackware ]]; then
-      builtin bind -r "\C-l"
-      builtin bind -x '"\C-l": tput clear'
-    fi
-    unset -v first_line
-  fi
-  unset -v f
+	f="/etc/slackware-version"
+	if [[ -r "${f}" ]]; then
+		read -r first_line <"${f}" &>/dev/null
+		if [[ "${first_line}" =~ ^[Ss]lackware ]]; then
+			builtin bind -r "\C-l"
+			builtin bind -x '"\C-l": tput clear'
+		fi
+		unset -v first_line
+	fi
+	unset -v f
 fi
