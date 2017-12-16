@@ -7,14 +7,14 @@ pathmunge() {
     *:"${1}":*)
       ;;
     *)
-      if [ -z "${PATH}" ]; then  # Avoid leading/trailing colon
+      # Avoid leading/trailing colon.
+      if [ -z "${PATH}" ]; then
         PATH="${1}"
+      fi
+      if [ "${2}" = "after" ]; then
+        PATH="${PATH}:${1}"
       else
-        if [ "${2}" = "after" ]; then
-          PATH="${PATH}:${1}"
-        else
-          PATH="${1}:${PATH}"
-        fi
+        PATH="${1}:${PATH}"
       fi
       ;;
   esac
