@@ -346,6 +346,10 @@ Do so only when Emacs is running on a graphic display."
   "Highlight trailing whitespace in the current buffer."
   (set (make-local-variable 'show-trailing-whitespace) t))
 
+(defun raghu--indentation-can-insert-tabs-in-buffer ()
+  "Indentation can use tabs in current buffer."
+  (set (make-local-variable 'indent-tabs-mode) t))
+
 (with-eval-after-load 'simple
   (add-hook 'special-mode-hook #'turn-on-font-lock))
 
@@ -395,6 +399,9 @@ Do so only when Emacs is running on a graphic display."
 (with-eval-after-load 'python
   (add-hook 'inferior-python-mode-hook #'turn-on-font-lock))
 
+(with-eval-after-load 'sh-mode
+  (add-hook 'sh-mode-hook #'raghu--indentation-can-insert-tabs-in-buffer))
+
 (with-eval-after-load "text-mode"	; No `provide' in text-mode.el
   (add-hook 'text-mode-hook #'raghu--do-word-wrap-in-buffer))
 
@@ -428,8 +435,8 @@ Do so only when Emacs is running on a graphic display."
      ("melpa-stable" . "https://stable.melpa.org/packages/"))))
  '(package-enable-at-startup nil)
  '(ring-bell-function (quote ignore))
- '(sh-basic-offset 2)
- '(sh-indentation 2)
+ '(sh-basic-offset 8)
+ '(sh-indentation 8)
  '(show-paren-delay 0)
  '(truncate-lines t)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
