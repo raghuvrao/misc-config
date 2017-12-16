@@ -42,12 +42,8 @@ if has("autocmd")
     au BufWinEnter,BufNewFile * setlocal formatoptions-=r
     au BufWinEnter,BufNewFile * setlocal formatoptions-=t
     au BufWinEnter,BufNewFile * setlocal formatoptions+=1jlmnq
-    au FileType json
-          \ setlocal expandtab softtabstop=2 shiftwidth=2
-    au FileType sh
-          \ setlocal expandtab softtabstop=2 shiftwidth=2
-    au FileType vim
-          \ setlocal expandtab softtabstop=2 shiftwidth=2 keywordprg=:help
+    au FileType json setlocal expandtab softtabstop=2 shiftwidth=2
+    au FileType vim setlocal keywordprg=:help
   augroup END
 endif
 
