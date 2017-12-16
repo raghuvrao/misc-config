@@ -50,7 +50,7 @@ endif
 " When running vim in tmux, allow C-<arrow> to work, useful in the cmdline and
 " in insert mode.  tmux sends xterm-style key sequences when its xterm-keys
 " option is on.
-if &term =~ '^screen'
+if &term =~ '^screen' && exists('$TMUX')
 	" Need `execute' because we want \e to be parsed into literal Esc
 	" before being assigned.
 	execute "set <xUp>=\e[1;*A"
