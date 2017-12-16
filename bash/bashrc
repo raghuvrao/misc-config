@@ -8,11 +8,11 @@ if [[ "${-}" != *i* ]]; then return; fi
 
 p='/etc/bashrc'
 if [[ -f "${p}" && -r "${p}" ]]; then
-  source "${p}"
+	source "${p}"
 fi
 unset -v p
 
-HISTCONTROL='ignoreboth'
+HISTCONTROL='ignoredups'
 HISTFILESIZE=20000
 HISTSIZE="${HISTFILESIZE}"
 HISTTIMEFORMAT='%F %a %T %Z(UTC%z) '
@@ -27,23 +27,20 @@ shopt -o -s pipefail
 # Do not perform completion when completion is attempted on an empty line.
 shopt -s no_empty_cmd_completion
 
-# Do not save lines matching previous history entry.
-HISTCONTROL='ignoredups'
-
 # In Slackware, when running bash, readline's clear-screen function (bound to
 # C-l by default) does not seem to work as expected for certain TERMs (e.g.
 # xterm-256color, screen-256color and screen).  For these TERMs, the command
-# 'tput clear' works as expected.  So, work around the problem by rebinding
-# C-l to 'tput clear' until I find a proper solution.
+# 'tput clear' works as expected.  So, work around the problem by rebinding C-l
+# to 'tput clear' until I find a proper solution.
 if [[ "${TERM}" =~ xterm-.*|screen.* ]]; then
-  f="/etc/slackware-version"
-  if [[ -r "${f}" ]]; then
-    read -r first_line <"${f}" &>/dev/null
-    if [[ "${first_line}" =~ ^[Ss]lackware ]]; then
-      builtin bind -r "\C-l"
-      builtin bind -x '"\C-l": tput clear'
-    fi
-    unset -v first_line
-  fi
-  unset -v f
+	f="/etc/slackware-version"
+	if [[ -r "${f}" ]]; then
+		read -r first_line <"${f}" &>/dev/null
+		if [[ "${first_line}" =~ ^[Ss]lackware ]]; then
+			builtin bind -r "\C-l"
+			builtin bind -x '"\C-l": tput clear'
+		fi
+		unset -v first_line
+	fi
+	unset -v f
 fi
