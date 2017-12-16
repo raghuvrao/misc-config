@@ -39,8 +39,11 @@ if has("autocmd")
   filetype plugin indent on
   augroup raghu_augroup
     au!
-    au BufWinEnter,BufNewFile *
-          \ setlocal formatoptions=qnm1lj
+    au BufWinEnter,BufNewFile * setlocal formatoptions-=c
+    au BufWinEnter,BufNewFile * setlocal formatoptions-=o
+    au BufWinEnter,BufNewFile * setlocal formatoptions-=r
+    au BufWinEnter,BufNewFile * setlocal formatoptions-=t
+    au BufWinEnter,BufNewFile * setlocal formatoptions+=1jlmnq
     au FileType json
           \ setlocal expandtab softtabstop=2 shiftwidth=2
     au FileType sh
