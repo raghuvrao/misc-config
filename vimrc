@@ -4,7 +4,7 @@ if has("persistent_undo") | set noundofile | endif
 set nomodeline modelines=0
 set backspace=indent,eol,start
 set lazyredraw
-set softtabstop=8  " Matches default values of tabstop and shiftwidth.
+let &softtabstop=&tabstop
 set ignorecase smartcase
 set nowrap sidescroll=1
 nnoremap <Leader>w :set invwrap<CR>
