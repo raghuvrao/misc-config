@@ -1,9 +1,7 @@
-set mouse=
 set nobackup
 if has("persistent_undo") | set noundofile | endif
 set nomodeline modelines=0
 set backspace=indent,eol,start
-set lazyredraw
 let &softtabstop=&tabstop
 set ignorecase smartcase
 set nowrap sidescroll=1
@@ -30,7 +28,6 @@ set laststatus=2
 if exists("+statusline")
 	set statusline=%(\ %f%M%)%(\ %h%r%w%)%(\ %l,%c%V\ %)
 endif
-set textwidth=0
 if exists("+autochdir") | set autochdir | endif
 
 if has("autocmd")
