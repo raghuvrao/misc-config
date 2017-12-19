@@ -57,8 +57,8 @@ if &term =~ '^screen' && exists('$TMUX')
 endif
 
 nnoremap <Leader>e :silent edit<CR>
-nnoremap <Leader>tu i<CR><Esc>k:put =strftime('%s')<CR>kJJ
-nnoremap <Leader>ts i<CR><Esc>k:put =strftime('%Y-%m-%d %H:%M:%S %Z(UTC%z)')<CR>kJJ
+nnoremap <Leader>tu i<C-R>=strftime('%s')<CR><Esc>
+nnoremap <Leader>ts i<C-R>=strftime('%Y-%m-%d %H:%M:%S %Z(UTC%z)')<CR><Esc>
 nnoremap <Leader>m :set invmodifiable<CR>
 
 function! ToggleSyntaxHighlight()
