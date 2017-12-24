@@ -19,10 +19,12 @@ if has("extra_search")
 	set incsearch
 	nnoremap <Leader>\ :nohlsearch<CR>
 endif
-set list listchars=tab:>\ ,trail:#,extends:>,precedes:<,nbsp:%
+set list
 if has("multi_byte")
 	set encoding=utf-8
-	set listchars=tab:·\ ,trail:¬,extends:>,precedes:<,nbsp:%
+	set listchars=tab:├·,trail:¬,extends:>,precedes:<,nbsp:%
+else
+	set listchars=tab:>-,trail:#,extends:>,precedes:<,nbsp:%
 endif
 set laststatus=2
 if exists("+statusline")
