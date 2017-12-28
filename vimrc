@@ -71,7 +71,7 @@ function! ToggleSyntaxHighlight()
 		if exists("g:syntax_on")
 			syntax off
 		else
-			syntax on
+			syntax enable
 		endif
 	endif
 endfunction
