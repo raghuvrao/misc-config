@@ -31,17 +31,13 @@ if exists("+statusline")
 	set statusline=%(\ %f%M%)%(\ %h%r%w%)%(\ %l,%c%V\ %)
 endif
 if exists("+autochdir") | set autochdir | endif
+set formatoptions=1jlmnq  " ftplugins should add to / remove from this default.
 
 if has("autocmd")
 	filetype plugin indent on
 	runtime ftplugin/man.vim
 	augroup raghu_augroup
 		au!
-		au BufWinEnter,BufNewFile * setlocal formatoptions-=c
-		au BufWinEnter,BufNewFile * setlocal formatoptions-=o
-		au BufWinEnter,BufNewFile * setlocal formatoptions-=r
-		au BufWinEnter,BufNewFile * setlocal formatoptions-=t
-		au BufWinEnter,BufNewFile * setlocal formatoptions+=1jlmnq
 		au FileType help setlocal nolist
 		au FileType json setlocal expandtab softtabstop=2 shiftwidth=2
 		au FileType man setlocal nolist
