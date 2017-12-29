@@ -42,6 +42,14 @@ export SVN_EDITOR="${VISUAL}"
 export PAGER='less'
 export LESS='-i -R'
 
+if [ -d "${HOME}/src/git/misc-config" ]; then
+	export mcfg="${HOME}/src/git/misc-config/"
+fi
+
+if [ -d "${HOME}/src/git/misc-scripts" ]; then
+	export mscr="${HOME}/src/git/misc-scripts/"
+fi
+
 if [ -d "${HOME}/lib/python" ]; then
 	export PYTHONPATH="${PYTHONPATH}:${HOME}/lib/python"
 fi
