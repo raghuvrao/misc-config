@@ -45,9 +45,9 @@ if has("autocmd")
 	augroup END
 endif
 
-" When running vim in tmux, allow C-<arrow> to work, useful in the cmdline and
-" in insert mode.  tmux sends xterm-style key sequences when its xterm-keys
-" option is on.
+" When running vim in tmux, allow C-<arrow> to work as expected.  These
+" mappings are useful in the cmdline and in insert mode.  tmux sends
+" xterm-style key sequences when its xterm-keys option is on.
 if &term =~ '^screen' && exists('$TMUX')
 	" Need `execute' because we want \e to be parsed into literal Esc
 	" before being assigned.
