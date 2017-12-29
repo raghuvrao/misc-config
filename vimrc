@@ -63,13 +63,12 @@ nnoremap <Leader>ts i<C-R>=strftime('%Y-%m-%d %H:%M:%S %Z(UTC%z)')<CR><Esc>
 nnoremap <Leader>m :set invmodifiable<CR>
 
 function! ToggleSyntaxHighlight()
-	if has("syntax")
-		if exists("g:syntax_on")
-			syntax off
-		else
-			syntax enable
-		endif
+	if !has("syntax")
+		echoerr "Unsupported feature: syntax"
+		return
 	endif
+	if exists("g:syntax_on") | syntax off | return | endif
+	syntax enable
 endfunction
 nnoremap <Leader>P :call ToggleSyntaxHighlight()<CR>
 
