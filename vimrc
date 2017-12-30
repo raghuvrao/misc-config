@@ -6,7 +6,6 @@ let &softtabstop=&tabstop
 set ignorecase smartcase
 set nowrap sidescroll=1
 nnoremap <Leader>w :set invwrap<CR>
-if exists("+linebreak") | set linebreak | endif
 if has("wildmenu") | set nowildmenu wildmode=longest,list,full | endif
 if has("cmdline_info") | set ruler showcmd | endif
 if has("folding")
