@@ -64,10 +64,14 @@ nnoremap <Leader>m :set invmodifiable<CR>
 function! ToggleSyntaxHighlight()
 	if !has("syntax")
 		echoerr "Unsupported feature: syntax"
-		return
+		return 1
 	endif
-	if exists("g:syntax_on") | syntax off | return | endif
-	syntax enable
+	if exists("g:syntax_on")
+		syntax off
+	else
+		syntax enable
+	endif
+	return 0
 endfunction
 nnoremap <Leader>P :call ToggleSyntaxHighlight()<CR>
 
