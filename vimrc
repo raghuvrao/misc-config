@@ -36,11 +36,11 @@ if has("autocmd")
 	filetype plugin indent on
 	runtime ftplugin/man.vim
 	augroup raghu_augroup
-		au!
-		au FileType help setlocal nolist
-		au FileType json setlocal expandtab softtabstop=2 shiftwidth=2
-		au FileType man setlocal nolist
-		au FileType vim setlocal keywordprg=:help
+		autocmd!
+		autocmd FileType help setlocal nolist
+		autocmd FileType json setlocal expandtab softtabstop=2 shiftwidth=2
+		autocmd FileType man setlocal nolist
+		autocmd FileType vim setlocal keywordprg=:help
 	augroup END
 endif
 
