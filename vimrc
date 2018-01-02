@@ -37,7 +37,7 @@ if has("autocmd")
 	runtime ftplugin/man.vim
 	augroup raghu_augroup
 		autocmd!
-		autocmd FileType help setlocal nolist
+		autocmd FileType help setlocal nolist keywordprg=:help
 		autocmd FileType json setlocal expandtab softtabstop=2 shiftwidth=2
 		autocmd FileType man setlocal nolist
 		autocmd FileType vim setlocal keywordprg=:help
