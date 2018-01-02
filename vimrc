@@ -74,7 +74,6 @@ if has("syntax")
 	syntax off
 endif
 
-let g:loaded_matchparen=1
 packadd! matchit
 
 " Make vim more secure.  See `:h trojan-horse'.
