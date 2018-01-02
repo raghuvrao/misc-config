@@ -74,7 +74,5 @@ if has("syntax")
 	syntax off
 endif
 
-packadd! matchit
-
 " Make vim more secure.  See `:h trojan-horse'.
 set noexrc secure
