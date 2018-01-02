@@ -15,8 +15,8 @@ if has("folding")
 	endif
 endif
 if has("extra_search")
-	set incsearch
 	nnoremap <Leader><Leader> :nohlsearch<CR>
+	if has("reltime") | set incsearch | endif
 endif
 set list
 if has("multi_byte")
