@@ -61,22 +61,18 @@ nnoremap <Leader>tu i<C-R>=strftime('%s')<CR><Esc>
 nnoremap <Leader>ts i<C-R>=strftime('%Y-%m-%d %H:%M:%S %Z(UTC%z)')<CR><Esc>
 nnoremap <Leader>m :set invmodifiable<CR>
 
-function! ToggleSyntaxHighlight()
-	if !has("syntax")
-		echoerr "Unsupported feature: syntax"
-		return 1
-	endif
-	if exists("g:syntax_on")
-		syntax off
-	else
-		syntax enable
-	endif
-	return 0
-endfunction
-nnoremap <Leader>P :call ToggleSyntaxHighlight()<CR>
-
-set background=light
-if has("syntax") | syntax off | endif
+if has("syntax")
+	function! ToggleSyntaxHighlight()
+		if exists("g:syntax_on")
+			syntax off
+		else
+			syntax enable
+		endif
+	endfunction
+	nnoremap <Leader>P :call ToggleSyntaxHighlight()<CR>
+	set background=light
+	syntax off
+endif
 
 let g:loaded_matchparen=1
 packadd! matchit
