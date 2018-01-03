@@ -1,13 +1,19 @@
 set nobackup
-if has("persistent_undo") | set noundofile | endif
+if has("persistent_undo")
+	set noundofile
+endif
 set nomodeline modelines=0
 set backspace=indent,eol,start
 let &softtabstop=&tabstop
 set ignorecase smartcase
 set nowrap sidescroll=1
 nnoremap <Leader>w :set invwrap<CR>
-if has("wildmenu") | set nowildmenu wildmode=longest,list,full | endif
-if has("cmdline_info") | set ruler showcmd | endif
+if has("wildmenu")
+	set nowildmenu wildmode=longest,list,full
+endif
+if has("cmdline_info")
+	set ruler showcmd
+endif
 if has("folding")
 	set foldmethod=indent foldlevel=100
 	if has("windows")
@@ -17,7 +23,9 @@ endif
 if has("extra_search")
 	set nohlsearch
 	nnoremap <Leader><Leader> :set invhlsearch<CR>
-	if has("reltime") | set incsearch | endif
+	if has("reltime")
+		set incsearch
+	endif
 endif
 set list
 if has("multi_byte")
@@ -30,7 +38,9 @@ set laststatus=2
 if exists("+statusline")
 	set statusline=%(\ %f%M%)%(\ %h%r%w%)%(\ %l,%c%V\ %)
 endif
-if exists("+autochdir") | set autochdir | endif
+if exists("+autochdir")
+	set autochdir
+endif
 set formatoptions=1jlmnq  " ftplugins should add to / remove from this default.
 
 if has("autocmd")
