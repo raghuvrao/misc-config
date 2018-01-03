@@ -1,8 +1,8 @@
 # ~/.profile
 # Author: Raghu Rao <raghu.v.rao@gmail.com>
-
-# This file must be fully sh-compatible as it is sourced by multiple sh-like
-# shells!  No bashisms!
+#
+# Keep this file so POSIX-compliant as possible because it is sourced by
+# multiple sh-like shells.  No bashisms!
 
 # Slightly modified version of pathmunge from Red Hat's /etc/profile.
 pathmunge() {
