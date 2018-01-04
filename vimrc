@@ -42,7 +42,6 @@ if exists("+autochdir")
 	set autochdir
 endif
 set formatoptions=1jlmnq  " ftplugins should add to / remove from this default.
-
 if has("autocmd")
 	filetype plugin indent on
 	runtime ftplugin/man.vim
@@ -54,7 +53,6 @@ if has("autocmd")
 		autocmd FileType vim setlocal keywordprg=:help
 	augroup END
 endif
-
 " When running vim in tmux, allow C-<arrow> to work as expected.  These
 " mappings are useful in the cmdline and in insert mode.  tmux sends
 " xterm-style key sequences when its xterm-keys option is on.
@@ -66,12 +64,10 @@ if &term =~ '^screen' && exists('$TMUX')
 	execute "set <xRight>=\e[1;*C"
 	execute "set <xLeft>=\e[1;*D"
 endif
-
 nnoremap <Leader>e :silent edit<CR>
 nnoremap <Leader>tu i<C-R>=strftime('%s')<CR><Esc>
 nnoremap <Leader>ts i<C-R>=strftime('%Y-%m-%d %H:%M:%S %Z(UTC%z)')<CR><Esc>
 nnoremap <Leader>m :set invmodifiable<CR>
-
 if has("syntax")
 	function! ToggleSyntaxHighlight()
 		if exists("g:syntax_on")
@@ -84,6 +80,5 @@ if has("syntax")
 	set background=light
 	syntax off
 endif
-
 " Make vim more secure.  See `:h trojan-horse'.
 set noexrc secure
