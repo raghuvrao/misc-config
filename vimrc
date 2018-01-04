@@ -34,7 +34,7 @@ else
 	set listchars=tab:>-,trail:#,extends:>,precedes:<,nbsp:%
 endif
 set laststatus=2
-if exists("+statusline")
+if has("statusline")
 	set statusline=%(\ %f%M%)%(\ %h%r%w%)%(\ %l,%c%V\ %)
 endif
 if exists("+autochdir")
