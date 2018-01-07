@@ -76,6 +76,13 @@ if has("syntax")
 		endif
 	endfunction
 	nnoremap <Leader>P :call ToggleSyntaxHighlight()<CR>
+	if has("autocmd")
+		augroup raghu_colors
+			autocmd!
+			autocmd ColorScheme default highlight SpecialKey ctermfg=DarkMagenta
+		augroup END
+		colorscheme default  " Just to trigger the above autocmd.
+	endif
 	set background=light
 	syntax off
 endif
