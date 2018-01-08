@@ -74,7 +74,7 @@ if [ -d "${GOPATH}" ]; then
 		pathmunge "${GOPATH}/bin"
 	fi
 else
-	unset GOPATH
+	unset -v GOPATH
 fi
 
 GOROOT="/opt/golang/root"
@@ -84,7 +84,7 @@ if [ -d "${GOROOT}" ]; then
 		pathmunge "${GOROOT}/bin"
 	fi
 else
-	unset GOROOT
+	unset -v GOROOT
 fi
 
 # Do not modify PATH after this part (in other words: do this part towards the
