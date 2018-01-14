@@ -69,6 +69,7 @@ nnoremap <Leader>e :silent edit<CR>
 nnoremap <Leader>tu i<C-R>=strftime('%s')<CR><Esc>
 nnoremap <Leader>ts i<C-R>=strftime('%Y-%m-%d %H:%M:%S %Z(UTC%z)')<CR><Esc>
 nnoremap <Leader>m :set invmodifiable<CR>
+nnoremap <Leader>I :edit $MYVIMRC<CR>
 if has("syntax")
 	function! ToggleSyntaxHighlight()
 		if exists("g:syntax_on")
