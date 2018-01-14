@@ -50,6 +50,7 @@ if has("autocmd")
 		autocmd FileType help setlocal nolist keywordprg=:help
 		autocmd FileType json setlocal expandtab softtabstop=2 shiftwidth=2
 		autocmd FileType man setlocal nolist
+		autocmd FileType text setlocal linebreak wrap
 		autocmd FileType vim setlocal keywordprg=:help
 	augroup END
 endif
