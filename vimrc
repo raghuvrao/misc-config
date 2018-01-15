@@ -1,31 +1,23 @@
 set nobackup
-if has("persistent_undo")
-	set noundofile
-endif
-set nomodeline modelines=0
+set noundofile
+set nomodeline
+set modelines=0
 set backspace=indent,eol,start
 let &softtabstop=&tabstop
-set ignorecase smartcase
-set nowrap sidescroll=1
+set ignorecase
+set smartcase
+set sidescroll=1
+set nowrap
 nnoremap <Leader>w :set invwrap<CR>
-if has("wildmenu")
-	set nowildmenu wildmode=longest,list,full
-endif
-if has("cmdline_info")
-	set ruler showcmd
-endif
-if has("folding")
-	set foldmethod=indent foldlevel=100
-	if has("windows")
-		set fillchars=vert:\|,stl:-,stlnc:\ ,fold:-,diff:-
-	endif
-endif
-if has("extra_search")
-	nnoremap <Leader><Leader> :nohlsearch<CR>
-	if has("reltime")
-		set incsearch
-	endif
-endif
+set nowildmenu
+set wildmode=longest,list,full
+set ruler
+set showcmd
+set foldmethod=indent
+set foldlevel=100
+set fillchars=vert:\|,stl:-,stlnc:\ ,fold:-,diff:-
+set incsearch
+nnoremap <Leader><Leader> :nohlsearch<CR>
 set list
 if has("multi_byte")
 	set encoding=utf-8
@@ -34,26 +26,20 @@ else
 	set listchars=tab:>-,trail:#,extends:>,precedes:<,nbsp:%
 endif
 set laststatus=2
-if has("statusline")
-	set statusline=%(\ %f%M%)%(\ %h%r%w%)%(\ %l,%c%V\ %)
-endif
-if exists("+autochdir")
-	set autochdir
-endif
+set statusline=%(\ %f%M%)%(\ %h%r%w%)%(\ %l,%c%V\ %)
+set autochdir
 set formatoptions=1jlmnq  " ftplugins should add to / remove from this default.
-if has("autocmd")
-	filetype plugin indent on
-	runtime ftplugin/man.vim
-	augroup raghu_augroup
-		autocmd!
-		autocmd BufNewFile,BufWinEnter * setlocal formatoptions-=c formatoptions-=o formatoptions-=r formatoptions-=t
-		autocmd FileType help setlocal nolist keywordprg=:help
-		autocmd FileType json setlocal expandtab softtabstop=2 shiftwidth=2
-		autocmd FileType man setlocal nolist
-		autocmd FileType text setlocal linebreak wrap
-		autocmd FileType vim setlocal keywordprg=:help
-	augroup END
-endif
+filetype plugin indent on
+runtime ftplugin/man.vim
+augroup raghu_augroup
+	autocmd!
+	autocmd BufNewFile,BufWinEnter * setlocal formatoptions-=c formatoptions-=o formatoptions-=r formatoptions-=t
+	autocmd FileType help setlocal nolist keywordprg=:help
+	autocmd FileType json setlocal expandtab softtabstop=2 shiftwidth=2
+	autocmd FileType man setlocal nolist
+	autocmd FileType text setlocal linebreak wrap
+	autocmd FileType vim setlocal keywordprg=:help
+augroup END
 " When running vim in tmux, allow C-<arrow> to work as expected.  These
 " mappings are useful in the cmdline and in insert mode.  tmux sends
 " xterm-style key sequences when its xterm-keys option is on.
@@ -70,24 +56,21 @@ nnoremap <Leader>tu i<C-R>=strftime('%s')<CR><Esc>
 nnoremap <Leader>ts i<C-R>=strftime('%Y-%m-%d %H:%M:%S %Z(UTC%z)')<CR><Esc>
 nnoremap <Leader>m :set invmodifiable<CR>
 nnoremap <Leader>I :edit $MYVIMRC<CR>
-if has("syntax")
-	function! ToggleSyntaxHighlight()
-		if exists("g:syntax_on")
-			syntax off
-		else
-			syntax enable
-		endif
-	endfunction
-	nnoremap <Leader>P :call ToggleSyntaxHighlight()<CR>
-	if has("autocmd")
-		augroup raghu_colors
-			autocmd!
-			autocmd ColorScheme default highlight SpecialKey ctermfg=DarkMagenta
-		augroup END
-		colorscheme default  " Just to trigger the above autocmd.
+function! ToggleSyntaxHighlight()
+	if exists("g:syntax_on")
+		syntax off
+	else
+		syntax enable
 	endif
-	set background=light
-	syntax off
-endif
+endfunction
+nnoremap <Leader>P :call ToggleSyntaxHighlight()<CR>
+augroup raghu_colors
+	autocmd!
+	autocmd ColorScheme default highlight SpecialKey ctermfg=DarkMagenta
+augroup END
+colorscheme default  " Just to trigger the above autocmd.
+set background=light
+syntax off
 " Make vim more secure.  See `:h trojan-horse'.
-set noexrc secure
+set secure
+set noexrc
