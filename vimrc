@@ -56,10 +56,10 @@ augroup raghu_augroup
   autocmd!
   autocmd BufNewFile,BufWinEnter * setlocal formatoptions-=c formatoptions-=o formatoptions-=r formatoptions-=t
   autocmd FileType help setlocal nolist keywordprg=:help
-  autocmd FileType json setlocal expandtab softtabstop=2 shiftwidth=2
+  autocmd FileType json setlocal expandtab shiftwidth=2 softtabstop=-1
   autocmd FileType man setlocal nolist
   autocmd FileType text setlocal linebreak wrap
-  autocmd FileType vim setlocal keywordprg=:help shiftwidth=2 softtabstop=2
+  autocmd FileType vim setlocal keywordprg=:help shiftwidth=2 softtabstop=-1
 augroup END
 
 " When running vim in tmux, allow C-<arrow> to work as expected.  These
