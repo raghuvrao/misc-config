@@ -42,6 +42,10 @@ export SVN_EDITOR="${VISUAL}"
 export PAGER='less'
 export LESS='-i -R'
 
+# Force LibreOffice to use the generic Visual Components Library plugin.
+# I find the others (kde4, gtk, and gtk3) ugly.
+export SAL_USE_VCLPLUGIN=gen
+
 if [ -d "${HOME}/src/git/misc-config" ]; then
 	export mcfg="${HOME}/src/git/misc-config/"
 fi
