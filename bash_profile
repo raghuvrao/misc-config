@@ -39,6 +39,9 @@ export SVN_EDITOR="${VISUAL}"
 export PAGER='less'
 export LESS='-i -R'
 
+# Force LibreOffice to use the generic Visual Components Library plugin.
+export SAL_USE_VCLPLUGIN=gen
+
 if [ -d "${HOME}/lib/python" ]; then
 	export PYTHONPATH="${PYTHONPATH}:${HOME}/lib/python"
 fi
