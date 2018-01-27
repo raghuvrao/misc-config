@@ -1,3 +1,8 @@
+" Plain colorscheme for vim.
+" Maintainer:	Raghu V. Rao
+
+" This colorscheme's goal is to disable most things from being colorized.
+
 set background=light
 hi clear
 if exists("g:syntax_on")
