@@ -46,7 +46,8 @@ set statusline=%(\ %f%M%)%(\ %h%r%w%)%(\ %l,%c%V\ %)
 
 set autochdir
 
-set formatoptions=1jlmnq  " ftplugins should add to / remove from this default.
+" ftplugins shall add to / remove from this default.
+set formatoptions=1jlmnq
 
 filetype plugin indent on
 
