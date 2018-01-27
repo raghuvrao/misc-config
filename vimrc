@@ -81,23 +81,8 @@ nnoremap <Leader>ts i<C-R>=strftime('%Y-%m-%d %H:%M:%S %Z(UTC%z)')<CR><Esc>
 nnoremap <Leader>m :set invmodifiable<CR>
 nnoremap <Leader>I :edit $MYVIMRC<CR>
 
-function! ToggleSyntaxHighlight()
-  if exists("g:syntax_on")
-    syntax off
-  else
-    syntax enable
-  endif
-endfunction
-nnoremap <Leader>P :call ToggleSyntaxHighlight()<CR>
-
-augroup raghu_colors
-  autocmd!
-  autocmd ColorScheme default highlight SpecialKey ctermfg=DarkMagenta
-augroup END
-colorscheme default  " Just to trigger the above autocmd.
-
-set background=light
-syntax off
+syntax on
+colorscheme raghuvrao
 
 " Make vim more secure.  See `:h trojan-horse'.
 set secure
