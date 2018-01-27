@@ -1,3 +1,8 @@
+" Plain colorscheme for vim.
+" Maintainer:	Raghu V. Rao
+
+" This colorscheme's goal is to disable most things from being colorized.
+
 let g:colors_name = "raghuvrao_dflb0"
 
 set background=light
