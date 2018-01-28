@@ -42,7 +42,7 @@ else
 endif
 
 set laststatus=2
-set statusline=%(\ %f%)%(\ %q%)%(\ %M%R%)%(\ %y%)%(\ %H%W%)%(\ %l,%c%V\ %)
+set statusline=%(\ %f%)%(\ %q%)%(\ %M%R%H%W%)%(\ %y%)%(\ %l,%c%V\ %)
 
 set autochdir
 
