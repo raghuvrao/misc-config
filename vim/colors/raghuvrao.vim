@@ -101,5 +101,20 @@ else
 	\ gui=NONE guifg=LightBlue guibg=NONE
 endif
 
+if &background == "light"
+  hi pythonString
+	\ term=underline
+	\ cterm=NONE ctermfg=DarkRed ctermbg=NONE
+	\ gui=NONE guifg=DarkRed guibg=NONE
+else
+  hi pythonString
+	\ term=underline
+	\ cterm=NONE ctermfg=DarkCyan ctermbg=NONE
+	\ gui=NONE guifg=DarkCyan guibg=NONE
+endif
+hi link pythonEscape pythonString
+hi link pythonQuotes pythonString
+hi link pythonTripleQuotes pythonString
+
 hi link vimCommentTitle vimComment
 hi link vimCommentString vimComment
