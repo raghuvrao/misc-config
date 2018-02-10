@@ -83,6 +83,8 @@ nnoremap <Leader>m :set invmodifiable<CR>
 nnoremap <Leader>I :edit $MYVIMRC<CR>
 nnoremap <Leader>] :echo synIDattr(synID(line('.'), col('.'), 1), 'name')<CR>
 
+" Enable syntax so operators like `gq' etc. work correctly.  Use my
+" colorscheme so most things do not get syntax-highlighted.
 syntax on
 colorscheme raghuvrao
 
