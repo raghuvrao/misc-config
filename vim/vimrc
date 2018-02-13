@@ -1,3 +1,5 @@
+scriptencoding utf-8
+
 set nobackup
 
 set noundofile
@@ -34,12 +36,7 @@ set incsearch
 nnoremap <Leader><Leader> :nohlsearch<CR>
 
 set list
-if has("multi_byte")
-  set encoding=utf-8
-  set listchars=tab:→·,trail:¬,extends:>,precedes:<,nbsp:%
-else
-  set listchars=tab:>-,trail:#,extends:>,precedes:<,nbsp:%
-endif
+set listchars=tab:→·,trail:¬,extends:>,precedes:<,nbsp:%
 
 set laststatus=2
 set statusline=%(\ %f%)%(\ %q%)%(\ %M%R%H%W%)%(\ %y%)%(\ %l,%c%V\ %)
