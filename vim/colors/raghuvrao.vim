@@ -10,7 +10,6 @@ endif
 
 let g:colors_name = 'raghuvrao'
 
-hi clear Comment
 hi clear Conceal
 hi clear Constant
 hi clear Identifier
@@ -24,6 +23,18 @@ hi clear String
 hi clear Type
 
 if &background == "light"
+  hi Comment
+	\ term=bold
+	\ cterm=NONE ctermfg=Brown ctermbg=NONE
+	\ gui=NONE guifg=Brown guibg=NONE
+else
+  hi Comment
+	\ term=bold
+	\ cterm=NONE ctermfg=Yellow ctermbg=NONE
+	\ gui=NONE guifg=Yellow guibg=NONE
+endif
+
+if &background == "light"
   hi SpecialKey
 	\ term=bold
 	\ cterm=NONE ctermfg=DarkMagenta ctermbg=NONE
@@ -33,6 +44,18 @@ else
 	\ term=bold
 	\ cterm=NONE ctermfg=DarkCyan ctermbg=NONE
 	\ gui=NONE guifg=DarkCyan guibg=NONE
+endif
+
+if &background == "light"
+  hi Visual
+	\ term=bold
+	\ cterm=NONE ctermfg=Black ctermbg=Cyan
+	\ gui=NONE guifg=Black guibg=Cyan
+else
+  hi Visual
+	\ term=bold
+	\ cterm=NONE ctermfg=Gray ctermbg=DarkBlue
+	\ gui=NONE guifg=Gray guibg=DarkBlue
 endif
 
 if &background == "light"
@@ -91,3 +114,15 @@ else
 	\ cterm=NONE ctermfg=Magenta ctermbg=NONE
 	\ gui=NONE guifg=Magenta guibg=NONE
 endif
+
+hi link cCommentString cComment
+
+hi link javaCommentTitle javaComment
+
+hi link javaDocParam javaDocComment
+hi link javaDocSeeTagParam javaDocComment
+hi link javaDocTags javaDocComment
+
+hi link vimCommentString vimComment
+hi link vimCommentTitle vimComment
+hi link vimCommentTitleLeader vimComment
