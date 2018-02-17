@@ -19,6 +19,8 @@ set sidescroll=1
 set nowrap
 nnoremap <Leader>w :set invwrap<CR>
 
+set scrolljump=-50
+
 set nowildmenu
 set wildmode=longest,list,full
 
