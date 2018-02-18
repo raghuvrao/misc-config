@@ -34,9 +34,9 @@ endif
 hi Visual
       \ term=bold
       \ cterm=NONE ctermfg=Black ctermbg=Cyan
-      \ gui=NONE guifg=Black guibg=Cyan
+      \ gui=NONE guifg=Black guibg=LightBlue
 if &background == "dark"
-  hi Visual ctermfg=Gray ctermbg=DarkBlue guifg=Gray guibg=DarkBlue
+  hi Visual ctermfg=LightGray ctermbg=DarkBlue guifg=LightGray guibg=DarkBlue
 endif
 
 
