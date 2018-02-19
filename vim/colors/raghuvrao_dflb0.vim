@@ -18,8 +18,18 @@ hi Comment
       \ cterm=NONE ctermfg=Brown ctermbg=NONE
       \ gui=NONE guifg=Brown guibg=NONE
 if &background == "dark"
-  hi Comment ctermfg=Yellow guifg=Yellow
+  hi Comment ctermfg=DarkYellow guifg=DarkYellow
 endif
+
+
+hi Pmenu
+      \ cterm=NONE ctermfg=Black ctermbg=Magenta
+      \ gui=NONE guifg=Black guibg=Magenta
+
+
+hi PmenuSel
+      \ cterm=NONE ctermfg=Black ctermbg=LightGray
+      \ gui=NONE guifg=Black guibg=LightGray
 
 
 hi SpecialKey
@@ -32,11 +42,11 @@ endif
 
 
 hi Visual
-      \ term=bold
+      \ term=reverse
       \ cterm=NONE ctermfg=Black ctermbg=Cyan
       \ gui=NONE guifg=Black guibg=LightBlue
 if &background == "dark"
-  hi Visual ctermfg=LightGray ctermbg=DarkBlue guifg=LightGray guibg=DarkBlue
+  hi Visual ctermfg=LightGray ctermbg=DarkBlue guifg=LightGray guibg=Blue
 endif
 
 
@@ -45,7 +55,7 @@ hi diffAdded
       \ cterm=NONE ctermfg=DarkBlue ctermbg=NONE
       \ gui=NONE guifg=DarkBlue guibg=NONE
 if &background == "dark"
-  hi diffAdded ctermfg=Green guifg=Green
+  hi diffAdded ctermfg=Green guifg=LightGreen
 endif
 
 hi diffFile
@@ -53,7 +63,7 @@ hi diffFile
       \ cterm=NONE ctermfg=DarkMagenta ctermbg=NONE
       \ gui=bold guifg=DarkMagenta guibg=NONE
 if &background == "dark"
-  hi diffFile ctermfg=Magenta guifg=Magenta
+  hi diffFile ctermfg=Magenta guifg=LightMagenta
 endif
 
 hi diffLine
@@ -69,7 +79,7 @@ hi diffRemoved
       \ cterm=NONE ctermfg=DarkRed ctermbg=NONE
       \ gui=NONE guifg=DarkRed guibg=NONE
 if &background == "dark"
-  hi diffRemoved ctermfg=Red guifg=Red
+  hi diffRemoved ctermfg=Red guifg=LightRed
 endif
 
 
@@ -78,11 +88,16 @@ hi gitcommitBranch
       \ cterm=NONE ctermfg=DarkMagenta ctermbg=NONE
       \ gui=NONE guifg=DarkMagenta guibg=NONE
 if &background == "dark"
-  hi gitcommitBranch ctermfg=Magenta guifg=Magenta
+  hi gitcommitBranch ctermfg=Magenta guifg=LightMagenta
 endif
 
 
 hi link cCommentString cComment
+
+
+hi link gitcommitHeader gitcommitComment
+hi link gitcommitType gitcommitComment
+hi link gitcommitFile gitcommitComment
 
 
 hi link javaCommentTitle javaComment
