@@ -26,7 +26,6 @@ hi Pmenu
       \ cterm=NONE ctermfg=Black ctermbg=Magenta
       \ gui=NONE guifg=Black guibg=Magenta
 
-
 hi PmenuSel
       \ cterm=NONE ctermfg=Black ctermbg=LightGray
       \ gui=NONE guifg=Black guibg=LightGray
@@ -101,7 +100,6 @@ hi link gitcommitFile gitcommitComment
 
 
 hi link javaCommentTitle javaComment
-
 
 hi link javaDocParam javaDocComment
 hi link javaDocSeeTagParam javaDocComment
