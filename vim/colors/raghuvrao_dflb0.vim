@@ -23,12 +23,12 @@ endif
 
 
 hi Pmenu
-      \ cterm=NONE ctermfg=Black ctermbg=Magenta
-      \ gui=NONE guifg=Black guibg=Magenta
+      \ cterm=NONE ctermfg=Black ctermbg=Cyan
+      \ gui=NONE guifg=Black guibg=Cyan
 
 hi PmenuSel
-      \ cterm=NONE ctermfg=Black ctermbg=LightGray
-      \ gui=NONE guifg=Black guibg=LightGray
+      \ cterm=NONE ctermfg=White ctermbg=DarkBlue
+      \ gui=NONE guifg=White guibg=DarkBlue
 
 
 hi SpecialKey
@@ -45,7 +45,7 @@ hi Visual
       \ cterm=NONE ctermfg=Black ctermbg=Cyan
       \ gui=NONE guifg=Black guibg=LightBlue
 if &background == "dark"
-  hi Visual ctermfg=LightGray ctermbg=DarkBlue guifg=LightGray guibg=Blue
+  hi Visual ctermfg=White ctermbg=DarkBlue guifg=LightGray guibg=Blue
 endif
 
 
