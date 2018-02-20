@@ -106,6 +106,9 @@ hi link javaDocSeeTagParam javaDocComment
 hi link javaDocTags javaDocComment
 
 
+hi link perlSharpBang perlComment
+
+
 hi link vimCommentString vimComment
 hi link vimCommentTitle vimComment
 hi link vimCommentTitleLeader vimComment
