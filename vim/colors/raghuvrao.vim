@@ -43,6 +43,14 @@ hi PmenuSel
       \ cterm=NONE ctermfg=White ctermbg=DarkBlue
       \ gui=NONE guifg=White guibg=DarkBlue
 
+hi PmenuSbar
+      \ cterm=NONE ctermfg=NONE ctermbg=Gray
+      \ gui=NONE guifg=NONE guibg=LightGray
+
+hi PmenuThumb
+      \ cterm=NONE ctermfg=NONE ctermbg=Brown
+      \ gui=NONE guifg=NONE guibg=Brown
+
 
 hi SpecialKey
       \ term=bold
