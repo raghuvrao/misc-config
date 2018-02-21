@@ -81,6 +81,15 @@ nnoremap <Leader>ts i<C-R>=strftime('%Y-%m-%d %H:%M:%S %Z(UTC%z)')<CR><Esc>
 nnoremap <Leader>m :set invmodifiable<CR>
 nnoremap <Leader>I :edit $MYVIMRC<CR>
 nnoremap <Leader>] :echo synIDattr(synID(line('.'), col('.'), 1), 'name')<CR>
+nnoremap <Leader><Space> :ls<CR>:b<Space>
+nnoremap <Leader>z :bprevious<CR>
+nnoremap <Leader>x :bnext<CR>
+nnoremap <Leader>s :%s//g<Left><Left>
+xnoremap <Leader>s :s//g<Left><Left>
+nnoremap <Leader>g :%g/
+xnoremap <Leader>g :g/
+nnoremap <Leader>v :%v/
+xnoremap <Leader>v :v/
 
 " Enable syntax so operators like `gq' etc. work correctly.  Use my
 " colorscheme so most things do not get syntax-highlighted.
