@@ -45,6 +45,8 @@ set statusline=%(\ %f%)%(\ %q%)%(\ %M%R%H%W%)%(\ %y%)%(\ %l,%c%V\ %)
 
 set autochdir
 
+set report=0
+
 " ftplugins shall add to / remove from this default.
 set formatoptions=1jlmnq
 
