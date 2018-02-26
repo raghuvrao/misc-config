@@ -39,7 +39,7 @@ set nohlsearch
 nnoremap <Leader><Leader> :set invhlsearch<CR>
 
 set list
-set listchars=tab:→·,trail:¬,extends:>,precedes:<,nbsp:%
+set listchars=tab:→·,trail:¬,extends:$,precedes:$,nbsp:%
 
 set laststatus=2
 set statusline=%(\ %f%)%(\ %q%)%(\ %M%R%H%W%)%(\ %y%)%(\ %l,%c%V\ %)
