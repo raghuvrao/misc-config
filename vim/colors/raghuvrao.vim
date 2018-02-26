@@ -51,6 +51,11 @@ hi PmenuThumb
       \ cterm=NONE ctermfg=NONE ctermbg=Brown
       \ gui=NONE guifg=NONE guibg=Brown
 
+hi NonText
+      \ term=bold
+      \ cterm=bold ctermfg=Blue ctermbg=NONE
+      \ gui=bold guifg=Blue guibg=NONE
+
 
 hi SpecialKey
       \ term=bold
