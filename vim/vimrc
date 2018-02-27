@@ -79,12 +79,13 @@ if &term =~ '^screen' && exists('$TMUX')
   execute "set <xLeft>=\e[1;*D"
 endif
 
+nnoremap <silent> <Leader>tu i<C-R>=strftime('%s')<CR><Esc>
+nnoremap <silent> <Leader>ts i<C-R>=strftime('%Y-%m-%d %H:%M:%S %Z(UTC%z)')<CR><Esc>
+nnoremap <silent> <Leader>] :echo synIDattr(synID(line('.'), col('.'), 1), 'name')<CR>
+
 nnoremap <Leader>e :silent edit<CR>
-nnoremap <Leader>tu i<C-R>=strftime('%s')<CR><Esc>
-nnoremap <Leader>ts i<C-R>=strftime('%Y-%m-%d %H:%M:%S %Z(UTC%z)')<CR><Esc>
 nnoremap <Leader>m :set invmodifiable<CR>
 nnoremap <Leader>I :edit $MYVIMRC<CR>
-nnoremap <Leader>] :echo synIDattr(synID(line('.'), col('.'), 1), 'name')<CR>
 nnoremap <Leader><Space> :ls<CR>:b<Space>
 nnoremap <Leader>z :bprevious<CR>
 nnoremap <Leader>x :bnext<CR>
