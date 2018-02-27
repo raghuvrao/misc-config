@@ -83,6 +83,12 @@ nnoremap <silent> <Leader>tu i<C-R>=strftime('%s')<CR><Esc>
 nnoremap <silent> <Leader>ts i<C-R>=strftime('%Y-%m-%d %H:%M:%S %Z(UTC%z)')<CR><Esc>
 nnoremap <silent> <Leader>] :echo synIDattr(synID(line('.'), col('.'), 1), 'name')<CR>
 
+if !empty(exepath('xsel'))
+  nnoremap <silent> <Leader>y :%w !xsel -ib<CR>
+  xnoremap <silent> <Leader>y :w !xsel -ib<CR>
+  nnoremap <silent> <Leader>p :r !xsel -ob<CR>
+endif
+
 nnoremap <Leader>e :silent edit<CR>
 nnoremap <Leader>m :set invmodifiable<CR>
 nnoremap <Leader>I :edit $MYVIMRC<CR>
