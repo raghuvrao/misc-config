@@ -84,9 +84,9 @@ nnoremap <silent> <Leader>ts i<C-R>=strftime('%Y-%m-%d %H:%M:%S %Z(UTC%z)')<CR><
 nnoremap <silent> <Leader>] :echo synIDattr(synID(line('.'), col('.'), 1), 'name')<CR>
 
 if !empty(exepath('xsel'))
-  nnoremap <silent> <Leader>y :%w !xsel -ib<CR>
-  xnoremap <silent> <Leader>y :w !xsel -ib<CR>
-  nnoremap <silent> <Leader>p :r !xsel -ob<CR>
+  nnoremap <silent> <Leader>y :%w !xsel -ib 2>/dev/null<CR>
+  xnoremap <silent> <Leader>y :w !xsel -ib 2>/dev/null<CR>
+  nnoremap <silent> <Leader>p :r !xsel -ob 2>/dev/null<CR>
 endif
 
 nnoremap <Leader>e :silent edit<CR>
