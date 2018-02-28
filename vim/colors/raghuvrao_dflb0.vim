@@ -62,12 +62,15 @@ if &background == 'dark'
 endif
 
 
-hi diffAdded
-      \ term=underline
-      \ cterm=NONE ctermfg=DarkBlue ctermbg=NONE
-      \ gui=NONE guifg=DarkBlue guibg=NONE
-if &background == 'dark'
-  hi diffAdded ctermfg=Green guifg=LightGreen
+hi diffAdded term=bold cterm=NONE gui=NONE
+if &background == 'light'
+  if has('gui') || &t_Co >= 256
+    hi diffAdded ctermfg=Black ctermbg=LightGreen guifg=Black guibg=LightGreen
+  else
+    hi diffAdded ctermfg=DarkBlue ctermbg=NONE
+  endif
+else
+  hi diffAdded ctermfg=Green ctermbg=NONE guifg=Green guibg=NONE
 endif
 
 hi diffFile
@@ -86,14 +89,16 @@ if &background == 'dark'
   hi diffLine ctermfg=Yellow guifg=Yellow
 endif
 
-hi diffRemoved
-      \ term=bold
-      \ cterm=NONE ctermfg=DarkRed ctermbg=NONE
-      \ gui=NONE guifg=DarkRed guibg=NONE
-if &background == 'dark'
-  hi diffRemoved ctermfg=Red guifg=LightRed
+hi diffRemoved term=bold cterm=NONE gui=NONE
+if &background == 'light'
+  if has('gui') || &t_Co >= 256
+    hi diffRemoved ctermfg=Black ctermbg=LightRed guifg=Black guibg=LightRed
+  else
+    hi diffRemoved ctermfg=DarkRed ctermbg=NONE
+  endif
+else
+  hi diffRemoved ctermfg=Red ctermbg=NONE guifg=Red guibg=NONE
 endif
-
 
 hi gitcommitBranch
       \ term=bold,underline
