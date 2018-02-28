@@ -1,23 +1,23 @@
 " Plain colorscheme for vim.
 " Maintainer:	Raghu V. Rao
 "
-" Goal: disable syntax highlighting for most things.
+" Goal: disable colors for most things.
 
 
 hi clear
-if exists("g:syntax_on")
+if exists('g:syntax_on')
   syntax reset
 endif
 
 
-let g:colors_name = "raghuvrao_dflb0"
+let g:colors_name = 'raghuvrao_dflb0'
 
 
 hi Comment
       \ term=bold
       \ cterm=NONE ctermfg=Brown ctermbg=NONE
       \ gui=NONE guifg=Brown guibg=NONE
-if &background == "dark"
+if &background == 'dark'
   hi Comment ctermfg=DarkYellow guifg=DarkYellow
 endif
 
@@ -48,7 +48,7 @@ hi SpecialKey
       \ term=bold
       \ cterm=NONE ctermfg=DarkMagenta ctermbg=NONE
       \ gui=NONE guifg=DarkMagenta guibg=NONE
-if &background == "dark"
+if &background == 'dark'
   hi SpecialKey ctermfg=DarkCyan guifg=DarkCyan
 endif
 
@@ -57,7 +57,7 @@ hi Visual
       \ term=reverse
       \ cterm=NONE ctermfg=Black ctermbg=Cyan
       \ gui=NONE guifg=Black guibg=LightBlue
-if &background == "dark"
+if &background == 'dark'
   hi Visual ctermfg=White ctermbg=DarkBlue guifg=LightGray guibg=Blue
 endif
 
@@ -66,7 +66,7 @@ hi diffAdded
       \ term=underline
       \ cterm=NONE ctermfg=DarkBlue ctermbg=NONE
       \ gui=NONE guifg=DarkBlue guibg=NONE
-if &background == "dark"
+if &background == 'dark'
   hi diffAdded ctermfg=Green guifg=LightGreen
 endif
 
@@ -74,7 +74,7 @@ hi diffFile
       \ term=bold
       \ cterm=NONE ctermfg=DarkMagenta ctermbg=NONE
       \ gui=bold guifg=DarkMagenta guibg=NONE
-if &background == "dark"
+if &background == 'dark'
   hi diffFile ctermfg=Magenta guifg=LightMagenta
 endif
 
@@ -82,7 +82,7 @@ hi diffLine
       \ term=bold
       \ cterm=NONE ctermfg=Brown ctermbg=NONE
       \ gui=NONE guifg=Brown guibg=NONE
-if &background == "dark"
+if &background == 'dark'
   hi diffLine ctermfg=Yellow guifg=Yellow
 endif
 
@@ -90,7 +90,7 @@ hi diffRemoved
       \ term=bold
       \ cterm=NONE ctermfg=DarkRed ctermbg=NONE
       \ gui=NONE guifg=DarkRed guibg=NONE
-if &background == "dark"
+if &background == 'dark'
   hi diffRemoved ctermfg=Red guifg=LightRed
 endif
 
@@ -99,7 +99,7 @@ hi gitcommitBranch
       \ term=bold,underline
       \ cterm=NONE ctermfg=DarkMagenta ctermbg=NONE
       \ gui=NONE guifg=DarkMagenta guibg=NONE
-if &background == "dark"
+if &background == 'dark'
   hi gitcommitBranch ctermfg=Magenta guifg=LightMagenta
 endif
 
