@@ -37,19 +37,32 @@ endif
 
 hi Pmenu
       \ cterm=NONE ctermfg=Black ctermbg=Cyan
-      \ gui=NONE guifg=Black guibg=Cyan
+      \ gui=NONE guifg=Black guibg=LightBlue
+if &background == 'dark'
+  hi Pmenu ctermfg=LightGray ctermbg=DarkBlue guifg=LightGray guibg=DarkBlue
+endif
+
+hi PmenuSbar
+      \ cterm=NONE ctermfg=NONE ctermbg=Black
+      \ gui=NONE guifg=NONE guibg=Gray
+if &background == 'dark'
+  hi PmenuSbar ctermbg=White guibg=LightGray
+endif
 
 hi PmenuSel
       \ cterm=NONE ctermfg=White ctermbg=DarkBlue
       \ gui=NONE guifg=White guibg=DarkBlue
-
-hi PmenuSbar
-      \ cterm=NONE ctermfg=NONE ctermbg=Gray
-      \ gui=NONE guifg=NONE guibg=LightGray
+if &background == 'dark'
+  hi PmenuSel ctermfg=Black ctermbg=Cyan guifg=Black guibg=DarkCyan
+endif
 
 hi PmenuThumb
-      \ cterm=NONE ctermfg=NONE ctermbg=Brown
+      \ cterm=NONE ctermfg=NONE ctermbg=DarkYellow
       \ gui=NONE guifg=NONE guibg=Brown
+if &background == 'dark'
+  hi PmenuThumb ctermbg=DarkGreen guibg=DarkGreen
+endif
+
 
 hi NonText
       \ term=bold
@@ -66,21 +79,49 @@ if &background == 'dark'
 endif
 
 
-hi Visual
+hi StatusLine
+      \ term=reverse,bold
+      \ cterm=bold ctermfg=White ctermbg=DarkBlue
+      \ gui=bold guifg=White guibg=DarkBlue
+
+
+hi StatusLineNC
       \ term=reverse
-      \ cterm=NONE ctermfg=Black ctermbg=Cyan
-      \ gui=NONE guifg=Black guibg=LightBlue
+      \ cterm=NONE ctermfg=Black ctermbg=Gray
+      \ gui=NONE guifg=Black guibg=Gray
+
+
+hi VertSplit
+      \ term=reverse
+      \ cterm=NONE ctermfg=DarkRed ctermbg=NONE
+      \ gui=NONE guifg=DarkRed guibg=NONE
 if &background == 'dark'
-  hi Visual ctermfg=White ctermbg=DarkBlue guifg=LightGray guibg=Blue
+  hi VertSplit ctermfg=Red guifg=Red
 endif
 
 
-hi diffAdded
-      \ term=underline
-      \ cterm=NONE ctermfg=DarkBlue ctermbg=NONE
-      \ gui=NONE guifg=DarkBlue guibg=NONE
-if &background == 'dark'
-  hi diffAdded ctermfg=Green guifg=LightGreen
+hi Visual term=reverse cterm=NONE gui=NONE
+if has('gui_running') || &t_Co >= 16
+  hi Visual ctermfg=Black ctermbg=Cyan guifg=Black guibg=LightBlue
+  if &background == 'dark'
+    hi Visual
+	  \ ctermfg=White ctermbg=DarkMagenta
+	  \ guifg=LightGray guibg=DarkMagenta
+  endif
+else
+  hi Visual cterm=reverse ctermfg=NONE ctermbg=NONE
+endif
+
+
+hi diffAdded term=bold cterm=NONE gui=NONE
+if &background == 'light'
+  if has('gui_running') || &t_Co >= 256
+    hi diffAdded ctermfg=Black ctermbg=LightGreen guifg=Black guibg=LightGreen
+  else
+    hi diffAdded ctermfg=DarkBlue ctermbg=NONE
+  endif
+else
+  hi diffAdded ctermfg=Green ctermbg=NONE guifg=Green guibg=NONE
 endif
 
 hi diffFile
@@ -99,12 +140,15 @@ if &background == 'dark'
   hi diffLine ctermfg=Yellow guifg=Yellow
 endif
 
-hi diffRemoved
-      \ term=bold
-      \ cterm=NONE ctermfg=DarkRed ctermbg=NONE
-      \ gui=NONE guifg=DarkRed guibg=NONE
-if &background == 'dark'
-  hi diffRemoved ctermfg=Red guifg=LightRed
+hi diffRemoved term=bold cterm=NONE gui=NONE
+if &background == 'light'
+  if has('gui_running') || &t_Co >= 256
+    hi diffRemoved ctermfg=Black ctermbg=LightRed guifg=Black guibg=LightRed
+  else
+    hi diffRemoved ctermfg=DarkRed ctermbg=NONE
+  endif
+else
+  hi diffRemoved ctermfg=Red ctermbg=NONE guifg=Red guibg=NONE
 endif
 
 
