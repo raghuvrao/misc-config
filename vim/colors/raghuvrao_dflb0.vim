@@ -32,11 +32,11 @@ hi PmenuSel
 
 hi PmenuSbar
       \ cterm=NONE ctermfg=NONE ctermbg=Gray
-      \ gui=NONE guifg=NONE guibg=LightGray
+      \ gui=NONE guifg=NONE guibg=DarkGray
 
 hi PmenuThumb
-      \ cterm=NONE ctermfg=NONE ctermbg=Brown
-      \ gui=NONE guifg=NONE guibg=Brown
+      \ cterm=NONE ctermfg=NONE ctermbg=DarkBlue
+      \ gui=NONE guifg=NONE guibg=Gray
 
 hi NonText
       \ term=bold
