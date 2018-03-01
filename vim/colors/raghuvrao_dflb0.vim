@@ -22,21 +22,20 @@ if &background == 'dark'
 endif
 
 
-hi Pmenu
-      \ cterm=NONE ctermfg=Black ctermbg=Cyan
-      \ gui=NONE guifg=Black guibg=Cyan
+if &background == 'dark'
+  hi Pmenu
+	\ cterm=NONE ctermfg=Black ctermbg=LightGray
+	\ gui=NONE guifg=Black guibg=LightGray
 
-hi PmenuSel
-      \ cterm=NONE ctermfg=White ctermbg=DarkBlue
-      \ gui=NONE guifg=White guibg=DarkBlue
+  hi PmenuSel
+	\ cterm=NONE ctermfg=White ctermbg=DarkBlue
+	\ gui=NONE guifg=White guibg=DarkBlue
+endif
 
-hi PmenuSbar
-      \ cterm=NONE ctermfg=NONE ctermbg=Gray
-      \ gui=NONE guifg=NONE guibg=DarkGray
+if !has('gui_running') && &t_Co < 256
+  hi PmenuThumb cterm=NONE ctermfg=NONE ctermbg=DarkBlue
+endif
 
-hi PmenuThumb
-      \ cterm=NONE ctermfg=NONE ctermbg=DarkBlue
-      \ gui=NONE guifg=NONE guibg=Gray
 
 hi NonText
       \ term=bold
@@ -58,13 +57,13 @@ hi Visual
       \ cterm=NONE ctermfg=Black ctermbg=Cyan
       \ gui=NONE guifg=Black guibg=LightBlue
 if &background == 'dark'
-  hi Visual ctermfg=White ctermbg=DarkBlue guifg=LightGray guibg=Blue
+  hi Visual ctermfg=White ctermbg=DarkBlue guifg=LightGray guibg=DarkBlue
 endif
 
 
 hi diffAdded term=bold cterm=NONE gui=NONE
 if &background == 'light'
-  if has('gui') || &t_Co >= 256
+  if has('gui_running') || &t_Co >= 256
     hi diffAdded ctermfg=Black ctermbg=LightGreen guifg=Black guibg=LightGreen
   else
     hi diffAdded ctermfg=DarkBlue ctermbg=NONE
@@ -91,7 +90,7 @@ endif
 
 hi diffRemoved term=bold cterm=NONE gui=NONE
 if &background == 'light'
-  if has('gui') || &t_Co >= 256
+  if has('gui_running') || &t_Co >= 256
     hi diffRemoved ctermfg=Black ctermbg=LightRed guifg=Black guibg=LightRed
   else
     hi diffRemoved ctermfg=DarkRed ctermbg=NONE
