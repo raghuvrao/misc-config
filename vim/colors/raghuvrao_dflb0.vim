@@ -113,6 +113,7 @@ else
   hi diffRemoved ctermfg=Red ctermbg=NONE guifg=Red guibg=NONE
 endif
 
+
 hi gitcommitBranch
       \ term=bold,underline
       \ cterm=NONE ctermfg=DarkMagenta ctermbg=NONE
