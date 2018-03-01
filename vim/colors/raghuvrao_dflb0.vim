@@ -22,18 +22,32 @@ if &background == 'dark'
 endif
 
 
+hi Pmenu
+      \ cterm=NONE ctermfg=Black ctermbg=Cyan
+      \ gui=NONE guifg=Black guibg=LightBlue
 if &background == 'dark'
-  hi Pmenu
-	\ cterm=NONE ctermfg=Black ctermbg=LightGray
-	\ gui=NONE guifg=Black guibg=LightGray
-
-  hi PmenuSel
-	\ cterm=NONE ctermfg=White ctermbg=DarkBlue
-	\ gui=NONE guifg=White guibg=DarkBlue
+  hi Pmenu ctermfg=LightGray ctermbg=DarkBlue guifg=LightGray guibg=DarkBlue
 endif
 
-if !has('gui_running') && &t_Co < 256
-  hi PmenuThumb cterm=NONE ctermfg=NONE ctermbg=DarkBlue
+hi PmenuSel
+      \ cterm=NONE ctermfg=White ctermbg=DarkBlue
+      \ gui=NONE guifg=White guibg=DarkBlue
+if &background == 'dark'
+  hi PmenuSel ctermfg=Black ctermbg=Cyan guifg=Black guibg=DarkCyan
+endif
+
+hi PmenuSbar
+      \ cterm=NONE ctermfg=NONE ctermbg=Black
+      \ gui=NONE guifg=NONE guibg=Gray
+if &background == 'dark'
+  hi PmenuSbar ctermbg=White guibg=LightGray
+endif
+
+hi PmenuThumb
+      \ cterm=NONE ctermfg=NONE ctermbg=Brown
+      \ gui=NONE guifg=NONE guibg=Brown
+if &background == 'dark'
+  hi PmenuThumb ctermbg=DarkGreen guibg=DarkGreen
 endif
 
 
@@ -57,7 +71,7 @@ hi Visual
       \ cterm=NONE ctermfg=Black ctermbg=Cyan
       \ gui=NONE guifg=Black guibg=LightBlue
 if &background == 'dark'
-  hi Visual ctermfg=White ctermbg=DarkBlue guifg=LightGray guibg=DarkBlue
+  hi Visual ctermfg=White ctermbg=DarkBlue guifg=LightGray guibg=Blue
 endif
 
 
