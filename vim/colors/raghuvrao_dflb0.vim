@@ -29,13 +29,6 @@ if &background == 'dark'
   hi Pmenu ctermfg=LightGray ctermbg=DarkBlue guifg=LightGray guibg=DarkBlue
 endif
 
-hi PmenuSel
-      \ cterm=NONE ctermfg=White ctermbg=DarkBlue
-      \ gui=NONE guifg=White guibg=DarkBlue
-if &background == 'dark'
-  hi PmenuSel ctermfg=Black ctermbg=Cyan guifg=Black guibg=DarkCyan
-endif
-
 hi PmenuSbar
       \ cterm=NONE ctermfg=NONE ctermbg=Black
       \ gui=NONE guifg=NONE guibg=Gray
@@ -43,8 +36,15 @@ if &background == 'dark'
   hi PmenuSbar ctermbg=White guibg=LightGray
 endif
 
+hi PmenuSel
+      \ cterm=NONE ctermfg=White ctermbg=DarkBlue
+      \ gui=NONE guifg=White guibg=DarkBlue
+if &background == 'dark'
+  hi PmenuSel ctermfg=Black ctermbg=Cyan guifg=Black guibg=DarkCyan
+endif
+
 hi PmenuThumb
-      \ cterm=NONE ctermfg=NONE ctermbg=Brown
+      \ cterm=NONE ctermfg=NONE ctermbg=DarkYellow
       \ gui=NONE guifg=NONE guibg=Brown
 if &background == 'dark'
   hi PmenuThumb ctermbg=DarkGreen guibg=DarkGreen
@@ -66,12 +66,37 @@ if &background == 'dark'
 endif
 
 
-hi Visual
+hi StatusLine
+      \ term=reverse,bold
+      \ cterm=bold ctermfg=White ctermbg=DarkBlue
+      \ gui=bold guifg=White guibg=DarkBlue
+
+
+hi StatusLineNC
       \ term=reverse
-      \ cterm=NONE ctermfg=Black ctermbg=Cyan
-      \ gui=NONE guifg=Black guibg=LightBlue
+      \ cterm=NONE ctermfg=Black ctermbg=Gray
+      \ gui=NONE guifg=Black guibg=Gray
+
+
+hi VertSplit
+      \ term=reverse
+      \ cterm=NONE ctermfg=DarkRed ctermbg=NONE
+      \ gui=NONE guifg=DarkRed guibg=NONE
 if &background == 'dark'
-  hi Visual ctermfg=White ctermbg=DarkBlue guifg=LightGray guibg=Blue
+  hi VertSplit ctermfg=Red guifg=Red
+endif
+
+
+hi Visual term=reverse cterm=NONE gui=NONE
+if has('gui_running') || &t_Co >= 16
+  hi Visual ctermfg=Black ctermbg=Cyan guifg=Black guibg=LightBlue
+  if &background == 'dark'
+    hi Visual
+	  \ ctermfg=White ctermbg=DarkMagenta
+	  \ guifg=LightGray guibg=DarkMagenta
+  endif
+else
+  hi Visual cterm=reverse ctermfg=NONE ctermbg=NONE
 endif
 
 
