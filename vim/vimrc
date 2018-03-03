@@ -31,7 +31,7 @@ set showcmd
 set foldmethod=indent
 set foldlevel=100
 
-set fillchars=vert:\|,stl:-,stlnc:\ ,fold:-,diff:-
+set fillchars=vert:\|,stl:^,stlnc:=,fold:-,diff:-
 
 set incsearch
 
