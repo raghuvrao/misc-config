@@ -37,6 +37,12 @@ hi Comment
       \ gui=NONE guifg=Brown guibg=NONE
 
 
+hi NonText
+      \ term=bold
+      \ cterm=bold ctermfg=Blue ctermbg=NONE
+      \ gui=bold guifg=Blue guibg=NONE
+
+
 hi Pmenu
       \ cterm=NONE ctermfg=Black ctermbg=Cyan
       \ gui=NONE guifg=Black guibg=LightBlue
@@ -54,12 +60,6 @@ hi PmenuThumb
       \ gui=NONE guifg=NONE guibg=Brown
 
 
-hi NonText
-      \ term=bold
-      \ cterm=bold ctermfg=Blue ctermbg=NONE
-      \ gui=bold guifg=Blue guibg=NONE
-
-
 hi SpecialKey
       \ term=bold
       \ cterm=NONE ctermfg=DarkMagenta ctermbg=NONE
@@ -71,11 +71,33 @@ hi StatusLine
       \ cterm=bold ctermfg=White ctermbg=DarkBlue
       \ gui=bold guifg=White guibg=DarkBlue
 
-
 hi StatusLineNC
       \ term=reverse
-      \ cterm=NONE ctermfg=Black ctermbg=Gray
-      \ gui=NONE guifg=Black guibg=Gray
+      \ cterm=NONE ctermfg=DarkBlue ctermbg=LightGray
+      \ gui=NONE guifg=DarkBlue guibg=LightGray
+
+hi StatusLineTerm
+      \ term=reverse,bold
+      \ cterm=bold ctermfg=White ctermbg=DarkMagenta
+      \ gui=bold guifg=White guibg=DarkMagenta
+
+hi StatusLineTermNC
+      \ term=reverse
+      \ cterm=NONE ctermfg=DarkRed ctermbg=LightGray
+      \ gui=NONE guifg=DarkRed guibg=LightGray
+
+
+hi TabLine
+      \ term=reverse
+      \ cterm=NONE ctermfg=DarkBlue ctermbg=LightGray
+
+hi TabLineFill
+      \ term=reverse
+      \ cterm=NONE ctermfg=DarkBlue ctermbg=LightGray
+
+hi TabLineSel
+      \ term=bold
+      \ cterm=bold ctermfg=White ctermbg=DarkBlue
 
 
 hi VertSplit
