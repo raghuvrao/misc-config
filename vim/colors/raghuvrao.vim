@@ -114,6 +114,12 @@ else
 endif
 
 
+hi WildMenu
+      \ term=standout
+      \ cterm=bold ctermfg=White ctermbg=DarkMagenta
+      \ gui=bold guifg=White guibg=DarkMagenta
+
+
 hi diffAdded term=bold cterm=NONE gui=NONE
 if has('gui_running') || &t_Co >= 256
   hi diffAdded ctermfg=Black ctermbg=LightGreen guifg=Black guibg=LightGreen
