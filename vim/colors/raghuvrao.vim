@@ -1,12 +1,5 @@
-" Plain colorscheme for vim.
+" Mostly plain colorscheme for vim.
 " Maintainer:	Raghu V. Rao
-
-" This colorscheme disables colors for most things.  The few things for which
-" it defines colors are elements of Vim itself, and not any syntactic
-" elements, with the exception of comments.  I want to highlight only comments
-" because sometimes it is hard to spot lines of a program that have been
-" disabled using multiline-comment syntax.  This colorscheme works best when
-" the background is light and the foreground is dark.
 
 hi clear
 if exists('g:syntax_on')
@@ -58,28 +51,17 @@ endif
 
 hi WildMenu term=standout cterm=bold ctermfg=White ctermbg=DarkMagenta gui=bold guifg=White guibg=DarkMagenta
 
-hi diffAdded term=bold cterm=NONE gui=NONE
-if has('gui_running') || &t_Co >= 256
-  hi diffAdded ctermfg=Black ctermbg=LightGreen guifg=Black guibg=LightGreen
-else
-  hi diffAdded ctermfg=DarkBlue ctermbg=NONE
-endif
-hi diffFile term=bold cterm=NONE ctermfg=DarkMagenta ctermbg=NONE gui=bold guifg=DarkMagenta guibg=NONE
-hi diffLine term=bold cterm=NONE ctermfg=Brown ctermbg=NONE gui=NONE guifg=Brown guibg=NONE
-hi diffRemoved term=bold cterm=NONE gui=NONE
-if has('gui_running') || &t_Co >= 256
-  hi diffRemoved ctermfg=Black ctermbg=LightRed guifg=Black guibg=LightRed
-else
-  hi diffRemoved ctermfg=DarkRed ctermbg=NONE
-endif
+hi diffAdded term=bold cterm=NONE ctermfg=Blue ctermbg=NONE gui=NONE guifg=Blue guibg=NONE
+hi diffFile term=bold cterm=bold ctermfg=NONE ctermbg=NONE gui=bold guifg=NONE guibg=NONE
+hi diffLine term=bold cterm=NONE ctermfg=DarkCyan ctermbg=NONE gui=NONE guifg=DarkCyan guibg=NONE
+hi diffRemoved term=underline cterm=NONE ctermfg=DarkRed ctermbg=NONE gui=NONE guifg=DarkRed guibg=NONE
 
 hi gitcommitBranch term=bold,underline cterm=NONE ctermfg=DarkMagenta ctermbg=NONE gui=NONE guifg=DarkMagenta guibg=NONE
-
-hi link cCommentString cComment
-
 hi link gitcommitHeader gitcommitComment
 hi link gitcommitType gitcommitComment
 hi link gitcommitFile gitcommitComment
+
+hi link cCommentString cComment
 
 hi link javaCommentTitle javaComment
 
