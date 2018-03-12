@@ -40,7 +40,7 @@ hi TabLine term=reverse cterm=NONE ctermfg=DarkBlue ctermbg=LightGray
 hi TabLineFill term=reverse cterm=NONE ctermfg=DarkBlue ctermbg=LightGray
 hi TabLineSel term=bold cterm=bold ctermfg=White ctermbg=DarkBlue
 
-hi VertSplit term=reverse cterm=NONE ctermfg=DarkRed ctermbg=NONE gui=NONE guifg=DarkRed guibg=NONE
+hi VertSplit term=reverse cterm=NONE ctermfg=DarkBlue ctermbg=LightGray gui=NONE guifg=DarkBlue guibg=LightGray
 
 hi Visual term=reverse cterm=NONE gui=NONE
 if has('gui_running') || &t_Co >= 16
