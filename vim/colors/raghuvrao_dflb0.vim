@@ -10,6 +10,8 @@ let g:colors_name = 'raghuvrao_dflb0'
 
 hi Comment term=bold cterm=NONE ctermfg=Brown ctermbg=NONE gui=NONE guifg=Brown guibg=NONE
 
+hi Folded term=standout cterm=NONE ctermfg=DarkCyan ctermbg=NONE gui=NONE guifg=DarkCyan guibg=NONE
+
 hi NonText term=bold cterm=bold ctermfg=Blue ctermbg=NONE gui=bold guifg=Blue guibg=NONE
 
 hi Pmenu cterm=NONE ctermfg=Black ctermbg=Cyan gui=NONE guifg=Black guibg=LightBlue
