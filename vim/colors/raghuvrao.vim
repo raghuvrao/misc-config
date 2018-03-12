@@ -51,7 +51,7 @@ endif
 
 hi WildMenu term=standout cterm=bold ctermfg=White ctermbg=DarkMagenta gui=bold guifg=White guibg=DarkMagenta
 
-hi diffAdded term=bold cterm=NONE ctermfg=Blue ctermbg=NONE gui=NONE guifg=Blue guibg=NONE
+hi diffAdded term=bold cterm=NONE ctermfg=DarkGreen ctermbg=NONE gui=NONE guifg=DarkGreen guibg=NONE
 hi diffFile term=bold cterm=bold ctermfg=NONE ctermbg=NONE gui=bold guifg=NONE guibg=NONE
 hi diffLine term=bold cterm=NONE ctermfg=DarkCyan ctermbg=NONE gui=NONE guifg=DarkCyan guibg=NONE
 hi diffRemoved term=underline cterm=NONE ctermfg=DarkRed ctermbg=NONE gui=NONE guifg=DarkRed guibg=NONE
