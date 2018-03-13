@@ -22,6 +22,10 @@ hi clear Type
 
 hi Comment term=bold cterm=NONE ctermfg=Brown ctermbg=NONE gui=NONE guifg=Brown guibg=NONE
 
+hi Error term=reverse cterm=NONE ctermfg=White ctermbg=DarkRed gui=NONE guifg=White guibg=DarkRed
+
+hi ErrorMsg term=standout cterm=NONE ctermfg=White ctermbg=DarkRed gui=NONE guifg=White guibg=DarkRed
+
 hi Folded term=standout cterm=NONE ctermfg=DarkCyan ctermbg=NONE gui=NONE guifg=DarkCyan guibg=NONE
 
 hi NonText term=bold cterm=bold ctermfg=Blue ctermbg=NONE gui=bold guifg=Blue guibg=NONE
