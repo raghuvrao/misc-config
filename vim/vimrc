@@ -31,8 +31,6 @@ set showcmd
 set foldmethod=indent
 set foldlevel=100
 
-set fillchars=vert:\|,stl:^,stlnc:=,fold:-,diff:-
-
 set incsearch
 
 nnoremap <Leader><Leader> :nohlsearch<CR>
