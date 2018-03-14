@@ -37,10 +37,10 @@ hi PmenuThumb cterm=NONE ctermfg=NONE ctermbg=DarkYellow gui=NONE guifg=NONE gui
 
 hi SpecialKey term=bold cterm=NONE ctermfg=DarkMagenta ctermbg=NONE gui=NONE guifg=DarkMagenta guibg=NONE
 
-hi StatusLine term=reverse,bold cterm=bold ctermfg=White ctermbg=DarkBlue gui=bold guifg=White guibg=DarkBlue
-hi StatusLineNC term=reverse cterm=NONE ctermfg=DarkBlue ctermbg=LightGray gui=NONE guifg=DarkBlue guibg=LightGray
-hi StatusLineTerm term=reverse,bold cterm=bold ctermfg=White ctermbg=DarkMagenta gui=bold guifg=White guibg=DarkMagenta
-hi StatusLineTermNC term=reverse cterm=NONE ctermfg=DarkRed ctermbg=LightGray gui=NONE guifg=DarkRed guibg=LightGray
+hi StatusLine term=reverse,bold cterm=bold ctermfg=White ctermbg=DarkMagenta gui=bold guifg=White guibg=DarkMagenta
+hi StatusLineNC term=reverse cterm=NONE ctermfg=LightGray ctermbg=DarkBlue gui=NONE guifg=LightGray guibg=DarkBlue
+hi link StatusLineTerm StatusLine
+hi link StatusLineTermNC StatusLineNC
 
 hi TabLine term=reverse cterm=NONE ctermfg=DarkBlue ctermbg=LightGray
 hi TabLineFill term=reverse cterm=NONE ctermfg=DarkBlue ctermbg=LightGray
