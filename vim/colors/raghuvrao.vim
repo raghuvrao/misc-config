@@ -1,4 +1,4 @@
-" Mostly plain colorscheme for vim.
+" Mostly plain colorscheme for Vim.
 " Maintainer:	Raghu V. Rao
 
 hi clear
@@ -39,7 +39,9 @@ hi SpecialKey term=bold cterm=NONE ctermfg=DarkMagenta ctermbg=NONE gui=NONE gui
 
 hi StatusLine term=reverse,bold cterm=bold ctermfg=White ctermbg=DarkMagenta gui=bold guifg=White guibg=DarkMagenta
 hi StatusLineNC term=reverse cterm=bold ctermfg=White ctermbg=DarkBlue gui=bold guifg=White guibg=DarkBlue
+hi clear StatusLineTerm
 hi link StatusLineTerm StatusLine
+hi clear StatusLineTermNC
 hi link StatusLineTermNC StatusLineNC
 
 hi TabLine term=reverse cterm=NONE ctermfg=DarkBlue ctermbg=LightGray
