@@ -20,37 +20,37 @@ hi clear Statement
 hi clear String
 hi clear Type
 
-hi Comment term=bold cterm=NONE ctermfg=Brown ctermbg=NONE gui=NONE guifg=Brown guibg=NONE
+hi Comment ctermfg=Brown ctermbg=NONE cterm=NONE guifg=Brown guibg=NONE gui=NONE term=bold
 
-hi Error term=reverse cterm=NONE ctermfg=White ctermbg=DarkRed gui=NONE guifg=White guibg=DarkRed
+hi Error ctermfg=White ctermbg=DarkRed cterm=NONE guifg=White guibg=DarkRed gui=NONE term=reverse
 
-hi ErrorMsg term=standout cterm=NONE ctermfg=White ctermbg=DarkRed gui=NONE guifg=White guibg=DarkRed
+hi ErrorMsg ctermfg=White ctermbg=DarkRed cterm=NONE guifg=White guibg=DarkRed gui=NONE term=standout
 
-hi Folded term=standout cterm=NONE ctermfg=DarkCyan ctermbg=NONE gui=NONE guifg=DarkCyan guibg=NONE
+hi Folded ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui=NONE term=standout
 
-hi NonText term=bold cterm=bold ctermfg=Blue ctermbg=NONE gui=bold guifg=Blue guibg=NONE
+hi NonText ctermfg=Blue ctermbg=NONE cterm=bold guifg=Blue guibg=NONE gui=bold term=bold
 
-hi Pmenu cterm=NONE ctermfg=Black ctermbg=Cyan gui=NONE guifg=Black guibg=LightBlue
-hi PmenuSbar cterm=NONE ctermfg=NONE ctermbg=Black gui=NONE guifg=NONE guibg=Gray
-hi PmenuSel cterm=NONE ctermfg=White ctermbg=DarkBlue gui=NONE guifg=White guibg=DarkBlue
-hi PmenuThumb cterm=NONE ctermfg=NONE ctermbg=DarkYellow gui=NONE guifg=NONE guibg=Brown
+hi Pmenu ctermfg=Black ctermbg=Cyan cterm=NONE guifg=Black guibg=LightBlue gui=NONE
+hi PmenuSbar ctermfg=NONE ctermbg=Black cterm=NONE guifg=NONE guibg=Gray gui=NONE
+hi PmenuSel ctermfg=White ctermbg=DarkBlue cterm=NONE guifg=White guibg=DarkBlue gui=NONE
+hi PmenuThumb ctermfg=NONE ctermbg=DarkYellow cterm=NONE guifg=NONE guibg=Brown gui=NONE
 
-hi SpecialKey term=bold cterm=NONE ctermfg=DarkMagenta ctermbg=NONE gui=NONE guifg=DarkMagenta guibg=NONE
+hi SpecialKey ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=NONE term=bold
 
-hi StatusLine term=reverse,bold cterm=bold ctermfg=White ctermbg=DarkMagenta gui=bold guifg=White guibg=DarkMagenta
-hi StatusLineNC term=reverse cterm=bold ctermfg=White ctermbg=DarkBlue gui=bold guifg=White guibg=DarkBlue
+hi StatusLine ctermfg=White ctermbg=DarkMagenta cterm=bold guifg=White guibg=DarkMagenta gui=bold term=reverse,bold
+hi StatusLineNC ctermfg=White ctermbg=DarkBlue cterm=bold guifg=White guibg=DarkBlue gui=bold term=reverse
 hi clear StatusLineTerm
 hi link StatusLineTerm StatusLine
 hi clear StatusLineTermNC
 hi link StatusLineTermNC StatusLineNC
 
-hi TabLine term=reverse cterm=NONE ctermfg=DarkBlue ctermbg=LightGray
-hi TabLineFill term=reverse cterm=NONE ctermfg=DarkBlue ctermbg=LightGray
-hi TabLineSel term=bold cterm=bold ctermfg=White ctermbg=DarkBlue
+hi TabLine ctermfg=DarkBlue ctermbg=LightGray cterm=NONE term=reverse
+hi TabLineFill ctermfg=DarkBlue ctermbg=LightGray cterm=NONE term=reverse
+hi TabLineSel ctermfg=White ctermbg=DarkBlue cterm=bold term=bold
 
-hi Todo term=standout cterm=bold ctermfg=Blue ctermbg=NONE gui=bold guifg=Blue guibg=NONE
+hi Todo ctermfg=Blue ctermbg=NONE cterm=bold guifg=Blue guibg=NONE gui=bold term=standout
 
-hi VertSplit term=reverse cterm=NONE ctermfg=DarkRed ctermbg=LightGray gui=NONE guifg=DarkRed guibg=LightGray
+hi VertSplit ctermfg=DarkRed ctermbg=LightGray cterm=NONE guifg=DarkRed guibg=LightGray gui=NONE term=reverse
 
 hi Visual term=reverse cterm=NONE gui=NONE
 if has('gui_running') || &t_Co >= 16
@@ -59,14 +59,14 @@ else
   hi Visual cterm=reverse ctermfg=NONE ctermbg=NONE
 endif
 
-hi WildMenu term=standout cterm=bold ctermfg=White ctermbg=DarkMagenta gui=bold guifg=White guibg=DarkMagenta
+hi WildMenu ctermfg=White ctermbg=DarkMagenta cterm=bold guifg=White guibg=DarkMagenta gui=bold term=standout
 
-hi diffAdded term=bold cterm=NONE ctermfg=DarkGreen ctermbg=NONE gui=NONE guifg=DarkGreen guibg=NONE
-hi diffFile term=bold cterm=bold ctermfg=NONE ctermbg=NONE gui=bold guifg=NONE guibg=NONE
-hi diffLine term=bold cterm=NONE ctermfg=DarkCyan ctermbg=NONE gui=NONE guifg=DarkCyan guibg=NONE
-hi diffRemoved term=underline cterm=NONE ctermfg=DarkRed ctermbg=NONE gui=NONE guifg=DarkRed guibg=NONE
+hi diffAdded ctermfg=DarkGreen ctermbg=NONE cterm=NONE guifg=DarkGreen guibg=NONE gui=NONE term=bold
+hi diffFile ctermfg=NONE ctermbg=NONE cterm=bold guifg=NONE guibg=NONE gui=bold term=bold
+hi diffLine ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui=NONE term=bold
+hi diffRemoved ctermfg=DarkRed ctermbg=NONE cterm=NONE guifg=DarkRed guibg=NONE gui=NONE term=underline
 
-hi gitcommitBranch term=bold,underline cterm=NONE ctermfg=DarkMagenta ctermbg=NONE gui=NONE guifg=DarkMagenta guibg=NONE
+hi gitcommitBranch ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=NONE term=bold,underline
 hi link gitcommitHeader gitcommitComment
 hi link gitcommitType gitcommitComment
 hi link gitcommitFile gitcommitComment
