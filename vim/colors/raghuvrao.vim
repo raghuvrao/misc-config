@@ -48,6 +48,8 @@ hi TabLine term=reverse cterm=NONE ctermfg=DarkBlue ctermbg=LightGray
 hi TabLineFill term=reverse cterm=NONE ctermfg=DarkBlue ctermbg=LightGray
 hi TabLineSel term=bold cterm=bold ctermfg=White ctermbg=DarkBlue
 
+hi Todo term=standout cterm=bold ctermfg=Blue ctermbg=NONE gui=bold guifg=Blue guibg=NONE
+
 hi VertSplit term=reverse cterm=NONE ctermfg=DarkRed ctermbg=LightGray gui=NONE guifg=DarkRed guibg=LightGray
 
 hi Visual term=reverse cterm=NONE gui=NONE
