@@ -22,9 +22,9 @@ hi clear Type
 
 hi Comment ctermfg=Brown ctermbg=NONE cterm=NONE guifg=Brown guibg=NONE gui=NONE term=bold
 
-hi Error ctermfg=White ctermbg=DarkRed cterm=NONE guifg=White guibg=DarkRed gui=NONE term=reverse
+hi Error ctermfg=White ctermbg=Red cterm=bold guifg=White guibg=Red gui=bold term=reverse
 
-hi ErrorMsg ctermfg=White ctermbg=DarkRed cterm=NONE guifg=White guibg=DarkRed gui=NONE term=standout
+hi ErrorMsg ctermfg=White ctermbg=Red cterm=bold guifg=White guibg=Red gui=bold term=standout
 
 hi Folded ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui=NONE term=standout
 
