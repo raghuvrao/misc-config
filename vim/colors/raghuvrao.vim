@@ -31,9 +31,15 @@ hi Folded ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui
 hi NonText ctermfg=Blue ctermbg=NONE cterm=bold guifg=Blue guibg=NONE gui=bold term=bold
 
 hi Pmenu ctermfg=Black ctermbg=Cyan cterm=NONE guifg=Black guibg=LightBlue gui=NONE
+if !has('gui_running') && &t_Co < 16
+  hi Pmenu ctermfg=White ctermbg=DarkBlue cterm=bold
+endif
 hi PmenuSbar ctermfg=NONE ctermbg=Black cterm=NONE guifg=NONE guibg=Gray gui=NONE
 hi PmenuSel ctermfg=White ctermbg=DarkBlue cterm=NONE guifg=White guibg=DarkBlue gui=NONE
-hi PmenuThumb ctermfg=NONE ctermbg=DarkYellow cterm=NONE guifg=NONE guibg=Brown gui=NONE
+if !has('gui_running') && &t_Co < 16
+  hi PmenuSel ctermfg=White ctermbg=DarkMagenta cterm=bold
+endif
+hi PmenuThumb ctermfg=NONE ctermbg=DarkYellow cterm=NONE guifg=NONE guibg=Black gui=NONE
 
 hi SpecialKey ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=NONE term=bold
 
