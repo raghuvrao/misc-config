@@ -74,6 +74,7 @@ hi diffRemoved ctermfg=DarkRed ctermbg=NONE cterm=NONE guifg=DarkRed guibg=NONE 
 
 hi gitcommitBranch ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=NONE term=bold,underline
 hi link gitcommitHeader gitcommitComment
+hi link gitcommitOverflow gitcommitComment
 hi link gitcommitType gitcommitComment
 hi link gitcommitFile gitcommitComment
 
