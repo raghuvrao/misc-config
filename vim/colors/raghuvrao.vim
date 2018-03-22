@@ -22,11 +22,22 @@ hi clear Type
 
 hi Comment ctermfg=Brown ctermbg=NONE cterm=NONE guifg=Brown guibg=NONE gui=NONE term=bold
 
-hi Error ctermfg=White ctermbg=Red cterm=bold guifg=White guibg=Red gui=bold term=reverse
+hi Error ctermfg=White ctermbg=Red cterm=bold guifg=DarkRed guibg=LightRed gui=bold term=reverse
+if &t_Co >= 256
+  hi Error ctermfg=DarkRed ctermbg=LightRed cterm=NONE
+endif
 
-hi ErrorMsg ctermfg=White ctermbg=Red cterm=bold guifg=White guibg=Red gui=bold term=standout
+hi ErrorMsg ctermfg=White ctermbg=Red cterm=bold guifg=DarkRed guibg=LightRed gui=bold term=standout
+if &t_Co >= 256
+  hi ErrorMsg ctermfg=DarkRed ctermbg=LightRed cterm=NONE
+endif
 
 hi Folded ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui=NONE term=standout
+
+hi MoreMsg ctermfg=DarkGreen ctermbg=NONE cterm=NONE guifg=Black guibg=LightGreen gui=bold term=standout
+if &t_Co >= 256
+  hi MoreMsg ctermfg=Black ctermbg=LightGreen
+endif
 
 hi NonText ctermfg=Blue ctermbg=NONE cterm=bold guifg=Blue guibg=NONE gui=bold term=bold
 
@@ -41,10 +52,15 @@ if !has('gui_running') && &t_Co < 16
 endif
 hi PmenuThumb ctermfg=NONE ctermbg=DarkYellow cterm=NONE guifg=NONE guibg=Black gui=NONE
 
+hi Question ctermfg=DarkGreen ctermbg=NONE cterm=NONE guifg=Black guibg=LightGreen gui=bold term=standout
+if &t_Co >= 256
+  hi Question ctermfg=Black ctermbg=LightGreen
+endif
+
 hi SpecialKey ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=NONE term=bold
 
-hi StatusLine ctermfg=White ctermbg=DarkMagenta cterm=bold guifg=White guibg=DarkMagenta gui=bold term=reverse,bold
-hi StatusLineNC ctermfg=White ctermbg=DarkBlue cterm=bold guifg=White guibg=DarkBlue gui=bold term=reverse
+hi StatusLine ctermfg=White ctermbg=DarkBlue cterm=bold guifg=White guibg=DarkBlue gui=bold term=reverse,bold
+hi StatusLineNC ctermfg=White ctermbg=DarkMagenta cterm=bold guifg=White guibg=DarkMagenta gui=bold term=reverse
 hi clear StatusLineTerm
 hi link StatusLineTerm StatusLine
 hi clear StatusLineTermNC
