@@ -102,6 +102,10 @@ hi link javaDocParam javaDocComment
 hi link javaDocSeeTagParam javaDocComment
 hi link javaDocTags javaDocComment
 
+hi netrwClassify ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui=NONE term=underline
+hi link netrwDir netrwPlain
+hi link netrwSymLink netrwPlain
+
 hi link vimCommentString vimComment
 hi link vimCommentTitle vimComment
 hi link vimCommentTitleLeader vimComment
