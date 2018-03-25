@@ -94,6 +94,7 @@ hi netrwClassify ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=N
 hi link netrwDir netrwPlain
 hi link netrwSymLink netrwPlain
 
+hi link perlPOD NONE
 hi link perlSharpBang perlComment
 
 hi link vimCommentString vimComment
