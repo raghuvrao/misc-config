@@ -40,7 +40,7 @@ export EDITOR="${VISUAL}"
 export FCEDIT="${VISUAL}"
 export SVN_EDITOR="${VISUAL}"
 export PAGER='less'
-export LESS='-i -R'
+export LESS='QRi'
 
 # Force LibreOffice to use the generic Visual Components Library plugin.
 # I find the others (kde4, gtk, and gtk3) ugly.
