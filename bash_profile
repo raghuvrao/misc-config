@@ -42,14 +42,6 @@ export LESS='QRi'
 # Force LibreOffice to use the generic Visual Components Library plugin.
 export SAL_USE_VCLPLUGIN=gen
 
-if [ -d "${HOME}/lib/python" ]; then
-	export PYTHONPATH="${PYTHONPATH}:${HOME}/lib/python"
-fi
-
-if [ -r "${HOME}/.pythonrc.py" ]; then
-	export PYTHONSTARTUP="${HOME}/.pythonrc.py"
-fi
-
 if [ -d "${HOME}/bin" ]; then
 	pathmunge "${HOME}/bin" "after"
 fi
