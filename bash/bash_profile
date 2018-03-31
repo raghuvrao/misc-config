@@ -42,9 +42,12 @@ export LESS='QRi'
 # Force LibreOffice to use the generic Visual Components Library plugin.
 export SAL_USE_VCLPLUGIN=gen
 
-if [ -d "${HOME}/bin" ]; then
-	pathmunge "${HOME}/bin" "after"
+p="${HOME}/bin"
+if [ -d "${p}" ]; then
+	pathmunge "${p}" 'after'
 fi
+
+unset -v p
 
 # Do not modify PATH after this part (in other words: do this part towards the
 # end of ~/.bash_profile).  Remove any duplicates from PATH.  Order will be
@@ -54,7 +57,7 @@ IFS=':'
 path_copy="${PATH}"
 PATH=""
 for p in ${path_copy}; do
-	pathmunge "${p}" "after"
+	pathmunge "${p}" 'after'
 done
 if [ -z "${orig_IFS}" ]; then unset -v IFS; else IFS="${orig_IFS#_}"; fi
 export PATH
