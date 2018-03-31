@@ -46,42 +46,42 @@ export LESS='QRi'
 # I find the others (kde4, gtk, and gtk3) ugly.
 export SAL_USE_VCLPLUGIN=gen
 
-if [ -d "${HOME}/src/git/misc-config" ]; then
-	export mcfg="${HOME}/src/git/misc-config/"
+p="${HOME}/src/git/misc-config"
+if [ -d "${p}" ]; then
+	export mcfg="${p}"
 fi
 
-if [ -d "${HOME}/src/git/misc-scripts" ]; then
-	export mscr="${HOME}/src/git/misc-scripts/"
+p="${HOME}/src/git/misc-scripts"
+if [ -d "${p}" ]; then
+	export mscr="${p}"
 fi
 
-if [ -d "${HOME}/bin" ]; then
-	pathmunge "${HOME}/bin" "after"
-fi
-
-for d in /usr/local/sbin /usr/sbin /sbin; do
-	pathmunge "${d}"
+for p in /usr/local/sbin /usr/sbin /sbin; do
+	pathmunge "${p}" 'after'
 done
-unset -v d
 
-GOPATH="${HOME}/go"
-if [ -d "${GOPATH}" ]; then
-	export GOPATH
+p="${HOME}/bin"
+if [ -d "${p}" ]; then
+	pathmunge "${p}" 'after'
+fi
+
+p="${HOME}/go"
+if [ -d "${p}" ]; then
+	export GOPATH="${p}"
 	if [ -d "${GOPATH}/bin" ]; then
 		pathmunge "${GOPATH}/bin"
 	fi
-else
-	unset -v GOPATH
 fi
 
-GOROOT="/opt/golang/root"
-if [ -d "${GOROOT}" ]; then
-	export GOROOT
+p='/opt/golang/root'
+if [ -d "${p}" ]; then
+	export GOROOT="${p}"
 	if [ -d "${GOROOT}/bin" ]; then
 		pathmunge "${GOROOT}/bin"
 	fi
-else
-	unset -v GOROOT
 fi
+
+unset -v p
 
 # Do not modify PATH after this part (in other words: do this part towards the
 # end of ~/.profile).  Remove any duplicates from PATH.  Order will be
@@ -91,7 +91,7 @@ IFS=':'
 path_copy="${PATH}"
 PATH=""
 for p in ${path_copy}; do
-	pathmunge "${p}" "after"
+	pathmunge "${p}" 'after'
 done
 if [ -z "${orig_IFS}" ]; then unset -v IFS; else IFS="${orig_IFS#_}"; fi
 export PATH
