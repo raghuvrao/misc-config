@@ -52,11 +52,21 @@ set formatoptions=1jlmnq
 
 filetype plugin indent on
 
+function! SelectivelyEnableAutoInsertCommentLeader()
+  let l:enableFiletypes = ['c', 'cpp', 'java']
+  if index(l:enableFiletypes, &filetype) >= 0
+    setlocal formatoptions+=r formatoptions+=o
+  else
+    setlocal formatoptions-=r formatoptions-=o
+  endif
+endfunction
+
 runtime ftplugin/man.vim
 
-augroup raghu_augroup
+augroup my_augroup
   autocmd!
-  autocmd BufNewFile,BufWinEnter * setlocal formatoptions-=c formatoptions-=o formatoptions-=r formatoptions-=t
+  autocmd BufNewFile,BufWinEnter * setlocal formatoptions-=t formatoptions-=c
+  autocmd FileType * call SelectivelyEnableAutoInsertCommentLeader()
   autocmd FileType * setlocal conceallevel=0 concealcursor=
   autocmd FileType help setlocal nolist keywordprg=:help
   autocmd FileType json setlocal expandtab shiftwidth=2 softtabstop=-1
