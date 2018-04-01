@@ -61,13 +61,25 @@ function! SelectivelyEnableAutoInsertCommentLeader()
   endif
 endfunction
 
+augroup comment_leader
+  autocmd!
+  autocmd FileType * call SelectivelyEnableAutoInsertCommentLeader()
+augroup END
+
+augroup no_hard_wrap
+  autocmd!
+  autocmd FileType * setlocal formatoptions-=t formatoptions-=c
+augroup END
+
+augroup no_conceal
+  autocmd!
+  autocmd FileType * setlocal conceallevel=0 concealcursor=
+augroup END
+
 runtime ftplugin/man.vim
 
-augroup my_augroup
+augroup miscellaneous
   autocmd!
-  autocmd BufNewFile,BufWinEnter * setlocal formatoptions-=t formatoptions-=c
-  autocmd FileType * call SelectivelyEnableAutoInsertCommentLeader()
-  autocmd FileType * setlocal conceallevel=0 concealcursor=
   autocmd FileType help setlocal nolist keywordprg=:help
   autocmd FileType json setlocal expandtab shiftwidth=2 softtabstop=-1
   autocmd FileType man setlocal nolist
