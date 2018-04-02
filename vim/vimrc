@@ -89,12 +89,17 @@ augroup miscellaneous
   autocmd FileType vim setlocal keywordprg=:help shiftwidth=2 softtabstop=-1
 augroup END
 
-" When running vim in tmux, allow C-<arrow> to work as expected.  These
-" mappings are useful in the cmdline and in insert mode.  tmux sends
-" xterm-style key sequences when its xterm-keys option is on.
-if &term =~ '^screen' && exists('$TMUX')
-  " Need `execute' because we want \e to be parsed into literal Esc
-  " before being assigned.
+" The following escape-sequences allow CTRL-<arrow> to work as expected
+" (mostly) when Vim is run within tmux.  CTRL-<arrow> is useful in insert mode
+" and cmdline mode.  For these settings to work, `xterm-keys' must be set to
+" on in tmux's configuration.  To prevent these assignments from occuring in
+" GUI-Vim (the assignments are unnecessary there), the 'gui_running' check is
+" needed: 'term' is not yet set to 'builtin_gui' when GUI-Vim runs the
+" commands in this file.  Instead, 'term' will have the same value as the
+" shell variable TERM; it gets set to 'builtin_gui' some time later.
+if !has('gui_running') && &term =~ '^screen' && exists('$TMUX')
+  " :execute is needed because we want \e to be parsed into literal ESC before
+  " being assigned.
   execute "set <xUp>=\e[1;*A"
   execute "set <xDown>=\e[1;*B"
   execute "set <xRight>=\e[1;*C"
