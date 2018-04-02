@@ -1,0 +1,3 @@
+set mouse=a
+
+set guioptions-=L guioptions-=R guioptions-=T guioptions-=b guioptions-=l guioptions-=r
