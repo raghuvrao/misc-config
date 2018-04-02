@@ -47,6 +47,8 @@ set hidden
 
 set report=0
 
+set mouse=
+
 " ftplugins shall add to / remove from this default.
 set formatoptions=1jlmnq
 
