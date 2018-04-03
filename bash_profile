@@ -3,6 +3,9 @@
 
 # Slightly modified version of pathmunge from Red Hat's /etc/profile.
 pathmunge() {
+	if test ! -d "${1}"; then
+		return
+	fi
 	case ":${PATH}:" in
 		*:"${1}":*)
 			;;
@@ -36,6 +39,7 @@ export VISUAL='vim'
 export EDITOR="${VISUAL}"
 export FCEDIT="${VISUAL}"
 export SVN_EDITOR="${VISUAL}"
+
 export PAGER='less'
 export LESS='QRi'
 export GIT_PAGER='less -+F -X'
@@ -43,16 +47,15 @@ export GIT_PAGER='less -+F -X'
 # Force LibreOffice to use the generic Visual Components Library plugin.
 export SAL_USE_VCLPLUGIN=gen
 
-p="${HOME}/bin"
-if [ -d "${p}" ]; then
-	pathmunge "${p}" 'after'
+if [ -z "${PATH}" ]; then
+	PATH='/usr/local/bin:/usr/bin:/bin'
 fi
 
-unset -v p
+PATH="${PATH}:${HOME}/bin"
 
 # Do not modify PATH after this part (in other words: do this part towards the
 # end of ~/.bash_profile).  Remove any duplicates from PATH.  Order will be
-# preserved.
+# preserved.  Non-existent directories will be removed.
 orig_IFS="${IFS+_${IFS}}"  # Note: ${foo+bar}, not ${foo:+bar}
 IFS=':'
 path_copy="${PATH}"
@@ -61,10 +64,12 @@ for p in ${path_copy}; do
 	pathmunge "${p}" 'after'
 done
 if [ -z "${orig_IFS}" ]; then unset -v IFS; else IFS="${orig_IFS#_}"; fi
-export PATH
 unset -v orig_IFS p path_copy
 
 unset -f pathmunge
+
+# Finally, export PATH after cleaning it up.
+export PATH
 
 # Source .bashrc in the end, and only if running bash.
 if [ -n "${BASH_VERSION}" -a -r "${HOME}/.bashrc" ]; then
