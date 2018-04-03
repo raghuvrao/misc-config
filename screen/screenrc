@@ -1,8 +1,5 @@
 startup_message off
-
-altscreen off
-termcapinfo xterm* ti@:te@
-
+altscreen on
 autodetach on
 defc1 off
 defmonitor on
@@ -26,5 +23,4 @@ termcapinfo xterm* 'hs:ts=\E]0;:fs=\007:ds=\E]0;GNU Screen\007'
 #hardstatus alwayslastline
 hardstatus string 's:%h'
 
-# The string is from 'man screen'.
-caption always '%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<'
+caption always '%-Lw%{=br}{%n%f:%t}%{-}%+Lw'
