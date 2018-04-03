@@ -6,6 +6,9 @@
 
 # Slightly modified version of pathmunge from Red Hat's /etc/profile.
 pathmunge() {
+	if test ! -d "${1}"; then
+		return
+	fi
 	case ":${PATH}:" in
 		*:"${1}":*)
 			;;
@@ -39,6 +42,7 @@ export VISUAL='vim'
 export EDITOR="${VISUAL}"
 export FCEDIT="${VISUAL}"
 export SVN_EDITOR="${VISUAL}"
+
 export PAGER='less'
 export LESS='QRi'
 export GIT_PAGER='less -+F -X'
@@ -47,46 +51,34 @@ export GIT_PAGER='less -+F -X'
 # I find the others (kde4, gtk, and gtk3) ugly.
 export SAL_USE_VCLPLUGIN=gen
 
-p="${HOME}/src/git/misc-config"
-if [ -d "${p}" ]; then
-	export mcfg="${p}"
+export mcfg="${HOME}/src/git/misc-config"
+export mscr="${HOME}/src/git/misc-scripts"
+
+if [ -z "${PATH}" ]; then
+	PATH='/usr/local/bin:/usr/bin:/bin'
 fi
 
-p="${HOME}/src/git/misc-scripts"
-if [ -d "${p}" ]; then
-	export mscr="${p}"
-fi
+PATH="${PATH}:/usr/local/sbin:/usr/sbin:/sbin"
 
-for p in /usr/local/sbin /usr/sbin /sbin; do
-	pathmunge "${p}" 'after'
-done
-
-p="${HOME}/bin"
+p='/opt/golang/root'
 if [ -d "${p}" ]; then
-	pathmunge "${p}" 'after'
+	export GOROOT="${p}"
+	PATH="${GOROOT}/bin:${PATH}"
 fi
 
 p="${HOME}/go"
 if [ -d "${p}" ]; then
 	export GOPATH="${p}"
-	if [ -d "${GOPATH}/bin" ]; then
-		pathmunge "${GOPATH}/bin"
-	fi
-fi
-
-p='/opt/golang/root'
-if [ -d "${p}" ]; then
-	export GOROOT="${p}"
-	if [ -d "${GOROOT}/bin" ]; then
-		pathmunge "${GOROOT}/bin"
-	fi
+	PATH="${PATH}:${GOPATH}/bin"
 fi
 
 unset -v p
 
+PATH="${PATH}:${HOME}/bin"
+
 # Do not modify PATH after this part (in other words: do this part towards the
 # end of ~/.profile).  Remove any duplicates from PATH.  Order will be
-# preserved.
+# preserved.  Non-existent directories will be removed.
 orig_IFS="${IFS+_${IFS}}"  # Note: ${foo+bar}, not ${foo:+bar}
 IFS=':'
 path_copy="${PATH}"
@@ -95,10 +87,12 @@ for p in ${path_copy}; do
 	pathmunge "${p}" 'after'
 done
 if [ -z "${orig_IFS}" ]; then unset -v IFS; else IFS="${orig_IFS#_}"; fi
-export PATH
 unset -v orig_IFS p path_copy
 
 unset -f pathmunge
+
+# Finally, export PATH after cleaning it up.
+export PATH
 
 # Source .bashrc in the end, and only if running bash.
 if [ -n "${BASH_VERSION}" -a -r "${HOME}/.bashrc" ]; then
