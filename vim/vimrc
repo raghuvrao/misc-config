@@ -92,14 +92,16 @@ augroup END
 " The following escape-sequences allow CTRL-<arrow> to work as expected
 " (mostly) when Vim is run within tmux.  CTRL-<arrow> is useful in insert mode
 " and cmdline mode.  For these settings to work, `xterm-keys' must be set to
-" on in tmux's configuration.  To prevent these assignments from occuring in
-" GUI-Vim (the assignments are unnecessary there), the 'gui_running' check is
-" needed: 'term' is not yet set to 'builtin_gui' when GUI-Vim runs the
-" commands in this file.  Instead, 'term' will have the same value as the
-" shell variable TERM; it gets set to 'builtin_gui' some time later.
-if !has('gui_running') && &term =~# '^screen' && exists('$TMUX')
-  " :execute is needed because we want \e to be parsed into literal ESC before
-  " being assigned.
+" on in tmux's configuration.
+"
+" I want these escape-sequences to be assigned only in non-GUI Vim, and when
+" started from within tmux.  'term' is not _yet_ 'builtin_gui' when GUI-Vim
+" executes the commands in this file ('term' will match the value of TERM in
+" the shell/environment, which in tmux is typically screen* or tmux*), so
+" check 'gui_running' too.
+if !has('gui_running') && &term =~# '^screen\|^tmux' && exists('$TMUX')
+  " :execute is needed because we want \e to be parsed into literal ESC
+  " before being assigned.
   execute "set <xUp>=\e[1;*A"
   execute "set <xDown>=\e[1;*B"
   execute "set <xRight>=\e[1;*C"
