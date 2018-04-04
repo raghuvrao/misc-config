@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # .bash_profile
 # Author: Raghu Rao <raghu.v.rao@gmail.com>
 
