@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # ~/.profile
 # Author: Raghu Rao <raghu.v.rao@gmail.com>
 #

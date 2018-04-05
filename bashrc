@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # ~/.bashrc
 # Author: Raghu Rao <raghu.v.rao@gmail.com>
 #
