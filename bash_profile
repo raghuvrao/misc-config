@@ -37,14 +37,16 @@ pathmunge() {
 # In order that these variables be available to child processes, it is
 # necessary to export them.
 
-export VISUAL='vim'
-export EDITOR="${VISUAL}"
-export FCEDIT="${VISUAL}"
-export SVN_EDITOR="${VISUAL}"
+export EDITOR='vim'
+export FCEDIT="${EDITOR}"
+export GIT_EDITOR="${EDITOR}"
+export SVN_EDITOR="${EDITOR}"
+export VISUAL="${EDITOR}"
 
-export PAGER='less'
-export LESS='QRi'
 export GIT_PAGER='less -+F -X'
+export PAGER='less'
+
+export LESS='QRi'
 
 # Force LibreOffice to use the generic Visual Components Library plugin.
 export SAL_USE_VCLPLUGIN=gen
