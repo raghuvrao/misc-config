@@ -9,7 +9,6 @@
 (require 'package)
 (package-initialize)
 
-(global-font-lock-mode -1)
 (global-hl-line-mode -1)
 (transient-mark-mode -1)
 
@@ -35,7 +34,6 @@
 
 (define-key global-map (kbd "C-c H") #'hl-line-mode)
 (define-key global-map (kbd "C-c J") #'join-line)
-(define-key global-map (kbd "C-c P") #'font-lock-mode)
 (define-key global-map (kbd "C-c f") #'forward-whitespace)
 (define-key global-map (kbd "C-c w") #'toggle-truncate-lines)
 (define-key global-map (kbd "C-c ;") #'comment-line)
@@ -350,9 +348,6 @@ Do so only when Emacs is running on a graphic display."
   "Indentation can use tabs in current buffer."
   (set (make-local-variable 'indent-tabs-mode) t))
 
-(with-eval-after-load 'simple
-  (add-hook 'special-mode-hook #'turn-on-font-lock))
-
 (with-eval-after-load 'help-mode
   (add-hook 'help-mode-hook #'raghu--do-word-wrap-in-buffer))
 
@@ -361,8 +356,7 @@ Do so only when Emacs is running on a graphic display."
   (add-hook 'prog-mode-hook #'raghu--show-trailing-whitespace-in-buffer))
 
 (with-eval-after-load 'outline
-  (add-hook 'outline-mode-hook #'raghu--enable-hl-line-mode-in-buffer)
-  (add-hook 'outline-mode-hook #'turn-on-font-lock))
+  (add-hook 'outline-mode-hook #'raghu--enable-hl-line-mode-in-buffer))
 
 (with-eval-after-load 'conf-mode
   (add-hook 'conf-mode-hook #'raghu--enable-hl-line-mode-in-buffer))
@@ -377,24 +371,17 @@ Do so only when Emacs is running on a graphic display."
   (add-hook 'ibuffer-mode-hook #'raghu--enable-hl-line-mode-in-buffer))
 
 (with-eval-after-load 'dired
-  (add-hook 'dired-mode-hook #'raghu--enable-hl-line-mode-in-buffer)
-  (add-hook 'dired-mode-hook #'turn-on-font-lock))
+  (add-hook 'dired-mode-hook #'raghu--enable-hl-line-mode-in-buffer))
 
 (with-eval-after-load 'compile
   (add-hook 'compilation-mode-hook #'raghu--enable-hl-line-mode-in-buffer)
-  (add-hook 'compilation-mode-hook #'raghu--do-word-wrap-in-buffer)
-  (add-hook 'compilation-mode-hook #'turn-on-font-lock))
-
-(with-eval-after-load 'diff-mode
-  (add-hook 'diff-mode-hook #'turn-on-font-lock))
+  (add-hook 'compilation-mode-hook #'raghu--do-word-wrap-in-buffer))
 
 (with-eval-after-load 'shell
-  (add-hook 'shell-mode-hook #'raghu--enable-hl-line-mode-in-buffer)
-  (add-hook 'shell-mode-hook #'turn-on-font-lock))
+  (add-hook 'shell-mode-hook #'raghu--enable-hl-line-mode-in-buffer))
 
 (with-eval-after-load 'esh-mode
-  (add-hook 'eshell-mode-hook #'raghu--enable-hl-line-mode-in-buffer)
-  (add-hook 'eshell-mode-hook #'turn-on-font-lock))
+  (add-hook 'eshell-mode-hook #'raghu--enable-hl-line-mode-in-buffer))
 
 (with-eval-after-load 'python
   (add-hook 'inferior-python-mode-hook #'turn-on-font-lock))
@@ -447,9 +434,31 @@ Do so only when Emacs is running on a graphic display."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(isearch ((((type x ns) (class color) (background light)) (:background "plum2" :foreground "black"))))
- '(region ((((type x ns) (class color) (background light)) (:background "LightGoldenrod2" :foreground "black")) (((type tty) (class color) (min-colors 8) (background light)) (:background "cyan" :foreground "black"))))
- '(trailing-whitespace ((((type x ns) (class color) (background light)) (:background "sky blue")))))
+ '(font-lock-builtin-face ((t nil)))
+ '(font-lock-constant-face ((t nil)))
+ '(font-lock-function-name-face ((t nil)))
+ '(font-lock-keyword-face ((t nil)))
+ '(font-lock-regexp-grouping-backslash ((t (:weight bold))))
+ '(font-lock-regexp-grouping-construct ((t (:weight bold))))
+ '(font-lock-string-face ((t nil)))
+ '(font-lock-type-face ((t nil)))
+ '(font-lock-variable-name-face ((t nil)))
+ '(font-lock-warning-face ((t (:weight bold))))
+ '(isearch ((((type x) (class color) (background light)) (:background "plum2" :foreground "black"))))
+ '(mode-line ((((type tty) (class color) (min-colors 8) (background light)) (:background "blue" :foreground "white" :weight bold))))
+ '(mode-line-inactive ((((type tty) (class color) (min-colors 8) (background light)) (:background "magenta" :foreground "white" :weight bold))))
+ '(org-block ((t nil)))
+ '(org-date ((t nil)))
+ '(org-meta-line ((t nil)))
+ '(org-table ((t nil)))
+ '(org-verbatim ((t nil)))
+ '(outline-4 ((t nil)))
+ '(region ((((type x) (class color) (background light)) (:background "LightGoldenrod2" :foreground "black")) (((type tty) (class color) (min-colors 8) (background light)) (:background "cyan" :foreground "black"))))
+ '(sh-quoted-exec ((t nil)))
+ '(trailing-whitespace ((((type x) (class color) (background light)) (:background "sky blue"))))
+ '(vertical-border ((((type tty) (class color) (min-colors 8) (background light)) (:background "white" :foreground "red"))))
+ '(widget-field ((((type tty) (background light)) (:inverse-video t))))
+ '(widget-inactive ((((type tty) (class color) (min-colors 8) (background light)) (:foreground "red")))))
 
 (require 'server)
 (unless (server-running-p) (server-start))
