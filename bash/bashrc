@@ -19,22 +19,23 @@ HISTFILESIZE=20000
 HISTSIZE="${HISTFILESIZE}"
 HISTTIMEFORMAT='%F %a %T %Z(UTC%z) '
 
-# Make sure bash updates its idea of window size after each command.
+# Make bash update its idea of the window's size after each command.
 shopt -s checkwinsize
 
-# Make pipeline's return status the value of the last (rightmost) command to
-# exit with a non-zero status, or zero if all commands exit successfully.
+# Make pipelines return the exit status of the most recent (rightmost) command
+# in them that exited with a non-zero exit status, instead of the exit status
+# of the final command.
 shopt -o -s pipefail
 
 # Do not perform completion when completion is attempted on an empty line.
 shopt -s no_empty_cmd_completion
 
 # In Slackware, when running bash, readline's clear-screen function (bound to
-# C-l by default) does not seem to work as expected for certain TERMs (e.g.
-# xterm-256color, screen-256color and screen).  For these TERMs, the command
-# 'tput clear' works as expected.  So, work around the problem by rebinding C-l
-# to 'tput clear' until I find a proper solution.
-if [[ "${TERM}" =~ xterm-.*|screen.* ]]; then
+# C-l by default) does not seem to work as expected for certain types of
+# terminals (e.g.  xterm-256color, screen*, rxvt*).  For these terminal types,
+# the command `tput clear' works as expected.  So, work around the problem by
+# binding C-l to `tput clear', until I find a better solution.
+if [[ "${TERM}" =~ xterm-.*|screen.*|rxvt.* ]]; then
 	f="/etc/slackware-version"
 	if [[ -r "${f}" ]]; then
 		read -r first_line <"${f}" &>/dev/null
