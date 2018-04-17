@@ -453,7 +453,7 @@ Do so only when Emacs is running on a graphic display."
  '(org-table ((t nil)))
  '(org-verbatim ((t nil)))
  '(outline-4 ((t nil)))
- '(region ((((type x) (class color) (background light)) (:background "LightGoldenrod2" :foreground "black")) (((type tty) (class color) (min-colors 8) (background light)) (:background "cyan" :foreground "black"))))
+ '(region ((((type x tty) (class color) (min-colors 256) (background light)) (:background "LightGoldenrod2" :foreground "black")) (((type tty) (class color) (min-colors 16) (background light)) (:background "brightcyan" :foreground "black")) (((type tty) (class color) (min-colors 8) (background light)) (:background "cyan" :foreground "black"))))
  '(sh-quoted-exec ((t nil)))
  '(trailing-whitespace ((((type x) (class color) (background light)) (:background "sky blue"))))
  '(vertical-border ((((type tty) (class color) (min-colors 8) (background light)) (:background "white" :foreground "red"))))
