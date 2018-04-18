@@ -20,11 +20,23 @@
 (column-number-mode 1)
 (show-paren-mode 1)
 
-;; Various shell programs like to send their stdout through a
-;; pagination program (e.g. more, less).  When those programs are run
-;; within Emacs, pagination is unnecessary.
+;; Various programs (e.g. git, man) like to send their stdout through
+;; a pagination program (e.g. more, less).  When those programs are
+;; invoked at a command interpreter (a shell) in Emacs, pagination is
+;; unnecessary.
 (setenv "PAGER" "cat")
 (setenv "GIT_PAGER" nil)
+
+;; When working with a command interpreter through Emacs, use
+;; `emacsclient' as the editor that other programs invoke (e.g. git,
+;; svn), so the file to edit opens in an Emacs buffer.  It works
+;; because I do server-start or run Emacs in daemon mode.
+(let ((editor "emacsclient"))
+  (setenv "EDITOR" editor)
+  (setenv "FCEDIT" editor)
+  (setenv "GIT_EDITOR" editor)
+  (setenv "SVN_EDITOR" editor)
+  (setenv "VISUAL" editor))
 
 (set-language-environment "UTF-8")
 (prefer-coding-system 'utf-8)
