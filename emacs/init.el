@@ -26,6 +26,7 @@
 ;; unnecessary.
 (setenv "PAGER" "cat")
 (setenv "GIT_PAGER" nil)
+(setenv "LESS" nil)
 
 ;; When working with a command interpreter through Emacs, use
 ;; `emacsclient' as the editor that other programs invoke (e.g. git,
