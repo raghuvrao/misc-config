@@ -9,7 +9,6 @@
 (require 'package)
 (package-initialize)
 
-(global-hl-line-mode -1)
 (transient-mark-mode -1)
 
 (when (fboundp #'horizontal-scroll-bar-mode) (horizontal-scroll-bar-mode -1))
@@ -340,13 +339,6 @@ UNIX timestamp."
     (insert (format-time-string fmt nil timezone))))
 (define-key global-map (kbd "C-c t") #'raghu/insert-current-date-time)
 
-(defun raghu--enable-hl-line-mode-in-buffer ()
-  "Highlight line containing point in current buffer.
-
-Do so only when Emacs is running on a graphic display."
-  (when (fboundp #'display-graphic-p)
-    (when (display-graphic-p) (hl-line-mode 1))))
-
 (defun raghu--do-word-wrap-in-buffer ()
   "Do word-wrapping in current buffer."
   (set (make-local-variable 'truncate-lines) nil)
@@ -364,36 +356,10 @@ Do so only when Emacs is running on a graphic display."
   (add-hook 'help-mode-hook #'raghu--do-word-wrap-in-buffer))
 
 (with-eval-after-load 'prog-mode
-  (add-hook 'prog-mode-hook #'raghu--enable-hl-line-mode-in-buffer)
   (add-hook 'prog-mode-hook #'raghu--show-trailing-whitespace-in-buffer))
 
-(with-eval-after-load 'outline
-  (add-hook 'outline-mode-hook #'raghu--enable-hl-line-mode-in-buffer))
-
-(with-eval-after-load 'conf-mode
-  (add-hook 'conf-mode-hook #'raghu--enable-hl-line-mode-in-buffer))
-
-(with-eval-after-load 'cus-edit
-  (add-hook 'Custom-mode-hook #'raghu--enable-hl-line-mode-in-buffer))
-
-(with-eval-after-load 'tabulated-list
-  (add-hook 'tabulated-list-mode-hook #'raghu--enable-hl-line-mode-in-buffer))
-
-(with-eval-after-load 'ibuffer
-  (add-hook 'ibuffer-mode-hook #'raghu--enable-hl-line-mode-in-buffer))
-
-(with-eval-after-load 'dired
-  (add-hook 'dired-mode-hook #'raghu--enable-hl-line-mode-in-buffer))
-
 (with-eval-after-load 'compile
-  (add-hook 'compilation-mode-hook #'raghu--enable-hl-line-mode-in-buffer)
   (add-hook 'compilation-mode-hook #'raghu--do-word-wrap-in-buffer))
-
-(with-eval-after-load 'shell
-  (add-hook 'shell-mode-hook #'raghu--enable-hl-line-mode-in-buffer))
-
-(with-eval-after-load 'esh-mode
-  (add-hook 'eshell-mode-hook #'raghu--enable-hl-line-mode-in-buffer))
 
 (with-eval-after-load 'python
   (add-hook 'inferior-python-mode-hook #'turn-on-font-lock))
@@ -405,7 +371,6 @@ Do so only when Emacs is running on a graphic display."
   (add-hook 'text-mode-hook #'raghu--do-word-wrap-in-buffer))
 
 (with-eval-after-load 'log-edit
-  (add-hook 'log-edit-mode-hook #'raghu--enable-hl-line-mode-in-buffer)
   (add-hook 'log-edit-mode-hook #'turn-on-font-lock))
 
 (with-eval-after-load 'conf-mode
