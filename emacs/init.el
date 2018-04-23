@@ -309,21 +309,6 @@ indentation according to mode."
     (indent-according-to-mode)))
 (define-key global-map (kbd "C-c RET") #'raghu/new-line-below)
 
-(defun raghu/mark-string (&optional activate-mark-p)
-  "Mark the string containing point.
-
-If ACTIVATE-MARK-P is non-nil, activate mark too."
-  (interactive "P")
-  (if (nth 3 (syntax-ppss))
-      (progn
-	(while (nth 3 (syntax-ppss)) (backward-char 1))
-	(push-mark)
-	(forward-char 1)
-	(while (nth 3 (syntax-ppss)) (forward-char 1))
-	(when activate-mark-p (activate-mark)))
-    (error "Point is not in a string")))
-(define-key global-map (kbd "C-c \"") #'raghu/mark-string)
-
 (defun raghu/insert-current-date-time (&optional arg)
   "At point, insert current date and time in system timezone.
 
