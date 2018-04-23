@@ -47,7 +47,7 @@
 (define-key global-map (kbd "C-c J") #'join-line)
 (define-key global-map (kbd "C-c f") #'forward-whitespace)
 (define-key global-map (kbd "C-c w") #'toggle-truncate-lines)
-(define-key global-map (kbd "C-c ;") #'comment-line)
+(define-key global-map (kbd "C-c c") #'comment-line)
 
 (require 'windmove)
 (windmove-default-keybindings 'control)
@@ -117,7 +117,7 @@ or double quotes."
     (switch-to-buffer buf-name)
     (setq default-directory dir)
     (async-shell-command cmd buf-name nil)))
-(define-key global-map (kbd "C-c !") #'raghu/async-shell-command)
+(define-key global-map (kbd "C-c d") #'raghu/async-shell-command)
 
 (defun raghu/visit-emacs-configuration-file ()
   "Visit ~/.emacs.d/init.el."
