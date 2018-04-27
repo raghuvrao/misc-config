@@ -389,7 +389,6 @@ UNIX timestamp."
  '(ring-bell-function (quote ignore))
  '(sh-basic-offset 8)
  '(sh-indentation 8)
- '(show-paren-delay 0)
  '(track-eol t)
  '(truncate-lines t)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
