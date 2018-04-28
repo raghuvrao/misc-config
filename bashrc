@@ -35,15 +35,13 @@ shopt -s no_empty_cmd_completion
 # terminals (e.g.  xterm-256color, screen*, rxvt*).  For these terminal types,
 # the command `tput clear' works as expected.  So, work around the problem by
 # binding C-l to `tput clear', until I find a better solution.
-if [[ "${TERM}" =~ xterm-.*|screen.*|rxvt.* ]]; then
-	f="/etc/slackware-version"
-	if [[ -r "${f}" ]]; then
-		read -r first_line <"${f}" &>/dev/null
-		if [[ "${first_line}" =~ ^[Ss]lackware ]]; then
-			builtin bind -r "\C-l"
-			builtin bind -x '"\C-l": tput clear'
-		fi
-		unset -v first_line
+if builtin shopt -q -o emacs || builtin shopt -q -o vi; then
+	if [[ "${TERM}" =~ xterm-.*|screen.*|rxvt.* ]]; then
+		builtin bind -m emacs -r "\C-l"
+		builtin bind -m emacs -x '"\C-l": tput clear'
+		builtin bind -m vi-command -r "\C-l"
+		builtin bind -m vi-command -x '"\C-l": tput clear'
+		builtin bind -m vi-move -r "\C-l"
+		builtin bind -m vi-move -x '"\C-l": tput clear'
 	fi
-	unset -v f
 fi
