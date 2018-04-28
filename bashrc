@@ -12,13 +12,13 @@ if [[ "${-}" != *i* ]]; then return; fi
 # Make bash update its idea of the window's size after each command.
 shopt -s checkwinsize
 
+# Do not perform completion when completion is attempted on an empty line.
+shopt -s no_empty_cmd_completion
+
 # Make pipelines return the exit status of the most recent (rightmost) command
 # in them that exited with a non-zero exit status, instead of the exit status
 # of the final command.
 shopt -o -s pipefail
-
-# Do not perform completion when completion is attempted on an empty line.
-shopt -s no_empty_cmd_completion
 
 # Do not save lines matching previous history entry.
 HISTCONTROL='ignoredups'
@@ -43,15 +43,13 @@ unset -v PROMPT_COMMAND
 # terminals (e.g.  xterm-256color, screen*, rxvt*).  For these terminal types,
 # the command `tput clear' works as expected.  So, work around the problem by
 # binding C-l to `tput clear', until I find a better solution.
-if [[ "${TERM}" =~ xterm-.*|screen.*|rxvt.* ]]; then
-	f="/etc/slackware-version"
-	if [[ -r "${f}" ]]; then
-		read -r first_line <"${f}" &>/dev/null
-		if [[ "${first_line}" =~ ^[Ss]lackware ]]; then
-			builtin bind -r "\C-l"
-			builtin bind -x '"\C-l": tput clear'
-		fi
-		unset -v first_line
+if builtin shopt -q -o emacs || builtin shopt -q -o vi; then
+	if [[ "${TERM}" =~ xterm-.*|screen.*|rxvt.* ]]; then
+		builtin bind -m emacs -r "\C-l"
+		builtin bind -m emacs -x '"\C-l": tput clear'
+		builtin bind -m vi-command -r "\C-l"
+		builtin bind -m vi-command -x '"\C-l": tput clear'
+		builtin bind -m vi-move -r "\C-l"
+		builtin bind -m vi-move -x '"\C-l": tput clear'
 	fi
-	unset -v f
 fi
