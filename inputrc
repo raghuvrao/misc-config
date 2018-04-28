@@ -1,6 +1,3 @@
-set editing-mode emacs
-set keymap emacs-standard
-
 $include /etc/inputrc
 
 set input-meta on
