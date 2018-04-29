@@ -24,8 +24,8 @@ shopt -o -s pipefail
 HISTCONTROL='ignoredups'
 PROMPT_DIRTRIM=3
 
-# Set prompt and terminal emulator window/tab titles and icon names.  See
-# SETTING-TITLES for more information.
+# Set prompt and terminal emulator window/tab titles and icon names.  See the
+# file SETTING-TITLES for more information.
 PS1='\h:\w\$ '
 case "${TERM}" in
     xterm*|rxvt*)
