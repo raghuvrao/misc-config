@@ -331,13 +331,13 @@ UNIX timestamp."
   (set (make-local-variable 'truncate-lines) nil)
   (set (make-local-variable 'word-wrap) 1))
 
+(defun raghu--indentation-cannot-insert-tabs-in-buffer ()
+  "Indentation cannot use tabs in current buffer."
+  (set (make-local-variable 'indent-tabs-mode) nil))
+
 (defun raghu--show-trailing-whitespace-in-buffer ()
   "Highlight trailing whitespace in the current buffer."
   (set (make-local-variable 'show-trailing-whitespace) t))
-
-(defun raghu--indentation-can-insert-tabs-in-buffer ()
-  "Indentation can use tabs in current buffer."
-  (set (make-local-variable 'indent-tabs-mode) t))
 
 (with-eval-after-load 'help-mode
   (add-hook 'help-mode-hook #'raghu--do-word-wrap-in-buffer))
@@ -349,7 +349,7 @@ UNIX timestamp."
   (add-hook 'compilation-mode-hook #'raghu--do-word-wrap-in-buffer))
 
 (with-eval-after-load 'sh-mode
-  (add-hook 'sh-mode-hook #'raghu--indentation-can-insert-tabs-in-buffer))
+  (add-hook 'sh-mode-hook #'raghu--indentation-cannot-insert-tabs-in-buffer))
 
 (with-eval-after-load "text-mode"	; No `provide' in text-mode.el
   (add-hook 'text-mode-hook #'raghu--do-word-wrap-in-buffer))
@@ -396,8 +396,6 @@ UNIX timestamp."
  '(package-enable-at-startup nil)
  '(package-selected-packages (quote (go-eldoc go-errcheck go-guru go-mode go-rename)))
  '(ring-bell-function (quote ignore))
- '(sh-basic-offset 8)
- '(sh-indentation 8)
  '(track-eol t)
  '(truncate-lines t)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
