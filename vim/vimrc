@@ -85,6 +85,7 @@ augroup miscellaneous
   autocmd FileType help setlocal nolist keywordprg=:help
   autocmd FileType json setlocal expandtab shiftwidth=2 softtabstop=-1
   autocmd FileType man setlocal nolist
+  autocmd FileType sh setlocal expandtab shiftwidth=4 softtabstop=-1
   autocmd FileType text setlocal linebreak wrap
   autocmd FileType vim setlocal keywordprg=:help shiftwidth=2 softtabstop=-1
 augroup END

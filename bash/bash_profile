@@ -5,25 +5,24 @@
 
 # Slightly modified version of pathmunge from Red Hat's /etc/profile.
 pathmunge() {
-	if test ! -d "${1}"; then
-		return
-	fi
-	case ":${PATH}:" in
-		*:"${1}":*)
-			;;
-		*)
-			# Avoid leading/trailing colon.
-			if [ -z "${PATH}" ]; then
-				PATH="${1}"
-				return
-			fi
-			if [ "${2}" = "after" ]; then
-				PATH="${PATH}:${1}"
-			else
-				PATH="${1}:${PATH}"
-			fi
-			;;
-	esac
+    if test ! -d "${1}"; then
+        return
+    fi
+    case ":${PATH}:" in
+        *:"${1}":*) ;;  # Do nothing.  PATH already has ${1} in it.
+        *)
+            # Avoid leading/trailing colon.
+            if [ -z "${PATH}" ]; then
+                PATH="${1}"
+                return
+            fi
+            if [ "${2}" = "after" ]; then
+                PATH="${PATH}:${1}"
+            else
+                PATH="${1}:${PATH}"
+            fi
+            ;;
+    esac
 }
 
 # Some general guidelines to tell if an environment variable belongs in this
@@ -52,7 +51,7 @@ export LESS='QRi'
 export SAL_USE_VCLPLUGIN=gen
 
 if [ -z "${PATH}" ]; then
-	PATH='/usr/local/bin:/usr/bin:/bin'
+    PATH='/usr/local/bin:/usr/bin:/bin'
 fi
 
 PATH="${PATH}:${HOME}/bin"
@@ -60,12 +59,12 @@ PATH="${PATH}:${HOME}/bin"
 # Do not modify PATH after this part (in other words: do this part towards the
 # end of ~/.bash_profile).  Remove any duplicates from PATH.  Order will be
 # preserved.  Non-existent directories will be removed.
-orig_IFS="${IFS+_${IFS}}"  # Note: ${foo+bar}, not ${foo:+bar}
-IFS=':'
 path_copy="${PATH}"
 PATH=""
+orig_IFS="${IFS+_${IFS}}"  # Note: ${foo+bar}, not ${foo:+bar}
+IFS=':'
 for p in ${path_copy}; do
-	pathmunge "${p}" 'after'
+    pathmunge "${p}" 'after'
 done
 if [ -z "${orig_IFS}" ]; then unset -v IFS; else IFS="${orig_IFS#_}"; fi
 unset -v orig_IFS p path_copy
@@ -77,5 +76,5 @@ export PATH
 
 # Source .bashrc in the end, and only if running bash.
 if [ -n "${BASH_VERSION}" -a -r "${HOME}/.bashrc" ]; then
-	. "${HOME}/.bashrc"
+    . "${HOME}/.bashrc"
 fi
