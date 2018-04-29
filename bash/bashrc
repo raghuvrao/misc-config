@@ -35,13 +35,13 @@ HISTTIMEFORMAT='%F %a %T %Z(UTC%z) '
 # terminals (e.g.  xterm-256color, screen*, rxvt*).  For these terminal types,
 # the command `tput clear' works as expected.  So, work around the problem by
 # binding C-l to `tput clear', until I find a better solution.
-if builtin shopt -q -o emacs || builtin shopt -q -o vi; then
+if shopt -q -o emacs || shopt -q -o vi; then
     if [[ "${TERM}" =~ xterm-.*|screen.*|rxvt.* ]]; then
-        builtin bind -m emacs -r "\C-l"
-        builtin bind -m emacs -x '"\C-l": tput clear'
-        builtin bind -m vi-command -r "\C-l"
-        builtin bind -m vi-command -x '"\C-l": tput clear'
-        builtin bind -m vi-move -r "\C-l"
-        builtin bind -m vi-move -x '"\C-l": tput clear'
+        bind -m emacs -r "\C-l"
+        bind -m emacs -x '"\C-l": tput clear'
+        bind -m vi-command -r "\C-l"
+        bind -m vi-command -x '"\C-l": tput clear'
+        bind -m vi-move -r "\C-l"
+        bind -m vi-move -x '"\C-l": tput clear'
     fi
 fi
