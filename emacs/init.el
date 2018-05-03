@@ -345,6 +345,11 @@ UNIX timestamp."
 (with-eval-after-load 'prog-mode
   (add-hook 'prog-mode-hook #'raghu--show-trailing-whitespace-in-buffer))
 
+;; Limit the size of comint buffers (e.g. buffers from M-x shell).
+;; Also, see `comint-buffer-maximum-size'.
+(with-eval-after-load 'comint
+  (add-hook 'comint-output-filter-functions #'comint-truncate-buffer))
+
 (with-eval-after-load 'compile
   (add-hook 'compilation-mode-hook #'raghu--do-word-wrap-in-buffer))
 
@@ -368,6 +373,7 @@ UNIX timestamp."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(comint-buffer-maximum-size 10240)
  '(debug-on-error t)
  '(frame-background-mode (quote light))
  '(help-window-select t)
