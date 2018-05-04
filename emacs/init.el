@@ -294,7 +294,7 @@ indentation according to mode."
     (beginning-of-line 1)
     (open-line arg)
     (indent-according-to-mode)))
-(define-key global-map (kbd "C-c o") #'raghu/new-line-above)
+(define-key global-map (kbd "C-c O") #'raghu/new-line-above)
 
 (defun raghu/new-line-below (arg)
   "Below current line, insert new line and indentation.
@@ -310,7 +310,7 @@ indentation according to mode."
       (newline arg nil))
     (forward-line)
     (indent-according-to-mode)))
-(define-key global-map (kbd "C-c RET") #'raghu/new-line-below)
+(define-key global-map (kbd "C-c o") #'raghu/new-line-below)
 
 (defun raghu/insert-current-date-time (&optional arg)
   "At point, insert current date and time in system timezone.
