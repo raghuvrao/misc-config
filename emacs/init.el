@@ -353,7 +353,7 @@ UNIX timestamp."
 (with-eval-after-load 'compile
   (add-hook 'compilation-mode-hook #'raghu--do-word-wrap-in-buffer))
 
-(with-eval-after-load 'sh-mode
+(with-eval-after-load 'sh-script
   (add-hook 'sh-mode-hook #'raghu--indentation-cannot-insert-tabs-in-buffer))
 
 (with-eval-after-load "text-mode"	; No `provide' in text-mode.el
