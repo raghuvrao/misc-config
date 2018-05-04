@@ -47,9 +47,10 @@
 
 (define-key global-map (kbd "C-c H") #'hl-line-mode)
 (define-key global-map (kbd "C-c J") #'join-line)
+(define-key global-map (kbd "C-c K") #'kill-whole-line)
+(define-key global-map (kbd "C-c c") #'comment-line)
 (define-key global-map (kbd "C-c f") #'forward-whitespace)
 (define-key global-map (kbd "C-c w") #'toggle-truncate-lines)
-(define-key global-map (kbd "C-c c") #'comment-line)
 
 (require 'windmove)
 (windmove-default-keybindings 'control)
