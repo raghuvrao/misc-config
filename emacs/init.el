@@ -394,7 +394,6 @@ UNIX timestamp."
      ("melpa-stable" . "https://stable.melpa.org/packages/"))))
  '(package-enable-at-startup nil)
  '(ring-bell-function (quote ignore))
- '(track-eol t)
  '(truncate-lines t)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
  '(use-dialog-box nil)
