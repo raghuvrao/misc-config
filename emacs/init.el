@@ -403,7 +403,6 @@ UNIX timestamp."
  '(package-enable-at-startup nil)
  '(package-selected-packages (quote (go-eldoc go-errcheck go-guru go-mode go-rename)))
  '(ring-bell-function (quote ignore))
- '(track-eol t)
  '(truncate-lines t)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
  '(use-dialog-box nil)
