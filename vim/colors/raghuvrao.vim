@@ -60,7 +60,7 @@ endif
 hi SpecialKey ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=NONE term=bold
 
 hi StatusLine ctermfg=White ctermbg=DarkBlue cterm=bold guifg=White guibg=DarkBlue gui=bold term=reverse,bold
-hi StatusLineNC ctermfg=Black ctermbg=DarkCyan cterm=NONE guifg=White guibg=DarkCyan gui=NONE term=reverse
+hi StatusLineNC ctermfg=White ctermbg=DarkCyan cterm=bold guifg=White guibg=DarkCyan gui=bold term=reverse
 hi clear StatusLineTerm
 hi link StatusLineTerm StatusLine
 hi clear StatusLineTermNC
