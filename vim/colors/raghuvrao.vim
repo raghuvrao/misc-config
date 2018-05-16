@@ -41,16 +41,26 @@ endif
 
 hi NonText ctermfg=Blue ctermbg=NONE cterm=bold guifg=Blue guibg=NONE gui=bold term=bold
 
-hi Pmenu ctermfg=Black ctermbg=Cyan cterm=NONE guifg=Black guibg=LightBlue gui=NONE
-if !has('gui_running') && &t_Co < 16
+hi Pmenu cterm=NONE guifg=Black guibg=LightBlue gui=NONE
+hi PmenuSbar ctermfg=NONE cterm=NONE guifg=NONE guibg=LightBlue gui=NONE
+hi PmenuSel ctermfg=White cterm=bold guifg=White guibg=DarkBlue gui=bold
+hi PmenuThumb ctermfg=NONE cterm=NONE guifg=NONE guibg=DarkCyan gui=NONE
+if &t_Co >= 256
+  hi Pmenu ctermfg=Black ctermbg=LightCyan
+  hi PmenuSbar ctermbg=LightCyan
+  hi PmenuSel ctermbg=DarkBlue
+  hi PmenuThumb ctermbg=DarkCyan
+elseif &t_Co >= 16
+  hi Pmenu ctermfg=Black ctermbg=Cyan
+  hi PmenuSbar ctermbg=Cyan
+  hi PmenuSel ctermbg=DarkBlue
+  hi PmenuThumb ctermbg=DarkCyan
+else
   hi Pmenu ctermfg=White ctermbg=DarkBlue cterm=bold
+  hi PmenuSbar ctermbg=DarkBlue
+  hi PmenuSel ctermbg=DarkMagenta
+  hi PmenuThumb ctermbg=DarkCyan
 endif
-hi PmenuSbar ctermfg=NONE ctermbg=Black cterm=NONE guifg=NONE guibg=Gray gui=NONE
-hi PmenuSel ctermfg=White ctermbg=DarkBlue cterm=NONE guifg=White guibg=DarkBlue gui=NONE
-if !has('gui_running') && &t_Co < 16
-  hi PmenuSel ctermfg=White ctermbg=DarkMagenta cterm=bold
-endif
-hi PmenuThumb ctermfg=NONE ctermbg=DarkYellow cterm=NONE guifg=NONE guibg=Black gui=NONE
 
 hi Question ctermfg=DarkGreen ctermbg=NONE cterm=NONE guifg=Black guibg=LightGreen gui=bold term=standout
 if &t_Co >= 256
