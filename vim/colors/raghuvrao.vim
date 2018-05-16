@@ -84,11 +84,13 @@ hi Todo ctermfg=Blue ctermbg=NONE cterm=bold guifg=Blue guibg=NONE gui=bold term
 
 hi VertSplit ctermfg=LightGray ctermbg=DarkBlue cterm=NONE guifg=LightGray guibg=DarkBlue gui=NONE term=reverse
 
-hi Visual term=reverse cterm=NONE gui=NONE
-if has('gui_running') || &t_Co >= 16
-  hi Visual ctermfg=Black ctermbg=Cyan guifg=Black guibg=LightBlue
+hi Visual ctermfg=Black cterm=NONE guifg=Black guibg=LightBlue gui=NONE term=reverse
+if &t_Co >= 256
+  hi Visual ctermbg=LightBlue
+elseif &t_Co >= 16
+  hi Visual ctermbg=Cyan
 else
-  hi Visual cterm=reverse ctermfg=NONE ctermbg=NONE
+  hi Visual ctermbg=DarkCyan
 endif
 
 hi WildMenu ctermfg=White ctermbg=DarkMagenta cterm=bold guifg=White guibg=DarkMagenta gui=bold term=standout
