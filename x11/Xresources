@@ -1,5 +1,9 @@
 xterm.termName: xterm-256color
 uxterm.termName: xterm-256color
+xterm*vt100.highlightSelection: true
+uxterm*vt100.highlightSelection: true
+xterm*vt100.trimSelection: true
+uxterm*vt100.trimSelection: true
 xterm*vt100.backarrowKey: false
 uxterm*vt100.backarrowKey: false
 xterm*vt100.loginShell: true
