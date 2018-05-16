@@ -72,7 +72,7 @@ hi TabLineSel ctermfg=White ctermbg=DarkBlue cterm=bold term=bold
 
 hi Todo ctermfg=Blue ctermbg=NONE cterm=bold guifg=Blue guibg=NONE gui=bold term=standout
 
-hi VertSplit ctermfg=DarkRed ctermbg=LightGray cterm=NONE guifg=DarkRed guibg=LightGray gui=NONE term=reverse
+hi VertSplit ctermfg=LightGray ctermbg=DarkBlue cterm=NONE guifg=LightGray guibg=DarkBlue gui=NONE term=reverse
 
 hi Visual term=reverse cterm=NONE gui=NONE
 if has('gui_running') || &t_Co >= 16
