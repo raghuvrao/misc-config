@@ -14,8 +14,6 @@ let &softtabstop=&tabstop
 set ignorecase
 set smartcase
 
-set sidescroll=1
-
 set nowrap
 nnoremap <Leader>w :set invwrap<CR>
 
