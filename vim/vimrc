@@ -132,6 +132,7 @@ nnoremap <Leader>e :silent edit<CR>
 nnoremap <Leader>m :set invmodifiable<CR>
 nnoremap <Leader>I :edit $MYVIMRC<CR>
 nnoremap <Leader><Space> :buffers<CR>:buffer<Space>
+nnoremap <Leader>a :buffer #<CR>
 nnoremap <Leader>z :bprevious<CR>
 nnoremap <Leader>x :bnext<CR>
 nnoremap <Leader>S :%substitute/\<<C-R><C-W>\>//g<Left><Left>
