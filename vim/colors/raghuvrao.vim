@@ -20,24 +20,21 @@ hi clear Statement
 hi clear String
 hi clear Type
 
-hi Comment ctermfg=Brown ctermbg=NONE cterm=NONE guifg=Brown guibg=NONE gui=NONE term=bold
-
-hi Error ctermfg=White ctermbg=Red cterm=bold guifg=DarkRed guibg=LightRed gui=bold term=reverse
-if &t_Co >= 256
-  hi Error ctermfg=DarkRed ctermbg=LightRed cterm=NONE
+if &t_Co <= 8
+  hi ColorColumn ctermfg=NONE ctermbg=DarkGreen cterm=NONE
+else
+  hi ColorColumn ctermfg=NONE ctermbg=Yellow cterm=NONE
 endif
 
-hi ErrorMsg ctermfg=White ctermbg=Red cterm=bold guifg=DarkRed guibg=LightRed gui=bold term=standout
-if &t_Co >= 256
-  hi ErrorMsg ctermfg=DarkRed ctermbg=LightRed cterm=NONE
-endif
+hi Comment ctermfg=DarkYellow ctermbg=NONE cterm=NONE guifg=Brown guibg=NONE gui=NONE term=bold
+
+hi Error ctermfg=DarkRed ctermbg=NONE cterm=NONE guifg=DarkRed guibg=LightRed gui=NONE term=reverse
+
+hi ErrorMsg ctermfg=DarkRed ctermbg=NONE cterm=NONE guifg=DarkRed guibg=LightRed gui=NONE term=standout
 
 hi Folded ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui=NONE term=standout
 
-hi MoreMsg ctermfg=DarkGreen ctermbg=NONE cterm=NONE guifg=Black guibg=LightGreen gui=bold term=standout
-if &t_Co >= 256
-  hi MoreMsg ctermfg=Black ctermbg=LightGreen
-endif
+hi MoreMsg ctermfg=DarkGreen ctermbg=NONE cterm=NONE guifg=Black guibg=LightGreen gui=NONE term=bold
 
 hi NonText ctermfg=Blue ctermbg=NONE cterm=bold guifg=Blue guibg=NONE gui=bold term=bold
 
@@ -45,12 +42,7 @@ hi Pmenu cterm=NONE guifg=Black guibg=LightBlue gui=NONE
 hi PmenuSbar ctermfg=NONE cterm=NONE guifg=NONE guibg=LightBlue gui=NONE
 hi PmenuSel ctermfg=White cterm=bold guifg=White guibg=DarkBlue gui=bold
 hi PmenuThumb ctermfg=NONE cterm=NONE guifg=NONE guibg=DarkCyan gui=NONE
-if &t_Co >= 256
-  hi Pmenu ctermfg=Black ctermbg=LightCyan
-  hi PmenuSbar ctermbg=LightCyan
-  hi PmenuSel ctermbg=DarkBlue
-  hi PmenuThumb ctermbg=DarkCyan
-elseif &t_Co >= 16
+if &t_Co >= 16
   hi Pmenu ctermfg=Black ctermbg=Cyan
   hi PmenuSbar ctermbg=Cyan
   hi PmenuSel ctermbg=DarkBlue
@@ -62,9 +54,13 @@ else
   hi PmenuThumb ctermbg=DarkCyan
 endif
 
-hi Question ctermfg=DarkGreen ctermbg=NONE cterm=NONE guifg=Black guibg=LightGreen gui=bold term=standout
-if &t_Co >= 256
-  hi Question ctermfg=Black ctermbg=LightGreen
+hi Question ctermfg=DarkGreen ctermbg=NONE cterm=NONE guifg=Black guibg=LightGreen gui=NONE term=standout
+
+hi Search ctermfg=Black cterm=NONE guifg=Black guibg=Yellow gui=NONE term=reverse
+if &t_Co >= 16
+  hi Search ctermbg=Yellow
+else
+  hi Search ctermbg=DarkGreen
 endif
 
 hi SpecialKey ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=NONE term=bold
@@ -82,12 +78,10 @@ hi TabLineSel ctermfg=White ctermbg=DarkBlue cterm=bold term=bold
 
 hi Todo ctermfg=Blue ctermbg=NONE cterm=bold guifg=Blue guibg=NONE gui=bold term=standout
 
-hi VertSplit ctermbg=DarkBlue ctermfg=Blue cterm=bold guifg=LightBlue guibg=DarkBlue gui=bold term=reverse
+hi VertSplit ctermfg=DarkCyan ctermbg=DarkBlue cterm=NONE guifg=LightBlue guibg=DarkBlue gui=NONE term=reverse
 
 hi Visual ctermfg=Black cterm=NONE guifg=Black guibg=LightBlue gui=NONE term=reverse
-if &t_Co >= 256
-  hi Visual ctermbg=LightBlue
-elseif &t_Co >= 16
+if &t_Co >= 16
   hi Visual ctermbg=Cyan
 else
   hi Visual ctermbg=DarkCyan
@@ -117,6 +111,11 @@ hi link javaDocTags javaDocComment
 hi netrwClassify ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui=NONE term=underline
 hi link netrwDir netrwPlain
 hi link netrwSymLink netrwPlain
+
+if &t_Co <= 8
+  hi qfLineNr ctermfg=DarkYellow ctermbg=NONE cterm=NONE
+  hi qfFileName ctermfg=DarkMagenta ctermbg=NONE cterm=NONE
+endif
 
 hi link vimCommentString vimComment
 hi link vimCommentTitle vimComment
