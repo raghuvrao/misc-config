@@ -1,4 +1,4 @@
-" Mostly plain colorscheme for Vim.
+" Mostly-plain colorscheme for dark-foreground-light-background screens.
 " Maintainer:	Raghu V. Rao
 
 hi clear
@@ -28,13 +28,13 @@ endif
 
 hi Comment ctermfg=DarkYellow ctermbg=NONE cterm=NONE guifg=Brown guibg=NONE gui=NONE term=bold
 
-hi Error ctermfg=DarkRed ctermbg=NONE cterm=NONE guifg=DarkRed guibg=LightRed gui=NONE term=reverse
+hi Error ctermfg=DarkRed ctermbg=NONE cterm=NONE guifg=Red guibg=NONE gui=NONE term=reverse
 
-hi ErrorMsg ctermfg=DarkRed ctermbg=NONE cterm=NONE guifg=DarkRed guibg=LightRed gui=NONE term=standout
+hi ErrorMsg ctermfg=DarkRed ctermbg=NONE cterm=NONE guifg=Red guibg=NONE gui=NONE term=standout
 
 hi Folded ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui=NONE term=standout
 
-hi MoreMsg ctermfg=DarkGreen ctermbg=NONE cterm=NONE guifg=Black guibg=LightGreen gui=NONE term=bold
+hi MoreMsg ctermfg=DarkGreen ctermbg=NONE cterm=NONE guifg=DarkGreen guibg=NONE gui=bold term=bold
 
 hi NonText ctermfg=Blue ctermbg=NONE cterm=bold guifg=Blue guibg=NONE gui=bold term=bold
 
@@ -54,7 +54,7 @@ else
   hi PmenuThumb ctermbg=DarkCyan
 endif
 
-hi Question ctermfg=DarkGreen ctermbg=NONE cterm=NONE guifg=Black guibg=LightGreen gui=NONE term=standout
+hi Question ctermfg=DarkGreen ctermbg=NONE cterm=NONE guifg=DarkGreen guibg=NONE gui=bold term=standout
 
 hi Search ctermfg=Black cterm=NONE guifg=Black guibg=Yellow gui=NONE term=reverse
 if &t_Co >= 16
