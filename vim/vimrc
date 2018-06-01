@@ -122,7 +122,7 @@ nnoremap <silent> <Leader>tu i<C-R>=strftime('%s')<CR><Esc>
 nnoremap <silent> <Leader>ts i<C-R>=strftime('%Y-%m-%d %H:%M:%S %Z(UTC%z)')<CR><Esc>
 nnoremap <silent> <Leader>] :echo synIDattr(synID(line('.'), col('.'), 1), 'name')<CR>
 
-if !empty(exepath('xsel'))
+if executable('xsel')
   nnoremap <silent> <Leader>y :%write !xsel -ib 2>/dev/null<CR>
   xnoremap <silent> <Leader>y :write !xsel -ib 2>/dev/null<CR>
   nnoremap <silent> <Leader>p :read !xsel -ob 2>/dev/null<CR>
