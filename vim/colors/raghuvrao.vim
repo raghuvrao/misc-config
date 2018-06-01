@@ -56,12 +56,7 @@ endif
 
 hi Question ctermfg=DarkGreen ctermbg=NONE cterm=NONE guifg=DarkGreen guibg=NONE gui=bold term=standout
 
-hi Search ctermfg=Black cterm=NONE guifg=Black guibg=Yellow gui=NONE term=reverse
-if &t_Co >= 16
-  hi Search ctermbg=Yellow
-else
-  hi Search ctermbg=DarkGreen
-endif
+hi Search ctermfg=Black ctermbg=Green cterm=NONE guifg=Black guibg=LightGreen gui=NONE term=reverse
 
 hi SpecialKey ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=NONE term=bold
 
@@ -78,7 +73,7 @@ hi TabLineSel ctermfg=White ctermbg=DarkBlue cterm=bold term=bold
 
 hi Todo ctermfg=Blue ctermbg=NONE cterm=bold guifg=Blue guibg=NONE gui=bold term=standout
 
-hi VertSplit ctermfg=DarkCyan ctermbg=DarkBlue cterm=NONE guifg=LightBlue guibg=DarkBlue gui=NONE term=reverse
+hi VertSplit ctermfg=DarkCyan ctermbg=DarkBlue cterm=NONE guifg=DarkCyan guibg=DarkBlue gui=NONE term=reverse,bold
 
 hi Visual ctermfg=Black cterm=NONE guifg=Black guibg=LightBlue gui=NONE term=reverse
 if &t_Co >= 16
