@@ -58,7 +58,7 @@ hi Question ctermfg=DarkGreen ctermbg=NONE cterm=NONE guifg=DarkGreen guibg=NONE
 
 hi Search ctermfg=Black ctermbg=Green cterm=NONE guifg=Black guibg=LightGreen gui=NONE term=reverse
 
-hi SpecialKey ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=NONE term=bold
+hi SpecialKey ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui=NONE term=bold
 
 hi StatusLine ctermfg=Cyan ctermbg=DarkBlue cterm=bold guifg=Cyan guibg=DarkBlue gui=bold term=reverse,bold
 hi StatusLineNC ctermfg=LightGray ctermbg=DarkBlue cterm=NONE guifg=LightGray guibg=DarkBlue gui=NONE term=reverse
