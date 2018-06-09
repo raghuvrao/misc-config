@@ -89,6 +89,10 @@ hi diffFile ctermfg=NONE ctermbg=NONE cterm=bold guifg=NONE guibg=NONE gui=bold 
 hi diffLine ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui=NONE term=bold
 hi diffRemoved ctermfg=DarkRed ctermbg=NONE cterm=NONE guifg=DarkRed guibg=NONE gui=NONE term=underline
 
+hi gitHead ctermfg=Blue ctermbg=NONE cterm=bold guifg=Blue guibg=NONE gui=bold term=bold
+hi link gitIdentityKeyword gitKeyword
+hi gitKeyword ctermfg=Brown ctermbg=NONE cterm=NONE guifg=Brown guibg=NONE gui=bold term=bold
+
 hi gitcommitBranch ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=NONE term=bold,underline
 hi link gitcommitHeader gitcommitComment
 hi link gitcommitOverflow gitcommitComment
