@@ -60,7 +60,7 @@ hi Search ctermfg=Black ctermbg=Green cterm=NONE guifg=Black guibg=LightGreen gu
 
 hi SpecialKey ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui=NONE term=bold
 
-hi StatusLine ctermfg=Cyan ctermbg=DarkBlue cterm=bold guifg=Cyan guibg=DarkBlue gui=bold term=reverse,bold
+hi StatusLine ctermfg=White ctermbg=DarkBlue cterm=bold guifg=White guibg=DarkBlue gui=bold term=reverse,bold
 hi StatusLineNC ctermfg=LightGray ctermbg=DarkBlue cterm=NONE guifg=LightGray guibg=DarkBlue gui=NONE term=reverse
 hi clear StatusLineTerm
 hi link StatusLineTerm StatusLine
@@ -73,7 +73,7 @@ hi TabLineSel ctermfg=White ctermbg=DarkBlue cterm=bold term=bold
 
 hi Todo ctermfg=Blue ctermbg=NONE cterm=bold guifg=Blue guibg=NONE gui=bold term=standout
 
-hi VertSplit ctermfg=DarkCyan ctermbg=DarkBlue cterm=NONE guifg=DarkCyan guibg=DarkBlue gui=NONE term=reverse,bold
+hi VertSplit ctermfg=DarkBlue ctermbg=NONE cterm=NONE guifg=DarkBlue guibg=NONE gui=NONE term=reverse
 
 hi Visual ctermfg=Black cterm=NONE guifg=Black guibg=LightBlue gui=NONE term=reverse
 if &t_Co >= 16
