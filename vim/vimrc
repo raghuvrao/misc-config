@@ -26,6 +26,9 @@ set ruler
 
 set showcmd
 
+set fillchars-=vert:\|
+set fillchars+=vert:│
+
 set foldmethod=indent
 set foldlevel=100
 
