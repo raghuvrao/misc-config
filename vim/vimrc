@@ -26,8 +26,10 @@ set ruler
 
 set showcmd
 
-set fillchars-=vert:\|
-set fillchars+=vert:│
+if has('multi_byte') && &encoding == 'utf-8'
+  set fillchars-=vert:\|
+  set fillchars+=vert:│
+endif
 
 set foldmethod=indent
 set foldlevel=100
@@ -38,7 +40,12 @@ set nohlsearch
 nnoremap <Leader><Leader> :set invhlsearch<CR>
 
 set list
-set listchars=tab:→·,trail:¬,extends:#,precedes:#,nbsp:%
+set listchars=extends:#,precedes:#,nbsp:%
+if has('multi_byte') && &encoding == 'utf-8'
+  set listchars+=tab:→·,trail:¬
+else
+  set listchars+=tab:>\ ,trail:_
+endif
 
 set laststatus=2
 set statusline=%(\ %f%)%(\ %q%)%(\ %M%R%H%W%)%(\ %y%)%(\ %l,%c%V\ %)
