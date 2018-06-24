@@ -58,8 +58,8 @@ hi Search ctermfg=Black ctermbg=Green cterm=NONE guifg=Black guibg=LightGreen gu
 
 hi SpecialKey ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui=NONE term=bold
 
-hi StatusLine ctermfg=White ctermbg=DarkBlue cterm=bold guifg=White guibg=DarkBlue gui=bold term=reverse,bold
-hi StatusLineNC ctermfg=LightGray ctermbg=DarkBlue cterm=NONE guifg=LightGray guibg=DarkBlue gui=NONE term=reverse
+hi StatusLine ctermfg=White ctermbg=DarkMagenta cterm=bold guifg=White guibg=DarkMagenta gui=bold term=reverse,bold
+hi StatusLineNC ctermfg=White ctermbg=DarkBlue cterm=bold guifg=White guibg=DarkBlue gui=bold term=reverse
 hi clear StatusLineTerm
 hi link StatusLineTerm StatusLine
 hi clear StatusLineTermNC
