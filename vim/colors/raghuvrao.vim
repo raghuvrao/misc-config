@@ -26,7 +26,7 @@ else
   hi ColorColumn ctermfg=NONE ctermbg=Yellow cterm=NONE
 endif
 
-hi Comment ctermfg=DarkYellow ctermbg=NONE cterm=NONE guifg=Brown guibg=NONE gui=NONE term=bold
+hi Comment ctermfg=Brown ctermbg=NONE cterm=NONE guifg=Brown guibg=NONE gui=NONE term=bold
 
 hi Error guifg=Red guibg=NONE gui=NONE term=reverse
 if &t_Co >= 256
