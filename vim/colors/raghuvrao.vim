@@ -83,7 +83,7 @@ hi TabLineSel ctermfg=White ctermbg=DarkBlue cterm=bold term=bold
 
 hi Todo ctermfg=Blue ctermbg=NONE cterm=bold guifg=Blue guibg=NONE gui=bold term=standout
 
-hi VertSplit ctermfg=DarkBlue ctermbg=NONE cterm=NONE guifg=DarkBlue guibg=NONE gui=NONE term=reverse
+hi VertSplit ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=NONE term=reverse
 
 hi Visual ctermfg=Black cterm=NONE guifg=Black guibg=LightBlue gui=NONE term=reverse
 if &t_Co >= 16
