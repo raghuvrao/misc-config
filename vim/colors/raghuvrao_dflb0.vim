@@ -121,6 +121,8 @@ hi link vimCommentString vimComment
 hi link vimCommentTitle vimComment
 hi link vimCommentTitleLeader vimComment
 
+hi link xmlProcessingDelim NONE
+
 hi clear Conceal
 hi clear Constant
 hi clear Identifier
