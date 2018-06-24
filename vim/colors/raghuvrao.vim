@@ -129,3 +129,5 @@ endif
 hi link vimCommentString vimComment
 hi link vimCommentTitle vimComment
 hi link vimCommentTitleLeader vimComment
+
+hi link xmlProcessingDelim NONE
