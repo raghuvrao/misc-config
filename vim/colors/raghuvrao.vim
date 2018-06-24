@@ -28,7 +28,17 @@ endif
 
 hi Comment ctermfg=DarkYellow ctermbg=NONE cterm=NONE guifg=Brown guibg=NONE gui=NONE term=bold
 
-hi Error ctermfg=DarkRed ctermbg=NONE cterm=NONE guifg=Red guibg=NONE gui=NONE term=reverse
+hi Error guifg=Red guibg=NONE gui=NONE term=reverse
+if &t_Co >= 256
+  hi Error ctermfg=DarkRed ctermbg=LightRed cterm=NONE
+else
+  hi Error ctermfg=White ctermbg=DarkRed
+  if &t_Co >= 16
+    hi Error cterm=NONE
+  else
+    hi Error cterm=bold
+  endif
+endif
 
 hi ErrorMsg ctermfg=DarkRed ctermbg=NONE cterm=NONE guifg=Red guibg=NONE gui=NONE term=standout
 
