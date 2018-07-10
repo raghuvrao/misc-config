@@ -20,25 +20,14 @@ hi clear Statement
 hi clear String
 hi clear Type
 
+hi ColorColumn ctermfg=NONE ctermbg=Yellow cterm=NONE guifg=NONE guibg=Yellow gui=NONE term=reverse
 if &t_Co <= 8
-  hi ColorColumn ctermfg=NONE ctermbg=DarkGreen cterm=NONE
-else
-  hi ColorColumn ctermfg=NONE ctermbg=Yellow cterm=NONE
+  hi ColorColumn ctermbg=DarkGreen
 endif
 
 hi Comment ctermfg=Brown ctermbg=NONE cterm=NONE guifg=Brown guibg=NONE gui=NONE term=bold
 
-hi Error guifg=Red guibg=NONE gui=NONE term=reverse
-if &t_Co >= 256
-  hi Error ctermfg=DarkRed ctermbg=LightRed cterm=NONE
-else
-  hi Error ctermfg=White ctermbg=DarkRed
-  if &t_Co >= 16
-    hi Error cterm=NONE
-  else
-    hi Error cterm=bold
-  endif
-endif
+hi Error ctermfg=Red ctermbg=NONE cterm=bold guifg=Red guibg=NONE gui=NONE term=reverse
 
 hi ErrorMsg ctermfg=DarkRed ctermbg=NONE cterm=NONE guifg=Red guibg=NONE gui=NONE term=standout
 
@@ -48,16 +37,11 @@ hi MoreMsg ctermfg=DarkGreen ctermbg=NONE cterm=NONE guifg=DarkGreen guibg=NONE 
 
 hi NonText ctermfg=Blue ctermbg=NONE cterm=bold guifg=Blue guibg=NONE gui=bold term=bold
 
-hi Pmenu cterm=NONE guifg=Black guibg=LightBlue gui=NONE
-hi PmenuSbar ctermfg=NONE cterm=NONE guifg=NONE guibg=LightBlue gui=NONE
-hi PmenuSel ctermfg=White cterm=bold guifg=White guibg=DarkBlue gui=bold
-hi PmenuThumb ctermfg=NONE cterm=NONE guifg=NONE guibg=DarkCyan gui=NONE
-if &t_Co >= 16
-  hi Pmenu ctermfg=Black ctermbg=Cyan
-  hi PmenuSbar ctermbg=Cyan
-  hi PmenuSel ctermbg=DarkBlue
-  hi PmenuThumb ctermbg=DarkCyan
-else
+hi Pmenu ctermfg=Black ctermbg=Cyan cterm=NONE guifg=Black guibg=LightBlue gui=NONE
+hi PmenuSbar ctermfg=NONE ctermbg=Cyan cterm=NONE guifg=NONE guibg=LightBlue gui=NONE
+hi PmenuSel ctermfg=White ctermbg=DarkBlue cterm=bold guifg=White guibg=DarkBlue gui=bold
+hi PmenuThumb ctermfg=NONE ctermbg=DarkCyan cterm=NONE guifg=NONE guibg=DarkCyan gui=NONE
+if &t_Co <= 8
   hi Pmenu ctermfg=White ctermbg=DarkBlue cterm=bold
   hi PmenuSbar ctermbg=DarkBlue
   hi PmenuSel ctermbg=DarkMagenta
@@ -85,12 +69,7 @@ hi Todo ctermfg=Blue ctermbg=NONE cterm=bold guifg=Blue guibg=NONE gui=bold term
 
 hi VertSplit ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=NONE term=reverse
 
-hi Visual ctermfg=Black cterm=NONE guifg=Black guibg=LightBlue gui=NONE term=reverse
-if &t_Co >= 16
-  hi Visual ctermbg=Cyan
-else
-  hi Visual ctermbg=DarkCyan
-endif
+hi Visual ctermfg=Black ctermbg=Cyan cterm=NONE guifg=Black guibg=LightBlue gui=NONE term=reverse
 
 hi WildMenu ctermfg=White ctermbg=DarkBlue cterm=bold guifg=White guibg=DarkBlue gui=bold term=standout
 
