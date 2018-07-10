@@ -27,7 +27,7 @@ endif
 
 hi Comment ctermfg=Brown ctermbg=NONE cterm=NONE guifg=Brown guibg=NONE gui=NONE term=bold
 
-hi Error ctermfg=Red ctermbg=NONE cterm=bold guifg=Red guibg=NONE gui=NONE term=reverse
+hi Error ctermfg=Red ctermbg=NONE cterm=bold guifg=Red guibg=NONE gui=bold term=reverse
 
 hi ErrorMsg ctermfg=DarkRed ctermbg=NONE cterm=NONE guifg=Red guibg=NONE gui=NONE term=standout
 
