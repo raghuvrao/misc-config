@@ -8,24 +8,26 @@
 
 # Slightly modified version of pathmunge from Red Hat's /etc/profile.
 pathmunge() {
-    if test ! -d "${1}"; then
-        return
-    fi
-    case ":${PATH}:" in
-        *:"${1}":*) ;;  # Do nothing.  PATH already has ${1} in it.
-        *)
-            # Avoid leading/trailing colon.
-            if [ -z "${PATH}" ]; then
+    # Include only directories that we can both read and into which we can
+    # descend.
+    if [ -d "${1}" -a -r "${1}" -a -x "${1}" ]; then
+        case ":${PATH}:" in
+            ::)
+                # PATH is empty; avoid leading/trailing colon.
                 PATH="${1}"
-                return
-            fi
-            if [ "${2}" = "after" ]; then
-                PATH="${PATH}:${1}"
-            else
-                PATH="${1}:${PATH}"
-            fi
-            ;;
-    esac
+                ;;
+            *:"${1}":*)
+                # PATH already has ${1} in it; do nothing.
+                ;;
+            *)
+                if [ "${2}" = "after" ]; then
+                    PATH="${PATH}:${1}"
+                else
+                    PATH="${1}:${PATH}"
+                fi
+                ;;
+        esac
+    fi
 }
 
 # Some general guidelines to tell if an environment variable belongs in this
@@ -79,9 +81,8 @@ unset -v p
 
 PATH="${PATH}:${HOME}/bin"
 
-# Do not modify PATH after this part (in other words: do this part towards the
-# end of ~/.profile).  Remove any duplicates from PATH.  Order will be
-# preserved.  Non-existent directories will be removed.
+# Clean up PATH.  Do not modify PATH after this part (in other words: do this
+# part towards the end of ~/.profile).
 path_copy="${PATH}"
 PATH=""
 orig_IFS="${IFS+_${IFS}}"  # Note: ${foo+bar}, not ${foo:+bar}
@@ -89,12 +90,15 @@ IFS=':'
 for p in ${path_copy}; do
     pathmunge "${p}" 'after'
 done
-if [ -z "${orig_IFS}" ]; then unset -v IFS; else IFS="${orig_IFS#_}"; fi
+if [ -z "${orig_IFS}" ]; then
+    unset -v IFS
+else
+    IFS="${orig_IFS#_}"
+fi
 unset -v orig_IFS p path_copy
 
 unset -f pathmunge
 
-# Finally, export PATH after cleaning it up.
 export PATH
 
 # Source .bashrc in the end, and only if running bash.
