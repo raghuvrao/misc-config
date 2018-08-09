@@ -6,11 +6,23 @@
 # Keep this file so POSIX-compliant as possible because it is sourced by
 # multiple sh-like shells.  No bashisms!
 
-# Slightly modified version of pathmunge from Red Hat's /etc/profile.
+# dir_r_x returns true if its first argument is a readable directory into which
+# we can descend; false otherwise.
+dir_r_x() {
+    test -d "${1}" -a -r "${1}" -a -x "${1}"
+    return "${?}"
+}
+
+# pathmunge() appends its first argument to PATH if the second argument is the
+# string `after'; otherwise, pathmunge() prefixes its first argument to PATH.
+# The first argument must be a readable directory into which we can descend;
+# otherwise, pathmunge() does nothing to PATH, regardless of the second
+# argument.  This version of pathmunge() is a modified version of pathmunge()
+# from Red Hat's /etc/profile.
 pathmunge() {
     # Include only directories that we can both read and into which we can
     # descend.
-    if [ -d "${1}" -a -r "${1}" -a -x "${1}" ]; then
+    if dir_r_x "${1}"; then
         case ":${PATH}:" in
             ::)
                 # PATH is empty; avoid leading/trailing colon.
@@ -66,13 +78,13 @@ fi
 PATH="${PATH}:/usr/local/sbin:/usr/sbin:/sbin"
 
 p='/opt/golang/root'
-if [ -d "${p}" ]; then
+if dir_r_x "${p}" && dir_r_x "${p}/bin"; then
     export GOROOT="${p}"
     PATH="${GOROOT}/bin:${PATH}"
 fi
 
 p="${HOME}/go"
-if [ -d "${p}" ]; then
+if dir_r_x "${p}" && dir_r_x "${p}/bin"; then
     export GOPATH="${p}"
     PATH="${PATH}:${GOPATH}/bin"
 fi
@@ -81,8 +93,8 @@ unset -v p
 
 PATH="${PATH}:${HOME}/bin"
 
-# Clean up PATH.  Do not modify PATH after this part (in other words: do this
-# part towards the end of ~/.profile).
+# Clean up PATH.  Do not modify PATH after this clean-up part.  Any
+# modification to PATH must happen before this comment.
 path_copy="${PATH}"
 PATH=""
 orig_IFS="${IFS+_${IFS}}"  # Note: ${foo+bar}, not ${foo:+bar}
@@ -97,9 +109,9 @@ else
 fi
 unset -v orig_IFS p path_copy
 
-unset -f pathmunge
-
 export PATH
+
+unset -f pathmunge dir_r_x
 
 # Source .bashrc in the end, and only if running bash.
 if [ -n "${BASH_VERSION}" -a -r "${HOME}/.bashrc" ]; then
