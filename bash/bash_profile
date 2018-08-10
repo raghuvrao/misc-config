@@ -7,7 +7,7 @@
 # we can descend; false otherwise.
 dir_r_x() {
     test -d "${1}" -a -r "${1}" -a -x "${1}"
-    return "${?}"
+    return ${?}
 }
 
 # pathmunge() appends its first argument to PATH if the second argument is the
