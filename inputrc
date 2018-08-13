@@ -12,6 +12,5 @@ set visible-stats on
 set show-all-if-ambiguous off
 set show-all-if-unmodified on
 set completion-prefix-display-length 0
-set bell-style none
 set match-hidden-files on
 set print-completions-horizontally off
