@@ -59,7 +59,7 @@ export VISUAL="${EDITOR}"
 export GIT_PAGER='less -+F -X'
 export PAGER='less'
 
-export LESS='QRi'
+export LESS='Ri'
 
 # Force LibreOffice to use the generic Visual Components Library plugin.
 export SAL_USE_VCLPLUGIN=gen
