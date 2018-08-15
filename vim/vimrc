@@ -52,6 +52,8 @@ set report=0
 
 set mouse=
 
+set nofixendofline
+
 " ftplugins shall add to / remove from this default.
 set formatoptions=1jlmnq
 
