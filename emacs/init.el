@@ -402,7 +402,6 @@ UNIX timestamp."
      ("melpa-stable" . "https://stable.melpa.org/packages/"))))
  '(package-enable-at-startup nil)
  '(package-selected-packages (quote (go-eldoc go-errcheck go-guru go-mode go-rename)))
- '(ring-bell-function (quote ignore))
  '(truncate-lines t)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
  '(use-dialog-box nil)
