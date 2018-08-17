@@ -20,18 +20,17 @@
 (column-number-mode 1)
 (show-paren-mode 1)
 
-;; Various programs (e.g. git, man) like to send their stdout through
-;; a pagination program (e.g. more, less).  When those programs are
-;; invoked at a command interpreter (a shell) in Emacs, pagination is
-;; unnecessary.
+;; Various programs (e.g. git, man) like to send their stdout through a
+;; pagination program (e.g. more, less).  When those programs are invoked at a
+;; command interpreter (a shell) in Emacs, pagination is unnecessary.
 (setenv "PAGER" "cat")
 (setenv "GIT_PAGER" nil)
 (setenv "LESS" nil)
 
-;; When working with a command interpreter through Emacs, use
-;; `emacsclient' as the editor that other programs invoke (e.g. git,
-;; svn), so the file to edit opens in an Emacs buffer.  It works
-;; because I do server-start or run Emacs in daemon mode.
+;; When working with a command interpreter through Emacs, use `emacsclient' as
+;; the editor that other programs invoke (e.g. git, svn), so the file to edit
+;; opens in an Emacs buffer.  It works because I do server-start or run Emacs
+;; in daemon mode.
 (let ((editor "emacsclient"))
   (setenv "EDITOR" editor)
   (setenv "FCEDIT" editor)
@@ -96,9 +95,9 @@ called interactively, read buffer name from minibuffer."
     (message "Indented: %S" (get-buffer buf))
     t))
 
-;; async-shell-command runs the commands in buffers that are not
-;; entirely uniquely named.  I want the buffers to be named after the
-;; command that is run in them.
+;; async-shell-command runs the commands in buffers that are not entirely
+;; uniquely named.  I want the buffers to be named after the command that is
+;; run in them.
 (defun raghu/async-shell-command (cmd)
   "Run string CMD in buffer \"*Async: `CMD'*\".
 
@@ -128,11 +127,11 @@ or double quotes."
   (find-file (substitute-in-file-name "$HOME/.emacs.d/init.el")))
 (define-key global-map (kbd "C-c I") #'raghu/visit-emacs-configuration-file)
 
-;; Scroll while keeping point on original text-line (so long as the
-;; original text-line is in the window, of course).
+;; Scroll while keeping point on original text-line (so long as the original
+;; text-line is in the window, of course).
 ;;
-;; First, define a few scrolling-related functions.  These functions
-;; will be eventually bound to keys.
+;; First, define a few scrolling-related functions.  These functions will be
+;; eventually bound to keys.
 (defun raghu--show-down-one ()
   "Scroll buffer to show next one line."
   (interactive)
@@ -150,8 +149,8 @@ or double quotes."
   (interactive)
   (scroll-left 1))
 
-;; Next, define a map variable, and in it, give key-bindings to the
-;; above functions.
+;; Next, define a map variable, and in it, give key-bindings to the above
+;; functions.
 (defvar raghu/scroll-map
   (let ((map (make-sparse-keymap)))
     (define-key map "e" #'raghu--show-up-one)
@@ -165,8 +164,8 @@ While scrolling, point remains with the original text-line (not
 screen-line) so long as the original text-line is within the
 window.")
 
-;; Finally, define a function and a key-binding to activate the above
-;; keymap in a transient fashion.
+;; Finally, define a function and a key-binding to activate the above keymap in
+;; a transient fashion.
 (defun raghu/scroll ()
   "Scroll in the current buffer.
 
@@ -346,8 +345,8 @@ UNIX timestamp."
 (with-eval-after-load 'prog-mode
   (add-hook 'prog-mode-hook #'raghu--show-trailing-whitespace-in-buffer))
 
-;; Limit the size of comint buffers (e.g. buffers from M-x shell).
-;; Also, see `comint-buffer-maximum-size'.
+;; Limit the size of comint buffers (e.g. buffers from M-x shell).  Also, see
+;; `comint-buffer-maximum-size'.
 (with-eval-after-load 'comint
   (add-hook 'comint-output-filter-functions #'comint-truncate-buffer))
 
