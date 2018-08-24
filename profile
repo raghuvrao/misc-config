@@ -63,7 +63,6 @@ export GIT_EDITOR="${EDITOR}"
 export SVN_EDITOR="${EDITOR}"
 export VISUAL="${EDITOR}"
 
-export GIT_PAGER='less -+F -X'
 export PAGER='less'
 
 export LESS='Ri'
