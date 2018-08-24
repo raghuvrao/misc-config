@@ -44,14 +44,18 @@ pathmunge() {
 
 # Some general guidelines to tell if an environment variable belongs in this
 # file:
-#   - its value remains the same in all shell invocations
-#   - it is expected to be available to child processes (e.g. programs other
-#     than the shell use it)
-#   - it does not concern interactive shell sessions in particular (e.g. PS1 is
-#     interactive-only, so it does not belong in this file)
-#   - it is not bash-specific
-# In order that these variables be available to child processes, it is
-# necessary to export them.
+#
+#   1.  Its value remains the same in all shell invocations.
+#
+#   2.  It is expected to be available to child processes (e.g. programs other
+#       than the shell use it).
+#
+#   3.  It does not concern interactive shell sessions in particular (e.g. PS1
+#       is interactive-only, so it does not belong in this file).
+#
+#   4.  It is not bash-specific.
+#
+# To make a variable available to child processes, it must be exported.
 
 export EDITOR='vim'
 export FCEDIT="${EDITOR}"
