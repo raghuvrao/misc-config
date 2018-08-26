@@ -437,6 +437,18 @@ UNIX timestamp."
  '(widget-inactive ((((type tty) (class color) (min-colors 8) (background light)) (:foreground "red")))))
 
 (require 'server)
+;; To check if *this* Emacs process started a server, use:
+;;
+;;   (and (boundp 'server-process) server-process)
+;;
+;; To check if *some* Emacs process started a server, use:
+;;
+;;   (server-running-p)
+;;
+;; See:
+;;
+;;   http://lists.gnu.org/archive/html/bug-gnu-emacs/2018-06/msg00720.html
+;;   https://git.savannah.gnu.org/cgit/emacs.git/commit/?h=emacs-26&id=8182d648cb18fb048495c761db7c21fbf3c2a624
 (unless (server-running-p) (server-start))
 
 ;;; init.el ends here
