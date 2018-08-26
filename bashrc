@@ -7,11 +7,9 @@
 
 if [[ "${-}" != *i* ]]; then return; fi
 
-shopt -s checkwinsize
+shopt -s checkwinsize no_empty_cmd_completion
 
-shopt -s no_empty_cmd_completion
-
-shopt -o -s pipefail
+set -o pipefail
 
 HISTCONTROL='ignoredups'
 
