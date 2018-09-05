@@ -10,7 +10,8 @@ vbell off
 # Set terminfo capabilities for hardstatus for the xterm term-type.  Set the
 # capabilities in such a way that when this capability is used, it updates the
 # window title and icon name (by using the corresponding control sequence, in
-# this case, the OSC sequence OSC 0 ; TEXT BEL).
+# this case, the OSC sequence OSC 0 ; TEXT BEL).  See the file SETTING-TITLES
+# for more information.
 termcapinfo xterm* 'hs:ts=\E]0;:fs=\007:ds=\E]0;GNU Screen\007'
 
 # 'alwayslastline' will tell screen not to use the terminal's hardstatus line,
