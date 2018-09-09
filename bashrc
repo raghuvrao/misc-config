@@ -24,9 +24,12 @@ HISTTIMEFORMAT='%F %a %T %Z(UTC%z) '
 
 # In Slackware, when running bash, readline's clear-screen function (typically
 # bound to C-l) does not seem to work as expected for certain types of
-# terminals.  For these terminal types, the command `tput clear' works as
-# expected.  So, work around the problem by binding C-l to `tput clear', until
-# I find a better solution.
+# terminals.  It is /probably/ because Slackware's bash depends on libtermcap
+# rather than ncurses/terminfo.  For these terminal types, the command `tput
+# clear' works as expected.  So, work around the problem by binding C-l to
+# `tput clear'.  The better (proper?) solution is probably to recompile bash
+# with ncurses rather than termcap, but I am lazy, so I will just use the
+# workaround I have for now.
 if [[ "${TERM}" =~ xterm-.*|screen.*|rxvt.* ]]; then
     if shopt -q -o emacs; then
         bind -m emacs -r "\C-l"
