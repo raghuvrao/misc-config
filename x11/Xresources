@@ -95,7 +95,7 @@ uxterm*vt100.metaSendsEscape: true
 ! xterm*vt100.eightBitControl: false
 ! uxterm*vt100.eightBitControl: false
 
-xfontsel*font: -misc-fixed-medium-r-semicondensed--13-*-*-*-*-*-iso10646-1
+xfontsel*font: -misc-fixed-bold-r-normal--13-*-*-*-*-*-iso10646-1
 
 !xscreensaver.Dialog.headingFont: -misc-fixed-bold-r-semicondensed--13-*-*-*-*-*-iso10646-1
 !xscreensaver.Dialog.bodyFont: -misc-fixed-medium-r-semicondensed--13-*-*-*-*-*-iso10646-1
