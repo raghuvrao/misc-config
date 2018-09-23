@@ -13,20 +13,18 @@ set -o pipefail
 
 HISTCONTROL='ignoredups'
 
-PS1='\h:\w\$ '
+PS1='\H:\w\$ '
 
 # See the file SETTING-TITLES for information about setting terminal emulator
 # window/tab titles, and icon names.
 case "${TERM}" in
     xterm*|rxvt*)
-        PS1='\[\033]0;\h:\w\007\]'"${PS1}"
+        PS1='\[\033]0;\H:\w\007\]'"${PS1}"
         ;;
     screen*)
-        PS1='\[\033]0;\h:\w\007\]\[\033k\h:\w\033\134\]'"${PS1}"
+        PS1='\[\033]0;\H:\w\007\]\[\033k\H:\w\033\134\]'"${PS1}"
         ;;
 esac
-
-PROMPT_DIRTRIM=3
 
 unset -v PROMPT_COMMAND
 
