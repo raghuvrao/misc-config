@@ -1,16 +1,17 @@
 $include /etc/inputrc
 
+set convert-meta off
 set input-meta on
 set output-meta on
-set convert-meta off
+
+set completion-prefix-display-length 0
 set expand-tilde on
 set mark-directories on
 set mark-symlinked-directories on
+set match-hidden-files on
 set page-completions on
-set skip-completed-text on
-set visible-stats on
+set print-completions-horizontally off
 set show-all-if-ambiguous off
 set show-all-if-unmodified on
-set completion-prefix-display-length 0
-set match-hidden-files on
-set print-completions-horizontally off
+set skip-completed-text on
+set visible-stats on
