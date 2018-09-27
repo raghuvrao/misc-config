@@ -18,10 +18,10 @@ PS1='\H:\w\$ '
 # See the file SETTING-TITLES for information about setting terminal emulator
 # window/tab titles, and icon names.
 case "${TERM}" in
-    xterm*|rxvt*)
+    (xterm*|rxvt*)
         PS1='\[\033]0;\H:\w\007\]'"${PS1}"
         ;;
-    screen*)
+    (screen*)
         PS1='\[\033]0;\H:\w\007\]\[\033k\H:\w\033\134\]'"${PS1}"
         ;;
 esac
