@@ -30,7 +30,7 @@ HISTTIMEFORMAT='%F %a %T %Z(UTC%z) '
 # `tput clear'.  The better (proper?) solution is probably to recompile bash
 # with ncurses rather than termcap, but I am lazy, so I will just use the
 # workaround I have for now.
-if [[ "${TERM}" =~ xterm-.*|screen.*|rxvt.* ]]; then
+if [[ "${TERM}" =~ xterm-.*|rxvt.*|screen.*|tmux.* ]]; then
     if shopt -q -o emacs; then
         bind -m emacs -r "\C-l"
         bind -m emacs -x '"\C-l": tput clear'
