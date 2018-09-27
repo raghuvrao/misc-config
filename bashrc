@@ -21,7 +21,7 @@ case "${TERM}" in
     (xterm*|rxvt*)
         PS1='\[\033]0;\H:\w\007\]'"${PS1}"
         ;;
-    (screen*)
+    (tmux*|screen*)
         PS1='\[\033]0;\H:\w\007\]\[\033k\H:\w\033\134\]'"${PS1}"
         ;;
 esac
