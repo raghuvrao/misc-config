@@ -21,14 +21,14 @@ pathmunge() {
     # descend.
     if dir_r_x "${1}"; then
         case ":${PATH}:" in
-            ::)
+            (::)
                 # PATH is empty; avoid leading/trailing colon.
                 PATH="${1}"
                 ;;
-            *:"${1}":*)
+            (*:"${1}":*)
                 # PATH already has ${1} in it; do nothing.
                 ;;
-            *)
+            (*)
                 if [ "${2}" = "after" ]; then
                     PATH="${PATH}:${1}"
                 else
