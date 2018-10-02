@@ -47,3 +47,6 @@ if [[ "${TERM}" =~ xterm-.*|rxvt.*|screen.*|tmux.* ]]; then
         bind -m vi-insert -x '"\C-l": tput clear'
     fi
 fi
+
+cgrep() { command grep --color=always "${@}"; }
+grep() { command grep --color=auto "${@}"; }
