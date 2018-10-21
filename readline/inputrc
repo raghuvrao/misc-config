@@ -15,3 +15,13 @@ set show-all-if-ambiguous off
 set show-all-if-unmodified on
 set skip-completed-text on
 set visible-stats on
+
+set keymap vi-insert
+"\C-l": clear-screen
+"\C-_": yank-last-arg
+"\C-/": yank-last-arg
+
+set keymap vi-command
+"o": re-read-init-file
+"\C-_": yank-last-arg
+"\C-/": yank-last-arg
