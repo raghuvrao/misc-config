@@ -32,6 +32,8 @@ uxterm*vt100.boldFont: -misc-fixed-bold-r-semicondensed--13-*-*-*-*-*-iso10646-1
 ! uxterm*vt100.faceSize5: 15
 ! xterm*vt100.faceSize6: 18
 ! uxterm*vt100.faceSize6: 18
+xterm*vt100.alternateScroll: true
+uxterm*vt100.alternateScroll: true
 xterm*vt100.titeInhibit: false
 uxterm*vt100.titeInhibit: false
 xterm*vt100.scrollBar: false
