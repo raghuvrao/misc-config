@@ -7,6 +7,9 @@ set noundofile
 set nomodeline
 set modelines=0
 
+let mapleader = '\'
+let maplocalleader = '_'
+
 set backspace=indent,eol,start
 
 let &softtabstop=&tabstop
@@ -31,7 +34,7 @@ set foldlevel=100
 
 set incsearch
 
-nnoremap <Leader><Leader> :nohlsearch<CR>
+nnoremap <Leader>h :nohlsearch<CR>
 
 set list
 set listchars=extends:#,precedes:#,nbsp:%
@@ -138,7 +141,7 @@ endif
 nnoremap <Leader>e :silent edit<CR>
 nnoremap <Leader>m :set invmodifiable<CR>
 nnoremap <Leader>I :edit $MYVIMRC<CR>
-nnoremap <Leader><Space> :buffers<CR>:buffer<Space>
+nnoremap <Leader><Leader> :buffers<CR>:buffer<Space>
 nnoremap <Leader>a :buffer #<CR>
 nnoremap <Leader>z :bprevious<CR>
 nnoremap <Leader>x :bnext<CR>
