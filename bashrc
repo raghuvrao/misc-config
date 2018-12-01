@@ -34,5 +34,5 @@ HISTTIMEFORMAT='%F %a %T %Z(UTC%z) '
 # MANPATH solves this problem, and makes man work as expected.
 unset -v MANPATH
 
-cgrep() { command grep --color=always "${@}"; }
-grep() { command grep --color=auto "${@}"; }
+alias cgrep='command grep --color=always'
+alias grep='grep --color=auto'
