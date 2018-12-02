@@ -1,9 +1,5 @@
 $include /etc/inputrc
 
-set convert-meta off
-set input-meta on
-set output-meta on
-
 set completion-prefix-display-length 0
 set expand-tilde on
 set mark-directories on
