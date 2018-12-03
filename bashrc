@@ -12,6 +12,7 @@ shopt -s checkwinsize no_empty_cmd_completion
 set -o pipefail
 
 HISTCONTROL='ignoredups'
+HISTTIMEFORMAT='[%F %a %T %z] '
 
 PS1='\H:\w\$ '
 
