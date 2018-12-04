@@ -41,4 +41,4 @@ unset -v MANPATH
 
 alias cgrep='grep --color=always'
 alias grep='grep --color=auto'
-alias ls='ls -A'
+alias ls='ls --almost-all --tabsize=0 --escape'
