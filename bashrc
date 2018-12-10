@@ -22,14 +22,13 @@ HISTFILESIZE=20000
 HISTSIZE="${HISTFILESIZE}"
 HISTTIMEFORMAT='%F %a %T %Z(UTC%z) '
 
-# Slackware sets MANPATH to /usr/local/man:/usr/man:${JAVA_HOME}/man in
-# /etc/profile* (even though /etc/man_db.conf is configured satisfactorily),
-# and it was causing more problems than solving anything for me.  E.g. I use
-# a version of bash that I compiled myself and installed in /usr/local.  So,
-# when I do `man bash', I should see the bash manual page located in
+# I use a version of bash that I compiled myself and installed in /usr/local.
+# So, when I do `man bash', I should see the bash manual page located in
 # /usr/local/share; instead, man pulls up the system-bash manual page from
 # /usr/share, which does not match the version of bash I am using.  Unsetting
-# MANPATH solves this problem, and makes man work as expected.
+# the MANPATH environment variable solves this problem, and makes man work as
+# expected.  Besides, /etc/man_db.conf seems to be configured satisfactorily be
+# default, so far as I am concerned.
 unset -v MANPATH
 
 alias cgrep='command grep --color=always'
