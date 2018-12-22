@@ -5,7 +5,8 @@
 
 # dir_r_x returns true if its first argument is a readable directory into which
 # we can descend; false otherwise.
-dir_r_x() {
+dir_r_x()
+{
     test -d "${1}" -a -r "${1}" -a -x "${1}"
     return ${?}
 }
@@ -16,7 +17,8 @@ dir_r_x() {
 # otherwise, pathmunge() does nothing to PATH, regardless of the second
 # argument.  This version of pathmunge() is a modified version of pathmunge()
 # from Red Hat's /etc/profile.
-pathmunge() {
+pathmunge()
+{
     # Include only directories that we can both read and into which we can
     # descend.
     if dir_r_x "${1}"; then
