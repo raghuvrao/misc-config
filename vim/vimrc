@@ -51,7 +51,7 @@ else
 endif
 
 set laststatus=2
-set statusline=%(\ %f%)%(\ %q%)%(\ %M%R%H%W%)%(\ %y%)%(\ %l,%c%V\ %)
+set statusline=%(\ %f%)%(\ %q%)%(\ %M%R%H%W%)%(\ %y%)%(\ %l,%c%V%)
 
 set autochdir
 
@@ -96,6 +96,7 @@ runtime ftplugin/man.vim
 
 augroup miscellaneous
   autocmd!
+  autocmd FileType go setlocal statusline+=%(\ %o%)
   autocmd FileType help setlocal nolist keywordprg=:help
   autocmd FileType json setlocal expandtab shiftwidth=2 softtabstop=-1
   autocmd FileType man setlocal nolist
