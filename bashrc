@@ -27,7 +27,7 @@ HISTTIMEFORMAT='%F %a %T %Z(UTC%z) '
 # /usr/local/share; instead, man pulls up the system-bash manual page from
 # /usr/share, which does not match the version of bash I am using.  Unsetting
 # the MANPATH environment variable solves this problem, and makes man work as
-# expected.  Besides, /etc/man_db.conf seems to be configured satisfactorily be
+# expected.  Besides, /etc/man_db.conf seems to be configured satisfactorily by
 # default, so far as I am concerned.
 unset -v MANPATH
 
