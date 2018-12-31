@@ -96,6 +96,14 @@ hi link javaDocParam javaDocComment
 hi link javaDocSeeTagParam javaDocComment
 hi link javaDocTags javaDocComment
 
+hi manOptionDesc ctermfg=NONE ctermbg=NONE cterm=bold guifg=NONE guibg=NONE gui=bold term=bold
+hi link manCFuncDefinition manOptionDesc
+hi link manLongOptionDesc manOptionDesc
+hi manReference ctermfg=NONE ctermbg=NONE cterm=underline guifg=NONE guibg=NONE gui=underline term=underline
+hi manTitle ctermfg=NONE ctermbg=NONE cterm=bold guifg=NONE guibg=NONE gui=bold term=bold
+hi link manSectionHeading manTitle
+hi link manSubHeading manTitle
+
 hi netrwClassify ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui=NONE term=underline
 hi link netrwDir netrwPlain
 hi link netrwSymLink netrwPlain
