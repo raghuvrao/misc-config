@@ -11,13 +11,11 @@ dir_r_x()
     return ${?}
 }
 
-# pathmunge() appends its first argument to PATH if the second argument is the
-# string `after'; otherwise, pathmunge() prefixes its first argument to PATH.
-# The first argument must be a readable directory into which we can descend;
-# otherwise, pathmunge() does nothing to PATH, regardless of the second
-# argument.  This version of pathmunge() is a modified version of pathmunge()
-# from Red Hat's /etc/profile.
-pathmunge()
+# path_append() appends its first argument to PATH if the first argument is
+# a readable directory into which I can descend; otherwise, path_append() does
+# nothing to PATH.  This function is a modified version of pathmunge() from
+# Fedora's /etc/profile.
+path_append()
 {
     # Include only directories that we can both read and into which we can
     # descend.
@@ -31,11 +29,7 @@ pathmunge()
                 # PATH already has ${1} in it; do nothing.
                 ;;
             (*)
-                if [ "${2}" = "after" ]; then
-                    PATH="${PATH}:${1}"
-                else
-                    PATH="${1}:${PATH}"
-                fi
+                PATH="${PATH}:${1}"
                 ;;
         esac
     fi
@@ -79,7 +73,7 @@ PATH=""
 orig_IFS="${IFS+_${IFS}}"  # Note: ${foo+bar}, not ${foo:+bar}
 IFS=':'
 for p in ${path_copy}; do
-    pathmunge "${p}" 'after'
+    path_append "${p}"
 done
 if [ -z "${orig_IFS}" ]; then
     unset -v IFS
@@ -90,7 +84,7 @@ unset -v orig_IFS p path_copy
 
 export PATH
 
-unset -f pathmunge dir_r_x
+unset -f path_append dir_r_x
 
 # Source .bashrc in the end, and only if running bash.
 if [ -n "${BASH_VERSION}" -a -r "${HOME}/.bashrc" ]; then
