@@ -25,6 +25,10 @@ set scrolljump=-50
 set nowildmenu
 set wildmode=longest,list,full
 
+" Set ruler even though I have line and column numbers in my statusline (see
+" further below).  Infrequently and temporarily, I remove the statusline from
+" view.  I want line- and column-number information to be displayed even in
+" these situations.
 set ruler
 
 set showcmd
@@ -53,11 +57,15 @@ set hidden
 
 set report=0
 
+" I do not want mouse support in Vim, whereas I like to have mouse support in
+" GVim.  My system-wide vimrc enables mouse support in Vim, so disable it
+" here.  Enable mouse support in GVim in the gvimrc file, which Vim does not
+" read.
 set mouse=
 
 set nofixendofline
 
-" ftplugins shall add to / remove from this default.
+" ftplugins shall add to / remove from the following formatoptions.
 set formatoptions=1jlmnq
 
 filetype plugin indent on
@@ -81,11 +89,17 @@ runtime ftplugin/man.vim
 
 augroup miscellaneous
   autocmd!
+  " In the following autocommand, `keywordprg=:help' is redundant in
+  " Vim>=8.1.675 because $VIMRUNTIME/ftplugin/help.vim sets keywordprg to
+  " :help in these versions.  TODO: remove this setting after upgrading.
   autocmd FileType help setlocal nolist keywordprg=:help
   autocmd FileType json setlocal expandtab shiftwidth=2 softtabstop=-1
   autocmd FileType man setlocal nolist
   autocmd FileType sh setlocal expandtab shiftwidth=4 softtabstop=-1
   autocmd FileType text setlocal linebreak wrap
+  " In the following autocommand, `keywordprg=:help' is redundant in
+  " Vim>=8.0.1290 because $VIMRUNTIME/ftplugin/vim.vim sets keywordprg to
+  " :help in these versions.  TODO: remove this setting after upgrading.
   autocmd FileType vim setlocal keywordprg=:help shiftwidth=2 softtabstop=-1
 augroup END
 
