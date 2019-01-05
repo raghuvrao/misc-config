@@ -62,23 +62,14 @@ set formatoptions=1jlmnq
 
 filetype plugin indent on
 
-function! SelectivelyEnableAutoInsertCommentLeader()
-  let l:enableFiletypes = ['c', 'cpp', 'java']
-  if index(l:enableFiletypes, &filetype) >= 0
-    setlocal formatoptions+=r formatoptions+=o
-  else
-    setlocal formatoptions-=r formatoptions-=o
-  endif
-endfunction
-
-augroup comment_leader
+augroup no_automatic_insert_comment_leader
   autocmd!
-  autocmd FileType * call SelectivelyEnableAutoInsertCommentLeader()
+  autocmd FileType * setlocal formatoptions-=o formatoptions-=r
 augroup END
 
 augroup no_hard_wrap
   autocmd!
-  autocmd FileType * setlocal formatoptions-=t formatoptions-=c
+  autocmd FileType * setlocal formatoptions-=c formatoptions-=t
 augroup END
 
 augroup no_conceal
