@@ -70,12 +70,14 @@ set formatoptions=1jlmnq
 
 filetype plugin indent on
 
+runtime ftplugin/man.vim
+
 augroup no_automatic_insert_comment_leader
   autocmd!
   autocmd FileType * setlocal formatoptions-=o formatoptions-=r
 augroup END
 
-augroup no_hard_wrap
+augroup no_automatic_hard_wrap
   autocmd!
   autocmd FileType * setlocal formatoptions-=c formatoptions-=t
 augroup END
@@ -85,18 +87,36 @@ augroup no_conceal
   autocmd FileType * setlocal conceallevel=0 concealcursor=
 augroup END
 
-runtime ftplugin/man.vim
-
-augroup miscellaneous
+augroup file_type_help
   autocmd!
   " In the following autocommand, `keywordprg=:help' is redundant in
   " Vim>=8.1.675 because $VIMRUNTIME/ftplugin/help.vim sets keywordprg to
   " :help in these versions.  TODO: remove this setting after upgrading.
   autocmd FileType help setlocal nolist keywordprg=:help
+augroup END
+
+augroup file_type_json
+  autocmd!
   autocmd FileType json setlocal expandtab shiftwidth=2 softtabstop=-1
+augroup END
+
+augroup file_type_manual_page
+  autocmd!
   autocmd FileType man setlocal nolist
+augroup END
+
+augroup file_type_shell_script
+  autocmd!
   autocmd FileType sh setlocal expandtab shiftwidth=4 softtabstop=-1
+augroup END
+
+augroup file_type_text
+  autocmd!
   autocmd FileType text setlocal linebreak wrap
+augroup END
+
+augroup file_type_vim
+  autocmd!
   " In the following autocommand, `keywordprg=:help' is redundant in
   " Vim>=8.0.1290 because $VIMRUNTIME/ftplugin/vim.vim sets keywordprg to
   " :help in these versions.  TODO: remove this setting after upgrading.
