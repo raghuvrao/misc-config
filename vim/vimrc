@@ -102,6 +102,7 @@ augroup END
 
 augroup file_type_manual_page
   autocmd!
+  autocmd FileType man setlocal keywordprg=:Man
   autocmd FileType man setlocal nolist
 augroup END
 
