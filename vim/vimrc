@@ -89,10 +89,11 @@ augroup END
 
 augroup file_type_help
   autocmd!
-  " In the following autocommand, `keywordprg=:help' is redundant in
-  " Vim>=8.1.675 because $VIMRUNTIME/ftplugin/help.vim sets keywordprg to
-  " :help in these versions.  TODO: remove this setting after upgrading.
-  autocmd FileType help setlocal nolist keywordprg=:help
+  " The following autocommand is redundant in Vim>=8.1.675 because
+  " $VIMRUNTIME/ftplugin/help.vim sets keywordprg to :help in these versions.
+  " TODO: remove this autocommand after upgrading.
+  autocmd FileType help setlocal keywordprg=:help
+  autocmd FileType help setlocal nolist
 augroup END
 
 augroup file_type_json
@@ -118,10 +119,11 @@ augroup END
 
 augroup file_type_vim
   autocmd!
-  " In the following autocommand, `keywordprg=:help' is redundant in
-  " Vim>=8.0.1290 because $VIMRUNTIME/ftplugin/vim.vim sets keywordprg to
-  " :help in these versions.  TODO: remove this setting after upgrading.
-  autocmd FileType vim setlocal keywordprg=:help shiftwidth=2 softtabstop=-1
+  " The following autocommand is redundant in Vim>=8.0.1290 because
+  " $VIMRUNTIME/ftplugin/vim.vim sets keywordprg to :help in these versions.
+  " TODO: remove this autocommand after upgrading.
+  autocmd FileType vim setlocal keywordprg=:help
+  autocmd FileType vim setlocal shiftwidth=2 softtabstop=-1
 augroup END
 
 " The following escape-sequences allow CTRL-<arrow> to work as expected when
