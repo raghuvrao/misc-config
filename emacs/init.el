@@ -378,6 +378,7 @@ UNIX timestamp."
  '(fill-column 79)
  '(frame-background-mode (quote light))
  '(help-window-select t)
+ '(hscroll-margin 2)
  '(hscroll-step 1)
  '(indicate-empty-lines t)
  '(inhibit-startup-screen t)
