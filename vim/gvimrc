@@ -1,6 +1,9 @@
 set mouse=a
 
-set guioptions-=L guioptions-=R guioptions-=T guioptions-=b guioptions-=l guioptions-=r
+set guioptions-=b guioptions-=L guioptions-=l guioptions-=R guioptions-=r
+
+set guioptions-=T
+
 set guioptions+=c
 
 set showtabline=2
