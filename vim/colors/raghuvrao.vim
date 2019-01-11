@@ -73,6 +73,8 @@ hi Visual ctermfg=Black ctermbg=Cyan cterm=NONE guifg=Black guibg=LightBlue gui=
 
 hi WildMenu ctermfg=White ctermbg=DarkBlue cterm=bold guifg=White guibg=DarkBlue gui=bold term=standout
 
+hi link cCommentString cComment
+
 hi diffAdded ctermfg=DarkGreen ctermbg=NONE cterm=NONE guifg=DarkGreen guibg=NONE gui=NONE term=bold
 hi diffFile ctermfg=NONE ctermbg=NONE cterm=bold guifg=NONE guibg=NONE gui=bold term=bold
 hi diffLine ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui=NONE term=bold
@@ -88,7 +90,8 @@ hi link gitcommitOverflow gitcommitComment
 hi link gitcommitType gitcommitComment
 hi link gitcommitFile gitcommitComment
 
-hi link cCommentString cComment
+hi helpHyperTextEntry ctermfg=DarkGreen ctermbg=NONE cterm=NONE guifg=DarkGreen guibg=NONE gui=NONE term=bold
+hi helpHyperTextJump ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=NONE term=underline
 
 hi link javaCommentTitle javaComment
 
