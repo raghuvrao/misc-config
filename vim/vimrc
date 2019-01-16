@@ -87,6 +87,19 @@ augroup no_conceal
   autocmd FileType * setlocal conceallevel=0 concealcursor=
 augroup END
 
+" Some ftplugins define textwidth, and others do not.  For those filetypes
+" whose ftplugins do not define textwidth, set textwidth to 79.  I am making
+" certain that textwidth is never zero for any filetype mostly to affect the
+" behaviour of the gq operator.  When textwidth is 0, gq formats text to 79
+" columns or the number of columns in the Vim window, whichever is smaller.
+" Instead, I want gq to format to within 79 columns regardless of the Vim
+" window size, unless the filetype's ftplugin says otherwise.  If the buffer
+" does not have a filetype, do nothing about textwidth.  See :help gq.
+augroup nonzero_textwidth_if_filetype_set
+  autocmd!
+  autocmd FileType * if &textwidth == 0 | setlocal textwidth=79 | endif
+augroup END
+
 augroup file_type_help
   autocmd!
   " The following autocommand is redundant in Vim>=8.1.675 because
