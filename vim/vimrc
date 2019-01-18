@@ -194,6 +194,10 @@ xnoremap <Leader>g :global/\<
 nnoremap <Leader>v :%vglobal/\<
 xnoremap <Leader>v :vglobal/\<
 
+" Do not highlight numbers, characters, and strings in comments in C / C++
+" programs.
+unlet! c_comment_strings
+
 " Enable syntax so operators like `gq' etc. work correctly.  Use my
 " colorscheme so most things do not get syntax-highlighted.
 syntax on
