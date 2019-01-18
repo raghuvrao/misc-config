@@ -65,6 +65,13 @@ set mouse=
 
 set nofixendofline
 
+" autoindent, while typically unnecessary (ftplugins take care of indentation
+" sufficiently well), is helpful for formatting numbered/bulleted lists with
+" the gq operator in comments etc. when formatoptions includes n.  Enabling it
+" does not appear to interfere with indentation done by filetype plugins.  So,
+" enable it.
+set autoindent
+
 " ftplugins shall add to / remove from the following formatoptions.
 set formatoptions=1jlmnq
 
