@@ -1,7 +1,10 @@
 " Mostly-plain colorscheme for dark-foreground-light-background screens.
 " Maintainer:	Raghu V. Rao
 
+set background=light
+
 hi clear
+
 if exists('g:syntax_on')
   syntax reset
 endif
