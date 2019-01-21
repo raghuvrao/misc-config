@@ -207,8 +207,11 @@ xnoremap <Leader>v :vglobal/\<
 " programs.
 unlet! c_comment_strings
 
-" Enable syntax so operators like `gq' etc. work correctly.  Use my
-" colorscheme so most things do not get syntax-highlighted.
+" The system-wide vimrc enables syntax conditionally: if GUI, or if the
+" terminal supports more than 2 colors.  However, I want syntax to be enabled
+" all the time, because without syntax, operators like `gq' etc. do not work
+" correctly to format comments in programs.  I am, however, not keen on syntax
+" _highlighting_, so I use my colorscheme which unhighlights most things.
 syntax on
 colorscheme raghuvrao
 
