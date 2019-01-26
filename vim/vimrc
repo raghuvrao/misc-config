@@ -40,7 +40,6 @@ set incsearch
 
 nnoremap <Leader>h :nohlsearch<CR>
 
-set list
 set listchars=extends:#,precedes:#,nbsp:%
 if has('multi_byte') && &encoding == 'utf-8'
   set listchars+=tab:→·,trail:¬
@@ -81,6 +80,29 @@ filetype plugin indent on
 
 runtime ftplugin/man.vim
 
+" I want 'list' to be set in windows that do not have buffers of filetype
+" 'man' or 'help'.  In a window with 'list' set, when a hidden help/man buffer
+" becomes unhidden (e.g. by using the :buffer command), 'list' does not get
+" unset if we have just the FileType autocmmands below.  We also need the
+" BufWinEnter autocommand.  :help 'list' says that 'list' is local to window
+" rather than buffer, and :help FileType suggests that the FileType
+" autocommands will run only once, when the 'filetype' option is determined
+" and set.  These reasons are probably why I need BufWinEnter in addition to
+" FileType to set and unset 'list'.
+function! ShowListcharsInWindowMaybe()
+  if &filetype !=# 'help' && &filetype !=# 'man'
+    setlocal list
+  else
+    setlocal nolist
+  endif
+endfunc
+augroup listchars_in_window_maybe
+  autocmd!
+  autocmd BufWinEnter * call ShowListcharsInWindowMaybe()
+  autocmd FileType help setlocal nolist
+  autocmd FileType man setlocal nolist
+augroup END
+
 augroup no_automatic_insert_comment_leader
   autocmd!
   autocmd FileType * setlocal formatoptions-=o formatoptions-=r
@@ -115,7 +137,6 @@ augroup file_type_help
   " $VIMRUNTIME/ftplugin/help.vim sets keywordprg to :help in these versions.
   " TODO: remove this autocommand after upgrading.
   autocmd FileType help setlocal keywordprg=:help
-  autocmd FileType help setlocal nolist
 augroup END
 
 augroup file_type_json
@@ -126,7 +147,6 @@ augroup END
 augroup file_type_manual_page
   autocmd!
   autocmd FileType man setlocal keywordprg=:Man
-  autocmd FileType man setlocal nolist
 augroup END
 
 augroup file_type_shell_script
