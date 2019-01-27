@@ -131,41 +131,29 @@ augroup nonzero_textwidth_if_filetype_set
   autocmd FileType * if &textwidth == 0 | setlocal textwidth=79 | endif
 augroup END
 
-augroup file_type_help
+augroup make_K_more_useful
   autocmd!
   " The following autocommand is redundant in Vim>=8.1.675 because
   " $VIMRUNTIME/ftplugin/help.vim sets keywordprg to :help in these versions.
   " TODO: remove this autocommand after upgrading.
   autocmd FileType help setlocal keywordprg=:help
-augroup END
-
-augroup file_type_json
-  autocmd!
-  autocmd FileType json setlocal expandtab shiftwidth=2 softtabstop=-1
-augroup END
-
-augroup file_type_manual_page
-  autocmd!
   autocmd FileType man setlocal keywordprg=:Man
-augroup END
-
-augroup file_type_shell_script
-  autocmd!
-  autocmd FileType sh setlocal expandtab shiftwidth=4 softtabstop=-1
-augroup END
-
-augroup file_type_text
-  autocmd!
-  autocmd FileType text setlocal linebreak wrap
-augroup END
-
-augroup file_type_vim
-  autocmd!
   " The following autocommand is redundant in Vim>=8.0.1290 because
   " $VIMRUNTIME/ftplugin/vim.vim sets keywordprg to :help in these versions.
   " TODO: remove this autocommand after upgrading.
   autocmd FileType vim setlocal keywordprg=:help
+augroup END
+
+augroup indentation
+  autocmd!
+  autocmd FileType json setlocal expandtab shiftwidth=2 softtabstop=-1
+  autocmd FileType sh setlocal expandtab shiftwidth=4 softtabstop=-1
   autocmd FileType vim setlocal shiftwidth=2 softtabstop=-1
+augroup END
+
+augroup line_wrapping
+  autocmd!
+  autocmd FileType text setlocal linebreak wrap
 augroup END
 
 " The following escape-sequences allow CTRL-<arrow> to work as expected when
