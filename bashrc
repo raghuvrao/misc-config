@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # ~/.bashrc
-# Author: Raghu Rao <raghu.v.rao@gmail.com>
+# Author: Raghu V. Rao <raghu.v.rao@gmail.com>
 #
 # bashisms are allowed in this file.
 

@@ -1,3 +1,6 @@
+! ~/.Xresources
+! Author: Raghu V. Rao <raghu.v.rao@gmail.com>
+
 URxvt.termName: rxvt-unicode-256color
 URxvt.loginShell: true
 URxvt.secondaryScreen: true

@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # ~/.profile
-# Author: Raghu Rao <raghu.v.rao@gmail.com>
+# Author: Raghu V. Rao <raghu.v.rao@gmail.com>
 #
 # Keep this file so POSIX-compliant as possible because it is sourced by
 # multiple sh-like shells.  No bashisms!
