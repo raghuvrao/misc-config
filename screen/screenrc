@@ -1,3 +1,6 @@
+# ~/.screenrc
+# Author: Raghu V. Rao <raghu.v.rao@gmail.com>
+
 startup_message off
 altscreen on
 autodetach on
