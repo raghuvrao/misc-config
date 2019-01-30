@@ -13,7 +13,7 @@ if [[ -f "${p}" && -r "${p}" ]]; then
 fi
 unset -v p
 
-shopt -s checkwinsize no_empty_cmd_completion
+shopt -s checkwinsize dotglob no_empty_cmd_completion
 
 set -o pipefail
 
