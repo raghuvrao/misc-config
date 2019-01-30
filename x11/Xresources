@@ -1,3 +1,6 @@
+! ~/.Xresources
+! Author: Raghu V. Rao <raghu.v.rao@gmail.com>
+
 xterm.termName: xterm-256color
 uxterm.termName: xterm-256color
 xterm*vt100.highlightSelection: true

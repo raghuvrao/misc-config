@@ -1,3 +1,6 @@
+# ~/.inputrc
+# Author: Raghu V. Rao <raghu.v.rao@gmail.com>
+
 $include /etc/inputrc
 
 set expand-tilde on

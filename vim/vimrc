@@ -1,5 +1,8 @@
 scriptencoding utf-8
 
+" ~/.vimrc ~/.vim/vimrc
+" Author: Raghu V. Rao <raghu.v.rao@gmail.com>
+
 set nobackup
 
 set noundofile

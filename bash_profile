@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # .bash_profile
-# Author: Raghu Rao <raghu.v.rao@gmail.com>
+# Author: Raghu V. Rao <raghu.v.rao@gmail.com>
 
 # dir_r_x returns true if its first argument is a readable directory into which
 # we can descend; false otherwise.
