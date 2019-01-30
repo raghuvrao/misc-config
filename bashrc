@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ~/.bashrc
-# Author: Raghu Rao <raghu.v.rao@gmail.com>
+# Author: Raghu V. Rao <raghu.v.rao@gmail.com>
 
 umask 077
 

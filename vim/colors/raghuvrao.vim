@@ -1,5 +1,5 @@
 " Mostly-plain colorscheme for dark-foreground-light-background screens.
-" Maintainer:	Raghu V. Rao
+" Maintainer:	Raghu Rao <raghu.v.rao@gmail.com>
 
 set background=light
 

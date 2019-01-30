@@ -1,3 +1,6 @@
+" ~/.gvimrc ~/.vim/gvimrc
+" Author: Raghu V. Rao <raghu.v.rao@gmail.com>
+
 set mouse=a
 
 set guioptions-=b guioptions-=L guioptions-=l guioptions-=R guioptions-=r

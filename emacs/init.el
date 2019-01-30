@@ -2,7 +2,8 @@
 
 ;;; Commentary:
 
-;; Raghu V. Rao's Emacs configuration file.
+;; Emacs configuration file.
+;; Author: Raghu V. Rao <raghu.v.rao@gmail.com>
 
 ;;; Code:
 
