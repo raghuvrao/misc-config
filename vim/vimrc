@@ -78,6 +78,8 @@ set nofixendofline
 " So, enable autoindent.
 set autoindent
 
+set conceallevel=0 concealcursor=
+
 " ftplugins shall add to / remove from the following formatoptions.
 set formatoptions=1jlmnqr
 
@@ -99,11 +101,6 @@ augroup END
 augroup no_automatic_insert_comment_leader_normal
   autocmd!
   autocmd FileType * setlocal formatoptions-=o
-augroup END
-
-augroup no_conceal
-  autocmd!
-  autocmd FileType * setlocal conceallevel=0 concealcursor=
 augroup END
 
 " Some ftplugins define textwidth, and others do not.  For those filetypes
