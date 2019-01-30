@@ -7,7 +7,7 @@
 
 if [[ "${-}" != *i* ]]; then return; fi
 
-shopt -s checkwinsize no_empty_cmd_completion
+shopt -s checkwinsize dotglob no_empty_cmd_completion
 
 set -o pipefail
 
