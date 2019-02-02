@@ -105,6 +105,8 @@ hi link netrwSymLink netrwPlain
 hi link perlPOD NONE
 hi link perlSharpBang perlComment
 
+hi pythonBuiltin ctermfg=NONE ctermbg=NONE cterm=underline guifg=NONE guibg=NONE gui=underline term=underline
+
 if &t_Co <= 8
   hi qfLineNr ctermfg=DarkYellow ctermbg=NONE cterm=NONE
   hi qfFileName ctermfg=DarkMagenta ctermbg=NONE cterm=NONE
