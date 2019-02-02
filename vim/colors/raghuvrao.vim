@@ -114,6 +114,8 @@ hi netrwClassify ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=N
 hi link netrwDir netrwPlain
 hi link netrwSymLink netrwPlain
 
+hi pythonBuiltin ctermfg=NONE ctermbg=NONE cterm=underline guifg=NONE guibg=NONE gui=underline term=underline
+
 if &t_Co <= 8
   hi qfLineNr ctermfg=DarkYellow ctermbg=NONE cterm=NONE
   hi qfFileName ctermfg=DarkMagenta ctermbg=NONE cterm=NONE
