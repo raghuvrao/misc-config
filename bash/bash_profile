@@ -64,7 +64,7 @@ if [ -z "${PATH}" ]; then
     PATH='/usr/local/bin:/usr/bin:/bin'
 fi
 
-PATH="${PATH}:${HOME}/bin"
+PATH="${HOME}/.local/bin:${PATH}:${HOME}/bin"
 
 # Clean up PATH.  Do not modify PATH after this clean-up part.  Any
 # modification to PATH must happen before this comment.
