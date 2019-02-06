@@ -32,7 +32,7 @@ hi Comment ctermfg=Brown ctermbg=NONE cterm=NONE guifg=Brown guibg=NONE gui=NONE
 
 hi Error ctermfg=Red ctermbg=NONE cterm=bold guifg=Red guibg=NONE gui=bold term=reverse
 
-hi ErrorMsg ctermfg=DarkRed ctermbg=NONE cterm=NONE guifg=Red guibg=NONE gui=NONE term=standout
+hi ErrorMsg ctermfg=Red ctermbg=NONE cterm=bold guifg=Red guibg=NONE gui=bold term=standout
 
 hi Folded ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui=NONE term=standout
 
