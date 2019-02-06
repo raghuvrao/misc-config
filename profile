@@ -74,7 +74,7 @@ if [ -z "${PATH}" ]; then
     PATH='/usr/local/bin:/usr/bin:/bin'
 fi
 
-PATH="${PATH}:/usr/local/sbin:/usr/sbin:/sbin"
+PATH="${HOME}/.local/bin:${PATH}:/usr/local/sbin:/usr/sbin:/sbin"
 
 p='/opt/golang/root'
 if dir_r_x "${p}" && dir_r_x "${p}/bin"; then
