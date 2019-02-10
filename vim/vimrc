@@ -84,6 +84,19 @@ filetype plugin indent on
 
 runtime ftplugin/man.vim
 
+function! ToPositionWhenLastExitingCurrentBuffer()
+  if &filetype !~# '\m\(commit$\|^git$\|^gitrebase$\|^help$\|^man$\|^svn$\)'
+    let l:target_line_number = line("'\"")
+    if l:target_line_number >= 1 && l:target_line_number <= line('$')
+      execute 'normal! g`"zz'
+    endif
+  endif
+endfunction
+augroup toPositionWhenLastExitingCurrentBuffer
+  autocmd!
+  autocmd BufReadPost * call ToPositionWhenLastExitingCurrentBuffer()
+augroup END
+
 augroup no_list
   autocmd!
   autocmd FileType help setlocal nolist
