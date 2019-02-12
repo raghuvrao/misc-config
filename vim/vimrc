@@ -36,11 +36,6 @@ set ruler
 
 set showcmd
 
-if has('multi_byte') && &encoding == 'utf-8'
-  set fillchars-=vert:\|
-  set fillchars+=vert:│
-endif
-
 set foldmethod=indent
 set foldlevel=100
 
@@ -53,6 +48,8 @@ set list
 set listchars=extends:#,precedes:#,nbsp:%
 if has('multi_byte') && &encoding == 'utf-8'
   set listchars+=tab:→·,trail:¬
+  set fillchars-=vert:\|
+  set fillchars+=vert:│
 else
   set listchars+=tab:>\ ,trail:_
 endif
