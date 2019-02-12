@@ -126,15 +126,7 @@ augroup END
 
 augroup make_K_more_useful
   autocmd!
-  " The following autocommand is redundant in Vim>=8.1.675 because
-  " $VIMRUNTIME/ftplugin/help.vim sets keywordprg to :help in these versions.
-  " TODO: remove this autocommand after upgrading.
-  autocmd FileType help setlocal keywordprg=:help
   autocmd FileType man setlocal keywordprg=:Man
-  " The following autocommand is redundant in Vim>=8.0.1290 because
-  " $VIMRUNTIME/ftplugin/vim.vim sets keywordprg to :help in these versions.
-  " TODO: remove this autocommand after upgrading.
-  autocmd FileType vim setlocal keywordprg=:help
 augroup END
 
 augroup indentation
