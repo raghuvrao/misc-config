@@ -54,8 +54,6 @@ endif
 set laststatus=2
 set statusline=%(\ %f%)%(\ %q%)%(\ %M%R%H%W%)%(\ %y%)%(\ %l,%c%V\ %)
 
-set autochdir
-
 set report=0
 
 " I do not want mouse support in Vim, whereas I like to have mouse support in
