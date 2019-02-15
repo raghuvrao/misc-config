@@ -206,6 +206,8 @@ unlet! c_comment_strings
 syntax on
 colorscheme raghuvrao
 
+packadd! matchit
+
 " Make vim more secure.  See `:h trojan-horse'.
 set secure
 set noexrc
