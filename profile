@@ -53,15 +53,18 @@ path_append()
 #
 # To make a variable available to child processes, it must be exported.
 
-export EDITOR='vim'
-export FCEDIT="${EDITOR}"
-export GIT_EDITOR="${EDITOR}"
-export SVN_EDITOR="${EDITOR}"
-export VISUAL="${EDITOR}"
+my_visual_editor='/usr/local/bin/vim'
+if [ -f "${my_visual_editor}" -a -x "${my_visual_editor}" ]; then
+    export VISUAL="${my_visual_editor}"
+else
+    export VISUAL='/usr/bin/vim'
+fi
+unset -v my_visual_editor
+export EDITOR="${VISUAL}"
+export FCEDIT="${VISUAL}"
 
-export PAGER='less'
-
-export LESS='Ri'
+export PAGER='/usr/bin/less'
+export LESS='MRi'
 
 # Force LibreOffice to use the generic Visual Components Library plugin.
 # I find the others (kde4, gtk, and gtk3) ugly.
