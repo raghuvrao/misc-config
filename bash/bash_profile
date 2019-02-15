@@ -47,15 +47,8 @@ path_append()
 #     For example, the variable PS1 is relevant only for interactive shells,
 #     and so it does not belong in this file.
 
-export EDITOR='vim'
-export FCEDIT="${EDITOR}"
-export GIT_EDITOR="${EDITOR}"
-export SVN_EDITOR="${EDITOR}"
-export VISUAL="${EDITOR}"
-
-export PAGER='less'
-
-export LESS='Ri'
+export VISUAL='vim'
+export EDITOR="${VISUAL}"
 
 # Force LibreOffice to use the generic Visual Components Library plugin.
 export SAL_USE_VCLPLUGIN=gen
