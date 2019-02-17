@@ -61,7 +61,6 @@ else
 fi
 unset -v my_visual_editor
 export EDITOR="${VISUAL}"
-export FCEDIT="${VISUAL}"
 
 export PAGER='/usr/bin/less'
 export LESS='MRi'
