@@ -129,6 +129,8 @@ augroup END
 
 augroup indentation
   autocmd!
+  autocmd FileType c setlocal expandtab shiftwidth=4 softtabstop=-1
+  autocmd FileType cpp setlocal expandtab shiftwidth=4 softtabstop=-1
   autocmd FileType json setlocal expandtab shiftwidth=2 softtabstop=-1
   autocmd FileType sh setlocal expandtab shiftwidth=4 softtabstop=-1
   autocmd FileType vim setlocal shiftwidth=2 softtabstop=-1
