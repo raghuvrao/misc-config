@@ -76,7 +76,7 @@ if [ -z "${PATH}" ]; then
     PATH='/usr/local/bin:/usr/bin:/bin'
 fi
 
-PATH="${HOME}/.local/bin:${PATH}:/usr/local/sbin:/usr/sbin:/sbin"
+PATH="${PATH}:/usr/local/sbin:/usr/sbin:/sbin"
 
 p='/opt/golang/root'
 if dir_r_x "${p}" && dir_r_x "${p}/bin"; then
@@ -87,12 +87,12 @@ fi
 p="${HOME}/go"
 if dir_r_x "${p}" && dir_r_x "${p}/bin"; then
     export GOPATH="${p}"
-    PATH="${PATH}:${GOPATH}/bin"
+    PATH="${GOPATH}/bin:${PATH}"
 fi
 
 unset -v p
 
-PATH="${PATH}:${HOME}/bin"
+PATH="${HOME}/.local/bin:${HOME}/bin:${PATH}"
 
 # Clean up PATH.  Do not modify PATH after this clean-up part.  Any
 # modification to PATH must happen before this comment.
