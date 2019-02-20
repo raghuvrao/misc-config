@@ -182,15 +182,20 @@ if executable('xsel')
 endif
 
 nnoremap <Leader>e :silent edit<CR>
+
 nnoremap <Leader>m :set invmodifiable<CR>
+
 nnoremap <Leader>I :edit $MYVIMRC<CR>
-nnoremap <Leader><Leader> :buffers<CR>:buffer<Space>
+
+nnoremap <Leader><Leader> :buffer<Space>
 nnoremap <Leader>a :buffer #<CR>
 nnoremap <Leader>z :bprevious<CR>
 nnoremap <Leader>x :bnext<CR>
+
 nnoremap <Leader>S :%substitute/\<<C-R><C-W>\>//g<Left><Left>
 nnoremap <Leader>s :%substitute/\</g<Left><Left>
 xnoremap <Leader>s :substitute/\</g<Left><Left>
+
 nnoremap <Leader>g :%global/\<
 xnoremap <Leader>g :global/\<
 nnoremap <Leader>v :%vglobal/\<
