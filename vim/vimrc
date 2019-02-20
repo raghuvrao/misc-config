@@ -141,28 +141,27 @@ augroup line_wrapping
   autocmd FileType text setlocal linebreak wrap
 augroup END
 
-" The following escape-sequences allow CTRL-<arrow> to work as expected when
-" Vim is run within tmux or GNU Screen.  CTRL-<arrow> is useful in insert mode
-" and cmdline mode.
+" Make a few things work within tmux that work outside tmux.
 "
-" NOTE:
-"
-"   1.  For these settings to work, tmux must be configured to have its
-"       `xterm-keys' option set to on, so that tmux sends xterm-style function
-"       key sequences on pressing CTRL-<arrow> (see `man tmux', under
-"       `xterm-keys').  GNU Screen sends xterm-style function key sequences
-"       for CTRL-<arrow> in its default configuration, at least in
-"       versions >= 4.00.03 (FAU), so no additional configuration should be
-"       necessary in GNU Screen.
-"
-"   2.  Check has('gui_running') to prevent assignment of these
-"       escape-sequences in GUI-Vim when it is started from within tmux or
-"       screen.  These sequences are unnecessary in GUI-Vim.  When GUI-Vim is
-"       started from the shell, 'term' inherits its value from the environment
-"       variable TERM (which in this case matches "tmux*" or "screen*"), and
-"       does not change to 'builtin_gui' until some time after all the
-"       commands in this file are executed.
+" Check has('gui_running') to prevent assignment of these escape-sequences in
+" GUI-Vim when it is started from within tmux or screen.  These sequences are
+" unnecessary in GUI-Vim.  When GUI-Vim is started from the shell, 'term'
+" inherits its value from the environment variable TERM (which in this case
+" matches "tmux*" or "screen*"), and does not change to 'builtin_gui' until
+" some time after all the commands in this file are executed.
 if !has('gui_running') && &term =~# '^screen\|^tmux'
+  " The xUp, xDown, xLeft and xRight escape-sequences allow CTRL-<arrow> to
+  " work as expected when Vim is run within tmux or GNU Screen.  CTRL-<arrow>
+  " is useful in insert mode and cmdline mode.
+  "
+  " For these sequences to be effective in Vim running in tmux, tmux must be
+  " configured to have its `xterm-keys' option set to on, so that tmux sends
+  " xterm-style function key sequences on pressing CTRL-<arrow> (see `man
+  " tmux', under `xterm-keys').  GNU Screen sends xterm-style function key
+  " sequences for CTRL-<arrow> in its default configuration, at least in
+  " versions >= 4.00.03 (FAU), so no additional configuration should be
+  " necessary in GNU Screen.
+  "
   " :execute is needed because we want \e to be parsed into literal ESC before
   " being assigned.
   execute "set <xUp>=\e[1;*A"
