@@ -168,6 +168,32 @@ if !has('gui_running') && &term =~# '^screen\|^tmux'
   execute "set <xDown>=\e[1;*B"
   execute "set <xRight>=\e[1;*C"
   execute "set <xLeft>=\e[1;*D"
+
+  " Allow bracketed paste to work when Vim is running in tmux or GNU Screen.
+  "
+  " Bracketed paste support was added to GNU Screen in the following commit
+  " (2015-06-25 17:05:31 +0200):
+  "
+  " https://git.savannah.gnu.org/cgit/screen.git/commit/?id=c389013e89e7b04ce43872f2e72d43f77461a3c0
+  " ( https://lists.gnu.org/archive/html/screen-devel/2013-03/msg00000.html )
+  "
+  " A few relevant fixes were made in the following commit, several years
+  " after (2019-02-14 20:30:23 +0100) the one above:
+  "
+  " https://git.savannah.gnu.org/cgit/screen.git/commit/?id=d2d33f664132e9473c62f37a4758a047fa83eb7a
+  "
+  " So, the minimum version of GNU Screen that is required for the sequences
+  " below to be effective is the version at the first commit above.  It is
+  " better to use a version at or after the second commit above.
+  "
+  " Support for bracketed paste was added in Vim 8.0.0210, whereas in some
+  " computers I use, only older versions of Vim are available.
+  if exists('+t_BD') && exists('+t_BE') && exists('+t_PS') && exists('+t_PE')
+    let &t_BD = "\e[?2004l"
+    let &t_BE = "\e[?2004h"
+    let &t_PS = "\e[200~"
+    let &t_PE = "\e[201~"
+  endif
 endif
 
 nnoremap <silent> <Leader>tu i<C-R>=strftime('%s')<CR><Esc>
