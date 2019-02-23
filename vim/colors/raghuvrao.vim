@@ -36,6 +36,8 @@ hi ErrorMsg ctermfg=Red ctermbg=NONE cterm=bold guifg=Red guibg=NONE gui=bold te
 
 hi Folded ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui=NONE term=standout
 
+hi MatchParen ctermfg=Black ctermbg=Green cterm=NONE guifg=Black guibg=LightGreen gui=NONE term=bold
+
 hi MoreMsg ctermfg=DarkGreen ctermbg=NONE cterm=NONE guifg=DarkGreen guibg=NONE gui=bold term=bold
 
 hi NonText ctermfg=Blue ctermbg=NONE cterm=bold guifg=Blue guibg=NONE gui=bold term=bold
@@ -53,7 +55,12 @@ endif
 
 hi Question ctermfg=DarkGreen ctermbg=NONE cterm=NONE guifg=DarkGreen guibg=NONE gui=bold term=standout
 
-hi Search ctermfg=Black ctermbg=Green cterm=NONE guifg=Black guibg=LightGreen gui=NONE term=reverse
+hi QuickFixLine ctermfg=NONE ctermbg=Green cterm=NONE guifg=NONE guibg=LightGreen gui=NONE term=reverse,bold
+if &t_Co <= 8
+  hi QuickFixLine ctermfg=Black ctermbg=DarkGreen cterm=NONE
+endif
+
+hi Search ctermfg=White ctermbg=Brown cterm=bold guifg=Black guibg=Orange gui=NONE term=reverse
 
 hi SpecialKey ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui=NONE term=bold
 
@@ -116,10 +123,8 @@ hi link netrwSymLink netrwPlain
 
 hi pythonBuiltin ctermfg=NONE ctermbg=NONE cterm=underline guifg=NONE guibg=NONE gui=underline term=underline
 
-if &t_Co <= 8
-  hi qfLineNr ctermfg=DarkYellow ctermbg=NONE cterm=NONE
-  hi qfFileName ctermfg=DarkMagenta ctermbg=NONE cterm=NONE
-endif
+hi qfFileName ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=NONE term=bold
+hi qfLineNr ctermfg=Brown ctermbg=NONE cterm=NONE guifg=Brown guibg=NONE gui=NONE term=bold
 
 hi link vimCommentString vimComment
 hi link vimCommentTitle vimComment
