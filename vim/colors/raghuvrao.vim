@@ -36,7 +36,7 @@ hi ErrorMsg ctermfg=Red ctermbg=NONE cterm=bold guifg=Red guibg=NONE gui=bold te
 
 hi Folded ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui=NONE term=standout
 
-hi MatchParen ctermfg=Black ctermbg=Green cterm=NONE guifg=Black guibg=LightGreen gui=NONE term=bold
+hi MatchParen ctermfg=Black ctermbg=Yellow cterm=NONE guifg=Black guibg=Yellow gui=underline,bold term=bold
 
 hi MoreMsg ctermfg=DarkGreen ctermbg=NONE cterm=NONE guifg=DarkGreen guibg=NONE gui=bold term=bold
 
@@ -55,12 +55,12 @@ endif
 
 hi Question ctermfg=DarkGreen ctermbg=NONE cterm=NONE guifg=DarkGreen guibg=NONE gui=bold term=standout
 
-hi QuickFixLine ctermfg=NONE ctermbg=Green cterm=NONE guifg=NONE guibg=LightGreen gui=NONE term=reverse,bold
+hi QuickFixLine ctermfg=Black ctermbg=Yellow cterm=NONE guifg=Black guibg=LightGreen gui=NONE term=reverse,bold
 if &t_Co <= 8
-  hi QuickFixLine ctermfg=Black ctermbg=DarkGreen cterm=NONE
+  hi QuickFixLine ctermbg=DarkGreen
 endif
 
-hi Search ctermfg=White ctermbg=Brown cterm=bold guifg=Black guibg=Orange gui=NONE term=reverse
+hi Search ctermfg=White ctermbg=Brown cterm=bold guifg=Black guibg=Orange gui=underline term=reverse
 
 hi SpecialKey ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui=NONE term=bold
 
