@@ -1,11 +1,11 @@
 " Mostly-plain colorscheme for dark-foreground-light-background screens.
 "
 " For text-terminals that support color, this colorscheme makes the reasonable
-" assumption that the 'upper' 8 colors (colors 8-15, or bold + colors 0-7) of
+" assumption that the 'upper' 8 colors (colors 8-15, or colors 0-7 + bold) of
 " the terminal are bright variants of the corresponding 'lower' 8 colors
 " (colors 0-7).
 "
-" Maintainer:	Raghu Rao <raghu.v.rao@gmail.com>
+" Maintainer:	Raghu V. Rao <raghu.v.rao@gmail.com>
 
 set background=light
 
@@ -34,7 +34,7 @@ if &t_Co <= 8
   hi ColorColumn ctermbg=DarkGreen
 endif
 
-hi Comment ctermfg=Brown ctermbg=NONE cterm=NONE guifg=Brown guibg=NONE gui=NONE term=bold
+hi Comment ctermfg=DarkBlue ctermbg=NONE cterm=NONE guifg=DarkBlue guibg=NONE gui=NONE term=bold
 
 hi Error ctermfg=Red ctermbg=NONE cterm=bold guifg=Red guibg=NONE gui=bold term=reverse
 
@@ -46,7 +46,7 @@ hi MatchParen ctermfg=Black ctermbg=Yellow cterm=NONE guifg=Black guibg=Yellow g
 
 hi MoreMsg ctermfg=DarkGreen ctermbg=NONE cterm=NONE guifg=DarkGreen guibg=NONE gui=bold term=bold
 
-hi NonText ctermfg=Blue ctermbg=NONE cterm=bold guifg=Blue guibg=NONE gui=bold term=bold
+hi NonText ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=NONE term=bold
 
 hi Pmenu ctermfg=Black ctermbg=Cyan cterm=NONE guifg=Black guibg=LightBlue gui=NONE
 hi PmenuSbar ctermfg=NONE ctermbg=Cyan cterm=NONE guifg=NONE guibg=LightBlue gui=NONE
@@ -66,7 +66,7 @@ if &t_Co <= 8
   hi QuickFixLine ctermbg=DarkGreen
 endif
 
-hi Search ctermfg=White ctermbg=Brown cterm=bold guifg=Black guibg=Orange gui=underline term=reverse
+hi Search ctermfg=Black ctermbg=Yellow cterm=NONE guifg=Black guibg=Orange gui=underline term=reverse
 
 hi SpecialKey ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui=NONE term=bold
 
@@ -81,7 +81,7 @@ hi TabLine ctermfg=DarkBlue ctermbg=LightGray cterm=NONE term=reverse
 hi TabLineFill ctermfg=DarkBlue ctermbg=LightGray cterm=NONE term=reverse
 hi TabLineSel ctermfg=White ctermbg=DarkBlue cterm=bold term=bold
 
-hi Todo ctermfg=Blue ctermbg=NONE cterm=bold guifg=Blue guibg=NONE gui=bold term=standout
+hi Todo ctermfg=DarkMagenta ctermbg=NONE cterm=bold guifg=DarkMagenta guibg=NONE gui=bold term=standout
 
 hi VertSplit ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=NONE term=reverse
 
@@ -96,13 +96,14 @@ hi diffRemoved ctermfg=DarkRed ctermbg=NONE cterm=NONE guifg=DarkRed guibg=NONE 
 
 hi gitHead ctermfg=Blue ctermbg=NONE cterm=bold guifg=Blue guibg=NONE gui=bold term=bold
 hi link gitIdentityKeyword gitKeyword
-hi gitKeyword ctermfg=Brown ctermbg=NONE cterm=NONE guifg=Brown guibg=NONE gui=bold term=bold
+hi gitKeyword ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=Brown guibg=NONE gui=bold term=bold
 
 hi gitcommitBranch ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=NONE term=bold,underline
-hi link gitcommitHeader gitcommitComment
+hi gitcommitHeader ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=NONE term=bold,underline
 hi link gitcommitOverflow gitcommitComment
 hi link gitcommitType gitcommitComment
 hi link gitcommitFile gitcommitComment
+hi gitcommitUntracked ctermfg=DarkRed ctermbg=NONE cterm=NONE guifg=DarkRed guibg=NONE gui=NONE term=bold
 
 hi helpHyperTextEntry ctermfg=DarkGreen ctermbg=NONE cterm=NONE guifg=DarkGreen guibg=NONE gui=NONE term=bold
 hi helpHyperTextJump ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=NONE term=underline
@@ -128,7 +129,7 @@ hi link netrwSymLink netrwPlain
 hi pythonBuiltin ctermfg=NONE ctermbg=NONE cterm=underline guifg=NONE guibg=NONE gui=underline term=underline
 
 hi qfFileName ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=NONE term=bold
-hi qfLineNr ctermfg=Brown ctermbg=NONE cterm=NONE guifg=Brown guibg=NONE gui=NONE term=bold
+hi qfLineNr ctermfg=DarkRed ctermbg=NONE cterm=NONE guifg=Brown guibg=NONE gui=NONE term=bold
 
 hi link vimCommentString vimComment
 hi link vimCommentTitle vimComment
