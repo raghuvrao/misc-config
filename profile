@@ -63,7 +63,8 @@ unset -v my_visual_editor
 export EDITOR="${VISUAL}"
 
 export PAGER='/usr/bin/less'
-export LESS='-M -R'
+
+export LESS=' -R -m'
 
 # Force LibreOffice to use the generic Visual Components Library plugin.
 # I find the others (kde4, gtk, and gtk3) ugly.
