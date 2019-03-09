@@ -1,4 +1,10 @@
 " Mostly-plain colorscheme for dark-foreground-light-background screens.
+"
+" For text-terminals that support color, this colorscheme makes the reasonable
+" assumption that the 'upper' 8 colors (colors 8-15, or bold + colors 0-7) of
+" the terminal are bright variants of the corresponding 'lower' 8 colors
+" (colors 0-7).
+"
 " Maintainer:	Raghu Rao <raghu.v.rao@gmail.com>
 
 set background=light
@@ -82,8 +88,6 @@ hi VertSplit ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg
 hi Visual ctermfg=Black ctermbg=Cyan cterm=NONE guifg=Black guibg=LightBlue gui=NONE term=reverse
 
 hi WildMenu ctermfg=White ctermbg=DarkBlue cterm=bold guifg=White guibg=DarkBlue gui=bold term=standout
-
-hi link cCommentString cComment
 
 hi diffAdded ctermfg=DarkGreen ctermbg=NONE cterm=NONE guifg=DarkGreen guibg=NONE gui=NONE term=bold
 hi diffFile ctermfg=NONE ctermbg=NONE cterm=bold guifg=NONE guibg=NONE gui=bold term=bold
