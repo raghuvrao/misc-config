@@ -55,7 +55,7 @@ else
 endif
 
 set laststatus=2
-set statusline=%(\ %f%)%(\ %q%)%(\ %M%R%H%W%)%(\ %y%)%(\ %l,%c%V%)
+set statusline=%(\ %f%)%(\ %q%)%(\ %M%R%H%W%)%(\ %y%)%(\ %l,%c%V\ %)
 
 set report=0
 
@@ -123,11 +123,6 @@ augroup END
 augroup nonzero_textwidth_if_filetype_set
   autocmd!
   autocmd FileType * if &textwidth == 0 | setlocal textwidth=79 | endif
-augroup END
-
-augroup modify_status_line
-  autocmd!
-  autocmd FileType go setlocal statusline+=%(\ %o%)
 augroup END
 
 augroup make_K_more_useful
