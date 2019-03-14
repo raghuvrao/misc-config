@@ -35,6 +35,7 @@ if &t_Co <= 8
 endif
 
 hi Comment ctermfg=DarkBlue ctermbg=NONE cterm=NONE guifg=DarkBlue guibg=NONE gui=NONE term=bold
+hi link SpecialComment Comment
 
 hi Error ctermfg=Red ctermbg=NONE cterm=bold guifg=Red guibg=NONE gui=bold term=reverse
 
