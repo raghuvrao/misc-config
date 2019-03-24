@@ -1,11 +1,11 @@
 " Mostly-plain colorscheme for dark-foreground-light-background screens.
 "
+" Maintainer:	Raghu V. Rao <raghu.v.rao@gmail.com>
+"
 " For text-terminals that support color, this colorscheme makes the reasonable
 " assumption that the 'upper' 8 colors (colors 8-15, or colors 0-7 + bold) of
 " the terminal are bright variants of the corresponding 'lower' 8 colors
 " (colors 0-7).
-"
-" Maintainer:	Raghu V. Rao <raghu.v.rao@gmail.com>
 
 set background=light
 
@@ -85,7 +85,11 @@ hi TabLine ctermfg=DarkBlue ctermbg=LightGray cterm=NONE term=reverse
 hi TabLineFill ctermfg=DarkBlue ctermbg=LightGray cterm=NONE term=reverse
 hi TabLineSel ctermfg=White ctermbg=DarkBlue cterm=bold term=bold
 
+hi Title ctermfg=NONE ctermbg=NONE cterm=bold guifg=NONE guibg=NONE gui=bold term=bold
+
 hi Todo ctermfg=DarkMagenta ctermbg=NONE cterm=bold guifg=DarkMagenta guibg=NONE gui=bold term=standout
+
+hi Underlined ctermfg=NONE ctermbg=NONE cterm=underline guifg=NONE guibg=NONE gui=underline term=underline
 
 hi VertSplit ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=NONE term=reverse
 
@@ -122,6 +126,18 @@ hi gitrebaseSquash ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta
 
 hi helpHyperTextEntry ctermfg=DarkGreen ctermbg=NONE cterm=NONE guifg=DarkGreen guibg=NONE gui=NONE term=bold
 hi helpHyperTextJump ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=NONE term=underline
+
+" Also affects Markdown.
+hi link htmlTitle NONE
+hi link htmlLink NONE
+hi link htmlH1 NONE
+hi link htmlBold NONE
+hi link htmlUnderline NONE
+hi link htmlItalic NONE
+hi link htmlBoldItalic NONE
+hi link htmlUnderlineItalic NONE
+hi link htmlBoldUnderline NONE
+hi link htmlBoldUnderlineItalic NONE
 
 hi link javaCommentTitle javaComment
 
