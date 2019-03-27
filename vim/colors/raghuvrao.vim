@@ -48,7 +48,7 @@ if &t_Co <= 8
   hi MatchParen ctermfg=Magenta ctermbg=NONE cterm=bold
 endif
 
-hi MoreMsg ctermfg=DarkGreen ctermbg=NONE cterm=NONE guifg=DarkGreen guibg=NONE gui=bold term=bold
+hi MoreMsg ctermfg=Blue ctermbg=NONE cterm=bold guifg=Blue guibg=NONE gui=bold term=bold
 
 hi NonText ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=NONE term=bold
 
@@ -63,7 +63,7 @@ if &t_Co <= 8
   hi PmenuThumb ctermbg=DarkCyan
 endif
 
-hi Question ctermfg=DarkGreen ctermbg=NONE cterm=NONE guifg=DarkGreen guibg=NONE gui=bold term=standout
+hi Question ctermfg=Blue ctermbg=NONE cterm=bold guifg=Blue guibg=NONE gui=bold term=standout
 
 hi QuickFixLine ctermfg=Black ctermbg=Yellow cterm=NONE guifg=Black guibg=LightGreen gui=NONE term=reverse,bold
 if &t_Co <= 8
