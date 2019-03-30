@@ -20,7 +20,6 @@ let g:colors_name = 'raghuvrao'
 hi clear Conceal
 hi clear Constant
 hi clear Identifier
-hi clear Ignore
 hi clear Keyword
 hi clear Normal
 hi clear PreProc
@@ -34,14 +33,24 @@ if &t_Co <= 8
   hi ColorColumn ctermbg=DarkGreen
 endif
 
-hi Comment ctermfg=DarkBlue ctermbg=NONE cterm=NONE guifg=DarkBlue guibg=NONE gui=NONE term=bold
+hi Comment ctermfg=Blue ctermbg=NONE cterm=NONE guifg=Blue guibg=NONE gui=NONE term=bold
+if &t_Co <= 8
+  hi Comment ctermfg=DarkBlue
+endif
 hi link SpecialComment Comment
 
 hi Error ctermfg=Red ctermbg=NONE cterm=bold guifg=Red guibg=NONE gui=bold term=reverse
 
 hi ErrorMsg ctermfg=Red ctermbg=NONE cterm=bold guifg=Red guibg=NONE gui=bold term=standout
 
+hi FoldColumn ctermfg=DarkBlue ctermbg=Yellow cterm=NONE guifg=DarkBlue guibg=LightGray gui=NONE term=standout
+if &t_Co <= 8
+  hi FoldColumn ctermbg=White
+endif
+
 hi Folded ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui=NONE term=standout
+
+hi Ignore ctermfg=Yellow ctermbg=NONE cterm=NONE guifg=LightYellow guibg=NONE gui=NONE term=NONE
 
 hi MatchParen ctermfg=Black ctermbg=Yellow cterm=NONE guifg=Black guibg=Yellow gui=underline,bold term=bold
 if &t_Co <= 8
@@ -50,7 +59,7 @@ endif
 
 hi MoreMsg ctermfg=Blue ctermbg=NONE cterm=bold guifg=Blue guibg=NONE gui=bold term=bold
 
-hi NonText ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=NONE term=bold
+hi NonText ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=bold term=bold
 
 hi Pmenu ctermfg=Black ctermbg=Cyan cterm=NONE guifg=Black guibg=LightBlue gui=NONE
 hi PmenuSbar ctermfg=NONE ctermbg=Cyan cterm=NONE guifg=NONE guibg=LightBlue gui=NONE
@@ -87,7 +96,7 @@ hi TabLineSel ctermfg=White ctermbg=DarkBlue cterm=bold term=bold
 
 hi Title ctermfg=DarkMagenta ctermbg=NONE cterm=bold guifg=DarkMagenta guibg=NONE gui=NONE term=bold
 
-hi Todo ctermfg=DarkMagenta ctermbg=NONE cterm=bold guifg=DarkMagenta guibg=NONE gui=bold term=standout
+hi Todo ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=bold term=standout
 
 hi Underlined ctermfg=NONE ctermbg=NONE cterm=underline guifg=NONE guibg=NONE gui=underline term=underline
 
@@ -109,7 +118,7 @@ hi gitKeyword ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=Brown guibg=NONE
 
 hi gitcommitBranch ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=NONE term=bold,underline
 hi gitcommitHeader ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=NONE term=bold,underline
-hi gitcommitOverflow ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=NONE term=bold,underline
+hi gitcommitSummary ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=bold term=bold
 hi link gitcommitType gitcommitComment
 hi link gitcommitFile gitcommitComment
 hi gitcommitUntracked ctermfg=DarkRed ctermbg=NONE cterm=NONE guifg=DarkRed guibg=NONE gui=NONE term=bold
@@ -124,8 +133,9 @@ hi gitrebasePick ctermfg=DarkBlue ctermbg=NONE cterm=NONE guifg=DarkBlue guibg=N
 hi gitrebaseReword ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui=NONE term=bold
 hi gitrebaseSquash ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=NONE term=bold
 
-hi helpHyperTextEntry ctermfg=DarkGreen ctermbg=NONE cterm=NONE guifg=DarkGreen guibg=NONE gui=NONE term=bold
-hi helpHyperTextJump ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=NONE term=underline
+hi helpSpecial ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=NONE term=bold
+hi helpHyperTextEntry ctermfg=DarkRed ctermbg=NONE cterm=NONE guifg=DarkRed guibg=NONE gui=NONE term=bold
+hi helpHyperTextJump ctermfg=DarkBlue ctermbg=NONE cterm=NONE guifg=DarkBlue guibg=NONE gui=NONE term=underline
 
 " Also affects Markdown.
 hi link htmlTitle NONE
