@@ -39,9 +39,9 @@ if &t_Co <= 8
 endif
 hi link SpecialComment Comment
 
-hi Error ctermfg=Red ctermbg=NONE cterm=bold guifg=Red guibg=NONE gui=bold term=reverse
+hi Error ctermfg=DarkRed ctermbg=NONE cterm=NONE guifg=Red guibg=NONE gui=bold term=reverse
 
-hi ErrorMsg ctermfg=Red ctermbg=NONE cterm=bold guifg=Red guibg=NONE gui=bold term=standout
+hi ErrorMsg ctermfg=DarkRed ctermbg=NONE cterm=NONE guifg=Red guibg=NONE gui=bold term=standout
 
 hi FoldColumn ctermfg=DarkBlue ctermbg=Yellow cterm=NONE guifg=DarkBlue guibg=LightGray gui=NONE term=standout
 if &t_Co <= 8
@@ -103,6 +103,8 @@ hi Underlined ctermfg=NONE ctermbg=NONE cterm=underline guifg=NONE guibg=NONE gu
 hi VertSplit ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=NONE term=reverse
 
 hi Visual ctermfg=Black ctermbg=Cyan cterm=NONE guifg=Black guibg=LightBlue gui=NONE term=reverse
+
+hi WarningMsg ctermfg=DarkRed ctermbg=NONE cterm=NONE guifg=DarkRed guibg=NONE gui=bold term=standout
 
 hi WildMenu ctermfg=White ctermbg=DarkBlue cterm=bold guifg=White guibg=DarkBlue gui=bold term=standout
 
