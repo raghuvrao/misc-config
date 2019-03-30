@@ -48,6 +48,8 @@ endif
 
 hi MoreMsg ctermfg=Blue ctermbg=NONE cterm=bold guifg=Blue guibg=NONE gui=bold term=bold
 
+hi Normal ctermfg=NONE ctermbg=NONE cterm=NONE guifg=Black guibg=White gui=NONE term=NONE
+
 hi NonText ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=bold term=bold
 
 hi Pmenu ctermfg=Black ctermbg=Cyan cterm=NONE guifg=Black guibg=LightBlue gui=NONE
@@ -176,7 +178,6 @@ hi clear Conceal
 hi clear Constant
 hi clear Identifier
 hi clear Keyword
-hi clear Normal
 hi clear PreProc
 hi clear Special
 hi clear Statement
