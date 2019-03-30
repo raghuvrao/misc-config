@@ -101,6 +101,11 @@ augroup no_list
   autocmd FileType man setlocal nolist
 augroup END
 
+augroup no_conceal
+  autocmd!
+  autocmd FileType * setlocal conceallevel=0 concealcursor=
+augroup END
+
 augroup no_automatic_insert_comment_leader
   autocmd!
   autocmd FileType * setlocal formatoptions-=o formatoptions-=r
