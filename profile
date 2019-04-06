@@ -79,7 +79,7 @@ fi
 
 PATH="${PATH}:/usr/local/sbin:/usr/sbin:/sbin"
 
-p='/opt/golang/root'
+p='/opt/go/root'
 if dir_r_x "${p}" && dir_r_x "${p}/bin"; then
     export GOROOT="${p}"
     PATH="${GOROOT}/bin:${PATH}"
