@@ -85,12 +85,31 @@ filetype plugin indent on
 runtime ftplugin/man.vim
 
 function! ToPositionWhenLastExitingCurrentBuffer()
-  if &filetype !~# '\m\(commit$\|^git$\|^gitrebase$\|^help$\|^man$\|^svn$\)'
-    let l:target_line_number = line("'\"")
-    if l:target_line_number >= 1 && l:target_line_number <= line('$')
-      execute 'normal! g`"zz'
-    endif
+  " If something has already moved the cursor, do not move it again.
+  if getcurpos()[1:2] != [1, 1]
+    return
   endif
+  " If the line number where the cursor should be moved is either invalid or
+  " no longer exists in the file, do not move the cursor.
+  let l:target_line_number = line("'\"")
+  if l:target_line_number < 1 || l:target_line_number > line('$')
+    return
+  endif
+  " Do not move the cursor for some special buffers and for some filetypes.
+  if expand('%:p') ==# ''
+	\ || &diff
+	\ || &buftype !=# ''
+	\ || &filetype ==# 'git'
+	\ || &filetype ==# 'gitcommit'
+	\ || &filetype ==# 'gitrebase'
+	\ || &filetype ==# 'help'
+	\ || &filetype ==# 'hgcommit'
+	\ || &filetype ==# 'man'
+	\ || &filetype ==# 'svn'
+    return
+  endif
+  " If we have come so far, it should be fine to move the cursor.
+  normal! g`"zz
 endfunction
 augroup toPositionWhenLastExitingCurrentBuffer
   autocmd!
