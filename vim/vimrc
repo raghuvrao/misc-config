@@ -116,46 +116,6 @@ augroup toPositionWhenLastExitingCurrentBuffer
   autocmd BufReadPost * call ToPositionWhenLastExitingCurrentBuffer()
 augroup END
 
-augroup no_list
-  autocmd!
-  autocmd FileType help setlocal nolist
-  autocmd FileType man setlocal nolist
-augroup END
-
-augroup no_conceal
-  autocmd!
-  autocmd FileType * setlocal conceallevel=0 concealcursor=
-augroup END
-
-augroup no_automatic_insert_comment_leader
-  autocmd!
-  autocmd FileType * setlocal formatoptions-=o formatoptions-=r
-augroup END
-
-augroup no_automatic_hard_wrap
-  autocmd!
-  autocmd FileType * setlocal formatoptions-=c formatoptions-=t
-augroup END
-
-augroup make_K_more_useful
-  autocmd!
-  autocmd FileType man setlocal keywordprg=:Man
-augroup END
-
-augroup indentation
-  autocmd!
-  autocmd FileType c setlocal expandtab shiftwidth=4 softtabstop=-1
-  autocmd FileType cpp setlocal expandtab shiftwidth=4 softtabstop=-1
-  autocmd FileType json setlocal expandtab shiftwidth=2 softtabstop=-1
-  autocmd FileType sh setlocal expandtab shiftwidth=4 softtabstop=-1
-  autocmd FileType vim setlocal shiftwidth=2 softtabstop=-1
-augroup END
-
-augroup line_wrapping
-  autocmd!
-  autocmd FileType text setlocal linebreak wrap
-augroup END
-
 " The following functions and autocommands work for :buffer #.  However, upon
 " doing :edit # or CTRL-^, the current line still gets centered in the window.
 " I do not (yet) know how to work around the undesired-automatic-scrolling
