@@ -49,7 +49,7 @@ endif
 
 hi Folded ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui=NONE term=standout
 
-hi Ignore ctermfg=Yellow ctermbg=NONE cterm=NONE guifg=LightYellow guibg=NONE gui=NONE term=NONE
+hi Ignore ctermfg=Yellow ctermbg=NONE cterm=NONE guifg=LightGray guibg=NONE gui=NONE term=NONE
 
 hi MatchParen ctermfg=Black ctermbg=Yellow cterm=NONE guifg=Black guibg=Yellow gui=underline,bold term=bold
 if &t_Co <= 8
