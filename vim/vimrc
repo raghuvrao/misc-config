@@ -156,6 +156,42 @@ augroup line_wrapping
   autocmd FileType text setlocal linebreak wrap
 augroup END
 
+" The following functions and autocommands work for :buffer #.  However, upon
+" doing :edit # or CTRL-^, the current line still gets centered in the window.
+" I do not (yet) know how to work around the undesired-automatic-scrolling
+" problem after CTRL-^ / :edit #.  Not a huge problem because I use :b # far
+" more than :edit # or CTRL-^.
+function! SaveView()
+  if &diff
+    return
+  endif
+  if !exists('w:savedViews')
+    let w:savedViews = {}
+  endif
+  let w:savedViews[bufnr('%')] = winsaveview()
+endfunction
+function! RestoreView()
+  if &diff
+    return
+  endif
+  if !exists('w:savedViews')
+    return
+  endif
+  let l:thisBufNum = bufnr('%')
+  if !has_key(w:savedViews, l:thisBufNum)
+    return
+  endif
+  if getcurpos()[1:2] != [1, 1]
+    call winrestview(w:savedViews[l:thisBufNum])
+  endif
+  unlet w:savedViews[l:thisBufNum]
+endfunction
+augroup no_disorientation
+  autocmd!
+  autocmd BufLeave * call SaveView()
+  autocmd BufEnter * call RestoreView()
+augroup END
+
 " Make a few things work within tmux that work outside tmux.
 "
 " When GVim is started from the shell, 'term' inherits its value from the
