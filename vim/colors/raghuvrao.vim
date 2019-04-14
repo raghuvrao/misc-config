@@ -95,7 +95,7 @@ hi TabLine ctermfg=DarkBlue ctermbg=LightGray cterm=NONE term=reverse
 hi TabLineFill ctermfg=DarkBlue ctermbg=LightGray cterm=NONE term=reverse
 hi TabLineSel ctermfg=White ctermbg=DarkBlue cterm=bold term=bold
 
-hi Title ctermfg=DarkMagenta ctermbg=NONE cterm=bold guifg=DarkMagenta guibg=NONE gui=NONE term=bold
+hi Title ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=bold term=bold
 
 hi Todo ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=bold term=standout
 
