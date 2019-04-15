@@ -102,7 +102,6 @@ function! ToPositionWhenLastExitingCurrentBuffer()
 	\ || &filetype ==# 'git'
 	\ || &filetype ==# 'gitcommit'
 	\ || &filetype ==# 'gitrebase'
-	\ || &filetype ==# 'help'
 	\ || &filetype ==# 'hgcommit'
 	\ || &filetype ==# 'man'
 	\ || &filetype ==# 'svn'
