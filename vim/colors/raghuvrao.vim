@@ -7,6 +7,11 @@
 " the terminal are bright variants of the corresponding 'lower' 8 colors
 " (colors 0-7).
 
+if !has('gui_running') && &t_Co < 8
+  echoerr 'Available colors: ' . &t_Co . '; selected colorscheme needs at least 8, looks best with 16 or more'
+  finish
+endif
+
 set background=light
 
 hi clear
@@ -28,12 +33,12 @@ hi clear String
 hi clear Type
 
 hi ColorColumn ctermfg=NONE ctermbg=Yellow cterm=NONE guifg=NONE guibg=Yellow gui=NONE term=reverse
-if &t_Co <= 8
+if &t_Co < 16
   hi ColorColumn ctermbg=DarkGreen
 endif
 
 hi Comment ctermfg=Blue ctermbg=NONE cterm=NONE guifg=Blue guibg=NONE gui=NONE term=bold
-if &t_Co <= 8
+if &t_Co < 16
   hi Comment ctermfg=DarkBlue
 endif
 hi link SpecialComment Comment
@@ -43,7 +48,7 @@ hi Error ctermfg=DarkRed ctermbg=NONE cterm=NONE guifg=Red guibg=NONE gui=bold t
 hi ErrorMsg ctermfg=DarkRed ctermbg=NONE cterm=NONE guifg=Red guibg=NONE gui=bold term=standout
 
 hi FoldColumn ctermfg=DarkBlue ctermbg=Yellow cterm=NONE guifg=DarkBlue guibg=LightGray gui=NONE term=standout
-if &t_Co <= 8
+if &t_Co < 16
   hi FoldColumn ctermbg=White
 endif
 
@@ -52,7 +57,7 @@ hi Folded ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui
 hi Ignore ctermfg=Yellow ctermbg=NONE cterm=NONE guifg=LightGray guibg=NONE gui=NONE term=NONE
 
 hi MatchParen ctermfg=Black ctermbg=Yellow cterm=NONE guifg=Black guibg=Yellow gui=underline,bold term=bold
-if &t_Co <= 8
+if &t_Co < 16
   hi MatchParen ctermfg=Magenta ctermbg=NONE cterm=bold
 endif
 
@@ -66,7 +71,7 @@ hi Pmenu ctermfg=Black ctermbg=Cyan cterm=NONE guifg=Black guibg=LightBlue gui=N
 hi PmenuSbar ctermfg=NONE ctermbg=Cyan cterm=NONE guifg=NONE guibg=LightBlue gui=NONE
 hi PmenuSel ctermfg=White ctermbg=DarkBlue cterm=bold guifg=White guibg=DarkBlue gui=bold
 hi PmenuThumb ctermfg=NONE ctermbg=DarkCyan cterm=NONE guifg=NONE guibg=DarkCyan gui=NONE
-if &t_Co <= 8
+if &t_Co < 16
   hi Pmenu ctermfg=White ctermbg=DarkBlue cterm=bold
   hi PmenuSbar ctermbg=DarkBlue
   hi PmenuSel ctermbg=DarkMagenta
@@ -76,7 +81,7 @@ endif
 hi Question ctermfg=Blue ctermbg=NONE cterm=bold guifg=Blue guibg=NONE gui=bold term=standout
 
 hi QuickFixLine ctermfg=Black ctermbg=Yellow cterm=NONE guifg=Black guibg=LightGreen gui=NONE term=reverse,bold
-if &t_Co <= 8
+if &t_Co < 16
   hi QuickFixLine ctermbg=DarkGreen
 endif
 
