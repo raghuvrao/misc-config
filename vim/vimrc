@@ -25,6 +25,13 @@ nnoremap <Leader>w :set invwrap<CR>
 
 set sidescroll=1
 
+" Do not allow the cursor to move onto the extends/precedes listchars when
+" 'wrap' is disabled (which it is for me most of the time).  It becomes easier
+" to understand the % motion on a long unwrapped line with several brackets in
+" it.  The disadvantage is I must live with g$ and g^ moving the view by
+" a column, which is OK for me because I do not use g$ and g^ a lot.
+set sidescrolloff=1
+
 set nowildmenu
 set wildmode=longest,list,full
 
