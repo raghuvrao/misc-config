@@ -222,6 +222,8 @@ nnoremap <Leader>m :set invmodifiable<CR>
 
 nnoremap <Leader>I :edit $MYVIMRC<CR>
 
+nnoremap <Leader>[ :ToggleMatchParen<CR>
+
 nnoremap <Leader><Leader> :buffer<Space>
 nnoremap <Leader>a :buffer #<CR>
 nnoremap <Leader>z :bprevious<CR>
