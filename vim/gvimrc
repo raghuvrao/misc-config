@@ -3,6 +3,8 @@
 
 set mouse=a
 
+set guioptions-=e
+
 set guioptions-=b guioptions-=L guioptions-=l guioptions-=R guioptions-=r
 
 set guioptions-=T

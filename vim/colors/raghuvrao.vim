@@ -96,9 +96,9 @@ hi link StatusLineTerm StatusLine
 hi clear StatusLineTermNC
 hi link StatusLineTermNC StatusLineNC
 
-hi TabLine ctermfg=DarkBlue ctermbg=LightGray cterm=NONE term=reverse
-hi TabLineFill ctermfg=DarkBlue ctermbg=LightGray cterm=NONE term=reverse
-hi TabLineSel ctermfg=White ctermbg=DarkBlue cterm=bold term=bold
+hi TabLine ctermfg=DarkBlue ctermbg=LightGray cterm=NONE guifg=DarkBlue guibg=LightGray gui=NONE term=reverse
+hi TabLineFill ctermfg=DarkBlue ctermbg=LightGray cterm=NONE guifg=DarkBlue guibg=DarkGray gui=NONE term=reverse
+hi TabLineSel ctermfg=White ctermbg=DarkBlue cterm=bold guifg=White guibg=SeaGreen gui=bold term=bold
 
 hi Title ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=bold term=bold
 
