@@ -3,10 +3,18 @@
 
 set mouse=a
 
+" Use native/non-GUI tab line.
 set guioptions-=e
 
-set guioptions-=b guioptions-=L guioptions-=l guioptions-=R guioptions-=r
+" Horizontal and right scroll bars always on.  Horizontal scrollbar thumb
+" sizes applies to cursor-line only, and not longest line in view.  Left
+" scrollbars always off.
+set guioptions+=b guioptions+=R guioptions+=r
+set guioptions+=h
+set guioptions-=L guioptions-=l
 
+" Exclude toolbar.
 set guioptions-=T
 
+" Console dialogs instead of pop-up dialogs for simple questions.
 set guioptions+=c
