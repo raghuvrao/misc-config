@@ -10,5 +10,5 @@ set show-all-if-unmodified on
 set skip-completed-text on
 set visible-stats on
 
-Control-l: redraw-current-line
-"\C-x\C-l": clear-screen
+# Control-l: redraw-current-line
+# "\C-x\C-l": clear-screen
