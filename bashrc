@@ -14,7 +14,7 @@ set -o pipefail
 HISTCONTROL='ignoredups'
 HISTTIMEFORMAT='[%F %a %T %z] '
 
-PS1='\H:\w\$ '
+PS1='[\H ${?} \W] \$ '
 
 # See the file SETTING-TITLES for information about setting terminal emulator
 # window/tab titles, and icon names.
