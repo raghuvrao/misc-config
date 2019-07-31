@@ -18,14 +18,18 @@ PS1='\H:\w\$ '
 
 # See the file SETTING-TITLES for information about setting terminal emulator
 # window/tab titles, and icon names.
+title_content='\H:\w'
+osc_title='\e]0;'"${title_content}"'\a'
+kseq='\ek'"${title_content}"'\e\\'
 case "${TERM}" in
     (xterm*|rxvt*)
-        PS1='\[\033]0;\H:\w\007\]'"${PS1}"
+        PS1="\[${osc_title}\]${PS1}"
         ;;
     (tmux*|screen*)
-        PS1='\[\033]0;\H:\w\007\]\[\033k\H:\w\033\134\]'"${PS1}"
+        PS1="\[${kseq}\]\[${osc_title}\]${PS1}"
         ;;
 esac
+unset -v title_content osc_title kseq
 
 unset -v PROMPT_COMMAND
 
