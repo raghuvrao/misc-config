@@ -1,10 +1,3 @@
-# dir_r_x returns true if its first argument is a readable directory into
-# which we can descend; false otherwise.
-dir_r_x () {
-	[[ -d "${1}" && -r "${1}" && -x "${1}" ]]
-	return ${?}
-}
-
 my_visual_editor='/usr/local/bin/vim'
 if [[ -f "${my_visual_editor}" && -x "${my_visual_editor}" ]]; then
 	export VISUAL="${my_visual_editor}"
@@ -33,20 +26,4 @@ fi
 
 path+=(/usr/local/sbin /usr/sbin /sbin)
 
-p='/opt/go/root'
-if dir_r_x "${p}" && dir_r_x "${p}/bin"; then
-	export GOROOT="${p}"
-	path=(${GOROOT}/bin ${path})
-fi
-
-p="${HOME}/go"
-if dir_r_x "${p}" && dir_r_x "${p}/bin"; then
-	export GOPATH="${p}"
-	path=(${GOPATH}/bin ${path})
-fi
-
-unset -v p
-
 path=(${HOME}/.local/bin ${HOME}/bin ${path})
-
-unhash -f dir_r_x
