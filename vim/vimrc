@@ -329,7 +329,7 @@ unlet! c_comment_strings
 " correctly to format comments in programs.  I am, however, not keen on syntax
 " _highlighting_, so I use my colorscheme which unhighlights most things.
 syntax on
-colorscheme raghuvrao_dflb0
+colorscheme raghuvrao_lfdb0
 
 packadd! matchit
 
