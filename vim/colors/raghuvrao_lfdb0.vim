@@ -85,8 +85,8 @@ if &t_Co == 8
   hi SpecialKey cterm=bold
 endif
 
-hi StatusLine ctermfg=White ctermbg=DarkBlue cterm=bold guifg=LightGray guibg=DarkBlue gui=bold term=reverse,bold
-hi StatusLineNC ctermfg=Black ctermbg=Gray cterm=NONE guifg=Black guibg=Gray gui=NONE term=reverse
+hi StatusLine ctermfg=NONE ctermbg=NONE cterm=reverse,bold guifg=NONE guibg=NONE gui=reverse,bold term=reverse,bold
+hi StatusLineNC ctermfg=NONE ctermbg=NONE cterm=reverse guifg=NONE guibg=NONE gui=reverse term=reverse
 hi clear StatusLineTerm
 hi link StatusLineTerm StatusLine
 hi clear StatusLineTermNC
@@ -102,7 +102,7 @@ hi Todo ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE
 
 hi Underlined ctermfg=NONE ctermbg=NONE cterm=underline guifg=NONE guibg=NONE gui=underline term=underline
 
-hi VertSplit ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=NONE term=reverse
+hi VertSplit ctermfg=DarkYellow ctermbg=NONE cterm=NONE guifg=DarkYellow guibg=NONE gui=NONE term=reverse
 
 hi Visual ctermfg=Black ctermbg=DarkCyan cterm=NONE guifg=Black guibg=DarkCyan gui=NONE term=reverse
 
