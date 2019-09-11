@@ -35,6 +35,22 @@ hi link SpecialComment Comment
 
 hi CursorLine ctermfg=NONE ctermbg=NONE cterm=underline guifg=NONE guibg=NONE gui=underline term=underline
 
+hi Directory ctermfg=Cyan ctermbg=NONE cterm=NONE guifg=Cyan guibg=NONE gui=NONE term=bold
+if &t_Co == 8
+  hi Directory ctermfg=DarkCyan
+endif
+
+hi DiffAdd ctermfg=Green ctermbg=NONE cterm=NONE guifg=Green guibg=NONE gui=NONE
+hi DiffChange ctermfg=Cyan ctermbg=NONE cterm=NONE guifg=Cyan guibg=NONE gui=NONE
+hi DiffDelete ctermfg=Red ctermbg=NONE cterm=NONE guifg=Red guibg=NONE gui=NONE
+hi DiffText ctermfg=Magenta ctermbg=NONE cterm=NONE guifg=Magenta guibg=NONE gui=NONE
+if &t_Co == 8
+  hi DiffAdd cterm=bold
+  hi DiffChange cterm=bold
+  hi DiffDelete cterm=bold
+  hi DiffText cterm=bold
+endif
+
 hi Error ctermfg=Red ctermbg=NONE cterm=bold guifg=Red guibg=NONE gui=bold term=reverse
 
 hi ErrorMsg ctermfg=Red ctermbg=NONE cterm=bold guifg=Red guibg=NONE gui=bold term=standout
@@ -54,10 +70,7 @@ endif
 
 hi Normal ctermfg=NONE ctermbg=NONE cterm=NONE guifg=LightGray guibg=Black gui=NONE term=NONE
 
-hi NonText ctermfg=Blue ctermbg=NONE cterm=bold guifg=Blue guibg=NONE gui=bold term=bold
-if &t_Co == 8
-  hi NonText cterm=bold
-endif
+hi NonText ctermfg=DarkYellow ctermbg=NONE cterm=NONE guifg=DarkYellow guibg=NONE gui=NONE term=bold
 
 hi Pmenu ctermfg=White ctermbg=DarkBlue cterm=NONE guifg=White guibg=DarkBlue gui=NONE
 hi PmenuSbar ctermfg=NONE ctermbg=DarkBlue cterm=NONE guifg=NONE guibg=DarkBlue gui=NONE
@@ -73,9 +86,9 @@ if &t_Co == 8
   hi Question cterm=bold
 endif
 
-hi QuickFixLine ctermfg=Black ctermbg=DarkGreen cterm=NONE guifg=Black guibg=DarkGreen gui=NONE term=reverse,bold
+hi QuickFixLine ctermfg=Black ctermbg=DarkGreen cterm=NONE guifg=LightGray guibg=Blue gui=NONE term=reverse,bold
 
-hi Search ctermfg=White ctermbg=DarkMagenta cterm=NONE guifg=White guibg=DarkMagenta gui=NONE term=reverse
+hi Search ctermfg=White ctermbg=DarkMagenta cterm=NONE guifg=White guibg=DarkMagenta gui=bold term=reverse
 if &t_Co == 8
   hi Search cterm=bold
 endif
@@ -92,9 +105,9 @@ hi link StatusLineTerm StatusLine
 hi clear StatusLineTermNC
 hi link StatusLineTermNC StatusLineNC
 
-hi TabLine ctermfg=Black ctermbg=LightGray cterm=NONE guifg=DarkBlue guibg=LightGray gui=NONE term=reverse
-hi TabLineFill ctermfg=Black ctermbg=LightGray cterm=NONE guifg=DarkBlue guibg=DarkGray gui=NONE term=reverse
-hi TabLineSel ctermfg=White ctermbg=DarkBlue cterm=bold guifg=White guibg=DarkBlue gui=bold term=bold
+hi TabLine ctermfg=NONE ctermbg=NONE cterm=reverse guifg=NONE guibg=NONE gui=reverse term=reverse
+hi TabLineFill ctermfg=NONE ctermbg=NONE cterm=reverse guifg=NONE guibg=NONE gui=reverse term=reverse
+hi TabLineSel ctermfg=NONE ctermbg=NONE cterm=bold guifg=NONE guibg=NONE gui=bold term=bold
 
 hi Title ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=bold term=bold
 
@@ -134,7 +147,7 @@ hi link gitIdentityKeyword gitKeyword
 
 hi gitcommitBranch ctermfg=Magenta ctermbg=NONE cterm=NONE guifg=Magenta guibg=NONE gui=NONE term=bold,underline
 hi gitcommitHeader ctermfg=Magenta ctermbg=NONE cterm=NONE guifg=Magenta guibg=NONE gui=NONE term=bold,underline
-hi gitcommitSummary ctermfg=Magenta ctermbg=NONE cterm=NONE guifg=Magenta guibg=NONE gui=bold term=bold
+hi gitcommitOverflow ctermfg=DarkYellow ctermbg=NONE cterm=NONE guifg=DarkYellow guibg=NONE gui=NONE term=bold
 hi gitcommitUntracked ctermfg=Red ctermbg=NONE cterm=NONE guifg=Red guibg=NONE gui=NONE term=bold
 if &t_Co == 8
   hi gitcommitBranch cterm=bold
@@ -209,13 +222,6 @@ hi link perlPOD NONE
 hi link perlSharpBang perlComment
 
 hi pythonBuiltin ctermfg=NONE ctermbg=NONE cterm=underline guifg=NONE guibg=NONE gui=underline term=underline
-
-hi qfFileName ctermfg=Magenta ctermbg=NONE cterm=NONE guifg=Magenta guibg=NONE gui=NONE term=bold
-hi qfLineNr ctermfg=DarkYellow ctermbg=NONE cterm=NONE guifg=DarkYellow guibg=NONE gui=NONE term=bold
-if &t_Co == 8
-  hi qfFileName cterm=bold
-  hi qfLineNr cterm=bold
-endif
 
 hi link vimCommentString vimComment
 hi link vimCommentTitle vimComment
