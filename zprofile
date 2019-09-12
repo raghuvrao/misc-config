@@ -1,3 +1,5 @@
+#!/bin/zsh
+
 my_visual_editor='/usr/local/bin/vim'
 if [[ -f "${my_visual_editor}" && -x "${my_visual_editor}" ]]; then
 	export VISUAL="${my_visual_editor}"

@@ -1,3 +1,5 @@
+#!/bin/zsh
+
 if [[ ! -o INTERACTIVE ]]; then return; fi
 
 # Slackware likes to set MANPATH even though /etc/man_db.conf is configured
