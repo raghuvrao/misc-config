@@ -316,11 +316,13 @@ if !has('gui_running') && &term =~# '^screen\|^tmux'
   "
   " Support for bracketed paste was added in Vim 8.0.0210, whereas in some
   " computers I use, only older versions of Vim are available.
-  if exists('+t_BD') && exists('+t_BE') && exists('+t_PS') && exists('+t_PE')
-    let &t_BD = "\e[?2004l"
-    let &t_BE = "\e[?2004h"
-    let &t_PS = "\e[200~"
-    let &t_PE = "\e[201~"
+  if exists('+t_BD') && exists('+t_BE')
+    let &t_BD = "\<Esc>[?2004l"
+    let &t_BE = "\<Esc>[?2004h"
+    " t_PS and t_PE do not exist initially (which is why we do not check for
+    " them in the if-condition above).  Define them now (see :h :let-&).
+    let &t_PS = "\<Esc>[200~"
+    let &t_PE = "\<Esc>[201~"
   endif
 endif
 
