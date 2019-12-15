@@ -61,15 +61,10 @@ bindkey -M emacs '^X^E' edit-command-line
 
 case "${TERM}" in
 	(xterm*|rxvt*)
-		chpwd () {
-			print -Pn '\e]0;%M:%~\a'
-		}
+		precmd () { print -Pn '\e]0;%M:%~\a'; }
 		;;
 	(tmux*|screen*)
-		chpwd () {
-			print -Pn '\e]0;%M:%~\a'
-			print -Pn '\ek%M:%~\e\\'
-		}
+		precmd () { print -Pn '\e]0;%M:%~\a\ek%M:%~\e\\'; }
 		;;
 esac
 
