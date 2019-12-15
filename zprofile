@@ -11,7 +11,7 @@ export EDITOR="${VISUAL}"
 
 export PAGER='/usr/bin/less'
 
-export LESS=' --RAW-CONTROL-CHARS --long-prompt --no-init '
+export LESS=' --RAW-CONTROL-CHARS --long-prompt --no-init --quit-if-one-screen '
 
 # Force LibreOffice to use the generic Visual Components Library plugin.
 # I find the others (kde4, gtk, and gtk3) ugly.
