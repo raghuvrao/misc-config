@@ -14,16 +14,31 @@ bindkey -e
 
 bindkey -M emacs '\t' expand-or-complete-prefix
 bindkey -M emacs '\eb' emacs-backward-word
-bindkey -M emacs '\eB' emacs-backward-word
 bindkey -M emacs '\ef' emacs-forward-word
-bindkey -M emacs '\eF' emacs-forward-word
+
+# While I prefer bash's default way of traversing/deleting words, sometimes,
+# I want to use zsh's default way of traversing/deleting words too.  The
+# difference is that zsh's default set of word separators is far smaller than
+# bash's.  The following few my_* functions and widgets provide zsh's default
+# behaviours at non-default bindings.
+
+my_backward_word () {
+	local WORDCHARS=''
+	unset -v WORDCHARS
+	zle backward-word
+}
+zle -N my-backward-word my_backward_word
+bindkey -M emacs '\eB' my-backward-word
+
+my_forward_word () {
+	local WORDCHARS=''
+	unset -v WORDCHARS
+	zle forward-word
+}
+zle -N my-forward-word my_forward_word
+bindkey -M emacs '\eF' my-forward-word
 
 my_backward_kill_word_from_point () {
-	# By creating a local version of WORDCHARS, and unsetting it, zle in
-	# this local scope will operate without WORDCHARS being set.  When
-	# WORDCHARS is unset, zle uses space (and perhaps comma) as the word
-	# separator, and not any of the other special characters.  Ultimately,
-	# I get an easy means to delete from point to the previous space.
 	local WORDCHARS=''
 	unset -v WORDCHARS
 	zle backward-kill-word
@@ -50,7 +65,10 @@ HISTFILE="${HOME}/.zsh_history"
 HISTSIZE=10500
 SAVEHIST=10000
 
-# Not the same as WORDCHARS being unset.
+# Setting WORDCHARS to the empty value is NOT the same as unsetting WORDCHARS.
+# The effect of setting WORDCHARS to the empty string is that zle will treat
+# many more so-called special characters as word separators than its limited
+# default set (which seems to be space, comma and colon).
 WORDCHARS=''
 
 PS1='[%M %? %3~] %# '
