@@ -73,19 +73,3 @@ alias ll='ls -l'
 alias grep='grep --color=auto'
 alias cgrep='command grep --color=always'
 alias which-command='whence -a -v'
-
-# The following lines were added by compinstall
-
-zstyle ':completion:*' auto-description 'specify: %d'
-zstyle ':completion:*' format '--- %d ---'
-zstyle ':completion:*' group-name ''
-zstyle ':completion:*' insert-unambiguous true
-zstyle ':completion:*' list-prompt %SAt %p: press TAB for more, or the character to insert%s
-zstyle ':completion:*' menu select=1
-zstyle ':completion:*' original true
-zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
-zstyle :compinstall filename '/home/raghu/.zshrc'
-
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
