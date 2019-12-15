@@ -122,11 +122,20 @@ augroup jump_to_last_exit_position
   autocmd BufReadPost * call JumpToLastExitPosition()
 augroup END
 
+" When switching from buffer B to buffer A in a window, and in buffer A, if
+" the line containing the cursor was not at the center of the window, Vim
+" scrolls buffer A such that the line containing the cursor is at the center
+" of the window displaying that buffer.  I find this automatic scrolling
+" disorienting and annoying. The following functions SaveView and RestoreView,
+" and the corresponding autocommand group no_disorientation aim to address
+" this problem.
+"
 " The following functions and autocommands work for :buffer #.  However, upon
 " doing :edit # or CTRL-^, the current line still gets centered in the window.
 " I do not (yet) know how to work around the undesired-automatic-scrolling
 " problem after CTRL-^ / :edit #.  Not a huge problem because I use :b # far
 " more than :edit # or CTRL-^.
+
 function! SaveView()
   if &diff
     return
@@ -136,22 +145,53 @@ function! SaveView()
   endif
   let w:savedViews[bufnr('%')] = winsaveview()
 endfunction
+
 function! RestoreView()
-  if &diff
-    return
-  endif
-  if !exists('w:savedViews')
+  " Rationale for the getpos() call below (in other words, why we do nothing
+  " in this function if the cursor is not at the start of the buffer):
+  "
+  "   When switching buffers within one window, Vim first sets the cursor
+  "   position to the start of the file, then fires a BufEnter event;
+  "   afterward, if no autocmd has changed the cursor position, Vim restores
+  "   the cursor position based on values saved in its internal data
+  "   structures.  In contrast, when switching to another window the cursor
+  "   position is not forced to the start of the file; this includes the case
+  "   when the user scrolls and clicks with the mouse.
+  "
+  " Source: <https://vim.fandom.com/wiki/Avoid_scrolling_when_switch_buffers>
+  "
+  " Because of the behaviour described above, restoring the view without
+  " ensuring that the cursor was not already moved causes undesired scrolling:
+  "
+  " 1.  Remove getpos('.')[1:2] != [1, 1] || below, save this file, and close
+  "     the editor.
+  " 2.  Start GVim with the modified vimrc (I was unable to reproduce this
+  "     problem in Vim).  Place the cursor on a line that is not the center
+  "     line on the screen.  E.g., place the cursor on the top line or the
+  "     bottom line on the screen.
+  " 3.  Split the window, move the cursor/focus to the new window, and open
+  "     another file in the new window.
+  " 4.  With the cursor in this new window, scroll the original window using
+  "     the mouse wheel.
+  " 5.  Click on the status bar of the original window to move focus to the
+  "     original window.
+  "
+  " The expected behaviour is that the buffer in the original window does not
+  " scroll automatically.  The actual behaviour is that the buffer scrolls to
+  " restore the saved view of the buffer before splitting the original window.
+  " In order for actual behaviour to match expected behaviour, restore the
+  " view only if the cursor is in the start of the buffer.
+  if getpos('.')[1:2] != [1, 1] || !exists('w:savedViews') || &diff
     return
   endif
   let l:thisBufNum = bufnr('%')
   if !has_key(w:savedViews, l:thisBufNum)
     return
   endif
-  if getcurpos()[1:2] != [1, 1]
-    call winrestview(w:savedViews[l:thisBufNum])
-  endif
+  call winrestview(w:savedViews[l:thisBufNum])
   unlet w:savedViews[l:thisBufNum]
 endfunction
+
 augroup no_disorientation
   autocmd!
   autocmd BufLeave * call SaveView()
