@@ -10,9 +10,22 @@ if [[ ! -o INTERACTIVE ]]; then return; fi
 # solve this problem.
 unset -v MANPATH
 
+# Use Emacs-style key-bindings regardless of the value of EDITOR.
 bindkey -e
 
+# zsh binds the ZLE function expand-or-complete to TAB by default.
+# expand-or-complete attempts to complete the word rather than the prefix so
+# it takes into account the letters both before and after the cursor.  I am
+# accustomed to having completion work only on the letters before the cursor,
+# which is what the ZLE function expand-or-complete-prefix does.
 bindkey -M emacs '\t' expand-or-complete-prefix
+
+# zsh binds the ZLE function kill-whole-line to C-U by default.
+# kill-whole-line, as the name suggests, kills the entire line regardless of
+# the cursor's position.  I vastly prefer C-U to kill from the cursor's
+# position to the beginning of the line, like in bash.
+bindkey -M emacs '^U' backward-kill-line
+
 bindkey -M emacs '\eb' emacs-backward-word
 bindkey -M emacs '\ef' emacs-forward-word
 
