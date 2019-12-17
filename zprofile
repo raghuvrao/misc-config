@@ -20,6 +20,8 @@ export SAL_USE_VCLPLUGIN=gen
 export mcfg="${HOME}/src/git/misc-config"
 export mscr="${HOME}/src/git/misc-scripts"
 
+unset -v LESSOPEN
+
 typeset -U PATH path FPATH path MANPATH manpath
 
 if (( ${#path} == 0 )); then

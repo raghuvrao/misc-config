@@ -73,6 +73,8 @@ export SAL_USE_VCLPLUGIN=gen
 export mcfg="${HOME}/src/git/misc-config"
 export mscr="${HOME}/src/git/misc-scripts"
 
+unset -v LESSOPEN
+
 if [ -z "${PATH}" ]; then
     PATH='/usr/local/bin:/usr/bin:/bin'
 fi
