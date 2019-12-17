@@ -13,51 +13,65 @@ unset -v MANPATH
 # Use Emacs-style key-bindings regardless of the value of EDITOR.
 bindkey -e
 
-# zsh binds the ZLE function expand-or-complete to TAB by default.
-# expand-or-complete attempts to complete the word rather than the prefix so
-# it takes into account the letters both before and after the cursor.  I am
-# accustomed to having completion work only on the letters before the cursor,
-# which is what the ZLE function expand-or-complete-prefix does.
+# By default, TAB is bound to the ZLE function expand-or-complete.
+# expand-or-complete attempts to complete the word rather than the prefix, so
+# it takes into account the characters both before and after the cursor.
+# I like for completion to work only on the letters before the cursor, which
+# is what the ZLE function expand-or-complete-prefix does.
 bindkey -M emacs '\t' expand-or-complete-prefix
 
-# zsh binds the ZLE function kill-whole-line to C-U by default.
+# By default, C-U is bound to the ZLE function kill-whole-line.
 # kill-whole-line, as the name suggests, kills the entire line regardless of
 # the cursor's position.  I vastly prefer C-U to kill from the cursor's
 # position to the beginning of the line, like in bash.
 bindkey -M emacs '^U' backward-kill-line
 
-bindkey -M emacs '\eb' emacs-backward-word
+# Make zsh treat more characters as word separators.
+#
+# The default value for WORDCHARS is *?_-.[]~=/&;!#$%^(){}<> which means ZLE
+# will treat none of these characters as a word separator.  Also, unsetting
+# WORDCHARS is not equivalent to setting it to the empty value.  If WORDCHARS
+# is unset, ZLE will use its (aggressive) default value.
+WORDCHARS=''
+
+# Be default, M-f is bound to forward-word, which moves point to the beginning
+# of the next word (subject, of course, to WORDCHARS).  In Emacs and bash, M-f
+# moves point forward to the end of the word, which I find more convenient.
+# Fortunately, ZLE provides the function emacs-forward-word, which provides
+# the behaviour I prefer.
 bindkey -M emacs '\ef' emacs-forward-word
 
-# While I prefer bash's default way of traversing/deleting words, sometimes,
-# I want to use zsh's default way of traversing/deleting words too.  The
-# difference is that zsh's default set of word separators is far smaller than
-# bash's.  The following few my_* functions and widgets provide zsh's default
-# behaviours at non-default bindings.
+# Create a few functions, and corresponding ZLE widgets and key-bindings to
+# keep zsh's default concept of words handy.
+#
+# By creating a local version of WORDCHARS and unsetting it, we can pretend
+# that WORDCHARS does not exist in the environment (see the documentation for
+# the 'unset' builtin in 'man zshbuiltins').  Unsetting WORDCHARS is not the
+# same as setting WORDCHARS to the empty value.
 
-my_backward_word () {
+my_emacs_backward_word () {
 	local WORDCHARS=''
 	unset -v WORDCHARS
-	zle backward-word
+	zle emacs-backward-word
 }
-zle -N my-backward-word my_backward_word
-bindkey -M emacs '\eB' my-backward-word
+zle -N my-emacs-backward-word my_emacs_backward_word
+bindkey -M emacs '\eB' my-emacs-backward-word
 
-my_forward_word () {
+my_emacs_forward_word () {
 	local WORDCHARS=''
 	unset -v WORDCHARS
-	zle forward-word
+	zle emacs-forward-word
 }
-zle -N my-forward-word my_forward_word
-bindkey -M emacs '\eF' my-forward-word
+zle -N my-emacs-forward-word my_emacs_forward_word
+bindkey -M emacs '\eF' my-emacs-forward-word
 
-my_backward_kill_word_from_point () {
+my_backward_kill_word () {
 	local WORDCHARS=''
 	unset -v WORDCHARS
 	zle backward-kill-word
 }
-zle -N my_backward_kill_word_from_point my_backward_kill_word_from_point
-bindkey -M emacs '^W' my_backward_kill_word_from_point
+zle -N my_backward_kill_word my_backward_kill_word
+bindkey -M emacs '^W' my_backward_kill_word
 
 setopt APPEND_HISTORY
 setopt AUTO_MENU
