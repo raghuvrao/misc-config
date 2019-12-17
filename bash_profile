@@ -53,6 +53,8 @@ export EDITOR="${VISUAL}"
 # Force LibreOffice to use the generic Visual Components Library plugin.
 export SAL_USE_VCLPLUGIN=gen
 
+unset -v LESSOPEN
+
 if [ -z "${PATH}" ]; then
     PATH='/usr/local/bin:/usr/bin:/bin'
 fi
