@@ -2,8 +2,8 @@
 
 if [[ ! -o INTERACTIVE ]]; then return; fi
 
-# Slackware likes to set MANPATH even though /etc/man_db.conf is configured
-# satisfactorily (so far as I go).  Slackware's default MANPATH causes
+# Slackware sets MANPATH (even though /etc/man_db.conf is configured
+# satisfactorily, so far as I go).  Slackware's default MANPATH causes
 # problems sometimes.  E.g. when two versions of a program are installed in
 # two different locations, sometimes man pulls up the version of the man page
 # that does not match the version of the command.  Unsetting MANPATH seems to
@@ -44,10 +44,10 @@ bindkey -M emacs '\ef' emacs-forward-word
 # Create a few functions, and corresponding ZLE widgets and key-bindings to
 # keep zsh's default concept of words handy.
 #
-# By creating a local version of WORDCHARS and unsetting it, we can pretend
-# that WORDCHARS does not exist in the environment (see the documentation for
-# the 'unset' builtin in 'man zshbuiltins').  Unsetting WORDCHARS is not the
-# same as setting WORDCHARS to the empty value.
+# In a function, by creating a local version of WORDCHARS and unsetting it,
+# zsh will remove WORDCHARS from the environment in the scope of that function
+# (see the documentation for the 'unset' builtin in 'man zshbuiltins').
+# Consequently, within that scope, the default value of WORDCHARS is used.
 
 my_emacs_backward_word () {
 	local WORDCHARS=''
