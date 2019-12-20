@@ -69,6 +69,15 @@ set report=0
 " read.
 set mouse=
 
+" In the event that I enable mouse in Vim (as opposed to GVim, where I keep it
+" enabled always), I want the mouse to work well.  With 'ttymouse' set to
+" 'xterm' (which is what Vim calculates as my default), the mouse barely
+" works, especially when running Vim "inside" tmux.  The value 'sgr' for
+" 'ttymouse' makes mouse operation much better: select+drag works, and
+" smoothly too, resizing splits works, the 223-column limit is removed (see
+" :help xterm-mouse), etc.
+set ttymouse=sgr
+
 set nofixendofline
 
 " Setting autoindent is typically unnecessary because filetype-specific
