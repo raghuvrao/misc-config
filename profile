@@ -64,8 +64,6 @@ export EDITOR="${VISUAL}"
 
 export PAGER='/usr/bin/less'
 
-export LESS=' --RAW-CONTROL-CHARS --long-prompt --no-init --quit-if-one-screen '
-
 # Force LibreOffice to use the generic Visual Components Library plugin.
 # I find the others (kde4, gtk, and gtk3) ugly.
 export SAL_USE_VCLPLUGIN=gen
@@ -73,7 +71,7 @@ export SAL_USE_VCLPLUGIN=gen
 export mcfg="${HOME}/src/git/misc-config"
 export mscr="${HOME}/src/git/misc-scripts"
 
-unset -v LESSOPEN
+unset -v LESS LESSOPEN
 
 if [ -z "${PATH}" ]; then
     PATH='/usr/local/bin:/usr/bin:/bin'
