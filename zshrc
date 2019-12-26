@@ -2,14 +2,6 @@
 
 if [[ ! -o INTERACTIVE ]]; then return; fi
 
-# Slackware sets MANPATH (even though /etc/man_db.conf is configured
-# satisfactorily, so far as I go).  Slackware's default MANPATH causes
-# problems sometimes.  E.g. when two versions of a program are installed in
-# two different locations, sometimes man pulls up the version of the man page
-# that does not match the version of the command.  Unsetting MANPATH seems to
-# solve this problem.
-unset -v MANPATH
-
 # Use Emacs-style key-bindings regardless of the value of EDITOR.
 bindkey -e
 
