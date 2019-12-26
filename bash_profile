@@ -55,6 +55,14 @@ export SAL_USE_VCLPLUGIN=gen
 
 unset -v LESS LESSOPEN
 
+# Slackware sets MANPATH (even though /etc/man_db.conf is configured
+# satisfactorily, so far as I go).  Slackware's default MANPATH causes
+# problems sometimes.  E.g. when two versions of a program are installed in
+# two different locations, sometimes man pulls up the version of the man page
+# that does not match the version of the command.  Unsetting MANPATH seems to
+# solve this problem.
+unset -v MANPATH
+
 if [ -z "${PATH}" ]; then
     PATH='/usr/local/bin:/usr/bin:/bin'
 fi
