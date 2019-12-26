@@ -67,7 +67,7 @@ hi Ignore ctermfg=DarkGray ctermbg=NONE cterm=NONE guifg='#555555' guibg=NONE gu
 
 hi LineNr ctermfg=DarkYellow ctermbg=NONE cterm=NONE guifg='#555555' guibg=NONE gui=NONE term=bold
 
-hi MatchParen ctermfg=White ctermbg=Blue cterm=bold guifg='#FFFFFF' guibg='#5555FF' gui=bold term=bold
+hi MatchParen ctermfg=White ctermbg=DarkBlue cterm=bold guifg='#FFFFFF' guibg='#0000AA' gui=bold term=bold
 
 hi ModeMsg ctermfg=NONE ctermbg=NONE cterm=bold guifg=NONE guibg=NONE gui=bold term=bold
 
