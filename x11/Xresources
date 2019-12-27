@@ -65,10 +65,10 @@ xterm*vt100.color1: rgb:AA/33/33
 uxterm*vt100.color1: rgb:AA/33/33
 xterm*vt100.color2: rgb:33/AA/33
 uxterm*vt100.color2: rgb:33/AA/33
-xterm*vt100.color3: rgb:AA/55/33
-uxterm*vt100.color3: rgb:AA/55/33
-xterm*vt100.color4: rgb:33/55/AA
-uxterm*vt100.color4: rgb:33/55/AA
+xterm*vt100.color3: rgb:AA/AA/33
+uxterm*vt100.color3: rgb:AA/AA/33
+xterm*vt100.color4: rgb:33/33/AA
+uxterm*vt100.color4: rgb:33/33/AA
 xterm*vt100.color5: rgb:AA/33/AA
 uxterm*vt100.color5: rgb:AA/33/AA
 xterm*vt100.color6: rgb:33/AA/AA
@@ -83,8 +83,8 @@ xterm*vt100.color10: rgb:55/FF/55
 uxterm*vt100.color10: rgb:55/FF/55
 xterm*vt100.color11: rgb:FF/FF/55
 uxterm*vt100.color11: rgb:FF/FF/55
-xterm*vt100.color12: rgb:55/77/FF
-uxterm*vt100.color12: rgb:55/77/FF
+xterm*vt100.color12: rgb:55/55/FF
+uxterm*vt100.color12: rgb:55/55/FF
 xterm*vt100.color13: rgb:FF/55/FF
 uxterm*vt100.color13: rgb:FF/55/FF
 xterm*vt100.color14: rgb:55/FF/FF
