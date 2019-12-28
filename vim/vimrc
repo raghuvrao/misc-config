@@ -100,6 +100,23 @@ filetype plugin indent on
 
 runtime ftplugin/man.vim
 
+" Delete the autocommand groups vimrcEx and vimStartup.  The augroups are
+" usually defined in $VIM/vimrc (which, if present, is usually a copy of or
+" link to $VIMRUNTIME/vimrc_example.vim), or in $VIMRUNTIME/defaults.vim.
+" These augroups have autocommands that are either unnecessary for me, or
+" I override them elsewhere in my configuration.
+"
+" :help :augroup-delete suggests that to delete an augroup, it is better to
+" empty it first.
+augroup vimrcEx
+  autocmd!
+augroup END
+augroup! vimrcEx
+augroup vimStartup
+  autocmd!
+augroup END
+augroup! vimStartup
+
 function! JumpToLastExitPosition()
   " If something has already moved the cursor, do not move it again.
   if getcurpos()[1:2] != [1, 1]
