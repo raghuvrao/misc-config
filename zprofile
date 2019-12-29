@@ -40,7 +40,7 @@ export SAL_USE_VCLPLUGIN=gen
 export mcfg="${HOME}/src/git/misc-config"
 export mscr="${HOME}/src/git/misc-scripts"
 
-typeset -U PATH path FPATH path MANPATH manpath
+typeset -U PATH path FPATH path
 
 if (( ${#path} == 0 )); then
 	path=(/usr/local/bin /usr/bin /bin)
