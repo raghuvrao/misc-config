@@ -1,5 +1,27 @@
 #!/bin/zsh
 
+# Many programs that invoke 'less' themselves for paginating their output set
+# LESS to a value they prefer if LESS is not already set.  I cannot seem to
+# find a combination of options to put into LESS that works for every
+# use-case.  So, let the programs that run 'less' decide what they want in
+# LESS themselves.
+unset -v LESS
+
+# When I run the 'less' program, I want it not to do much more than paginating
+# the contents of a file.  I do not want 'less' invoking external programs to
+# process the input files, and paginating the output of those external
+# programs.  So, unset LESSOPEN to prevent 'less' from invoking other programs
+# to process/display files.
+unset -v LESSOPEN
+
+# Slackware sets MANPATH (even though /etc/man_db.conf is configured
+# satisfactorily, so far as I go).  Slackware's default MANPATH causes
+# problems sometimes.  E.g. when two versions of a program are installed in
+# two different locations, sometimes man pulls up the version of the man page
+# that does not match the version of the command.  Unsetting MANPATH seems to
+# solve this problem.
+unset -v MANPATH
+
 my_visual_editor='/usr/local/bin/vim'
 if [[ -f "${my_visual_editor}" && -x "${my_visual_editor}" ]]; then
 	export VISUAL="${my_visual_editor}"
@@ -18,8 +40,6 @@ export SAL_USE_VCLPLUGIN=gen
 export mcfg="${HOME}/src/git/misc-config"
 export mscr="${HOME}/src/git/misc-scripts"
 
-unset -v LESS LESSOPEN
-
 typeset -U PATH path FPATH path MANPATH manpath
 
 if (( ${#path} == 0 )); then
@@ -29,11 +49,3 @@ fi
 path+=(/usr/local/sbin /usr/sbin /sbin)
 
 path=(${HOME}/.local/bin ${HOME}/bin ${path})
-
-# Slackware sets MANPATH (even though /etc/man_db.conf is configured
-# satisfactorily, so far as I go).  Slackware's default MANPATH causes
-# problems sometimes.  E.g. when two versions of a program are installed in
-# two different locations, sometimes man pulls up the version of the man page
-# that does not match the version of the command.  Unsetting MANPATH seems to
-# solve this problem.
-unset -v MANPATH

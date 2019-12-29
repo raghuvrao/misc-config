@@ -6,6 +6,28 @@
 # Keep this file so POSIX-compliant as possible because it is sourced by
 # multiple sh-like shells.  No bashisms!
 
+# Many programs that invoke 'less' themselves for paginating their output set
+# LESS to a value they prefer if LESS is not already set.  I cannot seem to
+# find a combination of options to put into LESS that works for every
+# use-case.  So, let the programs that run 'less' decide what they want in
+# LESS themselves.
+unset -v LESS
+
+# When I run the 'less' program, I want it not to do much more than paginating
+# the contents of a file.  I do not want 'less' invoking external programs to
+# process the input files, and paginating the output of those external
+# programs.  So, unset LESSOPEN to prevent 'less' from invoking other programs
+# to process/display files.
+unset -v LESSOPEN
+
+# Slackware sets MANPATH (even though /etc/man_db.conf is configured
+# satisfactorily, so far as I go).  Slackware's default MANPATH causes
+# problems sometimes.  E.g. when two versions of a program are installed in
+# two different locations, sometimes man pulls up the version of the man page
+# that does not match the version of the command.  Unsetting MANPATH seems to
+# solve this problem.
+unset -v MANPATH
+
 # dir_r_x returns true if its first argument is a readable directory into which
 # we can descend; false otherwise.
 dir_r_x()
@@ -70,16 +92,6 @@ export SAL_USE_VCLPLUGIN=gen
 
 export mcfg="${HOME}/src/git/misc-config"
 export mscr="${HOME}/src/git/misc-scripts"
-
-unset -v LESS LESSOPEN
-
-# Slackware sets MANPATH (even though /etc/man_db.conf is configured
-# satisfactorily, so far as I go).  Slackware's default MANPATH causes
-# problems sometimes.  E.g. when two versions of a program are installed in
-# two different locations, sometimes man pulls up the version of the man page
-# that does not match the version of the command.  Unsetting MANPATH seems to
-# solve this problem.
-unset -v MANPATH
 
 if [ -z "${PATH}" ]; then
     PATH='/usr/local/bin:/usr/bin:/bin'
