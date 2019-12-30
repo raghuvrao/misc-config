@@ -14,14 +14,6 @@ unset -v LESS
 # to process/display files.
 unset -v LESSOPEN
 
-# Slackware sets MANPATH (even though /etc/man_db.conf is configured
-# satisfactorily, so far as I go).  Slackware's default MANPATH causes
-# problems sometimes.  E.g. when two versions of a program are installed in
-# two different locations, sometimes man pulls up the version of the man page
-# that does not match the version of the command.  Unsetting MANPATH seems to
-# solve this problem.
-unset -v MANPATH
-
 my_visual_editor='/usr/local/bin/vim'
 if [[ -f "${my_visual_editor}" && -x "${my_visual_editor}" ]]; then
 	export VISUAL="${my_visual_editor}"
