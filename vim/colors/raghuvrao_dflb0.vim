@@ -1,6 +1,6 @@
 " Mostly-plain colorscheme for dark-foreground-light-background screens.
 "
-" Maintainer:	Raghu V. Rao <raghu.v.rao@gmail.com>
+" Author: Raghu V. Rao <raghu.v.rao@gmail.com>
 "
 " For text-terminals that support color, this colorscheme makes the reasonable
 " assumption that the 'upper' 8 colors (colors 8-15, or colors 0-7 + bold) of

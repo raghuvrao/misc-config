@@ -133,14 +133,14 @@ function! JumpToLastExitPosition()
   endif
   " Do not move the cursor for some special buffers and for some filetypes.
   if expand('%:p') ==# ''
-	\ || &diff
-	\ || &buftype !=# ''
-	\ || &filetype ==# 'git'
-	\ || &filetype ==# 'gitcommit'
-	\ || &filetype ==# 'gitrebase'
-	\ || &filetype ==# 'hgcommit'
-	\ || &filetype ==# 'man'
-	\ || &filetype ==# 'svn'
+        \ || &diff
+        \ || &buftype !=# ''
+        \ || &filetype ==# 'git'
+        \ || &filetype ==# 'gitcommit'
+        \ || &filetype ==# 'gitrebase'
+        \ || &filetype ==# 'hgcommit'
+        \ || &filetype ==# 'man'
+        \ || &filetype ==# 'svn'
     return
   endif
   " If we have come so far, it should be fine to move the cursor.
