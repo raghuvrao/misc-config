@@ -75,7 +75,7 @@ path_append()
 #
 # To make a variable available to child processes, it must be exported.
 
-my_visual_editor='/usr/local/bin/vim'
+my_visual_editor="${HOME}/.local/bin/vim"
 if [ -f "${my_visual_editor}" -a -x "${my_visual_editor}" ]; then
     export VISUAL="${my_visual_editor}"
 else
@@ -99,7 +99,7 @@ fi
 
 PATH="${PATH}:/usr/local/sbin:/usr/sbin:/sbin"
 
-PATH="${HOME}/.local/bin:${HOME}/bin:${PATH}"
+PATH="${HOME}/.local/bin:${PATH}"
 
 # Clean up PATH.  Do not modify PATH after this clean-up part.  Any
 # modification to PATH must happen before this comment.

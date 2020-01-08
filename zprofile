@@ -14,7 +14,7 @@ unset -v LESS
 # to process/display files.
 unset -v LESSOPEN
 
-my_visual_editor='/usr/local/bin/vim'
+my_visual_editor="${HOME}/.local/bin/vim"
 if [[ -f "${my_visual_editor}" && -x "${my_visual_editor}" ]]; then
 	export VISUAL="${my_visual_editor}"
 else
@@ -40,4 +40,4 @@ fi
 
 path+=(/usr/local/sbin /usr/sbin /sbin)
 
-path=(${HOME}/.local/bin ${HOME}/bin ${path})
+path=(${HOME}/.local/bin ${path})
