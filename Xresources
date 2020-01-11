@@ -47,8 +47,8 @@ xterm*vt100.boldMode: true
 uxterm*vt100.boldMode: true
 xterm*vt100.alwaysBoldMode: false
 uxterm*vt100.alwaysBoldMode: false
-xterm*vt100.cursorBlink: true
-uxterm*vt100.cursorBlink: true
+xterm*vt100.cursorBlink: false
+uxterm*vt100.cursorBlink: false
 xterm*vt100.colorBDMode: true
 uxterm*vt100.colorBDMode: true
 xterm*vt100.veryBoldColors: 4
