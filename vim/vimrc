@@ -202,11 +202,17 @@ if has('patch-7.4.1557') && has('patch-8.1.0494')
     endif
     let l:bufNrInOriginWin = winbufnr(w:maximizedFromWinID)
     if l:bufNrInOriginWin == -1
-      echo 'Cannot unmaximize: origin window does not exist'
+      echo 'Cannot unmaximize: origin window (ID ' . w:maximizedFromWinID . ') does not exist'
       return
     endif
-    if l:bufNrInOriginWin != bufnr('%')
-      echo 'Cannot unmaximize: different buffer displayed in origin window'
+    let l:thisBufNr = bufnr('%')
+    if l:bufNrInOriginWin != l:thisBufNr
+      echo 'Cannot unmaximize: expected buffer '
+            \ . l:thisBufNr
+            \ . ' (this buffer) in origin window (ID '
+            \ . w:maximizedFromWinID
+            \ . '), found buffer '
+            \ . l:bufNrInOriginWin
       return
     endif
     let l:maxdTab = tabpagenr()
