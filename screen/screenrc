@@ -1,14 +1,16 @@
 # ~/.screenrc
 # Author: Raghu V. Rao <raghu.v.rao@gmail.com>
 
-startup_message off
 altscreen on
 autodetach on
+nonblock on
+startup_message off
+vbell off
+
+defbce on
 defc1 off
 defmonitor on
 defutf8 on
-nonblock on
-vbell off
 
 # Set terminfo capabilities for hardstatus for the xterm term-type.  Set the
 # capabilities in such a way that when this capability is used, it updates the
