@@ -111,8 +111,8 @@ endif
 
 hi SpecialKey ctermfg=DarkYellow ctermbg=NONE cterm=NONE guifg='#AA5500' guibg=NONE gui=NONE term=bold
 
-hi StatusLine ctermfg=NONE ctermbg=NONE cterm=reverse,bold guifg=NONE guibg=NONE gui=reverse,bold term=reverse,bold
-hi StatusLineNC ctermfg=NONE ctermbg=NONE cterm=reverse guifg=NONE guibg=NONE gui=reverse term=reverse
+hi StatusLine ctermfg=Black ctermbg=DarkCyan cterm=NONE guifg='#000000' guibg='#00AAAA' gui=bold term=reverse,bold
+hi StatusLineNC ctermfg=Black ctermbg=LightGray cterm=NONE guifg='#000000' guibg='#AAAAAA' gui=NONE term=reverse
 hi clear StatusLineTerm
 hi link StatusLineTerm StatusLine
 hi clear StatusLineTermNC
@@ -130,7 +130,10 @@ hi Underlined ctermfg=NONE ctermbg=NONE cterm=underline guifg=NONE guibg=NONE gu
 
 hi VertSplit ctermfg=DarkYellow ctermbg=NONE cterm=NONE guifg='#AAAA00' guibg=NONE gui=NONE term=reverse
 
-hi Visual ctermfg=LightGray ctermbg=DarkBlue cterm=NONE guifg='#AAAAAA' guibg='#0000AA' gui=NONE term=reverse
+hi Visual ctermfg=White ctermbg=DarkBlue cterm=NONE guifg='#FFFFFF' guibg='#0000AA' gui=NONE term=reverse
+if &t_Co == 8
+  hi Visual ctermfg=LightGray
+endif
 
 hi WarningMsg ctermfg=Red ctermbg=NONE cterm=NONE guifg='#FF5555' guibg=NONE gui=bold term=standout
 if &t_Co == 8
