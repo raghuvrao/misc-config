@@ -117,7 +117,7 @@ augroup vimStartup
 augroup END
 augroup! vimStartup
 
-function! JumpToLastExitPosition()
+function! JumpToLastExitPosition() abort
   " If something has already moved the cursor, do not move it again.
   if getcurpos()[1:2] != [1, 1]
     return
@@ -154,7 +154,7 @@ augroup END
 " functions (and the mappings to call them) conditionally.
 if has('patch-7.4.1557') && has('patch-8.1.0494')
 
-  function! MaximizeToTab()
+  function! MaximizeToTab() abort
     if winnr('$') == 1
       echo 'Cannot maximize: window already maximized'
       return
