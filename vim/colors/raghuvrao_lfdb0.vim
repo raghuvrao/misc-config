@@ -122,7 +122,7 @@ hi TabLine ctermfg=Black ctermbg=LightGray cterm=NONE guifg='#000000' guibg='#AA
 hi TabLineFill ctermfg=Black ctermbg=LightGray cterm=NONE guifg='#000000' guibg='#AAAAAA' gui=NONE term=reverse
 hi TabLineSel ctermfg=Black ctermbg=DarkCyan cterm=NONE guifg='#000000' guibg='#00AAAA' gui=bold term=bold
 
-hi Title ctermfg=Magenta ctermbg=NONE cterm=NONE guifg='#FF55FF' guibg=NONE gui=bold term=bold
+hi Title ctermfg=Yellow ctermbg=NONE cterm=bold guifg='#FFFF55' guibg=NONE gui=bold term=bold
 
 hi Todo ctermfg=Magenta ctermbg=NONE cterm=NONE guifg='#FF55FF' guibg=NONE gui=bold term=standout
 
