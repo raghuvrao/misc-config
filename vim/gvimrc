@@ -3,6 +3,8 @@
 
 set mouse=a
 
+set showtabline=2
+
 " Use native/non-GUI tab line.
 set guioptions-=e
 
