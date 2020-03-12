@@ -6,8 +6,8 @@ set mouse=a
 " Use native/non-GUI tab line.
 set guioptions-=e
 
-" Left-side scrollbars always off.
-set guioptions-=L guioptions-=l
+" Left-side scrollbars are always on.
+set guioptions-=L guioptions+=l
 
 " Horizontal and right-side scroll bars always on.
 set guioptions+=b guioptions+=R guioptions+=r
