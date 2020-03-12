@@ -99,6 +99,7 @@ set formatoptions=1jlmnq
 filetype plugin indent on
 
 runtime ftplugin/man.vim
+set keywordprg=:Man
 
 " Delete the autocommand groups vimrcEx and vimStartup.  The augroups are
 " usually defined in $VIM/vimrc (which, if present, is usually a copy of or
