@@ -5,21 +5,26 @@ set mouse=a
 
 set showtabline=2
 
-" Use native/non-GUI tab line.
+" Use the native/non-GUI tab line.
 set guioptions-=e
 
 " Left-side scrollbars are always on.
-set guioptions-=L guioptions+=l
+set guioptions-=L
+set guioptions+=l
 
-" Horizontal and right-side scroll bars always on.
-set guioptions+=b guioptions+=R guioptions+=r
+" Right-side scrollbars are always on.
+set guioptions-=R
+set guioptions+=r
 
-" Horizontal scrollbar length applies to cursor-line only, and not longest
-" line in view.
+" Bottom (horizontal) scrollbar is always on.
+set guioptions+=b
+
+" Adjust the horizontal scrollbar thumb size to match the cursor-line, and not
+" the longest visible line (reduces computations).
 set guioptions+=h
 
-" Exclude toolbar.
+" Remove the toolbar from view.
 set guioptions-=T
 
-" Console dialogs instead of pop-up dialogs for simple questions.
+" Use console dialogs instead of pop-up dialogs for simple questions.
 set guioptions+=c
