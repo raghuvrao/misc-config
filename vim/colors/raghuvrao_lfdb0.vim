@@ -99,7 +99,7 @@ endif
 
 hi QuickFixLine ctermfg=Black ctermbg=DarkGreen cterm=NONE guifg='#FFFFFF' guibg='#0000AA' gui=NONE term=reverse,bold
 
-hi Search ctermfg=White ctermbg=DarkMagenta cterm=NONE guifg='#FFFFFF' guibg='#AA00AA' gui=NONE term=reverse
+hi Search ctermfg=White ctermbg=DarkBlue cterm=NONE guifg='#FFFFFF' guibg='#0000AA' gui=bold term=reverse
 if &t_Co == 8
   hi Search cterm=bold
 endif
@@ -130,10 +130,7 @@ hi Underlined ctermfg=NONE ctermbg=NONE cterm=underline guifg=NONE guibg=NONE gu
 
 hi VertSplit ctermfg=DarkYellow ctermbg=NONE cterm=NONE guifg='#AAAA00' guibg=NONE gui=NONE term=reverse
 
-hi Visual ctermfg=White ctermbg=DarkBlue cterm=NONE guifg='#FFFFFF' guibg='#0000AA' gui=NONE term=reverse
-if &t_Co == 8
-  hi Visual ctermfg=LightGray
-endif
+hi Visual ctermfg=Black ctermbg=DarkYellow cterm=NONE guifg='#000000' guibg='#AA5500' gui=NONE term=reverse
 
 hi WarningMsg ctermfg=Red ctermbg=NONE cterm=NONE guifg='#FF5555' guibg=NONE gui=bold term=standout
 if &t_Co == 8
