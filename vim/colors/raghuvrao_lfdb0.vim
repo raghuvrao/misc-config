@@ -27,12 +27,12 @@ hi CursorColumn ctermfg=NONE ctermbg=DarkGray cterm=NONE guifg=NONE guibg='#3333
 hi CursorLine ctermfg=NONE ctermbg=NONE cterm=underline guifg=NONE guibg=NONE gui=underline term=underline
 
 hi CursorLineNr ctermfg=Yellow ctermbg=NONE cterm=NONE guifg='#AAAA00' guibg=NONE gui=NONE term=bold
-if &t_Co == 8
+if &t_Co < 16
   hi CursorLineNr cterm=bold
 endif
 
 hi Directory ctermfg=Cyan ctermbg=NONE cterm=NONE guifg='#00AAAA' guibg=NONE gui=NONE term=bold
-if &t_Co == 8
+if &t_Co < 16
   hi Directory ctermfg=DarkCyan
 endif
 
@@ -40,24 +40,24 @@ hi DiffAdd ctermfg=Green ctermbg=NONE cterm=NONE guifg='#55FF55' guibg=NONE gui=
 hi DiffChange ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg='#00AAAA' guibg=NONE gui=NONE
 hi DiffDelete ctermfg=Red ctermbg=NONE cterm=NONE guifg='#FF5555' guibg=NONE gui=NONE
 hi DiffText ctermfg=Cyan ctermbg=NONE cterm=NONE guifg='#55FFFF' guibg=NONE gui=NONE
-if &t_Co == 8
+if &t_Co < 16
   hi DiffAdd cterm=bold
   hi DiffChange cterm=bold
   hi DiffDelete cterm=bold
 endif
 
 hi Error ctermfg=White ctermbg=DarkRed cterm=NONE guifg='#FFFFFF' guibg='#AA0000' gui=NONE term=reverse
-if &t_Co == 8
+if &t_Co < 16
   hi Error cterm=bold
 endif
 
 hi ErrorMsg ctermfg=White ctermbg=DarkRed cterm=NONE guifg='#FFFFFF' guibg='#AA0000' gui=NONE term=standout
-if &t_Co == 8
+if &t_Co < 16
   hi ErrorMsg cterm=bold
 endif
 
 hi FoldColumn ctermfg=Cyan ctermbg=DarkGray cterm=NONE guifg='#55FFFF' guibg='#333333' gui=NONE term=standout
-if &t_Co == 8
+if &t_Co < 16
   hi FoldColumn ctermfg=DarkCyan ctermbg=Black cterm=bold
 endif
 
@@ -72,14 +72,14 @@ hi MatchParen ctermfg=White ctermbg=DarkBlue cterm=bold guifg='#FFFFFF' guibg='#
 hi ModeMsg ctermfg=NONE ctermbg=NONE cterm=bold guifg=NONE guibg=NONE gui=bold term=bold
 
 hi MoreMsg ctermfg=Green ctermbg=NONE cterm=NONE guifg='#55FF55' guibg=NONE gui=NONE term=bold
-if &t_Co == 8
+if &t_Co < 16
   hi MoreMsg cterm=bold
 endif
 
 hi Normal ctermfg=NONE ctermbg=NONE cterm=NONE guifg='#AAAAAA' guibg='#000000' gui=NONE term=NONE
 
 hi NonText ctermfg=Blue ctermbg=NONE cterm=bold guifg='#5555FF' guibg=NONE gui=bold term=bold
-if &t_Co == 8
+if &t_Co < 16
   hi NonText cterm=bold
 endif
 
@@ -87,25 +87,25 @@ hi Pmenu ctermfg=White ctermbg=DarkBlue cterm=NONE guifg='#FFFFFF' guibg='#0000A
 hi PmenuSbar ctermfg=NONE ctermbg=DarkBlue cterm=NONE guifg=NONE guibg='#0000AA' gui=NONE
 hi PmenuSel ctermfg=White ctermbg=DarkMagenta cterm=bold guifg='#FFFFFF' guibg='#AA00AA' gui=bold
 hi PmenuThumb ctermfg=NONE ctermbg=DarkCyan cterm=NONE guifg=NONE guibg='#00AAAA' gui=NONE
-if &t_Co == 8
+if &t_Co < 16
   hi Pmenu cterm=bold
   hi PmenuSel cterm=bold
 endif
 
 hi Question ctermfg=Green ctermbg=NONE cterm=NONE guifg='#55FF55' guibg=NONE gui=NONE term=standout
-if &t_Co == 8
+if &t_Co < 16
   hi Question cterm=bold
 endif
 
 hi QuickFixLine ctermfg=Black ctermbg=DarkGreen cterm=NONE guifg='#FFFFFF' guibg='#0000AA' gui=NONE term=reverse,bold
 
 hi Search ctermfg=White ctermbg=DarkBlue cterm=NONE guifg='#FFFFFF' guibg='#0000AA' gui=bold term=reverse
-if &t_Co == 8
+if &t_Co < 16
   hi Search cterm=bold
 endif
 
 hi SignColumn ctermfg=Cyan ctermbg=DarkGray cterm=NONE guifg='#55FFFF' guibg='#222222' gui=NONE term=standout
-if &t_Co == 8
+if &t_Co < 16
   hi SignColumn ctermfg=DarkCyan ctermbg=Black cterm=bold
 endif
 
@@ -133,7 +133,7 @@ hi VertSplit ctermfg=DarkYellow ctermbg=NONE cterm=NONE guifg='#AAAA00' guibg=NO
 hi Visual ctermfg=Black ctermbg=DarkYellow cterm=NONE guifg='#000000' guibg='#AA5500' gui=NONE term=reverse
 
 hi WarningMsg ctermfg=Red ctermbg=NONE cterm=NONE guifg='#FF5555' guibg=NONE gui=bold term=standout
-if &t_Co == 8
+if &t_Co < 16
   hi WarningMsg cterm=bold
 endif
 
@@ -143,7 +143,7 @@ hi diffAdded ctermfg=Green ctermbg=NONE cterm=NONE guifg='#55FF55' guibg=NONE gu
 hi diffFile ctermfg=NONE ctermbg=NONE cterm=bold guifg=NONE guibg=NONE gui=bold term=bold
 hi diffLine ctermfg=Cyan ctermbg=NONE cterm=NONE guifg='#55FFFF' guibg=NONE gui=NONE term=bold
 hi diffRemoved ctermfg=Red ctermbg=NONE cterm=NONE guifg='#FF5555' guibg=NONE gui=NONE term=underline
-if &t_Co == 8
+if &t_Co < 16
   hi diffAdded cterm=bold
   hi diffLine cterm=bold
   hi diffRemoved cterm=bold
@@ -152,7 +152,7 @@ endif
 hi gitHash ctermfg=Cyan ctermbg=NONE cterm=NONE guifg='#55FFFF' guibg=NONE gui=NONE term=bold
 hi gitHead ctermfg=Blue ctermbg=NONE cterm=bold guifg='#FF5555' guibg=NONE gui=NONE term=bold
 hi gitKeyword ctermfg=Magenta ctermbg=NONE cterm=NONE guifg='#AA5500' guibg=NONE gui=bold term=bold
-if &t_Co == 8
+if &t_Co < 16
   hi gitHash cterm=bold
   hi gitKeyword cterm=bold
 endif
@@ -162,7 +162,7 @@ hi gitcommitBranch ctermfg=Magenta ctermbg=NONE cterm=NONE guifg='#FF55FF' guibg
 hi gitcommitHeader ctermfg=Magenta ctermbg=NONE cterm=NONE guifg='#FF55FF' guibg=NONE gui=NONE term=bold,underline
 hi gitcommitOverflow ctermfg=DarkYellow ctermbg=NONE cterm=NONE guifg='#AAAA00' guibg=NONE gui=NONE term=bold
 hi gitcommitUntracked ctermfg=Red ctermbg=NONE cterm=NONE guifg='#FF5555' guibg=NONE gui=NONE term=bold
-if &t_Co == 8
+if &t_Co < 16
   hi gitcommitBranch cterm=bold
   hi gitcommitHeader cterm=bold
   hi gitcommitSummary cterm=bold
@@ -180,7 +180,7 @@ hi gitrebaseHash ctermfg=Yellow ctermbg=NONE cterm=NONE guifg='#FFFF55' guibg=NO
 hi gitrebasePick ctermfg=Cyan ctermbg=NONE cterm=NONE guifg='#55FFFF' guibg=NONE gui=NONE term=bold
 hi gitrebaseReword ctermfg=Cyan ctermbg=NONE cterm=NONE guifg='#55FFFF' guibg=NONE gui=NONE term=bold
 hi gitrebaseSquash ctermfg=Magenta ctermbg=NONE cterm=NONE guifg='#FF55FF' guibg=NONE gui=NONE term=bold
-if &t_Co == 8
+if &t_Co < 16
   hi gitrebaseCommand cterm=bold
   hi gitrebaseDrop cterm=bold
   hi gitrebaseEdit cterm=bold
@@ -195,7 +195,7 @@ endif
 hi helpSpecial ctermfg=Magenta ctermbg=NONE cterm=NONE guifg='#FF55FF' guibg=NONE gui=NONE term=bold
 hi helpHyperTextEntry ctermfg=Green ctermbg=NONE cterm=NONE guifg='#55FF55' guibg=NONE gui=NONE term=bold
 hi helpHyperTextJump ctermfg=Yellow ctermbg=NONE cterm=NONE guifg='#FFFF55' guibg=NONE gui=underline term=underline
-if &t_Co == 8
+if &t_Co < 16
   hi helpSpecial cterm=bold
   hi helpHyperTextEntry cterm=bold
   hi helpHyperTextJump cterm=bold
