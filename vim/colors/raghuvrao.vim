@@ -7,11 +7,6 @@
 " the terminal are bright variants of the corresponding 'lower' 8 colors
 " (colors 0-7).
 
-if !has('gui_running') && &t_Co < 8
-  echoerr 'Available colors: ' . &t_Co . '; selected colorscheme needs at least 8, looks best with 16 or more'
-  finish
-endif
-
 set background=light
 
 hi clear
