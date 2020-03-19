@@ -292,9 +292,25 @@ if !has('gui_running') && &term =~# '^screen\|^tmux'
   endif
 endif
 
+function! SyntaxIDs(line_num, col_num) abort
+  let id = synID(a:line_num, a:col_num, 1)
+  let id_name = synIDattr(id, 'name')
+  if id_name == ''
+    return id_name
+  endif
+  let final_id = synIDtrans(id)
+  if final_id == id
+    return id_name
+  endif
+  " TODO: Replace . with .. below for string concatenation when Vim>=8.1.1114
+  " is commmonplace.
+  return id_name . ': ' . synIDattr(final_id, 'name')
+endfunction
+
+nnoremap <silent> <Leader>] :echo SyntaxIDs(line('.'), col('.'))<CR>
+
 nnoremap <silent> <Leader>tu i<C-R>=strftime('%s')<CR><Esc>
 nnoremap <silent> <Leader>ts i<C-R>=strftime('%Y-%m-%d %H:%M:%S %Z(UTC%z)')<CR><Esc>
-nnoremap <silent> <Leader>] :echo synIDattr(synID(line('.'), col('.'), 1), 'name')<CR>
 
 if executable('xsel')
   nnoremap <silent> <Leader>y :%write !xsel -ib 2>/dev/null<CR>
