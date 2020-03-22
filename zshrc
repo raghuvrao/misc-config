@@ -87,6 +87,14 @@ my_backward_kill_word () {
 zle -N my_backward_kill_word my_backward_kill_word
 bindkey -M emacs '^W' my_backward_kill_word
 
+my_kill_word () {
+	local WORDCHARS=''
+	unset -v WORDCHARS
+	zle kill-word
+}
+zle -N my_kill_word my_kill_word
+bindkey -M emacs '\eD' my_kill_word
+
 setopt APPEND_HISTORY
 setopt AUTO_MENU
 setopt COMBINING_CHARS
