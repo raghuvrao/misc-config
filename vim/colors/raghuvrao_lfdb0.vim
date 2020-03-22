@@ -132,10 +132,7 @@ hi VertSplit ctermfg=DarkYellow ctermbg=NONE cterm=NONE guifg='#AAAA00' guibg=NO
 
 hi Visual ctermfg=Black ctermbg=DarkYellow cterm=NONE guifg='#000000' guibg='#AA5500' gui=NONE term=reverse
 
-hi WarningMsg ctermfg=Red ctermbg=NONE cterm=NONE guifg='#FF5555' guibg=NONE gui=bold term=standout
-if &t_Co < 16
-  hi WarningMsg cterm=bold
-endif
+hi WarningMsg ctermfg=Red ctermbg=NONE cterm=bold guifg='#FF5555' guibg=NONE gui=bold term=standout
 
 hi WildMenu ctermfg=White ctermbg=DarkBlue cterm=bold guifg='#FFFFFF' guibg='#0000AA' gui=NONE term=standout
 
