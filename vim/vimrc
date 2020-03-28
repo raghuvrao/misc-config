@@ -32,6 +32,10 @@ set sidescroll=1
 " a column, which is OK for me because I do not use g$ and g^ a lot.
 set sidescrolloff=1
 
+" Time out on terminal-key-codes, and not on mappings.
+set ttimeout
+set notimeout
+
 set nowildmenu
 set wildmode=longest,list,full
 
