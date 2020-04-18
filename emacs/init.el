@@ -17,8 +17,8 @@
 (when (fboundp #'tool-bar-mode) (tool-bar-mode -1))
 (when (fboundp #'tooltip-mode) (tooltip-mode -1))
 
-(blink-cursor-mode 1)
 (column-number-mode 1)
+
 (show-paren-mode 1)
 
 ;; Various programs (e.g. git, man) like to send their stdout through a
