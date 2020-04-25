@@ -10,6 +10,23 @@ set noundofile
 set nomodeline
 set modelines=0
 
+" Try to prevent Vim from meddling with my terminal's cursor (e.g. Vim changes
+" the cursor style when running :terminal even though I never asked Vim to
+" change my cursor style).  The following are not applicable in GVim (it uses
+" 'guicursor', which belongs in gvimrc).
+set t_ve=
+set t_vi=
+set t_vs=
+set t_VS=
+set t_SI=
+set t_SR=
+set t_EI=
+set t_SC=
+set t_EC=
+set t_SH=
+set t_RC=
+set t_RS=
+
 let mapleader = '\'
 let maplocalleader = '_'
 
