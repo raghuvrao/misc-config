@@ -95,8 +95,6 @@ my_kill_word () {
 zle -N my_kill_word my_kill_word
 bindkey -M emacs '\eD' my_kill_word
 
-setopt APPEND_HISTORY
-setopt AUTO_MENU
 setopt COMBINING_CHARS
 setopt EXTENDED_HISTORY
 setopt HIST_IGNORE_DUPS
@@ -106,7 +104,6 @@ setopt MULTIBYTE
 
 unsetopt LIST_BEEP
 unsetopt LIST_TYPES
-unsetopt MENU_COMPLETE
 unsetopt PROMPT_CR
 unsetopt PROMPT_SP
 
