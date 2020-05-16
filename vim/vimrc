@@ -34,9 +34,6 @@ set backspace=indent,eol,start
 
 let &softtabstop=&tabstop
 
-set ignorecase
-set smartcase
-
 set nowrap
 nnoremap <Leader>w :set invwrap<CR>
 
