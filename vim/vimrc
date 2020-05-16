@@ -361,6 +361,18 @@ xnoremap <Leader>g :global/\<
 nnoremap <Leader>v :%vglobal/\<
 xnoremap <Leader>v :vglobal/\<
 
+" When in Insert mode, make <CTRL-W>, <CTRL-U>, and <ENTER> start a new change
+" in addition to performing their usual tasks so that I can undo that change
+" in Normal/Command mode with u if I want to.  Without <CTRL-G> u, the whole
+" Insert operation will be considered one change, and u in Normal/Command mode
+" will undo that whole Insert operation.
+inoremap <C-W> <C-G>u<C-W>
+inoremap <C-U> <C-G>u<C-U>
+inoremap <C-M> <C-G>u<C-M>
+inoremap <NL> <C-G>u<NL>
+inoremap <C-J> <C-G>u<C-J>
+inoremap <CR> <C-G>u<CR>
+
 " Do not highlight numbers, characters, and strings in comments in C / C++
 " programs.
 unlet! c_comment_strings
