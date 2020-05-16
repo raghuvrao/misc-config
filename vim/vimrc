@@ -339,6 +339,7 @@ endif
 nnoremap <Leader>e :silent edit<CR>
 
 nnoremap <Leader>m :set invmodifiable<CR>
+nnoremap <Leader>W :set invwrapscan<CR>
 
 nnoremap <Leader>I :edit $MYVIMRC<CR>
 
