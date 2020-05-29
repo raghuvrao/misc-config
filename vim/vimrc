@@ -111,6 +111,8 @@ set textwidth=78
 
 set history=500
 
+set nostartofline
+
 " ftplugins shall add to / remove from the following formatoptions.
 set formatoptions=1jlmnq
 
