@@ -80,7 +80,7 @@ else
 endif
 
 set laststatus=2
-set statusline=%(\ %f%)%(\ %q%)%(\ %M%R%H%W%)%(\ %y%)%(\ %l,%c%V\ %)
+set statusline=%(\ %f%)%(\ %q%)%(\ %M%R%H%W%)%(\ %y%)%(\ %P\ %l,%c%V\ %)
 
 set report=0
 
