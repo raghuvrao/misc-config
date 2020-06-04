@@ -16,8 +16,8 @@ HISTTIMEFORMAT='[%F %a %T %z] '
 
 PS1='[\H ${?} \W] \$ '
 
-# See the file SETTING-TITLES for information about setting terminal emulator
-# window/tab titles, and icon names.
+# See the file SETTING-TITLES for information about setting terminal
+# emulator window/tab titles, and icon names.
 title_content='\H:\w'
 osc_title='\e]0;'"${title_content}"'\a'
 kseq='\ek'"${title_content}"'\e\\'

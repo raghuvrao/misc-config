@@ -2,66 +2,71 @@
 
 if [[ ! -o INTERACTIVE ]]; then return; fi
 
-# Slackware sets MANPATH in /etc/{z,}profile even though /etc/man_db.conf is
-# configured satisfactorily so far as I go.  Slackware's default MANPATH
-# causes problems sometimes.  E.g. when two versions of a program are
-# installed in two different locations, sometimes man pulls up the version of
-# the man page that does not match the version of the command. Unsetting
-# MANPATH seems to solve this problem.
+# Slackware sets MANPATH in /etc/{z,}profile even though
+# /etc/man_db.conf is configured satisfactorily so far as I go.
+# Slackware's default MANPATH causes problems sometimes.  E.g. when two
+# versions of a program are installed in two different locations,
+# sometimes man pulls up the version of the man page that does not match
+# the version of the command. Unsetting MANPATH seems to solve this
+# problem.
 #
-# zsh handles MANPATH (and the corresponding manpath array) in a strange way.
-# In 'man zshparam', MANPATH (and manpath) are listed under 'PARAMETERS USED
-# BY THE SHELL' and not under 'PARAMETERS SET BY THE SHELL'.  However, if
-# MANPATH does not exist in the environment, and if I am not unsetting MANPATH
-# myself, zsh creates the MANPATH variable itself, set to the empty value.
-# So, the documentation does not seem to match actual behaviour.  Also, I find
-# it strange and unnecessary that the shell meddles with MANPATH.
+# zsh handles MANPATH (and the corresponding manpath array) in a strange
+# way.  In 'man zshparam', MANPATH (and manpath) are listed under
+# 'PARAMETERS USED BY THE SHELL' and not under 'PARAMETERS SET BY THE
+# SHELL'.  However, if MANPATH does not exist in the environment, and if
+# I am not unsetting MANPATH myself, zsh creates the MANPATH variable
+# itself, set to the empty value.  So, the documentation does not seem
+# to match actual behaviour.  Also, I find it strange and unnecessary
+# that the shell meddles with MANPATH.
 #
-# Unsetting MANPATH in ~/.zshrc (vs. in ~/.zprofile) will ensure MANPATH is
-# fully removed from the environment: non-login zsh processes (interactive or
-# otherwise) will not read ~/.zprofile, so they will not know to remove
-# MANPATH.  zsh will ensure MANPATH and the array manpath are kept
-# synchronized.
+# Unsetting MANPATH in ~/.zshrc (vs. in ~/.zprofile) will ensure MANPATH
+# is fully removed from the environment: non-login zsh processes
+# (interactive or otherwise) will not read ~/.zprofile, so they will not
+# know to remove MANPATH.  zsh will ensure MANPATH and the array manpath
+# are kept synchronized.
 unset -v MANPATH
 
 # Use Emacs-style key-bindings regardless of the value of EDITOR.
 bindkey -e
 
 # By default, TAB is bound to the ZLE function expand-or-complete.
-# expand-or-complete attempts to complete the word rather than the prefix, so
-# it takes into account the characters both before and after the cursor.
-# I like for completion to work only on the letters before the cursor, which
-# is what the ZLE function expand-or-complete-prefix does.
+# expand-or-complete attempts to complete the word rather than the
+# prefix, so it takes into account the characters both before and after
+# the cursor.  I like for completion to work only on the letters before
+# the cursor, which is what the ZLE function expand-or-complete-prefix
+# does.
 bindkey -M emacs '\t' expand-or-complete-prefix
 
 # By default, C-U is bound to the ZLE function kill-whole-line.
-# kill-whole-line, as the name suggests, kills the entire line regardless of
-# the cursor's position.  I vastly prefer C-U to kill from the cursor's
-# position to the beginning of the line, like in bash.
+# kill-whole-line, as the name suggests, kills the entire line
+# regardless of the cursor's position.  I vastly prefer C-U to kill from
+# the cursor's position to the beginning of the line, like in bash.
 bindkey -M emacs '^U' backward-kill-line
 
 # Make zsh treat more characters as word separators.
 #
-# The default value for WORDCHARS is *?_-.[]~=/&;!#$%^(){}<> which means ZLE
-# will treat none of these characters as a word separator.  Also, unsetting
-# WORDCHARS is not equivalent to setting it to the empty value.  If WORDCHARS
-# is unset, ZLE will use its (aggressive) default value.
+# The default value for WORDCHARS is *?_-.[]~=/&;!#$%^(){}<> which means
+# ZLE will treat none of these characters as a word separator.  Also,
+# unsetting WORDCHARS is not equivalent to setting it to the empty
+# value.  If WORDCHARS is unset, ZLE will use its (aggressive) default
+# value.
 WORDCHARS=''
 
-# Be default, M-f is bound to forward-word, which moves point to the beginning
-# of the next word (subject, of course, to WORDCHARS).  In Emacs and bash, M-f
-# moves point forward to the end of the word, which I find more convenient.
-# Fortunately, ZLE provides the function emacs-forward-word, which provides
-# the behaviour I prefer.
+# Be default, M-f is bound to forward-word, which moves point to the
+# beginning of the next word (subject, of course, to WORDCHARS).  In
+# Emacs and bash, M-f moves point forward to the end of the word, which
+# I find more convenient.  Fortunately, ZLE provides the function
+# emacs-forward-word, which provides the behaviour I prefer.
 bindkey -M emacs '\ef' emacs-forward-word
 
-# Create a few functions, and corresponding ZLE widgets and key-bindings to
-# keep zsh's default concept of words handy.
+# Create a few functions, and corresponding ZLE widgets and key-bindings
+# to keep zsh's default concept of words handy.
 #
-# In a function, by creating a local version of WORDCHARS and unsetting it,
-# zsh will remove WORDCHARS from the environment in the scope of that function
-# (see the documentation for the 'unset' builtin in 'man zshbuiltins').
-# Consequently, within that scope, the default value of WORDCHARS is used.
+# In a function, by creating a local version of WORDCHARS and unsetting
+# it, zsh will remove WORDCHARS from the environment in the scope of
+# that function (see the documentation for the 'unset' builtin in 'man
+# zshbuiltins').  Consequently, within that scope, the default value of
+# WORDCHARS is used.
 
 my_emacs_backward_word () {
 	local WORDCHARS=''
@@ -111,10 +116,11 @@ HISTFILE="${HOME}/.zsh_history"
 HISTSIZE=10500
 SAVEHIST=10000
 
-# Setting WORDCHARS to the empty value is NOT the same as unsetting WORDCHARS.
-# The effect of setting WORDCHARS to the empty string is that zle will treat
-# many more so-called special characters as word separators than its limited
-# default set (which seems to be space, comma and colon).
+# Setting WORDCHARS to the empty value is NOT the same as unsetting
+# WORDCHARS.  The effect of setting WORDCHARS to the empty string is
+# that zle will treat many more so-called special characters as word
+# separators than its limited default set (which seems to be space,
+# comma and colon).
 WORDCHARS=''
 
 PS1='[%M %? %3~] %# '
