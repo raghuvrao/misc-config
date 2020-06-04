@@ -12,20 +12,20 @@ defc1 off
 defmonitor on
 defutf8 on
 
-# Set terminfo capabilities for hardstatus for the xterm term-type.  Set the
-# capabilities in such a way that when this capability is used, it updates the
-# window title and icon name (by using the corresponding control sequence, in
-# this case, the OSC sequence OSC 0 ; TEXT BEL).  See the file SETTING-TITLES
-# for more information.
+# Set terminfo capabilities for hardstatus for the xterm term-type.  Set
+# the capabilities in such a way that when this capability is used, it
+# updates the window title and icon name (by using the corresponding
+# control sequence, in this case, the OSC sequence OSC 0 ; TEXT BEL).
+# See the file SETTING-TITLES for more information.
 termcapinfo xterm* 'hs:ts=\E]0;:fs=\007:ds=\E]0;GNU Screen\007'
 
-# 'alwayslastline' will tell screen not to use the terminal's hardstatus line,
-# and instead use a display line for hardstatus (typically, the last line in
-# the display area).  Some versions of GNU Screen will use the terminal's
-# hardstatus capability even when the alwayslastline option is set.  So, if
-# you have set hardstatus to alwayslastline, and you are wondering why your
-# terminal's titlebar is not getting updated, then do not set hardstatus to
-# alwayslastline.
+# 'alwayslastline' will tell screen not to use the terminal's hardstatus
+# line, and instead use a display line for hardstatus (typically, the
+# last line in the display area).  Some versions of GNU Screen will use
+# the terminal's hardstatus capability even when the alwayslastline
+# option is set.  So, if you have set hardstatus to alwayslastline, and
+# you are wondering why your terminal's titlebar is not getting updated,
+# then do not set hardstatus to alwayslastline.
 #hardstatus alwayslastline
 hardstatus string 's:%h'
 

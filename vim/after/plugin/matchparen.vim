@@ -1,5 +1,5 @@
-" If the matchparen plugin has been loaded, the commands :NoMatchParen and
-" :DoMatchParen will be defined.
+" If the matchparen plugin has been loaded, the commands :NoMatchParen
+" and :DoMatchParen will be defined.
 if !exists(':NoMatchParen') || !exists(':DoMatchParen')
   finish
 endif
