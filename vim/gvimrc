@@ -19,8 +19,8 @@ set guioptions+=r
 " Bottom (horizontal) scrollbar is always on.
 set guioptions+=b
 
-" Adjust the horizontal scrollbar thumb size to match the cursor-line, and not
-" the longest visible line (reduces computations).
+" Adjust the horizontal scrollbar thumb size to match the cursor-line,
+" and not the longest visible line (reduces computations).
 set guioptions+=h
 
 " Remove the toolbar from view.

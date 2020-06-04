@@ -10,10 +10,10 @@ set noundofile
 set nomodeline
 set modelines=0
 
-" Try to prevent Vim from meddling with my terminal's cursor (e.g. Vim changes
-" the cursor style when running :terminal even though I never asked Vim to
-" change my cursor style).  The following are not applicable in GVim (it uses
-" 'guicursor', which belongs in gvimrc).
+" Try to prevent Vim from meddling with my terminal's cursor (e.g. Vim
+" changes the cursor style when running :terminal even though I never
+" asked Vim to change my cursor style).  The following are not
+" applicable in GVim (it uses 'guicursor', which belongs in gvimrc).
 set t_ve=
 set t_vi=
 set t_vs=
@@ -39,11 +39,12 @@ nnoremap <Leader>w :set invwrap<CR>
 
 set sidescroll=1
 
-" Do not allow the cursor to move onto the extends/precedes listchars when
-" 'wrap' is disabled (which it is for me most of the time).  It becomes easier
-" to understand the % motion on a long unwrapped line with several brackets in
-" it.  The disadvantage is I must live with g$ and g^ moving the view by
-" a column, which is OK for me because I do not use g$ and g^ a lot.
+" Do not allow the cursor to move onto the extends/precedes listchars
+" when 'wrap' is disabled (which it is for me most of the time).  It
+" becomes easier to understand the % motion on a long unwrapped line
+" with several brackets in it.  The disadvantage is I must live with g$
+" and g^ moving the view by a column, which is OK for me because I do
+" not use g$ and g^ a lot.
 set sidescrolloff=1
 
 " Time out on terminal-key-codes, and not on mappings.
@@ -53,10 +54,10 @@ set notimeout
 set nowildmenu
 set wildmode=longest,list,full
 
-" Set ruler even though I have line and column numbers in my statusline (see
-" further below).  Infrequently and temporarily, I remove the statusline from
-" view.  I want line- and column-number information to be displayed even in
-" these situations.
+" Set ruler even though I have line and column numbers in my statusline
+" (see further below).  Infrequently and temporarily, I remove the
+" statusline from view.  I want line- and column-number information to
+" be displayed even in these situations.
 set ruler
 
 set showcmd
@@ -81,33 +82,33 @@ set statusline=%(\ %f%)%(\ %q%)%(\ %M%R%H%W%)%(\ %y%)%(\ %{&fileformat}%)%(\ %P\
 
 set report=0
 
-" I do not want mouse support in Vim, whereas I like to have mouse support in
-" GVim.  My system-wide vimrc enables mouse support in Vim, so disable it
-" here.  Enable mouse support in GVim in the gvimrc file, which Vim does not
-" read.
+" I do not want mouse support in Vim, whereas I like to have mouse
+" support in GVim.  My system-wide vimrc enables mouse support in Vim,
+" so disable it here.  Enable mouse support in GVim in the gvimrc file,
+" which Vim does not read.
 set mouse=
 
-" In the event that I enable mouse in Vim (as opposed to GVim, where I keep it
-" enabled always), I want the mouse to work well.  With 'ttymouse' set to
-" 'xterm' (which is what Vim calculates as my default), the mouse barely
-" works, especially when running Vim "inside" tmux.  The value 'sgr' for
-" 'ttymouse' makes mouse operation much better: select+drag works, and
-" smoothly too, resizing splits works, the 223-column limit is removed (see
-" :help xterm-mouse), etc.
+" In the event that I enable mouse in Vim (as opposed to GVim, where
+" I keep it enabled always), I want the mouse to work well.  With
+" 'ttymouse' set to 'xterm' (which is what Vim calculates as my
+" default), the mouse barely works, especially when running Vim "inside"
+" tmux.  The value 'sgr' for 'ttymouse' makes mouse operation much
+" better: select+drag works, and smoothly too, resizing splits works,
+" the 223-column limit is removed (see :help xterm-mouse), etc.
 set ttymouse=sgr
 
 set nofixendofline
 
 " Setting autoindent is typically unnecessary because filetype-specific
-" indentation plugins take care of indentation sufficiently well.  However,
-" with `n' included in formatoptions and with autoindent set, formatting
-" numbered/bulleted lists (even in program comments) with the `gq' operator
-" becomes so much easier.  Also, setting autoindent does not appear to be
-" interfering with indentation done by filetype-specific indentation plugins.
-" So, enable autoindent.
+" indentation plugins take care of indentation sufficiently well.
+" However, with `n' included in formatoptions and with autoindent set,
+" formatting numbered/bulleted lists (even in program comments) with the
+" `gq' operator becomes so much easier.  Also, setting autoindent does
+" not appear to be interfering with indentation done by
+" filetype-specific indentation plugins.  So, enable autoindent.
 set autoindent
 
-set textwidth=78
+set textwidth=72
 
 set history=500
 
@@ -121,14 +122,15 @@ filetype plugin indent on
 runtime ftplugin/man.vim
 set keywordprg=:Man
 
-" Delete the autocommand groups vimrcEx and vimStartup.  The augroups are
-" usually defined in $VIM/vimrc (which, if present, is usually a copy of or
-" link to $VIMRUNTIME/vimrc_example.vim), or in $VIMRUNTIME/defaults.vim.
-" These augroups have autocommands that are either unnecessary for me, or
-" I override them elsewhere in my configuration.
+" Delete the autocommand groups vimrcEx and vimStartup.  The augroups
+" are usually defined in $VIM/vimrc (which, if present, is usually
+" a copy of or link to $VIMRUNTIME/vimrc_example.vim), or in
+" $VIMRUNTIME/defaults.vim.  These augroups have autocommands that are
+" either unnecessary for me, or I override them elsewhere in my
+" configuration.
 "
-" :help :augroup-delete suggests that to delete an augroup, it is better to
-" empty it first.
+" :help :augroup-delete suggests that to delete an augroup, it is better
+" to empty it first.
 augroup vimrcEx
   autocmd!
 augroup END
@@ -143,13 +145,14 @@ function! JumpToLastExitPosition() abort
   if getcurpos()[1:2] != [1, 1]
     return
   endif
-  " If the line number where the cursor should be moved is either invalid or
-  " no longer exists in the file, do not move the cursor.
+  " If the line number where the cursor should be moved is either
+  " invalid or no longer exists in the file, do not move the cursor.
   let l:targetLineNumber = line("'\"")
   if l:targetLineNumber < 1 || l:targetLineNumber > line('$')
     return
   endif
-  " Do not move the cursor for some special buffers and for some filetypes.
+  " Do not move the cursor for some special buffers and for some
+  " filetypes.
   if expand('%:p') ==# ''
 	\ || &diff
 	\ || &buftype !=# ''
@@ -169,10 +172,11 @@ augroup jump_to_last_exit_position
   autocmd BufReadPost * call JumpToLastExitPosition()
 augroup END
 
-" win_getid() was introduced in Vim 7.4.1557, and winbufnr() was enhanced to
-" look in all tab pages instead of just the current tab page in Vim 8.1.0494.
-" Both of the above are required in the following functions, so define the
-" functions (and the mappings to call them) conditionally.
+" win_getid() was introduced in Vim 7.4.1557, and winbufnr() was
+" enhanced to look in all tab pages instead of just the current tab page
+" in Vim 8.1.0494.  Both of the above are required in the following
+" functions, so define the functions (and the mappings to call them)
+" conditionally.
 if has('patch-7.4.1557') && has('patch-8.1.0494')
 
   function! MaximizeToTab() abort
@@ -182,9 +186,9 @@ if has('patch-7.4.1557') && has('patch-8.1.0494')
     endif
     let l:destTabNum = -1
     let l:curBufNum = bufnr('%')
-    " Find the tab page where the current buffer is the only one displayed.
-    " If it exists, we will simply switch to that tab page instead of creating
-    " a new one.
+    " Find the tab page where the current buffer is the only one
+    " displayed.  If it exists, we will simply switch to that tab page
+    " instead of creating a new one.
     for l:i in range(tabpagenr('$'))
       " range() starts from 0, tab pages are numbered starting from 1.
       let l:tabNum = l:i + 1
@@ -245,8 +249,8 @@ if has('patch-7.4.1557') && has('patch-8.1.0494')
       echo ''
     else
       " Probably no way to reach here.  The check above for winbufnr()
-      " returning -1 will catch the case where the origin window does not
-      " exist.
+      " returning -1 will catch the case where the origin window does
+      " not exist.
       echo 'Cannot unmaximize: origin window not found'
       return
     endif
@@ -257,56 +261,60 @@ endif
 
 " Make a few things work within tmux that work outside tmux.
 "
-" When GVim is started from the shell, 'term' inherits its value from the
-" environment variable TERM first (which in this case matches "tmux*" or
-" "screen*"), and changes to 'builtin_gui' at some point after this file is
-" sourced.  So, check 'gui_running' here to avoid making the following
-" assignments in GVim, where the assignments are unnecessary.
+" When GVim is started from the shell, 'term' inherits its value from
+" the environment variable TERM first (which in this case matches
+" "tmux*" or "screen*"), and changes to 'builtin_gui' at some point
+" after this file is sourced.  So, check 'gui_running' here to avoid
+" making the following assignments in GVim, where the assignments are
+" unnecessary.
 if !has('gui_running') && &term =~# '^screen\|^tmux'
-  " xUp, xDown, xLeft and xRight can be used to make CTRL-<arrow> work as
-  " expected when Vim is run within tmux or GNU Screen.  CTRL-<arrow> is
-  " useful in the insert and command-line modes.
+  " xUp, xDown, xLeft and xRight can be used to make CTRL-<arrow> work
+  " as expected when Vim is run within tmux or GNU Screen.  CTRL-<arrow>
+  " is useful in the insert and command-line modes.
   "
-  " For the terminal-sequences below to be effective in Vim running in tmux,
-  " tmux must have its `xterm-keys' option set to on, so that tmux sends
-  " xterm-style function key sequences on pressing CTRL-<arrow> (see `man
-  " tmux', under `xterm-keys').
+  " For the terminal-sequences below to be effective in Vim running in
+  " tmux, tmux must have its `xterm-keys' option set to on, so that tmux
+  " sends xterm-style function key sequences on pressing CTRL-<arrow>
+  " (see `man tmux', under `xterm-keys').
   "
-  " GNU Screen sends xterm-style function key sequences for CTRL-<arrow> in
-  " its default configuration, at least in versions >= 4.00.03 (FAU), so no
-  " additional configuration should be necessary in GNU Screen.
+  " GNU Screen sends xterm-style function key sequences for CTRL-<arrow>
+  " in its default configuration, at least in versions >= 4.00.03 (FAU),
+  " so no additional configuration should be necessary in GNU Screen.
   "
-  " :execute is needed because we want \e to be parsed into literal ESC before
-  " being assigned.
+  " :execute is needed because we want \e to be parsed into literal ESC
+  " before being assigned.
   execute "set <xUp>=\e[1;*A"
   execute "set <xDown>=\e[1;*B"
   execute "set <xRight>=\e[1;*C"
   execute "set <xLeft>=\e[1;*D"
 
-  " Allow bracketed paste to work when Vim is running in tmux or GNU Screen.
+  " Allow bracketed paste to work when Vim is running in tmux or GNU
+  " Screen.
   "
-  " Bracketed paste support was added to GNU Screen in the following commit
-  " (2015-06-25 17:05:31 +0200):
+  " Bracketed paste support was added to GNU Screen in the following
+  " commit (2015-06-25 17:05:31 +0200):
   "
   " https://git.savannah.gnu.org/cgit/screen.git/commit/?id=c389013e89e7b04ce43872f2e72d43f77461a3c0
   " ( https://lists.gnu.org/archive/html/screen-devel/2013-03/msg00000.html )
   "
-  " A few relevant fixes were made in the following commit, several years
-  " later (2019-02-14 20:30:23 +0100):
+  " A few relevant fixes were made in the following commit, several
+  " years later (2019-02-14 20:30:23 +0100):
   "
   " https://git.savannah.gnu.org/cgit/screen.git/commit/?id=d2d33f664132e9473c62f37a4758a047fa83eb7a
   "
-  " So, the minimum version of GNU Screen that is required for the sequences
-  " below to be effective is the version at the first commit above.  It is
-  " better to use a version at or after the second commit above.
+  " So, the minimum version of GNU Screen that is required for the
+  " sequences below to be effective is the version at the first commit
+  " above.  It is better to use a version at or after the second commit
+  " above.
   "
-  " Support for bracketed paste was added in Vim 8.0.0210, whereas in some
-  " computers I use, only older versions of Vim are available.
+  " Support for bracketed paste was added in Vim 8.0.0210, whereas in
+  " some computers I use, only older versions of Vim are available.
   if exists('+t_BD') && exists('+t_BE')
     let &t_BD = "\<Esc>[?2004l"
     let &t_BE = "\<Esc>[?2004h"
-    " t_PS and t_PE do not exist initially (which is why we do not check for
-    " them in the if-condition above).  Define them now (see :h :let-&).
+    " t_PS and t_PE do not exist initially (which is why we do not check
+    " for them in the if-condition above).  Define them now (see :h
+    " :let-&).
     let &t_PS = "\<Esc>[200~"
     let &t_PE = "\<Esc>[201~"
   endif
@@ -322,8 +330,8 @@ function! SyntaxIDs(line_num, col_num) abort
   if final_id == id
     return id_name
   endif
-  " TODO: Replace . with .. below for string concatenation when Vim>=8.1.1114
-  " is commmonplace.
+  " TODO: Replace . with .. below for string concatenation after
+  " upgrading to Vim>=8.1.1114.
   return id_name . ': ' . synIDattr(final_id, 'name')
 endfunction
 
@@ -361,11 +369,11 @@ xnoremap <Leader>g :global/\<
 nnoremap <Leader>v :%vglobal/\<
 xnoremap <Leader>v :vglobal/\<
 
-" When in Insert mode, make <CTRL-W>, <CTRL-U>, and <ENTER> start a new change
-" in addition to performing their usual tasks so that I can undo that change
-" in Normal/Command mode with u if I want to.  Without <CTRL-G> u, the whole
-" Insert operation will be considered one change, and u in Normal/Command mode
-" will undo that whole Insert operation.
+" When in Insert mode, make <CTRL-W>, <CTRL-U>, and <ENTER> start a new
+" change in addition to performing their usual tasks so that I can undo
+" that change in Normal/Command mode with u if I want to.  Without
+" <CTRL-G> u, the whole Insert operation will be considered one change,
+" and u in Normal/Command mode will undo that whole Insert operation.
 inoremap <C-W> <C-G>u<C-W>
 inoremap <C-U> <C-G>u<C-U>
 inoremap <C-M> <C-G>u<C-M>
@@ -373,15 +381,16 @@ inoremap <NL> <C-G>u<NL>
 inoremap <C-J> <C-G>u<C-J>
 inoremap <CR> <C-G>u<CR>
 
-" Do not highlight numbers, characters, and strings in comments in C / C++
-" programs.
+" Do not highlight numbers, characters, and strings in comments in
+" C / C++ programs.
 unlet! c_comment_strings
 
 " The system-wide vimrc enables syntax conditionally: if GUI, or if the
-" terminal supports more than 2 colors.  However, I want syntax to be enabled
-" all the time, because without syntax, operators like `gq' etc. do not work
-" correctly to format comments in programs.  I am, however, not keen on syntax
-" _highlighting_, so I use my colorscheme which unhighlights most things.
+" terminal supports more than 2 colors.  However, I want syntax to be
+" enabled all the time, because without syntax, operators like `gq' etc.
+" do not work correctly to format comments in programs.  I am, however,
+" not keen on syntax _highlighting_, so I use my colorscheme which
+" unhighlights most things.
 syntax on
 colorscheme raghuvrao
 
