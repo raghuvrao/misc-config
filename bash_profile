@@ -3,44 +3,44 @@
 # .bash_profile
 # Author: Raghu V. Rao <raghu.v.rao@gmail.com>
 
-# Many programs that invoke 'less' themselves for paginating their output set
-# LESS to a value they prefer if LESS is not already set.  I cannot seem to
-# find a combination of options to put into LESS that works for every
-# use-case.  So, let the programs that run 'less' decide what they want in
-# LESS themselves.
+# Many programs that invoke 'less' themselves for paginating their
+# output set LESS to a value they prefer if LESS is not already set.
+# I cannot seem to find a combination of options to put into LESS that
+# works for every use-case.  So, let the programs that run 'less' decide
+# what they want in LESS themselves.
 unset -v LESS
 
-# When I run the 'less' program, I want it not to do much more than paginating
-# the contents of a file.  I do not want 'less' invoking external programs to
-# process the input files, and paginating the output of those external
-# programs.  So, unset LESSOPEN to prevent 'less' from invoking other programs
-# to process/display files.
+# When I run the 'less' program, I want it not to do much more than
+# paginating the contents of a file.  I do not want 'less' invoking
+# external programs to process the input files, and paginating the
+# output of those external programs.  So, unset LESSOPEN to prevent
+# 'less' from invoking other programs to process/display files.
 unset -v LESSOPEN
 
 # Slackware sets MANPATH (even though /etc/man_db.conf is configured
 # satisfactorily, so far as I go).  Slackware's default MANPATH causes
-# problems sometimes.  E.g. when two versions of a program are installed in
-# two different locations, sometimes man pulls up the version of the man page
-# that does not match the version of the command.  Unsetting MANPATH seems to
-# solve this problem.
+# problems sometimes.  E.g. when two versions of a program are installed
+# in two different locations, sometimes man pulls up the version of the
+# man page that does not match the version of the command.  Unsetting
+# MANPATH seems to solve this problem.
 unset -v MANPATH
 
-# dir_r_x returns true if its first argument is a readable directory into which
-# we can descend; false otherwise.
+# dir_r_x returns true if its first argument is a readable directory
+# into which we can descend; false otherwise.
 dir_r_x()
 {
     test -d "${1}" -a -r "${1}" -a -x "${1}"
     return ${?}
 }
 
-# path_append() appends its first argument to PATH if the first argument is
-# a readable directory into which I can descend; otherwise, path_append() does
-# nothing to PATH.  This function is a modified version of pathmunge() from
-# Fedora's /etc/profile.
+# path_append() appends its first argument to PATH if the first argument
+# is a readable directory into which I can descend; otherwise,
+# path_append() does nothing to PATH.  This function is a modified
+# version of pathmunge() from Fedora's /etc/profile.
 path_append()
 {
-    # Include only directories that we can both read and into which we can
-    # descend.
+    # Include only directories that we can both read and into which we
+    # can descend.
     if dir_r_x "${1}"; then
         case ":${PATH}:" in
             (::)
@@ -57,17 +57,17 @@ path_append()
     fi
 }
 
-# Some general guidelines to tell if an environment variable belongs in this
-# file:
+# Some general guidelines to tell if an environment variable belongs in
+# this file:
 #
 # 1.  The variable's value remains the same in all shell invocations.
 #
-# 2.  Programs other than the shell use the variable.  To make a variable
-#     available to child processes, it must be exported.
+# 2.  Programs other than the shell use the variable.  To make
+#     a variable available to child processes, it must be exported.
 #
-# 3.  The variable does not concern interactive shell processes in particular.
-#     For example, the variable PS1 is relevant only for interactive shells,
-#     and so it does not belong in this file.
+# 3.  The variable does not concern interactive shell processes in
+#     particular.  For example, the variable PS1 is relevant only for
+#     interactive shells, and so it does not belong in this file.
 
 export VISUAL='vim'
 export EDITOR="${VISUAL}"
