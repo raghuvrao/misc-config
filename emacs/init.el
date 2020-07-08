@@ -46,7 +46,17 @@
 (windmove-default-keybindings 'control)
 
 (defun raghu/with-confirmation (fn &rest args)
-  "Conditionally, call function FN with arguments ARGS."
+  "With user confirmation, call function FN with arguments ARGS.
+
+Obtain confirmation with `y-or-n-p' using the prompt \"Are you
+sure?\".
+
+Usage examples:
+
+Call function foo (with arguments 2 3) with confirmation:
+  (raghu/with-confirmation #'foo 2 3)
+Arrange to get confirmation whenever function foo is called:
+  (advice-add #'foo :around #'raghu/with-confirmation)"
   (when (y-or-n-p "Are you sure?") (apply fn args)))
 
 (defun raghu/backward-whitespace (arg)
