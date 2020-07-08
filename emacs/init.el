@@ -57,7 +57,7 @@ Call function foo (with arguments 2 3) with confirmation:
   (raghu/with-confirmation #'foo 2 3)
 Arrange to get confirmation whenever function foo is called:
   (advice-add #'foo :around #'raghu/with-confirmation)"
-  (when (y-or-n-p "Are you sure?") (apply fn args)))
+  (when (y-or-n-p "Are you sure? ") (apply fn args)))
 
 (defun raghu/switch-to-text-scratchbuffer ()
   "Switch to the scratch `text-mode' buffer.
@@ -321,6 +321,9 @@ indentation according to mode."
 
 (defun raghu/insert-current-date-time (&optional arg)
   "At point, insert current date and time in system timezone.
+
+Use \\[universal-argument] to supply optional prefix argument
+ARG.
 
 With one \\[universal-argument], insert current date and time in
 Etc/UTC.  With another \\[universal-argument], insert current
