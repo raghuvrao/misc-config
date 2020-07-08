@@ -345,6 +345,9 @@ UNIX timestamp."
 (with-eval-after-load 'python
   (add-hook 'inferior-python-mode-hook #'turn-on-font-lock))
 
+(with-eval-after-load 'js
+  (add-hook 'js-mode-hook #'raghu--indentation-cannot-insert-tabs-in-buffer))
+
 (with-eval-after-load 'sh-script
   (add-hook 'sh-mode-hook #'raghu--indentation-cannot-insert-tabs-in-buffer))
 
@@ -376,6 +379,7 @@ UNIX timestamp."
  '(inhibit-startup-screen t)
  '(initial-scratch-message nil)
  '(isearch-allow-scroll t)
+ '(js-indent-level 2)
  '(line-move-visual nil)
  '(make-backup-files nil)
  '(mouse-wheel-progressive-speed nil)
