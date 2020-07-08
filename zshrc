@@ -107,6 +107,7 @@ setopt INTERACTIVE_COMMENTS
 setopt LIST_PACKED
 setopt MULTIBYTE
 
+unsetopt ALWAYS_LAST_PROMPT
 unsetopt LIST_BEEP
 unsetopt LIST_TYPES
 unsetopt PROMPT_CR
