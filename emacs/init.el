@@ -49,8 +49,6 @@
   "Conditionally, call function FN with arguments ARGS."
   (when (y-or-n-p "Are you sure?") (apply fn args)))
 
-(advice-add #'save-buffers-kill-terminal :around #'raghu/with-confirmation)
-
 (defun raghu/backward-whitespace (arg)
   "Move point to start of previous sequence of whitespace characters.
 
@@ -366,6 +364,7 @@ UNIX timestamp."
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
  '(comint-buffer-maximum-size 10240)
+ '(confirm-kill-emacs (quote y-or-n-p))
  '(debug-on-error t)
  '(fill-column 72)
  '(frame-background-mode (quote light))
