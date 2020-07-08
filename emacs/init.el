@@ -424,7 +424,7 @@ UNIX timestamp."
     (("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa-stable" . "https://stable.melpa.org/packages/"))))
  '(package-enable-at-startup nil)
- '(package-selected-packages (quote (go-errcheck go-guru go-mode go-rename)))
+ '(package-selected-packages (quote (yaml-mode go-errcheck go-guru go-mode go-rename)))
  '(ring-bell-function (quote ignore))
  '(save-place-mode t)
  '(scroll-bar-mode nil)
