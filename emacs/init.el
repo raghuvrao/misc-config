@@ -419,6 +419,7 @@ UNIX timestamp."
      ("melpa-stable" . "https://stable.melpa.org/packages/"))))
  '(package-enable-at-startup nil)
  '(package-selected-packages (quote (go-eldoc go-errcheck go-guru go-mode go-rename)))
+ '(save-place-mode t)
  '(scroll-bar-mode nil)
  '(scroll-conservatively 5)
  '(show-paren-mode t)
