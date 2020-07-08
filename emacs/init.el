@@ -346,6 +346,10 @@ UNIX timestamp."
   "Indentation cannot use tabs in current buffer."
   (set (make-local-variable 'indent-tabs-mode) nil))
 
+(defun raghu--enable-whitespace-mode-in-buffer ()
+  "Enable whitespace visualization in current buffer."
+  (whitespace-mode 1))
+
 (defun raghu--show-trailing-whitespace-in-buffer ()
   "Highlight trailing whitespace in the current buffer."
   (set (make-local-variable 'show-trailing-whitespace) t))
@@ -354,7 +358,8 @@ UNIX timestamp."
   (add-hook 'help-mode-hook #'raghu--do-word-wrap-in-buffer))
 
 (with-eval-after-load 'prog-mode
-  (add-hook 'prog-mode-hook #'raghu--show-trailing-whitespace-in-buffer))
+  (add-hook 'prog-mode-hook #'raghu--show-trailing-whitespace-in-buffer)
+  (add-hook 'prog-mode-hook #'raghu--enable-whitespace-mode-in-buffer))
 
 ;; Limit the size of comint buffers (e.g. buffers from M-x shell).
 ;; Also, see `comint-buffer-maximum-size'.
@@ -423,7 +428,9 @@ UNIX timestamp."
  '(truncate-lines t)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
  '(use-dialog-box nil)
- '(vc-follow-symlinks t))
+ '(vc-follow-symlinks t)
+ '(whitespace-display-mappings (quote ((tab-mark 9 [8594 9]))))
+ '(whitespace-style (quote (face tabs tab-mark))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
