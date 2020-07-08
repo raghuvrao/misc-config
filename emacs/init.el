@@ -410,6 +410,7 @@ UNIX timestamp."
     (("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa-stable" . "https://stable.melpa.org/packages/"))))
  '(package-enable-at-startup nil)
+ '(save-place-mode t)
  '(scroll-bar-mode nil)
  '(scroll-conservatively 5)
  '(show-paren-mode t)
