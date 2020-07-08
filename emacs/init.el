@@ -59,6 +59,15 @@ Arrange to get confirmation whenever function foo is called:
   (advice-add #'foo :around #'raghu/with-confirmation)"
   (when (y-or-n-p "Are you sure?") (apply fn args)))
 
+(defun raghu/create-switch-to-scratch-text-buffer ()
+  "Switch to the scratch `text-mode' buffer.
+
+Create the buffer if it does not already exist."
+  (interactive)
+  (switch-to-buffer (get-buffer-create "*scratch-text*"))
+  (text-mode))
+(define-key global-map (kbd "C-c r") #'raghu/create-switch-to-scratch-text-buffer)
+
 (defun raghu/backward-whitespace (arg)
   "Move point to start of previous sequence of whitespace characters.
 
