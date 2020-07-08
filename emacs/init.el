@@ -10,17 +10,6 @@
 (require 'package)
 (package-initialize)
 
-(transient-mark-mode -1)
-
-(when (fboundp #'horizontal-scroll-bar-mode) (horizontal-scroll-bar-mode -1))
-(when (fboundp #'scroll-bar-mode) (scroll-bar-mode -1))
-(when (fboundp #'tool-bar-mode) (tool-bar-mode -1))
-(when (fboundp #'tooltip-mode) (tooltip-mode -1))
-
-(column-number-mode 1)
-
-(show-paren-mode 1)
-
 ;; Various programs (e.g. git, man) like to send their stdout through a
 ;; pagination program (e.g. more, less).  When those programs are
 ;; invoked at a command interpreter (a shell) in Emacs, pagination is
@@ -375,11 +364,13 @@ UNIX timestamp."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(column-number-mode t)
  '(comint-buffer-maximum-size 10240)
  '(debug-on-error t)
  '(fill-column 72)
  '(frame-background-mode (quote light))
  '(help-window-select t)
+ '(horizontal-scroll-bar-mode nil)
  '(hscroll-margin 2)
  '(hscroll-step 1)
  '(indicate-empty-lines t)
@@ -397,7 +388,12 @@ UNIX timestamp."
     (("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa-stable" . "https://stable.melpa.org/packages/"))))
  '(package-enable-at-startup nil)
+ '(scroll-bar-mode nil)
  '(scroll-conservatively 5)
+ '(show-paren-mode t)
+ '(tool-bar-mode nil)
+ '(tooltip-mode nil)
+ '(transient-mark-mode nil)
  '(truncate-lines t)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
  '(use-dialog-box nil)
