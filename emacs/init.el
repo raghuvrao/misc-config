@@ -344,6 +344,83 @@ mode."
     num-copied-lines))
 (define-key global-map (kbd "C-c C") #'raghu/duplicate-and-comment)
 
+(defun raghu/region-expand-whole-lines (beg end &optional extremities)
+  "Expand region to cover whole lines, and activate mark.
+
+BEG and END are the boundaries of the region to be expanded to
+whole lines.
+
+Optional prefix argument EXTREMITIES determines whether to
+exclude indentation (at region beginning) and trailing
+newline (at region end).
+
+Supply EXTREMITIES with \\[universal-argument].
+
+No \\[universal-argument]: include both trailing newline at
+region end and indentation at region beginning
+
+One \\[universal-argument]: exclude trailing newline at region
+end, include indentation at region beginning
+
+Two \\[universal-argument]: include trailing newline at region
+end, exclude indentation at region beginning
+
+Three or more \\[universal-argument]: exclude both trailing
+newline at region end and indentation at region beginning"
+  (interactive "r\np")
+  (unless (natnump beg) (signal 'wrong-type-argument (list #'natnump beg)))
+  (unless (natnump end) (signal 'wrong-type-argument (list #'natnump end)))
+  (cond ((booleanp extremities) (setq extremities 1))
+	((natnump extremities) t)
+	(t (signal 'wrong-type-argument (list #'natnump extremities))))
+  (when (< end beg) (setq beg (prog1 end (setq end beg))))
+  (cond
+   ;; No `universal-argument'
+   ((< extremities 4)
+    (if (= (point) end)
+	(progn (unless (bolp) (forward-line 1))
+	       (exchange-point-and-mark)
+	       (unless (bolp) (goto-char (line-beginning-position))))
+      (unless (bolp) (goto-char (line-beginning-position)))
+      (exchange-point-and-mark)
+      (unless (bolp) (forward-line 1))))
+   ;; One `universal argument'
+   ((< extremities 16)
+    (if (= (point) end)
+	(progn (when (bolp) (forward-line -1))
+	       (unless (eolp) (goto-char (line-end-position)))
+	       (exchange-point-and-mark)
+	       (unless (bolp) (goto-char (line-beginning-position))))
+      (unless (bolp) (goto-char (line-beginning-position)))
+      (exchange-point-and-mark)
+      (when (bolp) (forward-line -1))
+      (unless (eolp) (goto-char (line-end-position)))))
+   ;; Two `universal-argument'
+   ((< extremities 64)
+    (if (= (point) end)
+	(progn (unless (bolp) (forward-line 1))
+	       (exchange-point-and-mark)
+	       (back-to-indentation))
+      (back-to-indentation)
+      (exchange-point-and-mark)
+      (unless (bolp) (forward-line 1))))
+   ;; Three or more `universal-argument'
+   ((>= extremities 64)
+    (if (= (point) end)
+	(progn (when (bolp) (forward-line -1))
+	       (unless (eolp) (goto-char (line-end-position)))
+	       (exchange-point-and-mark)
+	       (back-to-indentation))
+      (back-to-indentation)
+      (exchange-point-and-mark)
+      (when (bolp) (forward-line -1))
+      (unless (eolp) (goto-char (line-end-position))))))
+  ;; In every case above, point and mark will have been exchanged, so
+  ;; restore them now.
+  (exchange-point-and-mark)
+  (activate-mark))
+(define-key global-map (kbd "C-c n") #'raghu/region-expand-whole-lines)
+
 (defun raghu/new-line-above (arg)
   "Above current line, insert new line and indentation.
 
