@@ -36,7 +36,6 @@
 (defalias 'yes-or-no-p #'y-or-n-p)
 
 (define-key global-map (kbd "C-c H") #'hl-line-mode)
-(define-key global-map (kbd "C-c J") #'join-line)
 (define-key global-map (kbd "C-c K") #'kill-whole-line)
 (define-key global-map (kbd "C-c c") #'comment-line)
 (define-key global-map (kbd "C-c f") #'forward-whitespace)
@@ -67,6 +66,62 @@ Create the buffer if it does not already exist."
   (switch-to-buffer (get-buffer-create "*scratch-text*"))
   (text-mode))
 (define-key global-map (kbd "C-c r") #'raghu/switch-to-text-scratchbuffer)
+
+(defun raghu/join-lines (&optional lines)
+  "Join multiples lines.
+
+Lines are joined using `join-line'.
+
+If mark is active, ignore LINES and join the lines in the region.
+
+If mark is not active, decide how many lines to join based on
+LINES: if LINES is boolean, join the current line to the line
+above it; if LINES is 0, do not join any lines; if LINES > 0,
+join the current line and LINES-1 lines above it; if LINES < 0,
+join current line and LINES-1 lines below it.
+
+This function can be used as an interactive command.  When using
+interactively, \\[universal-argument] can be used to provide an
+argument for the LINES parameter."
+  (interactive "*P")
+  (if (use-region-p)
+      (let* ((tmp-start (region-beginning))
+	     (tmp-end (region-end))
+	     (start-line-start nil)
+	     (end-line-start nil)
+	     (end-line-end nil))
+	(save-excursion
+	  (goto-char tmp-start)
+	  (setq start-line-start (line-beginning-position))
+	  (goto-char tmp-end)
+	  (when (bolp) (forward-line -1))
+	  (setq end-line-start (line-beginning-position))
+	  (setq end-line-end (line-end-position)))
+	(unless (= start-line-start end-line-start)
+	  (goto-char end-line-end)
+	  (while (/= (line-beginning-position) start-line-start)
+	    (join-line))))
+    (if (booleanp lines)
+	(unless (save-excursion (goto-char (line-beginning-position)) (bobp))
+	  (join-line))
+      (when (listp lines)
+	(let ((x (car lines))) (when (integerp x) (setq lines x))))
+      (unless (integerp lines)
+	(signal 'wrong-type-argument (list #'integerp lines)))
+      (let ((join-line-arg (< lines 0)) ; t if joining lines BELOW, nil otherwise
+	    (joined 0))
+	(unless (or
+		 ;; Trying to join first line to lines "above" it
+		 (and (save-excursion (goto-char (line-beginning-position)) (bobp))
+		      (not join-line-arg)) ; Joining lines above
+		 ;; Trying to join last line to lines "below" it
+		 (and (save-excursion (goto-char (line-end-position)) (eobp))
+		      join-line-arg)) ; Joining lines below
+	  (when join-line-arg (setq lines (- lines)))
+	  (while (< joined lines)
+	    (join-line join-line-arg)
+	    (setq joined (1+ joined))))))))
+(define-key global-map (kbd "C-c J") #'raghu/join-lines)
 
 (defun raghu/backward-whitespace (arg)
   "Move point to start of previous sequence of whitespace characters.
