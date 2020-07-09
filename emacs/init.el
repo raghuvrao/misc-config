@@ -277,72 +277,95 @@ ARG can be supplied through \\[universal-argument]."
     num-killed-lines))
 (define-key global-map (kbd "C-c k") #'raghu/kill-backward-to-indentation)
 
-(defun raghu/duplicate-and-comment (&optional lines)
+(defun raghu/duplicate-and-comment-region (beg end)
+  "Duplicate and comment region.
+
+BEG and END mark the region.  Duplicate and comment whole lines;
+expand partial lines to whole lines.
+
+This function does not check if comment-syntax is defined for the
+buffer's major mode.
+
+Return number of whole lines duplicated+commented."
+  (unless (natnump beg) (signal 'wrong-type-argument (list #'natnump beg)))
+  (unless (natnump end) (signal 'wrong-type-argument (list #'natnump end)))
+  (let ((copied-lines nil) (num-copied-lines 0))
+    (unless (= beg end)
+      (when (< end beg) (let ((aux beg)) (setq beg end end aux)))
+      (save-excursion
+	(goto-char beg)
+	(setq beg (line-beginning-position))
+	(goto-char end)
+	(when (bolp) (forward-line -1))
+	(setq end (line-end-position))
+	(unless (= beg end)
+	  (setq num-copied-lines (count-lines beg end)
+		copied-lines (buffer-substring beg end))
+	  (goto-char beg)
+	  (open-line 1)
+	  (insert copied-lines)
+	  (comment-region beg end)))
+      ;; Account for save-excursion's behavior at the line's beginning.
+      (when (and (bolp) (= beg (point))) (forward-line num-copied-lines)))
+    ;; Return the number of lines copied+commented.
+    num-copied-lines))
+
+(defun raghu/duplicate-and-comment-lines (lines)
   "Duplicate and comment lines.
 
-If region is active, work on the lines necessary and sufficient
-to encapsulate the region.  Ignore argument LINES.
+If LINES > 0, work on the current line and LINES-1 lines below
+it.  If LINES < 0, work on the current line and -LINES-1 lines
+above it.  If LINES = 0, do nothing.
 
-If region is not active, work on the current line and LINES
-additional lines.  If LINES is greater than 0, work on the
-current line and LINES lines below it.  If LINES is lesser than
-0, work on the current line and -LINES lines above it.  If LINES
-is nil, t or equal to 0, work on the current line only.
+This function does not check if comment-syntax is defined for the
+buffer's major mode.
 
-LINES can be specified via prefix argument.  When no prefix
-argument is specified, work on the current line only.
+Return the number of lines duplicated+commented."
+  (unless (integerp lines)
+    (signal 'wrong-type-argument (list #'integerp lines)))
+  (let ((num-copied-lines 0))
+    (unless (= lines 0)
+      (let ((beg -1) (end -1) (copied-lines nil))
+	(if (> lines 0)
+	    (setq beg (line-beginning-position)
+		  end (line-end-position lines))
+	  ;; lines < 0.  We do not get this far if lines = 0.
+	  (setq end (line-end-position)
+		beg (line-beginning-position (+ lines 2))))
+	(unless (= beg end)
+	  (setq copied-lines (buffer-substring beg end)
+		num-copied-lines (count-lines beg end))
+	  (save-excursion
+	    (goto-char beg)
+	    (open-line 1)
+	    (insert copied-lines)
+	    (comment-region beg end))
+	  ;; Account for save-excursion's behavior at the beginning of
+	  ;; the line.
+	  (when (and (bolp) (= beg (point)))
+	    (forward-line num-copied-lines)))))
+    ;; Return the number of lines duplicated+commented.
+    num-copied-lines))
 
-Return the number of lines copied.
+(defun raghu/duplicate-and-comment-lines-or-region (&optional lines)
+  "Duplicate and comment lines.
 
-NOTE: This function is meant for interactive use only: it calls
+If mark is active, duplicate and comment the region using
+`raghu/duplicate-and-comment-region'.  Otherwise, duplicate and
+comment LINES lines using `raghu/duplicate-and-comment-lines'.
+Use \\[universal-argument] to provide an argument for the LINES
+parameter.
+
+This function is meant for interactive use only: it calls
 `comment-normalize-vars', which prompts the user for comment
 syntax if comment syntax is undefined for the buffer's major
 mode."
   (interactive "*P")
   (comment-normalize-vars)
-  (let ((copied-lines nil) (num-copied-lines 0) (begin nil) (end nil))
-    (if (use-region-p)
-	(let ((rb (region-beginning)) (re (region-end)))
-	  (save-excursion
-	    (goto-char rb)
-	    (beginning-of-line)
-	    (setq begin (point))
-	    (goto-char re)
-	    (end-of-line)
-	    (setq end (point))))
-      (if (booleanp lines)
-	  (setq lines 0)
-	(when (listp lines)
-	  (let ((z (car lines)) (when (integerp z) (setq lines z)))))
-	(unless (integerp lines)
-	  (signal 'wrong-type-argument
-		  (list (list #'integerp #'booleanp) lines))))
-      (let ((starting-point (point)))
-	(save-excursion
-	  (forward-line lines)
-	  (if (> lines 0)
-	      (progn (end-of-line)
-		     (setq end (point))
-		     (goto-char starting-point)
-		     (beginning-of-line)
-		     (setq begin (point)))
-	    (setq begin (point))
-	    (goto-char starting-point)
-	    (end-of-line)
-	    (setq end (point))))))
-    (when (= begin end) (error "%s" "Nothing to comment"))
-    (save-excursion
-      (setq copied-lines (buffer-substring begin end)
-	    num-copied-lines (count-lines begin end))
-      (goto-char begin)
-      (open-line 1)
-      (insert copied-lines)
-      (comment-region begin end))
-    ;; Account for save-excursion behavior at beginning of line.
-    (when (and (bolp) (= begin (point))) (forward-line num-copied-lines))
-    ;; Return the number of lines copied+commented.
-    num-copied-lines))
-(define-key global-map (kbd "C-c C") #'raghu/duplicate-and-comment)
+  (if (use-region-p)
+      (raghu/duplicate-and-comment-region (region-beginning) (region-end))
+    (raghu/duplicate-and-comment-lines (prefix-numeric-value lines))))
+(define-key global-map (kbd "C-c C") #'raghu/duplicate-and-comment-lines-or-region)
 
 (defun raghu/region-expand-whole-lines (beg end &optional extremities)
   "Expand region to cover whole lines, and activate mark.
