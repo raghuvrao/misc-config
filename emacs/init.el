@@ -136,7 +136,22 @@ for the LINES parameter."
   (if (use-region-p)
       (raghu/join-region (region-beginning) (region-end))
     (raghu/join-lines (prefix-numeric-value lines))))
-(define-key global-map (kbd "C-c J") #'raghu/join-lines-or-region)
+(define-key global-map (kbd "C-c j") #'raghu/join-lines-or-region)
+
+(defun raghu/join-whole-buffer (buf)
+  "Join buffer BUF into one line.
+
+If BUF is narrowed, join only its accessible portion.
+
+If called interactively, read the buffer name from the
+minibuffer.
+
+`raghu/join-region' is used to do the joining."
+  (interactive "bBuffer")
+  (with-current-buffer buf
+    (barf-if-buffer-read-only)
+    (raghu/join-region (point-min) (point-max))))
+(define-key global-map (kbd "C-c J") #'raghu/join-whole-buffer)
 
 (defun raghu/backward-whitespace (arg)
   "Move point to start of previous sequence of whitespace characters.
