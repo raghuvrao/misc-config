@@ -15,19 +15,23 @@
 ;; invoked at a command interpreter (a shell) in Emacs, pagination is
 ;; unnecessary.
 (setenv "PAGER" "cat")
-(setenv "GIT_PAGER" nil)
-(setenv "LESS" nil)
 
-;; When working with a command interpreter through Emacs, use
-;; `emacsclient' as the editor that other programs invoke (e.g. git,
-;; svn), so the file to edit opens in an Emacs buffer.  It works
-;; because I do server-start or run Emacs in daemon mode.
-(let ((editor "emacsclient"))
-  (setenv "EDITOR" editor)
-  (setenv "FCEDIT" editor)
-  (setenv "GIT_EDITOR" editor)
-  (setenv "SVN_EDITOR" editor)
-  (setenv "VISUAL" editor))
+;; When interacting with the command interpreter through Emacs, use
+;; `emacsclient' as the editor that other programs invoke.  It works
+;; because I do server-start, or run Emacs in daemon mode.
+;;
+;; I want these variables to be set to the absolute path of emacsclient
+;; which is in specific directories, regardless of exec-path and/or
+;; PATH, so work my way down a list of these paths, instead of setting
+;; the variables simply to "emacsclient".
+(catch 'break
+  (dolist (ec (list (expand-file-name "~/.local/bin/emacsclient")
+		    "/usr/local/bin/emacsclient"
+		    "/usr/bin/emacsclient"))
+    (when (file-executable-p ec)
+      (setenv "EDITOR" ec)
+      (setenv "VISUAL" ec)
+      (throw 'break t))))
 
 (set-language-environment "UTF-8")
 (prefer-coding-system 'utf-8)
