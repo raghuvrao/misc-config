@@ -575,7 +575,6 @@ UNIX timestamp."
  '(column-number-mode t)
  '(comint-buffer-maximum-size 10240)
  '(confirm-kill-emacs (quote y-or-n-p))
- '(debug-on-error t)
  '(fill-column 72)
  '(frame-background-mode (quote dark))
  '(help-window-select t)
