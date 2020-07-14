@@ -15,18 +15,13 @@
 ;; invoked at a command interpreter (a shell) in Emacs, pagination is
 ;; unnecessary.
 (setenv "PAGER" "cat")
-(setenv "GIT_PAGER" nil)
-(setenv "LESS" nil)
 
 ;; When working with a command interpreter through Emacs, use
 ;; `emacsclient' as the editor that other programs invoke (e.g. git,
-;; svn), so the file to edit opens in an Emacs buffer.  It works
-;; because I do server-start or run Emacs in daemon mode.
+;; svn), so the file to edit opens in an Emacs buffer.  It works because
+;; I do server-start or, run Emacs in daemon mode.
 (let ((editor "emacsclient"))
   (setenv "EDITOR" editor)
-  (setenv "FCEDIT" editor)
-  (setenv "GIT_EDITOR" editor)
-  (setenv "SVN_EDITOR" editor)
   (setenv "VISUAL" editor))
 
 (set-language-environment "UTF-8")
