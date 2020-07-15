@@ -547,8 +547,13 @@ UNIX timestamp."
   (add-hook 'help-mode-hook #'raghu--do-word-wrap-in-buffer))
 
 (with-eval-after-load 'prog-mode
+  (add-hook 'prog-mode-hook #'hs-minor-mode)
   (add-hook 'prog-mode-hook #'raghu--show-trailing-whitespace-in-buffer)
   (add-hook 'prog-mode-hook #'raghu--enable-whitespace-mode-in-buffer))
+
+(with-eval-after-load 'python
+  (add-hook 'python-mode-hook (lambda () (hs-minor-mode -1)))
+  (add-hook 'python-mode-hook #'outline-minor-mode))
 
 ;; Limit the size of comint buffers (e.g. buffers from M-x shell).
 ;; Also, see `comint-buffer-maximum-size'.
