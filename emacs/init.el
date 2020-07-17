@@ -154,6 +154,25 @@ minibuffer.
     (raghu/join-region (point-min) (point-max))))
 (define-key global-map (kbd "C-c J") #'raghu/join-whole-buffer)
 
+(defun raghu/empty-buffer (buf &optional delp)
+  "Remove the contents of the buffer BUF.
+
+If BUF is narrowed, empty only its accessible portion.
+
+If optional argument DELP is non-nil, delete the contents of BUF
+without modifying the kill ring.  Otherwise, save the removed
+contents in the kill ring.
+
+In interactive use, read the buffer name from the minibuffer, and
+get DELP from \\[universal-argument]."
+  (interactive "bBuffer to empty\nP")
+  (with-current-buffer buf
+    (barf-if-buffer-read-only)
+    (if delp
+	(delete-region (point-min) (point-max))
+      (kill-region (point-min) (point-max)))))
+(define-key global-map (kbd "C-c E") #'raghu/empty-buffer)
+
 (defun raghu/backward-whitespace (arg)
   "Move point to start of previous sequence of whitespace characters.
 
