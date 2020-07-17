@@ -36,6 +36,12 @@
 (define-key global-map (kbd "C-c f") #'forward-whitespace)
 (define-key global-map (kbd "C-c w") #'toggle-truncate-lines)
 
+;; I keep menu-bar-mode enabled because it helps me discover major-mode
+;; key-bindings.  The default binding to access it---F10---is not easily
+;; available on some of the keyboards that I must use.  So, add a more
+;; convenient binding.
+(define-key global-map (kbd "C-c M") #'menu-bar-open)
+
 (require 'windmove)
 (windmove-default-keybindings 'control)
 
