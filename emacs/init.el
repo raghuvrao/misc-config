@@ -542,6 +542,24 @@ UNIX timestamp."
     (insert (format-time-string fmt nil timezone))))
 (define-key global-map (kbd "C-c t") #'raghu/insert-current-date-time)
 
+(defun raghu/activate-mark (&optional no-tmm)
+  "Activate the mark without moving point.
+
+Activate the mark using `activate-mark'.  Send optional argument
+NO-TMM to `activate-mark' without modification.
+
+While keeping Transient Mark mode disabled, reactivating the
+deactivated mark exchanges point and mark (see info
+node `(emacs)Disabled Transient Mark').  Also, `activate-mark' is
+not an interactive function.
+
+Address the above through this function."
+  (interactive "P")
+  (if (mark)
+      (activate-mark no-tmm)
+    (user-error "%s" "No mark set in this buffer")))
+(define-key global-map (kbd "C-c x") #'raghu/activate-mark)
+
 (defun raghu--do-word-wrap-in-buffer ()
   "Do word-wrapping in current buffer."
   (set (make-local-variable 'truncate-lines) nil)
