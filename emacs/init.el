@@ -617,7 +617,6 @@ Address the above through this function."
 
 (with-eval-after-load 'go-mode
   (require 'go-guru)
-  (require 'go-rename)
   (require 'go-errcheck)
   (setq gofmt-command (or (executable-find "goimports")
 			  (executable-find "gofmt")))
@@ -660,7 +659,7 @@ Address the above through this function."
     (("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa-stable" . "https://stable.melpa.org/packages/"))))
  '(package-enable-at-startup nil)
- '(package-selected-packages (quote (yaml-mode go-errcheck go-guru go-mode go-rename)))
+ '(package-selected-packages (quote (yaml-mode go-errcheck go-guru go-mode)))
  '(ring-bell-function (quote ignore))
  '(save-place-mode t)
  '(scroll-bar-mode nil)
