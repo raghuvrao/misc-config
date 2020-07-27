@@ -623,6 +623,7 @@ Address the above through this function."
  '(confirm-kill-emacs (quote y-or-n-p))
  '(fill-column 72)
  '(frame-background-mode (quote dark))
+ '(frame-resize-pixelwise t)
  '(help-window-select t)
  '(horizontal-scroll-bar-mode nil)
  '(hscroll-margin 2)
@@ -657,7 +658,8 @@ Address the above through this function."
  '(use-dialog-box nil)
  '(vc-follow-symlinks t)
  '(whitespace-display-mappings (quote ((tab-mark 9 [8594 9]))))
- '(whitespace-style (quote (face tabs tab-mark))))
+ '(whitespace-style (quote (face tabs tab-mark)))
+ '(window-resize-pixelwise t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
