@@ -32,7 +32,6 @@
 
 (define-key global-map (kbd "C-c H") #'hl-line-mode)
 (define-key global-map (kbd "C-c K") #'kill-whole-line)
-(define-key global-map (kbd "C-c c") #'comment-line)
 (define-key global-map (kbd "C-c f") #'forward-whitespace)
 (define-key global-map (kbd "C-c w") #'toggle-truncate-lines)
 
@@ -326,6 +325,50 @@ ARG can be supplied through \\[universal-argument]."
       (kill-region point-at-indent starting-point))
     num-killed-lines))
 (define-key global-map (kbd "C-c k") #'raghu/kill-backward-to-indentation)
+
+;; `comment-dwim' is too much magic, and `comment-line' includes, in
+;; some situations, an extra line that I think ought not to be included.
+;; I need something that just comments/uncomments lines or what I deem
+;; as non-empty region, so write my own function that uses
+;; `comment-lines' and `comment-or-uncomment-region' as appropriate.
+(defun raghu/comment-or-uncomment-lines-or-region (&optional lines)
+  "Comment or uncomment region or lines.
+
+If region is active, ignore parameter LINES, and comment or
+uncomment whole lines containing the region using
+`comment-or-uncomment-region'.  Exclude leading/trailing empty
+lines, and the leading/trailing newline, if any, in the region.
+
+If region is not active, comment or uncomment LINES lines using
+`comment-line'.
+
+In interactive use, \\[universal-argument] can be used to provide
+argument for LINES."
+  (interactive "*P")
+  (if (use-region-p)
+      (let ((beg (region-beginning)) (end (region-end)))
+	(save-excursion
+	  (goto-char beg)
+	  ;; Exclude leading newline (need not be due to an empty line),
+	  ;; if any.
+	  (when (eolp) (forward-line 1))
+	  ;; Skip over leading empty lines, if any.
+	  (while (and (eolp) (bolp) (< (point) end))
+	    (forward-line 1))
+	  (setq beg (line-beginning-position))
+	  (when (= beg end) (user-error "Effectively empty region"))
+	  (goto-char end)
+	  ;; Exclude trailing newline (need not be due to an empty
+	  ;; line), if any.
+	  (when (bolp) (forward-line -1))
+	  ;; Skip over trailing empty lines, if any.
+	  (while (and (eolp) (bolp) (> (point) beg))
+	    (forward-line -1))
+	  (setq end (line-end-position))
+	  (when (= beg end) (user-error "Effectively empty region"))
+	  (comment-or-uncomment-region beg end)))
+    (comment-line (prefix-numeric-value lines))))
+(define-key global-map (kbd "C-c c") #'raghu/comment-or-uncomment-lines-or-region)
 
 (defun raghu/duplicate-and-comment-region (beg end)
   "Duplicate and comment region.
