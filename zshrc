@@ -102,6 +102,7 @@ bindkey -M emacs '\eD' my_kill_word
 
 setopt COMBINING_CHARS
 setopt EXTENDED_HISTORY
+setopt GLOB_DOTS
 setopt HIST_IGNORE_DUPS
 setopt INTERACTIVE_COMMENTS
 setopt LIST_PACKED
