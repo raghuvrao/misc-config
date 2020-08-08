@@ -306,26 +306,22 @@ resumed.  A mark is set at point's original starting position.
 When ARG is a non-zero integer, kill backward from point to the
 indentation of the ARGth line above the current line.  When ARG
 is 0, nil or t, kill backward from point to the indentation of
-the current line.  Return number of lines killed (the count
-includes partially killed lines, if any).
+the current line.
 
 ARG can be supplied through \\[universal-argument]."
   (interactive "*P")
-  (if (booleanp arg)
-      (setq arg 0)
-    (when (listp arg) (let ((z (car arg))) (when (natnump z) (setq arg z))))
-    (unless (natnump arg)
-      (signal 'wrong-type-argument (list (list #'natnump #'booleanp) arg))))
-  (let ((starting-point (point)) (point-at-indent nil) (num-killed-lines 0))
-    (back-to-indentation)
+  (cond ((booleanp arg) (setq arg 0))
+	((consp arg) (let ((z (car arg))) (when (natnump z) (setq arg z)))))
+  (unless (natnump arg)
+    (signal 'wrong-type-argument (list (list #'natnump #'booleanp) arg)))
+  (let ((starting-point (point)) (point-at-indent nil))
+    (backward-to-indentation 0)
     (when (> arg 0)
-      (when (> (point) starting-point) (setq starting-point (point)))
+      (let ((x (point))) (when (> x starting-point) (setq starting-point x)))
       (backward-to-indentation arg))
     (setq point-at-indent (point))
     (when (> starting-point point-at-indent)
-      (setq num-killed-lines (count-lines starting-point point-at-indent))
-      (kill-region point-at-indent starting-point))
-    num-killed-lines))
+      (kill-region point-at-indent starting-point))))
 (define-key global-map (kbd "C-c k") #'raghu/kill-backward-to-indentation)
 
 ;; `comment-dwim' is too much magic, and `comment-line' includes, in
@@ -379,31 +375,35 @@ BEG and END mark the region.  Duplicate and comment whole lines;
 expand partial lines to whole lines.
 
 This function does not check if comment-syntax is defined for the
-buffer's major mode.
-
-Return number of whole lines duplicated+commented."
+buffer's major mode."
   (unless (natnump beg) (signal 'wrong-type-argument (list #'natnump beg)))
   (unless (natnump end) (signal 'wrong-type-argument (list #'natnump end)))
-  (let ((copied-lines nil) (num-copied-lines 0))
-    (unless (= beg end)
-      (when (< end beg) (let ((aux beg)) (setq beg end end aux)))
-      (save-excursion
+  (unless (= beg end)
+    (when (> beg end) (let ((aux beg)) (setq beg end end aux)))
+    ;; Create a marker and manage it myself here instead of using
+    ;; `save-excursion' because `save-excursion' seems to be doing the
+    ;; equivalent of creating a marker that advances on insert except
+    ;; when the marker is at the beginning of the line.  I want the
+    ;; marker to advance always.
+    (let ((original-location (make-marker)))
+      (set-marker-insertion-type original-location t) ; Advance on insert
+      (set-marker original-location (point))
+      (let ((copied-lines nil))
 	(goto-char beg)
+	(when (eolp) (forward-line 1))
 	(setq beg (line-beginning-position))
 	(goto-char end)
-	(when (bolp) (forward-line -1))
-	(setq end (line-end-position))
 	(unless (= beg end)
-	  (setq num-copied-lines (count-lines beg end)
-		copied-lines (buffer-substring beg end))
-	  (goto-char beg)
-	  (open-line 1)
-	  (insert copied-lines)
-	  (comment-region beg end)))
-      ;; Account for save-excursion's behavior at the line's beginning.
-      (when (and (bolp) (= beg (point))) (forward-line num-copied-lines)))
-    ;; Return the number of lines copied+commented.
-    num-copied-lines))
+	  (when (bolp) (forward-line -1))
+	  (setq end (line-end-position))
+	  (unless (= beg end)
+	    (setq copied-lines (buffer-substring beg end))
+	    (goto-char beg)
+	    (open-line 1)
+	    (insert copied-lines)
+	    (comment-region beg end))))
+      (goto-char original-location)
+      (set-marker original-location nil))))
 
 (defun raghu/duplicate-and-comment-lines (lines)
   "Duplicate and comment lines.
@@ -413,34 +413,30 @@ it.  If LINES < 0, work on the current line and -LINES-1 lines
 above it.  If LINES = 0, do nothing.
 
 This function does not check if comment-syntax is defined for the
-buffer's major mode.
-
-Return the number of lines duplicated+commented."
+buffer's major mode."
   (unless (integerp lines)
     (signal 'wrong-type-argument (list #'integerp lines)))
-  (let ((num-copied-lines 0))
-    (unless (= lines 0)
-      (let ((beg -1) (end -1) (copied-lines nil))
-	(if (> lines 0)
-	    (setq beg (line-beginning-position)
-		  end (line-end-position lines))
-	  ;; lines < 0.  We do not get this far if lines = 0.
-	  (setq end (line-end-position)
-		beg (line-beginning-position (+ lines 2))))
-	(unless (= beg end)
-	  (setq copied-lines (buffer-substring beg end)
-		num-copied-lines (count-lines beg end))
-	  (save-excursion
-	    (goto-char beg)
-	    (open-line 1)
-	    (insert copied-lines)
-	    (comment-region beg end))
-	  ;; Account for save-excursion's behavior at the beginning of
-	  ;; the line.
-	  (when (and (bolp) (= beg (point)))
-	    (forward-line num-copied-lines)))))
-    ;; Return the number of lines duplicated+commented.
-    num-copied-lines))
+  (let ((copied-lines nil) (beg 0) (end 0))
+    (cond ((> lines 0) (setq beg (line-beginning-position)
+			     end (line-end-position lines)))
+	  ((< lines 0) (setq end (line-end-position)
+			     beg (line-beginning-position (+ lines 2)))))
+    (unless (= beg end)
+      ;; Create a marker and manage it myself here instead of using
+      ;; `save-excursion' because `save-excursion' seems to be doing the
+      ;; equivalent of creating a marker that advances on insert except
+      ;; when the marker is at the beginning of the line.  I want the
+      ;; marker to advance always.
+      (let ((original-location (make-marker)))
+	(set-marker-insertion-type original-location t) ; Advance on insert
+	(set-marker original-location (point))
+	(setq copied-lines (buffer-substring beg end))
+	(goto-char beg)
+	(open-line 1)
+	(insert copied-lines)
+	(comment-region beg end)
+	(goto-char original-location)
+	(set-marker original-location nil)))))
 
 (defun raghu/duplicate-and-comment-lines-or-region (&optional lines)
   "Duplicate and comment lines.
