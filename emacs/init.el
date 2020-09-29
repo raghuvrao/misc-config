@@ -652,20 +652,6 @@ Address the above through this function."
 (with-eval-after-load "text-mode"	; No `provide' in text-mode.el
   (add-hook 'text-mode-hook #'raghu--do-word-wrap-in-buffer))
 
-(with-eval-after-load 'go-mode
-  (require 'go-guru)
-  (require 'go-errcheck)
-  (setq gofmt-command (or (executable-find "goimports")
-			  (executable-find "gofmt")))
-  (when gofmt-command (add-hook 'before-save-hook #'gofmt-before-save))
-  (add-hook 'go-mode-hook (lambda ()
-			    (unless (string-match "^go" compile-command)
-			      (set (make-local-variable 'compile-command)
-				   "go build && go vet"))))
-  (add-hook 'go-mode-hook (lambda ()
-			    (local-set-key (kbd "C-c C-c") #'compile)))
-  (add-hook 'go-mode-hook (lambda () (subword-mode 1))))
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -697,7 +683,7 @@ Address the above through this function."
     (("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/"))))
  '(package-enable-at-startup nil)
- '(package-selected-packages (quote (yaml-mode go-errcheck go-guru go-mode)))
+ '(package-selected-packages (quote (yaml-mode)))
  '(ring-bell-function (quote ignore))
  '(save-place-mode t)
  '(scroll-bar-mode nil)
