@@ -691,11 +691,11 @@ Address the above through this function."
  '(mouse-wheel-progressive-speed nil)
  '(mouse-wheel-scroll-amount (quote (1 ((shift) . 5) ((control)))))
  '(mouse-yank-at-point t)
- '(package-archive-priorities (quote (("gnu" . 90) ("melpa-stable" . 70))))
+ '(package-archive-priorities (quote (("gnu" . 90) ("melpa" . 70))))
  '(package-archives
    (quote
     (("gnu" . "https://elpa.gnu.org/packages/")
-     ("melpa-stable" . "https://stable.melpa.org/packages/"))))
+     ("melpa" . "https://melpa.org/packages/"))))
  '(package-enable-at-startup nil)
  '(package-selected-packages (quote (yaml-mode go-errcheck go-guru go-mode)))
  '(ring-bell-function (quote ignore))
