@@ -619,10 +619,6 @@ Address the above through this function."
   "Indentation cannot use tabs in current buffer."
   (set (make-local-variable 'indent-tabs-mode) nil))
 
-(defun raghu--enable-whitespace-mode-in-buffer ()
-  "Enable whitespace visualization in current buffer."
-  (whitespace-mode 1))
-
 (defun raghu--show-trailing-whitespace-in-buffer ()
   "Highlight trailing whitespace in the current buffer."
   (set (make-local-variable 'show-trailing-whitespace) t))
@@ -633,7 +629,7 @@ Address the above through this function."
 (with-eval-after-load 'prog-mode
   (add-hook 'prog-mode-hook #'hs-minor-mode)
   (add-hook 'prog-mode-hook #'raghu--show-trailing-whitespace-in-buffer)
-  (add-hook 'prog-mode-hook #'raghu--enable-whitespace-mode-in-buffer))
+  (add-hook 'prog-mode-hook #'whitespace-mode))
 
 (with-eval-after-load 'python
   (add-hook 'python-mode-hook (lambda () (hs-minor-mode -1)))
