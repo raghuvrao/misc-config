@@ -112,7 +112,10 @@ endif
 hi SpecialKey ctermfg=DarkYellow ctermbg=NONE cterm=NONE guifg='#AA5500' guibg=NONE gui=NONE term=bold
 
 hi StatusLine ctermfg=Black ctermbg=DarkCyan cterm=NONE guifg='#000000' guibg='#00AAAA' gui=bold term=reverse,bold
-hi StatusLineNC ctermfg=Black ctermbg=LightGray cterm=NONE guifg='#000000' guibg='#AAAAAA' gui=NONE term=reverse
+hi StatusLineNC ctermfg=White ctermbg=DarkGray cterm=NONE guifg='#AAAAAA' guibg='#555555' gui=bold term=reverse
+if &t_Co < 16
+  hi StatusLineNC ctermfg=Black ctermbg=LightGray
+endif
 hi clear StatusLineTerm
 hi link StatusLineTerm StatusLine
 hi clear StatusLineTermNC
