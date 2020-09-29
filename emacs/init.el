@@ -246,31 +246,31 @@ or double quotes."
 ;;
 ;; First, define a few scrolling-related functions.  These functions
 ;; will be eventually bound to keys.
-(defun raghu--show-down-one ()
-  "Scroll buffer to show next one line."
+(defun raghu--scroll-text-one-line-up ()
+  "Scroll text up by one line."
   (interactive)
   (scroll-up 1))
-(defun raghu--show-up-one ()
-  "Scroll buffer to show previous one line."
+(defun raghu--scroll-text-one-line-down ()
+  "Scroll text down by one line."
   (interactive)
   (scroll-down 1))
-(defun raghu--show-left-one ()
-  "Scroll buffer to show left one column."
-  (interactive)
-  (scroll-right 1))
-(defun raghu--show-right-one ()
-  "Scroll buffer to show right one column."
+(defun raghu--scroll-text-one-col-left ()
+  "Scroll text left by one column."
   (interactive)
   (scroll-left 1))
+(defun raghu--scroll-text-one-col-right ()
+  "Scroll text right by one column."
+  (interactive)
+  (scroll-right 1))
 
 ;; Next, define a map variable, and in it, give key-bindings to the
 ;; above functions.
 (defvar raghu/scroll-map
   (let ((map (make-sparse-keymap)))
-    (define-key map "e" #'raghu--show-up-one)
-    (define-key map "d" #'raghu--show-down-one)
-    (define-key map "s" #'raghu--show-left-one)
-    (define-key map "f" #'raghu--show-right-one)
+    (define-key map "e" #'raghu--scroll-text-one-line-up)
+    (define-key map "d" #'raghu--scroll-text-one-line-down)
+    (define-key map "s" #'raghu--scroll-text-one-col-left)
+    (define-key map "f" #'raghu--scroll-text-one-col-right)
     map)
   "Keymap for scrolling one line/column at a time.
 
