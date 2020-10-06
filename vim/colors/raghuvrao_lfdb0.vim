@@ -76,7 +76,7 @@ if &t_Co < 16
   hi MoreMsg cterm=bold
 endif
 
-hi Normal ctermfg=NONE ctermbg=NONE cterm=NONE guifg='#AAAAAA' guibg='#000000' gui=NONE term=NONE
+hi Normal ctermfg=NONE ctermbg=NONE cterm=NONE guifg='#CCAA55' guibg='#000000' gui=NONE term=NONE
 
 hi NonText ctermfg=Blue ctermbg=NONE cterm=bold guifg='#5555FF' guibg=NONE gui=bold term=bold
 if &t_Co < 16
