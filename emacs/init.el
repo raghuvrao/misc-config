@@ -641,7 +641,7 @@ Address the above through this function."
 (with-eval-after-load 'sh-script
   (add-hook 'sh-mode-hook #'raghu--indentation-cannot-insert-tabs-in-buffer))
 
-(with-eval-after-load "text-mode"	; No `provide' in text-mode.el
+(with-eval-after-load 'text-mode
   (add-hook 'text-mode-hook #'raghu--do-word-wrap-in-buffer))
 
 (with-eval-after-load 'log-edit
