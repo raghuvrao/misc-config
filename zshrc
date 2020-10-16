@@ -114,6 +114,12 @@ unsetopt LIST_TYPES
 unsetopt PROMPT_CR
 unsetopt PROMPT_SP
 
+# When I type '&' or '|' immediately after the completion system has
+# inserted a completion and a suffix character, do not remove the suffix
+# character.  See 'man zshparam' for more information about
+# ZLE_REMOVE_SUFFIX_CHARS.
+ZLE_REMOVE_SUFFIX_CHARS=$' \t\n;'
+
 HISTFILE="${HOME}/.zsh_history"
 HISTSIZE=10500
 SAVEHIST=10000
