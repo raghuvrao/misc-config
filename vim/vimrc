@@ -355,7 +355,6 @@ nnoremap <Leader>I :edit $MYVIMRC<CR>
 
 nnoremap <Leader>[ :ToggleMatchParen<CR>
 
-nnoremap <Leader><Leader> :buffer<Space>
 nnoremap <Leader>a :buffer #<CR>
 nnoremap <Leader>z :bprevious<CR>
 nnoremap <Leader>x :bnext<CR>
@@ -368,6 +367,9 @@ nnoremap <Leader>g :%global/\<
 xnoremap <Leader>g :global/\<
 nnoremap <Leader>v :%vglobal/\<
 xnoremap <Leader>v :vglobal/\<
+
+nnoremap <Leader><Leader> :update<CR>
+xnoremap <Leader><Leader> <Esc>:update<CR>gv
 
 " When in Insert mode, make <CTRL-W>, <CTRL-U>, and <ENTER> start a new
 " change in addition to performing their usual tasks so that I can undo
