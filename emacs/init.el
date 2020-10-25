@@ -747,7 +747,7 @@ Address the above through this function."
  '(region ((((type x ns) (class color) (background dark)) (:background "#aa5500" :foreground "#000000")) (((type tty) (class color) (background dark)) (:background "yellow" :foreground "black"))))
  '(sh-quoted-exec ((t nil)))
  '(shadow ((((type x ns) (class color) (background dark)) (:foreground "#885500"))))
- '(show-paren-match ((((type x ns) (class color) (background dark)) (:background "#0055aa" :foreground "#ffffff" :weight bold)) (((type tty) (class color) (background dark)) (:background "blue" :foreground "brightwhite" :weight bold))))
+ '(show-paren-match ((((type x ns) (class color) (background dark)) (:background "#0055aa" :foreground "#ffffff" :weight bold :underline t)) (((type tty) (class color) (background dark)) (:background "blue" :foreground "brightwhite" :weight bold :underline t))))
  '(show-paren-mismatch ((((type x ns) (class color) (background dark)) (:background "#aa0000" :foreground "#ffffff" :weight bold)) (((type tty) (class color) (background dark)) (:background "red" :foreground "brightwhite" :weight bold))))
  '(tab-bar ((((type tty) (class color) (min-colors 8) (background dark)) (:background "white" :foreground "black"))))
  '(tab-bar-tab ((((type tty) (class color) (min-colors 8) (background dark)) (:background "cyan" :foreground "black"))))
