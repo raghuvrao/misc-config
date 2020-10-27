@@ -614,8 +614,19 @@ Address the above through this function."
   "Highlight trailing whitespace in the current buffer."
   (set (make-local-variable 'show-trailing-whitespace) t))
 
+;; Limit the size of comint buffers (e.g. buffers from M-x shell).
+;; Also, see `comint-buffer-maximum-size'.
+(with-eval-after-load 'comint
+  (add-hook 'comint-output-filter-functions #'comint-truncate-buffer))
+
+(with-eval-after-load 'compile
+  (add-hook 'compilation-mode-hook #'raghu--do-word-wrap-in-buffer))
+
 (with-eval-after-load 'help-mode
   (add-hook 'help-mode-hook #'raghu--do-word-wrap-in-buffer))
+
+(with-eval-after-load 'js
+  (add-hook 'js-mode-hook #'raghu--indentation-cannot-insert-tabs-in-buffer))
 
 (with-eval-after-load 'prog-mode
   (add-hook 'prog-mode-hook #'hs-minor-mode)
@@ -626,17 +637,6 @@ Address the above through this function."
   (add-hook 'python-mode-hook (lambda () (hs-minor-mode -1)))
   (add-hook 'python-mode-hook #'outline-minor-mode)
   (add-hook 'inferior-python-mode-hook #'turn-on-font-lock))
-
-;; Limit the size of comint buffers (e.g. buffers from M-x shell).
-;; Also, see `comint-buffer-maximum-size'.
-(with-eval-after-load 'comint
-  (add-hook 'comint-output-filter-functions #'comint-truncate-buffer))
-
-(with-eval-after-load 'compile
-  (add-hook 'compilation-mode-hook #'raghu--do-word-wrap-in-buffer))
-
-(with-eval-after-load 'js
-  (add-hook 'js-mode-hook #'raghu--indentation-cannot-insert-tabs-in-buffer))
 
 (with-eval-after-load 'sh-script
   (add-hook 'sh-mode-hook #'raghu--indentation-cannot-insert-tabs-in-buffer))
