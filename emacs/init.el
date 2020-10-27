@@ -622,6 +622,9 @@ Address the above through this function."
 (with-eval-after-load 'compile
   (add-hook 'compilation-mode-hook #'raghu--do-word-wrap-in-buffer))
 
+(with-eval-after-load 'diff-mode
+  (add-hook 'diff-mode-hook #'raghu--do-word-wrap-in-buffer))
+
 (with-eval-after-load 'help-mode
   (add-hook 'help-mode-hook #'raghu--do-word-wrap-in-buffer))
 
