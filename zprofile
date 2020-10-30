@@ -14,13 +14,12 @@ unset -v LESS
 # 'less' from invoking other programs to process/display files.
 unset -v LESSOPEN
 
-my_visual_editor="${HOME}/.local/bin/vim"
-if [[ -f "${my_visual_editor}" && -x "${my_visual_editor}" ]]; then
-    export VISUAL="${my_visual_editor}"
-else
-    export VISUAL='/usr/bin/vim'
-fi
-unset -v my_visual_editor
+for v in "${HOME}/.local/bin/vim" '/usr/local/bin/vim' '/usr/bin/vim'; do
+    if [[ -f "${v}" && -x "${v}" ]]; then
+        export VISUAL="${v}"
+        break
+    fi
+done
 
 if [[ -n "${VISUAL}" ]]; then
     export EDITOR="${VISUAL}"
