@@ -9,7 +9,9 @@ if [[ "${-}" != *i* ]]; then return; fi
 
 shopt -s checkwinsize dotglob no_empty_cmd_completion
 
-set -o pipefail
+shopt -u -o emacs
+
+shopt -s -o pipefail vi
 
 HISTCONTROL='ignoredups'
 HISTTIMEFORMAT='[%F %a %T %z] '
