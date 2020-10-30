@@ -69,33 +69,33 @@ bindkey -M emacs '\ef' emacs-forward-word
 # WORDCHARS is used.
 
 my_emacs_backward_word () {
-	local WORDCHARS=''
-	unset -v WORDCHARS
-	zle emacs-backward-word
+    local WORDCHARS=''
+    unset -v WORDCHARS
+    zle emacs-backward-word
 }
 zle -N my-emacs-backward-word my_emacs_backward_word
 bindkey -M emacs '\eB' my-emacs-backward-word
 
 my_emacs_forward_word () {
-	local WORDCHARS=''
-	unset -v WORDCHARS
-	zle emacs-forward-word
+    local WORDCHARS=''
+    unset -v WORDCHARS
+    zle emacs-forward-word
 }
 zle -N my-emacs-forward-word my_emacs_forward_word
 bindkey -M emacs '\eF' my-emacs-forward-word
 
 my_backward_kill_word () {
-	local WORDCHARS=''
-	unset -v WORDCHARS
-	zle backward-kill-word
+    local WORDCHARS=''
+    unset -v WORDCHARS
+    zle backward-kill-word
 }
 zle -N my_backward_kill_word my_backward_kill_word
 bindkey -M emacs '^W' my_backward_kill_word
 
 my_kill_word () {
-	local WORDCHARS=''
-	unset -v WORDCHARS
-	zle kill-word
+    local WORDCHARS=''
+    unset -v WORDCHARS
+    zle kill-word
 }
 zle -N my_kill_word my_kill_word
 bindkey -M emacs '\eD' my_kill_word
@@ -138,12 +138,12 @@ zle -N edit-command-line edit-command-line
 bindkey -M emacs '^X^E' edit-command-line
 
 case "${TERM}" in
-	(xterm*|rxvt*)
-		precmd () { print -Pn '\e]0;%M:%~\a'; }
-		;;
-	(tmux*|screen*)
-		precmd () { print -Pn '\e]0;%M:%~\a\ek%M:%~\e\\'; }
-		;;
+    (xterm*|rxvt*)
+        precmd () { print -Pn '\e]0;%M:%~\a'; }
+        ;;
+    (tmux*|screen*)
+        precmd () { print -Pn '\e]0;%M:%~\a\ek%M:%~\e\\'; }
+        ;;
 esac
 
 alias ls='ls -A -b'

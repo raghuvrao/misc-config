@@ -16,9 +16,9 @@ unset -v LESSOPEN
 
 my_visual_editor="${HOME}/.local/bin/vim"
 if [[ -f "${my_visual_editor}" && -x "${my_visual_editor}" ]]; then
-	export VISUAL="${my_visual_editor}"
+    export VISUAL="${my_visual_editor}"
 else
-	export VISUAL='/usr/bin/vim'
+    export VISUAL='/usr/bin/vim'
 fi
 unset -v my_visual_editor
 
@@ -37,7 +37,7 @@ export mscr="${HOME}/src/git/misc-scripts"
 typeset -U PATH path FPATH path
 
 if (( ${#path} == 0 )); then
-	path=(/usr/local/bin /usr/bin /bin)
+    path=(/usr/local/bin /usr/bin /bin)
 fi
 
 path+=(/usr/local/sbin /usr/sbin /sbin)
