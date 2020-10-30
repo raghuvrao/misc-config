@@ -4,11 +4,6 @@
 $include /etc/inputrc
 
 set expand-tilde on
-set mark-symlinked-directories on
 set show-all-if-ambiguous off
 set show-all-if-unmodified on
 set skip-completed-text on
-set visible-stats on
-
-# Control-l: redraw-current-line
-# "\C-x\C-l": clear-screen
