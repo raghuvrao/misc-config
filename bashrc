@@ -3,19 +3,23 @@
 # ~/.bashrc
 # Author: Raghu V. Rao <raghu.v.rao@gmail.com>
 
-umask 077
-
-if [[ "${-}" != *i* ]]; then return; fi
-
 p='/etc/bashrc'
 if [[ -f "${p}" && -r "${p}" ]]; then
     source "${p}"
 fi
 unset -v p
 
-shopt -s checkwinsize dotglob no_empty_cmd_completion
+umask 077
 
-set -o pipefail
+if [[ "${-}" != *i* ]]; then
+    return
+fi
+
+shopt -s checkwinsize
+shopt -s dotglob
+shopt -s no_empty_cmd_completion
+
+shopt -s -o pipefail
 
 HISTCONTROL='ignoredups'
 HISTFILESIZE=20000
