@@ -21,7 +21,10 @@ else
 	export VISUAL='/usr/bin/vim'
 fi
 unset -v my_visual_editor
-export EDITOR="${VISUAL}"
+
+if [[ -n "${VISUAL}" ]]; then
+    export EDITOR="${VISUAL}"
+fi
 
 export PAGER='/usr/bin/less'
 
