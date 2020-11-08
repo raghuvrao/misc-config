@@ -22,7 +22,7 @@ hi ColorColumn ctermfg=NONE ctermbg=DarkBlue cterm=NONE guifg=NONE guibg='#0000A
 hi Comment ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg='#00AAAA' guibg=NONE gui=NONE term=bold
 hi link SpecialComment Comment
 
-hi CursorColumn ctermfg=NONE ctermbg=DarkGray cterm=NONE guifg=NONE guibg='#333333' gui=NONE term=reverse
+hi CursorColumn ctermfg=NONE ctermbg=DarkGray cterm=NONE guifg=NONE guibg='#222222' gui=NONE term=reverse
 
 hi CursorLine ctermfg=NONE ctermbg=NONE cterm=underline guifg=NONE guibg=NONE gui=underline term=underline
 
@@ -61,7 +61,7 @@ if &t_Co < 16
   hi FoldColumn ctermfg=DarkCyan ctermbg=Black cterm=bold
 endif
 
-hi Folded ctermfg=DarkYellow ctermbg=NONE cterm=NONE guifg='#AAAA00' guibg=NONE gui=NONE term=standout
+hi Folded ctermfg=DarkYellow ctermbg=NONE cterm=NONE guifg='#AA5500' guibg=NONE gui=NONE term=standout
 
 hi Ignore ctermfg=DarkGray ctermbg=NONE cterm=NONE guifg='#555555' guibg=NONE gui=NONE term=NONE
 
@@ -131,7 +131,7 @@ hi Todo ctermfg=Magenta ctermbg=NONE cterm=NONE guifg='#FF55FF' guibg=NONE gui=b
 
 hi Underlined ctermfg=NONE ctermbg=NONE cterm=underline guifg=NONE guibg=NONE gui=underline term=underline
 
-hi VertSplit ctermfg=DarkYellow ctermbg=NONE cterm=NONE guifg='#AAAA00' guibg=NONE gui=NONE term=reverse
+hi VertSplit ctermfg=DarkYellow ctermbg=NONE cterm=NONE guifg='#AA5500' guibg=NONE gui=NONE term=reverse
 
 hi Visual ctermfg=Black ctermbg=DarkYellow cterm=NONE guifg='#000000' guibg='#AA5500' gui=NONE term=reverse
 
