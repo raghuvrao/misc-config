@@ -54,10 +54,6 @@ SAVEHIST=10000
 
 PS1='[%M %? %3~] %# '
 
-autoload -Uz edit-command-line
-zle -N edit-command-line edit-command-line
-bindkey -M emacs '^X^E' edit-command-line
-
 case "${TERM}" in
     (xterm*|rxvt*)
         precmd () { print -Pn '\e]0;%M:%~\a'; }
