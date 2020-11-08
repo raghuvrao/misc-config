@@ -1,10 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 
-# ~/.profile
+# ~/.bash_profile
 # Author: Raghu V. Rao <raghu.v.rao@gmail.com>
-#
-# Keep this file so POSIX-compliant as possible because it is sourced by
-# multiple sh-like shells.  No bashisms!
 
 # Many programs that invoke 'less' themselves for paginating their
 # output set LESS to a value they prefer if LESS is not already set.
@@ -32,7 +29,7 @@ unset -v MANPATH
 # into which we can descend; false otherwise.
 dir_r_x()
 {
-    test -d "${1}" -a -r "${1}" -a -x "${1}"
+    [[ -d "${1}" && -r "${1}" && -x "${1}" ]]
     return ${?}
 }
 
@@ -72,18 +69,16 @@ path_append()
 #       (e.g. PS1 is interactive-only, so it does not belong in this
 #       file).
 #
-#   4.  It is not bash-specific.
-#
 # To make a variable available to child processes, it must be exported.
 
 for v in "${HOME}/.local/bin/vim" '/usr/local/bin/vim' '/usr/bin/vim'; do
-    if [ -f "${v}" -a -x "${v}" ]; then
+    if [[ -f "${v}" && -x "${v}" ]]; then
         export VISUAL="${v}"
         break
     fi
 done
 
-if [ -n "${VISUAL}" ]; then
+if [[ -n "${VISUAL}" ]]; then
     export EDITOR="${VISUAL}"
 fi
 
@@ -95,11 +90,11 @@ export SAL_USE_VCLPLUGIN=gen
 export mcfg="${HOME}/src/git/misc-config"
 export mscr="${HOME}/src/git/misc-scripts"
 
-if [ -z "${PATH}" ]; then
+if [[ -z "${PATH}" ]]; then
     PATH='/usr/local/bin:/usr/bin:/bin'
 fi
 
-PATH="${PATH}:/usr/local/sbin:/usr/sbin:/sbin"
+PATH+=":/usr/local/sbin:/usr/sbin:/sbin"
 
 PATH="${HOME}/.local/bin:${PATH}"
 
@@ -112,7 +107,7 @@ IFS=':'
 for p in ${path_copy}; do
     path_append "${p}"
 done
-if [ -z "${orig_IFS}" ]; then
+if [[ -z "${orig_IFS}" ]]; then
     unset -v IFS
 else
     IFS="${orig_IFS#_}"
@@ -123,7 +118,9 @@ export PATH
 
 unset -f path_append dir_r_x
 
-# Source .bashrc in the end, and only if running bash.
-if [ -n "${BASH_VERSION}" -a -r "${HOME}/.bashrc" ]; then
-    . "${HOME}/.bashrc"
+# Source ~/.bashrc in the end.
+_bashrc="${HOME}/.bashrc"
+if [[ -f "${_bashrc}" && -r "${_bashrc}" ]]; then
+    source "${HOME}/.bashrc"
 fi
+unset -v _bashrc
