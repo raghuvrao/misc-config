@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 
-# .bash_profile
+# ~/.bash_profile
 # Author: Raghu V. Rao <raghu.v.rao@gmail.com>
 
 unset -v LESS
@@ -9,7 +9,7 @@ unset -v MANPATH
 
 dir_r_x ()
 {
-    test -d "${1}" -a -r "${1}" -a -x "${1}"
+    [[ -d "${1}" && -r "${1}" && -x "${1}" ]]
     return ${?}
 }
 
@@ -47,7 +47,7 @@ export EDITOR="${VISUAL}"
 # Force LibreOffice to use the generic Visual Components Library plugin.
 export SAL_USE_VCLPLUGIN=gen
 
-if [ -z "${PATH}" ]; then
+if [[ -z "${PATH}" ]]; then
     PATH='/usr/local/bin:/usr/bin:/bin'
 fi
 
@@ -63,7 +63,7 @@ IFS=':'
 for p in ${path_copy}; do
     path_append "${p}"
 done
-if [ -z "${orig_IFS}" ]; then
+if [[ -z "${orig_IFS}" ]]; then
     unset -v IFS
 else
     IFS="${orig_IFS#_}"
@@ -74,7 +74,9 @@ export PATH
 
 unset -f path_append dir_r_x
 
-# Source .bashrc in the end, and only if running bash.
-if [ -n "${BASH_VERSION}" -a -r "${HOME}/.bashrc" ]; then
-    . "${HOME}/.bashrc"
+# Source ~/.bashrc in the end.
+_bashrc="${HOME}/.bashrc"
+if [[ -f "${_bashrc}" && -r "${_bashrc}" ]]; then
+    source "${HOME}/.bashrc"
 fi
+unset -v _bashrc
