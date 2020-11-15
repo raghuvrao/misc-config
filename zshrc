@@ -28,6 +28,8 @@ unset -v MANPATH
 
 bindkey -v
 
+bindkey -M vicmd 'K' run-help
+
 setopt COMBINING_CHARS
 setopt EXTENDED_HISTORY
 setopt GLOB_DOTS
