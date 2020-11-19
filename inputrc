@@ -14,3 +14,4 @@ set visible-stats on
 
 set keymap vi-insert
 Control-_: yank-last-arg
+Control-l: clear-screen
