@@ -23,13 +23,13 @@ hi Comment ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg='#00AAAA' guibg=NONE g
 hi link SpecialComment Comment
 
 hi CursorColumn ctermfg=NONE ctermbg=DarkGray cterm=NONE guifg=NONE guibg='#222222' gui=NONE term=reverse
+if &t_Co < 16
+  hi CursorColumn ctermbg=DarkBlue
+endif
 
 hi CursorLine ctermfg=NONE ctermbg=NONE cterm=underline guifg=NONE guibg=NONE gui=underline term=underline
 
-hi CursorLineNr ctermfg=Yellow ctermbg=NONE cterm=NONE guifg='#AAAA00' guibg=NONE gui=NONE term=bold
-if &t_Co < 16
-  hi CursorLineNr cterm=bold
-endif
+hi CursorLineNr ctermfg=Yellow ctermbg=NONE cterm=bold guifg='#FFFF55' guibg=NONE gui=bold term=bold
 
 hi Directory ctermfg=Cyan ctermbg=NONE cterm=NONE guifg='#00AAAA' guibg=NONE gui=NONE term=bold
 if &t_Co < 16
@@ -65,9 +65,9 @@ hi Folded ctermfg=DarkYellow ctermbg=NONE cterm=NONE guifg='#AA5500' guibg=NONE 
 
 hi Ignore ctermfg=DarkGray ctermbg=NONE cterm=NONE guifg='#555555' guibg=NONE gui=NONE term=NONE
 
-hi LineNr ctermfg=DarkYellow ctermbg=NONE cterm=NONE guifg='#555555' guibg=NONE gui=NONE term=bold
+hi LineNr ctermfg=DarkYellow ctermbg=NONE cterm=NONE guifg='#AA5500' guibg=NONE gui=NONE term=bold
 
-hi MatchParen ctermfg=White ctermbg=DarkBlue cterm=bold guifg='#FFFFFF' guibg='#0000AA' gui=bold term=bold
+hi MatchParen ctermfg=White ctermbg=Blue cterm=bold guifg='#FFFFFF' guibg='#5555FF' gui=bold term=bold
 
 hi ModeMsg ctermfg=NONE ctermbg=NONE cterm=bold guifg=NONE guibg=NONE gui=bold term=bold
 
@@ -99,17 +99,17 @@ endif
 
 hi QuickFixLine ctermfg=Black ctermbg=DarkGreen cterm=NONE guifg='#FFFFFF' guibg='#0000AA' gui=NONE term=reverse,bold
 
-hi Search ctermfg=White ctermbg=DarkBlue cterm=NONE guifg='#FFFFFF' guibg='#0000AA' gui=bold term=reverse
+hi Search ctermfg=White ctermbg=DarkMagenta cterm=NONE guifg='#FFFFFF' guibg='#AA00AA' gui=NONE term=reverse
 if &t_Co < 16
   hi Search cterm=bold
 endif
 
-hi SignColumn ctermfg=Cyan ctermbg=DarkGray cterm=NONE guifg='#55FFFF' guibg='#222222' gui=NONE term=standout
+hi SignColumn ctermfg=Cyan ctermbg=DarkGray cterm=NONE guifg='#55FFFF' guibg='#333333' gui=NONE term=standout
 if &t_Co < 16
   hi SignColumn ctermfg=DarkCyan ctermbg=Black cterm=bold
 endif
 
-hi SpecialKey ctermfg=DarkYellow ctermbg=NONE cterm=NONE guifg='#AA5500' guibg=NONE gui=NONE term=bold
+hi SpecialKey ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg='#AA00AA' guibg=NONE gui=NONE term=bold
 
 hi StatusLine ctermfg=Black ctermbg=DarkCyan cterm=NONE guifg='#000000' guibg='#00AAAA' gui=bold term=reverse,bold
 hi StatusLineNC ctermfg=White ctermbg=DarkGray cterm=NONE guifg='#AAAAAA' guibg='#555555' gui=bold term=reverse
@@ -121,9 +121,12 @@ hi link StatusLineTerm StatusLine
 hi clear StatusLineTermNC
 hi link StatusLineTermNC StatusLineNC
 
-hi TabLine ctermfg=Black ctermbg=LightGray cterm=NONE guifg='#000000' guibg='#AAAAAA' gui=NONE term=reverse
-hi TabLineFill ctermfg=Black ctermbg=LightGray cterm=NONE guifg='#000000' guibg='#AAAAAA' gui=NONE term=reverse
-hi TabLineSel ctermfg=Black ctermbg=DarkCyan cterm=NONE guifg='#000000' guibg='#00AAAA' gui=bold term=bold
+hi clear TabLine
+hi link TabLine StatusLineNC
+hi clear TabLineFill
+hi link TabLineFill TabLine
+hi clear TabLineSel
+hi link TabLineSel StatusLine
 
 hi Title ctermfg=Yellow ctermbg=NONE cterm=bold guifg='#FFFF55' guibg=NONE gui=bold term=bold
 
@@ -134,10 +137,11 @@ hi Underlined ctermfg=NONE ctermbg=NONE cterm=underline guifg=NONE guibg=NONE gu
 hi VertSplit ctermfg=DarkYellow ctermbg=NONE cterm=NONE guifg='#AA5500' guibg=NONE gui=NONE term=reverse
 
 hi Visual ctermfg=Black ctermbg=DarkYellow cterm=NONE guifg='#000000' guibg='#AA5500' gui=NONE term=reverse
+hi VisualNOS ctermfg=Black ctermbg=LightGray cterm=NONE guifg='#000000' guibg='#AAAAAA' gui=NONE term=reverse
 
 hi WarningMsg ctermfg=Red ctermbg=NONE cterm=bold guifg='#FF5555' guibg=NONE gui=bold term=standout
 
-hi WildMenu ctermfg=White ctermbg=DarkBlue cterm=bold guifg='#FFFFFF' guibg='#0000AA' gui=NONE term=standout
+hi WildMenu ctermfg=Black ctermbg=DarkYellow cterm=NONE guifg='#000000' guibg='#AA5500' gui=bold term=standout
 
 hi diffAdded ctermfg=Green ctermbg=NONE cterm=NONE guifg='#55FF55' guibg=NONE gui=NONE term=bold
 hi diffFile ctermfg=NONE ctermbg=NONE cterm=bold guifg=NONE guibg=NONE gui=bold term=bold
