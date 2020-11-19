@@ -29,6 +29,7 @@ unset -v MANPATH
 bindkey -v
 
 bindkey -M vicmd 'K' run-help
+bindkey -M viins '^_' insert-last-word
 
 setopt COMBINING_CHARS
 setopt EXTENDED_HISTORY
