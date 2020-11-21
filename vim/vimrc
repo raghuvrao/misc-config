@@ -120,6 +120,7 @@ set formatoptions=1jlmnq
 filetype plugin indent on
 
 runtime ftplugin/man.vim
+let g:ft_man_open_mode = 'tab'
 set keywordprg=:Man
 
 " Delete the autocommand groups vimrcEx and vimStartup.  The augroups
