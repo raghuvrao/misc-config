@@ -351,11 +351,6 @@ if executable('xsel')
   nnoremap <silent> <Leader>p :read !xsel -ob 2>/dev/null<CR>
 endif
 
-nnoremap <Leader>e :silent edit<CR>
-
-nnoremap <Leader>m :set invmodifiable<CR>
-nnoremap <Leader>W :set invwrapscan<CR>
-
 nnoremap <Leader>I :edit $MYVIMRC<CR>
 
 nnoremap <Leader>[ :ToggleMatchParen<CR>
