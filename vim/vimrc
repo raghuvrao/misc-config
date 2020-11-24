@@ -338,8 +338,12 @@ endfunction
 
 nnoremap <silent> <Leader>] :echo SyntaxIDs(line('.'), col('.'))<CR>
 
-nnoremap <silent> <Leader>tu i<C-R>=strftime('%s')<CR><Esc>
-nnoremap <silent> <Leader>ts i<C-R>=strftime('%Y-%m-%d %H:%M:%S %Z(UTC%z)')<CR><Esc>
+" TODO: after upgrading to Vim>=8.1.1310, make the argument for
+" parameter 'unix' below optional: assign it the default value 0.
+function! PutCurrentTimestamp(unix) abort
+  put =strftime(a:unix ? '%s' : '%F %a %T %Z(UTC%z)')
+endfunction
+command! -nargs=1 PutCurrentTimestamp call PutCurrentTimestamp(<args>)
 
 if executable('xsel')
   nnoremap <silent> <Leader>y :%write !xsel -ib 2>/dev/null<CR>
