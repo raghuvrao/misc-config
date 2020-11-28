@@ -13,7 +13,7 @@ set modelines=0
 " Try to prevent Vim from meddling with my terminal's cursor (e.g. Vim
 " changes the cursor style when running :terminal even though I never
 " asked Vim to change my cursor style).  The following are not
-" applicable in GVim (it uses 'guicursor', which belongs in gvimrc).
+" applicable in the GUI (it uses 'guicursor', which belongs in gvimrc).
 set t_ve=
 set t_vi=
 set t_vs=
@@ -82,13 +82,13 @@ set statusline=%(\ %f%)%(\ %q%)%(\ %M%R%H%W%)%(\ %y%)%(\ %{&fileformat}%)%(\ %P\
 
 set report=0
 
-" I do not want mouse support in Vim, whereas I like to have mouse
-" support in GVim.  My system-wide vimrc enables mouse support in Vim,
-" so disable it here.  Enable mouse support in GVim in the gvimrc file,
-" which Vim does not read.
+" Most of the time, I do not want mouse support in Vim, whereas I like
+" to have mouse support in the GUI.  My system-wide vimrc enables mouse
+" support in Vim, so disable it here.  I will enable mouse support in
+" the GUI in the gvimrc file, which Vim does not read.
 set mouse=
 
-" In the event that I enable mouse in Vim (as opposed to GVim, where
+" In the event that I enable mouse in Vim (as opposed to the GUI, where
 " I keep it enabled always), I want the mouse to work well.  With
 " 'ttymouse' set to 'xterm' (which is what Vim calculates as my
 " default), the mouse barely works, especially when running Vim "inside"
@@ -262,11 +262,11 @@ endif
 
 " Make a few things work within tmux that work outside tmux.
 "
-" When GVim is started from the shell, 'term' inherits its value from
+" When the GUI is started from the shell, 'term' inherits its value from
 " the environment variable TERM first (which in this case matches
 " "tmux*" or "screen*"), and changes to 'builtin_gui' at some point
 " after this file is sourced.  So, check 'gui_running' here to avoid
-" making the following assignments in GVim, where the assignments are
+" making the following assignments in the GUI, where the assignments are
 " unnecessary.
 if !has('gui_running') && &term =~# '^screen\|^tmux'
   " xUp, xDown, xLeft and xRight can be used to make CTRL-<arrow> work
@@ -387,7 +387,7 @@ inoremap <CR> <C-G>u<CR>
 " C / C++ programs.
 unlet! c_comment_strings
 
-" The system-wide vimrc enables syntax conditionally: if GUI, or if the
+" My system-wide vimrc enables syntax conditionally: if GUI, or if the
 " terminal supports more than 2 colors.  However, I want syntax to be
 " enabled all the time, because without syntax, operators like `gq' etc.
 " do not work correctly to format comments in programs.  I am, however,
