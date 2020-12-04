@@ -63,7 +63,7 @@ set ruler
 set showcmd
 
 set foldmethod=indent
-set foldlevel=100
+set foldlevelstart=99
 
 set incsearch
 
