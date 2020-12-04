@@ -5,12 +5,11 @@ $include /etc/inputrc
 
 set editing-mode vi
 set expand-tilde on
-set mark-symlinked-directories on
+set mark-directories off
 set show-all-if-ambiguous off
 set show-all-if-unmodified on
 set show-mode-in-prompt on
 set skip-completed-text on
-set visible-stats on
 
 set keymap vi-insert
 Control-_: yank-last-arg
