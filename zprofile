@@ -25,8 +25,6 @@ if [[ -n "${VISUAL}" ]]; then
     export EDITOR="${VISUAL}"
 fi
 
-export PAGER='/usr/bin/less'
-
 # Force LibreOffice to use the generic Visual Components Library plugin.
 export SAL_USE_VCLPLUGIN=gen
 
