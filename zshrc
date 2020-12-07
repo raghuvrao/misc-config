@@ -2,22 +2,21 @@
 
 if [[ ! -o INTERACTIVE ]]; then return; fi
 
-# Slackware sets MANPATH in /etc/{z,}profile even though
-# /etc/man_db.conf is configured satisfactorily so far as I go.
-# Slackware's default MANPATH causes problems sometimes.  E.g. when two
-# versions of a program are installed in two different locations,
-# sometimes man pulls up the version of the man page that does not match
-# the version of the command. Unsetting MANPATH seems to solve this
-# problem.
+# Slackware's default MANPATH (set in /etc/{z,}profile) causes problems
+# sometimes.  E.g. when two versions of a program are installed in two
+# different locations, sometimes 'man' displays the version of the
+# manual page that does not match the version of the command found first
+# in PATH. Unsetting MANPATH seems to solve this problem.  So far as
+# I go, /etc/man_db.conf in Slackware is configured satisfactorily.
 #
-# zsh handles MANPATH (and the corresponding manpath array) in a strange
-# way.  In 'man zshparam', MANPATH (and manpath) are listed under
-# 'PARAMETERS USED BY THE SHELL' and not under 'PARAMETERS SET BY THE
-# SHELL'.  However, if MANPATH does not exist in the environment, and if
-# I am not unsetting MANPATH myself, zsh creates the MANPATH variable
-# itself, set to the empty value.  So, the documentation does not seem
-# to match actual behaviour.  Also, I find it strange and unnecessary
-# that the shell meddles with MANPATH.
+# zsh handles MANPATH (and the corresponding 'manpath' array) in
+# a strange way.  In 'man zshparam', MANPATH (and manpath) are listed
+# under 'PARAMETERS USED BY THE SHELL' and not under 'PARAMETERS SET BY
+# THE SHELL'.  However, if MANPATH does not exist in the environment,
+# and if I am not unsetting MANPATH myself, zsh creates the MANPATH
+# variable itself, set to the empty value.  So, the documentation does
+# not seem to match actual behaviour.  Also, I find it strange and
+# unnecessary that the shell meddles with MANPATH.
 #
 # Unsetting MANPATH in ~/.zshrc (vs. in ~/.zprofile) will ensure MANPATH
 # is fully removed from the environment: non-login zsh processes

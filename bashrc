@@ -2,8 +2,6 @@
 
 # ~/.bashrc
 # Author: Raghu V. Rao <raghu.v.rao@gmail.com>
-#
-# bashisms are allowed in this file.
 
 if [[ "${-}" != *i* ]]; then return; fi
 
