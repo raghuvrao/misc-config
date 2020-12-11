@@ -67,8 +67,7 @@ set foldlevelstart=99
 
 set incsearch
 
-set nohlsearch
-nnoremap <Leader>h :set invhlsearch<CR>
+set hlsearch
 
 set list
 set listchars=extends:#,precedes:#,nbsp:%
@@ -357,6 +356,8 @@ endif
 nnoremap <Leader>I :edit $MYVIMRC<CR>
 
 nnoremap <Leader>[ :ToggleMatchParen<CR>
+
+nnoremap <silent> <Leader>h :nohlsearch<CR>
 
 nnoremap <Leader>a :buffer #<CR>
 nnoremap <Leader>z :bprevious<CR>
