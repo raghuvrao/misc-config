@@ -3,6 +3,7 @@
 
 URxvt.termName: rxvt-unicode-256color
 URxvt.loginShell: true
+URxvt.cursorBlink: true
 URxvt.secondaryScreen: true
 URxvt.secondaryScroll: false
 URxvt.scrollTtyOutput: false
