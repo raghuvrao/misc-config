@@ -41,6 +41,7 @@ setopt HIST_IGNORE_DUPS
 setopt INTERACTIVE_COMMENTS
 setopt LIST_PACKED
 setopt MULTIBYTE
+setopt PROMPT_SUBST
 
 unsetopt ALWAYS_LAST_PROMPT
 unsetopt LIST_BEEP
@@ -57,17 +58,6 @@ ZLE_REMOVE_SUFFIX_CHARS=$' \t\n;'
 HISTFILE="${HOME}/.zsh_history"
 HISTSIZE=10500
 SAVEHIST=10000
-
-PS1='[%M %? %3~] %# '
-
-case "${TERM}" in
-    (xterm*|rxvt*)
-        precmd () { print -Pn '\e]0;%M:%~\a'; }
-        ;;
-    (tmux*|screen*)
-        precmd () { print -Pn '\e]0;%M:%~\a\ek%M:%~\e\\'; }
-        ;;
-esac
 
 _with_max_manwidth_80 () {
     if [[ ${#} -lt 1 ]]; then
@@ -101,3 +91,38 @@ alias ll='ls -l'
 alias ls='ls -A -b'
 alias man='_with_max_manwidth_80 man'
 alias which-command='whence -a -v'
+
+case "${TERM}" in
+    (xterm*|rxvt*)
+        precmd () {
+            print -P '(%M) (%y) (%?) (%3~)'
+            print -Pn '\e]0;%M:%3~\a'
+        }
+        ;;
+    (tmux*|screen*)
+        precmd () {
+            print -P '(%M) (%y) (%?) (%3~)'
+            print -Pn '\e]0;%M:%3~\a'
+            print -Pn '\ek%M:%3~\e\\'
+        }
+        ;;
+    (*)
+        precmd () {
+            print -P '(%M) (%y) (%?) (%3~)'
+        }
+        ;;
+esac
+
+_m=' '
+_set_keymap_indicator () {
+    case "${KEYMAP}" in
+        (vicmd) _m='·' ;;
+        (*) _m=' ' ;;
+    esac
+    zle reset-prompt
+}
+zle -N zle-line-init _set_keymap_indicator
+zle -N zle-keymap-select _set_keymap_indicator
+
+PS1='${_m}%# '
+PS2='${_m}%_> '

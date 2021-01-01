@@ -14,22 +14,19 @@ shopt -s -o pipefail vi
 HISTCONTROL='ignoredups'
 HISTTIMEFORMAT='[%F %a %T %z] '
 
-PS1='[\H ${?} \W] \$ '
-
 # See the file SETTING-TITLES for information about setting terminal
 # emulator window/tab titles, and icon names.
-title_content='\H:\w'
-osc_title='\e]0;'"${title_content}"'\a'
-kseq='\ek'"${title_content}"'\e\\'
+PS1=''
 case "${TERM}" in
     (xterm*|rxvt*)
-        PS1="\[${osc_title}\]${PS1}"
+        PS1+='\[\e]0;\H:\w\a\]'
         ;;
     (tmux*|screen*)
-        PS1="\[${kseq}\]\[${osc_title}\]${PS1}"
+        PS1+='\[\e]0;\H:\w\a\]'
+        PS1+='\[\ek\H:\w\e\\\]'
         ;;
 esac
-unset -v title_content osc_title kseq
+PS1+='(\H) (\l) (${?}) (\w)\n\$ '
 
 unset -v PROMPT_COMMAND
 

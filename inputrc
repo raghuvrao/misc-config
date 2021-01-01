@@ -3,13 +3,16 @@
 
 $include /etc/inputrc
 
-set editing-mode vi
 set expand-tilde on
 set mark-directories off
 set show-all-if-ambiguous off
 set show-all-if-unmodified on
 set show-mode-in-prompt on
 set skip-completed-text on
+
+set editing-mode vi
+set vi-cmd-mode-string "·"
+set vi-ins-mode-string " "
 
 set keymap vi-insert
 Control-_: yank-last-arg
