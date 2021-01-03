@@ -21,10 +21,6 @@ for v in "${HOME}/.local/bin/vim" '/usr/local/bin/vim' '/usr/bin/vim'; do
     fi
 done
 
-if [[ -n "${VISUAL}" ]]; then
-    export EDITOR="${VISUAL}"
-fi
-
 # Force LibreOffice to use the generic Visual Components Library plugin.
 export SAL_USE_VCLPLUGIN=gen
 
