@@ -346,7 +346,7 @@ endfunction
 command! -nargs=1 PutCurrentTimestamp call PutCurrentTimestamp(<args>)
 
 if executable('xsel')
-  nnoremap <silent> <Leader>y :%write !xsel -ib 2>/dev/null<CR>
+  nnoremap <silent> <Leader>y :<C-U>%write !xsel -ib 2>/dev/null<CR>
   xnoremap <silent> <Leader>y :write !xsel -ib 2>/dev/null<CR>
   nnoremap <silent> <Leader>p :read !xsel -ob 2>/dev/null<CR>
 endif
@@ -359,17 +359,17 @@ nnoremap <Leader>a :buffer #<CR>
 nnoremap <Leader>z :bprevious<CR>
 nnoremap <Leader>x :bnext<CR>
 
-nnoremap <Leader>S :%substitute/\<<C-R><C-W>\>//g<Left><Left>
-nnoremap <Leader>s :%substitute/\</g<Left><Left>
+nnoremap <Leader>S :<C-U>%substitute/\<<C-R><C-W>\>//g<Left><Left>
+nnoremap <Leader>s :<C-U>%substitute/\</g<Left><Left>
 xnoremap <Leader>s :substitute/\</g<Left><Left>
 
-nnoremap <Leader>g :%global/\<
+nnoremap <Leader>g :<C-U>%global/\<
 xnoremap <Leader>g :global/\<
-nnoremap <Leader>v :%vglobal/\<
+nnoremap <Leader>v :<C-U>%vglobal/\<
 xnoremap <Leader>v :vglobal/\<
 
-nnoremap <Leader><Leader> :update<CR>
-xnoremap <Leader><Leader> <Esc>:update<CR>gv
+nnoremap <Leader><Leader> :<C-U>update<CR>
+xnoremap <Leader><Leader> <Esc>:<C-U>update<CR>gv
 
 " When in Insert mode, make <CTRL-W>, <CTRL-U>, and <ENTER> start a new
 " change in addition to performing their usual tasks so that I can undo
