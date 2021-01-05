@@ -8,39 +8,8 @@ set showtabline=2
 " Use the native/non-GUI tab line.
 set guioptions-=e
 
-" Allow scrollbars (if enabled) even when only one window is visible.
-set guioptions-=L
-set guioptions-=R
-
-" Keep vertical scrollbars disabled.  Provide a means to toggle them.
-set guioptions-=l
-set guioptions-=r
-function! ToggleVerticalScrollbars() abort
-  if &guioptions =~# 'l'
-    set guioptions-=l
-    if &guioptions =~# 'r'
-      set guioptions-=r
-    endif
-  else
-    if &guioptions =~# 'r'
-      set guioptions-=r
-    else
-      set guioptions+=lr
-    endif
-  endif
-endfunction
-nnoremap <Leader>Bv :call ToggleVerticalScrollbars()<CR>
-
-" Keep the horizontal scrollbar disabled.  Provide a means to enable it.
-set guioptions-=b
-function! ToggleHorizontalScrollbar() abort
-  if &guioptions =~# 'b'
-    set guioptions-=b
-  else
-    set guioptions+=b
-  endif
-endfunction
-nnoremap <Leader>Bh :call ToggleHorizontalScrollbar()<CR>
+" Enable the horizontal scrollbar.
+set guioptions+=b
 
 " Adjust the horizontal scrollbar thumb size to match the cursor-line,
 " and not the longest visible line (reduces computations).
