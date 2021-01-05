@@ -30,9 +30,11 @@ bindkey -v
 bindkey -M vicmd 'K' run-help
 bindkey -M viins '^_' insert-last-word
 bindkey -M viins '^T' history-incremental-search-backward
+bindkey -M vicmd '^T' history-incremental-search-backward
 bindkey -M viins '^Y' accept-and-hold
 bindkey -M vicmd '^Y' accept-and-hold
 bindkey -M viins '^Z' which-command
+bindkey -M vicmd '^Z' which-command
 
 setopt COMBINING_CHARS
 setopt EXTENDED_HISTORY
