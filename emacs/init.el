@@ -614,6 +614,10 @@ Address the above through this function."
   "Highlight trailing whitespace in the current buffer."
   (set (make-local-variable 'show-trailing-whitespace) t))
 
+(defun raghu--backward-delete-char-untabify ()
+  "When deleting a tab, arrange to turn the tab to many spaces to delete one space."
+  (set (make-local-variable 'backward-delete-char-untabify-method) 'untabify))
+
 ;; Limit the size of comint buffers (e.g. buffers from M-x shell).
 ;; Also, see `comint-buffer-maximum-size'.
 (with-eval-after-load 'comint
@@ -624,6 +628,9 @@ Address the above through this function."
 
 (with-eval-after-load 'diff-mode
   (add-hook 'diff-mode-hook #'raghu--do-word-wrap-in-buffer))
+
+(with-eval-after-load 'elisp-mode
+  (add-hook 'emacs-lisp-mode-hook #'raghu--backward-delete-char-untabify))
 
 (with-eval-after-load 'help-mode
   (add-hook 'help-mode-hook #'raghu--do-word-wrap-in-buffer))
@@ -658,6 +665,7 @@ Address the above through this function."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(backward-delete-char-untabify-method nil)
  '(column-number-mode t)
  '(comint-buffer-maximum-size 10240)
  '(confirm-kill-emacs (quote y-or-n-p))
