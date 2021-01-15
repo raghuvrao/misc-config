@@ -99,9 +99,9 @@ endif
 
 hi QuickFixLine ctermfg=Black ctermbg=DarkGreen cterm=NONE guifg='#FFFFFF' guibg='#0000AA' gui=NONE term=reverse,bold
 
-hi Search ctermfg=White ctermbg=DarkMagenta cterm=NONE guifg='#FFFFFF' guibg='#AA00AA' gui=NONE term=reverse
+hi Search ctermfg=Black ctermbg=Magenta cterm=NONE guifg='#000000' guibg='#FF55FF' gui=NONE term=reverse
 if &t_Co < 16
-  hi Search cterm=bold
+  hi Search ctermfg=White ctermbg=DarkMagenta cterm=bold
 endif
 
 hi SignColumn ctermfg=Cyan ctermbg=DarkGray cterm=NONE guifg='#55FFFF' guibg='#333333' gui=NONE term=standout
