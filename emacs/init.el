@@ -640,8 +640,7 @@ Address the above through this function."
 
 (with-eval-after-load 'prog-mode
   (add-hook 'prog-mode-hook #'hs-minor-mode)
-  (add-hook 'prog-mode-hook #'raghu--show-trailing-whitespace-in-buffer)
-  (add-hook 'prog-mode-hook #'whitespace-mode))
+  (add-hook 'prog-mode-hook #'raghu--show-trailing-whitespace-in-buffer))
 
 (with-eval-after-load 'python
   (add-hook 'python-mode-hook (lambda () (hs-minor-mode -1)))
@@ -705,8 +704,6 @@ Address the above through this function."
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
  '(use-dialog-box nil)
  '(vc-follow-symlinks t)
- '(whitespace-display-mappings (quote ((tab-mark 9 [8594 9]))))
- '(whitespace-style (quote (face tabs tab-mark)))
  '(window-resize-pixelwise t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -775,7 +772,6 @@ Address the above through this function."
  '(tty-menu-enabled-face ((((type tty) (class color) (min-colors 8) (background dark)) (:background "white" :foreground "black"))))
  '(tty-menu-selected-face ((((type tty) (class color) (min-colors 8) (background dark)) (:background "cyan"))))
  '(vertical-border ((((type tty) (class color) (min-colors 8) (background dark)) (:foreground "yellow"))))
- '(whitespace-tab ((((type x ns) (class color) (background dark)) (:foreground "#aa00aa")) (((type tty) (class color) (background dark)) (:foreground "magenta")) (((class mono) (background dark)) (:weight bold))))
  '(widget-field ((((type x ns) (class color) (background dark)) (:background "#555555" :foreground "#ffffff" :box (:line-width 1 :color "#555555" :style pressed-button))) (((type tty) (background dark)) (:inverse-video t))))
  '(widget-inactive ((((type tty) (class color) (background dark)) (:foreground "red")))))
 
