@@ -3,13 +3,15 @@
 # ~/.bashrc
 # Author: Raghu V. Rao <raghu.v.rao@gmail.com>
 
-if [[ "${-}" != *i* ]]; then return; fi
+if [[ "${-}" != *i* ]]; then
+    return
+fi
 
-shopt -s checkwinsize dotglob no_empty_cmd_completion
+shopt -s checkwinsize
+shopt -s dotglob
+shopt -s no_empty_cmd_completion
 
-shopt -u -o emacs
-
-shopt -s -o pipefail vi
+shopt -s -o pipefail
 
 HISTCONTROL='ignoredups'
 HISTTIMEFORMAT='[%F %a %T %z] '
@@ -22,11 +24,12 @@ case "${TERM}" in
         PS1+='\[\e]0;\H:\w\a\]'
         ;;
     (tmux*|screen*)
-        PS1+='\[\e]0;\H:\w\a\]'
-        PS1+='\[\ek\H:\w\e\\\]'
+        PS1+='\[\e]0;\H:\w\a\]\[\ek\H:\w\e\\\]'
         ;;
 esac
-PS1+='(\H) (\l) (${?}) (\w)\n\$ '
+PS1+='(\H ${?} \w) \$ '
+
+PROMPT_DIRTRIM=3
 
 unset -v PROMPT_COMMAND
 
