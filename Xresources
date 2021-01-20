@@ -37,16 +37,6 @@ uxterm*vt100.boldFont: -misc-fixed-bold-r-semicondensed--13-*-*-*-*-*-iso10646-1
 ! uxterm*vt100.faceSize6: 18
 xterm*vt100.alternateScroll: true
 uxterm*vt100.alternateScroll: true
-xterm*vt100.titeInhibit: false
-uxterm*vt100.titeInhibit: false
-xterm*vt100.scrollBar: false
-uxterm*vt100.scrollBar: false
-xterm*vt100.allowBoldFonts: true
-uxterm*vt100.allowBoldFonts: true
-xterm*vt100.boldMode: true
-uxterm*vt100.boldMode: true
-xterm*vt100.alwaysBoldMode: false
-uxterm*vt100.alwaysBoldMode: false
 xterm*vt100.colorBDMode: true
 uxterm*vt100.colorBDMode: true
 xterm*vt100.veryBoldColors: 4
@@ -91,12 +81,6 @@ xterm*vt100.color15: rgb:FF/FF/FF
 uxterm*vt100.color15: rgb:FF/FF/FF
 xterm*vt100.metaSendsEscape: true
 uxterm*vt100.metaSendsEscape: true
-! xterm*vt100.eightBitInput: false
-! uxterm*vt100.eightBitInput: false
-! xterm*vt100.eightBitOutput: true
-! uxterm*vt100.eightBitOutput: true
-! xterm*vt100.eightBitControl: false
-! uxterm*vt100.eightBitControl: false
 
 xfontsel*font: -misc-fixed-bold-r-normal--13-*-*-*-*-*-iso10646-1
 
