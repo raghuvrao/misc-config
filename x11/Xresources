@@ -37,16 +37,14 @@ uxterm*vt100.boldFont: -misc-fixed-bold-r-semicondensed--13-*-*-*-*-*-iso10646-1
 ! uxterm*vt100.faceSize6: 18
 xterm*vt100.alternateScroll: true
 uxterm*vt100.alternateScroll: true
-xterm*vt100.colorBDMode: true
-uxterm*vt100.colorBDMode: true
-xterm*vt100.veryBoldColors: 4
-uxterm*vt100.veryBoldColors: 4
+xterm*vt100.boldColors: false
+uxterm*vt100.boldColors: false
 xterm*vt100.background: rgb:22/22/22
 uxterm*vt100.background: rgb:22/22/22
 xterm*vt100.foreground: rgb:CC/AA/55
 uxterm*vt100.foreground: rgb:CC/AA/55
-xterm*vt100.colorBD: rgb:EE/DD/88
-uxterm*vt100.colorBD: rgb:EE/DD/88
+! xterm*vt100.colorBD: rgb:EE/DD/88
+! uxterm*vt100.colorBD: rgb:EE/DD/88
 xterm*vt100.color0: rgb:00/00/00
 uxterm*vt100.color0: rgb:00/00/00
 xterm*vt100.color1: rgb:BB/22/22
