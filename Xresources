@@ -91,11 +91,12 @@ URxvt.boldItalicFont: xft:DejaVu Sans Mono:size=10:style=Bold Oblique,\
                       xft:Lohit Oriya:size=10:style=Regular,\
                       xft:Lohit Marathi:size=10:style=Regular
 URxvt.scrollBar: false
+URxvt.intensityStyles: false
 URxvt.borderColor: rgb:FF/FF/FF
 URxvt.background: rgb:FF/FF/FF
 URxvt.foreground: rgb:00/55/55
-URxvt.colorBD: rgb:55/00/55
-URxvt.colorIT: rgb:55/55/00
+! URxvt.colorBD: rgb:55/00/55
+! URxvt.colorIT: rgb:55/55/00
 URxvt.color0: rgb:00/00/00
 URxvt.color1: rgb:AA/00/00
 URxvt.color2: rgb:00/AA/00
@@ -151,16 +152,14 @@ uxterm*vt100.boldFont: -misc-fixed-bold-r-semicondensed--13-*-*-*-*-*-iso10646-1
 ! uxterm*vt100.faceSize6: 18
 xterm*vt100.alternateScroll: true
 uxterm*vt100.alternateScroll: true
-xterm*vt100.colorBDMode: true
-uxterm*vt100.colorBDMode: true
-xterm*vt100.veryBoldColors: 4
-uxterm*vt100.veryBoldColors: 4
+xterm*vt100.boldColors: false
+uxterm*vt100.boldColors: false
 xterm*vt100.background: rgb:22/22/22
 uxterm*vt100.background: rgb:22/22/22
 xterm*vt100.foreground: rgb:CC/AA/55
 uxterm*vt100.foreground: rgb:CC/AA/55
-xterm*vt100.colorBD: rgb:EE/DD/88
-uxterm*vt100.colorBD: rgb:EE/DD/88
+! xterm*vt100.colorBD: rgb:EE/DD/88
+! uxterm*vt100.colorBD: rgb:EE/DD/88
 xterm*vt100.color0: rgb:00/00/00
 uxterm*vt100.color0: rgb:00/00/00
 xterm*vt100.color1: rgb:BB/22/22
