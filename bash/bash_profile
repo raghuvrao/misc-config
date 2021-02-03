@@ -7,6 +7,13 @@ unset -v LESS
 unset -v LESSOPEN
 unset -v MANPATH
 
+_s ()
+{
+    if [[ -f "${1}" && -r "${1}" ]]; then
+        source "${1}"
+    fi
+}
+
 dir_r_x ()
 {
     [[ -d "${1}" && -r "${1}" && -x "${1}" ]]
@@ -53,6 +60,8 @@ fi
 
 PATH="${HOME}/.local/bin:${PATH}"
 
+_s "${HOME}/.bash_profile_local.bash"
+
 # Remove duplicates and inaccessible directories from PATH.  Do not
 # modify PATH after this clean-up part.  Any modification to PATH must
 # happen before this comment.
@@ -75,8 +84,6 @@ export PATH
 unset -f path_append dir_r_x
 
 # Source ~/.bashrc in the end.
-_bashrc="${HOME}/.bashrc"
-if [[ -f "${_bashrc}" && -r "${_bashrc}" ]]; then
-    source "${HOME}/.bashrc"
-fi
-unset -v _bashrc
+_s "${HOME}/.bashrc"
+
+unset -f _s
