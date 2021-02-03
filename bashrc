@@ -3,15 +3,19 @@
 # ~/.bashrc
 # Author: Raghu V. Rao <raghu.v.rao@gmail.com>
 
-p='/etc/bashrc'
-if [[ -f "${p}" && -r "${p}" ]]; then
-    source "${p}"
-fi
-unset -v p
+_s ()
+{
+    if [[ -f "${1}" && -r "${1}" ]]; then
+        source "${1}"
+    fi
+}
+
+_s '/etc/bashrc'
 
 umask 077
 
 if [[ "${-}" != *i* ]]; then
+    unset -f _s
     return
 fi
 
@@ -30,3 +34,7 @@ alias cgrep='command grep --color=always'
 alias grep='grep --color=auto'
 alias ll='ls -l'
 alias ls='ls -A'
+
+_s "${HOME}/.bashrc_local.bash"
+
+unset -f _s
