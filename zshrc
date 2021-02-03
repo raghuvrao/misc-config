@@ -39,8 +39,6 @@ SAVEHIST=10000
 
 WORDCHARS=''
 
-PS1='(%M %(0?.%?.%B%?%b) %3~) %# '
-
 # When I type '&' or '|' immediately after the completion system has
 # inserted a completion and a suffix character, do not remove the suffix
 # character.  See 'man zshparam' for more information about
@@ -94,3 +92,13 @@ alias ll='ls -l'
 alias ls='ls -A -b'
 alias man='_with_max_manwidth_80 man'
 alias which-command='whence -a -v'
+
+# The following lines were added by compinstall
+
+# End of lines added by compinstall
+
+x="${HOME}/.zshrc.local"
+if [[ -r "${x}" && -f "${x}" ]]; then
+    source "${x}"
+fi
+unset -v x

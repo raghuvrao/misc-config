@@ -16,19 +16,6 @@ shopt -s -o pipefail
 HISTCONTROL='ignoredups'
 HISTTIMEFORMAT='[%F %a %T %z] '
 
-# See the file SETTING-TITLES for information about setting terminal
-# emulator window/tab titles, and icon names.
-PS1=''
-case "${TERM}" in
-    (xterm*|rxvt*)
-        PS1+='\[\e]0;\H:\w\a\]'
-        ;;
-    (tmux*|screen*)
-        PS1+='\[\e]0;\H:\w\a\]\[\ek\H:\w\e\\\]'
-        ;;
-esac
-PS1+='(\H ${?} \w) \$ '
-
 PROMPT_DIRTRIM=3
 
 unset -v PROMPT_COMMAND
@@ -65,3 +52,9 @@ alias ll='ls -l'
 alias ls='ls -A -b'
 alias man='_with_max_manwidth_80 man'
 alias which-command='whence -a -v'
+
+x="${HOME}/.bashrc.local"
+if [[ -r "${x}" && -f "${x}" ]]; then
+    source "${x}"
+fi
+unset -v x
