@@ -32,8 +32,6 @@
 
 (define-key global-map (kbd "C-c H") #'hl-line-mode)
 (define-key global-map (kbd "C-c K") #'kill-whole-line)
-(define-key global-map (kbd "C-c S h") #'horizontal-scroll-bar-mode)
-(define-key global-map (kbd "C-c S v") #'scroll-bar-mode)
 (define-key global-map (kbd "C-c f") #'forward-whitespace)
 (define-key global-map (kbd "C-c w") #'toggle-truncate-lines)
 
