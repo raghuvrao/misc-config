@@ -39,42 +39,42 @@ uxterm*vt100.boldFont: -misc-fixed-bold-r-semicondensed--13-*-*-*-*-*-iso10646-1
 uxterm*vt100.alternateScroll: true
  xterm*vt100.boldColors: false
 uxterm*vt100.boldColors: false
- xterm*vt100.background: rgb:22/22/22
-uxterm*vt100.background: rgb:22/22/22
- xterm*vt100.foreground: rgb:CC/AA/55
-uxterm*vt100.foreground: rgb:CC/AA/55
-!  xterm*vt100.colorBD: rgb:EE/DD/88
-! uxterm*vt100.colorBD: rgb:EE/DD/88
+ xterm*vt100.background: rgb:26/26/26
+uxterm*vt100.background: rgb:26/26/26
+ xterm*vt100.foreground: rgb:BF/A7/60
+uxterm*vt100.foreground: rgb:BF/A7/60
+!  xterm*vt100.colorBD: rgb:FF/DF/7F
+! uxterm*vt100.colorBD: rgb:FF/DF/7F
  xterm*vt100.color0: rgb:00/00/00
 uxterm*vt100.color0: rgb:00/00/00
- xterm*vt100.color1: rgb:BB/22/22
-uxterm*vt100.color1: rgb:BB/22/22
- xterm*vt100.color2: rgb:22/BB/22
-uxterm*vt100.color2: rgb:22/BB/22
- xterm*vt100.color3: rgb:BB/66/22
-uxterm*vt100.color3: rgb:BB/66/22
- xterm*vt100.color4: rgb:22/22/BB
-uxterm*vt100.color4: rgb:22/22/BB
- xterm*vt100.color5: rgb:BB/22/BB
-uxterm*vt100.color5: rgb:BB/22/BB
- xterm*vt100.color6: rgb:22/BB/BB
-uxterm*vt100.color6: rgb:22/BB/BB
- xterm*vt100.color7: rgb:BB/BB/BB
-uxterm*vt100.color7: rgb:BB/BB/BB
- xterm*vt100.color8: rgb:66/66/66
-uxterm*vt100.color8: rgb:66/66/66
- xterm*vt100.color9: rgb:FF/66/66
-uxterm*vt100.color9: rgb:FF/66/66
- xterm*vt100.color10: rgb:66/FF/66
-uxterm*vt100.color10: rgb:66/FF/66
- xterm*vt100.color11: rgb:FF/FF/66
-uxterm*vt100.color11: rgb:FF/FF/66
- xterm*vt100.color12: rgb:66/66/FF
-uxterm*vt100.color12: rgb:66/66/FF
- xterm*vt100.color13: rgb:FF/66/FF
-uxterm*vt100.color13: rgb:FF/66/FF
- xterm*vt100.color14: rgb:66/FF/FF
-uxterm*vt100.color14: rgb:66/FF/FF
+ xterm*vt100.color1: rgb:BF/30/30
+uxterm*vt100.color1: rgb:BF/30/30
+ xterm*vt100.color2: rgb:30/BF/30
+uxterm*vt100.color2: rgb:30/BF/30
+ xterm*vt100.color3: rgb:BF/78/30
+uxterm*vt100.color3: rgb:BF/78/30
+ xterm*vt100.color4: rgb:30/60/BF
+uxterm*vt100.color4: rgb:30/60/BF
+ xterm*vt100.color5: rgb:BF/30/BF
+uxterm*vt100.color5: rgb:BF/30/BF
+ xterm*vt100.color6: rgb:30/BF/BF
+uxterm*vt100.color6: rgb:30/BF/BF
+ xterm*vt100.color7: rgb:BF/BF/BF
+uxterm*vt100.color7: rgb:BF/BF/BF
+ xterm*vt100.color8: rgb:73/73/73
+uxterm*vt100.color8: rgb:73/73/73
+ xterm*vt100.color9: rgb:FF/40/40
+uxterm*vt100.color9: rgb:FF/40/40
+ xterm*vt100.color10: rgb:40/FF/40
+uxterm*vt100.color10: rgb:40/FF/40
+ xterm*vt100.color11: rgb:FF/FF/40
+uxterm*vt100.color11: rgb:FF/FF/40
+ xterm*vt100.color12: rgb:40/7F/FF
+uxterm*vt100.color12: rgb:40/7F/FF
+ xterm*vt100.color13: rgb:FF/40/FF
+uxterm*vt100.color13: rgb:FF/40/FF
+ xterm*vt100.color14: rgb:40/FF/FF
+uxterm*vt100.color14: rgb:40/FF/FF
  xterm*vt100.color15: rgb:FF/FF/FF
 uxterm*vt100.color15: rgb:FF/FF/FF
  xterm*vt100.metaSendsEscape: true
