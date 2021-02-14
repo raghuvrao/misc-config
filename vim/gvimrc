@@ -9,18 +9,6 @@ if has('gui_gtk')
   set guifont=Monospace\ 10
 endif
 
-" Use the native/non-GUI tab line.
-set guioptions-=e
+set guioptions=c
 
-" Enable the horizontal scrollbar.
-set guioptions+=b
-
-" Adjust the horizontal scrollbar thumb size to match the cursor-line,
-" and not the longest visible line (reduces computations).
-set guioptions+=h
-
-" Remove the toolbar from view.
-set guioptions-=T
-
-" Use console dialogs instead of pop-up dialogs for simple questions.
-set guioptions+=c
+set title
