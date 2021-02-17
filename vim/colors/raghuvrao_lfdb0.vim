@@ -72,7 +72,7 @@ hi Ignore ctermfg=DarkGray ctermbg=NONE cterm=NONE guifg='#737373' guibg=NONE gu
 
 hi LineNr ctermfg=DarkYellow ctermbg=NONE cterm=NONE guifg='#BF7830' guibg=NONE gui=NONE term=bold
 
-hi MatchParen ctermfg=White ctermbg=Blue cterm=bold guifg='#FFFFFF' guibg='#4040FF' gui=bold term=bold
+hi MatchParen ctermfg=White ctermbg=DarkBlue cterm=bold guifg='#FFFFFF' guibg='#3030BF' gui=bold term=bold
 
 hi ModeMsg ctermfg=NONE ctermbg=NONE cterm=bold guifg=NONE guibg=NONE gui=bold term=bold
 
@@ -81,15 +81,15 @@ if &t_Co < 16
   hi MoreMsg cterm=bold
 endif
 
-hi Normal ctermfg=NONE ctermbg=NONE cterm=NONE guifg='#BFA730' guibg='#262626' gui=NONE term=NONE
-
-hi NonText ctermfg=Blue ctermbg=NONE cterm=bold guifg='#4040FF' guibg=NONE gui=bold term=bold
+hi NonText ctermfg=Blue ctermbg=NONE cterm=bold guifg='#407FFF' guibg=NONE gui=bold term=bold
 if &t_Co < 16
   hi NonText cterm=bold
 endif
 
+hi Normal ctermfg=NONE ctermbg=NONE cterm=NONE guifg='#BFA760' guibg='#262626' gui=NONE term=NONE
+
 hi Pmenu ctermfg=White ctermbg=DarkBlue cterm=NONE guifg='#FFFFFF' guibg='#3030BF' gui=NONE
-hi PmenuSbar ctermfg=NONE ctermbg=DarkBlue cterm=NONE guifg=NONE guibg='#3030BF' gui=NONE
+hi PmenuSbar ctermfg=NONE ctermbg=DarkBlue cterm=NONE guifg=NONE guibg='#3078BF' gui=NONE
 hi PmenuSel ctermfg=White ctermbg=DarkMagenta cterm=bold guifg='#FFFFFF' guibg='#BF30BF' gui=bold
 hi PmenuThumb ctermfg=NONE ctermbg=DarkCyan cterm=NONE guifg=NONE guibg='#30BFBF' gui=NONE
 if &t_Co < 16
@@ -117,9 +117,9 @@ endif
 hi SpecialKey ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg='#BF30BF' guibg=NONE gui=NONE term=bold
 
 hi StatusLine ctermfg=Black ctermbg=DarkCyan cterm=NONE guifg='#000000' guibg='#30BFBF' gui=bold term=reverse,bold
-hi StatusLineNC ctermfg=LightGray ctermbg=DarkGray cterm=NONE guifg='#BFBFBF' guibg='#737373' gui=NONE term=reverse
+hi StatusLineNC ctermfg=Black ctermbg=DarkGray cterm=NONE guifg='#000000' guibg='#737373' gui=NONE term=reverse
 if &t_Co < 16
-  hi StatusLineNC ctermfg=Black ctermbg=LightGray cterm=NONE
+  hi StatusLineNC ctermbg=LightGray
 endif
 hi clear StatusLineTerm
 hi link StatusLineTerm StatusLine
@@ -141,7 +141,7 @@ hi Underlined ctermfg=NONE ctermbg=NONE cterm=underline guifg=NONE guibg=NONE gu
 
 hi VertSplit ctermfg=DarkYellow ctermbg=NONE cterm=NONE guifg='#BF7830' guibg=NONE gui=NONE term=reverse
 
-hi Visual ctermfg=White ctermbg=DarkBlue cterm=NONE guifg='#FFFFFF' guibg='#3078BF' gui=NONE term=reverse
+hi Visual ctermfg=White ctermbg=DarkBlue cterm=NONE guifg='#FFFFFF' guibg='#3060BF' gui=NONE term=reverse
 if &t_Co < 16
   hi Visual cterm=bold
 endif
@@ -162,11 +162,11 @@ if &t_Co < 16
 endif
 
 hi gitHash ctermfg=Cyan ctermbg=NONE cterm=NONE guifg='#40FFFF' guibg=NONE gui=NONE term=bold
-hi gitHead ctermfg=Blue ctermbg=NONE cterm=bold guifg='#FF4040' guibg=NONE gui=NONE term=bold
-hi gitKeyword ctermfg=Magenta ctermbg=NONE cterm=NONE guifg='#BF7830' guibg=NONE gui=bold term=bold
+hi gitHead ctermfg=Blue ctermbg=NONE cterm=bold guifg='#407FFF' guibg=NONE gui=bold term=bold
+hi gitKeyword ctermfg=DarkYellow ctermbg=NONE cterm=NONE guifg='#BF7830' guibg=NONE gui=bold term=bold
 if &t_Co < 16
-  hi gitHash cterm=bold
-  hi gitKeyword cterm=bold
+  hi gitHash ctermfg=DarkCyan cterm=bold
+  hi gitHead ctermfg=DarkRed
 endif
 hi link gitIdentityKeyword gitKeyword
 
