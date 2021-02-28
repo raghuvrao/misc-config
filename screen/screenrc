@@ -7,10 +7,12 @@ nonblock on
 startup_message off
 vbell off
 
-defbce on
 defc1 off
 defmonitor on
 defutf8 on
+
+defbce on
+term screen-256color-bce-s
 
 # Set terminfo capabilities for hardstatus for the xterm term-type.  Set
 # the capabilities in such a way that when this capability is used, it
