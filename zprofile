@@ -23,4 +23,4 @@ fi
 
 path+=(/usr/local/sbin /usr/sbin /sbin)
 
-path=(${HOME}/.local/bin ${path})
+path=(${HOME}/.local/bin /opt/local/bin ${path})

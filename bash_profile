@@ -56,7 +56,7 @@ fi
 
 PATH+=":/usr/local/sbin:/usr/sbin:/sbin"
 
-PATH="${HOME}/.local/bin:${PATH}"
+PATH="${HOME}/.local/bin:/opt/local/bin:${PATH}"
 
 # Remove duplicates and inaccessible directories from PATH.  Do not
 # modify PATH after this clean-up part.  Any modification to PATH must
