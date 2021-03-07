@@ -141,10 +141,7 @@ hi Underlined ctermfg=NONE ctermbg=NONE cterm=underline guifg=NONE guibg=NONE gu
 
 hi VertSplit ctermfg=DarkYellow ctermbg=NONE cterm=NONE guifg='#BF7830' guibg=NONE gui=NONE term=reverse
 
-hi Visual ctermfg=White ctermbg=DarkBlue cterm=NONE guifg='#FFFFFF' guibg='#3060BF' gui=NONE term=reverse
-if &t_Co < 16
-  hi Visual cterm=bold
-endif
+hi Visual ctermfg=Black ctermbg=DarkYellow cterm=NONE guifg='#000000' guibg='#BF7830' gui=NONE term=reverse
 hi VisualNOS ctermfg=Black ctermbg=LightGray cterm=NONE guifg='#000000' guibg='#BFBFBF' gui=NONE term=reverse
 
 hi WarningMsg ctermfg=Red ctermbg=NONE cterm=bold guifg='#FF4040' guibg=NONE gui=bold term=standout
