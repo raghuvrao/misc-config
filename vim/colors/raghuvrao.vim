@@ -1,6 +1,6 @@
 " Mostly-plain colorscheme for dark-foreground-light-background screens.
 "
-" Maintainer:	Raghu V. Rao <raghu.v.rao@gmail.com>
+" Maintainer: Raghu V. Rao <raghu.v.rao@gmail.com>
 "
 " For text-terminals that support color, this colorscheme makes the
 " reasonable assumption that the 'upper' 8 colors (colors 8-15, or
@@ -12,7 +12,7 @@ set background=light
 hi clear
 
 if exists('g:syntax_on')
-  syntax reset
+    syntax reset
 endif
 
 let g:colors_name = 'raghuvrao'
@@ -29,12 +29,12 @@ hi clear Type
 
 hi ColorColumn ctermfg=NONE ctermbg=Yellow cterm=NONE guifg=NONE guibg=Yellow gui=NONE term=reverse
 if &t_Co < 16
-  hi ColorColumn ctermbg=DarkGreen
+    hi ColorColumn ctermbg=DarkGreen
 endif
 
 hi Comment ctermfg=Blue ctermbg=NONE cterm=NONE guifg=Blue guibg=NONE gui=NONE term=bold
 if &t_Co < 16
-  hi Comment ctermfg=DarkBlue
+    hi Comment ctermfg=DarkBlue
 endif
 hi link SpecialComment Comment
 
@@ -44,7 +44,7 @@ hi ErrorMsg ctermfg=DarkRed ctermbg=NONE cterm=NONE guifg=Red guibg=NONE gui=bol
 
 hi FoldColumn ctermfg=DarkBlue ctermbg=Yellow cterm=NONE guifg=DarkBlue guibg=LightGray gui=NONE term=standout
 if &t_Co < 16
-  hi FoldColumn ctermbg=White
+    hi FoldColumn ctermbg=White
 endif
 
 hi Folded ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui=NONE term=standout
@@ -53,7 +53,7 @@ hi Ignore ctermfg=Yellow ctermbg=NONE cterm=NONE guifg=LightGray guibg=NONE gui=
 
 hi MatchParen ctermfg=Black ctermbg=Yellow cterm=NONE guifg=Black guibg=Yellow gui=underline,bold term=bold
 if &t_Co < 16
-  hi MatchParen ctermfg=Magenta ctermbg=NONE cterm=bold
+    hi MatchParen ctermfg=Magenta ctermbg=NONE cterm=bold
 endif
 
 hi MoreMsg ctermfg=Blue ctermbg=NONE cterm=bold guifg=Blue guibg=NONE gui=bold term=bold
@@ -67,17 +67,17 @@ hi PmenuSbar ctermfg=NONE ctermbg=Cyan cterm=NONE guifg=NONE guibg=LightBlue gui
 hi PmenuSel ctermfg=White ctermbg=DarkBlue cterm=bold guifg=White guibg=DarkBlue gui=bold
 hi PmenuThumb ctermfg=NONE ctermbg=DarkCyan cterm=NONE guifg=NONE guibg=DarkCyan gui=NONE
 if &t_Co < 16
-  hi Pmenu ctermfg=White ctermbg=DarkBlue cterm=bold
-  hi PmenuSbar ctermbg=DarkBlue
-  hi PmenuSel ctermbg=DarkMagenta
-  hi PmenuThumb ctermbg=DarkCyan
+    hi Pmenu ctermfg=White ctermbg=DarkBlue cterm=bold
+    hi PmenuSbar ctermbg=DarkBlue
+    hi PmenuSel ctermbg=DarkMagenta
+    hi PmenuThumb ctermbg=DarkCyan
 endif
 
 hi Question ctermfg=Blue ctermbg=NONE cterm=bold guifg=Blue guibg=NONE gui=bold term=standout
 
 hi QuickFixLine ctermfg=Black ctermbg=Yellow cterm=NONE guifg=Black guibg=LightGreen gui=NONE term=reverse,bold
 if &t_Co < 16
-  hi QuickFixLine ctermbg=DarkGreen
+    hi QuickFixLine ctermbg=DarkGreen
 endif
 
 hi Search ctermfg=Black ctermbg=Yellow cterm=NONE guifg=Black guibg=Orange gui=underline term=reverse
