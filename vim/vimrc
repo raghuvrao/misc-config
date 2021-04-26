@@ -72,9 +72,9 @@ nnoremap <Leader>h :nohlsearch<CR>
 set list
 set listchars=extends:#,precedes:#,nbsp:%
 if has('multi_byte') && &encoding == 'utf-8'
-  set listchars+=tab:→\ ,trail:¬
+    set listchars+=tab:→\ ,trail:¬
 else
-  set listchars+=tab:>\ ,trail:_
+    set listchars+=tab:>\ ,trail:_
 endif
 
 set laststatus=2
@@ -133,44 +133,44 @@ set keywordprg=:Man
 " :help :augroup-delete suggests that to delete an augroup, it is better
 " to empty it first.
 augroup vimrcEx
-  autocmd!
+    autocmd!
 augroup END
 augroup! vimrcEx
 augroup vimStartup
-  autocmd!
+    autocmd!
 augroup END
 augroup! vimStartup
 
 function! JumpToLastExitPosition() abort
-  " If something has already moved the cursor, do not move it again.
-  if getcurpos()[1:2] != [1, 1]
-    return
-  endif
-  " If the line number where the cursor should be moved is either
-  " invalid or no longer exists in the file, do not move the cursor.
-  let l:targetLineNumber = line("'\"")
-  if l:targetLineNumber < 1 || l:targetLineNumber > line('$')
-    return
-  endif
-  " Do not move the cursor for some special buffers and for some
-  " filetypes.
-  if expand('%:p') ==# ''
-	\ || &diff
-	\ || &buftype !=# ''
-	\ || &filetype ==# 'git'
-	\ || &filetype ==# 'gitcommit'
-	\ || &filetype ==# 'gitrebase'
-	\ || &filetype ==# 'hgcommit'
-	\ || &filetype ==# 'man'
-	\ || &filetype ==# 'svn'
-    return
-  endif
-  " If we have come so far, it should be fine to move the cursor.
-  normal! g`"zz
+    " If something has already moved the cursor, do not move it again.
+    if getcurpos()[1:2] != [1, 1]
+        return
+    endif
+    " If the line number where the cursor should be moved is either
+    " invalid or no longer exists in the file, do not move the cursor.
+    let l:targetLineNumber = line("'\"")
+    if l:targetLineNumber < 1 || l:targetLineNumber > line('$')
+        return
+    endif
+    " Do not move the cursor for some special buffers and for some
+    " filetypes.
+    if expand('%:p') ==# ''
+                \ || &diff
+                \ || &buftype !=# ''
+                \ || &filetype ==# 'git'
+                \ || &filetype ==# 'gitcommit'
+                \ || &filetype ==# 'gitrebase'
+                \ || &filetype ==# 'hgcommit'
+                \ || &filetype ==# 'man'
+                \ || &filetype ==# 'svn'
+        return
+    endif
+    " If we have come so far, it should be fine to move the cursor.
+    normal! g`"zz
 endfunction
 augroup jump_to_last_exit_position
-  autocmd!
-  autocmd BufReadPost * call JumpToLastExitPosition()
+    autocmd!
+    autocmd BufReadPost * call JumpToLastExitPosition()
 augroup END
 
 " Make a few things work within tmux that work outside tmux.
@@ -182,69 +182,69 @@ augroup END
 " making the following assignments in the GUI, where the assignments are
 " unnecessary.
 if !has('gui_running') && &term =~# '^screen\|^tmux'
-  " xUp, xDown, xLeft and xRight can be used to make CTRL-<arrow> work
-  " as expected when Vim is run within tmux or GNU Screen.  CTRL-<arrow>
-  " is useful in the insert and command-line modes.
-  "
-  " For the terminal-sequences below to be effective in Vim running in
-  " tmux, tmux must have its `xterm-keys' option set to on, so that tmux
-  " sends xterm-style function key sequences on pressing CTRL-<arrow>
-  " (see `man tmux', under `xterm-keys').
-  "
-  " GNU Screen sends xterm-style function key sequences for CTRL-<arrow>
-  " in its default configuration, at least in versions >= 4.00.03 (FAU),
-  " so no additional configuration should be necessary in GNU Screen.
-  "
-  " :execute is needed because we want \e to be parsed into literal ESC
-  " before being assigned.
-  execute "set <xUp>=\e[1;*A"
-  execute "set <xDown>=\e[1;*B"
-  execute "set <xRight>=\e[1;*C"
-  execute "set <xLeft>=\e[1;*D"
+    " xUp, xDown, xLeft and xRight can be used to make CTRL-<arrow> work
+    " as expected when Vim is run within tmux or GNU Screen.
+    " CTRL-<arrow> is useful in the insert and command-line modes.
+    "
+    " For the terminal-sequences below to be effective in Vim running in
+    " tmux, tmux must have its `xterm-keys' option set to on, so that
+    " tmux sends xterm-style function key sequences on pressing
+    " CTRL-<arrow> (see `man tmux', under `xterm-keys').
+    "
+    " GNU Screen sends xterm-style function key sequences for
+    " CTRL-<arrow> in its default configuration, at least in versions >=
+    " 4.00.03 (FAU), so no additional configuration should be necessary
+    " in GNU Screen.
+    "
+    " :execute is needed because we want \e to be parsed into literal
+    " ESC before being assigned.
+    execute "set <xUp>=\e[1;*A"
+    execute "set <xDown>=\e[1;*B"
+    execute "set <xRight>=\e[1;*C"
+    execute "set <xLeft>=\e[1;*D"
 
-  " Allow bracketed paste to work when Vim is running in tmux or GNU
-  " Screen.
-  "
-  " Bracketed paste support was added to GNU Screen in the following
-  " commit (2015-06-25 17:05:31 +0200):
-  "
-  " https://git.savannah.gnu.org/cgit/screen.git/commit/?id=c389013e89e7b04ce43872f2e72d43f77461a3c0
-  " ( https://lists.gnu.org/archive/html/screen-devel/2013-03/msg00000.html )
-  "
-  " A few relevant fixes were made in the following commit, several
-  " years later (2019-02-14 20:30:23 +0100):
-  "
-  " https://git.savannah.gnu.org/cgit/screen.git/commit/?id=d2d33f664132e9473c62f37a4758a047fa83eb7a
-  "
-  " So, the minimum version of GNU Screen that is required for the
-  " sequences below to be effective is the version at the first commit
-  " above.  It is better to use a version at or after the second commit
-  " above.
-  "
-  " Support for bracketed paste was added in Vim 8.0.0210, whereas in
-  " some computers I use, only older versions of Vim are available.
-  if exists('+t_BD') && exists('+t_BE')
-    let &t_BD = "\<Esc>[?2004l"
-    let &t_BE = "\<Esc>[?2004h"
-    " t_PS and t_PE do not exist initially (which is why we do not check
-    " for them in the if-condition above).  Define them now (see :h
-    " :let-&).
-    let &t_PS = "\<Esc>[200~"
-    let &t_PE = "\<Esc>[201~"
-  endif
+    " Allow bracketed paste to work when Vim is running in tmux or GNU
+    " Screen.
+    "
+    " Bracketed paste support was added to GNU Screen in the following
+    " commit (2015-06-25 17:05:31 +0200):
+    "
+    " https://git.savannah.gnu.org/cgit/screen.git/commit/?id=c389013e89e7b04ce43872f2e72d43f77461a3c0
+    " ( https://lists.gnu.org/archive/html/screen-devel/2013-03/msg00000.html )
+    "
+    " A few relevant fixes were made in the following commit, several
+    " years later (2019-02-14 20:30:23 +0100):
+    "
+    " https://git.savannah.gnu.org/cgit/screen.git/commit/?id=d2d33f664132e9473c62f37a4758a047fa83eb7a
+    "
+    " So, the minimum version of GNU Screen that is required for the
+    " sequences below to be effective is the version at the first commit
+    " above.  It is better to use a version at or after the second
+    " commit above.
+    "
+    " Support for bracketed paste was added in Vim 8.0.0210, whereas in
+    " some computers I use, only older versions of Vim are available.
+    if exists('+t_BD') && exists('+t_BE')
+        let &t_BD = "\<Esc>[?2004l"
+        let &t_BE = "\<Esc>[?2004h"
+        " t_PS and t_PE do not exist initially, so do not check for them
+        " in the if-condition above.  Define them now (:h :let-&).
+        let &t_PS = "\<Esc>[200~"
+        let &t_PE = "\<Esc>[201~"
+    endif
 endif
 
 " TODO: after upgrading to Vim>=8.1.1310, make the argument for
 " parameter 'unix' below optional: assign it the default value 0.
 function! PutCurrentTimestamp(unix) abort
-  put =strftime(a:unix ? '%s' : '%F %a %T %Z(UTC%z)')
+    put =strftime(a:unix ? '%s' : '%F %a %T %Z(UTC%z)')
 endfunction
 command! -nargs=1 PutCurrentTimestamp call putcurrts#PutCurrentTimestamp(<args>)
 
 if executable('xsel')
-  nnoremap <silent> <Leader>y :<C-U>%write !xsel -ib 2>/dev/null<CR>
-  xnoremap <silent> <Leader>y :write !xsel -ib 2>/dev/null<CR>
-  nnoremap <silent> <Leader>p :read !xsel -ob 2>/dev/null<CR>
+    nnoremap <silent> <Leader>y :<C-U>%write !xsel -ib 2>/dev/null<CR>
+    xnoremap <silent> <Leader>y :write !xsel -ib 2>/dev/null<CR>
+    nnoremap <silent> <Leader>p :read !xsel -ob 2>/dev/null<CR>
 endif
 
 nnoremap <Leader>I :edit $MYVIMRC<CR>
