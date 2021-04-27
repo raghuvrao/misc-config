@@ -76,3 +76,11 @@ function! maxtab#UnmaximizeFromTab() abort
         return
     endif
 endfunction
+
+function! maxtab#ToggleMaximizeToTab() abort
+    if winnr('$') > 1
+        call maxtab#MaximizeToTab()
+    else
+        call maxtab#UnmaximizeFromTab()
+    endif
+endfunction
