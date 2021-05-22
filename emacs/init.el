@@ -669,6 +669,7 @@ Address the above through this function."
  '(fill-column 72)
  '(frame-background-mode (quote dark))
  '(frame-resize-pixelwise t)
+ '(gnutls-algorithm-priority "normal:-vers-tls1.3")
  '(help-window-select t)
  '(horizontal-scroll-bar-mode nil)
  '(hscroll-margin 2)
