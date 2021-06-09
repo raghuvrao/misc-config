@@ -14,15 +14,9 @@ _s ()
     fi
 }
 
-dir_r_x ()
-{
-    [[ -d "${1}" && -r "${1}" && -x "${1}" ]]
-    return ${?}
-}
-
 path_append ()
 {
-    if dir_r_x "${1}"; then
+    if [[ -n "${1}" && -d "${1}" && -r "${1}" && -x "${1}" ]]; then
         case ":${PATH}:" in
             (::)
                 PATH="${1}"
@@ -67,23 +61,22 @@ _s "${HOME}/.bash_profile_local.bash"
 # happen before this comment.
 path_copy="${PATH}"
 PATH=""
-orig_IFS="${IFS+_${IFS}}"  # Note: ${foo+bar}, not ${foo:+bar}
+# Note: ${foo+bar} below, not ${foo:+bar}
+original_IFS="${IFS+_${IFS}}"
 IFS=':'
 for p in ${path_copy}; do
     path_append "${p}"
 done
-if [[ -z "${orig_IFS}" ]]; then
+if [[ -z "${original_IFS}" ]]; then
     unset -v IFS
 else
-    IFS="${orig_IFS#_}"
+    IFS="${original_IFS#_}"
 fi
-unset -v orig_IFS p path_copy
-
 export PATH
-
-unset -f path_append dir_r_x
+unset -v original_IFS path_copy
 
 # Source ~/.bashrc in the end.
 _s "${HOME}/.bashrc"
 
+unset -f path_append
 unset -f _s
