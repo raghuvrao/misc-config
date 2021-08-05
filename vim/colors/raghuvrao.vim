@@ -25,6 +25,7 @@ hi clear PreProc
 hi clear Special
 hi clear Statement
 hi clear String
+hi clear Terminal
 hi clear Type
 
 hi ColorColumn ctermfg=NONE ctermbg=Yellow cterm=NONE guifg=NONE guibg=Yellow gui=NONE term=reverse
