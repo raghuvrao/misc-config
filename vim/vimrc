@@ -3,6 +3,14 @@ scriptencoding utf-8
 " ~/.vimrc ~/.vim/vimrc
 " Author: Raghu V. Rao <raghu.v.rao@gmail.com>
 
+" :help 'compatible' suggests that resetting 'compatible' is redundant
+" when ~/.vimrc (this file) is present.  But, when Vim is invoked as the
+" command ex, 'compatible' is set, which makes ex complain about line
+" continuation with reverse solidus (used further below in this file),
+" and probably other things.  Reset 'compatible' to sort out these
+" complaints.
+set nocompatible
+
 set nobackup
 
 set noundofile
