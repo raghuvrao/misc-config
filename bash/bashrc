@@ -21,6 +21,7 @@ fi
 
 shopt -s checkwinsize
 shopt -s dotglob
+shopt -s failglob
 shopt -s no_empty_cmd_completion
 
 shopt -s -o pipefail
