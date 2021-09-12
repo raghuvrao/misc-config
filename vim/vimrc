@@ -122,6 +122,8 @@ set history=500
 
 set nostartofline
 
+set noequalalways
+
 " ftplugins shall add to / remove from the following formatoptions.
 set formatoptions=1jlmnq
 
