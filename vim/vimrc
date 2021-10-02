@@ -201,17 +201,16 @@ if !has('gui_running') && &term =~# '^screen\|^tmux'
     " tmux sends xterm-style function key sequences on pressing
     " CTRL-<arrow> (see `man tmux', under `xterm-keys').
     "
-    " GNU Screen sends xterm-style function key sequences for
-    " CTRL-<arrow> in its default configuration, at least in versions >=
-    " 4.00.03 (FAU), so no additional configuration should be necessary
-    " in GNU Screen.
+    " GNU Screen already sends xterm-style sequences for CTRL-<arrow> in
+    " its default configuration, at least in 4.00.03 and later versions.
     "
-    " :execute is needed because we want \e to be parsed into literal
-    " ESC before being assigned.
-    execute "set <xUp>=\e[1;*A"
-    execute "set <xDown>=\e[1;*B"
-    execute "set <xRight>=\e[1;*C"
-    execute "set <xLeft>=\e[1;*D"
+    " Without :execute, the sequences do not get assigned even though
+    " there is no error message.  It probably has something to do with
+    " '<' and '>' being in the names of the options.
+    execute "set <xUp>=\<Esc>[@;*A"
+    execute "set <xDown>=\<Esc>[@;*B"
+    execute "set <xRight>=\<Esc>[@;*C"
+    execute "set <xLeft>=\<Esc>[@;*D"
 
     " Allow bracketed paste to work when Vim is running in tmux or GNU
     " Screen.
