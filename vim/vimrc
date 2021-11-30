@@ -124,6 +124,13 @@ set nostartofline
 
 set noequalalways
 
+if isdirectory(expand('$HOME/misc-config'))
+    set path+=$HOME/misc-config/**
+endif
+if isdirectory(expand('$HOME/misc-scripts'))
+    set path+=$HOME/misc-scripts/**
+endif
+
 " ftplugins shall add to / remove from the following formatoptions.
 set formatoptions=1jlmnq
 
