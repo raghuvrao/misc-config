@@ -82,14 +82,14 @@ uxterm*vt100.boldColors: false
 ! uxterm*vt100.color15: rgb:DD/DD/DD
 ! END light background
 ! BEGIN dark background
- xterm*vt100.background: rgb:26/26/26
-uxterm*vt100.background: rgb:26/26/26
+ xterm*vt100.background: rgb:00/00/00
+uxterm*vt100.background: rgb:00/00/00
  xterm*vt100.foreground: rgb:BF/A7/60
 uxterm*vt100.foreground: rgb:BF/A7/60
 !  xterm*vt100.colorBD: rgb:FF/DF/7F
 ! uxterm*vt100.colorBD: rgb:FF/DF/7F
- xterm*vt100.color0: rgb:00/00/00
-uxterm*vt100.color0: rgb:00/00/00
+ xterm*vt100.color0: rgb:30/30/30
+uxterm*vt100.color0: rgb:30/30/30
  xterm*vt100.color1: rgb:BF/30/30
 uxterm*vt100.color1: rgb:BF/30/30
  xterm*vt100.color2: rgb:30/BF/30
