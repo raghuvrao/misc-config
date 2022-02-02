@@ -709,7 +709,7 @@ Address the above through this function."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((((type x ns) (class color) (background dark)) (:background "#262626" :foreground "#bfa760"))))
+ '(default ((((type x ns) (class color) (background dark)) (:background "#000000" :foreground "#bfa760"))))
  '(cursor ((((type x ns) (class color) (background dark)) (:background "#ffffff"))))
  '(custom-button ((((type x ns) (class color) (background dark)) (:background "#bfbfbf" :foreground "#000000" :box (:line-width 1 :style released-button)))))
  '(custom-button-mouse ((((type x ns) (class color) (background dark)) (:inherit custom-button))))
@@ -745,7 +745,7 @@ Address the above through this function."
  '(mode-line ((((type x ns) (class color) (background dark)) (:background "#30bfbf" :foreground "#000000" :box (:line-width 1 :style released-button))) (((type tty) (class color) (min-colors 8) (background dark)) (:background "cyan" :foreground "black"))))
  '(mode-line-buffer-id ((((type tty) (background dark)) nil)))
  '(mode-line-highlight ((((type x ns) (class color) (background dark)) (:box (:line-width 1 :color "#737373" :style released-button)))))
- '(mode-line-inactive ((((type x ns) (class color) (background dark)) (:background "#737373" :foreground "#000000" :box (:line-width 1 :style released-button))) (((type tty) (class color) (min-colors 16) (background dark)) (:background "brightblack" :foreground "black")) (((type tty) (class color) (min-colors 8) (background dark)) (:background "white" :foreground "black"))))
+ '(mode-line-inactive ((((type x ns) (class color) (background dark)) (:background "#737373" :foreground "#000000" :box (:line-width 1 :style released-button))) (((type tty) (class color) (min-colors 8) (background dark)) (:background "white" :foreground "black"))))
  '(org-block ((t nil)))
  '(org-checkbox ((t nil)))
  '(org-date ((t nil)))
