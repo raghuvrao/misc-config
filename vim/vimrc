@@ -299,6 +299,8 @@ inoremap <NL> <C-G>u<NL>
 inoremap <C-J> <C-G>u<C-J>
 inoremap <CR> <C-G>u<CR>
 
+runtime vimrc_local.vim
+
 " Do not highlight numbers, characters, and strings in comments in
 " C / C++ programs.
 unlet! c_comment_strings
