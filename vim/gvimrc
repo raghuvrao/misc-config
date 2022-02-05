@@ -14,3 +14,5 @@ set guioptions-=T
 set guioptions-=m
 
 set title
+
+runtime gvimrc_local.vim
