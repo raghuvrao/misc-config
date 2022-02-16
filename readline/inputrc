@@ -3,6 +3,7 @@
 
 $include /etc/inputrc
 
+set enable-bracketed-paste on
 set expand-tilde on
 set show-all-if-ambiguous off
 set show-all-if-unmodified on
