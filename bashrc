@@ -32,6 +32,16 @@ HISTFILESIZE=20000
 HISTSIZE="${HISTFILESIZE}"
 HISTTIMEFORMAT='%F %a %T %Z(UTC%z) '
 
+q ()
+{
+    unset HISTFILE
+    if [[ -n "${HISTFILE+y}" ]]; then
+        printf 'HISTFILE is still set: <%s>\n' "${HISTFILE}" >&2
+        return 1
+    fi
+    exit
+}
+
 alias cgrep='command grep --color=always'
 alias grep='grep --color=auto'
 alias ll='ls -l'
