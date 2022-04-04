@@ -39,6 +39,8 @@ if &t_Co < 16
 endif
 hi link SpecialComment Comment
 
+hi EndOfBuffer ctermfg=Blue ctermbg=NONE cterm=bold guifg='#407FFF' guibg=NONE gui=bold term=bold
+
 hi Error ctermfg=DarkRed ctermbg=NONE cterm=NONE guifg=Red guibg=NONE gui=bold term=reverse
 
 hi ErrorMsg ctermfg=DarkRed ctermbg=NONE cterm=NONE guifg=Red guibg=NONE gui=bold term=standout
@@ -85,16 +87,16 @@ hi Search ctermfg=Black ctermbg=Yellow cterm=NONE guifg=Black guibg=Orange gui=u
 
 hi SpecialKey ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui=NONE term=bold
 
-hi StatusLine ctermfg=White ctermbg=DarkMagenta cterm=bold guifg=White guibg=DarkMagenta gui=bold term=reverse,bold
-hi StatusLineNC ctermfg=White ctermbg=DarkBlue cterm=bold guifg=White guibg=DarkBlue gui=bold term=reverse
+hi StatusLine ctermfg=NONE ctermbg=NONE cterm=reverse,bold guifg=NONE guibg=NONE gui=reverse,bold term=reverse,bold
+hi StatusLineNC ctermfg=NONE ctermbg=NONE cterm=reverse guifg=NONE guibg=NONE gui=reverse term=reverse
 hi clear StatusLineTerm
 hi link StatusLineTerm StatusLine
 hi clear StatusLineTermNC
 hi link StatusLineTermNC StatusLineNC
 
-hi TabLine ctermfg=DarkBlue ctermbg=LightGray cterm=NONE guifg=DarkBlue guibg=LightGray gui=NONE term=reverse
-hi TabLineFill ctermfg=DarkBlue ctermbg=LightGray cterm=NONE guifg=DarkBlue guibg=DarkGray gui=NONE term=reverse
-hi TabLineSel ctermfg=White ctermbg=DarkBlue cterm=bold guifg=White guibg=SeaGreen gui=bold term=bold
+hi TabLine ctermfg=NONE ctermbg=NONE cterm=reverse guifg=NONE guibg=NONE gui=reverse term=reverse
+hi TabLineFill ctermfg=NONE ctermbg=NONE cterm=reverse guifg=NONE guibg=NONE gui=reverse term=reverse
+hi TabLineSel ctermfg=NONE ctermbg=NONE cterm=reverse,bold guifg=NONE guibg=NONE gui=reverse,bold term=reverse,bold
 
 hi Title ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=bold term=bold
 
@@ -102,7 +104,7 @@ hi Todo ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE
 
 hi Underlined ctermfg=NONE ctermbg=NONE cterm=underline guifg=NONE guibg=NONE gui=underline term=underline
 
-hi VertSplit ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=NONE term=reverse
+hi VertSplit ctermfg=NONE ctermbg=NONE cterm=reverse guifg=NONE guibg=NONE gui=reverse term=reverse
 
 hi Visual ctermfg=Black ctermbg=Cyan cterm=NONE guifg=Black guibg=LightBlue gui=NONE term=reverse
 
