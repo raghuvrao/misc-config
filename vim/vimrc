@@ -250,12 +250,10 @@ if !has('gui_running') && &term =~# '^screen\|^tmux'
     endif
 endif
 
-" TODO: after upgrading to Vim>=8.1.1310, make the argument for
-" parameter 'unix' below optional: assign it the default value 0.
-function! PutCurrentTimestamp(unix) abort
-    put =strftime(a:unix ? '%s' : '%F %a %T %Z(UTC%z)')
+function! PutCurrentTimestamp(unixt = 0) abort
+    put =strftime(a:unixt ? '%s' : '%F %a %T %Z(UTC%z)')
 endfunction
-command! -nargs=1 PutCurrentTimestamp call putcurrts#PutCurrentTimestamp(<args>)
+command! -nargs=? PutCurrentTimestamp call PutCurrentTimestamp(<args>)
 
 if executable('xsel')
     nnoremap <silent> <Leader>y :<C-U>%write !xsel -ib 2>/dev/null<CR>
