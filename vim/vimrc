@@ -281,6 +281,9 @@ xnoremap <Leader>v :vglobal/\<
 nnoremap <Leader><Leader> :<C-U>update<CR>
 xnoremap <Leader><Leader> <Esc>:<C-U>update<CR>gv
 
+nnoremap <Leader>D :help digraph-table-mbyte<CR>
+nnoremap <Leader>d :help digraph-table<CR>
+
 nnoremap <silent> <Leader><CR> :call maxtab#ToggleMaximizeToTab()<CR>
 
 nnoremap <silent> <Leader>] :echo synids#SynIDs(line('.'), col('.'))<CR>
