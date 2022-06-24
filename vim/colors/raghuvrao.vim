@@ -1,11 +1,6 @@
-" Mostly-plain colorscheme for dark-foreground-light-background screens.
+" Mostly-plain light-background color scheme.
 "
-" Maintainer: Raghu V. Rao <raghu.v.rao@gmail.com>
-"
-" For text-terminals that support color, this colorscheme makes the
-" reasonable assumption that the 'upper' 8 colors (colors 8-15, or
-" colors 0-7 + bold) of the terminal are bright variants of the
-" corresponding 'lower' 8 colors (colors 0-7).
+" Author: Raghu V. Rao <raghu.v.rao@gmail.com>
 
 set background=light
 
@@ -28,89 +23,13 @@ hi clear String
 hi clear Terminal
 hi clear Type
 
-hi ColorColumn ctermfg=NONE ctermbg=Yellow cterm=NONE guifg=NONE guibg=Yellow gui=NONE term=reverse
-if &t_Co < 16
-    hi ColorColumn ctermbg=DarkGreen
-endif
-
-hi Comment ctermfg=Blue ctermbg=NONE cterm=NONE guifg=Blue guibg=NONE gui=NONE term=bold
-if &t_Co < 16
-    hi Comment ctermfg=DarkBlue
-endif
-hi link SpecialComment Comment
-
-hi EndOfBuffer ctermfg=Blue ctermbg=NONE cterm=bold guifg='#407FFF' guibg=NONE gui=bold term=bold
-
-hi Error ctermfg=DarkRed ctermbg=NONE cterm=NONE guifg=Red guibg=NONE gui=bold term=reverse
-
-hi ErrorMsg ctermfg=DarkRed ctermbg=NONE cterm=NONE guifg=Red guibg=NONE gui=bold term=standout
-
-hi FoldColumn ctermfg=DarkBlue ctermbg=Yellow cterm=NONE guifg=DarkBlue guibg=LightGray gui=NONE term=standout
-if &t_Co < 16
-    hi FoldColumn ctermbg=White
-endif
-
 hi Folded ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui=NONE term=standout
 
-hi Ignore ctermfg=Yellow ctermbg=NONE cterm=NONE guifg=LightGray guibg=NONE gui=NONE term=NONE
-
-hi MatchParen ctermfg=Black ctermbg=Yellow cterm=NONE guifg=Black guibg=Yellow gui=underline,bold term=bold
-if &t_Co < 16
-    hi MatchParen ctermfg=Magenta ctermbg=NONE cterm=bold
-endif
-
-hi MoreMsg ctermfg=Blue ctermbg=NONE cterm=bold guifg=Blue guibg=NONE gui=bold term=bold
+hi Ignore ctermfg=LightGrey ctermbg=NONE cterm=NONE guifg=LightGrey guibg=NONE gui=NONE term=NONE
 
 hi Normal ctermfg=NONE ctermbg=NONE cterm=NONE guifg=Black guibg=White gui=NONE term=NONE
 
-hi NonText ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=bold term=bold
-
-hi Pmenu ctermfg=Black ctermbg=Cyan cterm=NONE guifg=Black guibg=LightBlue gui=NONE
-hi PmenuSbar ctermfg=NONE ctermbg=Cyan cterm=NONE guifg=NONE guibg=LightBlue gui=NONE
-hi PmenuSel ctermfg=White ctermbg=DarkBlue cterm=bold guifg=White guibg=DarkBlue gui=bold
-hi PmenuThumb ctermfg=NONE ctermbg=DarkCyan cterm=NONE guifg=NONE guibg=DarkCyan gui=NONE
-if &t_Co < 16
-    hi Pmenu ctermfg=White ctermbg=DarkBlue cterm=bold
-    hi PmenuSbar ctermbg=DarkBlue
-    hi PmenuSel ctermbg=DarkMagenta
-    hi PmenuThumb ctermbg=DarkCyan
-endif
-
-hi Question ctermfg=Blue ctermbg=NONE cterm=bold guifg=Blue guibg=NONE gui=bold term=standout
-
-hi QuickFixLine ctermfg=Black ctermbg=Yellow cterm=NONE guifg=Black guibg=LightGreen gui=NONE term=reverse,bold
-if &t_Co < 16
-    hi QuickFixLine ctermbg=DarkGreen
-endif
-
-hi Search ctermfg=Black ctermbg=Yellow cterm=NONE guifg=Black guibg=Orange gui=underline term=reverse
-
-hi SpecialKey ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui=NONE term=bold
-
-hi StatusLine ctermfg=NONE ctermbg=NONE cterm=reverse,bold guifg=NONE guibg=NONE gui=reverse,bold term=reverse,bold
-hi StatusLineNC ctermfg=NONE ctermbg=NONE cterm=reverse guifg=NONE guibg=NONE gui=reverse term=reverse
-hi clear StatusLineTerm
-hi link StatusLineTerm StatusLine
-hi clear StatusLineTermNC
-hi link StatusLineTermNC StatusLineNC
-
-hi TabLine ctermfg=NONE ctermbg=NONE cterm=reverse guifg=NONE guibg=NONE gui=reverse term=reverse
-hi TabLineFill ctermfg=NONE ctermbg=NONE cterm=reverse guifg=NONE guibg=NONE gui=reverse term=reverse
-hi TabLineSel ctermfg=NONE ctermbg=NONE cterm=reverse,bold guifg=NONE guibg=NONE gui=reverse,bold term=reverse,bold
-
-hi Title ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=bold term=bold
-
-hi Todo ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=bold term=standout
-
-hi Underlined ctermfg=NONE ctermbg=NONE cterm=underline guifg=NONE guibg=NONE gui=underline term=underline
-
-hi VertSplit ctermfg=NONE ctermbg=NONE cterm=reverse guifg=NONE guibg=NONE gui=reverse term=reverse
-
-hi Visual ctermfg=Black ctermbg=Cyan cterm=NONE guifg=Black guibg=LightBlue gui=NONE term=reverse
-
-hi WarningMsg ctermfg=DarkRed ctermbg=NONE cterm=NONE guifg=DarkRed guibg=NONE gui=bold term=standout
-
-hi WildMenu ctermfg=White ctermbg=DarkBlue cterm=bold guifg=White guibg=DarkBlue gui=bold term=standout
+hi SpecialKey ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=NONE term=bold
 
 hi diffAdded ctermfg=DarkGreen ctermbg=NONE cterm=NONE guifg=DarkGreen guibg=NONE gui=NONE term=bold
 hi diffFile ctermfg=NONE ctermbg=NONE cterm=bold guifg=NONE guibg=NONE gui=bold term=bold
