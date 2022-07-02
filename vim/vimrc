@@ -116,8 +116,6 @@ set nofixendofline
 " filetype-specific indentation plugins.  So, enable autoindent.
 set autoindent
 
-set textwidth=72
-
 set history=500
 
 set nostartofline
