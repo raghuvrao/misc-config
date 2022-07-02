@@ -132,7 +132,7 @@ if isdirectory(expand('$HOME/misc-scripts'))
 endif
 
 " ftplugins shall add to / remove from the following formatoptions.
-set formatoptions=1jlmnq
+set formatoptions=1jlmnoqr
 
 filetype plugin indent on
 
