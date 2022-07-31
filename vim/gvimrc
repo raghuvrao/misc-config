@@ -1,8 +1,6 @@
 " ~/.gvimrc ~/.vim/gvimrc
 " Author: Raghu V. Rao <raghu.v.rao@gmail.com>
 
-set mouse=a
-
 set showtabline=2
 
 set guioptions-=L guioptions-=l
@@ -12,7 +10,5 @@ set guioptions-=b guioptions+=h
 set guioptions-=T
 
 set guioptions-=m
-
-set title
 
 runtime gvimrc_local.vim
