@@ -3,12 +3,7 @@ scriptencoding utf-8
 " ~/.vimrc ~/.vim/vimrc
 " Author: Raghu V. Rao <raghu.v.rao@gmail.com>
 
-" :help 'compatible' suggests that resetting 'compatible' is redundant
-" when ~/.vimrc (this file) is present.  But, when Vim is invoked as the
-" command ex, 'compatible' is set, which makes ex complain about line
-" continuation with reverse solidus (used further below in this file),
-" and probably other things.  Reset 'compatible' to sort out these
-" complaints.
+" Useful when starting Vim as ex.
 set nocompatible
 
 set nobackup
@@ -17,23 +12,6 @@ set noundofile
 
 set nomodeline
 set modelines=0
-
-" Try to prevent Vim from meddling with my terminal's cursor (e.g. Vim
-" changes the cursor style when running :terminal even though I never
-" asked Vim to change my cursor style).  The following are not
-" applicable in the GUI (it uses 'guicursor', which belongs in gvimrc).
-set t_ve=
-set t_vi=
-set t_vs=
-set t_VS=
-set t_SI=
-set t_SR=
-set t_EI=
-set t_SC=
-set t_EC=
-set t_SH=
-set t_RC=
-set t_RS=
 
 let mapleader = '\'
 let maplocalleader = '_'
@@ -47,12 +25,7 @@ nnoremap <Leader>w :set invwrap<CR>
 
 set sidescroll=1
 
-" Do not allow the cursor to move onto the extends/precedes listchars
-" when 'wrap' is disabled (which it is for me most of the time).  It
-" becomes easier to understand the % motion on a long unwrapped line
-" with several brackets in it.  The disadvantage is I must live with g$
-" and g^ moving the view by a column, which is OK for me because I do
-" not use g$ and g^ a lot.
+" Do not allow the cursor to move onto the extends/precedes listchars.
 set sidescrolloff=1
 
 " Time out on terminal-key-codes, and not on mappings.
@@ -62,10 +35,7 @@ set notimeout
 set nowildmenu
 set wildmode=longest,list,full
 
-" Set ruler even though I have line and column numbers in my statusline
-" (see further below).  Infrequently and temporarily, I remove the
-" statusline from view.  I want line- and column-number information to
-" be displayed even in these situations.
+" Show line and column numbers even when statusline is disabled.
 set ruler
 
 set showcmd
@@ -90,30 +60,8 @@ set statusline=%(\ %f%)%(\ %q%)%(\ %M%R%H%W%)%(\ %y%)%(\ %{&fileformat}%)%(\ %P\
 
 set report=0
 
-" Most of the time, I do not want mouse support in Vim, whereas I like
-" to have mouse support in the GUI.  My system-wide vimrc enables mouse
-" support in Vim, so disable it here.  I will enable mouse support in
-" the GUI in the gvimrc file, which Vim does not read.
-set mouse=
-
-" In the event that I enable mouse in Vim (as opposed to the GUI, where
-" I keep it enabled always), I want the mouse to work well.  With
-" 'ttymouse' set to 'xterm' (which is what Vim calculates as my
-" default), the mouse barely works, especially when running Vim "inside"
-" tmux.  The value 'sgr' for 'ttymouse' makes mouse operation much
-" better: select+drag works, and smoothly too, resizing splits works,
-" the 223-column limit is removed (see :help xterm-mouse), etc.
-set ttymouse=sgr
-
 set nofixendofline
 
-" Setting autoindent is typically unnecessary because filetype-specific
-" indentation plugins take care of indentation sufficiently well.
-" However, with `n' included in formatoptions and with autoindent set,
-" formatting numbered/bulleted lists (even in program comments) with the
-" `gq' operator becomes so much easier.  Also, setting autoindent does
-" not appear to be interfering with indentation done by
-" filetype-specific indentation plugins.  So, enable autoindent.
 set autoindent
 
 set history=500
@@ -129,7 +77,37 @@ if isdirectory(expand('$HOME/misc-scripts'))
     set path+=$HOME/misc-scripts/**
 endif
 
-" ftplugins shall add to / remove from the following formatoptions.
+if !has('gui_running')
+    set mouse=
+    " Do not meddle with the terminal's cursor.
+    set t_ve=
+    set t_vi=
+    set t_vs=
+    set t_VS=
+    set t_SI=
+    set t_SR=
+    set t_EI=
+    set t_SC=
+    set t_EC=
+    set t_SH=
+    set t_RC=
+    set t_RS=
+    if &term =~# '^\%(screen\|tmux\)'
+        " :help xterm-mouse, :help sgr-mouse
+        set ttymouse=sgr
+        " :help arrow_modifiers
+        execute "set <xUp>=\<Esc>[@;*A"
+        execute "set <xDown>=\<Esc>[@;*B"
+        execute "set <xRight>=\<Esc>[@;*C"
+        execute "set <xLeft>=\<Esc>[@;*D"
+        " :help xterm-bracketed-paste
+        let &t_BD = "\<Esc>[?2004l"
+        let &t_BE = "\<Esc>[?2004h"
+        let &t_PS = "\<Esc>[200~"
+        let &t_PE = "\<Esc>[201~"
+    endif
+endif
+
 set formatoptions=1jlmnoqr
 
 filetype plugin indent on
@@ -138,15 +116,7 @@ runtime ftplugin/man.vim
 let g:ft_man_open_mode = 'tab'
 set keywordprg=:Man
 
-" Delete the autocommand groups vimrcEx and vimStartup.  The augroups
-" are usually defined in $VIM/vimrc (which, if present, is usually
-" a copy of or link to $VIMRUNTIME/vimrc_example.vim), or in
-" $VIMRUNTIME/defaults.vim.  These augroups have autocommands that are
-" either unnecessary for me, or I override them elsewhere in my
-" configuration.
-"
-" :help :augroup-delete suggests that to delete an augroup, it is better
-" to empty it first.
+" Delete the vimrcEx and vimStartup autocommand groups.
 augroup vimrcEx
     autocmd!
 augroup END
@@ -157,10 +127,7 @@ augroup END
 augroup! vimStartup
 
 function! JumpToLastExitPosition() abort
-    let l:targetLineNumber = line("'\"")
     if getcurpos()[1:2] == [1, 1]
-                \ && l:targetLineNumber >= 1
-                \ && l:targetLineNumber <= line('$')
                 \ && expand('%:p') !=# ''
                 \ && !(&diff)
                 \ && &buftype ==# ''
@@ -170,73 +137,16 @@ function! JumpToLastExitPosition() abort
                 \ && &filetype !=# 'hgcommit'
                 \ && &filetype !=# 'man'
                 \ && &filetype !=# 'svn'
-        normal! g`"zz
+        let x = line("'\"")
+        if 1 <= x && x <= line('$')
+            normal! g`"zz
+        endif
     endif
 endfunction
 augroup jump_to_last_exit_position
     autocmd!
     autocmd BufReadPost * call JumpToLastExitPosition()
 augroup END
-
-" Make a few things work within tmux that work outside tmux.
-"
-" When the GUI is started from the shell, 'term' inherits its value from
-" the environment variable TERM first (which in this case matches
-" "tmux*" or "screen*"), and changes to 'builtin_gui' at some point
-" after this file is sourced.  So, check 'gui_running' here to avoid
-" making the following assignments in the GUI, where the assignments are
-" unnecessary.
-if !has('gui_running') && &term =~# '^screen\|^tmux'
-    " xUp, xDown, xLeft and xRight can be used to make CTRL-<arrow> work
-    " as expected when Vim is run within tmux or GNU Screen.
-    " CTRL-<arrow> is useful in the insert and command-line modes.
-    "
-    " For the terminal-sequences below to be effective in Vim running in
-    " tmux, tmux must have its `xterm-keys' option set to on, so that
-    " tmux sends xterm-style function key sequences on pressing
-    " CTRL-<arrow> (see `man tmux', under `xterm-keys').
-    "
-    " GNU Screen already sends xterm-style sequences for CTRL-<arrow> in
-    " its default configuration, at least in 4.00.03 and later versions.
-    "
-    " Without :execute, the sequences do not get assigned even though
-    " there is no error message.  It probably has something to do with
-    " '<' and '>' being in the names of the options.
-    execute "set <xUp>=\<Esc>[@;*A"
-    execute "set <xDown>=\<Esc>[@;*B"
-    execute "set <xRight>=\<Esc>[@;*C"
-    execute "set <xLeft>=\<Esc>[@;*D"
-
-    " Allow bracketed paste to work when Vim is running in tmux or GNU
-    " Screen.
-    "
-    " Bracketed paste support was added to GNU Screen in the following
-    " commit (2015-06-25 17:05:31 +0200):
-    "
-    " https://git.savannah.gnu.org/cgit/screen.git/commit/?id=c389013e89e7b04ce43872f2e72d43f77461a3c0
-    " ( https://lists.gnu.org/archive/html/screen-devel/2013-03/msg00000.html )
-    "
-    " A few relevant fixes were made in the following commit, several
-    " years later (2019-02-14 20:30:23 +0100):
-    "
-    " https://git.savannah.gnu.org/cgit/screen.git/commit/?id=d2d33f664132e9473c62f37a4758a047fa83eb7a
-    "
-    " So, the minimum version of GNU Screen that is required for the
-    " sequences below to be effective is the version at the first commit
-    " above.  It is better to use a version at or after the second
-    " commit above.
-    "
-    " Support for bracketed paste was added in Vim 8.0.0210, whereas in
-    " some computers I use, only older versions of Vim are available.
-    if exists('+t_BD') && exists('+t_BE')
-        let &t_BD = "\<Esc>[?2004l"
-        let &t_BE = "\<Esc>[?2004h"
-        " t_PS and t_PE do not exist initially, so do not check for them
-        " in the if-condition above.  Define them now (:h :let-&).
-        let &t_PS = "\<Esc>[200~"
-        let &t_PE = "\<Esc>[201~"
-    endif
-endif
 
 function! PutCurrentTimestamp(unixt = 0) abort
     put =strftime(a:unixt ? '%s' : '%F %a %T %Z(UTC%z)')
@@ -276,11 +186,6 @@ nnoremap <silent> <Leader><CR> :call maxtab#ToggleMaximizeToTab()<CR>
 
 nnoremap <silent> <Leader>] :echo synids#SynIDs(line('.'), col('.'))<CR>
 
-" When in Insert mode, make <CTRL-W>, <CTRL-U>, and <ENTER> start a new
-" change in addition to performing their usual tasks so that I can undo
-" that change in Normal/Command mode with u if I want to.  Without
-" <CTRL-G> u, the whole Insert operation will be considered one change,
-" and u in Normal/Command mode will undo that whole Insert operation.
 inoremap <C-W> <C-G>u<C-W>
 inoremap <C-U> <C-G>u<C-U>
 inoremap <C-M> <C-G>u<C-M>
@@ -290,21 +195,14 @@ inoremap <CR> <C-G>u<CR>
 
 runtime vimrc_local.vim
 
-" Do not highlight numbers, characters, and strings in comments in
-" C / C++ programs.
+" Do not highlight numbers, characters, and strings in C/C++ comments.
 unlet! c_comment_strings
 
-" My system-wide vimrc enables syntax conditionally: if GUI, or if the
-" terminal supports more than 2 colors.  However, I want syntax to be
-" enabled all the time, because without syntax, operators like `gq' etc.
-" do not work correctly to format comments in programs.  I am, however,
-" not keen on syntax _highlighting_, so I use my colorscheme which
-" unhighlights most things.
 syntax on
 colorscheme raghuvrao
 
 packadd! matchit
 
-" Make vim more secure.  See `:h trojan-horse'.
+" :help trojan-horse
 set secure
 set noexrc
