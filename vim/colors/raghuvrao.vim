@@ -69,9 +69,10 @@ hi gitrebasePick ctermfg=DarkBlue ctermbg=NONE cterm=NONE guifg=DarkBlue guibg=N
 hi gitrebaseReword ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui=NONE term=bold
 hi gitrebaseSquash ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=NONE term=bold
 
-hi helpSpecial ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=NONE term=bold
-hi helpHyperTextEntry ctermfg=DarkRed ctermbg=NONE cterm=NONE guifg=DarkRed guibg=NONE gui=NONE term=bold
-hi helpHyperTextJump ctermfg=DarkBlue ctermbg=NONE cterm=NONE guifg=DarkBlue guibg=NONE gui=NONE term=underline
+hi helpSpecial ctermfg=NONE ctermbg=NONE cterm=bold guifg=NONE guibg=NONE gui=bold term=bold
+hi helpHyperTextJump ctermfg=DarkBlue ctermbg=NONE cterm=NONE guifg=Blue guibg=NONE gui=underline term=underline
+hi link helpCommand NONE
+hi link helpExample NONE
 
 " Also affects Markdown.
 hi link htmlTitle NONE
