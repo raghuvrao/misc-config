@@ -710,6 +710,7 @@ Address the above through this function."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(font-lock-builtin-face ((t nil)))
+ '(font-lock-comment-face ((((type x) (class color) (background light)) (:foreground "blue")) (((type tty) (class color) (min-colors 8) (background light)) (:foreground "blue"))))
  '(font-lock-constant-face ((t nil)))
  '(font-lock-function-name-face ((t nil)))
  '(font-lock-keyword-face ((t nil)))
@@ -722,6 +723,9 @@ Address the above through this function."
  '(org-block ((t nil)))
  '(org-checkbox ((t nil)))
  '(org-date ((t nil)))
+ '(org-document-info ((t nil)))
+ '(org-document-info-keyword ((t nil)))
+ '(org-document-title ((t nil)))
  '(org-meta-line ((t nil)))
  '(org-table ((t nil)))
  '(org-todo ((t nil)))
