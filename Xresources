@@ -11,7 +11,6 @@
 *xterm*vt100.font: -misc-fixed-medium-r-normal--18-120-100-100-c-90-iso10646-1
 *xterm*vt100.boldFont: -misc-fixed-bold-r-normal--18-120-100-100-c-90-iso10646-1
 *xterm*vt100.faceName: xft:Monospace
-*xterm*vt100.faceNameDoublesize: xft:WenQuanYi Zen Hei Mono
 *xterm*vt100.faceSize: 10
 *xterm*vt100.faceSize1: 4
 *xterm*vt100.faceSize2: 6
