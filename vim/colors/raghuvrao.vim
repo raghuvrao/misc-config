@@ -23,24 +23,25 @@ hi clear String
 hi clear Terminal
 hi clear Type
 
-if hlexists('EndOfBuffer')
-    hi EndOfBuffer ctermfg=Blue ctermbg=None cterm=bold guifg=Blue guibg=NONE gui=bold term=bold
-    hi NonText ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=LightCyan gui=bold term=bold
-else
-    hi NonText ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui=bold term=bold
-endif
+hi EndOfBuffer ctermfg=Blue ctermbg=NONE cterm=bold guifg=Blue guibg=NONE gui=bold term=bold
 
 hi Folded ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui=NONE term=standout
 
 hi Ignore ctermfg=LightGrey ctermbg=NONE cterm=NONE guifg=LightGrey guibg=NONE gui=NONE term=NONE
 
+hi NonText ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui=bold term=bold
+
 hi Normal ctermfg=NONE ctermbg=NONE cterm=NONE guifg=Black guibg=White gui=NONE term=NONE
 
-hi SpecialKey ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=NONE gui=NONE term=bold
+hi SpecialKey ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui=NONE term=bold
 
 if has('gui_running')
     hi link Terminal Normal
 endif
+
+hi Todo ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=LightCyan gui=bold term=standout
+
+hi WarningMsg ctermfg=DarkRed ctermbg=NONE cterm=NONE guifg=DarkRed guibg=NONE gui=NONE term=standout
 
 hi diffAdded ctermfg=DarkGreen ctermbg=NONE cterm=NONE guifg=DarkGreen guibg=NONE gui=NONE term=bold
 hi diffFile ctermfg=NONE ctermbg=NONE cterm=bold guifg=NONE guibg=NONE gui=bold term=bold
@@ -48,7 +49,7 @@ hi diffLine ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE g
 hi diffRemoved ctermfg=DarkRed ctermbg=NONE cterm=NONE guifg=DarkRed guibg=NONE gui=NONE term=underline
 
 hi gitHash ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui=NONE term=bold
-hi gitHead ctermfg=Blue ctermbg=NONE cterm=bold guifg=Blue guibg=NONE gui=bold term=bold
+hi gitHead ctermfg=DarkBlue ctermbg=NONE cterm=NONE guifg=Blue guibg=NONE gui=bold term=bold
 hi link gitIdentityKeyword gitKeyword
 hi gitKeyword ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=Brown guibg=NONE gui=bold term=bold
 
