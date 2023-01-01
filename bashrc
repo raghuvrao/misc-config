@@ -45,7 +45,7 @@ q ()
 alias cgrep='command grep --color=always'
 alias grep='grep --color=auto'
 alias ll='ls -l'
-alias ls='ls -A'
+alias ls='ls -A -p'
 
 _s "${HOME}/.bashrc_local.bash"
 
