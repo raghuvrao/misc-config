@@ -48,12 +48,7 @@ set incsearch
 nnoremap <Leader>h :nohlsearch<CR>
 
 set list
-set listchars=extends:#,precedes:#,nbsp:%
-if has('multi_byte') && &encoding == 'utf-8'
-    set listchars+=tab:→\ ,trail:¬
-else
-    set listchars+=tab:>\ ,trail:_
-endif
+set listchars=extends:#,precedes:#,nbsp:%,tab:→\ ,trail:¬
 
 set laststatus=2
 set statusline=%(\ %f%)%(\ %q%)%(\ %M%R%H%W%)%(\ %y%)%(\ %{&fileformat}%)%(\ %P\ %l,%c%V\ %)
