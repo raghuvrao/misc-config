@@ -23,7 +23,13 @@ hi clear String
 hi clear Terminal
 hi clear Type
 
+if &t_Co >= 256
+    hi CursorLine ctermfg=NONE ctermbg=254 cterm=NONE
+endif
+
 hi EndOfBuffer ctermfg=Blue ctermbg=NONE cterm=bold guifg=Blue guibg=NONE gui=bold term=bold
+
+hi Error ctermfg=Red ctermbg=NONE cterm=bold guifg=Red guibg=NONE gui=bold term=reverse
 
 hi Folded ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui=NONE term=standout
 
