@@ -3,10 +3,6 @@
 # ~/.bash_profile
 # Author: Raghu V. Rao <raghu.v.rao@gmail.com>
 
-unset -v LESS
-unset -v LESSOPEN
-unset -v MANPATH
-
 _s ()
 {
     if [[ -f "${1}" && -r "${1}" ]]; then
