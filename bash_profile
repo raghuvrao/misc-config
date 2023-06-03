@@ -14,22 +14,6 @@ _s ()
     fi
 }
 
-path_append ()
-{
-    if [[ -n "${1}" && -d "${1}" && -r "${1}" && -x "${1}" ]]; then
-        case ":${PATH}:" in
-            (::)
-                PATH="${1}"
-                ;;
-            (*:"${1}":*)
-                ;;
-            (*)
-                PATH="${PATH}:${1}"
-                ;;
-        esac
-    fi
-}
-
 # Some general guidelines to tell if an environment variable belongs in
 # this file:
 #
@@ -56,27 +40,36 @@ PATH="${HOME}/.local/bin:${PATH}"
 
 _s "${HOME}/.bash_profile_local.bash"
 
-# Remove duplicates and inaccessible directories from PATH.  Do not
-# modify PATH after this clean-up part.  Any modification to PATH must
-# happen before this comment.
-path_copy="${PATH}"
-PATH=""
+# ---- DO NOT MODIFY PATH AFTER THIS COMMENT! ----
+#
+# Remove duplicates and inaccessible directories from PATH while preserving
+# order.
+#
 # Note: ${foo+bar} below, not ${foo:+bar}
 original_IFS="${IFS+_${IFS}}"
 IFS=':'
-for p in ${path_copy}; do
-    path_append "${p}"
+declare -a paths
+declare -A paths_seen
+for p in ${PATH}; do
+    if [[ -n "${p}" && "${p}" != '.' && "${p}" != '..' && -z "${paths_seen["${p}"]+_}" && -d "${p}" && -r "${p}" && -x "${p}" ]]; then
+        paths_seen["${p}"]=1
+        paths+=("${p}")
+    fi
 done
+# The '*' below makes Bash use the first character of IFS (instead of space) as
+# the delimiter when constructing a string from the 'paths' array.
+PATH="${paths[*]}"
+# Restore IFS.
 if [[ -z "${original_IFS}" ]]; then
     unset -v IFS
 else
     IFS="${original_IFS#_}"
 fi
+unset -v original_IFS paths paths_seen
+
 export PATH
-unset -v original_IFS path_copy
 
 # Source ~/.bashrc in the end.
 _s "${HOME}/.bashrc"
 
-unset -f path_append
 unset -f _s
