@@ -29,9 +29,6 @@ _s ()
 export VISUAL='vim'
 export EDITOR="${VISUAL}"
 
-# Force LibreOffice to use the generic Visual Components Library plugin.
-export SAL_USE_VCLPLUGIN=gen
-
 if [[ -z "${PATH}" ]]; then
     PATH='/usr/local/bin:/usr/bin:/bin'
 fi
