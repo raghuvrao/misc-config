@@ -719,6 +719,7 @@ Address the above through this function."
  '(font-lock-type-face ((t nil)))
  '(font-lock-variable-name-face ((t nil)))
  '(font-lock-warning-face ((((type x) (class color) (background light)) (:foreground "brown")) (((type tty) (class color) (min-colors 8) (background light)) (:foreground "yellow"))))
+ '(hl-line ((((type x) (class color) (background light)) (:extend t :background "grey90")) (((type tty) (class color) (min-colors 256) (background light)) (:extend t :background "color-254"))))
  '(org-block ((t nil)))
  '(org-checkbox ((t nil)))
  '(org-date ((t nil)))
