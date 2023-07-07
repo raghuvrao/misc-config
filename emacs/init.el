@@ -680,6 +680,7 @@ Address the above through this function."
  '(isearch-allow-scroll t)
  '(js-indent-level 2)
  '(line-move-visual nil)
+ '(line-spacing 0.3)
  '(make-backup-files nil)
  '(mouse-wheel-progressive-speed nil)
  '(mouse-wheel-scroll-amount '(1 ((shift) . 5) ((control))))
