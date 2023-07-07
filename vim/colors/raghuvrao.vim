@@ -23,6 +23,8 @@ hi clear String
 hi clear Terminal
 hi clear Type
 
+hi Cursor guifg=White guibg=magenta3 gui=NONE
+
 if &t_Co >= 256
     hi CursorLine ctermfg=NONE ctermbg=254 cterm=NONE
 endif
