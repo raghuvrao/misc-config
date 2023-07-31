@@ -8,6 +8,7 @@
 *xterm*vt100.metaSendsEscape: true
 *xterm*vt100.loginShell: true
 *xterm*vt100.selectToClipboard: true
+*xterm*vt100.forceBoxChars: true
 *xterm*vt100.font: -misc-fixed-medium-r-normal--18-120-100-100-c-90-iso10646-1
 *xterm*vt100.boldFont: -misc-fixed-bold-r-normal--18-120-100-100-c-90-iso10646-1
 *xterm*vt100.faceName: xft:Monospace
