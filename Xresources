@@ -24,5 +24,6 @@
 *xterm*vt100.boldColors: false
 *xterm*vt100.background: White
 *xterm*vt100.foreground: Black
+*xterm*vt100.cursorColor: rgb:00/77/ff
 
 xfontsel*font: -misc-fixed-bold-r-normal--18-120-100-100-c-90-iso10646-1
