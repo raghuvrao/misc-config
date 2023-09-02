@@ -51,7 +51,7 @@ set list
 set listchars=extends:#,precedes:#,nbsp:%,tab:›\ ,trail:¬
 
 set laststatus=2
-set statusline=%(\ %f%)%(\ %q%)%(\ %M%R%H%W%)%(\ %y%)%(\ %{&fileformat}%)%(\ %P\ %l,%c%V\ %)
+set statusline=%(\ %h%w%q%)%(\ [%R%M]%)%(\ %f%)%(\ %y%)%(\ %{&fileformat}%)%(\ %P\ %l,%v\ %)
 
 set report=0
 
