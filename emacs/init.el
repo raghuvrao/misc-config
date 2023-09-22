@@ -710,7 +710,7 @@ Address the above through this function."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(font-lock-builtin-face ((t nil)))
- '(font-lock-comment-face ((((type x) (class color) (background light)) (:foreground "blue")) (((type tty) (class color) (min-colors 8) (background light)) (:foreground "blue"))))
+ '(font-lock-comment-face ((((type x) (class color) (background light)) (:foreground "blue")) (((type tty) (class color) (min-colors 88) (background light)) (:foreground "blue"))))
  '(font-lock-constant-face ((t nil)))
  '(font-lock-function-name-face ((t nil)))
  '(font-lock-keyword-face ((t nil)))
@@ -719,8 +719,9 @@ Address the above through this function."
  '(font-lock-string-face ((t nil)))
  '(font-lock-type-face ((t nil)))
  '(font-lock-variable-name-face ((t nil)))
- '(font-lock-warning-face ((((type x) (class color) (background light)) (:foreground "brown")) (((type tty) (class color) (min-colors 8) (background light)) (:foreground "yellow"))))
- '(hl-line ((((type x) (class color) (background light)) (:extend t :background "grey90")) (((type tty) (class color) (min-colors 256) (background light)) (:extend t :background "color-254"))))
+ '(font-lock-warning-face ((((type x) (class color) (background light)) (:foreground "brown")) (((type tty) (class color) (min-colors 88) (background light)) (:foreground "brown"))))
+ '(hl-line ((((type x) (class color) (background light)) (:extend t :background "grey90")) (((type tty) (class color) (min-colors 256) (background light)) (:extend t :background "grey95"))))
+ '(menu ((((type tty) (class color) (min-colors 88) (background light)) (:extend t :background "white" :foreground "black"))))
  '(org-block ((t nil)))
  '(org-checkbox ((t nil)))
  '(org-date ((t nil)))
@@ -734,10 +735,10 @@ Address the above through this function."
  '(outline-4 ((t nil)))
  '(region ((((type x) (class color) (background light)) (:background "lightgoldenrod2"))))
  '(sh-quoted-exec ((t nil)))
- '(tty-menu-disabled-face ((((type tty) (class color) (min-colors 16)) (:background "blue" :foreground "white")) (((type tty) (class color) (min-colors 8)) (:background "blue" :foreground "yellow"))))
- '(tty-menu-enabled-face ((((type tty) (class color) (min-colors 16)) (:background "blue" :foreground "brightwhite")) (((type tty) (class color) (min-colors 8)) (:background "blue" :foreground "white" :weight bold))))
- '(tty-menu-selected-face ((((type tty) (class color) (min-colors 8)) (:background "magenta"))))
- '(widget-field ((((type tty) (class color) (min-colors 8) (background light)) (:background "white" :foreground "black")))))
+ '(tty-menu-disabled-face ((((type tty) (class color) (min-colors 88)) (:background "blue" :foreground "white"))))
+ '(tty-menu-enabled-face ((((type tty) (class color) (min-colors 88)) (:background "blue" :foreground "brightwhite"))))
+ '(tty-menu-selected-face ((((type tty) (class color) (min-colors 88)) (:background "magenta"))))
+ '(widget-field ((((type tty) (class color) (min-colors 88) (background light)) (:background "white" :foreground "black")))))
 
 (require 'server)
 ;; To check if *this* Emacs process started a server, use:
