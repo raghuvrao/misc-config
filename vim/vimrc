@@ -21,7 +21,6 @@ set backspace=indent,eol,start
 let &softtabstop=&tabstop
 
 set nowrap
-nnoremap <Leader>w :set invwrap<CR>
 
 set sidescroll=1
 
@@ -44,8 +43,6 @@ set foldmethod=indent
 set foldlevelstart=99
 
 set incsearch
-
-nnoremap <Leader>h :nohlsearch<CR>
 
 set list
 set listchars=extends:#,precedes:#,nbsp:%,tab:›\ ,trail:¬
@@ -149,18 +146,18 @@ endfunction
 command! -nargs=? PutCurrentTimestamp call PutCurrentTimestamp(<args>)
 
 if executable('xsel')
-    nnoremap <silent> <Leader>y :<C-U>%write !xsel -ib 2>/dev/null<CR>
-    xnoremap <silent> <Leader>y :write !xsel -ib 2>/dev/null<CR>
-    nnoremap <silent> <Leader>p :read !xsel -ob 2>/dev/null<CR>
+    nnoremap <Leader>y <Cmd>%write !xsel -ib 2>/dev/null<CR>
+    xnoremap <silent> <Leader>y <Cmd>write !xsel -ib 2>/dev/null<CR>
+    nnoremap <Leader>p <Cmd>read !xsel -ob 2>/dev/null<CR>
 endif
 
-nnoremap <Leader>I :edit $MYVIMRC<CR>
+nnoremap <Leader>I <Cmd>edit $MYVIMRC<CR>
 
-nnoremap <Leader>[ :ToggleMatchParen<CR>
+nnoremap <Leader>[ <Cmd>ToggleMatchParen<CR>
 
-nnoremap <Leader>a :buffer #<CR>
-nnoremap <Leader>z :bprevious<CR>
-nnoremap <Leader>x :bnext<CR>
+nnoremap <Leader>a <Cmd>buffer #<CR>
+nnoremap <Leader>z <Cmd>bprevious<CR>
+nnoremap <Leader>x <Cmd>bnext<CR>
 
 nnoremap <Leader>S :<C-U>%substitute/\<<C-R><C-W>\>//g<Left><Left>
 nnoremap <Leader>s :<C-U>%substitute/\</g<Left><Left>
@@ -171,15 +168,19 @@ xnoremap <Leader>g :global/\<
 nnoremap <Leader>v :<C-U>%vglobal/\<
 xnoremap <Leader>v :vglobal/\<
 
-nnoremap <Leader><Leader> :<C-U>update<CR>
-xnoremap <Leader><Leader> <Esc>:<C-U>update<CR>gv
+nnoremap <Leader><Leader> <Cmd>update<CR>
+xnoremap <Leader><Leader> <Cmd>update<CR>
 
-nnoremap <Leader>D :help digraph-table-mbyte<CR>
-nnoremap <Leader>d :help digraph-table<CR>
+nnoremap <Leader>D <Cmd>help digraph-table-mbyte<CR>
+nnoremap <Leader>d <Cmd>help digraph-table<CR>
 
-nnoremap <silent> <Leader><CR> :call maxtab#ToggleMaximizeToTab()<CR>
+nnoremap <Leader>w <Cmd>set invwrap<CR>
 
-nnoremap <silent> <Leader>] :echo synids#SynIDs(line('.'), col('.'))<CR>
+nnoremap <Leader>h <Cmd>nohlsearch<CR>
+
+nnoremap <Leader><CR> <Cmd>call maxtab#ToggleMaximizeToTab()<CR>
+
+nnoremap <Leader>] <Cmd>echo synids#SynIDs(line('.'), col('.'))<CR>
 
 inoremap <C-W> <C-G>u<C-W>
 inoremap <C-U> <C-G>u<C-U>
