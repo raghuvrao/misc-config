@@ -709,6 +709,7 @@ Address the above through this function."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(cursor ((((type x) (class color) (background light)) (:background "magenta3"))))
  '(font-lock-builtin-face ((t nil)))
  '(font-lock-comment-face ((((type x) (class color) (background light)) (:foreground "blue")) (((type tty) (class color) (min-colors 88) (background light)) (:foreground "blue"))))
  '(font-lock-constant-face ((t nil)))
