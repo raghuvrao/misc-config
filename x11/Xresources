@@ -25,5 +25,13 @@
 *xterm*vt100.background: White
 *xterm*vt100.foreground: Black
 *xterm*vt100.cursorColor: rgb:00/77/ff
+*xterm*vt100.scrollBar: true
+*xterm*vt100.scrollbar.background: White
+*xterm*vt100.scrollbar.foreground: Black
+*xterm*vt100.scrollbar.borderWidth: 1
+*xterm*vt100.scrollTtyOutput: false
+*xterm*vt100.scrollKey: true
+*xterm*vt100.cdXtraScroll: true
+*xterm*vt100.tiXtraScroll: true
 
 xfontsel*font: -misc-fixed-bold-r-normal--18-120-100-100-c-90-iso10646-1
