@@ -29,7 +29,7 @@ if [[ -z "${PATH}" ]]; then
     PATH='/usr/local/bin:/usr/bin:/bin'
 fi
 
-PATH="${HOME}/.local/bin:${PATH}"
+PATH="${HOME}/.local/bin:${HOME}/go/bin:/usr/local/go/bin:${PATH}"
 
 _s "${HOME}/.bash_profile_local.bash"
 
