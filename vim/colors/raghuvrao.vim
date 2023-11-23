@@ -51,6 +51,11 @@ hi TabLine ctermfg=NONE ctermbg=NONE cterm=reverse guifg=NONE guibg=NONE gui=rev
 
 hi Todo ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=LightCyan gui=bold term=standout
 
+hi Visual ctermfg=White ctermbg=DarkBlue cterm=NONE guifg=White guibg=DarkBlue gui=NONE term=reverse
+if &t_Co < 16
+    hi Visual cterm=bold
+endif
+
 hi WarningMsg ctermfg=DarkRed ctermbg=NONE cterm=NONE guifg=DarkRed guibg=NONE gui=NONE term=standout
 
 hi diffAdded ctermfg=DarkGreen ctermbg=NONE cterm=NONE guifg=DarkGreen guibg=NONE gui=NONE term=bold
