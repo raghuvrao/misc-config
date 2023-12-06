@@ -182,6 +182,11 @@ nnoremap <Leader><CR> <Cmd>call maxtab#ToggleMaximizeToTab()<CR>
 
 nnoremap <Leader>] <Cmd>echo synids#SynIDs(line('.'), col('.'))<CR>
 
+nnoremap <Leader>B "_yiW
+nnoremap <Leader>E "_yiwE
+nnoremap <Leader>b "_yiw
+nnoremap <Leader>e "_yiwe
+
 inoremap <C-W> <C-G>u<C-W>
 inoremap <C-U> <C-G>u<C-U>
 inoremap <C-M> <C-G>u<C-M>
