@@ -182,6 +182,43 @@ nnoremap <Leader><CR> <Cmd>call maxtab#ToggleMaximizeToTab()<CR>
 
 nnoremap <Leader>] <Cmd>echo synids#SynIDs(line('.'), col('.'))<CR>
 
+function! RedrawLineNearEdge(edge, percentage) abort
+    if &wrap
+        echoerr "Not implemented when 'wrap' is set"
+        return
+    endif
+    if a:percentage < 0 || a:percentage > 100
+        echoerr "Percentage" a:percentage "is not in the interval [0, 100]"
+        return
+    endif
+    let wh = winheight(0)
+    let lc = float2nr((wh * a:percentage) / 100)
+    let wl = winline()
+    if a:edge == 0 " Top edge
+        let c = wl - lc - 1
+        if c == 0
+            return
+        elseif c < 0
+            execute 'normal!' .. -(c) .. "\<C-Y>"
+        else
+            execute 'normal!' .. c .. "\<C-E>"
+        endif
+    else " Bottom edge
+        let c = wh - lc - wl
+        if c == 0
+            return
+        elseif c < 0
+            execute 'normal!' .. -(c) .. "\<C-E>"
+        else
+            execute 'normal!' .. c .. "\<C-Y>"
+        endif
+    endif
+endfunction
+nnoremap <silent> zB <Cmd>call RedrawLineNearEdge(1, 12)<CR>
+nnoremap <silent> zT <Cmd>call RedrawLineNearEdge(0, 12)<CR>
+xnoremap <silent> zB <Cmd>call RedrawLineNearEdge(1, 12)<CR>
+xnoremap <silent> zT <Cmd>call RedrawLineNearEdge(0, 12)<CR>
+
 inoremap <C-W> <C-G>u<C-W>
 inoremap <C-U> <C-G>u<C-U>
 inoremap <C-M> <C-G>u<C-M>
