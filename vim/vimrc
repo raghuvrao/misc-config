@@ -219,6 +219,8 @@ nnoremap <silent> zT <Cmd>call RedrawLineNearEdge(0, 12)<CR>
 xnoremap <silent> zB <Cmd>call RedrawLineNearEdge(1, 12)<CR>
 xnoremap <silent> zT <Cmd>call RedrawLineNearEdge(0, 12)<CR>
 
+nnoremap <Leader>T :<C-U>tab terminal ++close<Space>
+
 inoremap <C-W> <C-G>u<C-W>
 inoremap <C-U> <C-G>u<C-U>
 inoremap <C-M> <C-G>u<C-M>
