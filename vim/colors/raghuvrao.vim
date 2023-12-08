@@ -41,20 +41,17 @@ hi NonText ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gu
 
 hi Normal ctermfg=NONE ctermbg=NONE cterm=NONE guifg=Black guibg=White gui=NONE term=NONE
 
+if &t_Co >= 256
+    hi Search ctermbg=193
+endif
+
 hi SpecialKey ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui=NONE term=bold
 
 if has('gui_running')
     hi link Terminal Normal
 endif
 
-hi TabLine ctermfg=NONE ctermbg=NONE cterm=reverse guifg=NONE guibg=NONE gui=reverse term=reverse
-
 hi Todo ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=LightCyan gui=bold term=standout
-
-hi Visual ctermfg=White ctermbg=DarkBlue cterm=NONE guifg=White guibg=DarkBlue gui=NONE term=reverse
-if &t_Co < 16
-    hi Visual cterm=bold
-endif
 
 hi WarningMsg ctermfg=DarkRed ctermbg=NONE cterm=NONE guifg=DarkRed guibg=NONE gui=NONE term=standout
 
