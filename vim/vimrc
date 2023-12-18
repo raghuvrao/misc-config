@@ -13,6 +13,8 @@ set noundofile
 set nomodeline
 set modelines=0
 
+set shortmess+=I
+
 let mapleader = '\'
 let maplocalleader = '_'
 
