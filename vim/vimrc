@@ -104,6 +104,8 @@ endif
 
 set display+=lastline
 
+let &showbreak = '+ '
+
 set formatoptions=1jlmnoqr
 
 filetype plugin indent on
