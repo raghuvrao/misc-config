@@ -25,6 +25,8 @@ _s ()
 export VISUAL='vim'
 export EDITOR="${VISUAL}"
 
+export NO_COLOR=1
+
 if [[ -z "${PATH}" ]]; then
     PATH='/usr/local/bin:/usr/bin:/bin'
 fi
