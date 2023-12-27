@@ -3,13 +3,6 @@
 # ~/.bash_profile
 # Author: Raghu V. Rao <raghu.v.rao@gmail.com>
 
-_s ()
-{
-    if [[ -f "${1}" && -r "${1}" ]]; then
-        source "${1}"
-    fi
-}
-
 # Some general guidelines to tell if an environment variable belongs in
 # this file:
 #
@@ -27,18 +20,16 @@ export EDITOR="${VISUAL}"
 
 export NO_COLOR=1
 
-if [[ -z "${PATH}" ]]; then
-    PATH='/usr/local/bin:/usr/bin:/bin'
-fi
+[[ -z "${PATH}" ]] && PATH='/usr/local/bin:/usr/bin:/bin'
 
 PATH="${HOME}/.local/bin:${PATH}"
 
-_s "${HOME}/.bash_profile_local.bash"
+source "${HOME}/.bash_profile_local.bash"
 
-# ---- DO NOT MODIFY PATH AFTER THIS COMMENT! ----
+# ---- KEEP YOUR MODIFICATIONS TO PATH BEFORE THIS COMMENT! ----
 #
-# Remove duplicates and inaccessible directories from PATH while preserving
-# order.
+# Remove empty entries, ., .., duplicates, and inaccessible directories from
+# PATH while preserving order.
 #
 # Note: ${foo+bar} below, not ${foo:+bar}
 original_IFS="${IFS+_${IFS}}"
@@ -65,6 +56,4 @@ unset -v original_IFS paths paths_seen
 export PATH
 
 # Source ~/.bashrc in the end.
-_s "${HOME}/.bashrc"
-
-unset -f _s
+source "${HOME}/.bashrc"
