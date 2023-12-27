@@ -3,21 +3,11 @@
 # ~/.bashrc
 # Author: Raghu V. Rao <raghu.v.rao@gmail.com>
 
-_s ()
-{
-    if [[ -f "${1}" && -r "${1}" ]]; then
-        source "${1}"
-    fi
-}
-
-_s '/etc/bashrc'
-
+# NOTE: If sourcing /etc/bashrc or similar, do it before setting the umask
+# because /etc/bashrc or a script it sources could set a different umask.
 umask 077
 
-if [[ "${-}" != *i* ]]; then
-    unset -f _s
-    return
-fi
+[[ "${-}" != *i* ]] && return
 
 shopt -s checkwinsize
 shopt -s dotglob
@@ -48,6 +38,4 @@ alias ll='ls -l'
 alias ls='ls -A -p'
 alias pr='pr -t'
 
-_s "${HOME}/.bashrc_local.bash"
-
-unset -f _s
+source "${HOME}/.bashrc_local.bash"
