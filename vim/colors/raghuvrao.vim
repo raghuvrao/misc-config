@@ -33,6 +33,11 @@ hi EndOfBuffer ctermfg=Blue ctermbg=NONE cterm=bold guifg=Blue guibg=NONE gui=bo
 
 hi Error ctermfg=Red ctermbg=NONE cterm=bold guifg=Red guibg=NONE gui=bold
 
+hi ErrorMsg ctermfg=White ctermbg=DarkRed cterm=NONE guifg=White guibg=DarkRed gui=NONE
+if &t_Co < 16
+    hi ErrorMsg cterm=bold
+endif
+
 hi Folded ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui=NONE
 
 hi Ignore ctermfg=LightGrey ctermbg=NONE cterm=NONE guifg=LightGrey guibg=NONE gui=NONE
