@@ -604,7 +604,7 @@ Address the above through this function."
   (set (make-local-variable 'truncate-lines) nil)
   (set (make-local-variable 'word-wrap) 1))
 
-(defun raghu--indentation-cannot-insert-tabs-in-buffer ()
+(defun raghu--indent-without-tabs-in-buffer ()
   "Indentation cannot use tabs in current buffer."
   (set (make-local-variable 'indent-tabs-mode) nil))
 
@@ -634,7 +634,7 @@ Address the above through this function."
   (add-hook 'help-mode-hook #'raghu--do-word-wrap-in-buffer))
 
 (with-eval-after-load 'js
-  (add-hook 'js-mode-hook #'raghu--indentation-cannot-insert-tabs-in-buffer))
+  (add-hook 'js-mode-hook #'raghu--indent-without-tabs-in-buffer))
 
 (with-eval-after-load 'prog-mode
   (add-hook 'prog-mode-hook #'hs-minor-mode)
@@ -646,7 +646,7 @@ Address the above through this function."
   (add-hook 'inferior-python-mode-hook #'turn-on-font-lock))
 
 (with-eval-after-load 'sh-script
-  (add-hook 'sh-mode-hook #'raghu--indentation-cannot-insert-tabs-in-buffer))
+  (add-hook 'sh-mode-hook #'raghu--indent-without-tabs-in-buffer))
 
 (with-eval-after-load 'text-mode
   (add-hook 'text-mode-hook #'raghu--do-word-wrap-in-buffer))
