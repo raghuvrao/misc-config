@@ -709,6 +709,7 @@ Address the above through this function."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(default ((t (:height 110 :family "IBM Plex Sans"))))
  '(cursor ((((type x) (class color) (background light)) (:background "magenta3"))))
  '(font-lock-builtin-face ((t nil)))
  '(font-lock-comment-face ((((type x) (class color) (background light)) (:foreground "blue")) (((type tty) (class color) (min-colors 88) (background light)) (:foreground "blue"))))
@@ -739,6 +740,7 @@ Address the above through this function."
  '(tty-menu-disabled-face ((((type tty) (class color) (min-colors 88)) (:background "blue" :foreground "white"))))
  '(tty-menu-enabled-face ((((type tty) (class color) (min-colors 88)) (:background "blue" :foreground "brightwhite"))))
  '(tty-menu-selected-face ((((type tty) (class color) (min-colors 88)) (:background "magenta"))))
+ '(variable-pitch ((t (:family "IBM Plex Sans"))))
  '(widget-field ((((type tty) (class color) (min-colors 88) (background light)) (:background "white" :foreground "black")))))
 
 (require 'server)
