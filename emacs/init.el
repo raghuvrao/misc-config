@@ -14,31 +14,30 @@
 ;; pagination program (e.g. more, less).  When those programs are
 ;; invoked at a command interpreter (a shell) in Emacs, pagination is
 ;; unnecessary.
-(setenv "PAGER" "cat")
-
+;;
 ;; When working with a command interpreter through Emacs, use
 ;; `emacsclient' as the editor that other programs invoke (e.g. git,
 ;; svn), so the file to edit opens in an Emacs buffer.  It works because
 ;; I do server-start or, run Emacs in daemon mode.
-(let ((editor "emacsclient"))
+(let ((pager "cat") (editor "emacsclient"))
   (setenv "EDITOR" editor)
-  (setenv "VISUAL" editor))
+  (setenv "VISUAL" editor)
+  (setenv "PAGER" pager))
 
 (set-language-environment "UTF-8")
 (prefer-coding-system 'utf-8)
 
-;; Reply with y/SPC or n/DEL instead of `yes RET' or `no RET'.
-(defalias 'yes-or-no-p #'y-or-n-p)
-
-(define-key global-map (kbd "C-c H") #'hl-line-mode)
+(define-key global-map (kbd "C-c F") #'customize-face)
+(define-key global-map (kbd "C-c H") #'global-hl-line-mode)
 (define-key global-map (kbd "C-c K") #'kill-whole-line)
+(define-key global-map (kbd "C-c N") #'display-line-numbers-mode)
+(define-key global-map (kbd "C-c e") #'er/expand-region)
 (define-key global-map (kbd "C-c f") #'forward-whitespace)
 (define-key global-map (kbd "C-c w") #'toggle-truncate-lines)
 
-;; I keep menu-bar-mode enabled because it helps me discover major-mode
-;; key-bindings.  The default binding to access it---F10---is not easily
-;; available on some of the keyboards that I must use.  So, add a more
-;; convenient binding.
+;; The menu bar helps me discover major-mode key-bindings.  The default
+;; binding to access the menu---F10---is not easily available on some of
+;; the keyboards that I must use.  So, add a more convenient binding.
 (define-key global-map (kbd "C-c M") #'menu-bar-open)
 
 (require 'windmove)
@@ -58,14 +57,25 @@ Arrange to get confirmation whenever function foo is called:
   (advice-add #'foo :around #'raghu/with-confirmation)"
   (when (y-or-n-p "Are you sure? ") (apply fn args)))
 
-(defun raghu/switch-to-text-scratchbuffer ()
+(defun raghu/text-scratch-buffer ()
   "Switch to the scratch `text-mode' buffer.
 
 Create the buffer if it does not already exist."
   (interactive)
   (switch-to-buffer (get-buffer-create "*scratch-text*"))
-  (text-mode))
-(define-key global-map (kbd "C-c r") #'raghu/switch-to-text-scratchbuffer)
+  (when (eq (buffer-local-value 'major-mode (current-buffer)) 'fundamental-mode)
+    (text-mode)))
+(define-key global-map (kbd "C-c T") #'raghu/text-scratch-buffer)
+
+(defun raghu/scratch-buffer ()
+  "Switch to the scratch buffer.
+
+Create the buffer if it does not already exist."
+  (interactive)
+  (switch-to-buffer (get-buffer-create "*scratch*"))
+  (when (eq (buffer-local-value 'major-mode (current-buffer)) 'fundamental-mode)
+    (lisp-interaction-mode)))
+(define-key global-map (kbd "C-c S") #'raghu/scratch-buffer)
 
 (defun raghu/join-region (beg end)
   "Join region into a single line.
@@ -600,12 +610,12 @@ Address the above through this function."
 (define-key global-map (kbd "C-c x") #'raghu/activate-mark)
 
 (defun raghu--do-word-wrap-in-buffer ()
-  "Do word-wrapping in current buffer."
+  "Do word-wrapping in the current buffer."
   (set (make-local-variable 'truncate-lines) nil)
   (set (make-local-variable 'word-wrap) 1))
 
 (defun raghu--indent-without-tabs-in-buffer ()
-  "Indentation cannot use tabs in current buffer."
+  "In the current buffer, arrange not to use tabs for indentation."
   (set (make-local-variable 'indent-tabs-mode) nil))
 
 (defun raghu--show-trailing-whitespace-in-buffer ()
@@ -616,9 +626,8 @@ Address the above through this function."
   "When deleting a tab, arrange to turn the tab to many spaces to delete one space."
   (set (make-local-variable 'backward-delete-char-untabify-method) 'untabify))
 
-;; Limit the size of comint buffers (e.g. buffers from M-x shell).
-;; Also, see `comint-buffer-maximum-size'.
 (with-eval-after-load 'comint
+  (add-hook 'comint-mode-hook #'raghu--do-word-wrap-in-buffer)
   (add-hook 'comint-output-filter-functions #'comint-truncate-buffer))
 
 (with-eval-after-load 'compile
@@ -642,8 +651,7 @@ Address the above through this function."
 
 (with-eval-after-load 'python
   (add-hook 'python-mode-hook (lambda () (hs-minor-mode -1)))
-  (add-hook 'python-mode-hook #'outline-minor-mode)
-  (add-hook 'inferior-python-mode-hook #'turn-on-font-lock))
+  (add-hook 'python-mode-hook #'outline-minor-mode))
 
 (with-eval-after-load 'sh-script
   (add-hook 'sh-mode-hook #'raghu--indent-without-tabs-in-buffer))
@@ -651,23 +659,17 @@ Address the above through this function."
 (with-eval-after-load 'text-mode
   (add-hook 'text-mode-hook #'raghu--do-word-wrap-in-buffer))
 
-(with-eval-after-load 'log-edit
-  (add-hook 'log-edit-mode-hook #'turn-on-font-lock))
-
-(with-eval-after-load 'conf-mode
-  (add-hook 'conf-mode-hook #'raghu--disable-line-wrap-in-buffer))
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(backward-delete-char-untabify-method nil)
- '(blink-cursor-mode nil)
  '(column-number-mode t)
  '(comint-buffer-maximum-size 10240)
+ '(comint-scroll-to-bottom-on-input 'this)
  '(confirm-kill-emacs 'y-or-n-p)
- '(fill-column 72)
+ '(fill-column 80)
  '(frame-background-mode 'light)
  '(frame-resize-pixelwise t)
  '(gnutls-algorithm-priority "normal:-vers-tls1.3")
@@ -679,26 +681,28 @@ Address the above through this function."
  '(inhibit-startup-screen t)
  '(initial-scratch-message nil)
  '(isearch-allow-scroll t)
+ '(ispell-dictionary nil)
  '(js-indent-level 2)
  '(line-move-visual nil)
- '(line-spacing 0.3)
+ '(line-spacing 0.1)
  '(make-backup-files nil)
  '(mouse-wheel-progressive-speed nil)
  '(mouse-wheel-scroll-amount '(1 ((shift) . 5) ((control))))
  '(mouse-yank-at-point t)
- '(package-archive-priorities '(("gnu" . 90) ("melpa" . 70)))
+ '(package-archive-priorities '(("gnu" . 70) ("nongnu" . 70) ("melpa" . 90)))
  '(package-archives
    '(("gnu" . "https://elpa.gnu.org/packages/")
+     ("nongnu" . "https://elpa.nongnu.org/nongnu/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-enable-at-startup nil)
- '(package-selected-packages '(yaml-mode))
+ '(package-selected-packages
+   '(gnu-elpa-keyring-update lyrics markdown-mode expand-region yaml-mode))
  '(ring-bell-function 'ignore)
  '(save-place-mode t)
  '(scroll-bar-mode nil)
  '(scroll-conservatively 5)
  '(show-paren-mode t)
  '(tool-bar-mode nil)
- '(tooltip-mode nil)
  '(transient-mark-mode nil)
  '(truncate-lines t)
  '(uniquify-buffer-name-style 'forward nil (uniquify))
@@ -710,20 +714,31 @@ Address the above through this function."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(cursor ((((type x) (class color) (background light)) (:background "magenta3"))))
+ '(compilation-error ((((type x) (class color) (background light)) (:foreground "firebrick"))))
+ '(compilation-info ((((type x) (class color) (background light)) (:foreground "DarkGreen"))))
+ '(compilation-mode-line-fail ((((type x) (class color) (background light)) (:inherit compilation-error :weight bold))))
+ '(compilation-warning ((((type x) (class color) (background light)) (:foreground "saddle brown"))))
+ '(cursor ((((type x) (class color) (background light)) (:background "SteelBlue"))))
+ '(eshell-prompt ((((type x) (class color) (background light)) (:foreground "DarkMagenta"))))
  '(font-lock-builtin-face ((t nil)))
- '(font-lock-comment-face ((((type x) (class color) (background light)) (:foreground "blue")) (((type tty) (class color) (min-colors 88) (background light)) (:foreground "blue"))))
+ '(font-lock-comment-face ((((type x tty) (class color) (min-colors 8) (background light)) (:foreground "MediumBlue"))))
  '(font-lock-constant-face ((t nil)))
  '(font-lock-function-name-face ((t nil)))
  '(font-lock-keyword-face ((t nil)))
- '(font-lock-regexp-grouping-backslash ((t (:weight bold))))
- '(font-lock-regexp-grouping-construct ((t (:weight bold))))
+ '(font-lock-regexp-grouping-backslash ((((type x) (class color) (background light)) (:background "honeydew" :weight bold)) (t (:weight bold))))
+ '(font-lock-regexp-grouping-construct ((((type x) (class color) (background light)) (:background "lavender blush" :weight bold)) (t (:weight bold))))
  '(font-lock-string-face ((t nil)))
  '(font-lock-type-face ((t nil)))
  '(font-lock-variable-name-face ((t nil)))
  '(font-lock-warning-face ((((type x) (class color) (background light)) (:foreground "brown")) (((type tty) (class color) (min-colors 88) (background light)) (:foreground "brown"))))
- '(hl-line ((((type x) (class color) (background light)) (:extend t :background "grey90")) (((type tty) (class color) (min-colors 256) (background light)) (:extend t :background "grey95"))))
+ '(hl-line ((((type x tty) (class color) (background light)) (:extend t :background "linen"))))
+ '(isearch ((((type x) (class color) (background light)) (:background "magenta3" :foreground "white"))))
+ '(line-number ((((type x) (class color) (background light)) (:inherit (fixed-pitch shadow)))))
+ '(line-number-current-line ((((type x tty) (class color) (background light)) (:inherit (fringe line-number) :weight bold)) (t (:inherit line-number :weight bold))))
  '(menu ((((type tty) (class color) (min-colors 88) (background light)) (:extend t :background "white" :foreground "black"))))
+ '(mode-line ((((type x) (class color) (background light)) (:background "grey82" :foreground "black" :box (:line-width 1 :color "black")))))
+ '(mode-line-highlight ((((type x) (class color) (background light)) (:background "PaleTurquoise"))))
+ '(mode-line-inactive ((((type x) (class color) (background light)) (:inherit mode-line :background "gray92" :box (:line-width 1 :color "grey60")))))
  '(org-block ((t nil)))
  '(org-checkbox ((t nil)))
  '(org-date ((t nil)))
@@ -735,8 +750,10 @@ Address the above through this function."
  '(org-todo ((t nil)))
  '(org-verbatim ((t nil)))
  '(outline-4 ((t nil)))
- '(region ((((type x) (class color) (background light)) (:background "lightgoldenrod2"))))
+ '(region ((((type x) (class color) (background light)) (:background "LightGoldenRod"))))
  '(sh-quoted-exec ((t nil)))
+ '(show-paren-match ((((type x) (class color) (background light)) (:background "PaleTurquoise"))))
+ '(trailing-whitespace ((((type x) (class color) (background light)) (:background "MistyRose2"))))
  '(tty-menu-disabled-face ((((type tty) (class color) (min-colors 88)) (:background "blue" :foreground "white"))))
  '(tty-menu-enabled-face ((((type tty) (class color) (min-colors 88)) (:background "blue" :foreground "brightwhite"))))
  '(tty-menu-selected-face ((((type tty) (class color) (min-colors 88)) (:background "magenta"))))
