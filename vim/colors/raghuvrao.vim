@@ -12,6 +12,8 @@ endif
 
 let g:colors_name = 'raghuvrao'
 
+hi Normal ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
+
 hi clear Conceal
 hi clear Constant
 hi clear Identifier
@@ -23,7 +25,9 @@ hi clear String
 hi clear Terminal
 hi clear Type
 
-hi Cursor guifg=White guibg=#0077FF gui=NONE
+hi Comment ctermfg=DarkBlue ctermbg=NONE cterm=NONE gui=NONE guifg=MediumBlue guibg=NONE gui=NONE
+
+hi Cursor guifg=White guibg=magenta3 gui=NONE
 
 if &t_Co >= 256
     hi CursorLine ctermfg=NONE ctermbg=254 cterm=NONE
@@ -44,23 +48,27 @@ hi Ignore ctermfg=LightGrey ctermbg=NONE cterm=NONE guifg=LightGrey guibg=NONE g
 
 hi NonText ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui=bold
 
-hi Normal ctermfg=NONE ctermbg=NONE cterm=NONE guifg=Black guibg=White gui=NONE
-
 if &t_Co >= 256
     hi Search ctermbg=193
 endif
 
 hi SpecialKey ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui=NONE
 
+hi! link TabLine StatusLineNC
+hi! link TabLineFill StatusLineNC
+hi! link TabLineSel StatusLine
+
 if has('gui_running')
     hi link Terminal Normal
 endif
+
+hi Title ctermfg=DarkMagenta ctermbg=NONE cterm=bold guifg=DarkMagenta guibg=NONE gui=bold
 
 hi Todo ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=LightCyan gui=bold
 
 hi WarningMsg ctermfg=DarkRed ctermbg=NONE cterm=NONE guifg=DarkRed guibg=NONE gui=NONE
 
-hi VertSplit ctermfg=NONE ctermbg=NONE cterm=reverse,bold guifg=NONE guibg=NONE gui=reverse,bold term=reverse,bold
+hi Visual ctermfg=White ctermbg=Blue cterm=NONE guifg=White guibg=RoyalBlue gui=NONE
 
 hi diffAdded ctermfg=DarkGreen ctermbg=NONE cterm=NONE guifg=DarkGreen guibg=NONE gui=NONE
 hi diffFile ctermfg=NONE ctermbg=NONE cterm=bold guifg=NONE guibg=NONE gui=bold
