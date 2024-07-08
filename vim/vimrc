@@ -108,6 +108,10 @@ let &showbreak = '+ '
 
 set formatoptions=1jlmnoqr
 
+if has('termguicolors') && (&t_8f != '') && (&t_8b != '')
+    set termguicolors
+endif
+
 filetype plugin indent on
 
 runtime ftplugin/man.vim
