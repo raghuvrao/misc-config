@@ -23,7 +23,9 @@ hi clear String
 hi clear Terminal
 hi clear Type
 
-hi Cursor guifg=White guibg=#0077FF gui=NONE
+hi Comment ctermfg=DarkBlue ctermbg=NONE gui=NONE guifg=MediumBlue guibg=NONE gui=NONE
+
+hi Cursor guifg=White guibg=magenta3 gui=NONE
 
 if &t_Co >= 256
     hi CursorLine ctermfg=NONE ctermbg=254 cterm=NONE
@@ -52,15 +54,26 @@ endif
 
 hi SpecialKey ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui=NONE
 
+hi StatusLine ctermfg=DarkCyan ctermbg=NONE cterm=reverse guifg=DarkCyan guibg=NONE gui=reverse
+hi StatusLineNC ctermfg=Black ctermbg=LightGrey cterm=NONE guifg=Black guibg=LightGrey gui=NONE
+
+hi! link TabLine StatusLineNC
+hi! link TabLineFill StatusLineNC
+hi! link TabLineSel StatusLine
+
 if has('gui_running')
     hi link Terminal Normal
 endif
+
+hi Title ctermfg=DarkMagenta ctermbg=NONE cterm=bold guifg=DarkMagenta guibg=NONE gui=bold
 
 hi Todo ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=LightCyan gui=bold
 
 hi WarningMsg ctermfg=DarkRed ctermbg=NONE cterm=NONE guifg=DarkRed guibg=NONE gui=NONE
 
-hi VertSplit ctermfg=NONE ctermbg=NONE cterm=reverse,bold guifg=NONE guibg=NONE gui=reverse,bold term=reverse,bold
+hi VertSplit ctermfg=Black ctermbg=LightGrey cterm=NONE guifg=Black guibg=LightGrey gui=NONE
+
+hi Visual ctermfg=White ctermbg=Blue cterm=NONE guifg=White guibg=RoyalBlue gui=NONE
 
 hi diffAdded ctermfg=DarkGreen ctermbg=NONE cterm=NONE guifg=DarkGreen guibg=NONE gui=NONE
 hi diffFile ctermfg=NONE ctermbg=NONE cterm=bold guifg=NONE guibg=NONE gui=bold
