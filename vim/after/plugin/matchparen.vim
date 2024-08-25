@@ -4,11 +4,6 @@ if !exists(':NoMatchParen') || !exists(':DoMatchParen')
     finish
 endif
 
-" Start off with matching brackets highlighting disabled.  When I want
-" matching brackets highlighting, I will call ToggleMatchParen() defined
-" below.
-NoMatchParen
-
 function! ToggleMatchParen() abort
     if exists('g:loaded_matchparen')
         NoMatchParen
