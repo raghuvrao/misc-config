@@ -46,6 +46,11 @@ hi Folded ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui
 
 hi Ignore ctermfg=LightGrey ctermbg=NONE cterm=NONE guifg=LightGrey guibg=NONE gui=NONE
 
+hi MatchParen guifg=NONE guibg=PaleTurquoise gui=NONE
+if &t_Co >= 256
+    hi MatchParen ctermfg=NONE ctermbg=LightCyan cterm=NONE
+endif
+
 hi NonText ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui=bold
 
 if &t_Co >= 256
@@ -64,7 +69,7 @@ endif
 
 hi Title ctermfg=DarkMagenta ctermbg=NONE cterm=bold guifg=DarkMagenta guibg=NONE gui=bold
 
-hi Todo ctermfg=DarkMagenta ctermbg=NONE cterm=NONE guifg=DarkMagenta guibg=LightCyan gui=bold
+hi Todo ctermfg=DarkMagenta ctermbg=NONE cterm=bold guifg=DarkMagenta guibg=LightCyan gui=bold
 
 hi WarningMsg ctermfg=DarkRed ctermbg=NONE cterm=NONE guifg=DarkRed guibg=NONE gui=NONE
 
