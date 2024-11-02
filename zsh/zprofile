@@ -1,0 +1,25 @@
+# ~/.zprofile
+# Author: Raghu V. Rao <raghu.v.rao@gmail.com>
+
+export EDITOR=vim
+export VISUAL="${EDITOR}"
+
+export NO_COLOR=1
+
+typeset -U PATH path FPATH fpath MANPATH manpath
+
+if (( ${#path} == 0 )); then
+    path=('/usr/local/sbin' '/usr/local/bin' '/usr/sbin' '/usr/bin' '/sbin' '/bin')
+fi
+
+path=(
+    "${HOME}/.local/bin"
+    ${path}
+)
+
+x="${ZDOTDIR:-${HOME}}/.zprofile_local.zsh"
+if [[ -f "${x}" && -r "${x}" ]]; then
+    source "${x}"
+fi
+
+unset -v x
