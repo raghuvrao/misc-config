@@ -1,0 +1,58 @@
+# ~/.zshrc
+# Author: Raghu V. Rao <raghu.v.rao@gmail.com>
+
+umask 077
+
+if [[ ! -o INTERACTIVE ]]; then
+    return
+fi
+
+setopt append_history
+setopt extended_history
+setopt glob_dots
+setopt hist_ignore_dups
+setopt interactive_comments
+setopt list_packed
+setopt pipe_fail
+
+unsetopt always_last_prompt
+unsetopt auto_menu
+unsetopt auto_remove_slash
+unsetopt list_beep
+unsetopt menu_complete
+
+HISTFILE="${ZDOTDIR:-${HOME}}/.zsh_history"
+HISTSIZE=10500
+SAVEHIST=10000
+READNULLCMD=less
+REPORTTIME=1
+# WORDCHARS=''
+ZLE_REMOVE_SUFFIX_CHARS='"'
+ZLE_SPACE_SUFFIX_CHARS=
+
+bindkey -M viins '^E' insert-last-word
+
+q () {
+    unset HISTFILE
+    if [[ -n "${HISTFILE+y}" ]]; then
+        printf 'HISTFILE is still set: <%s>\n' "${HISTFILE}" >&2
+        return 1
+    fi
+    exit
+}
+
+alias ls='ls -A -p'
+alias ll='ls -h -l'
+alias grep='grep --color=auto'
+alias cgrep='grep --color=always'
+alias pr='pr -t'
+
+# The following lines were added by compinstall
+
+# End of lines added by compinstall
+
+x="${ZDOTDIR:-${HOME}}/.zshrc_local.zsh"
+if [[ -f "${x}" && -r "${x}" ]]; then
+    source "${x}"
+fi
+unset -v x
