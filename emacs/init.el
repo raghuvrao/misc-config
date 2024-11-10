@@ -684,7 +684,7 @@ Address the above through this function."
  '(ispell-dictionary nil)
  '(js-indent-level 2)
  '(line-move-visual nil)
- '(line-spacing 0.3)
+ '(line-spacing 0.2)
  '(make-backup-files nil)
  '(mouse-wheel-progressive-speed nil)
  '(mouse-wheel-scroll-amount '(1 ((shift) . 5) ((control))))
