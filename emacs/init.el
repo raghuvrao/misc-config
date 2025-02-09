@@ -713,6 +713,7 @@ Address the above through this function."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(default ((t (:height 120 :family "IBM Plex Sans"))))
  '(compilation-error ((((type x) (class color) (background light)) (:foreground "firebrick"))))
  '(compilation-info ((((type x) (class color) (background light)) (:foreground "DarkGreen"))))
  '(compilation-mode-line-fail ((((type x) (class color) (background light)) (:inherit compilation-error :weight bold))))
