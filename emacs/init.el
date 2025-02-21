@@ -653,6 +653,9 @@ Address the above through this function."
   (add-hook 'python-mode-hook (lambda () (hs-minor-mode -1)))
   (add-hook 'python-mode-hook #'outline-minor-mode))
 
+(with-eval-after-load 'shell
+  (add-hook 'shell-mode-hook (lambda () (set (make-local-variable 'comint-process-echoes) t))))
+
 (with-eval-after-load 'sh-script
   (add-hook 'sh-mode-hook #'raghu--indent-without-tabs-in-buffer))
 
