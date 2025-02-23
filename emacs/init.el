@@ -609,58 +609,46 @@ Address the above through this function."
     (user-error "%s" "No mark set in this buffer")))
 (define-key global-map (kbd "C-c x") #'raghu/activate-mark)
 
-(defun raghu--do-word-wrap-in-buffer ()
-  "Do word-wrapping in the current buffer."
-  (set (make-local-variable 'truncate-lines) nil)
-  (set (make-local-variable 'word-wrap) 1))
-
 (defun raghu--indent-without-tabs-in-buffer ()
   "In the current buffer, arrange not to use tabs for indentation."
   (set (make-local-variable 'indent-tabs-mode) nil))
-
-(defun raghu--show-trailing-whitespace-in-buffer ()
-  "Highlight trailing whitespace in the current buffer."
-  (set (make-local-variable 'show-trailing-whitespace) t))
 
 (defun raghu--backward-delete-char-untabify ()
   "When deleting a tab, arrange to turn the tab to many spaces to delete one space."
   (set (make-local-variable 'backward-delete-char-untabify-method) 'untabify))
 
-(with-eval-after-load 'comint
-  (add-hook 'comint-mode-hook #'raghu--do-word-wrap-in-buffer)
-  (add-hook 'comint-output-filter-functions #'comint-truncate-buffer))
-
-(with-eval-after-load 'compile
-  (add-hook 'compilation-mode-hook #'raghu--do-word-wrap-in-buffer))
-
-(with-eval-after-load 'diff-mode
-  (add-hook 'diff-mode-hook #'raghu--do-word-wrap-in-buffer))
-
 (with-eval-after-load 'elisp-mode
   (add-hook 'emacs-lisp-mode-hook #'raghu--backward-delete-char-untabify))
-
-(with-eval-after-load 'help-mode
-  (add-hook 'help-mode-hook #'raghu--do-word-wrap-in-buffer))
 
 (with-eval-after-load 'js
   (add-hook 'js-mode-hook #'raghu--indent-without-tabs-in-buffer))
 
+(defun raghu--customizations-prog-mode ()
+  "My customizations for programming modes."
+  (set (make-local-variable 'truncate-lines) t)
+  (set (make-local-variable 'show-trailing-whitespace) t))
 (with-eval-after-load 'prog-mode
-  (add-hook 'prog-mode-hook #'hs-minor-mode)
-  (add-hook 'prog-mode-hook #'raghu--show-trailing-whitespace-in-buffer))
+  (add-hook 'prog-mode-hook #'raghu--customizations-prog-mode)
+  (add-hook 'prog-mode-hook #'hs-minor-mode))
 
+(defun raghu--customizations-python-mode ()
+  "My customizations for python-mode."
+  (hs-minor-mode -1))
 (with-eval-after-load 'python
-  (add-hook 'python-mode-hook (lambda () (hs-minor-mode -1)))
+  (add-hook 'python-mode-hook #'raghu--customizations-python-mode)
   (add-hook 'python-mode-hook #'outline-minor-mode))
 
+(defun raghu--customizations-shell-mode ()
+  "My customizations for shell-mode."
+  (set (make-local-variable 'comint-process-echoes) t)
+  (set (make-local-variable 'comint-buffer-maximum-size) 10240)
+  (set (make-local-variable 'comint-scroll-to-bottom-on-input) 'this)
+  (add-hook 'comint-output-filter-functions #'comint-truncate-buffer 0 t))
 (with-eval-after-load 'shell
-  (add-hook 'shell-mode-hook (lambda () (set (make-local-variable 'comint-process-echoes) t))))
+  (add-hook 'shell-mode-hook #'raghu--customizations-shell-mode))
 
 (with-eval-after-load 'sh-script
   (add-hook 'sh-mode-hook #'raghu--indent-without-tabs-in-buffer))
-
-(with-eval-after-load 'text-mode
-  (add-hook 'text-mode-hook #'raghu--do-word-wrap-in-buffer))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -669,8 +657,6 @@ Address the above through this function."
  ;; If there is more than one, they won't work right.
  '(backward-delete-char-untabify-method nil)
  '(column-number-mode t)
- '(comint-buffer-maximum-size 10240)
- '(comint-scroll-to-bottom-on-input 'this)
  '(confirm-kill-emacs 'y-or-n-p)
  '(fill-column 80)
  '(frame-background-mode 'light)
@@ -706,7 +692,6 @@ Address the above through this function."
  '(scroll-conservatively 5)
  '(show-paren-mode t)
  '(tool-bar-mode nil)
- '(truncate-lines t)
  '(uniquify-buffer-name-style 'forward nil (uniquify))
  '(use-dialog-box nil)
  '(vc-follow-symlinks t)
