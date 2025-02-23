@@ -33,7 +33,6 @@
 (define-key global-map (kbd "C-c N") #'display-line-numbers-mode)
 (define-key global-map (kbd "C-c e") #'er/expand-region)
 (define-key global-map (kbd "C-c f") #'forward-whitespace)
-(define-key global-map (kbd "C-c w") #'toggle-truncate-lines)
 
 ;; The menu bar helps me discover major-mode key-bindings.  The default
 ;; binding to access the menu---F10---is not easily available on some of
