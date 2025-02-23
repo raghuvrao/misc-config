@@ -31,7 +31,6 @@
 (define-key global-map (kbd "C-c H") #'global-hl-line-mode)
 (define-key global-map (kbd "C-c K") #'kill-whole-line)
 (define-key global-map (kbd "C-c N") #'display-line-numbers-mode)
-(define-key global-map (kbd "C-c e") #'er/expand-region)
 (define-key global-map (kbd "C-c f") #'forward-whitespace)
 
 ;; The menu bar helps me discover major-mode key-bindings.  The default
@@ -41,6 +40,9 @@
 
 (require 'windmove)
 (windmove-default-keybindings 'control)
+
+(require 'expand-region)
+(define-key global-map (kbd "C-c e") #'er/expand-region)
 
 (defun my/with-confirmation (fn &rest args)
   "With user confirmation, call function FN with arguments ARGS.
