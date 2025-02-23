@@ -43,7 +43,7 @@
 (require 'windmove)
 (windmove-default-keybindings 'control)
 
-(defun raghu/with-confirmation (fn &rest args)
+(defun my/with-confirmation (fn &rest args)
   "With user confirmation, call function FN with arguments ARGS.
 
 Obtain confirmation with `y-or-n-p' using the prompt \"Are you
@@ -52,12 +52,12 @@ sure?\".
 Usage examples:
 
 Call function foo (with arguments 2 3) with confirmation:
-  (raghu/with-confirmation #'foo 2 3)
+  (my/with-confirmation #'foo 2 3)
 Arrange to get confirmation whenever function foo is called:
-  (advice-add #'foo :around #'raghu/with-confirmation)"
+  (advice-add #'foo :around #'my/with-confirmation)"
   (when (y-or-n-p "Are you sure? ") (apply fn args)))
 
-(defun raghu/text-scratch-buffer ()
+(defun my/text-scratch-buffer ()
   "Switch to the scratch `text-mode' buffer.
 
 Create the buffer if it does not already exist."
@@ -65,9 +65,9 @@ Create the buffer if it does not already exist."
   (switch-to-buffer (get-buffer-create "*scratch-text*"))
   (when (eq (buffer-local-value 'major-mode (current-buffer)) 'fundamental-mode)
     (text-mode)))
-(define-key global-map (kbd "C-c T") #'raghu/text-scratch-buffer)
+(define-key global-map (kbd "C-c T") #'my/text-scratch-buffer)
 
-(defun raghu/scratch-buffer ()
+(defun my/scratch-buffer ()
   "Switch to the scratch buffer.
 
 Create the buffer if it does not already exist."
@@ -75,9 +75,9 @@ Create the buffer if it does not already exist."
   (switch-to-buffer (get-buffer-create "*scratch*"))
   (when (eq (buffer-local-value 'major-mode (current-buffer)) 'fundamental-mode)
     (lisp-interaction-mode)))
-(define-key global-map (kbd "C-c S") #'raghu/scratch-buffer)
+(define-key global-map (kbd "C-c S") #'my/scratch-buffer)
 
-(defun raghu/join-region (beg end)
+(defun my/join-region (beg end)
   "Join region into a single line.
 
 BEG and END mark the beginning and the end of the region.  Whole
@@ -106,7 +106,7 @@ Return number of lines joined."
 	    (setq joined (1+ joined))))))
     joined))
 
-(defun raghu/join-lines (lines)
+(defun my/join-lines (lines)
   "Join multiple lines into a single line.
 
 If LINES is 0, do not join any lines.  If LINES > 0, join the
@@ -131,24 +131,24 @@ Return number of lines joined."
 	(setq joined (1+ joined))))
     joined))
 
-(defun raghu/join-lines-or-region (&optional lines)
+(defun my/join-lines-or-region (&optional lines)
   "Join multiple lines.
 
 If mark is active, ignore LINES, and join the lines in the region
-using `raghu/join-region'.
+using `my/join-region'.
 
-If mark is not active, join LINES lines using `raghu/join-lines'.
+If mark is not active, join LINES lines using `my/join-lines'.
 
 This function is meant for interactive use.  When using
 interactively, use \\[universal-argument] to provide an argument
 for the LINES parameter."
   (interactive "*p")
   (if (use-region-p)
-      (raghu/join-region (region-beginning) (region-end))
-    (raghu/join-lines (prefix-numeric-value lines))))
-(define-key global-map (kbd "C-c j") #'raghu/join-lines-or-region)
+      (my/join-region (region-beginning) (region-end))
+    (my/join-lines (prefix-numeric-value lines))))
+(define-key global-map (kbd "C-c j") #'my/join-lines-or-region)
 
-(defun raghu/join-whole-buffer (buf)
+(defun my/join-whole-buffer (buf)
   "Join buffer BUF into one line.
 
 If BUF is narrowed, join only its accessible portion.
@@ -156,14 +156,14 @@ If BUF is narrowed, join only its accessible portion.
 If called interactively, read the buffer name from the
 minibuffer.
 
-`raghu/join-region' is used to do the joining."
+`my/join-region' is used to do the joining."
   (interactive "bBuffer")
   (with-current-buffer buf
     (barf-if-buffer-read-only)
-    (raghu/join-region (point-min) (point-max))))
-(define-key global-map (kbd "C-c J") #'raghu/join-whole-buffer)
+    (my/join-region (point-min) (point-max))))
+(define-key global-map (kbd "C-c J") #'my/join-whole-buffer)
 
-(defun raghu/empty-buffer (buf &optional delp)
+(defun my/empty-buffer (buf &optional delp)
   "Remove the contents of the buffer BUF.
 
 If BUF is narrowed, empty only its accessible portion.
@@ -180,9 +180,9 @@ get DELP from \\[universal-argument]."
     (if delp
 	(delete-region (point-min) (point-max))
       (kill-region (point-min) (point-max)))))
-(define-key global-map (kbd "C-c E") #'raghu/empty-buffer)
+(define-key global-map (kbd "C-c E") #'my/empty-buffer)
 
-(defun raghu/backward-whitespace (arg)
+(defun my/backward-whitespace (arg)
   "Move point to start of previous sequence of whitespace characters.
 
 Each such sequence may be a single newline, or a sequence of
@@ -190,10 +190,10 @@ consecutive space and/or tab characters.  With prefix argument
 ARG, move backwards ARG times."
   (interactive "p")
   (forward-whitespace (if (< arg 0) arg (- arg))))
-(define-key global-map (kbd "C-c b") #'raghu/backward-whitespace)
+(define-key global-map (kbd "C-c b") #'my/backward-whitespace)
 
 ;; Useful for changing CRLF line terminators to LF line terminators.
-(defun raghu/to-unix-utf-8-buffer (buf)
+(defun my/to-unix-utf-8-buffer (buf)
   "Convert file encoding system of buffer BUF to UNIX UTF-8.
 
 If called interactively, read buffer name from minibuffer."
@@ -205,7 +205,7 @@ If called interactively, read buffer name from minibuffer."
     (message "To UNIX UTF-8: %S" (get-buffer buf))
     t))
 
-(defun raghu/indent-buffer (buf)
+(defun my/indent-buffer (buf)
   "Indent buffer BUF.
 
 If BUF is narrowed, indent only its accessible portion.  If
@@ -220,7 +220,7 @@ called interactively, read buffer name from minibuffer."
 ;; async-shell-command runs the commands in buffers that are not
 ;; entirely uniquely named.  I want the buffers to be named after the
 ;; command that is run in them.
-(defun raghu/async-shell-command (cmd)
+(defun my/async-shell-command (cmd)
   "Run string CMD in buffer \"*Async: `CMD'*\".
 
 First, remove spaces, line-feeds, carriage-returns, vertical tabs
@@ -241,44 +241,44 @@ or double quotes."
     (switch-to-buffer buf-name)
     (setq default-directory dir)
     (async-shell-command cmd buf-name nil)))
-(define-key global-map (kbd "C-c d") #'raghu/async-shell-command)
+(define-key global-map (kbd "C-c d") #'my/async-shell-command)
 
-(defun raghu/visit-emacs-configuration-file ()
+(defun my/visit-emacs-configuration-file ()
   "Visit ~/.emacs.d/init.el."
   (interactive)
   (find-file (substitute-in-file-name "$HOME/.emacs.d/init.el")))
-(define-key global-map (kbd "C-c I") #'raghu/visit-emacs-configuration-file)
+(define-key global-map (kbd "C-c I") #'my/visit-emacs-configuration-file)
 
 ;; Scroll while keeping point on original text-line (so long as the
 ;; original text-line is in the window, of course).
 ;;
 ;; First, define a few scrolling-related functions.  These functions
 ;; will be eventually bound to keys.
-(defun raghu--scroll-text-one-line-up ()
+(defun my--scroll-text-one-line-up ()
   "Scroll text up by one line."
   (interactive)
   (scroll-up 1))
-(defun raghu--scroll-text-one-line-down ()
+(defun my--scroll-text-one-line-down ()
   "Scroll text down by one line."
   (interactive)
   (scroll-down 1))
-(defun raghu--scroll-text-one-col-left ()
+(defun my--scroll-text-one-col-left ()
   "Scroll text left by one column."
   (interactive)
   (scroll-left 1))
-(defun raghu--scroll-text-one-col-right ()
+(defun my--scroll-text-one-col-right ()
   "Scroll text right by one column."
   (interactive)
   (scroll-right 1))
 
 ;; Next, define a map variable, and in it, give key-bindings to the
 ;; above functions.
-(defvar raghu/scroll-map
+(defvar my/scroll-map
   (let ((map (make-sparse-keymap)))
-    (define-key map "e" #'raghu--scroll-text-one-line-up)
-    (define-key map "d" #'raghu--scroll-text-one-line-down)
-    (define-key map "s" #'raghu--scroll-text-one-col-left)
-    (define-key map "f" #'raghu--scroll-text-one-col-right)
+    (define-key map "e" #'my--scroll-text-one-line-up)
+    (define-key map "d" #'my--scroll-text-one-line-down)
+    (define-key map "s" #'my--scroll-text-one-col-left)
+    (define-key map "f" #'my--scroll-text-one-col-right)
     map)
   "Keymap for scrolling one line/column at a time.
 
@@ -288,27 +288,27 @@ window.")
 
 ;; Finally, define a function and a key-binding to activate the above
 ;; keymap in a transient fashion.
-(defun raghu/scroll ()
+(defun my/scroll ()
   "Scroll in the current buffer.
 
-Activate the keymap `raghu/scroll-map', which makes scrolling a
+Activate the keymap `my/scroll-map', which makes scrolling a
 little easier.  When a key that is not in the map is pressed, it
 will deactivate the keymap so usual editing operations can be
 resumed.  A mark is set at point's original starting position.
 
-\\{raghu/scroll-map}"
+\\{my/scroll-map}"
   (interactive)
   (push-mark)
-  (message "%s" "raghu/scroll-map ON")
-  (set-transient-map raghu/scroll-map
+  (message "%s" "my/scroll-map ON")
+  (set-transient-map my/scroll-map
 		     (lambda ()
-		       (when (assoc last-input-event raghu/scroll-map)
-			 (message "%s" "raghu/scroll-map ON")))
+		       (when (assoc last-input-event my/scroll-map)
+			 (message "%s" "my/scroll-map ON")))
 		     (lambda ()
-		       (message "%s" "raghu/scroll-map OFF"))))
-(define-key global-map (kbd "C-c s") #'raghu/scroll)
+		       (message "%s" "my/scroll-map OFF"))))
+(define-key global-map (kbd "C-c s") #'my/scroll)
 
-(defun raghu/kill-backward-to-indentation (&optional arg)
+(defun my/kill-backward-to-indentation (&optional arg)
   "Kill backward from point to first nonblank character on line.
 
 When ARG is a non-zero integer, kill backward from point to the
@@ -330,14 +330,14 @@ ARG can be supplied through \\[universal-argument]."
     (setq point-at-indent (point))
     (when (> starting-point point-at-indent)
       (kill-region point-at-indent starting-point))))
-(define-key global-map (kbd "C-c k") #'raghu/kill-backward-to-indentation)
+(define-key global-map (kbd "C-c k") #'my/kill-backward-to-indentation)
 
 ;; `comment-dwim' is too much magic, and `comment-line' includes, in
 ;; some situations, an extra line that I think ought not to be included.
 ;; I need something that just comments/uncomments lines or what I deem
 ;; as non-empty region, so write my own function that uses
 ;; `comment-lines' and `comment-or-uncomment-region' as appropriate.
-(defun raghu/comment-or-uncomment-lines-or-region (&optional lines)
+(defun my/comment-or-uncomment-lines-or-region (&optional lines)
   "Comment or uncomment region or lines.
 
 If region is active, ignore parameter LINES, and comment or
@@ -374,9 +374,9 @@ argument for LINES."
 	  (when (= beg end) (user-error "Effectively empty region"))
 	  (comment-or-uncomment-region beg end)))
     (comment-line (prefix-numeric-value lines))))
-(define-key global-map (kbd "C-c c") #'raghu/comment-or-uncomment-lines-or-region)
+(define-key global-map (kbd "C-c c") #'my/comment-or-uncomment-lines-or-region)
 
-(defun raghu/duplicate-and-comment-region (beg end)
+(defun my/duplicate-and-comment-region (beg end)
   "Duplicate and comment region.
 
 BEG and END mark the region.  Duplicate and comment whole lines;
@@ -413,7 +413,7 @@ buffer's major mode."
       (goto-char original-location)
       (set-marker original-location nil))))
 
-(defun raghu/duplicate-and-comment-lines (lines)
+(defun my/duplicate-and-comment-lines (lines)
   "Duplicate and comment lines.
 
 If LINES > 0, work on the current line and LINES-1 lines below
@@ -446,12 +446,12 @@ buffer's major mode."
 	(goto-char original-location)
 	(set-marker original-location nil)))))
 
-(defun raghu/duplicate-and-comment-lines-or-region (&optional lines)
+(defun my/duplicate-and-comment-lines-or-region (&optional lines)
   "Duplicate and comment lines.
 
 If mark is active, duplicate and comment the region using
-`raghu/duplicate-and-comment-region'.  Otherwise, duplicate and
-comment LINES lines using `raghu/duplicate-and-comment-lines'.
+`my/duplicate-and-comment-region'.  Otherwise, duplicate and
+comment LINES lines using `my/duplicate-and-comment-lines'.
 Use \\[universal-argument] to provide an argument for the LINES
 parameter.
 
@@ -462,11 +462,11 @@ mode."
   (interactive "*P")
   (comment-normalize-vars)
   (if (use-region-p)
-      (raghu/duplicate-and-comment-region (region-beginning) (region-end))
-    (raghu/duplicate-and-comment-lines (prefix-numeric-value lines))))
-(define-key global-map (kbd "C-c C") #'raghu/duplicate-and-comment-lines-or-region)
+      (my/duplicate-and-comment-region (region-beginning) (region-end))
+    (my/duplicate-and-comment-lines (prefix-numeric-value lines))))
+(define-key global-map (kbd "C-c C") #'my/duplicate-and-comment-lines-or-region)
 
-(defun raghu/region-expand-whole-lines (beg end &optional extremities)
+(defun my/region-expand-whole-lines (beg end &optional extremities)
   "Expand region to cover whole lines, and activate mark.
 
 BEG and END are the boundaries of the region to be expanded to
@@ -541,9 +541,9 @@ newline at region end and indentation at region beginning"
   ;; restore them now.
   (exchange-point-and-mark)
   (activate-mark))
-(define-key global-map (kbd "C-c n") #'raghu/region-expand-whole-lines)
+(define-key global-map (kbd "C-c n") #'my/region-expand-whole-lines)
 
-(defun raghu/new-line-above (arg)
+(defun my/new-line-above (arg)
   "Above current line, insert new line and indentation.
 
 With prefix argument ARG, insert that many lines above current
@@ -555,9 +555,9 @@ indentation according to mode."
     (beginning-of-line 1)
     (open-line arg)
     (indent-according-to-mode)))
-(define-key global-map (kbd "C-c O") #'raghu/new-line-above)
+(define-key global-map (kbd "C-c O") #'my/new-line-above)
 
-(defun raghu/new-line-below (arg)
+(defun my/new-line-below (arg)
   "Below current line, insert new line and indentation.
 
 With prefix argument ARG, insert that many lines below current
@@ -571,9 +571,9 @@ indentation according to mode."
       (newline arg nil))
     (forward-line)
     (indent-according-to-mode)))
-(define-key global-map (kbd "C-c o") #'raghu/new-line-below)
+(define-key global-map (kbd "C-c o") #'my/new-line-below)
 
-(defun raghu/insert-current-date-time (&optional arg)
+(defun my/insert-current-date-time (&optional arg)
   "At point, insert current date and time in system timezone.
 
 Use \\[universal-argument] to supply optional prefix argument
@@ -589,9 +589,9 @@ UNIX timestamp."
       (4  (setq timezone "Etc/UTC"))	; One `universal-argument'
       (16 (setq fmt "%s")))		; Two `universal-argument's
     (insert (format-time-string fmt nil timezone))))
-(define-key global-map (kbd "C-c t") #'raghu/insert-current-date-time)
+(define-key global-map (kbd "C-c t") #'my/insert-current-date-time)
 
-(defun raghu/activate-mark (&optional no-tmm)
+(defun my/activate-mark (&optional no-tmm)
   "Activate the mark without moving point.
 
 Activate the mark using `activate-mark'.  Send optional argument
@@ -607,48 +607,48 @@ Address the above through this function."
   (if (mark)
       (activate-mark no-tmm)
     (user-error "%s" "No mark set in this buffer")))
-(define-key global-map (kbd "C-c x") #'raghu/activate-mark)
+(define-key global-map (kbd "C-c x") #'my/activate-mark)
 
-(defun raghu--indent-without-tabs-in-buffer ()
+(defun my--indent-without-tabs-in-buffer ()
   "In the current buffer, arrange not to use tabs for indentation."
   (set (make-local-variable 'indent-tabs-mode) nil))
 
-(defun raghu--backward-delete-char-untabify ()
+(defun my--backward-delete-char-untabify ()
   "When deleting a tab, arrange to turn the tab to many spaces to delete one space."
   (set (make-local-variable 'backward-delete-char-untabify-method) 'untabify))
 
 (with-eval-after-load 'elisp-mode
-  (add-hook 'emacs-lisp-mode-hook #'raghu--backward-delete-char-untabify))
+  (add-hook 'emacs-lisp-mode-hook #'my--backward-delete-char-untabify))
 
 (with-eval-after-load 'js
-  (add-hook 'js-mode-hook #'raghu--indent-without-tabs-in-buffer))
+  (add-hook 'js-mode-hook #'my--indent-without-tabs-in-buffer))
 
-(defun raghu--customizations-prog-mode ()
+(defun my--customizations-prog-mode ()
   "My customizations for programming modes."
   (set (make-local-variable 'truncate-lines) t)
   (set (make-local-variable 'show-trailing-whitespace) t))
 (with-eval-after-load 'prog-mode
-  (add-hook 'prog-mode-hook #'raghu--customizations-prog-mode)
+  (add-hook 'prog-mode-hook #'my--customizations-prog-mode)
   (add-hook 'prog-mode-hook #'hs-minor-mode))
 
-(defun raghu--customizations-python-mode ()
+(defun my--customizations-python-mode ()
   "My customizations for python-mode."
   (hs-minor-mode -1))
 (with-eval-after-load 'python
-  (add-hook 'python-mode-hook #'raghu--customizations-python-mode)
+  (add-hook 'python-mode-hook #'my--customizations-python-mode)
   (add-hook 'python-mode-hook #'outline-minor-mode))
 
-(defun raghu--customizations-shell-mode ()
+(defun my--customizations-shell-mode ()
   "My customizations for shell-mode."
   (set (make-local-variable 'comint-process-echoes) t)
   (set (make-local-variable 'comint-buffer-maximum-size) 10240)
   (set (make-local-variable 'comint-scroll-to-bottom-on-input) 'this)
   (add-hook 'comint-output-filter-functions #'comint-truncate-buffer 0 t))
 (with-eval-after-load 'shell
-  (add-hook 'shell-mode-hook #'raghu--customizations-shell-mode))
+  (add-hook 'shell-mode-hook #'my--customizations-shell-mode))
 
 (with-eval-after-load 'sh-script
-  (add-hook 'sh-mode-hook #'raghu--indent-without-tabs-in-buffer))
+  (add-hook 'sh-mode-hook #'my--indent-without-tabs-in-buffer))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
