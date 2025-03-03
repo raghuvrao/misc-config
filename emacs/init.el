@@ -702,12 +702,11 @@ Address the above through this function."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:height 120 :family "IBM Plex Sans"))))
  '(compilation-error ((((type x) (class color) (background light)) (:foreground "firebrick"))))
  '(compilation-info ((((type x) (class color) (background light)) (:foreground "DarkGreen"))))
  '(compilation-mode-line-fail ((((type x) (class color) (background light)) (:inherit compilation-error :weight bold))))
  '(compilation-warning ((((type x) (class color) (background light)) (:foreground "saddle brown"))))
- '(cursor ((((type x) (class color) (background light)) (:background "SteelBlue"))))
+ '(cursor ((((type x) (class color) (background light)) (:background "magenta3"))))
  '(eshell-prompt ((((type x) (class color) (background light)) (:foreground "DarkMagenta"))))
  '(font-lock-builtin-face ((t nil)))
  '(font-lock-comment-face ((((type x tty) (class color) (min-colors 8) (background light)) (:foreground "MediumBlue"))))
@@ -720,6 +719,7 @@ Address the above through this function."
  '(font-lock-type-face ((t nil)))
  '(font-lock-variable-name-face ((t nil)))
  '(font-lock-warning-face ((((type x) (class color) (background light)) (:foreground "brown")) (((type tty) (class color) (min-colors 88) (background light)) (:foreground "brown"))))
+ '(help-key-binding ((((type x) (class color) (background light)) (:background "grey96" :foreground "DarkBlue" :weight bold))))
  '(hl-line ((((type x tty) (class color) (background light)) (:extend t :background "linen"))))
  '(isearch ((((type x) (class color) (background light)) (:background "magenta3" :foreground "white"))))
  '(line-number ((((type x) (class color) (background light)) (:inherit (fixed-pitch shadow)))))
