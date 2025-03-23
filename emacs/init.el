@@ -699,6 +699,7 @@ Address the above through this function."
  '(backward-delete-char-untabify-method nil)
  '(column-number-mode t)
  '(confirm-kill-emacs 'y-or-n-p)
+ '(cursor-type '(bar . 2))
  '(eglot-ignored-server-capabilities '(:documentHighlightProvider))
  '(fill-column 80)
  '(frame-background-mode 'light)
