@@ -753,6 +753,7 @@ Address the above through this function."
  '(font-lock-builtin-face ((t nil)))
  '(font-lock-comment-face ((((type x tty) (class color) (min-colors 8) (background light)) (:foreground "MediumBlue"))))
  '(font-lock-constant-face ((t nil)))
+ '(font-lock-doc-face ((((class color) (min-colors 8) (background light)) (:foreground "DarkGreen"))))
  '(font-lock-function-name-face ((t nil)))
  '(font-lock-keyword-face ((t nil)))
  '(font-lock-regexp-grouping-backslash ((((type x) (class color) (background light)) (:background "honeydew" :weight bold)) (t (:weight bold))))
