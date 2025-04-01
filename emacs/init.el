@@ -744,6 +744,7 @@ Address the above through this function."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(default ((t (:family "Ubuntu Sans"))))
  '(compilation-error ((((type x) (class color) (background light)) (:foreground "firebrick"))))
  '(compilation-info ((((type x) (class color) (background light)) (:foreground "DarkGreen"))))
  '(compilation-mode-line-fail ((((type x) (class color) (background light)) (:inherit compilation-error :weight bold))))
@@ -766,7 +767,7 @@ Address the above through this function."
  '(hl-line ((((type x tty) (class color) (background light)) (:extend t :background "linen"))))
  '(isearch ((((type x) (class color) (background light)) (:background "magenta3" :foreground "white"))))
  '(line-number ((((type x) (class color) (background light)) (:inherit (fixed-pitch shadow)))))
- '(line-number-current-line ((((type x tty) (class color) (background light)) (:inherit (fringe line-number) :weight bold)) (t (:inherit line-number :weight bold))))
+ '(line-number-current-line ((t (:inherit (line-number hl-line)))))
  '(menu ((((type tty) (class color) (min-colors 88) (background light)) (:extend t :background "white" :foreground "black"))))
  '(mode-line ((((type x) (class color) (background light)) (:background "grey82" :foreground "black" :box (:line-width 1 :color "black")))))
  '(mode-line-highlight ((((type x) (class color) (background light)) (:background "PaleTurquoise"))))
