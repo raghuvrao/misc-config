@@ -44,6 +44,9 @@
 (require 'expand-region)
 (define-key global-map (kbd "C-c e") #'er/expand-region)
 
+;; Disable the scroll bars in the minibuffer window.
+(set-window-scroll-bars (minibuffer-window) nil nil nil nil t)
+
 (defun my/with-confirmation (fn &rest args)
   "With user confirmation, call function FN with arguments ARGS.
 
