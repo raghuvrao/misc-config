@@ -705,6 +705,7 @@ Address the above through this function."
  '(cursor-type '(bar . 2))
  '(eglot-ignored-server-capabilities '(:documentHighlightProvider))
  '(fill-column 80)
+ '(font-use-system-font t)
  '(frame-background-mode 'light)
  '(frame-resize-pixelwise t)
  '(gnutls-algorithm-priority "normal:-vers-tls1.3")
