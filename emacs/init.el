@@ -664,6 +664,7 @@ Address the above through this function."
  '(confirm-kill-emacs 'y-or-n-p)
  '(cursor-type '(bar . 2))
  '(fill-column 80)
+ '(font-use-system-font t)
  '(frame-background-mode 'light)
  '(frame-resize-pixelwise t)
  '(gnutls-algorithm-priority "normal:-vers-tls1.3")
