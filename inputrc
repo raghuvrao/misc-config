@@ -8,12 +8,3 @@ set expand-tilde on
 set show-all-if-ambiguous off
 set show-all-if-unmodified on
 set skip-completed-text on
-
-set editing-mode vi
-
-set keymap vi-insert
-"\C-E": insert-last-argument
-"\C-L": clear-screen
-
-set keymap vi-command
-"\C-F": re-read-init-file
