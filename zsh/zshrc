@@ -26,11 +26,11 @@ HISTSIZE=10500
 SAVEHIST=10000
 READNULLCMD=less
 REPORTTIME=1
-# WORDCHARS=''
+WORDCHARS=''
 ZLE_REMOVE_SUFFIX_CHARS='"'
 ZLE_SPACE_SUFFIX_CHARS=
 
-bindkey -M viins '^E' insert-last-word
+bindkey -e
 
 q () {
     unset HISTFILE
