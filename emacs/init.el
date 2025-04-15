@@ -295,21 +295,15 @@ window.")
 (defun my/scroll ()
   "Scroll in the current buffer.
 
-Activate the keymap `my/scroll-map', which makes scrolling a
-little easier.  When a key that is not in the map is pressed, it
-will deactivate the keymap so usual editing operations can be
-resumed.  A mark is set at point's original starting position.
+Set a mark at point's original starting position, and activate
+the keymap `my/scroll-map', which makes scrolling a little
+easier.  To deactivate the keymap, type any key that is not in
+the keymap.
 
 \\{my/scroll-map}"
   (interactive)
   (push-mark)
-  (message "%s" "my/scroll-map ON")
-  (set-transient-map my/scroll-map
-		     (lambda ()
-		       (when (assoc last-input-event my/scroll-map)
-			 (message "%s" "my/scroll-map ON")))
-		     (lambda ()
-		       (message "%s" "my/scroll-map OFF"))))
+  (set-transient-map my/scroll-map t nil "my/scroll-map ON" nil))
 (define-key global-map (kbd "C-c s") #'my/scroll)
 
 (defun my/kill-backward-to-indentation (&optional arg)
