@@ -589,23 +589,15 @@ UNIX timestamp."
     (insert (format-time-string fmt nil timezone))))
 (define-key global-map (kbd "C-c t") #'my/insert-current-date-time)
 
-(defun my/activate-mark (&optional no-tmm)
-  "Activate the mark without moving point.
+(defun my/reactivate-mark (&optional no-tmm)
+  "Reactivate the mark without moving point.
 
-Activate the mark using `activate-mark'.  Send optional argument
-NO-TMM to `activate-mark' without modification.
-
-While keeping Transient Mark mode disabled, reactivating the
-deactivated mark exchanges point and mark (see info
-node `(emacs)Disabled Transient Mark').  Also, `activate-mark' is
-not an interactive function.
-
-Address the above through this function."
+Activate the mark using `activate-mark'."
   (interactive "P")
   (if (mark)
       (activate-mark no-tmm)
     (user-error "%s" "No mark set in this buffer")))
-(define-key global-map (kbd "C-c x") #'my/activate-mark)
+(define-key global-map (kbd "C-c x") #'my/reactivate-mark)
 
 (defun my--indent-without-tabs-in-buffer ()
   "In the current buffer, arrange not to use tabs for indentation."
