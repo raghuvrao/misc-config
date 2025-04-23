@@ -31,6 +31,8 @@ ZLE_REMOVE_SUFFIX_CHARS='"'
 ZLE_SPACE_SUFFIX_CHARS=
 
 bindkey -e
+bindkey -M emacs '^[f' emacs-forward-word
+bindkey -M emacs '^U' backward-kill-line
 
 q () {
     unset HISTFILE
