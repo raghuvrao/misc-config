@@ -697,7 +697,7 @@ Activate the mark using `activate-mark'."
  '(compilation-info ((((type x) (class color) (background light)) (:foreground "DarkGreen"))))
  '(compilation-mode-line-fail ((((type x) (class color) (background light)) (:inherit compilation-error :weight bold))))
  '(compilation-warning ((((type x) (class color) (background light)) (:foreground "saddle brown"))))
- '(cursor ((((type x) (class color) (background light)) (:background "SteelBlue3"))))
+ '(cursor ((((type x) (class color) (background light)) (:background "MediumOrchid"))))
  '(eshell-prompt ((((type x) (class color) (background light)) (:foreground "DarkMagenta"))))
  '(font-lock-builtin-face ((t nil)))
  '(font-lock-comment-face ((((type x tty) (class color) (min-colors 8) (background light)) (:foreground "MediumBlue"))))
