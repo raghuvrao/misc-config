@@ -688,7 +688,7 @@ Activate the mark using `activate-mark'."
  '(backward-delete-char-untabify-method nil)
  '(column-number-mode t)
  '(confirm-kill-emacs 'y-or-n-p)
- '(cursor-type '(bar . 3))
+ '(cursor-type '(bar . 5))
  '(eglot-ignored-server-capabilities '(:documentHighlightProvider))
  '(fill-column 80)
  '(font-use-system-font t)
