@@ -707,7 +707,7 @@ Activate the mark using `activate-mark'."
  '(ispell-dictionary nil)
  '(js-indent-level 2)
  '(line-move-visual nil)
- '(line-spacing 0.2)
+ '(line-spacing 0.4)
  '(make-backup-files nil)
  '(mouse-wheel-progressive-speed nil)
  '(mouse-wheel-scroll-amount '(1 ((shift) . 5) ((control))))
@@ -735,6 +735,7 @@ Activate the mark using `activate-mark'."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(default ((t (:height 110 :family "DejaVu Serif"))))
  '(compilation-error ((((class color) (min-colors 256) (background light)) (:foreground "firebrick"))))
  '(compilation-info ((((class color) (min-colors 256) (background light)) (:foreground "DarkGreen"))))
  '(compilation-mode-line-fail ((((class color) (min-colors 256) (background light)) (:inherit compilation-error :weight bold))))
