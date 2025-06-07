@@ -694,11 +694,11 @@ Activate the mark using `activate-mark'."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(default ((t (:family "Noto Sans"))))
  '(compilation-error ((((class color) (min-colors 256) (background light)) (:foreground "firebrick"))))
  '(compilation-info ((((class color) (min-colors 256) (background light)) (:foreground "DarkGreen"))))
  '(compilation-mode-line-fail ((((class color) (min-colors 256) (background light)) (:inherit compilation-error :weight bold))))
  '(compilation-warning ((((class color) (min-colors 256) (background light)) (:foreground "saddle brown"))))
- '(cursor ((((class color) (min-colors 256) (background light)) (:background "MediumOrchid"))))
  '(eshell-prompt ((((class color) (min-colors 256) (background light)) (:foreground "DarkMagenta"))))
  '(font-lock-builtin-face ((t nil)))
  '(font-lock-comment-face ((((class color) (min-colors 256) (background light)) (:foreground "MediumBlue"))))
