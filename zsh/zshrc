@@ -43,6 +43,10 @@ q () {
     exit
 }
 
+s () {
+    print -P '%?'
+}
+
 alias ls='ls -A -p'
 alias ll='ls -h -l'
 alias grep='grep --color=auto'
