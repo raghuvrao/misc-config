@@ -703,7 +703,7 @@ Activate the mark using `activate-mark'."
  '(font-lock-builtin-face ((t nil)))
  '(font-lock-comment-face ((((class color) (min-colors 256) (background light)) (:foreground "MediumBlue"))))
  '(font-lock-constant-face ((t nil)))
- '(font-lock-doc-face ((((class color) (min-colors 256) (background light)) (:foreground "DarkGreen"))))
+ '(font-lock-doc-face ((((class color) (min-colors 256) (background light)) (:foreground "SeaGreen"))))
  '(font-lock-function-name-face ((t nil)))
  '(font-lock-keyword-face ((t nil)))
  '(font-lock-regexp-grouping-backslash ((((class color) (min-colors 256) (background light)) (:background "honeydew" :weight bold)) (t (:weight bold))))
