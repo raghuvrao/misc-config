@@ -31,6 +31,7 @@ hi Cursor guifg=White guibg=magenta3 gui=NONE
 
 if &t_Co >= 256
     hi CursorLine ctermfg=NONE ctermbg=254 cterm=NONE
+    hi CursorColumn ctermfg=NONE ctermbg=254 cterm=NONE
 endif
 
 hi EndOfBuffer ctermfg=Blue ctermbg=NONE cterm=bold guifg=Blue guibg=NONE gui=bold
