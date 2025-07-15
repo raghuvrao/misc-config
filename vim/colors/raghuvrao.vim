@@ -74,7 +74,14 @@ hi Todo ctermfg=DarkMagenta ctermbg=NONE cterm=bold guifg=DarkMagenta guibg=Ligh
 
 hi WarningMsg ctermfg=DarkRed ctermbg=NONE cterm=NONE guifg=DarkRed guibg=NONE gui=NONE
 
-hi Visual ctermfg=White ctermbg=Blue cterm=NONE guifg=White guibg=RoyalBlue gui=NONE
+hi Visual guifg=White guibg=RoyalBlue gui=NONE
+if &t_Co >= 256
+    hi Visual ctermfg=NONE ctermbg=153 cterm=NONE
+elseif &t_Co >= 16
+    hi Visual ctermfg=White ctermbg=Blue cterm=NONE
+else
+    hi Visual ctermfg=LightGrey ctermbg=DarkBlue cterm=bold
+endif
 
 hi VertSplit cterm=reverse,bold gui=reverse,bold term=reverse,bold
 
