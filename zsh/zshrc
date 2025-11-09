@@ -48,6 +48,9 @@ s () {
 }
 
 alias ls='ls -A -p'
+if [[ -n "${INSIDE_EMACS}" ]]; then
+    alias ls='ls -A -p -1'
+fi
 alias ll='ls -h -l'
 alias grep='grep --color=auto'
 alias cgrep='grep --color=always'
