@@ -599,37 +599,6 @@ Activate the mark using `activate-mark'."
     (user-error "%s" "No mark set in this buffer")))
 (define-key global-map (kbd "C-c x") #'my/reactivate-mark)
 
-(require 'company)
-(require 'yasnippet)
-
-(require 'eglot)
-
-(setq-default eglot-workspace-configuration
-	      '((:gopls . (:staticcheck t))))
-
-(require 'project)
-
-(defun my--project-go-implement-project-root ()
-  "Provide an implementation for the generic function `project-root'."
-  (cl-defmethod project-root ((project (head go-module)))
-    (cdr project)))
-
-(defun my--project-find-go-module (dir)
-  (when-let ((root (locate-dominating-file dir "go.mod")))
-    (cons 'go-module root)))
-
-(defun my--eglot-interactively-organize-imports ()
-  "Provide arguments to `eglot-code-action-organize-imports' via `call-interactively'."
-  (call-interactively #'eglot-code-action-organize-imports))
-
-(defun my--eglot-organize-imports-before-save ()
-  "Organize imports before saving the buffer."
-  (add-hook 'before-save-hook #'my--eglot-interactively-organize-imports nil t))
-
-(defun my--eglot-format-buffer-before-save ()
-  "Format the buffer before saving it."
-  (add-hook 'before-save-hook #'eglot-format-buffer -10 t))
-
 (defun my--indent-without-tabs-in-buffer ()
   "In the current buffer, arrange not to use tabs for indentation."
   (set (make-local-variable 'indent-tabs-mode) nil))
@@ -640,12 +609,6 @@ Activate the mark using `activate-mark'."
 
 (with-eval-after-load 'elisp-mode
   (add-hook 'emacs-lisp-mode-hook #'my--backward-delete-char-untabify))
-
-(with-eval-after-load 'go-mode
-  (add-hook 'go-mode-hook #'eglot-ensure)
-  (add-hook 'go-mode-hook #'my--project-go-implement-project-root)
-  (add-hook 'go-mode-hook #'my--eglot-organize-imports-before-save)
-  (add-hook 'go-mode-hook #'my--eglot-format-buffer-before-save))
 
 (with-eval-after-load 'js
   (add-hook 'js-mode-hook #'my--indent-without-tabs-in-buffer))
@@ -689,7 +652,7 @@ Activate the mark using `activate-mark'."
  '(column-number-mode t)
  '(confirm-kill-emacs 'y-or-n-p)
  '(cursor-in-non-selected-windows nil)
- '(cursor-type '(bar . 4))
+ '(cursor-type '(bar . 2))
  '(eglot-ignored-server-capabilities '(:documentHighlightProvider))
  '(fill-column 80)
  '(font-use-system-font t)
@@ -735,33 +698,16 @@ Activate the mark using `activate-mark'."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Noto Sans"))))
- '(compilation-error ((((class color) (min-colors 256) (background light)) (:foreground "firebrick"))))
- '(compilation-info ((((class color) (min-colors 256) (background light)) (:foreground "DarkGreen"))))
- '(compilation-mode-line-fail ((((class color) (min-colors 256) (background light)) (:inherit compilation-error :weight bold))))
- '(compilation-warning ((((class color) (min-colors 256) (background light)) (:foreground "saddle brown"))))
- '(eshell-prompt ((((class color) (min-colors 256) (background light)) (:foreground "DarkMagenta"))))
+ '(default ((t (:family "IBM Plex Sans"))))
  '(font-lock-builtin-face ((t nil)))
- '(font-lock-comment-face ((((class color) (min-colors 256) (background light)) (:foreground "MediumBlue"))))
+ '(font-lock-comment-face ((((class color) (min-colors 256) (background light)) (:foreground "RoyalBlue4"))))
  '(font-lock-constant-face ((t nil)))
- '(font-lock-doc-face ((((class color) (min-colors 256) (background light)) (:foreground "SeaGreen"))))
  '(font-lock-function-name-face ((t nil)))
  '(font-lock-keyword-face ((t nil)))
- '(font-lock-regexp-grouping-backslash ((((class color) (min-colors 256) (background light)) (:background "honeydew" :weight bold)) (t (:weight bold))))
- '(font-lock-regexp-grouping-construct ((((class color) (min-colors 256) (background light)) (:background "lavender blush" :weight bold)) (t (:weight bold))))
  '(font-lock-string-face ((t nil)))
  '(font-lock-type-face ((t nil)))
  '(font-lock-variable-name-face ((t nil)))
- '(font-lock-warning-face ((((class color) (min-colors 256) (background light)) (:foreground "brown"))))
- '(fringe ((((class color) (background light)) (:inherit shadow))))
- '(help-key-binding ((((class color) (min-colors 256) (background light)) (:background "grey96" :foreground "DarkBlue" :weight bold))))
- '(hl-line ((((class color) (min-colors 256) (background light)) (:extend t :background "linen"))))
- '(isearch ((((class color) (min-colors 256) (background light)) (:background "magenta3" :foreground "white"))))
- '(line-number-current-line ((((class color) (background light)) (:inherit default))))
- '(menu ((((type tty) (class color) (min-colors 256) (background light)) (:extend t :background "LightGrey" :foreground "black"))))
- '(mode-line ((((class color) (min-colors 256) (background light)) (:background "grey82" :foreground "black" :box (:line-width (1 . 1) :color "black")))))
- '(mode-line-highlight ((((class color) (min-colors 256) (background light)) (:background "PaleTurquoise"))))
- '(mode-line-inactive ((((class color) (min-colors 256) (background light)) (:inherit mode-line :background "gray92" :box (:line-width (1 . 1) :color "grey60")))))
+ '(font-lock-warning-face ((((class color) (min-colors 256) (background light)) (:foreground "Brown"))))
  '(org-block ((t nil)))
  '(org-checkbox ((t nil)))
  '(org-date ((t nil)))
@@ -773,14 +719,7 @@ Activate the mark using `activate-mark'."
  '(org-todo ((t nil)))
  '(org-verbatim ((t nil)))
  '(outline-4 ((t nil)))
- '(scroll-bar ((((class color) (background light)) (:background "grey95" :foreground "grey65"))))
- '(sh-quoted-exec ((t nil)))
- '(show-paren-match ((((class color) (min-colors 256) (background light)) (:background "PaleTurquoise"))))
- '(trailing-whitespace ((((class color) (min-colors 256) (background light)) (:background "MistyRose2"))))
- '(tty-menu-disabled-face ((((type tty) (class color) (min-colors 256)) (:background "blue" :foreground "grey"))))
- '(tty-menu-enabled-face ((((type tty) (class color) (min-colors 256)) (:background "blue" :foreground "brightwhite"))))
- '(tty-menu-selected-face ((((type tty) (class color) (min-colors 256)) (:background "magenta"))))
- '(widget-field ((((type tty) (class color) (min-colors 256) (background light)) (:background "white" :foreground "black")))))
+ '(sh-quoted-exec ((t nil))))
 
 (require 'server)
 ;; To check if *this* Emacs process started a server, use:
