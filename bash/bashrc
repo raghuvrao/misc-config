@@ -41,8 +41,11 @@ s ()
 
 alias cgrep='command grep --color=always'
 alias grep='grep --color=auto'
-alias ll='ls -l'
 alias ls='ls -A -p'
+if [[ -n "${INSIDE_EMACS}" ]]; then
+    alias ls='ls -A -p -1'
+fi
+alias ll='ls -l'
 alias pr='pr -t'
 
 source "${HOME}/.bashrc_local.bash"
