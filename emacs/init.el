@@ -682,7 +682,6 @@ Activate the mark using `activate-mark'."
  '(save-place-mode t)
  '(scroll-bar-mode nil)
  '(scroll-conservatively 5)
- '(show-paren-mode t)
  '(tool-bar-mode nil)
  '(uniquify-buffer-name-style 'forward nil (uniquify))
  '(use-dialog-box nil)
