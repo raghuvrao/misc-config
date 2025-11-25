@@ -654,7 +654,6 @@ Activate the mark using `activate-mark'."
  '(font-use-system-font t)
  '(frame-background-mode 'light)
  '(frame-resize-pixelwise t)
- '(gnutls-algorithm-priority "normal:-vers-tls1.3")
  '(help-window-select t)
  '(horizontal-scroll-bar-mode nil)
  '(hscroll-margin 2)
