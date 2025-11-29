@@ -1,2 +1,4 @@
-" Disable Python indentation plugin.
-let b:did_indent = 1
+vim9script
+
+# Disable Python indentation plugin.
+b:did_indent = 1
