@@ -1,5 +1,7 @@
-" ~/.gvimrc ~/.vim/gvimrc
-" Author: Raghu V. Rao <raghu.v.rao@gmail.com>
+vim9script
+
+# ~/.gvimrc ~/.vim/gvimrc
+# Author: Raghu V. Rao <raghu.v.rao@gmail.com>
 
 set showtabline=2
 
