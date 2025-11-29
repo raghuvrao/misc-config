@@ -1,9 +1,11 @@
+vim9script
+
 scriptencoding utf-8
 
-" ~/.vimrc ~/.vim/vimrc
-" Author: Raghu V. Rao <raghu.v.rao@gmail.com>
+# ~/.vimrc ~/.vim/vimrc
+# Author: Raghu V. Rao <raghu.v.rao@gmail.com>
 
-" Useful when starting Vim as ex.
+# Useful when starting Vim as ex.
 set nocompatible
 
 set nobackup
@@ -13,28 +15,28 @@ set noundofile
 set nomodeline
 set modelines=0
 
-let mapleader = '\'
-let maplocalleader = '_'
+g:mapleader = '\'
+g:maplocalleader = '_'
 
 set backspace=indent,eol,start
 
-let &softtabstop=&tabstop
+&softtabstop = &tabstop
 
 set nowrap
 
 set sidescroll=1
 
-" Do not allow the cursor to move onto the extends/precedes listchars.
+# Do not allow the cursor to move onto the extends/precedes listchars.
 set sidescrolloff=1
 
-" Time out on terminal-key-codes, and not on mappings.
+# Time out on terminal-key-codes, and not on mappings.
 set ttimeout
 set notimeout
 
 set nowildmenu
 set wildmode=longest,list,full
 
-" Show line and column numbers even when statusline is disabled.
+# Show line and column numbers even when statusline is disabled.
 set ruler
 
 set showcmd
@@ -71,7 +73,7 @@ endif
 
 if !has('gui_running')
     set mouse=
-    " Do not meddle with the terminal's cursor.
+    # Do not meddle with the terminal's cursor.
     set t_ve=
     set t_vi=
     set t_vs=
@@ -85,18 +87,18 @@ if !has('gui_running')
     set t_RC=
     set t_RS=
     if &term =~# '^\%(screen\|tmux\)'
-        " :help xterm-mouse, :help sgr-mouse
+        # :help xterm-mouse, :help sgr-mouse
         set ttymouse=sgr
-        " :help arrow_modifiers
+        # :help arrow_modifiers
         execute "set <xUp>=\<Esc>[@;*A"
         execute "set <xDown>=\<Esc>[@;*B"
         execute "set <xRight>=\<Esc>[@;*C"
         execute "set <xLeft>=\<Esc>[@;*D"
-        " :help xterm-bracketed-paste
-        let &t_BD = "\<Esc>[?2004l"
-        let &t_BE = "\<Esc>[?2004h"
-        let &t_PS = "\<Esc>[200~"
-        let &t_PE = "\<Esc>[201~"
+        # :help xterm-bracketed-paste
+        &t_BD = "\<Esc>[?2004l"
+        &t_BE = "\<Esc>[?2004h"
+        &t_PS = "\<Esc>[200~"
+        &t_PE = "\<Esc>[201~"
     endif
 endif
 
@@ -107,10 +109,10 @@ set formatoptions=1jlmnoqr
 filetype plugin indent on
 
 runtime ftplugin/man.vim
-let g:ft_man_open_mode = 'tab'
+g:ft_man_open_mode = 'tab'
 set keywordprg=:Man
 
-" Delete the vimrcEx and vimStartup autocommand groups.
+# Delete the vimrcEx and vimStartup autocommand groups.
 augroup vimrcEx
     autocmd!
 augroup END
@@ -120,31 +122,31 @@ augroup vimStartup
 augroup END
 augroup! vimStartup
 
-function! JumpToLastExitPosition() abort
-    if getcurpos()[1:2] == [1, 1]
-                \ && expand('%:p') !=# ''
-                \ && !(&diff)
-                \ && &buftype ==# ''
-                \ && &filetype !=# 'git'
-                \ && &filetype !=# 'gitcommit'
-                \ && &filetype !=# 'gitrebase'
-                \ && &filetype !=# 'hgcommit'
-                \ && &filetype !=# 'man'
-                \ && &filetype !=# 'svn'
-        let x = line("'\"")
+def! g:JumpToLastExitPosition()
+    if getcurpos()[1 : 2] == [1, 1]
+            && expand('%:p') !=# ''
+            && !(&diff)
+            && &buftype ==# ''
+            && &filetype !=# 'git'
+            && &filetype !=# 'gitcommit'
+            && &filetype !=# 'gitrebase'
+            && &filetype !=# 'hgcommit'
+            && &filetype !=# 'man'
+            && &filetype !=# 'svn'
+        var x = line("'\"")
         if 1 <= x && x <= line('$')
             normal! g`"zz
         endif
     endif
-endfunction
+enddef
 augroup jump_to_last_exit_position
     autocmd!
     autocmd BufReadPost * call JumpToLastExitPosition()
 augroup END
 
-function! PutCurrentTimestamp(unixt = 0) abort
-    put =strftime(a:unixt ? '%s' : '%F %a %T %Z(UTC%z)')
-endfunction
+def! g:PutCurrentTimestamp(unixt = 0)
+    put =strftime(unixt ? '%s' : '%F %a %T %Z(UTC%z)')
+enddef
 command! -nargs=? PutCurrentTimestamp call PutCurrentTimestamp(<args>)
 
 if executable('xsel')
@@ -180,24 +182,26 @@ nnoremap <Leader>w <Cmd>set invwrap<CR>
 
 nnoremap <Leader>h <Cmd>nohlsearch<CR>
 
-nnoremap <Leader><CR> <Cmd>call maxtab#ToggleMaximizeToTab()<CR>
+import autoload 'maxtab.vim' as maxtab
+nnoremap <Leader><CR> <ScriptCmd>call maxtab.ToggleMaximizeToTab()<CR>
 
-nnoremap <Leader>] <Cmd>echo synids#SynIDs(line('.'), col('.'))<CR>
+import autoload 'synids.vim' as synids
+nnoremap <Leader>] <ScriptCmd>echo synids.SynIDs(line('.'), col('.'))<CR>
 
-function! RedrawLineNearEdge(edge, percentage) abort
+def! g:RedrawLineNearEdge(edge: number, percentage: number)
     if &wrap
         echoerr "Not implemented when 'wrap' is set"
         return
     endif
-    if a:percentage < 0 || a:percentage > 100
-        echoerr "Percentage" a:percentage "is not in the interval [0, 100]"
+    if percentage < 0 || percentage > 100
+        echoerr "Percentage" percentage "is not in the interval [0, 100]"
         return
     endif
-    let wh = winheight(0)
-    let lc = float2nr((wh * a:percentage) / 100)
-    let wl = winline()
-    if a:edge == 0 " Top edge
-        let c = wl - lc - 1
+    var win_height = winheight(0)
+    var line_count = float2nr((win_height * percentage) / 100)
+    var win_line = winline()
+    if edge == 0 # Top edge
+        var c = win_line - line_count - 1
         if c == 0
             return
         elseif c < 0
@@ -205,8 +209,8 @@ function! RedrawLineNearEdge(edge, percentage) abort
         else
             execute 'normal!' .. c .. "\<C-E>"
         endif
-    else " Bottom edge
-        let c = wh - lc - wl
+    else # Bottom edge
+        var c = win_height - line_count - win_line
         if c == 0
             return
         elseif c < 0
@@ -215,7 +219,7 @@ function! RedrawLineNearEdge(edge, percentage) abort
             execute 'normal!' .. c .. "\<C-Y>"
         endif
     endif
-endfunction
+enddef
 nnoremap <silent> zB <Cmd>call RedrawLineNearEdge(1, 12)<CR>
 nnoremap <silent> zT <Cmd>call RedrawLineNearEdge(0, 12)<CR>
 xnoremap <silent> zB <Cmd>call RedrawLineNearEdge(1, 12)<CR>
@@ -232,14 +236,14 @@ inoremap <CR> <C-G>u<CR>
 
 runtime vimrc_local.vim
 
-" Do not highlight numbers, characters, and strings in C/C++ comments.
-unlet! c_comment_strings
+# Do not highlight numbers, characters, and strings in C/C++ comments.
+unlet! g:c_comment_strings
 
 syntax on
 colorscheme raghuvrao
 
 packadd! matchit
 
-" :help trojan-horse
+# :help trojan-horse
 set secure
 set noexrc

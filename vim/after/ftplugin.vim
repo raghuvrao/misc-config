@@ -1,3 +1,5 @@
+vim9script
+
 augroup no_concealing
     autocmd!
     autocmd FileType * setlocal conceallevel=0

@@ -1,44 +1,46 @@
-" maxtab.vim
-" Author: Raghu V. Rao <raghu.v.rao@gmail.com>
+vim9script
 
-function! maxtab#MaximizeToTab() abort
+# maxtab.vim
+# Author: Raghu V. Rao <raghu.v.rao@gmail.com>
+
+export def MaximizeToTab()
     if winnr('$') == 1
         echo 'Cannot maximize: window already maximized'
         return
     endif
-    let l:destTabNum = -1
-    let l:curBufNum = bufnr('%')
-    " Find the tab page where the current buffer is the only one
-    " displayed.  If it exists, we will simply switch to that tab page
-    " instead of creating a new one.
-    for l:i in range(tabpagenr('$'))
-        " range() starts from 0, tab pages are numbered starting from 1.
-        let l:tabNum = l:i + 1
-        if tabpagewinnr(l:tabNum, '$') == 1 && tabpagebuflist(l:tabNum)[0] == l:curBufNum
-            let l:destTabNum = l:tabNum
+    var destTabNum = -1
+    var curBufNum = bufnr('%')
+    # Find the tab page where the current buffer is the only one
+    # displayed.  If it exists, we will simply switch to that tab page
+    # instead of creating a new one.
+    for i in range(tabpagenr('$'))
+        # range() starts from 0, tab pages are numbered starting from 1.
+        var tabNum = i + 1
+        if tabpagewinnr(tabNum, '$') == 1 && tabpagebuflist(tabNum)[0] == curBufNum
+            destTabNum = tabNum
             break
         endif
     endfor
-    let l:winID = win_getid()
-    let l:lineNum = line('.')
-    let l:colNum = col('.')
-    if l:destTabNum > -1
-        execute 'tabnext ' . l:destTabNum
-        call cursor(l:lineNum, l:colNum)
+    var winID = win_getid()
+    var lineNum = line('.')
+    var colNum = col('.')
+    if destTabNum > -1
+        execute 'tabnext ' .. destTabNum
+        call cursor(lineNum, colNum)
     else
         tab split
     endif
-    let w:maximizedFromWinID = l:winID
+    w:maximizedFromWinID = winID
     echo ''
-endfunction
+enddef
 
-function! maxtab#UnmaximizeFromTab() abort
-    let l:numWindowsInTab = winnr('$')
-    if l:numWindowsInTab > 1
+export def UnmaximizeFromTab()
+    var numWindowsInTab = winnr('$')
+    if numWindowsInTab > 1
         echo 'Cannot unmaximize: window not maximized'
         return
     endif
-    if tabpagenr('$') == 1 && l:numWindowsInTab == 1
+    if tabpagenr('$') == 1 && numWindowsInTab == 1
         echo 'Cannot unmaximize: only window in only tab'
         return
     endif
@@ -46,41 +48,41 @@ function! maxtab#UnmaximizeFromTab() abort
         echo 'Cannot unmaximize: origin window unknown'
         return
     endif
-    let l:bufNrInOriginWin = winbufnr(w:maximizedFromWinID)
-    if l:bufNrInOriginWin == -1
-        echo 'Cannot unmaximize: origin window (ID ' . w:maximizedFromWinID . ') does not exist'
+    var bufNrInOriginWin = winbufnr(w:maximizedFromWinID)
+    if bufNrInOriginWin == -1
+        echo 'Cannot unmaximize: origin window (ID ' .. w:maximizedFromWinID .. ') does not exist'
         return
     endif
-    let l:thisBufNr = bufnr('%')
-    if l:bufNrInOriginWin != l:thisBufNr
+    var thisBufNr = bufnr('%')
+    if bufNrInOriginWin != thisBufNr
         echo 'Cannot unmaximize: expected buffer '
-                    \ . l:thisBufNr
-                    \ . ' (this buffer) in origin window (ID '
-                    \ . w:maximizedFromWinID
-                    \ . '), found buffer '
-                    \ . l:bufNrInOriginWin
+                    \ .. thisBufNr
+                    \ .. ' (this buffer) in origin window (ID '
+                    \ .. w:maximizedFromWinID
+                    \ .. '), found buffer '
+                    \ .. bufNrInOriginWin
         return
     endif
-    let l:maxdTab = tabpagenr()
-    let l:lineNum = line('.')
-    let l:colNum = col('.')
+    var maxdTab = tabpagenr()
+    var lineNum = line('.')
+    var colNum = col('.')
     if win_gotoid(w:maximizedFromWinID)
-        call cursor(l:lineNum, l:colNum)
-        execute 'tabclose ' . l:maxdTab
+        call cursor(lineNum, colNum)
+        execute 'tabclose ' .. maxdTab
         echo ''
     else
-        " Probably no way to reach here.  The check above for winbufnr()
-        " returning -1 will catch the case where the origin window does
-        " not exist.
+        # Probably no way to reach here.  The check above for winbufnr()
+        # returning -1 will catch the case where the origin window does
+        # not exist.
         echo 'Cannot unmaximize: origin window not found'
         return
     endif
-endfunction
+enddef
 
-function! maxtab#ToggleMaximizeToTab() abort
+export def ToggleMaximizeToTab()
     if winnr('$') > 1
-        call maxtab#MaximizeToTab()
+        call MaximizeToTab()
     else
-        call maxtab#UnmaximizeFromTab()
+        call UnmaximizeFromTab()
     endif
-endfunction
+enddef
