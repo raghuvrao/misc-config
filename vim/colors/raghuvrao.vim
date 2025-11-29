@@ -1,6 +1,8 @@
-" Mostly-plain light-background color scheme.
-"
-" Author: Raghu V. Rao <raghu.v.rao@gmail.com>
+vim9script
+
+# Mostly-plain light-background color scheme.
+#
+# Author: Raghu V. Rao <raghu.v.rao@gmail.com>
 
 set background=light
 
@@ -10,7 +12,9 @@ if exists('g:syntax_on')
     syntax reset
 endif
 
-let g:colors_name = 'raghuvrao'
+g:colors_name = 'raghuvrao'
+
+var t_Co = str2nr(&t_Co)
 
 hi Normal ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
 
@@ -29,7 +33,7 @@ hi Comment ctermfg=DarkBlue ctermbg=NONE cterm=NONE gui=NONE guifg=MediumBlue gu
 
 hi Cursor guifg=White guibg=magenta3 gui=NONE
 
-if &t_Co >= 256
+if t_Co >= 256
     hi CursorLine ctermfg=NONE ctermbg=254 cterm=NONE
     hi CursorColumn ctermfg=NONE ctermbg=254 cterm=NONE
 endif
@@ -39,7 +43,7 @@ hi EndOfBuffer ctermfg=Blue ctermbg=NONE cterm=bold guifg=Blue guibg=NONE gui=bo
 hi Error ctermfg=Red ctermbg=NONE cterm=bold guifg=Red guibg=NONE gui=bold
 
 hi ErrorMsg ctermfg=White ctermbg=DarkRed cterm=NONE guifg=White guibg=DarkRed gui=NONE
-if &t_Co < 16
+if t_Co < 16
     hi ErrorMsg cterm=bold
 endif
 
@@ -48,13 +52,13 @@ hi Folded ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui
 hi Ignore ctermfg=LightGrey ctermbg=NONE cterm=NONE guifg=LightGrey guibg=NONE gui=NONE
 
 hi MatchParen guifg=NONE guibg=PaleTurquoise gui=NONE
-if &t_Co >= 256
+if t_Co >= 256
     hi MatchParen ctermfg=NONE ctermbg=LightCyan cterm=NONE
 endif
 
 hi NonText ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui=bold
 
-if &t_Co >= 256
+if t_Co >= 256
     hi Search ctermbg=193
 endif
 
@@ -75,9 +79,9 @@ hi Todo ctermfg=DarkMagenta ctermbg=NONE cterm=bold guifg=DarkMagenta guibg=Ligh
 hi WarningMsg ctermfg=DarkRed ctermbg=NONE cterm=NONE guifg=DarkRed guibg=NONE gui=NONE
 
 hi Visual guifg=White guibg=RoyalBlue gui=NONE
-if &t_Co >= 256
+if t_Co >= 256
     hi Visual ctermfg=NONE ctermbg=153 cterm=NONE
-elseif &t_Co >= 16
+elseif t_Co >= 16
     hi Visual ctermfg=White ctermbg=Blue cterm=NONE
 else
     hi Visual ctermfg=LightGrey ctermbg=DarkBlue cterm=bold
@@ -117,7 +121,7 @@ hi helpHyperTextJump ctermfg=DarkBlue ctermbg=NONE cterm=NONE guifg=Blue guibg=N
 hi link helpCommand NONE
 hi link helpExample NONE
 
-" Also affects Markdown.
+# Also affects Markdown.
 hi link htmlTitle NONE
 hi link htmlLink NONE
 hi link htmlH1 NONE

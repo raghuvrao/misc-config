@@ -1,2 +1,4 @@
+vim9script
+
 " Disable YAML indentation plugin.
-let b:did_indent = 1
+b:did_indent = 1
