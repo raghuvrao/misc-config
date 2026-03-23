@@ -20,6 +20,8 @@ unsetopt auto_menu
 unsetopt auto_remove_slash
 unsetopt list_beep
 unsetopt menu_complete
+unsetopt prompt_cr
+unsetopt prompt_sp
 
 HISTFILE="${ZDOTDIR:-${HOME}}/.zsh_history"
 HISTSIZE=10500
