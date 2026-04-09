@@ -239,6 +239,10 @@ runtime vimrc_local.vim
 # Do not highlight numbers, characters, and strings in C/C++ comments.
 unlet! g:c_comment_strings
 
+if has('termguicolors') && $COLORTERM =~? 'truecolor\|24bit'
+    set termguicolors
+endif
+
 syntax on
 colorscheme raghuvrao
 
