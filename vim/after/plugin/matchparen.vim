@@ -6,7 +6,7 @@ if !exists(':NoMatchParen') || !exists(':DoMatchParen')
     finish
 endif
 
-def g:ToggleMatchParen()
+def ToggleMatchParen()
     if exists('g:loaded_matchparen')
         NoMatchParen
     else
@@ -14,4 +14,4 @@ def g:ToggleMatchParen()
     endif
 enddef
 
-command! ToggleMatchParen call ToggleMatchParen()
+command! ToggleMatchParen call <SID>ToggleMatchParen()
