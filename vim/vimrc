@@ -234,8 +234,6 @@ inoremap <NL> <C-G>u<NL>
 inoremap <C-J> <C-G>u<C-J>
 inoremap <CR> <C-G>u<CR>
 
-runtime vimrc_local.vim
-
 if has('termguicolors') && $COLORTERM =~? 'truecolor\|24bit'
     set termguicolors
 endif
@@ -252,6 +250,8 @@ nnoremap <Leader>x <ScriptCmd>ToggleSyntax()<CR>
 syntax off
 
 packadd! matchit
+
+runtime vimrc_local.vim
 
 # :help trojan-horse
 set secure
