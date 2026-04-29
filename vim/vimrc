@@ -238,6 +238,35 @@ if has('termguicolors') && $COLORTERM =~? 'truecolor\|24bit'
     set termguicolors
 endif
 
+def ColorSchemeOverrides()
+    if !exists('g:colors_name') || &background !=# 'light'
+        return
+    endif
+    if g:colors_name ==# 'default'
+        hi Comment guifg=MediumBlue
+        hi Constant guifg=DarkMagenta
+        hi Error guifg=Red4 guibg=LightRed
+        hi ErrorMsg guifg=Red4 guibg=NONE
+        hi Folded guifg=DarkCyan guibg=LightYellow
+        hi Ignore guifg=Grey85
+        hi MatchParen guibg=PaleTurquoise
+        hi SpecialKey guifg=Grey60
+        hi Visual guifg=Black guibg=LightBlue
+        hi WarningMsg guifg=Goldenrod4
+        if &termguicolors
+            hi CursorLine cterm=NONE
+            hi CursorLineNr cterm=NONE guibg=LightCyan
+        endif
+    endif
+enddef
+
+augroup color_scheme_overrides
+    autocmd!
+    autocmd ColorScheme default call s:ColorSchemeOverrides()
+augroup END
+
+colorscheme default
+
 def ToggleSyntax()
     if exists('g:syntax_on')
         syntax off
