@@ -122,7 +122,7 @@ augroup vimStartup
 augroup END
 augroup! vimStartup
 
-def! g:JumpToLastExitPosition()
+def JumpToLastExitPosition()
     if getcurpos()[1 : 2] == [1, 1]
             && expand('%:p') !=# ''
             && !(&diff)
@@ -141,13 +141,13 @@ def! g:JumpToLastExitPosition()
 enddef
 augroup jump_to_last_exit_position
     autocmd!
-    autocmd BufReadPost * call JumpToLastExitPosition()
+    autocmd BufReadPost * call s:JumpToLastExitPosition()
 augroup END
 
-def! g:PutCurrentTimestamp(unixt = 0)
+def PutCurrentTimestamp(unixt = 0)
     put =strftime(unixt ? '%s' : '%F %a %T %Z(UTC%z)')
 enddef
-command! -nargs=? PutCurrentTimestamp call PutCurrentTimestamp(<args>)
+command! -nargs=? PutCurrentTimestamp call <SID>PutCurrentTimestamp(<args>)
 
 if executable('xsel')
     nnoremap <Leader>y <Cmd>%write !xsel -ib 2>/dev/null<CR>
@@ -183,12 +183,12 @@ nnoremap <Leader>w <Cmd>set invwrap<CR>
 nnoremap <Leader>h <Cmd>nohlsearch<CR>
 
 import autoload 'maxtab.vim' as maxtab
-nnoremap <Leader><CR> <ScriptCmd>call maxtab.ToggleMaximizeToTab()<CR>
+nnoremap <Leader><CR> <ScriptCmd>maxtab.ToggleMaximizeToTab()<CR>
 
 import autoload 'synids.vim' as synids
 nnoremap <Leader>] <ScriptCmd>echo synids.SynIDs(line('.'), col('.'))<CR>
 
-def! g:RedrawLineNearEdge(edge: number, percentage: number)
+def RedrawLineNearEdge(edge: number, percentage: number)
     if &wrap
         echoerr "Not implemented when 'wrap' is set"
         return
@@ -220,10 +220,10 @@ def! g:RedrawLineNearEdge(edge: number, percentage: number)
         endif
     endif
 enddef
-nnoremap <silent> zB <Cmd>call RedrawLineNearEdge(1, 12)<CR>
-nnoremap <silent> zT <Cmd>call RedrawLineNearEdge(0, 12)<CR>
-xnoremap <silent> zB <Cmd>call RedrawLineNearEdge(1, 12)<CR>
-xnoremap <silent> zT <Cmd>call RedrawLineNearEdge(0, 12)<CR>
+nnoremap <silent> zB <ScriptCmd>RedrawLineNearEdge(1, 12)<CR>
+nnoremap <silent> zT <ScriptCmd>RedrawLineNearEdge(0, 12)<CR>
+xnoremap <silent> zB <ScriptCmd>RedrawLineNearEdge(1, 12)<CR>
+xnoremap <silent> zT <ScriptCmd>RedrawLineNearEdge(0, 12)<CR>
 
 nnoremap <Leader>T :<C-U>tab terminal ++close<Space>
 
