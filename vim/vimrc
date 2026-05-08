@@ -182,6 +182,8 @@ nnoremap <Leader>w <Cmd>set invwrap<CR>
 
 nnoremap <Leader>h <Cmd>nohlsearch<CR>
 
+nnoremap <Leader>n <Cmd>set invnumber<CR>
+
 import autoload 'maxtab.vim' as maxtab
 nnoremap <Leader><CR> <ScriptCmd>maxtab.ToggleMaximizeToTab()<CR>
 
