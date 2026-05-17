@@ -22,7 +22,7 @@ export NO_COLOR=1
 
 [[ -z "${PATH}" ]] && PATH='/usr/local/bin:/usr/bin:/bin'
 
-PATH="${HOME}/.local/bin:${PATH}"
+PATH="${HOME}/.local/bin:${HOME}/.cargo/bin:${PATH}"
 
 source "${HOME}/.bash_profile_local.bash"
 
