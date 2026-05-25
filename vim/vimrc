@@ -251,6 +251,7 @@ def ColorSchemeOverrides()
         hi ErrorMsg guifg=Red4 guibg=NONE
         hi Folded guifg=DarkCyan guibg=LightYellow
         hi Ignore guifg=Grey85
+        hi LineNr guifg=Grey60
         hi MatchParen guibg=PaleTurquoise
         hi SpecialKey guifg=Grey60
         hi Visual guifg=Black guibg=LightBlue
