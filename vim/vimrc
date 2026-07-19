@@ -236,7 +236,7 @@ inoremap <NL> <C-G>u<NL>
 inoremap <C-J> <C-G>u<C-J>
 inoremap <CR> <C-G>u<CR>
 
-if has('termguicolors') && $COLORTERM =~? 'truecolor\|24bit'
+if has('termguicolors') && ($COLORTERM =~? 'truecolor\|24bit' || str2nr(&t_Co) >= 16777216)
     set termguicolors
 endif
 
