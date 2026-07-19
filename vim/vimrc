@@ -239,7 +239,7 @@ inoremap <CR> <C-G>u<CR>
 # Do not highlight numbers, characters, and strings in C/C++ comments.
 unlet! g:c_comment_strings
 
-if has('termguicolors') && $COLORTERM =~? 'truecolor\|24bit'
+if has('termguicolors') && ($COLORTERM =~? 'truecolor\|24bit' || str2nr(&t_Co) >= 16777216)
     set termguicolors
 endif
 
