@@ -15,6 +15,7 @@ shopt -s failglob
 shopt -s histappend
 shopt -s no_empty_cmd_completion
 
+shopt -s -o ignoreeof
 shopt -s -o pipefail
 
 HISTCONTROL='ignoredups'
