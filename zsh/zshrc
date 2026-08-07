@@ -11,6 +11,7 @@ setopt append_history
 setopt extended_history
 setopt glob_dots
 setopt hist_ignore_dups
+setopt ignore_eof
 setopt interactive_comments
 setopt list_packed
 setopt pipe_fail
