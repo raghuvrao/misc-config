@@ -229,6 +229,11 @@ xnoremap <silent> zT <ScriptCmd>RedrawLineNearEdge(0, 12)<CR>
 
 nnoremap <Leader>T :<C-U>tab terminal ++close<Space>
 
+nnoremap <Up> <C-Y>
+nnoremap <Down> <C-E>
+nnoremap <Left> zh
+nnoremap <Right> zl
+
 inoremap <C-W> <C-G>u<C-W>
 inoremap <C-U> <C-G>u<C-U>
 inoremap <C-M> <C-G>u<C-M>
