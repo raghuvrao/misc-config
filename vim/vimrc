@@ -234,6 +234,9 @@ nnoremap <Down> <C-E>
 nnoremap <Left> zh
 nnoremap <Right> zl
 
+nnoremap <Space> <C-F>
+nnoremap <Backspace> <C-B>
+
 inoremap <C-W> <C-G>u<C-W>
 inoremap <C-U> <C-G>u<C-U>
 inoremap <C-M> <C-G>u<C-M>
