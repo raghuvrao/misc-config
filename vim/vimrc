@@ -34,7 +34,7 @@ set ttimeout
 set notimeout
 
 set nowildmenu
-set wildmode=longest,list,full
+set wildmode=longest,list
 
 # Show line and column numbers even when statusline is disabled.
 set ruler
