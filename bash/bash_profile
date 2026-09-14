@@ -42,6 +42,7 @@ for p in ${PATH}; do
         paths+=("${p}")
     fi
 done
+unset -v p
 # The '*' below makes Bash use the first character of IFS (instead of space) as
 # the delimiter when constructing a string from the 'paths' array.
 PATH="${paths[*]}"
