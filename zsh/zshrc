@@ -50,11 +50,7 @@ s () {
     print -P '%?'
 }
 
-alias ls='ls -A -p'
-if [[ -n "${INSIDE_EMACS}" ]]; then
-    alias ls='ls -A -p -1'
-fi
-alias ll='ls -h -l'
+alias ls='ls -A -h -l -p'
 alias grep='grep --color=auto'
 alias cgrep='grep --color=always'
 alias pr='pr -t'
