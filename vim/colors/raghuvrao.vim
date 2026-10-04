@@ -28,6 +28,7 @@ hi clear Statement
 hi clear String
 hi clear Terminal
 hi clear Type
+hi clear VertSplit
 
 hi Comment ctermfg=DarkBlue ctermbg=NONE cterm=NONE gui=NONE guifg=MediumBlue guibg=NONE gui=NONE
 
@@ -86,8 +87,6 @@ elseif t_Co >= 16
 else
     hi Visual ctermfg=LightGrey ctermbg=DarkBlue cterm=bold
 endif
-
-hi VertSplit cterm=reverse,bold gui=reverse,bold term=reverse,bold
 
 hi diffAdded ctermfg=DarkGreen ctermbg=NONE cterm=NONE guifg=DarkGreen guibg=NONE gui=NONE
 hi diffFile ctermfg=NONE ctermbg=NONE cterm=bold guifg=NONE guibg=NONE gui=bold
