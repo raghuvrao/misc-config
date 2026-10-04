@@ -40,7 +40,7 @@ s () {
 
 alias cgrep='command grep --color=always'
 alias grep='grep --color=auto'
-alias ls='ls -A -h -l -p'
+alias ls='ls -A -h -l -p -v'
 alias pr='pr -t'
 
 source "${HOME}/.bashrc_local.bash"
