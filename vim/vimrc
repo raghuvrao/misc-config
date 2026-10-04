@@ -46,6 +46,8 @@ set foldlevelstart=99
 
 set incsearch
 
+set fillchars-=vert:\| fillchars+=vert:┃
+
 set list
 set listchars=extends:#,precedes:#,nbsp:%,tab:»\ ,trail:•
 
