@@ -50,7 +50,7 @@ s () {
     print -P '%?'
 }
 
-alias ls='ls -A -h -l -p'
+alias ls='ls -A -h -l -p -v'
 alias grep='grep --color=auto'
 alias cgrep='grep --color=always'
 alias pr='pr -t'
