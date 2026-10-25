@@ -27,12 +27,12 @@ hi clear Special
 hi clear Statement
 hi clear String
 hi clear Terminal
+hi clear Title
 hi clear Type
-hi clear VertSplit
 
 hi Comment ctermfg=DarkBlue ctermbg=NONE cterm=NONE gui=NONE guifg=MediumBlue guibg=NONE gui=NONE
 
-hi Cursor guifg=White guibg=magenta3 gui=NONE
+hi Cursor guifg=White guibg=Magenta gui=NONE
 
 if t_Co >= 256
     hi CursorLine ctermfg=NONE ctermbg=254 cterm=NONE
@@ -63,6 +63,9 @@ if t_Co >= 256
     hi Search ctermbg=193
 endif
 
+hi StatusLine ctermfg=White ctermbg=DarkCyan cterm=bold guifg=White guibg=DarkCyan gui=bold
+hi StatusLineNC ctermfg=Black ctermbg=LightGrey cterm=NONE guifg=Black guibg=LightGrey gui=NONE
+
 hi SpecialKey ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui=NONE
 
 hi! link TabLine StatusLineNC
@@ -73,9 +76,9 @@ if has('gui_running')
     hi link Terminal Normal
 endif
 
-hi Title ctermfg=DarkMagenta ctermbg=NONE cterm=bold guifg=DarkMagenta guibg=NONE gui=bold
-
 hi Todo ctermfg=DarkMagenta ctermbg=NONE cterm=bold guifg=DarkMagenta guibg=LightCyan gui=bold
+
+hi VertSplit ctermfg=LightGrey ctermbg=NONE cterm=NONE guifg=LightGrey guibg=NONE gui=NONE
 
 hi WarningMsg ctermfg=DarkRed ctermbg=NONE cterm=NONE guifg=DarkRed guibg=NONE gui=NONE
 
