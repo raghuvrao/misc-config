@@ -46,7 +46,7 @@ set foldlevelstart=99
 
 set incsearch
 
-set fillchars-=vert:\| fillchars+=vert:┃
+set fillchars-=vert:\| fillchars+=vert:┃ fillchars+=tpl_vert:┃
 
 set list
 set listchars=extends:#,precedes:#,nbsp:%,tab:»\ ,trail:•
@@ -107,6 +107,8 @@ endif
 set display+=lastline
 
 set formatoptions=1jlmnoqr
+
+set tabpanelopt+=vert
 
 filetype plugin indent on
 
