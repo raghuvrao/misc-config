@@ -68,9 +68,9 @@ hi StatusLineNC ctermfg=Black ctermbg=LightGrey cterm=NONE guifg=Black guibg=Lig
 
 hi SpecialKey ctermfg=DarkCyan ctermbg=NONE cterm=NONE guifg=DarkCyan guibg=NONE gui=NONE
 
-hi! link TabLine StatusLineNC
-hi! link TabLineFill StatusLineNC
-hi! link TabLineSel StatusLine
+hi TabLine ctermfg=NONE ctermbg=NONE cterm=bold guifg=NONE guibg=NONE gui=bold term=bold
+hi TabLineFill ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE term=NONE
+hi TabLineSel ctermfg=NONE ctermbg=NONE cterm=bold,reverse guifg=NONE guibg=NONE gui=bold,reverse term=bold,reverse
 
 if has('gui_running')
     hi link Terminal Normal
